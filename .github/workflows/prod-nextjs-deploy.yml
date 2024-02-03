@@ -1,7 +1,9 @@
 name: Production Next.js CI/CD
 
 on:
-  push:
+  pull_request:
+    types:
+      - closed
     branches:
       - main
 
@@ -10,6 +12,7 @@ env:
 
 jobs:
   build-and-deploy:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     permissions:
