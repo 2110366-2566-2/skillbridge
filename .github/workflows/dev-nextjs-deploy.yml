@@ -3,7 +3,7 @@ name: Development Next.js CI/CD
 on:
   pull_request:
     types:
-      - closed
+      - opened
     branches:
       - main
 
