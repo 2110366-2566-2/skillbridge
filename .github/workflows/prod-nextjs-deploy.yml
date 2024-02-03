@@ -1,9 +1,7 @@
 name: Production Next.js CI/CD
 
 on:
-  pull_request:
-    types:
-      - closed
+  push:
     branches:
       - main
 
