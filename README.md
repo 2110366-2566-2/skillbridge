@@ -1,4 +1,4 @@
 # SkillBridgeFullStack
 
 Requirement:  
-Node version : 2.11.0
+Node version : 20.11.0
