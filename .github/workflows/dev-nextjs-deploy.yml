@@ -2,8 +2,7 @@ name: Development Next.js CI/CD
 
 on:
   pull_request:
-    types:
-      - opened
+    types: [opened, synchronize] 
     branches:
       - main
 
