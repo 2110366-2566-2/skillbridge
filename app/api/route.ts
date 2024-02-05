@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
  
-export function GET(req: NextApiRequest) {
+export function GET(req: Request | NextRequest) {
     console.log("API : /api/ being called");
 
     return NextResponse.json({
