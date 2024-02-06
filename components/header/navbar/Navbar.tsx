@@ -9,17 +9,24 @@ import workIcon from "@/public/icons/work.svg"
 import logoutIcon from "@/public/icons/logout.svg"
 import hambergerIcon from "@/public/icons/hamberger.svg"
 import closeIcon from "@/public/icons/close.svg"
+import NavLink from './navLink/NavLink';
+import homeDarkIcon from "@/public/icons/homeDark.svg"
+import searchDarkIcon from "@/public/icons/searchDark.svg"
+import workDarkIcon from "@/public/icons/workDark.svg"
 
 const studentLinks = [
     {
       title: "หน้าแรก",
       path: "/",
       icon: homeIcon,
+      activeIcon: homeDarkIcon,
     },
     {
       title: "ค้นหางาน",
       path: "/search",
       icon: searchIcon,
+      activeIcon: searchDarkIcon,
+
     },
 ];
 
@@ -28,11 +35,13 @@ const employerLinks = [
       title: "หน้าแรก",
       path: "/",
       icon: homeIcon,
+      activeIcon: homeDarkIcon,
     },
     {
       title: "งานของฉัน",
       path: "/works",
-      icon: workIcon
+      icon: workIcon,
+      activeIcon: searchDarkIcon,
     },
 ];
 
@@ -48,7 +57,23 @@ export default function Navbar({session, isStudent}) {
         <>
             {session ? (
                 <>
-                    <button className="z-30" onClick={() => setOpen((prevOpen) => !prevOpen)}>
+                    <div className='hidden font-ibm md:flex md:items-center md:gap-6 md:text-sm'>
+                        {(isStudent ? studentLinks : employerLinks).map((link) => (
+                            <NavLink key={new Date().toLocaleString()} link={link} />
+                        ))} 
+                        <div className='flex items-center gap-3 pl-2'>
+                            <p className='text-slate-50'>{name}</p>
+                            <Image
+                                className='rounded-full'
+                                src={avatar}
+                                alt="avatar"
+                                width={40}
+                                height={40}
+                            /> 
+                        </div>
+                    </div>
+                    
+                    <button className="z-30 md:hidden" onClick={() => setOpen((prevOpen) => !prevOpen)}>
                         {open ? (
                             <Image
                                 src={closeIcon}
@@ -83,17 +108,9 @@ export default function Navbar({session, isStudent}) {
                                             <p className='text-xs'>{company}</p>
                                         </div>
                                     </div>
-                                    <div className='w-full flex flex-col gap-4'>
-                                        {studentLinks.map((link) => (
-                                            <Link className="w-full flex gap-8" href={link.path} key={link.title}>
-                                                <Image
-                                                    src={link.icon}
-                                                    alt="icon"
-                                                    width={25}
-                                                    height={25}
-                                                /> 
-                                                <h2 className='text-lg font-semibold'>{link.title}</h2>
-                                            </Link>
+                                    <div className='w-full flex flex-col gap-2'>
+                                        {(isStudent ? studentLinks : employerLinks).map((link) => (
+                                            <NavLink key={new Date().toLocaleString()} link={link} />
                                         ))}
                                     </div>
                                 </div>
@@ -113,7 +130,7 @@ export default function Navbar({session, isStudent}) {
                     )} 
                 </>
             ) : (
-                <div className='flex gap-4 text-xs font-ibm'>
+                <div className='flex items-center gap-4 text-xs font-ibm md:gap-7 md:text-sm'>
                     <button className='bg-slate-50 px-3 py-2 rounded-md'>
                         <Link href="/login" className='text-slate-800 font-bold'>เข้าสู่ระบบ</Link>
                     </button>
