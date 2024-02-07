@@ -13,6 +13,7 @@ import NavLink from "./navLink/NavLink";
 import homeDarkIcon from "@/public/icons/homeDark.svg";
 import searchDarkIcon from "@/public/icons/searchDark.svg";
 import workDarkIcon from "@/public/icons/workDark.svg";
+import noavatarProfile from "@/public/icons/noavatar.svg";
 
 const studentLinks = [
   {
@@ -54,7 +55,6 @@ export default function Navbar(props: Props) {
   const [open, setOpen] = useState(false);
 
   // TEMPORARY
-  const avatar = "/noavatar.png";
   const name = "คุณชื่อจริง นามสกุล";
   const company = "ตำแหน่ง บริษัทตัวอย่าง จำกัด (มหาชน)";
 
@@ -70,7 +70,7 @@ export default function Navbar(props: Props) {
               <p className="text-slate-50">{name}</p>
               <Image
                 className="rounded-full"
-                src={avatar}
+                src={noavatarProfile}
                 alt="avatar"
                 width={40}
                 height={40}
@@ -108,7 +108,7 @@ export default function Navbar(props: Props) {
                   <div className="flex flex-col gap-5">
                     <Image
                       className="rounded-full"
-                      src={avatar}
+                      src={noavatarProfile}
                       alt="avatar"
                       width={70}
                       height={70}
