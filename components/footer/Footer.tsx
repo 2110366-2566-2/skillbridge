@@ -1,9 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-
-const whiteLogo = require("@/public/logos/logo-white.svg") as string;
-const githubLogo = require("@/public/logos/github-logo.svg") as string;
+import whiteLogo from "@/public/logos/logo-white.svg";
+import githubLogo from "@/public/logos/github-logo.svg";
 
 // Wait : waiting for ข้อตกลงและเงื่อนไขการใช้งาน & นโยบายคุ้มครองความเป็นส่วนตัว from ping
 export default function Footer() {
