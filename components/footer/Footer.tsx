@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+
 import whiteLogo from "@/public/logos/logo-white.svg";
 import githubLogo from "@/public/logos/github-logo.svg";
 
