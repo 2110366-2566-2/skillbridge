@@ -19,6 +19,9 @@ export const authOptions: AuthOptions = {
 
       return "/"
     },
+    session: async ({ session, user }) => {
+      return session
+    },
   },
 }
 
