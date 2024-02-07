@@ -1,29 +1,26 @@
-import React from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
-import Navbar from './navbar/Navbar'
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import Navbar from "./navbar/Navbar";
+import whiteLogo from "@/public/logos/logo-white.svg";
 
 export default async function Header() {
+  // TEMPORARY
+  const session = true;
+  const isStudent = false;
 
-    // TEMPORARY for check if user is authenticate or not
-    const session = true;
-    const isStudent = false;
-
-    return (
-      <div className="flex justify-between items-center py-4 pl-3 pr-5 md:pr-10">
-        <Link href="/">
+  return (
+    <div className="flex justify-between items-center py-4 pl-3 pr-5 md:pr-10">
+      <Link href="/landing">
         <Image
-            className='md:w-36'
-            src="/logo-white.png"
-            alt="logo"
-            width={110}
-            height={100}
+          className="w-auto h-auto md:w-36"
+          src={whiteLogo}
+          alt="logo"
+          width={110}
+          height={110}
         />
-        </Link>
-        <Navbar 
-            session={session}
-            isStudent={isStudent} 
-        />
-      </div>
-    );
-  }
+      </Link>
+      <Navbar session={session} isStudent={isStudent} />
+    </div>
+  );
+}

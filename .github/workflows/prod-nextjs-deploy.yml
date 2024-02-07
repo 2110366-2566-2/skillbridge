@@ -33,7 +33,7 @@ jobs:
       - name: Configure Docker
         run: |
           gcloud auth configure-docker us-central1-docker.pkg.dev
-          
+
       - name: Debug Information
         run: |
           echo "Artifact Registry Location: ${{ secrets.GCP_PROD_NEXTJS_AR_LOCATION }}"
@@ -52,4 +52,4 @@ jobs:
             --image "${{ secrets.GCP_PROD_NEXTJS_AR_LOCATION }}" \
             --platform managed \
             --region "${{ env.REGION }}" \
-            --allow-unauthenticated 
+            --allow-unauthenticated

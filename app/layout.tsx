@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, IBM_Plex_Sans_Thai } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
+import { cn } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
+const ibmPlexSansThaiLooped = IBM_Plex_Sans_Thai({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["thai"],
+  variable: "--ibm-plex-sans-thai-font",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,15 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className + " h-screen"}>
-        <div className="h-full bg-slate-800 flex flex-col justify-between">
-          <Header />
-          <div className="rounded-3xl bg-slate-50 h-full">
-            {children}
-          </div>
-          <Footer />
-        </div>
-      </body>
+      <body className={cn(inter.className, ibmPlexSansThaiLooped.className, ("h-screen"))}>{children}</body>
     </html>
   );
 }

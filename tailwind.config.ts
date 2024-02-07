@@ -15,8 +15,8 @@ const config: Config = {
       },
     },
     fontFamily: {
-      ibm: ["IBM Plex Sans Thai"]
-    }
+      ibm: ["var(--ibm-plex-sans-thai-looped-font)"],
+    },
   },
   plugins: [],
 };
