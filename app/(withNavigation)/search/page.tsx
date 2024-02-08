@@ -9,6 +9,12 @@ export default function SearchPage() {
       <SearchTaskItem />
       <SearchTaskItem />
       <SearchTaskItem />
+      <SearchTaskItem />
+      <SearchTaskItem />
+      <SearchTaskItem />
+      <SearchTaskItem />
+      <SearchTaskItem />
+      <SearchTaskItem />
     </div>
   )
 }
