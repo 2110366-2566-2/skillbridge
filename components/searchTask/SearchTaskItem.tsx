@@ -8,7 +8,7 @@ export default function SearchTaskItem() {
     return (
         <>
             {/* Mobile size */}
-            <div className="flex flex-row justify-between items-center h-[54px] pb-4 border-b border-slate-300 md:hidden">
+            <div className="flex flex-row justify-between items-center min-h-[54px] pb-4 mb-4 border-b border-slate-300 md:hidden">
                 <div className="flex flex-col justify-between">
                     <div className="font-bold text-[#313866]">ทำ Frontend LMS ชื่อดังในจุฬา</div>
                     <div className="flex flex-row justify-between">

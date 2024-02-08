@@ -5,6 +5,10 @@ export default function SearchPage() {
   return (
     <div>
       <SearchTaskItem />
+      <SearchTaskItem />
+      <SearchTaskItem />
+      <SearchTaskItem />
+      <SearchTaskItem />
     </div>
   )
 }
