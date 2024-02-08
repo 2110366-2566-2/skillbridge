@@ -13,7 +13,7 @@ export default function TypeAnimation(props: Props) {
 
     return (
             <TypeAnimationPackage
-                className='text-4xl font-semibold py-2 md:text-7xl md:font-bold'
+                className='text-4xl font-semibold py-2 md:text-8xl md:font-bold'
                 sequence={taskCategoriesWithDelay}
                 wrapper="span"
                 speed={10}

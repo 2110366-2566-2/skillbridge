@@ -1,4 +1,5 @@
 import CommentCard from "./commentCard/CommentCard"
+import CardSlider from "../cardSlider/CardSlider"
 
 const topComments = [
   {
@@ -40,10 +41,20 @@ const topComments = [
 
 export default function CommentCards() {
   return (
-    <div className="w-screen overflow-x-scroll flex gap-3 pb-5 px-5">
-      {topComments.map(comment => (
-        <CommentCard key={comment.message} name={comment.name} position={comment.position} company={comment.company} category={comment.category} message={comment.message} />
-      ))}
-    </div>
+    <>
+      <div className="w-screen overflow-x-scroll flex gap-3 pb-5 px-5 md:hidden">
+        {topComments.map(comment => (
+          <CommentCard key={comment.message} name={comment.name} position={comment.position} company={comment.company} category={comment.category} message={comment.message} />
+        ))}
+      </div>
+      <div className="hidden md:flex w-full justify-center">
+        <CardSlider>
+          {topComments.map(comment => (
+            <CommentCard key={comment.message} name={comment.name} position={comment.position} company={comment.company} category={comment.category} message={comment.message} />
+          ))}
+        </CardSlider>
+      </div>
+    </>
+    
   )
 }
