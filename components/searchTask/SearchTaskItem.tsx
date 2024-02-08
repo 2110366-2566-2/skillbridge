@@ -1,5 +1,5 @@
 "use client"
-import Link from "next/link";
+
 import Image from "next/image";
 
 const nextArrowButton = require("@/public/icons/nextArrowButton.svg") as string;
@@ -18,14 +18,27 @@ export default function SearchTaskItem() {
                 </div>
                 <div className="flex flex-row justify-end items-center">
                     <div className="font-semibold text-[20px] text-[#313866] mr-2">฿1,000</div>
-                    <Link href="/">
-                        <Image src={nextArrowButton} alt="nextArrowButton" width={40} height={40} />
-                    </Link>
+                    <Image
+                        src={nextArrowButton}
+                        alt="nextArrowButton"
+                        width={40}
+                        height={40}
+                        // Open link in new tab
+                        onClick={() => window.open("/", "_blank", "noopener,noreferrer")}
+                        role="link"
+                        tabIndex={0}
+                    />
                 </div>
             </div>
 
             {/* Desktop size */}
-            <div className="hidden md:inline-block md:m-[20px] md:border-[0.5px] md:border-slate-500 md:bg-slate-100 md:rounded-xl md:hover:shadow-xl md:hover:cursor-pointer">
+            <div
+                className="hidden md:inline-block md:m-[20px] md:border-[0.5px] md:border-slate-500 md:bg-slate-100 md:rounded-xl md:hover:shadow-xl md:hover:cursor-pointer"
+                // Open link in new tab
+                onClick={() => window.open("/", "_blank", "noopener,noreferrer")}
+                role="link"
+                tabIndex={0}
+            >
                 <div className="flex flex-col justify-between h-[340px] w-[268px] p-4">
                     <div className="h-[3em] font-bold text-[29px] text-[#313866] text-wrap line-clamp-2">รับสมัคร TA วิชา Com Prog สำหรับน้อง CEDT</div>
                     <div className="font-medium text-[15.5px] text-slate-500 text-wrap line-clamp-1">26/02/67 - 30/02/67</div>
