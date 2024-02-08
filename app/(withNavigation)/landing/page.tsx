@@ -2,7 +2,7 @@ import Image from "next/image";
 import studentImg from "@/public/images/student-mobile.png"
 import guaranteeLogo from "@/public/logos/guatantee-logo.svg"
 import { Marquee } from "@/components/maquee/Maquee";
-import CommentCard from "@/components/commentCards/commentCard/CommentCard";
+import CommentCards from "@/components/commentCards/CommentCards";
 
 const taskCategories = [
 "กราฟิกดีไซน์",
@@ -99,8 +99,7 @@ export default function LandingPage() {
             <h1 className="text-[26px] text-slate-800 font-bold [text-shadow:_0_1px_1px_rgb(0_0_0_/_25%)]">รีวิวผลงานจาก<span className="text-pink-400">นิสิต</span>ของเรา</h1>
             <p className="text-[13px] text-slate-800">สำเร็จไปแล้วกว่า 100 ครั้ง!</p>
           </div>
-          <CommentCard />
-        
+          <CommentCards />
         </div>
 
 
