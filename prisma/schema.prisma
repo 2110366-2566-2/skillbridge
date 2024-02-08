@@ -28,6 +28,8 @@ model User {
   Job      Job[]
   Applied  Applied[]
   Message  Message[]
+
+  @@map("_user")
 }
 
 model Student {
@@ -42,6 +44,8 @@ model Student {
   updatedAt       DateTime @updatedAt
 
   transaction Transaction[]
+
+  @@map("student")
 }
 
 model Employer {
@@ -54,6 +58,8 @@ model Employer {
   updatedAt    DateTime @updatedAt
 
   transaction Transaction[]
+
+  @@map("employer")
 }
 
 model Job {
@@ -70,11 +76,13 @@ model Job {
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 
-  jobTags     JobTag[]      @relation("JobTagsRelation")
+  jobTags     JobTag[]      @relation("job_tags_relation")
   Applied     Applied[]
   chatroom    Chatroom[]
   transaction Transaction[]
   Review      Review[]
+
+  @@map("job")
 }
 
 model JobTag {
@@ -83,7 +91,9 @@ model JobTag {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  jobs Job[] @relation("JobTagsRelation")
+  jobs Job[] @relation("job_tags_relation")
+
+  @@map("job_tag")
 }
 
 model Applied {
@@ -99,6 +109,7 @@ model Applied {
   updatedAt   DateTime  @updatedAt
 
   @@id([userId, jobId])
+  @@map("applied")
 }
 
 model Chatroom {
@@ -109,6 +120,8 @@ model Chatroom {
   job       Job      @relation(fields: [jobId], references: [id])
 
   Message Message[]
+
+  @@map("chatroom")
 }
 
 model Message {
@@ -124,6 +137,8 @@ model Message {
 
   Text  Text[]
   Image Image[]
+
+  @@map("message")
 }
 
 model Text {
@@ -131,6 +146,8 @@ model Text {
   message   Message  @relation(fields: [messageId], references: [id])
   text      String
   createdAt DateTime @default(now())
+
+  @@map("_text")
 }
 
 model Image {
@@ -138,6 +155,8 @@ model Image {
   message   Message  @relation(fields: [messageId], references: [id])
   imageUrl  String
   createdAt DateTime @default(now())
+
+  @@map("image")
 }
 
 model Transaction {
@@ -153,6 +172,8 @@ model Transaction {
   PaymentType     String?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+
+  @@map("transaction")
 }
 
 model Review {
@@ -167,4 +188,6 @@ model Review {
   Stars       Int
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@map("review")
 }
