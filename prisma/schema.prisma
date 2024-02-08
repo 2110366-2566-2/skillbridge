@@ -25,7 +25,7 @@ model User {
 
   Student  Student?
   Employee Employer?
-  Job      Job?
+  Job      Job[]
   Applied  Applied[]
   Message  Message[]
 }
@@ -58,10 +58,10 @@ model Employer {
 
 model Job {
   id                String    @id @default(uuid())
-  userId            String    @unique
+  userId            String
   user              User      @relation(fields: [userId], references: [id])
   title             String
-  status            String
+  status            String //enum
   description       String
   startDate         DateTime?
   endDate           DateTime?
