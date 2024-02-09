@@ -9,3 +9,29 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  user_id     String @id @default(uuid())
+  publicEmail String @unique @db.VarChar(100)
+  jobs        Job[]
+}
+
+model Job {
+  id                String     @id @default(uuid())
+  user              User       @relation(fields: [userId], references: [user_id])
+  userId            String
+  title             String     @db.VarChar(100)
+  status            Job_Status
+  description       String     @db.Text
+  createdAt         DateTime   @default(now())
+  startDate         DateTime?
+  endDate           DateTime?
+  estimateStartDate DateTime
+  estimateEndDate   DateTime
+}
+
+enum Job_Status {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+}
