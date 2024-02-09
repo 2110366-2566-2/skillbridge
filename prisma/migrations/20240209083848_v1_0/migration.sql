@@ -1,3 +1,9 @@
+-- CreateEnum
+CREATE TYPE "JobStatus" AS ENUM ('NOT_STARTED', 'IN_PROGRESS', 'COMPLETED');
+
+-- CreateEnum
+CREATE TYPE "AppliedStatus" AS ENUM ('PENDING', 'ACCEPT', 'REJECT');
+
 -- CreateTable
 CREATE TABLE "_user" (
     "id" TEXT NOT NULL,
@@ -20,7 +26,6 @@ CREATE TABLE "student" (
     "userId" TEXT NOT NULL,
     "resumeUrl" TEXT,
     "transcriptUrl" TEXT,
-    "bankAccountName" TEXT,
     "bankAccountNo" TEXT,
     "avgStar" DOUBLE PRECISION,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -46,8 +51,10 @@ CREATE TABLE "job" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "title" TEXT NOT NULL,
-    "status" TEXT NOT NULL,
+    "status" "JobStatus" NOT NULL DEFAULT 'NOT_STARTED',
     "description" TEXT NOT NULL,
+    "budget" INTEGER NOT NULL,
+    "numWorker" INTEGER NOT NULL DEFAULT 1,
     "startDate" TIMESTAMP(3),
     "endDate" TIMESTAMP(3),
     "estimateStartDate" TIMESTAMP(3) NOT NULL,
@@ -74,7 +81,7 @@ CREATE TABLE "applied" (
     "jobId" TEXT NOT NULL,
     "bid" DOUBLE PRECISION,
     "documentUrl" TEXT,
-    "status" TEXT NOT NULL,
+    "status" "AppliedStatus" NOT NULL DEFAULT 'PENDING',
     "appliedAt" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
