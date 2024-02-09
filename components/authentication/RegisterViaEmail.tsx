@@ -11,8 +11,7 @@ export default function RegisterViaEmail({
     isFirstFormComplete: boolean
 }) {
 
-    const handleNextPageSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault(); // This prevents the default form submission behavior
+    const handleNextPageSubmit = () => {
         handleFirstFormComplete();
     };
 
@@ -30,9 +29,9 @@ export default function RegisterViaEmail({
                         {/*Confirm Password Input Component */}
                         <ConfirmPasswordInput />
 
-                        <button id="nextPage" type="button" className="w-full bg-[#334155] rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md" onClick={handleNextPageSubmit}>
+                        <div id="nextPage" className="w-full bg-[#334155] text-center cursor-pointer rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md" onClick={handleNextPageSubmit}>
                             ถัดไป
-                        </button>
+                        </div>
 
                         <p className="w-full text-center text-sm mt-[10px]">
                             มีบัญชีอยู่แล้ว ? <Link href={"/login"} className="text-[#326FE2]">เข้าสู่ระบบ</Link>
@@ -47,11 +46,12 @@ export default function RegisterViaEmail({
                         <div className="mt-[20px]">
                             {/* Link ไป ข้อตกลงและเงื่อนไขการใช้งานของ SkillBridge และ นโยบายคุ้มครองความเป็นส่วนตัว*/}
                             <label className="block relative mb-[10px] text-[9.5px] pl-[20px]">ฉันได้อ่านและยอมรับ<Link href={'/'} className="text-[#326FE2]">ข้อตกลงและเงื่อนไขการใช้งานของ SkillBridge</Link>
-                                <input type="checkbox" name="" className="absolute cursor-pointer left-0" />
+                                <input type="checkbox" name="" className="absolute cursor-pointer left-0 checked:bg-[#334155]" />
                             </label>
 
                             <label className="block relative text-[9.5px] pl-[20px]">ฉันได้อ่านและยอมรับ<Link href={'/'} className="text-[#326FE2]">นโยบายคุ้มครองความเป็นส่วนตัว</Link>
-                                <input type="checkbox" name="" className="absolute cursor-pointer left-0" />
+                                <input type="checkbox" name="" className="absolute cursor-pointer left-0 checked:bg-[#334155]" />
+
                             </label>
                         </div>
 

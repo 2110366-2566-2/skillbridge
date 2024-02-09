@@ -10,6 +10,7 @@ export default function LoginViaGoogle() {
                 })
             }
         >
+
             <div>
                 <Image src={'/logos/google-logo.svg'} width={20} height={20} alt="google logo" />
             </div>
