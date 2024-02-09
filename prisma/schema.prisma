@@ -1,5 +1,6 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// Use this schema with CAUTIONS!
+// It is not stable as it is continuously changing
+// version 1.0
 
 generator client {
   provider = "prisma-client-js"
@@ -24,7 +25,7 @@ model User {
   updatedAt       DateTime @updatedAt
 
   Student  Student?
-  Employee Employer?
+  Employer Employer?
   Job      Job[]
   Applied  Applied[]
   Message  Message[]
@@ -33,15 +34,14 @@ model User {
 }
 
 model Student {
-  userId          String   @id @unique
-  user            User     @relation(fields: [userId], references: [id])
-  resumeUrl       String?
-  transcriptUrl   String?
-  bankAccountName String? //enum
-  bankAccountNo   String?
-  avgStar         Float?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  userId        String   @id @unique
+  user          User     @relation(fields: [userId], references: [id])
+  resumeUrl     String?
+  transcriptUrl String?
+  bankAccountNo String?
+  avgStar       Float?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   transaction Transaction[]
 
@@ -67,8 +67,10 @@ model Job {
   userId            String
   user              User      @relation(fields: [userId], references: [id])
   title             String
-  status            String //enum
+  status            JobStatus @default(NOT_STARTED)
   description       String
+  budget            Int
+  numWorker         Int       @default(1)
   startDate         DateTime?
   endDate           DateTime?
   estimateStartDate DateTime
@@ -98,15 +100,15 @@ model JobTag {
 
 model Applied {
   userId      String
-  user        User      @relation(fields: [userId], references: [id])
+  user        User          @relation(fields: [userId], references: [id])
   jobId       String
-  job         Job       @relation(fields: [jobId], references: [id])
+  job         Job           @relation(fields: [jobId], references: [id])
   bid         Float?
   documentUrl String?
-  status      String
+  status      AppliedStatus @default(PENDING)
   appliedAt   DateTime?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
 
   @@id([userId, jobId])
   @@map("applied")
@@ -190,4 +192,16 @@ model Review {
   updatedAt   DateTime @updatedAt
 
   @@map("review")
+}
+
+enum JobStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum AppliedStatus {
+  PENDING
+  ACCEPT
+  REJECT
 }
