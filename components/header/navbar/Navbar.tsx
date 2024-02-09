@@ -9,7 +9,7 @@ const homeIcon = require("@/public/icons/home.svg") as string;
 const searchIcon = require("@/public/icons/search.svg") as string;
 const workIcon = require("@/public/icons/work.svg") as string;
 const logoutIcon = require("@/public/icons/logout.svg") as string;
-const hambergerIcon = require("@/public/icons/hamberger-button.svg") as string;
+const hamburgerIcon = require("@/public/icons/hamburger-button.svg") as string;
 const closeIcon = require("@/public/icons/close.svg") as string;
 const homeDarkIcon = require("@/public/icons/homeDark.svg") as string;
 const searchDarkIcon = require("@/public/icons/searchDark.svg") as string;
@@ -95,7 +95,7 @@ export default function Navbar(props: Props) {
             ) : (
               <Image
                 className="w-auto h-auto"
-                src={hambergerIcon}
+                src={hamburgerIcon}
                 alt="hamberger"
                 width={35}
                 height={35}

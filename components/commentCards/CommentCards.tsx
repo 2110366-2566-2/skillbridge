@@ -47,7 +47,7 @@ export default function CommentCards() {
           <CommentCard key={comment.message} name={comment.name} position={comment.position} company={comment.company} category={comment.category} message={comment.message} />
         ))}
       </div>
-      <div className="hidden md:flex w-full justify-center">
+      <div className="hidden md:flex w-screen justify-center md:px-32 md:max-w-[1600px]">
         <CardSlider>
           {topComments.map(comment => (
             <CommentCard key={comment.message} name={comment.name} position={comment.position} company={comment.company} category={comment.category} message={comment.message} />

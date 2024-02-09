@@ -6,7 +6,7 @@ type Props = {
 export function Marquee(props: Props) {
     const {taskCategories, isLeft} = props;
     return (
-      <div className={`w-screen overflow-hidden flex ${isLeft ? ("justify-start") : ("justify-end")}`}>
+      <div className={`w-screen md:w-full overflow-hidden flex ${isLeft ? ("justify-start") : ("justify-end")}`}>
         <span className={`relative shrink-0 flex justify-around min-w-full ${isLeft ? ("animate-marqueeLeft") : ("animate-marqueeRight")}`}>
             <div className="flex justify-center items-center gap-4 md:gap-8">
                 {taskCategories.map((category) => (
