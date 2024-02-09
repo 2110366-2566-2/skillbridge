@@ -3,16 +3,18 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import homeIcon from "@/public/icons/home.svg";
-import searchIcon from "@/public/icons/search.svg";
-import workIcon from "@/public/icons/work.svg";
-import logoutIcon from "@/public/icons/logout.svg";
-import hambergerIcon from "@/public/icons/hamberger-button.svg";
-import closeIcon from "@/public/icons/close.svg";
 import NavLink from "./navLink/NavLink";
-import homeDarkIcon from "@/public/icons/homeDark.svg";
-import searchDarkIcon from "@/public/icons/searchDark.svg";
-import workDarkIcon from "@/public/icons/workDark.svg";
+
+const homeIcon = require("@/public/icons/home.svg") as string;
+const searchIcon = require("@/public/icons/search.svg") as string;
+const workIcon = require("@/public/icons/work.svg") as string;
+const logoutIcon = require("@/public/icons/logout.svg") as string;
+const hambergerIcon = require("@/public/icons/hamberger-button.svg") as string;
+const closeIcon = require("@/public/icons/close.svg") as string;
+const homeDarkIcon = require("@/public/icons/homeDark.svg") as string;
+const searchDarkIcon = require("@/public/icons/searchDark.svg") as string;
+const workDarkIcon = require("@/public/icons/workDark.svg") as string;
+const noavatar = require("@/public/icons/noavatar.svg") as string;
 
 const studentLinks = [
   {
@@ -54,7 +56,7 @@ export default function Navbar(props: Props) {
   const [open, setOpen] = useState(false);
 
   // TEMPORARY
-  const avatar = "/noavatar.png";
+  const avatar = noavatar;
   const name = "คุณชื่อจริง นามสกุล";
   const company = "ตำแหน่ง บริษัทตัวอย่าง จำกัด (มหาชน)";
 
