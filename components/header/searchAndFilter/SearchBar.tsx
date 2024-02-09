@@ -28,7 +28,7 @@ export default function SearchBar() {
             {/* Desktop */}
             <div className="hidden lg:inline-block">
                 <form>
-                    <div className="relative min-w-[498px]">
+                    <div className="relative ml-4 min-w-[35vw] max-w-[498px]">
                         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                             <Image
                                 src={searchBigIcon}
