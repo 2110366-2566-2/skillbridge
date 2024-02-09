@@ -20,7 +20,6 @@ async function main() {
         create: {
           resumeUrl: 'https://i.pinimg.com/736x/87/91/53/87915397fcb2d0b04899cd90420f4acc.jpg',
           transcriptUrl: 'https://www.greatschoolspartnership.org/wp-content/uploads/2022/02/GSP_Exemplar_Transcript_pg1_watermark.png',
-          bankAccountName: 'Promptpay',
           bankAccountNo: '0832705890',
           avgStar: 4.99
         }
@@ -39,7 +38,6 @@ async function main() {
         create: {
           resumeUrl: 'https://s3-us-west-2.amazonaws.com/hiration/ghost/2021/02/resume-meme-10.jpg',
           transcriptUrl: 'https://admissionsandutme.com/wp-content/uploads/2020/12/sample-of-transcript-2.jpg',
-          bankAccountName: 'KBank',
           bankAccountNo: '0955195010',
           avgStar: 3.33
         }
@@ -58,7 +56,6 @@ async function main() {
         create: {
           resumeUrl: 'https://cdn-images.zety.com/pages/resume_meme_2.png',
           transcriptUrl: 'https://worldwidetranscripts.com/wp-content/uploads/2021/04/Transcripts-Sample-1-622x1024.jpg',
-          bankAccountName: 'SCB',
           bankAccountNo: '0876789125',
           avgStar: 4.69
         }
@@ -73,7 +70,7 @@ async function main() {
       salutation: 'เสี่ย',
       firstname: 'ปิง',
       lastname: 'บรูไน',
-      Employee: {
+      Employer: {
         create: {
           position: 'Billionaire',
           organization: 'SoeiCorp.',
@@ -86,6 +83,7 @@ async function main() {
             title: 'เขียนเว็บให้ SoeiCorp.',
             status: 'NOT_STARTED',
             description: 'หาเงินจากทำงานออนไลน์ง่าย ๆ แค่เพียง 2-3 ชม.ต่อวัน',
+            budget: 1000,
             startDate: new Date("2024-01-01"),
             endDate: new Date("2024-01-15"),
             estimateStartDate: new Date("2024-01-22"),
@@ -95,6 +93,8 @@ async function main() {
             title: 'Renovate Soei888 Web',
             status: 'IN_PROGRESS',
             description: 'รวยทางลัดกับธุรกิจสีเทา',
+            budget: 500,
+            numWorker: 10,
             startDate: new Date("2023-08-08"),
             endDate: new Date("2023-08-31"),
             estimateStartDate: new Date("2023-09-15"),
@@ -104,6 +104,8 @@ async function main() {
             title: 'เขียนเว็บให้ SoeiCorp.',
             status: 'NOT_STARTED',
             description: 'หาเงินจากทำงานออนไลน์ง่าย ๆ แค่เพียง 2-3 ชม.ต่อวัน',
+            budget: 10000,
+            numWorker: 2,
             startDate: new Date("2024-01-05"),
             endDate: new Date("2024-01-20"),
             estimateStartDate: new Date("2024-01-22"),
@@ -122,7 +124,7 @@ async function main() {
       salutation: 'ยัง',
       firstname: 'เฟย',
       lastname: 'มาเท่อ',
-      Employee: {
+      Employer: {
         create: {
           position: 'Rapper',
           organization: 'Gold Element Temple',
@@ -135,6 +137,8 @@ async function main() {
             title: 'ทำโมเดล AI Auto Tune',
             status: 'COMPLETED',
             description: 'เคยยืนรอเธอบนบีทีเอส',
+            budget: 300,
+            numWorker: 5,
             startDate: new Date("2022-07-14"),
             endDate: new Date("2022-07-31"),
             estimateStartDate: new Date("2022-08-01"),
@@ -144,6 +148,8 @@ async function main() {
             title: 'ตัดต่อคลิปลง TikTok',
             status: 'NOT_STARTED',
             description: 'โอ้เบบี้เกิร์ลยูเรียนมาแตร์เดอี',
+            budget: 20,
+            numWorker: 30,
             startDate: new Date("2023-09-09"),
             endDate: new Date("2023-09-19"),
             estimateStartDate: new Date("2023-09-25"),
@@ -163,7 +169,7 @@ async function main() {
       firstname: 'ทิพ',
       middlename: 'สาม',
       lastname: 'บิด',
-      Employee: {
+      Employer: {
         create: {
           position: 'Biker',
           organization: 'BidKub',
@@ -176,6 +182,7 @@ async function main() {
             title: 'เซนเซอร์ติดม่านกันแดดอัจฉริยะ',
             status: 'NOT_STARTED',
             description: 'แสงอาทิตย์ส่องมามันแยงตา แต่สายตาเธอที่ส่องมามันแยงใจ',
+            budget: 1500,
             startDate: new Date("2024-02-01"),
             endDate: new Date("2024-02-16"),
             estimateStartDate: new Date("2024-02-20"),
@@ -185,6 +192,7 @@ async function main() {
             title: 'เขียนเว็บ ChaoChao',
             status: 'IN_PROGRESS',
             description: 'ไม่รู้จะเช่าไหนดี มาเช่านี่มา',
+            budget: 200,
             startDate: new Date("2024-01-08"),
             endDate: new Date("2024-01-20"),
             estimateStartDate: new Date("2024-01-21"),
@@ -194,6 +202,8 @@ async function main() {
             title: 'Web Developer for เฮียหมู',
             status: 'NOT_STARTED',
             description: 'เฮียหมูเจ้าเก่าเจ้าเดิม เพิ่มเติมคือกำลังจะมีหน้าเว็บแล้ว',
+            budget: 3000,
+            numWorker: 4,
             startDate: new Date("2023-10-01"),
             endDate: new Date("2023-10-31"),
             estimateStartDate: new Date("2023-11-01"),
@@ -203,6 +213,8 @@ async function main() {
             title: 'รสดีเด็ด อิซากายะ Frontend Developer',
             status: 'NOT_STARTED',
             description: 'Web-based application สำหรับจองคิวและโปรโมชั่น',
+            budget: 2000,
+            numWorker: 5,
             startDate: new Date("2024-01-27"),
             endDate: new Date("2024-02-29"),
             estimateStartDate: new Date("2024-03-01"),
@@ -212,6 +224,8 @@ async function main() {
             title: 'Skip Backend Developer',
             status: 'NOT_STARTED',
             description: 'Web-based application สำหรับสั่งออเดอร์และเรียกเติมน้ำชาเขียวรีฟิล',
+            budget: 1000,
+            numWorker: 3,
             startDate: new Date("2024-02-01"),
             endDate: new Date("2024-02-29"),
             estimateStartDate: new Date("2024-03-01"),
@@ -221,15 +235,7 @@ async function main() {
             title: 'เฮียหมู Data Analytics',
             status: 'NOT_STARTED',
             description: 'วิเคราะห์เมนูกับแกล้มยอดนิยมเทียบกับจำนวนเบียร์ที่ลูกค้าสั่งต่อโต๊ะ',
-            startDate: new Date("2024-02-05"),
-            endDate: new Date("2024-02-15"),
-            estimateStartDate: new Date("2024-03-01"),
-            estimateEndDate: new Date("2024-03-31"),
-          },
-          {
-            title: 'เฮียหมู Data Analytics',
-            status: 'NOT_STARTED',
-            description: 'วิเคราะห์เมนูกับแกล้มยอดนิยมเทียบกับจำนวนเบียร์ที่ลูกค้าสั่งต่อโต๊ะ',
+            budget: 4000,
             startDate: new Date("2024-02-05"),
             endDate: new Date("2024-02-15"),
             estimateStartDate: new Date("2024-03-01"),
@@ -239,6 +245,8 @@ async function main() {
             title: 'Implement Recommendation Model on Application',
             status: 'NOT_STARTED',
             description: 'Develop a ML model to recommend their favorite beers to users.',
+            budget: 10000,
+            numWorker: 2,
             startDate: new Date("2024-01-27"),
             endDate: new Date("2024-02-10"),
             estimateStartDate: new Date("2024-02-17"),
@@ -248,6 +256,7 @@ async function main() {
             title: 'Bad Guy Full-stack developer',
             status: 'NOT_STARTED',
             description: 'Develop Larb selling application for E-sarn People',
+            budget: 20,
             startDate: new Date("2024-01-11"),
             endDate: new Date("2024-01-25"),
             estimateStartDate: new Date("2024-02-02"),
