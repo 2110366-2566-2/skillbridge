@@ -12,42 +12,29 @@ export default async function Header() {
   const isStudent = false;
 
   return (
-    <>
+    <div>
+      <div className="flex justify-between items-center py-4 pl-3 pr-5 md:pr-10">
+        <Link href="/landing">
+          <Image
+            className="w-auto h-auto md:w-36"
+            src={whiteLogo}
+            alt="logo"
+            width={110}
+            height={110}
+          />
+        </Link>
+        {/* Desktop */}
+        <div className="hidden lg:inline-block">
+          {/* Only shows at "/search" */}
+          <SearchAndFilter />
+        </div>
+        <Navbar session={session} isStudent={isStudent} />
+      </div>
       {/* Mobile and Tablet */}
       <div className="lg:hidden">
-        <div className="flex justify-between items-center py-4 pl-3 pr-5 md:pr-10">
-          <Link href="/landing">
-            <Image
-              className="w-auto h-auto md:w-36"
-              src={whiteLogo}
-              alt="logo"
-              width={110}
-              height={110}
-            />
-          </Link>
-          <Navbar session={session} isStudent={isStudent} />
-        </div>
         {/* Only shows at "/search" */}
         <SearchAndFilter />
       </div>
-
-      {/* Desktop */}
-      <div className="hidden lg:inline-block">
-        <div className="flex justify-between items-center py-4 pl-3 pr-5 md:pr-10">
-          <Link href="/landing">
-            <Image
-              className="w-auto h-auto md:w-36"
-              src={whiteLogo}
-              alt="logo"
-              width={110}
-              height={110}
-            />
-          </Link>
-          {/* Only shows at "/search" */}
-          <SearchAndFilter />
-          <Navbar session={session} isStudent={isStudent} />
-        </div>
-      </div>
-    </>
+    </div>
   );
 }
