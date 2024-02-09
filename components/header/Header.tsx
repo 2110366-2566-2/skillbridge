@@ -25,6 +25,18 @@ export default async function Header() {
             height={110}
           />
         </Link>
+        <div className="hidden lg:inline-block">
+          <div className="flex gap-8">
+            <div>
+              <SearchBar />
+            </div>
+            <div>
+              <Filter />
+            </div>
+          </div>
+        </div>
+
+
         <Navbar session={session} isStudent={isStudent} />
       </div>
 
