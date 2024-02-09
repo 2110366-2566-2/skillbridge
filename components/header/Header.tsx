@@ -27,7 +27,7 @@ export default async function Header() {
           </Link>
           <Navbar session={session} isStudent={isStudent} />
         </div>
-        {/* Search and Filter */}
+        {/* Only shows at "/search" */}
         <SearchAndFilter />
       </div>
 
@@ -43,7 +43,7 @@ export default async function Header() {
               height={110}
             />
           </Link>
-          {/* Search and Filter */}
+          {/* Only shows at "/search" */}
           <SearchAndFilter />
           <Navbar session={session} isStudent={isStudent} />
         </div>
