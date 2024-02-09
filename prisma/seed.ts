@@ -4,10 +4,12 @@ const prisma = new PrismaClient()
 
 async function main() {
 
-  await prisma.job.deleteMany({})
-  await prisma.employer.deleteMany({})
-  await prisma.student.deleteMany({})
-  await prisma.user.deleteMany({})
+  await Promise.all([
+    prisma.job.deleteMany({}),
+    prisma.employer.deleteMany({}),
+    prisma.student.deleteMany({}),
+    prisma.user.deleteMany({})
+  ]);
 
   const u1 = await prisma.user.upsert({
     where: { email: '6430388021@student.chula.ac.th' },
