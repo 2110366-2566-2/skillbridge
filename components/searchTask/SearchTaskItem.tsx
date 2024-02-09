@@ -33,7 +33,7 @@ export default function SearchTaskItem() {
 
             {/* Desktop size */}
             <div
-                className="hidden md:inline-block md:m-[20px] md:border-[0.5px] md:border-slate-500 md:bg-white md:rounded-xl md:hover:shadow-xl md:hover:cursor-pointer"
+                className="hidden md:inline-block md:m-[20px] md:border-[0.5px] md:border-slate-200 md:bg-white md:rounded-xl md:hover:shadow-xl md:hover:cursor-pointer"
                 // Open link in new tab
                 onClick={() => window.open("/", "_blank", "noopener,noreferrer")}
                 role="link"
