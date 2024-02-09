@@ -54,7 +54,7 @@ export default function SearchTaskItem() {
                         <hr className="border-slate-300" />
                     </div>
                     <div className="flex flex-row justify-between items-end translate-y-[5px]">
-                        <div className="text-[13.12px] text-slate-500">สมัครแล้ว <span className="font-semibold">2 / 10</span> คน</div>
+                        <div className="text-[13.12px] text-slate-500">รับแล้ว <span className="font-semibold">2 / 10</span> คน</div>
                         <div className="font-semibold text-[24px] text-[#313866] translate-y-[5px]">฿1,000</div>
                     </div>
                 </div>
