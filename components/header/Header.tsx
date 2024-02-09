@@ -26,7 +26,7 @@ export default async function Header() {
           />
         </Link>
         <div className="hidden lg:inline-block">
-          <div className="flex gap-8">
+          <div className="flex gap-7">
             <div>
               <SearchBar />
             </div>
