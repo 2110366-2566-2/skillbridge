@@ -33,7 +33,7 @@ export default function SearchTaskItem() {
 
             {/* Desktop size */}
             <div
-                className="hidden md:inline-block md:m-[20px] md:border-[0.5px] md:border-slate-500 md:bg-slate-100 md:rounded-xl md:hover:shadow-xl md:hover:cursor-pointer"
+                className="hidden md:inline-block md:m-[20px] md:border-[0.5px] md:border-slate-500 md:bg-white md:rounded-xl md:hover:shadow-xl md:hover:cursor-pointer"
                 // Open link in new tab
                 onClick={() => window.open("/", "_blank", "noopener,noreferrer")}
                 role="link"
@@ -43,7 +43,7 @@ export default function SearchTaskItem() {
                     <div className="h-[3em] font-bold text-[29px] text-[#313866] text-wrap line-clamp-2">รับสมัคร TA วิชา Com Prog สำหรับน้อง CEDT</div>
                     <div className="font-medium text-[15.5px] text-slate-500 text-wrap line-clamp-1">26/02/67 - 30/02/67</div>
                     <div className="text-[14px] text-slate-800">
-                        <span className={`inline-block bg-slate-300 rounded py-1 px-2`}>การสอน</span>
+                        <span className={`inline-block bg-slate-200 rounded py-1 px-2`}>การสอน</span>
                     </div>
                     <div className="flex flex-col">
                         <div className="font-medium text-[10.5px] text-slate-500">คำอธิบายเกี่ยวกับงาน</div>
