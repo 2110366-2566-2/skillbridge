@@ -8,7 +8,7 @@ export default function LoginViaEmail() {
         <form className="mt-[10px] w-full" action={"/"}>
 
             {/* Email Input Component */}
-            <Input label="อีเมล" inputType="email" warning="กรอกที่อยู่อีเมลของคุณ" />
+            <Input name="email" label="อีเมล" inputType="email" warning="กรอกที่อยู่อีเมลของคุณ" />
 
             {/* Password Input Component */}
             <PasswordInput fromLoginPage={true} />

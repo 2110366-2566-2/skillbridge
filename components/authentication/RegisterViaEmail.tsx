@@ -3,26 +3,69 @@ import PasswordInput from "./PasswordInput"
 import Link from "next/link"
 import ConfirmPasswordInput from "./ConfirmPasswordInput"
 
-export default function RegisterViaEmail() {
+export default function RegisterViaEmail({
+    handleFirstFormComplete,
+    isFirstFormComplete
+}: {
+    handleFirstFormComplete: () => void
+    isFirstFormComplete: boolean
+}) {
+
+    const handleNextPageSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault(); // This prevents the default form submission behavior
+        handleFirstFormComplete();
+    };
+
     return (
-        <form className="mt-[10px] w-full" action={"/"}>
+        <form className="w-full" action={"/"}>
+            {
+                !isFirstFormComplete ?
+                    <div className="pt-[5px]">
+                        {/* Email Input Component */}
+                        <Input name="email" label="อีเมล" inputType="email" warning="กรอกที่อยู่อีเมลของคุณ" />
 
-            {/* Email Input Component */}
-            <Input label="อีเมล" inputType="email" warning="กรอกที่อยู่อีเมลของคุณ" />
+                        {/* Password Input Component */}
+                        <PasswordInput fromLoginPage={false} />
 
-            {/* Password Input Component */}
-            <PasswordInput fromLoginPage={false} />
+                        {/*Confirm Password Input Component */}
+                        <ConfirmPasswordInput />
 
-            {/*Confirm Password Input Component */}
-            <ConfirmPasswordInput />
+                        <button id="nextPage" type="button" className="w-full bg-[#334155] rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md" onClick={handleNextPageSubmit}>
+                            ถัดไป
+                        </button>
 
-            <button className="w-full bg-[#334155] rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md ">
-                ถัดไป
-            </button>
+                        <p className="w-full text-center text-sm mt-[10px]">
+                            มีบัญชีอยู่แล้ว ? <Link href={"/login"} className="text-[#326FE2]">เข้าสู่ระบบ</Link>
+                        </p>
 
-            <p className="w-full text-center text-sm mt-[10px]">
-                มีบัญชีอยู่แล้ว ? <Link href={"/login"} className="text-[#326FE2]">เข้าสู่ระบบ</Link>
-            </p>
+                    </div>
+                    :
+                    <div className="pt-[10px] flex flex-col">
+                        <Input name="fname" label="ชื่อ" inputType="text" warning="กรอกชื่อของคุณ" />
+                        <Input name="lname" label="นามสกุล" inputType="text" warning="กรอกนามสกุลของคุณ" />
+
+                        <div className="mt-[20px]">
+                            {/* Link ไป ข้อตกลงและเงื่อนไขการใช้งานของ SkillBridge และ นโยบายคุ้มครองความเป็นส่วนตัว*/}
+                            <label className="block relative mb-[10px] text-[9.5px] pl-[20px]">ฉันได้อ่านและยอมรับ<Link href={'/'} className="text-[#326FE2]">ข้อตกลงและเงื่อนไขการใช้งานของ SkillBridge</Link>
+                                <input type="checkbox" name="" className="absolute cursor-pointer left-0" />
+                            </label>
+
+                            <label className="block relative text-[9.5px] pl-[20px]">ฉันได้อ่านและยอมรับ<Link href={'/'} className="text-[#326FE2]">นโยบายคุ้มครองความเป็นส่วนตัว</Link>
+                                <input type="checkbox" name="" className="absolute cursor-pointer left-0" />
+                            </label>
+                        </div>
+
+                        <button id="submit" type="submit" className="w-full bg-[#334155] rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md">
+                            สร้างบัญชี
+                        </button>
+
+                        <button id="previousPage" type="button" className="mt-[20px] text-[#334155] text-md" onClick={handleNextPageSubmit}>
+                            ย้อนกลับ
+                        </button>
+
+                    </div>
+
+            }
         </form>
     )
 }
