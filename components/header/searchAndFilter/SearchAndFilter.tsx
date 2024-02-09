@@ -18,7 +18,6 @@ export default function SearchAndFilter() {
                         <div className="font-semibold text-[30px] text-white ml-5 mb-4">
                             หางาน
                         </div>
-
                         {/* SearchBar and Filter */}
                         <div className="flex flex-row items-center mx-5 mb-5">
                             <div className="w-full mr-[10px]">
@@ -32,6 +31,7 @@ export default function SearchAndFilter() {
 
                     {/* Desktop */}
                     <div className="hidden lg:inline-block">
+                        {/* SearchBar and Filter */}
                         <div className="flex gap-7">
                             <div>
                                 <SearchBar />
