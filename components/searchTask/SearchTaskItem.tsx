@@ -13,7 +13,7 @@ export default function SearchTaskItem() {
                     <div className="font-bold text-[#313866]">ทำ Frontend LMS ชื่อดังในจุฬา</div>
                     <div className="flex flex-row justify-between">
                         <div className="font-medium text-[11px] text-slate-500">26/02/67 - 30/02/67</div>
-                        <div className="text-[11px] text-[#838383]">สมัครแล้ว <span className="font-medium">2 / 10</span> คน</div>
+                        <div className="text-[11px] text-[#838383]">รับแล้ว <span className="font-medium">2 / 10</span> คน</div>
                     </div>
                 </div>
                 <div className="flex flex-row justify-end items-center">
