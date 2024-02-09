@@ -2,8 +2,6 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "./navbar/Navbar";
-import SearchBar from "./searchAndFilter/SearchBar";
-import Filter from "./searchAndFilter/Filter";
 import SearchAndFilter from "./searchAndFilter/SearchAndFilter";
 
 const whiteLogo = require("@/public/logos/logo-white.svg") as string;
