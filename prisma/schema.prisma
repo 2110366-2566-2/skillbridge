@@ -1,5 +1,6 @@
 // Use this schema with CAUTIONS!
 // It is not stable as it is continuously changing
+// version 1.0
 
 generator client {
   provider = "prisma-client-js"
