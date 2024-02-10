@@ -1,6 +1,8 @@
 "use server";
 
 import prisma from "@/db/prisma";
+//import {getServerSession} from "next-auth";
+//import {options} from "../api/auth/[...nextaut]/options"
 
 const createJob = async (fromData: FormData) => {
   try {
@@ -13,6 +15,19 @@ const createJob = async (fromData: FormData) => {
     const estimateEndDate = fromData.get("estimateEndDate");
     const budget = fromData.get("budget");
     const numWorker = fromData.get("NumWorker");
+
+    //const session = await getServerSession(options);
+    // const employer = await prisma.employer.findFirst({
+    //   where:{ userId: session?.userId},
+    //   select:{userId:true}
+    // })
+
+    // if (!session || !employer){
+    //   throw {
+    //     message: "Authentication fail",
+    //     status: 401
+    //   }
+    // }
   } catch (error) {
     console.log(error);
     return { message: "Internal Server Error", status: 500 };
