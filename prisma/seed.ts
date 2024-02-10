@@ -108,64 +108,7 @@ async function main() {
                   endDate: new Date("2024-01-20"),
                   estimateStartDate: new Date("2024-01-22"),
                   estimateEndDate: new Date("2024-02-22"),
-                },
-                {
-                  title: 'เขียนบล็อกและ Tech-savvy Blogger',
-                  status: 'NOT_STARTED',
-                  description: 'Freelance writer ที่มี passion สำหรับเทคโนโลยีที่จะ ผลิต insightful \n \
-                                และ well-researched blog articles. Topics รวมถึง the latest trends,\n \
-                                บทวิจารณ์ผลิตภัณฑ์, และ ข้อมูลที่เกี่ยวข้องกับ industry.',
-                  startDate: new Date("2024-01-01"),
-                  endDate: new Date("2024-01-31"),
-                  estimateStartDate: new Date("2024-02-01"),
-                  estimateEndDate: new Date("2024-04-30"),
-                },
-                {
-                  title: 'นักออกแบบกราฟิกและ Graphic Design Guru',
-                  status: 'NOT_STARTED',
-                  description: 'ต้องการ graphic designer ที่มีความสามารถสูงสำหรับ freelance projects, \n \
-                                การสร้าง eye-catching visuals สำหรับ marketing materials, social media, \n \
-                                และ การจัดแบรนด์. ต้องมี proficiency ใน Adobe Creative Suite และ a strong portfolio.',
-                  startDate: new Date("2024-01-01"),
-                  endDate: new Date("2024-01-11"),
-                  estimateStartDate: new Date("2024-01-16"),
-                  estimateEndDate: new Date("2024-03-31"),
-                },
-                {
-                  title: 'ผู้ป้อนข้อมูลและ Data Entry Dynamo',
-                  status: 'NOT_STARTED',
-                  description: 'Detail-oriented individual ที่จำเป็นสำหรับงานป้อนข้อมูล, \n \
-                                รวมถึง data organization, การตรวจสอบ, และการวิเคราะห์ข้อมูล. \n \
-                                Proficiency ใน Excel หรือ Google Sheets เป็น essential, \n \
-                                และ a knack สำหรับความถูกต้อง.',
-                  startDate: new Date("2024-01-01"),
-                  endDate: new Date("2024-01-08"),
-                  estimateStartDate: new Date("2024-01-11"),
-                  estimateEndDate: new Date("2024-02-29"),
-                },
-                {
-                  title: 'Social Media Content Manager / ผู้จัดการเนื้อหาโซเชียลมีเดีย',
-                  status: 'NOT_STARTED',
-                  description: 'Looking for a dynamic individual with ทักษะในการสร้าง \n \
-                                engaging content สำหรับ social media platforms. \n \
-                                Responsibilities include content creation, \n \
-                                strategic planning, and performance analysis.',
-                  startDate: new Date("2024-01-15"),
-                  endDate: new Date("2024-01-21"),
-                  estimateStartDate: new Date("2024-01-22"),
-                  estimateEndDate: new Date("2024-03-31"),
-                },
-                {
-                  title: 'Data Analyst และผู้วิเคราะห์ข้อมูล',
-                  status: 'NOT_STARTED',
-                  description: 'Seeking a detail-oriented data analyst ที่สามารถ analyze data sets, \n \
-                                generate insights, และ provide data-driven recommendations. \n \
-                                จำเป็นต้องมี proficiency in data visualization tools.',
-                  startDate: new Date("2024-01-11"),
-                  endDate: new Date("2024-01-15"),
-                  estimateStartDate: new Date("2024-01-16"),
-                  estimateEndDate: new Date("2024-03-31"),
-                },
+              },
                 // Add more job objects as needed
             ]
           }
@@ -205,72 +148,6 @@ async function main() {
                     endDate: new Date("2023-09-19"),
                     estimateStartDate: new Date("2023-09-25"),
                     estimateEndDate: new Date("2023-12-31"),
-                },
-                {
-                  title: 'UX/UI Designer และผู้สร้างประสบการณ์ผู้ใช้',
-                  status: 'NOT_STARTED',
-                  description: 'Looking for a creative mind ที่มีความสามารถในการออกแบบ \n \
-                                user-friendly interfaces และ optimize the user experience. \n \
-                                Proficiency ใน design tools เป็น',
-                  startDate: new Date("2024-01-11"),
-                  endDate: new Date("2024-01-15"),
-                  estimateStartDate: new Date("2024-01-16"),
-                  estimateEndDate: new Date("2024-03-31"),
-                },
-                {
-                  title: 'Content Translator และผู้แปลเนื้อหา',
-                  status: 'NOT_STARTED',
-                  description: 'กำลังมองหา bilingual content translator ที่สามารถ translate content \n \
-                                ในทั้งภาษาไทยและ English. Responsibilities รวมถึง \n \
-                                การรักษาความถูกต้องทางภาษา และ adaptation ของเนื้อหา.',
-                  startDate: new Date("2024-01-11"),
-                  endDate: new Date("2024-01-15"),
-                  estimateStartDate: new Date("2024-01-16"),
-                  estimateEndDate: new Date("2024-03-31"),
-                },
-                {
-                  title: 'ผู้เชี่ยวชาญด้านการดำเนินงาน E-commerce',
-                  status: 'NOT_STARTED',
-                  description: 'Seeking an expert in e-commerce operations ที่สามารถ \n \
-                                manage order fulfillment, inventory และ coordinate \n \
-                                with logistics partners. มีความรู้เกี่ยวกับการจัดการพื้นฐานของระบบ E-commerce.',
-                  startDate: new Date("2024-02-01"),
-                  endDate: new Date("2024-02-10"),
-                  estimateStartDate: new Date("2024-02-11"),
-                  estimateEndDate: new Date("2024-04-11"),
-                },
-                {
-                  title: 'Financial Analyst และนักวิเคราะห์ทางการเงิน',
-                  status: 'NOT_STARTED',
-                  description: 'Looking for a financial analyst ที่สามารถ analyze financial data, \n \
-                                prepare reports, และ provide insights for decision-making. \n \
-                                ความเข้าใจในเรื่องของการเงินและการวิเคราะห์ทางการเงิน.',
-                  startDate: new Date("2024-02-01"),
-                  endDate: new Date("2024-02-10"),
-                  estimateStartDate: new Date("2024-02-11"),
-                  estimateEndDate: new Date("2024-04-11"),
-                },
-                {
-                  title: 'นักวิจัยตลาดและ Market Researcher',
-                  status: 'NOT_STARTED',
-                  description: 'Seeking a market researcher ที่สามารถ conduct market analysis, \n \
-                                gather insights, และ identify trends. \n \
-                                Responsibilities รวมถึงการเขียนรายงานและการนำเสนอข้อมูลตลาด.',
-                  startDate: new Date("2024-02-01"),
-                  endDate: new Date("2024-02-10"),
-                  estimateStartDate: new Date("2024-02-11"),
-                  estimateEndDate: new Date("2024-04-11"),
-                },
-                {
-                  title: 'นักวิจัยตลาดและ Market Researcher',
-                  status: 'NOT_STARTED',
-                  description: 'Seeking a market researcher ที่สามารถ conduct market analysis, \n \
-                                gather insights, และ identify trends. \n \
-                                Responsibilities รวมถึงการเขียนรายงานและการนำเสนอข้อมูลตลาด.',
-                  startDate: new Date("2024-02-02"),
-                  endDate: new Date("2024-02-10"),
-                  estimateStartDate: new Date("2024-02-11"),
-                  estimateEndDate: new Date("2024-04-11"),
                 },
                 // Add more job objects as needed
             ]
@@ -376,64 +253,6 @@ async function main() {
                   estimateStartDate: new Date("2024-02-02"),
                   estimateEndDate: new Date("2024-05-15"),
                 },
-                {
-                  title: 'นักสร้างเนื้อหาและ Content Curator',
-                  status: 'NOT_STARTED',
-                  description: 'Looking for a freelance creative mind with ทักษะในการสร้าง \n \
-                                engaging และ เนื้อหาสร้างสรรค์สำหรับ social media platforms. \n \
-                                ต้องมี a flair for storytelling และ a keen eye for visuals \n \
-                                เพื่อที่จะ captivate audiences.',
-                  startDate: new Date("2024-01-01"),
-                  endDate: new Date("2024-01-31"),
-                  estimateStartDate: new Date("2024-02-01"),
-                  estimateEndDate: new Date("2024-04-30"),
-                },
-                {
-                  title: 'เจ้าหน้าที่ช่วยส่วนตัวและ Virtual Assistant Extraordinaire',
-                  status: 'NOT_STARTED',
-                  description: 'Seeking บุคคลที่มี detail-oriented virtual assistant \n \
-                                ที่สามารถ handle administrative tasks, จัดการปฏิทิน, \n \
-                                และ ช่วยเสริมสร้าง ใน various projects. \n \
-                                ทักษะการจัดระเบียบที่แข็งแกร่งและการสื่อสารที่เป็น must.',
-                  startDate: new Date("2024-01-01"),
-                  endDate: new Date("2024-01-31"),
-                  estimateStartDate: new Date("2024-02-01"),
-                  estimateEndDate: new Date("2024-04-30"),
-                },
-                {
-                  title: 'Creative Video Producer และโปรดิวเซอร์วิดีโอ',
-                  status: 'NOT_STARTED',
-                  description: 'Looking for a creative video producer ที่มีความสามารถในการสร้างและ \n \
-                                produce compelling video content. Proficiency ใน \n \
-                                video editing tools เป็น',
-                  startDate: new Date("2024-01-14"),
-                  endDate: new Date("2024-01-21"),
-                  estimateStartDate: new Date("2024-01-22"),
-                  estimateEndDate: new Date("2024-03-11"),
-                },
-                {
-                  title: 'HR Coordinator และผู้ประสานงานทรัพยากรบุคคล',
-                  status: 'NOT_STARTED',
-                  description: 'Seeking an HR coordinator ที่สามารถ assist with \n \
-                                recruitment, employee onboarding, และ HR processes. \n \
-                                ความเข้าใจในกฎหมายแรงงานและนโยบาย HR.',
-                  startDate: new Date("2024-01-01"),
-                  endDate: new Date("2024-01-31"),
-                  estimateStartDate: new Date("2024-02-01"),
-                  estimateEndDate: new Date("2024-04-30"),
-                },
-                {
-                  title: 'Tech Support Specialist และผู้ช่วยเหลือทางเทคนอล็อค',
-                  status: 'NOT_STARTED',
-                  description: 'Looking for a tech support specialist ที่สามารถ provide technical \n \
-                                assistance to end-users, troubleshoot issues, และ ให้คำแนะนำในการแก้ไขปัญหาทางเทคนิค. \n \
-                                Strong communication skills และ customer service mindset จำเป็น.',
-                  startDate: new Date("2024-01-21"),
-                  endDate: new Date("2024-01-31"),
-                  estimateStartDate: new Date("2024-02-01"),
-                  estimateEndDate: new Date("2024-03-11"),
-                },
-                
                 // Add more job objects as needed
             ]
           }
@@ -442,6 +261,27 @@ async function main() {
 
     console.log({u1, u2, u3, u4, u5, u6})
 }    
+
+    // await prisma.user.create({
+    //     data: {
+    //         name: 'Alice',
+    //         email: 'alice@prisma.io',
+    //         posts: {
+    //             create: { title: 'Hello World' },
+    //         },
+    //         profile: {
+    //             create: { bio: 'I like turtles' },
+    //         },
+    //     },
+    // })
+
+    // const allUsers = await prisma.user.findMany({
+    //     include: {
+    //         posts: true,
+    //         profile: true,
+    //     },
+    // })
+    // console.dir(allUsers, { depth: null })
 
 main()
     .then(async () => {
