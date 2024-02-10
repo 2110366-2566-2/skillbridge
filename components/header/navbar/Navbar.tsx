@@ -68,7 +68,7 @@ export default function Navbar(props: Props) {
             {(isStudent ? studentLinks : employerLinks).map((link) => (
               <NavLink key={"desktop : " + link.title} link={link} />
             ))}
-            <div className="flex items-center gap-3 pl-2">
+            <div className="flex items-center gap-3 pl-2 md:hover:opacity-80 md:duration-300">
               <p className="text-slate-50">{name}</p>
               <Image
                 className="rounded-full"

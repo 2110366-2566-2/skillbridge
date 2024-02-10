@@ -11,7 +11,7 @@ export default function Footer() {
     <div className="py-12 px-5 flex flex-col justify-center items-center gap-8 text-slate-50 text-xs font-ibm">
       <Link href="/landing">
         <Image
-          className="w-auto h-auto md:w-44"
+          className="w-auto h-auto md:w-44 md:hover:scale-105 md:duration-500"
           src={whiteLogo}
           alt="logo"
           width={150}
@@ -25,15 +25,15 @@ export default function Footer() {
         <p className="hidden md:block">|</p>
         <Link
           href="https://github.com/SoeiCorp/skillbridge"
-          className="flex gap-2 items-center"
+          className="flex gap-2 items-center md:hover:opacity-80 md:duration-300"
         >
           <p>Open Source on</p>
           <Image src={githubLogo} alt="github" width={20} height={20} />
         </Link>
       </div>
       <div className="flex gap-4 opacity-60 underline underline-offset-1">
-        <Link href="/landing">ข้อตกลงและเงื่อนไขการใช้งาน</Link>
-        <Link href="/landing">นโยบายคุ้มครองความเป็นส่วนตัว</Link>
+        <Link href="/landing" className="md:hover:opacity-80 md:duration-300">ข้อตกลงและเงื่อนไขการใช้งาน</Link>
+        <Link href="/landing" className="md:hover:opacity-80 md:duration-300">นโยบายคุ้มครองความเป็นส่วนตัว</Link>
       </div>
     </div>
   );

@@ -38,26 +38,11 @@ const taskCategories = [
 ]
 
 // TEMPORARY
-const isStudent = false;
+const isStudent = true;
 
 export default function LandingPage() {
   return (
-    <div className="flex-grow flex flex-col font-ibm w-full">
-      {/* Header */}
-      <div className="flex flex-col justify-center items-center text-slate-50 pt-5 pb-10 gap-3 md:gap-8 md:pb-24 md:pt-16">
-        <h2 className="text-xl font-medium md:text-4xl md:font-semibold">เรามี<span className="text-pink-400">{isStudent ? ("งาน") : ("นิสิตจุฬาฯ")}</span>ด้าน...</h2>
-        <TypeAnimation taskCategories={taskCategories} />
-        <h2 className="text-base font-normal md:text-3xl md:font-medium">{isStudent ? ("ที่พร้อมให้คุณได้แสดงฝีมือ!") : ("ที่พร้อมเปลี่ยนไอเดียของคุณให้เป็นจริง!")}</h2>
-        {/* Insert search bar here with placeholder "ค้นหางานเลย!" */}
-        {isStudent ? (
-          <Link href="/search" className="text-slate-800 font-bold bg-slate-50 rounded-2xl px-24 py-1 border-b-4 border-pink-400 md:text-3xl md:py-2 md:px-40">ค้นหางานเลย!</Link>
-        ) : (
-          <Link href="/works" className="text-slate-800 font-bold bg-slate-50 rounded-2xl px-24 py-1 border-b-4 border-pink-400 md:text-3xl md:py-2 md:px-40">โพสงานเลย!</Link>
-        )}
-      </div>
-
-      {/* Body */}
-    <div className="rounded-3xl bg-slate-50 h-full flex justify-center items-center">
+    <div className="flex justify-center items-center">
       <div className="flex flex-col h-full py-10 md:py-14 md:max-w-[1600px] md:w-screen">
 
         {/* ทำไม้อง SkillBridge ? */}
@@ -94,7 +79,7 @@ export default function LandingPage() {
               <p className="md:text-sm lg:text-lg leading-[26px] w-full pb-2 border-b-2 border-slate-400">{isStudent ? ("แหล่งรวมงานฟรีแลนซ์สำหรับนิสิตจุฬาฯ") : ("นิสิตจุฬาฯ ผ่านการคัดเลือกและยืนยันตัวตน")}<br/>{isStudent ? ("ที่เปิดโอกาสให้ทุกคนได้พัฒนาฝีมือและแสดงศักยภาพให้โลกได้รู้!") : ("กับ SkillBridge สามารถตรวจสอบได้")}</p>
             </div>
             <Image
-              className="md:w-[320px] md:h-auto lg:w-[360px] lg:h-auto xl:w-[600px] xl:h-auto"
+              className="md:w-[320px] md:h-auto lg:w-[360px] lg:h-auto xl:w-[600px] xl:h-auto hover:scale-105 duration-500"
               src={studentDesktopImg}
               alt="students"
               width={580}
@@ -120,7 +105,7 @@ export default function LandingPage() {
           {/* 2-desktop */}
           <div className="hidden md:flex md:justify-between w-full">
             <Image
-              className=""
+              className="hover:scale-105 duration-500"
               src={guaranteeLogo}
               alt="students"
               width={800}
@@ -187,7 +172,6 @@ export default function LandingPage() {
           <CommentCards />
         </div>
       </div>
-    </div>
     </div>
   );
 }

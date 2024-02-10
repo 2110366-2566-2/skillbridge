@@ -9,7 +9,7 @@ export default function NavigationLayout({
   return (
     <div className="h-full bg-slate-800 flex flex-col justify-between">
       <Header />
-      {children}
+      <div className="rounded-3xl bg-slate-50 h-full p-5">{children}</div>
       <Footer />
     </div>
   );

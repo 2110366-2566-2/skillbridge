@@ -11,7 +11,7 @@ export function Marquee(props: Props) {
             <div className="flex justify-center items-center gap-4 md:gap-8">
                 {taskCategories.map((category) => (
                 <div key={category} className="flex justify-center items-center text-center px-[16px] py-[16px] min-w-[120px] h-[100px] bg-white border-[2px] border-slate-500 rounded-[20px] text-[24px] font-bold text-slate-500 md:text-4xl md:px-12 md:py-20">
-                    {category}
+                    <p className="text-center md:hover:scale-110 duration-500">{category}</p>
                 </div>
                 ))}
             </div>
@@ -20,7 +20,7 @@ export function Marquee(props: Props) {
             <div className="flex justify-center items-center gap-4 md:gap-8">
                 {taskCategories.map((category) => (
                 <div key={category} className="flex justify-center items-center text-center px-[16px] py-[16px] min-w-[120px] h-[100px] bg-white border-[2px] border-slate-500 rounded-[20px] text-[24px] font-bold text-slate-500 md:text-4xl md:px-12 md:py-20">
-                    {category}
+                    <p className="text-center md:hover:scale-110 duration-500">{category}</p>
                 </div>
                 ))}
             </div>
