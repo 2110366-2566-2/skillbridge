@@ -1,4 +1,3 @@
-import SearchTaskItem from "@/components/searchTask/SearchTaskItem";
 import SearchTaskItemList from "@/components/searchTask/SearchTaskItemList";
 
 export default function SearchPage() {
