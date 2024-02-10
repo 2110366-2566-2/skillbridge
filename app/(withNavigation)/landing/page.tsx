@@ -43,7 +43,7 @@ const isStudent = true;
 export default function LandingPage() {
   return (
     <div className="flex justify-center items-center">
-      <div className="flex flex-col h-full py-10 md:py-14 md:max-w-[1600px] md:w-screen">
+      <div className="flex flex-col h-full py-10 md:py-14 md:max-w-[1600px] md:w-full">
 
         {/* ทำไม้อง SkillBridge ? */}
         <div className="flex flex-col justify-center items-center gap-10 md:gap-24 md:px-20 lg:px-32">

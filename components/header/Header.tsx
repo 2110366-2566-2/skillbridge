@@ -1,23 +1,18 @@
-"use client"
-
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "./navbar/Navbar";
-import { usePathname } from "next/navigation";
 import LandingHeader from "./landingHeader/LandingHeader";
 
 const whiteLogo = require("@/public/logos/logo-white.svg") as string;
 
 export default function Header() {
-  const pathName = usePathname();
-
   // TEMPORARY
   const session = true;
   const isStudent = true;
 
   return (
-    <div className="flex flex-col">
+    <div>
       <div className="flex justify-between items-center py-4 pl-3 pr-5 md:pr-10">
         <Link href="/landing">
           <Image
@@ -30,9 +25,7 @@ export default function Header() {
         </Link>
         <Navbar session={session} isStudent={isStudent} />
       </div>
-      {pathName === "/landing" && (
-        <LandingHeader isStudent={isStudent} />
-      )}
+      <LandingHeader isStudent={isStudent} />
     </div>
   );
 }
