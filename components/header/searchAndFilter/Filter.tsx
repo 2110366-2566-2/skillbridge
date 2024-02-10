@@ -98,7 +98,7 @@ export default function Filter() {
                             />
                         </div>
                         {/* Topic */}
-                        <div className="font-bold text-[24px] text-slate-800 my-6">จัดการตัวกรอง</div>
+                        <div className="font-bold text-[24px] text-slate-800 mt-4 mb-6">จัดการตัวกรอง</div>
                         {/* Date Range */}
                         <div className="font-bold text-[20px] text-slate-800 mb-2">ช่วงเวลา</div>
                         <div className="font-medium text-[16px] text-slate-800 mb-1">วันเริ่มต้น</div>
