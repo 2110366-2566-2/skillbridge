@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(inter.className, ibmPlexSansThaiLooped.className, ("h-screen"))}>{children}</body>
+      <body className={cn(inter.className, ibmPlexSansThaiLooped.className, ("h-full"))}>{children}</body>
     </html>
   );
 }
