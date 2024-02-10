@@ -17,8 +17,9 @@ const createJob = async (fromData: FormData) => {
     const numWorker = fromData.get("NumWorker");
 
     //const session = await getServerSession(options);
+    //const userId = session?.userId
     // const employer = await prisma.employer.findFirst({
-    //   where:{ userId: session?.userId},
+    //   where:{ userId: userId},
     //   select:{userId:true}
     // })
 
@@ -28,8 +29,31 @@ const createJob = async (fromData: FormData) => {
     //     status: 401
     //   }
     // }
-  } catch (error) {
+
+    // await prisma.job.create({
+    //   data: {
+    //     userId: userId,
+    //     title: title,
+    //     status: status,
+    //     description: description,
+    //     startDate: startDate,
+    //     endDate: endDate,
+    //     estimateStartDate: estimateStartDate,
+    //     estimateEndDate: estimateEndDate,
+    //     budget: budget,
+    //     numWorker: numWorker,
+    //   },
+    // });
+
+    // return {
+    //   message: "Create Task Success",
+    //   status: 200,
+    // };
+  } catch (error: any) {
     console.log(error);
-    return { message: "Internal Server Error", status: 500 };
+    return {
+      message: error.message || "Internal Server Error",
+      status: error.status || 500,
+    };
   }
 };
