@@ -22,7 +22,7 @@ async function getDefaultSearchJobs(): Promise<job[]> {
             Applied: true
         },
     })
-    
+
     // TODO : Filter for only jobs that are open
     // Waiting for enum to finalize so it can check
     jobs.forEach((job) => {

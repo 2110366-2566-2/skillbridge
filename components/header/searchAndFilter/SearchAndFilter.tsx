@@ -6,7 +6,7 @@ import Filter from "./Filter";
 
 export default function SearchAndFilter() {
     const pathName = usePathname();
-    const isSearchPage = pathName === "/search"
+    const isSearchPage = pathName.startsWith("/search");
 
     return (
         <>
