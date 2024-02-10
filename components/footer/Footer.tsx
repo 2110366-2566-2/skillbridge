@@ -2,8 +2,8 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import whiteLogo from "@/public/logos/logo-white.svg";
-import githubLogo from "@/public/logos/github-logo.svg";
+const whiteLogo = require("@/public/logos/logo-white.svg") as string;
+const githubLogo = require("@/public/logos/github-logo.svg") as string;
 
 // Wait : waiting for ข้อตกลงและเงื่อนไขการใช้งาน & นโยบายคุ้มครองความเป็นส่วนตัว from ping
 export default function Footer() {
@@ -32,8 +32,12 @@ export default function Footer() {
         </Link>
       </div>
       <div className="flex gap-4 opacity-60 underline underline-offset-1">
-        <Link href="/landing" className="md:hover:opacity-80 md:duration-300">ข้อตกลงและเงื่อนไขการใช้งาน</Link>
-        <Link href="/landing" className="md:hover:opacity-80 md:duration-300">นโยบายคุ้มครองความเป็นส่วนตัว</Link>
+        <Link href="/landing" className="md:hover:opacity-80 md:duration-300">
+          ข้อตกลงและเงื่อนไขการใช้งาน
+        </Link>
+        <Link href="/landing" className="md:hover:opacity-80 md:duration-300">
+          นโยบายคุ้มครองความเป็นส่วนตัว
+        </Link>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import LandingHeader from "./landingHeader/LandingHeader";
 const whiteLogo = require("@/public/logos/logo-white.svg") as string;
 
 export default function Header() {
-  // TEMPORARY
+  // TEMPORARY : Should use "auth" on layout?
   const session = true;
   const isStudent = true;
 

@@ -18,7 +18,8 @@ const config: Config = {
       ibm: ["var(--ibm-plex-sans-thai-looped-font)"],
     },
     animation: {
-      "opacity-pulse": "opacity-pulse .8s ease-in-out infinite alternate-reverse",
+      "opacity-pulse":
+        "opacity-pulse .8s ease-in-out infinite alternate-reverse",
       marqueeLeft: "marqueeLeft 60s linear infinite",
       marqueeRight: "marqueeRight 60s linear infinite",
     },
