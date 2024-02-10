@@ -15,7 +15,7 @@ interface job {
     price: number
 }
 
-export default async function SearchTaskItemList() {
+export default function SearchTaskItemList() {
     const [tasks, setTasks] = useState<job[]>([]);
 
     useEffect(() => {
