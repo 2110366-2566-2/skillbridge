@@ -4,7 +4,20 @@ import Image from "next/image";
 
 const nextArrowButton = require("@/public/icons/nextArrowButton.svg") as string;
 
-export default function SearchTaskItem() {
+type Props = {
+    task: {
+        title: string,
+        startDate: string | undefined,
+        endDate: string | undefined,
+        jobTags: string[],
+        description: string,
+        acceptNum: number,
+        maxAcceptNum: number,
+        price: number
+    }
+}
+
+export default function SearchTaskItem({ task }: Props) {
     return (
         <>
             {/* Mobile size */}
