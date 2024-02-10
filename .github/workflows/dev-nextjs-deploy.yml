@@ -2,7 +2,7 @@ name: Development Next.js CI/CD
 
 on:
   pull_request:
-    types: [opened, synchronize] 
+    types: [opened, synchronize]
     branches:
       - main
 
@@ -31,7 +31,7 @@ jobs:
       - name: Configure Docker
         run: |
           gcloud auth configure-docker us-central1-docker.pkg.dev
-          
+
       - name: Debug Information
         run: |
           echo "Artifact Registry Location: ${{ secrets.GCP_DEV_NEXTJS_AR_LOCATION }}"
@@ -50,4 +50,4 @@ jobs:
             --image "${{ secrets.GCP_DEV_NEXTJS_AR_LOCATION }}" \
             --platform managed \
             --region "${{ env.REGION }}" \
-            --allow-unauthenticated 
+            --allow-unauthenticated
