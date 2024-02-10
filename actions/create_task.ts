@@ -30,24 +30,28 @@ const createJob = async (fromData: FormData) => {
     //   }
     // }
 
+    // const job = {
+    //   userId: userId,
+    //   title: title,
+    //   status: status,
+    //   description: description,
+    //   startDate: startDate,
+    //   endDate: endDate,
+    //   estimateStartDate: estimateStartDate,
+    //   estimateEndDate: estimateEndDate,
+    //   budget: budget,
+    //   numWorker: numWorker,
+    // } as JobInput
+
     // await prisma.job.create({
     //   data: {
-    //     userId: userId,
-    //     title: title,
-    //     status: status,
-    //     description: description,
-    //     startDate: startDate,
-    //     endDate: endDate,
-    //     estimateStartDate: estimateStartDate,
-    //     estimateEndDate: estimateEndDate,
-    //     budget: budget,
-    //     numWorker: numWorker,
+    //     job
     //   },
     // });
 
     // return {
     //   message: "Create Task Success",
-    //   status: 200,
+    //   status: 201,
     // };
   } catch (error: any) {
     console.log(error);
