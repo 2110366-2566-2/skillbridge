@@ -2,6 +2,7 @@ import Input from "./Input"
 import PasswordInput from "./PasswordInput"
 import Link from "next/link"
 import ConfirmPasswordInput from "./ConfirmPasswordInput"
+import { useState } from "react"
 
 export default function RegisterViaEmail({
     handleFirstFormComplete,
@@ -15,43 +16,63 @@ export default function RegisterViaEmail({
         handleFirstFormComplete();
     };
 
+    const [Form, setForm] = useState({
+        email: '',
+        password: '',
+        cPassword: '',
+        fname: '',
+        lname: ''
+    })
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+        setForm({
+            ...Form,
+            [event.target.name]: event.target.value
+        })
+        console.log(Form)
+    }
+
     return (
         <form className="w-full" action={"/"}>
             {
                 !isFirstFormComplete ?
                     <div className="pt-[5px]">
                         {/* Email Input Component */}
-                        <Input name="email" label="อีเมล" inputType="email" warning="กรอกที่อยู่อีเมลของคุณ" />
+                        <Input name="email" label="อีเมล" inputType="email" warning="กรอกที่อยู่อีเมลของคุณ" handleChange={handleChange} value={Form.email} />
 
                         {/* Password Input Component */}
-                        <PasswordInput fromLoginPage={false} />
+                        <PasswordInput fromLoginPage={false} handleChange={handleChange} value={Form.password} />
 
                         {/*Confirm Password Input Component */}
-                        <ConfirmPasswordInput />
+                        <ConfirmPasswordInput handleChange={handleChange} value={Form.cPassword} />
 
                         <div id="nextPage" className="w-full bg-[#334155] text-center cursor-pointer rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md" onClick={handleNextPageSubmit}>
                             ถัดไป
                         </div>
 
                         <p className="w-full text-center text-sm mt-[10px]">
-                            มีบัญชีอยู่แล้ว ? <Link href={"/login"} className="text-[#326FE2]">เข้าสู่ระบบ</Link>
+                            มีบัญชีอยู่แล้ว ? <Link href={"/login"} className="text-[#326FE2] hover:underline hover:underline-offset-2">เข้าสู่ระบบ</Link>
                         </p>
 
                     </div>
                     :
                     <div className="pt-[10px] flex flex-col">
-                        <Input name="fname" label="ชื่อ" inputType="text" warning="กรอกชื่อของคุณ" />
-                        <Input name="lname" label="นามสกุล" inputType="text" warning="กรอกนามสกุลของคุณ" />
+                        <Input name="fname" label="ชื่อ" inputType="text" warning="กรอกชื่อของคุณ" handleChange={handleChange} value={Form.fname} />
+                        <Input name="lname" label="นามสกุล" inputType="text" warning="กรอกนามสกุลของคุณ" handleChange={handleChange} value={Form.lname} />
 
                         <div className="mt-[20px]">
                             {/* Link ไป ข้อตกลงและเงื่อนไขการใช้งานของ SkillBridge และ นโยบายคุ้มครองความเป็นส่วนตัว*/}
                             <label className="block relative mb-[10px] text-[9.5px] pl-[20px]">ฉันได้อ่านและยอมรับ<Link href={'/'} className="text-[#326FE2]">ข้อตกลงและเงื่อนไขการใช้งานของ SkillBridge</Link>
-                                <input type="checkbox" name="" className="absolute cursor-pointer left-0 checked:bg-[#334155]" />
+                                <input type="checkbox" name=""
+                                    className="absolute cursor-pointer left-0
+                                    checked:bg-[#334155] hover:bg-[#a3a3a3]
+                                    w-[14px] h-[14px] rounded-sm focus:outline-none
+                                    hover:ring hover:" />
                             </label>
 
-                            <label className="block relative text-[9.5px] pl-[20px]">ฉันได้อ่านและยอมรับ<Link href={'/'} className="text-[#326FE2]">นโยบายคุ้มครองความเป็นส่วนตัว</Link>
+                            <label className="block relative text-[9.5px] pl-[20px] ">ฉันได้อ่านและยอมรับ<Link href={'/'} className="text-[#326FE2]">นโยบายคุ้มครองความเป็นส่วนตัว</Link>
                                 <input type="checkbox" name="" className="absolute cursor-pointer left-0 checked:bg-[#334155]" />
-
                             </label>
                         </div>
 
