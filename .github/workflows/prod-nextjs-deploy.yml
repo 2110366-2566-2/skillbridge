@@ -58,7 +58,9 @@ jobs:
      runs-on: ubuntu-latest
 
      steps:
+       - uses: actions/checkout@v2
+       
        - name: Discord Notification
-         uses: johnnyhuy/actions-discord-git-webhook@v1.0.0
+         uses: johnnyhuy/actions-discord-git-webhook@main
          with: 
            webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
