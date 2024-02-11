@@ -1,6 +1,9 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image";
+
+const logoTextBlack = require("@/public/logos/logo-text-black.svg") as string;
 
 export default function SearchKeywordText() {
     const [keyword, setKeyword] = useState("")
@@ -10,7 +13,16 @@ export default function SearchKeywordText() {
             {keyword ? (
                 <div className="text-3xl text-slate-800">ผลการค้นหาสำหรับ "<span className="font-semibold">{keyword}</span>"</div>
             ) : (
-                <div className="font-semibold text-3xl text-slate-800">เริ่มต้นหางานฟรีแลนซ์ง่าย ๆ กับ SkillBridge</div>
+                <div className="font-semibold text-3xl text-slate-800">เริ่มต้นหางานฟรีแลนซ์ง่าย ๆ กับ<span> </span>
+                    <span className="inline-block translate-y-2">
+                        <Image
+                            src={logoTextBlack}
+                            alt="logoTextBlack"
+                            // width={16}
+                            height={34.75}
+                        />
+                    </span>
+                </div>
             )}
         </>
     )
