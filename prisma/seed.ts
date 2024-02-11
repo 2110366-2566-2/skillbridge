@@ -9,13 +9,11 @@ interface jobTagList {
 interface jobTagEnum {}
 
 async function main() {
-  await Promise.all([
-    prisma.job.deleteMany({}),
-    prisma.jobTag.deleteMany({}),
-    prisma.employer.deleteMany({}),
-    prisma.student.deleteMany({}),
-    prisma.user.deleteMany({}),
-  ]);
+  await prisma.job.deleteMany({});
+  await prisma.jobTag.deleteMany({});
+  await prisma.employer.deleteMany({});
+  await prisma.student.deleteMany({});
+  await prisma.user.deleteMany({});
 
   const jobTagEnum: string[] = [
     "กราฟิกดีไซน์",
