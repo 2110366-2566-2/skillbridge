@@ -61,6 +61,6 @@ jobs:
        - uses: actions/checkout@v2
        
        - name: Discord Notification
-         uses: johnnyhuy/actions-discord-git-webhook@main
+         uses: ErnaneJ/action-discord-alerts@v0.0.2
          with: 
-           webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+           webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
