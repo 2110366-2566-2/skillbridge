@@ -12,7 +12,7 @@ export default function SearchBar() {
     const handleChange = (evt: ChangeEvent) => {
         const changedInput = evt.target as HTMLInputElement;
         setSearchValue(changedInput.value)
-        console.log(changedInput.value)
+        // console.log(changedInput.value)
     }
     return (
         <>
