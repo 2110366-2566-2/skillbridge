@@ -3,9 +3,9 @@
   <summary>Table of Contents</summary>
   <ul>
     <li>
-      <a href="#version-1.0">v1.0</a>
+      <a href="#version-10">v1.0</a>
       <ul>
-        <li><a href="#version-1.1">v1.1</a></li>
+        <li><a href="#version-11">v1.1</a></li>
       </ul>
     </li>
   </ul>
