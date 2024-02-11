@@ -149,7 +149,7 @@ export default function Filter() {
                                             name="startDate"
                                             value={filtered.startDate}
                                             onChange={handleChange}
-                                        ></input>
+                                        />
                                     </div>
                                 </div>
                                 <div className="flex flex-col md:w-full">
