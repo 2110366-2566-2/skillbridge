@@ -1,4 +1,4 @@
-export default function LoadingTaskItem() {
+export default function LoadingJobItem() {
     return (
         <>
             {/* Mobile size */}
