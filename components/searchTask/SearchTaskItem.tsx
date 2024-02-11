@@ -7,13 +7,13 @@ const nextArrowButton = require("@/public/icons/nextArrowButton.svg") as string;
 type Props = {
     task: {
         title: string,
-        startDate: string | undefined,
-        endDate: string | undefined,
-        jobTags: string[],
+        startDate: string,
+        endDate: string,
+        jobTags: string,
         description: string,
         acceptNum: number,
         maxAcceptNum: number,
-        price: number
+        budget: number
     }
 }
 
@@ -41,7 +41,7 @@ export default function SearchTaskItem({ task }: Props) {
                     </div>
                 </div>
                 <div className="flex flex-row justify-end items-center">
-                    <div className="font-semibold text-[20px] text-[#313866] mr-2">฿{task?.price}</div>
+                    <div className="font-semibold text-[20px] text-[#313866] mr-2">฿{task?.budget}</div>
                     <Image
                         src={nextArrowButton}
                         alt="nextArrowButton"
@@ -85,7 +85,7 @@ export default function SearchTaskItem({ task }: Props) {
                     </div>
                     <div className="flex flex-row justify-between items-end translate-y-[5px]">
                         <div className="text-[13.12px] text-slate-500">รับแล้ว <span className="font-semibold">{task?.acceptNum} / {task?.maxAcceptNum}</span> คน</div>
-                        <div className="font-semibold text-[24px] text-[#313866] translate-y-[5px]">฿{task?.price}</div>
+                        <div className="font-semibold text-[24px] text-[#313866] translate-y-[5px]">฿{task?.budget}</div>
                     </div>
                 </div>
             </div>

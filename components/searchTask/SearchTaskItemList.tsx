@@ -3,18 +3,7 @@
 import { useEffect, useState } from "react";
 import SearchTaskItem from "@/components/searchTask/SearchTaskItem";
 import LoadingTaskItem from "./LoadingTaskItem";
-import { getDefaultSearchJobs } from "@/actions/tasks";
-
-interface job {
-    title: string,
-    startDate: string | undefined,
-    endDate: string | undefined,
-    jobTags: string[],
-    description: string,
-    acceptNum: number,
-    maxAcceptNum: number,
-    price: number
-}
+import { getDefaultSearchJobs, job } from "@/actions/search/jobs";
 
 export default function SearchTaskItemList() {
     const [tasks, setTasks] = useState<job[]>([]);
