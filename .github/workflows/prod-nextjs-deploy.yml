@@ -53,3 +53,13 @@ jobs:
             --platform managed \
             --region "${{ env.REGION }}" \
             --allow-unauthenticated
+            
+  discord-noti:
+     runs-on: ubuntu-latest
+
+     steps:
+       - name: Discord Notification
+       - uses: cl8dep/action-discord@0.1
+         with: 
+           webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+           message: "@soei main is updated, please pull and merge main to your branch!"
