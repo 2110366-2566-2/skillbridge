@@ -29,7 +29,7 @@ const FormattedDate = (inputDateString: string) => {
 }
 
 export default function SearchJobItem({ job }: Props) {
-    console.log(job)
+    // console.log(job)
     return (
         <>
             {/* Mobile size */}
