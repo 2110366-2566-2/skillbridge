@@ -442,8 +442,33 @@ generate insights, และ provide data-driven recommendations. \n \
             endDate: new Date("2022-11-07"),
             estimateStartDate: new Date("2022-08-01"),
             estimateEndDate: new Date("2022-10-31"),
-            jobTagId: jobTagList["ไอทีโซลูชั่น"]
+            jobTagId: jobTagList["ไอทีโซลูชั่น"],
+            applications: {
+              create: [
+                {
+                  userId: s1.userId,
+                  bid: 3000,
+                  status: 'ACCEPTED',
+                },
+                {
+                  userId: s3.userId,
+                  bid: 2000,
+                  status: 'REJECTED',
+                }, 
+              ]
+            },
+            reviews: {
+              create: [
+                {
+                  studentId: s1.userId,
+                  stars: 5,
+                  description: 'การทำงานกับนิสิตในโปรเจกต์นี้เป็นที่ประทับใจมาก ไม่เพียงแต่ทักษะทางวิชาการที่น่าทึ่งแต่ยังสามารถสื่อสารและทำงานร่วมกับทีมได้อย่างไร้ปัญหา\n\
+ความเข้าใจในภารกิจและการเสนอแนะที่มีประโยชน์ทำให้เขาเป็นส่วนที่สำคัญของทีมที่ดีขึ้น'
+                },
+              ]
+            }
           },
+
           {
             title: 'ตัดต่อคลิปลง TikTok',
             status: 'NOT_STARTED',
@@ -452,8 +477,21 @@ generate insights, และ provide data-driven recommendations. \n \
             numWorker: 3,
             estimateStartDate: new Date("2023-09-25"),
             estimateEndDate: new Date("2023-12-31"),
-            jobTagId: jobTagList["สื่อออนไลน์"]
+            jobTagId: jobTagList["สื่อออนไลน์"],
+            applications: {
+              create: [
+                {
+                  userId: s2.userId,
+                  bid: 3000,
+                },
+                {
+                  userId: s3.userId,
+                  bid: 2000,
+                }, 
+              ]
+            },
           },
+
           {
             title: 'UX/UI Designer และผู้สร้างประสบการณ์ผู้ใช้',
             status: 'NOT_STARTED',
@@ -464,8 +502,17 @@ Proficiency ใน design tools เป็น',
             numWorker: 5,
             estimateStartDate: new Date("2024-01-16"),
             estimateEndDate: new Date("2024-03-31"),
-            jobTagId: jobTagList["ออกแบบ UX UI"]
+            jobTagId: jobTagList["ออกแบบ UX UI"],
+            applications: {
+              create: [
+                {
+                  userId: s1.userId,
+                  bid: 3000,
+                },
+              ]
+            },
           },
+
           {
             title: 'Content Translator และผู้แปลเนื้อหา',
             status: 'NOT_STARTED',
@@ -475,8 +522,17 @@ Proficiency ใน design tools เป็น',
             numWorker: 5,
             estimateStartDate: new Date("2024-01-16"),
             estimateEndDate: new Date("2024-03-31"),
-            jobTagId: jobTagList["ภาษา"]
+            jobTagId: jobTagList["ภาษา"],
+            applications: {
+              create: [
+                {
+                  userId: s3.userId,
+                  bid: 2000,
+                }, 
+              ]
+            },
           },
+
           {
             title: 'ผู้เชี่ยวชาญด้านการดำเนินงาน E-commerce',
             status: 'NOT_STARTED',
@@ -487,11 +543,24 @@ with logistics partners. มีความรู้เกี่ยวกับ�
             numWorker: 5,
             estimateStartDate: new Date("2024-02-11"),
             estimateEndDate: new Date("2024-04-11"),
-            jobTagId: jobTagList["ธุรกิจและการเงิน"]
+            jobTagId: jobTagList["ธุรกิจและการเงิน"],
+            applications: {
+              create: [
+                {
+                  userId: s1.userId,
+                  bid: 5000,
+                },
+                {
+                  userId: s3.userId,
+                  bid: 5500,
+                }, 
+              ]
+            },
           },
+
           {
             title: 'Financial Analyst และนักวิเคราะห์ทางการเงิน',
-            status: 'NOT_STARTED',
+            status: 'COMPLETED',
             description: 'Looking for a financial analyst ที่สามารถ analyze financial data, \n \
 prepare reports, และ provide insights for decision-making. \n \
 ความเข้าใจในเรื่องของการเงินและการวิเคราะห์ทางการเงิน.',
@@ -499,8 +568,51 @@ prepare reports, และ provide insights for decision-making. \n \
             numWorker: 3,
             estimateStartDate: new Date("2024-02-11"),
             estimateEndDate: new Date("2024-04-11"),
-            jobTagId: jobTagList["ธุรกิจและการเงิน"]
+            jobTagId: jobTagList["ธุรกิจและการเงิน"],
+            applications: {
+              create: [
+                {
+                  userId: s1.userId,
+                  bid: 10000,
+                  status: 'ACCEPTED',
+                },
+                {
+                  userId: s2.userId,
+                  bid: 12000,
+                  status: 'ACCEPTED',
+                },
+                {
+                  userId: s3.userId,
+                  bid: 9000,
+                  status: 'ACCEPTED',
+                }, 
+              ]
+            },
+            reviews: {
+              create: [
+                {
+                  studentId: s1.userId,
+                  stars: 4,
+                  description: 'นิสิตคนนี้มีความสามารถในการจัดการงานและสามารถปฏิบัติงานตามที่ได้รับมอบหมายได้อย่างมีประสิทธิภาพ\n\
+ความรวดเร็วในการตอบสนองและสามารถทำงานภารกิจที่ซับซ้อนอย่างมีประสิทธิภาพ การมีสมาธิในการปรับตัวตามสถานการณ์ได้ดีเยี่ยม'
+                },
+                {
+                  studentId: s2.userId,
+                  stars: 3,
+                  description: 'การร่วมงานกับนิสิตนี้เป็นประสบการณ์ที่ทรงพลังมาก ทักษะทางวิชาการของเขามีคุณภาพสูง\n\
+การทำงานที่ให้ได้มีความละเอียดสูงและการแก้ไขปัญหาที่เกิดขึ้นอย่างมีประสิทธิภาพ นอกจากนี้ ความมุ่งมั่นที่แสดงออกมาทำให้เขาเป็นส่วนสำคัญในการสำเร็จของโปรเจกต์'
+                },
+                {
+                  studentId: s3.userId,
+                  stars: 5,
+                  description: 'ไม่สามารถพูดถึงความพึงพอใจต่อการทำงานกับนิสิตคนนี้ออกมาได้หมด การแสดงความคิดเป็นระเบียบ\n\
+และความสามารถในการแก้ไขปัญหาของเขาเป็นสิ่งที่ควรชมเชย การทำงานที่ส่งมอบละเมิดตามระเบียบเสมอ\n\
+ความมุ่งมั่นและความสามารถในการจัดการงานที่น่าชื่นชม ทำให้เขาเป็นส่วนหนึ่งที่สำคัญในทีมของเรา'
+                },
+              ]
+            }
           },
+
           {
             title: 'นักวิจัยตลาดและ Market Researcher',
             status: 'NOT_STARTED',
@@ -510,8 +622,21 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
             numWorker: 3,
             estimateStartDate: new Date("2024-02-11"),
             estimateEndDate: new Date("2024-04-11"),
-            jobTagId: jobTagList["ธุรกิจและการเงิน"]
+            jobTagId: jobTagList["ธุรกิจและการเงิน"],
+            applications: {
+              create: [
+                {
+                  userId: s1.userId,
+                  bid: 9000,
+                },
+                {
+                  userId: s2.userId,
+                  bid: 11500,
+                }, 
+              ]
+            },
           },
+
           {
             title: 'นักวิจัยตลาดและ Market Researcher',
             status: 'NOT_STARTED',
@@ -521,7 +646,19 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
             numWorker: 3,
             estimateStartDate: new Date("2024-02-11"),
             estimateEndDate: new Date("2024-04-11"),
-            jobTagId: jobTagList["ธุรกิจและการเงิน"]
+            jobTagId: jobTagList["ธุรกิจและการเงิน"],
+            applications: {
+              create: [
+                {
+                  userId: s2.userId,
+                  bid: 10000,
+                },
+                {
+                  userId: s3.userId,
+                  bid: 12000,
+                }, 
+              ]
+            },
           },
           // Add more job objects as needed
         ]
@@ -553,18 +690,46 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
             budget: 1500,
             estimateStartDate: new Date("2024-02-20"),
             estimateEndDate: new Date("2024-03-31"),
-            jobTagId: jobTagList["งาน IOT"]
+            jobTagId: jobTagList["งาน IOT"],
+            applications: {
+              create: [
+                {
+                  userId: s1.userId,
+                  bid: 1200,
+                },
+                {
+                  userId: s3.userId,
+                  bid: 2000,
+                }, 
+              ]
+            },
           },
+
           {
             title: 'เขียนเว็บ ChaoChao',
             status: 'IN_PROGRESS',
             description: 'ไม่รู้จะเช่าไหนดี มาเช่านี่มา',
-            budget: 200,
+            budget: 2000,
             startDate: new Date("2024-01-24"),
             estimateStartDate: new Date("2024-01-21"),
             estimateEndDate: new Date("2024-04-30"),
-            jobTagId: jobTagList["พัฒนาเว็ปไซต์"]
+            jobTagId: jobTagList["พัฒนาเว็ปไซต์"],
+            applications: {
+              create: [
+                {
+                  userId: s1.userId,
+                  bid: 1200,
+                  status: 'ACCEPTED',
+                },
+                {
+                  userId: s2.userId,
+                  bid: 2000,
+                  status: 'REJECTED',
+                }, 
+              ]
+            },
           },
+
           {
             title: 'Web Developer for เฮียหมู',
             status: 'NOT_STARTED',
@@ -573,18 +738,64 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
             numWorker: 4,
             estimateStartDate: new Date("2023-11-01"),
             estimateEndDate: new Date("2024-02-01"),
-            jobTagId: jobTagList["พัฒนาเว็ปไซต์"]
+            jobTagId: jobTagList["พัฒนาเว็ปไซต์"],
+            applications: {
+              create: [
+                {
+                  userId: s2.userId,
+                  bid: 3300,
+                },
+                {
+                  userId: s3.userId,
+                  bid: 2000,
+                }, 
+              ]
+            },
           },
+
           {
             title: 'รสดีเด็ด อิซากายะ Frontend Developer',
-            status: 'NOT_STARTED',
+            status: 'COMPLETED',
             description: 'Application สำหรับจองคิวและโปรโมชั่น',
             budget: 2000,
             numWorker: 5,
             estimateStartDate: new Date("2024-03-01"),
             estimateEndDate: new Date("2024-05-31"),
-            jobTagId: jobTagList["พัฒนาแอพฯมือถือ"]
+            jobTagId: jobTagList["พัฒนาแอพฯมือถือ"],
+            applications: {
+              create: [
+                {
+                  userId: s1.userId,
+                  bid: 2200,
+                  status: 'ACCEPTED',
+                },
+                {
+                  userId: s2.userId,
+                  bid: 2000,
+                  status: 'ACCEPTED',
+                }, 
+              ]
+            },
+            reviews: {
+              create: [
+                {
+                  studentId: s1.userId,
+                  stars: 4,
+                  description: 'I am genuinely impressed with the collaborative spirit and problem-solving abilities of this nisit.\n\
+Their academic prowess shines through in every aspect of the project. The ease with which they communicated \n\
+and took responsibility for their work created an environment that was not only productive but also enjoyable.'
+                },
+                {
+                  studentId: s2.userId,
+                  stars: 5,
+                  description: 'Working with this nisit has been a truly enlightening experience.\n\
+Their academic proficiency is evident in the exceptional way they approached and executed tasks within the project. \n\
+The standout quality was their impeccable attention to detail and problem-solving capabilities, distinguishing them as a standout contributor.'
+                },
+              ]
+            }
           },
+
           {
             title: 'Skip Backend Developer',
             status: 'NOT_STARTED',
@@ -593,8 +804,17 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
             numWorker: 3,
             estimateStartDate: new Date("2024-03-01"),
             estimateEndDate: new Date("2024-04-30"),
-            jobTagId: jobTagList["พัฒนาแอพฯมือถือ"]
+            jobTagId: jobTagList["พัฒนาแอพฯมือถือ"],
+            applications: {
+              create: [
+                {
+                  userId: s3.userId,
+                  bid: 2000,
+                },
+              ]
+            },
           },
+
           {
             title: 'เฮียหมู Data Analytics',
             status: 'NOT_STARTED',
@@ -602,27 +822,98 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
             budget: 4000,
             estimateStartDate: new Date("2024-03-01"),
             estimateEndDate: new Date("2024-03-31"),
-            jobTagId: jobTagList["ไอทีโซลูชั่น"]
+            jobTagId: jobTagList["ไอทีโซลูชั่น"],
+            applications: {
+              create: [
+                {
+                  userId: s1.userId,
+                  bid: 4000,
+                },
+                {
+                  userId: s2.userId,
+                  bid: 5000,
+                },
+                {
+                  userId: s3.userId,
+                  bid: 4400,
+                }, 
+              ]
+            },
           },
+
           {
             title: 'Implement Recommendation Model on Application',
             status: 'NOT_STARTED',
             description: 'Develop a ML model to recommend their favorite beers to users.',
             budget: 10000,
-            numWorker: 2,
             estimateStartDate: new Date("2024-02-17"),
             estimateEndDate: new Date("2024-04-16"),
-            jobTagId: jobTagList["ไอทีโซลูชั่น"]
+            jobTagId: jobTagList["ไอทีโซลูชั่น"],
+            applications: {
+              create: [
+                {
+                  userId: s1.userId,
+                  bid: 10000,
+                },
+                {
+                  userId: s2.userId,
+                  bid: 11000,
+                },
+                {
+                  userId: s3.userId,
+                  bid: 9900,
+                }, 
+              ]
+            },
           },
+
           {
             title: 'Bad Guy Full-stack developer',
-            status: 'NOT_STARTED',
+            status: 'COMPLETED',
             description: 'Develop Larb selling application for E-sarn People',
             budget: 2000,
+            numWorker: 2,
             estimateStartDate: new Date("2024-02-02"),
             estimateEndDate: new Date("2024-05-15"),
-            jobTagId: jobTagList["พัฒนาแอพฯมือถือ"]
+            jobTagId: jobTagList["พัฒนาแอพฯมือถือ"],
+            applications: {
+              create: [
+                {
+                  userId: s1.userId,
+                  bid: 2000,
+                  status: 'REJECTED',
+                },
+                {
+                  userId: s2.userId,
+                  bid: 3000,
+                  status: 'ACCEPTED',
+                },
+                {
+                  userId: s3.userId,
+                  bid: 1999,
+                  status: 'ACCEPTED',
+                }, 
+              ]
+            },
+            reviews: {
+              create: [
+                {
+                  studentId: s2.userId,
+                  stars: 5,
+                  description: 'Working with this nisit has been a pleasure from start to finish. Their efficient task management skills \n\
+and ability to fulfill assignments were noteworthy. Their work ethic and adaptability to different phases of the project ensured a smooth and successful collaboration.'
+                },
+                {
+                  studentId: s3.userId,
+                  stars: 4,
+                  description: 'This nisit brought a level of creativity and innovation that greatly enhanced the project. \n\
+Their ability to think outside the box and present solutions was truly commendable. The final deliverables reflected a unique \n\
+and fresh perspective, exceeding our expectations.'
+                },
+              ]
+            }
           },
+          
           {
             title: 'นักสร้างเนื้อหาและ Content Curator',
             status: 'NOT_STARTED',
@@ -633,11 +924,24 @@ engaging และ เนื้อหาสร้างสรรค์สำห�
             numWorker: 5,
             estimateStartDate: new Date("2024-02-01"),
             estimateEndDate: new Date("2024-04-30"),
-            jobTagId: jobTagList["สื่อออนไลน์"]
+            jobTagId: jobTagList["สื่อออนไลน์"],
+            applications: {
+              create: [
+                {
+                  userId: s1.userId,
+                  bid: 10000,
+                },
+                {
+                  userId: s2.userId,
+                  bid: 11000,
+                },
+              ]
+            },
           },
+
           {
             title: 'เจ้าหน้าที่ช่วยส่วนตัวและ Virtual Assistant Extraordinaire',
-            status: 'NOT_STARTED',
+            status: 'IN_PROGRESS',
             description: 'Seeking บุคคลที่มี detail-oriented virtual assistant \n \
 ที่สามารถ handle administrative tasks, จัดการปฏิทิน, และ ช่วยเสริมสร้าง ใน various projects. \n \
 ทักษะการจัดระเบียบที่แข็งแกร่งและการสื่อสารที่เป็น',
@@ -645,8 +949,18 @@ engaging และ เนื้อหาสร้างสรรค์สำห�
             numWorker: 2,
             estimateStartDate: new Date("2024-02-01"),
             estimateEndDate: new Date("2024-04-30"),
-            jobTagId: jobTagList["อื่น ๆ"]
+            jobTagId: jobTagList["อื่น ๆ"],
+            applications: {
+              create: [
+                {
+                  userId: s1.userId,
+                  bid: 5000,
+                  status: 'ACCEPTED'
+                },
+              ]
+            },
           },
+
           {
             title: 'Creative Video Producer และโปรดิวเซอร์วิดีโอ',
             status: 'NOT_STARTED',
@@ -658,6 +972,7 @@ produce compelling video content. Proficiency ใน video editing tools เป�
             estimateEndDate: new Date("2024-03-11"),
             jobTagId: jobTagList["รูปภาพและวีดีโอ"]
           },
+
           {
             title: 'HR Coordinator และผู้ประสานงานทรัพยากรบุคคล',
             status: 'NOT_STARTED',
@@ -670,6 +985,7 @@ recruitment, employee onboarding, และ HR processes. \n \
             estimateEndDate: new Date("2024-04-30"),
             jobTagId: jobTagList["อื่น ๆ"]
           },
+          
           {
             title: 'Tech Support Specialist และผู้ช่วยเหลือทางเทคนอล็อค',
             status: 'NOT_STARTED',
