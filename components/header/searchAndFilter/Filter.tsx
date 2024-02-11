@@ -80,9 +80,10 @@ export default function Filter() {
     return (
         <>
             {/* Mobile Button*/}
-            <div
-                className="md:hidden"
-                onClick={() => setIsOpen(true)}
+            <button
+                type="button"
+                className="px-1 translate-y-1 md:hidden"
+                onClick={toggleOpen}
             >
                 <Image
                     src={filterIcon}
@@ -90,11 +91,12 @@ export default function Filter() {
                     width={24}
                     height={24}
                 />
-            </div>
+            </button>
 
             {/* Tablet and Desktop Button */}
-            <div
-                className="hidden md:flex md:flex-row md:items-center md:justify-center md:min-w-[99px] md:min-h-[40px] md:bg-slate-300 md:rounded-[6px] lg:min-w-[109px] lg:min-h-[48px]"
+            <button
+                type="button"
+                className="hidden md:hover:bg-slate-200 md:flex md:flex-row md:items-center md:justify-center md:min-w-[99px] md:min-h-[40px] md:bg-slate-300 md:rounded-[6px] lg:min-w-[109px] lg:min-h-[48px] "
                 onClick={toggleOpen}
             >
                 <div className="">
@@ -106,7 +108,7 @@ export default function Filter() {
                     />
                 </div>
                 <div className="ml-2 font-medium text-[14px] lg:text-[16px] text-slate-900">ตัวกรอง</div>
-            </div>
+            </button>
 
             {/* Mobile and Desktop Filter Form */}
             {isOpen && (
@@ -238,28 +240,6 @@ export default function Filter() {
                     </div>
                 </div>
             )}
-
-            {/* Desktop Filter Form */}
-            {/* TODO: Implement in Mobile size loey */}
-            {/* {isOpen && (
-                <div className="hidden md:fixed md:inset-0 md:overflow-hidden md:font-ibm md:z-50 md:bg-slate-50 md:w-[28%] md:h-screen md:flex md:flex-col md:p-12 md:justify-between">
-                    <div className="flex flex-row justify-between items-center">
-                        <div className="font-bold text-[30px] text-slate-800">จัดการตัวกรอง</div>
-                        <div
-                            className="rounded-[50%] p-2 hover:bg-slate-100"
-                            onClick={toggleOpen}
-                        >
-                            <Image
-                                src={closeDarkIcon}
-                                alt="closeDarkIcon"
-                                width={30}
-                                height={30}
-                            />
-                        </div>
-                    </div>
-
-                </div>
-            )} */}
         </>
     )
 }
