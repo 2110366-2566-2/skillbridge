@@ -20,7 +20,7 @@ export default function SearchBar() {
                                 height={16}
                             />
                         </div>
-                        <input type="search" id="task-search" className="block w-full min-h-[40px] ps-10 text-[14px] text-slate-900 border border-slate-300 rounded bg-slate-50 focus:border-slate-400" placeholder="ค้นหางานที่ต้องการ..." required></input>
+                        <input type="search" id="task-search" className="block w-full min-h-[40px] ps-10 text-[14px] text-slate-900 border border-slate-300 rounded bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-slate-500" placeholder="ค้นหางานที่ต้องการ..." required></input>
                     </div>
                 </form>
             </div>
@@ -37,7 +37,7 @@ export default function SearchBar() {
                                 height={24}
                             />
                         </div>
-                        <input type="search" id="task-search" className="block w-full min-h-[48px] ps-12 text-[16px] text-slate-900 border border-slate-300 rounded-lg bg-slate-50 focus:border-slate-500" placeholder="ค้นหางานที่ต้องการ..." required></input>
+                        <input type="search" id="task-search" className="block w-full min-h-[48px] ps-12 text-[16px] text-slate-900 border border-slate-300 rounded-lg bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-400 focus:border-slate-500" placeholder="ค้นหางานที่ต้องการ..." required></input>
                         <button type="submit" className="min-w-[84px] min-h-[38px] text-white text-[14px] rounded absolute end-[5px] bottom-[5px] bg-slate-800 hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-slate-400">ค้นหา</button>
                     </div>
                 </form>
