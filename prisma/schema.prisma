@@ -8,126 +8,140 @@ datasource db {
 }
 
 model User {
-  id              String    @id @default(uuid())
+  id              String   @id @default(uuid())
   salutation      String
   firstname       String
   middlename      String?
   lastname        String
   profileImageUrl String?
-  lineId          String?   @unique
-  facebook        String?   @unique
-  email           String?   @unique
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-  Applied         Applied[]
-  Employer        Employer?
-  Job             Job[]
-  Message         Message[]
-  Student         Student?
+  lineId          String?  @unique
+  facebook        String?  @unique
+  email           String   @unique
+  hashedPassword  String   @db.VarChar(512)
+  isGmail         Boolean  @default(false)
+  isDeleted       Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  Student        Student?      @relation(fields: [studentUserId], references: [userId])
+  Employer       Employer?     @relation(fields: [employerUserId], references: [userId])
+  Application    Application[]
+  Message        Message[]
+  studentUserId  String?
+  employerUserId String?
 
   @@map("_user")
 }
 
 model Student {
-  userId        String        @id @unique
+  userId        String   @id @unique
   resumeUrl     String?
   transcriptUrl String?
   bankAccountNo String?
   avgStar       Float?
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-  user          User          @relation(fields: [userId], references: [id])
-  transaction   Transaction[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  transaction Transaction[]
+  Review      Review[]
+  User        User[]
 
   @@map("student")
 }
 
 model Employer {
-  userId       String        @id @unique
+  userId       String   @id @unique
   position     String
   organization String
   publicEmail  String
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-  user         User          @relation(fields: [userId], references: [id])
-  transaction  Transaction[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  Job         Job[]
+  transaction Transaction[]
+  User        User[]
 
   @@map("employer")
 }
 
 model Job {
-  id                String        @id @default(uuid())
-  userId            String
+  id                String    @id @default(uuid())
+  employerId        String
+  employer          Employer  @relation(fields: [employerId], references: [userId])
   title             String
-  status            JobStatus     @default(NOT_STARTED)
+  status            JobStatus @default(NOT_STARTED)
   description       String
   budget            Int
-  numWorker         Int           @default(1)
+  numWorker         Int       @default(1)
+  jobTagId          String
+  jobTag            JobTag    @relation(fields: [jobTagId], references: [id])
   startDate         DateTime?
   endDate           DateTime?
   estimateStartDate DateTime
   estimateEndDate   DateTime
-  createdAt         DateTime      @default(now())
-  updatedAt         DateTime      @updatedAt
-  Applied           Applied[]
-  chatroom          Chatroom[]
-  user              User          @relation(fields: [userId], references: [id])
-  Review            Review[]
-  transaction       Transaction[]
-  jobTags           JobTag[]      @relation("job_tags_relation")
+  isDeleted         Boolean   @default(false)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  Application Application[]
+  chatroom    Chatroom[]
+  transaction Transaction[]
+  Review      Review[]
 
   @@map("job")
 }
 
 model JobTag {
   id        String   @id @default(uuid())
-  title     String?
+  title     String
+  isDeleted Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  jobs      Job[]    @relation("job_tags_relation")
+  Job       Job[]
 
   @@map("job_tag")
 }
 
-model Applied {
+model Application {
   userId      String
+  user        User              @relation(fields: [userId], references: [id])
   jobId       String
-  bid         Float?
+  job         Job               @relation(fields: [jobId], references: [id])
+  bid         Float
   documentUrl String?
-  status      AppliedStatus @default(PENDING)
-  appliedAt   DateTime?
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  job         Job           @relation(fields: [jobId], references: [id])
-  user        User          @relation(fields: [userId], references: [id])
+  status      ApplicationStatus @default(PENDING)
+  isDeleted   Boolean           @default(false)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
 
   @@id([userId, jobId])
-  @@map("applied")
+  @@map("application")
 }
 
 model Chatroom {
-  id        String    @id @default(uuid())
+  id        String   @id @default(uuid())
   jobId     String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  job       Job       @relation(fields: [jobId], references: [id])
-  Message   Message[]
+  job       Job      @relation(fields: [jobId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Message Message[]
 
   @@map("chatroom")
 }
 
 model Message {
   id         String    @id @default(uuid())
-  timestamp  DateTime
   chatroomId String
   userId     String
+  user       User      @relation(fields: [userId], references: [id])
+  unsentAt   DateTime?
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
-  unsentAt   DateTime?
-  Text       Text?
-  Image      Image?
-  chatroom   Chatroom  @relation(fields: [chatroomId], references: [id])
-  user       User      @relation(fields: [userId], references: [id])
+
+  Text     Text[]
+  Image    Image[]
+  Chatroom Chatroom @relation(fields: [chatroomId], references: [id])
 
   @@map("message")
 }
@@ -151,27 +165,31 @@ model Image {
 }
 
 model Transaction {
-  id              String   @id @default(uuid())
+  id              String    @id @default(uuid())
   jobId           String
-  employerId      String
+  job             Job       @relation(fields: [jobId], references: [id])
   studentId       String
-  paymentId       String?
+  student         Student   @relation(fields: [studentId], references: [userId])
+  paymentId       String? // need revise
   receiptImageUrl String?
   PaymentType     String?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  employer        Employer @relation(fields: [employerId], references: [userId])
-  job             Job      @relation(fields: [jobId], references: [id])
-  student         Student  @relation(fields: [studentId], references: [userId])
+  isDeleted       Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  Employer        Employer? @relation(fields: [employerUserId], references: [userId])
+  employerUserId  String?
 
   @@map("transaction")
 }
 
 model Review {
   id          String   @id @default(uuid())
+  studentId   String
+  student     Student  @relation(fields: [studentId], references: [userId])
   jobId       String
   description String
   Stars       Int
+  isDeleted   Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   job         Job      @relation(fields: [jobId], references: [id])
@@ -185,8 +203,8 @@ enum JobStatus {
   COMPLETED
 }
 
-enum AppliedStatus {
+enum ApplicationStatus {
   PENDING
-  ACCEPT
-  REJECT
+  ACCEPTED
+  REJECTED
 }
