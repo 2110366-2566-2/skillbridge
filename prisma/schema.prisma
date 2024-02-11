@@ -9,12 +9,23 @@ datasource db {
 
 model User {
   id              String        @id @default(uuid())
-  id              String        @id @default(uuid())
   salutation      String
   firstname       String
   middlename      String?
   lastname        String
   profileImageUrl String?
+  lineId          String?       @unique
+  facebook        String?       @unique
+  email           String        @unique
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  hashedPassword  String        @db.VarChar(512)
+  isDeleted       Boolean       @default(false)
+  isGmail         Boolean       @default(false)
+  applications    Application[]
+  employer        Employer?
+  messages        Message[]
+  student         Student?
   lineId          String?       @unique
   facebook        String?       @unique
   email           String        @unique
@@ -33,11 +44,15 @@ model User {
 
 model Student {
   userId        String        @id @unique
-  userId        String        @id @unique
   resumeUrl     String?
   transcriptUrl String?
   bankAccountNo String?
   avgStar       Float?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  reviews       Review[]
+  user          User          @relation(fields: [userId], references: [id])
+  transactions  Transaction[]
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
   reviews       Review[]
@@ -49,10 +64,14 @@ model Student {
 
 model Employer {
   userId       String        @id @unique
-  userId       String        @id @unique
   position     String
   organization String
   publicEmail  String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  user         User          @relation(fields: [userId], references: [id])
+  jobs         Job[]
+  transactions Transaction[]
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
   user         User          @relation(fields: [userId], references: [id])
@@ -64,18 +83,26 @@ model Employer {
 
 model Job {
   id                String        @id @default(uuid())
-  id                String        @id @default(uuid())
   title             String
-  status            JobStatus     @default(NOT_STARTED)
   status            JobStatus     @default(NOT_STARTED)
   description       String
   budget            Int
-  numWorker         Int           @default(1)
   numWorker         Int           @default(1)
   startDate         DateTime?
   endDate           DateTime?
   estimateStartDate DateTime
   estimateEndDate   DateTime
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  isDeleted         Boolean       @default(false)
+  jobTagId          String
+  employerId        String
+  applications      Application[]
+  chatrooms         Chatroom[]
+  employer          Employer      @relation(fields: [employerId], references: [userId])
+  jobTag            JobTag        @relation(fields: [jobTagId], references: [id])
+  reviews           Review[]
+  transactions      Transaction[]
   createdAt         DateTime      @default(now())
   updatedAt         DateTime      @updatedAt
   isDeleted         Boolean       @default(false)
@@ -94,8 +121,11 @@ model Job {
 model JobTag {
   id        String   @id @default(uuid())
   title     String
+  title     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  isDeleted Boolean  @default(false)
+  job       Job[]
   isDeleted Boolean  @default(false)
   job       Job[]
 
@@ -103,10 +133,18 @@ model JobTag {
 }
 
 model Application {
+  model Application {
   userId      String
   jobId       String
   bid         Float
+  bid         Float
   documentUrl String?
+  status      ApplicationStatus @default(PENDING)
+  isDeleted   Boolean           @default(false)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  job         Job               @relation(fields: [jobId], references: [id])
+  user        User              @relation(fields: [userId], references: [id])
   status      ApplicationStatus @default(PENDING)
   isDeleted   Boolean           @default(false)
   createdAt   DateTime          @default(now())
@@ -116,12 +154,16 @@ model Application {
 
   @@id([userId, jobId])
   @@map("application")
+  @@map("application")
 }
 
 model Chatroom {
   id        String    @id @default(uuid())
-  id        String    @id @default(uuid())
   jobId     String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  job       Job       @relation(fields: [jobId], references: [id])
+  messages  Message[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   job       Job       @relation(fields: [jobId], references: [id])
@@ -132,12 +174,15 @@ model Chatroom {
 
 model Message {
   id         String    @id @default(uuid())
-  id         String    @id @default(uuid())
   chatroomId String
   userId     String
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
   unsentAt   DateTime?
+  texts      Text?
+  images     Image?
+  chatroom   Chatroom  @relation(fields: [chatroomId], references: [id])
+  user       User      @relation(fields: [userId], references: [id])
   texts      Text?
   images     Image?
   chatroom   Chatroom  @relation(fields: [chatroomId], references: [id])
@@ -151,6 +196,7 @@ model Text {
   text      String
   createdAt DateTime @default(now())
   message   Message  @relation(fields: [messageId], references: [id])
+  message   Message  @relation(fields: [messageId], references: [id])
 
   @@map("_text")
 }
@@ -160,16 +206,27 @@ model Image {
   imageUrl  String
   createdAt DateTime @default(now())
   message   Message  @relation(fields: [messageId], references: [id])
+  message   Message  @relation(fields: [messageId], references: [id])
 
   @@map("image")
 }
 
 model Transaction {
   id              String    @id @default(uuid())
+  id              String    @id @default(uuid())
   jobId           String
   studentId       String
   paymentId       String?
+  paymentId       String?
   receiptImageUrl String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  isDeleted       Boolean   @default(false)
+  employerUserId  String?
+  paymentType     String?
+  employer        Employer? @relation(fields: [employerUserId], references: [userId])
+  job             Job       @relation(fields: [jobId], references: [id])
+  student         Student   @relation(fields: [studentId], references: [userId])
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
   isDeleted       Boolean   @default(false)
@@ -193,6 +250,11 @@ model Review {
   stars       Int
   job         Job      @relation(fields: [jobId], references: [id])
   student     Student  @relation(fields: [studentId], references: [userId])
+  isDeleted   Boolean  @default(false)
+  studentId   String
+  stars       Int
+  job         Job      @relation(fields: [jobId], references: [id])
+  student     Student  @relation(fields: [studentId], references: [userId])
 
   @@map("review")
 }
@@ -204,7 +266,10 @@ enum JobStatus {
 }
 
 enum ApplicationStatus {
+  enum ApplicationStatus {
   PENDING
+  ACCEPTED
+  REJECTED
   ACCEPTED
   REJECTED
 }
