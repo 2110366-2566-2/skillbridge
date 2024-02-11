@@ -105,443 +105,415 @@ async function main() {
       email: "6437820221@student.chula.ac.th",
       student: {
         create: {
-          resumeUrl: "https://cdn-images.zety.com/pages/resume_meme_2.png",
-          transcriptUrl:
-            "https://worldwidetranscripts.com/wp-content/uploads/2021/04/Transcripts-Sample-1-622x1024.jpg",
-          bankAccountNo: "0876789125",
-          avgStar: 4.69,
+          salutation: "เสี่ย",
+          firstname: "ปิง",
+          lastname: "บรูไน",
+          hashedPassword: "thisishashespassword",
+          email: "6435644121@student.chula.ac.th",
         },
       },
-    },
-  });
-
-  const u4 = await prisma.user.upsert({
-    where: { email: "6435644121@student.chula.ac.th" },
-    update: {},
-    create: {
-      salutation: "เสี่ย",
-      firstname: "ปิง",
-      lastname: "บรูไน",
-      hashedPassword: "thisishashespassword",
-      email: "6435644121@student.chula.ac.th",
-      employer: {
-        create: {
-          position: "Billionaire",
-          organization: "SoeiCorp.",
-          publicEmail: "ping888@yahoo.com",
-          Job: {
-            create: [
-              {
-                title: "เขียนเว็บให้ SoeiCorp.",
-                status: "NOT_STARTED",
-                description:
-                  "หาเงินจากทำงานออนไลน์ง่าย ๆ แค่เพียง 2-3 ชม.ต่อวัน",
-                budget: 1000,
-                estimateStartDate: new Date("2024-01-22"),
-                estimateEndDate: new Date("2024-02-22"),
-                jobTagId: jobTagList["พัฒนาเว็ปไซต์"],
-              },
-              {
-                title: "Renovate Soei888 Web",
-                status: "IN_PROGRESS",
-                description: "รวยทางลัดกับธุรกิจสีเทา",
-                budget: 500,
-                numWorker: 10,
-                startDate: new Date("2023-09-21"),
-                estimateStartDate: new Date("2023-09-15"),
-                estimateEndDate: new Date("2024-03-31"),
-                jobTagId: jobTagList["พัฒนาเว็ปไซต์"],
-              },
-              {
-                title: "เขียนเว็บให้ SoeiCorp.",
-                status: "NOT_STARTED",
-                description:
-                  "หาเงินจากทำงานออนไลน์ง่าย ๆ แค่เพียง 2-3 ชม.ต่อวัน",
-                budget: 10000,
-                numWorker: 2,
-                estimateStartDate: new Date("2024-01-22"),
-                estimateEndDate: new Date("2024-02-22"),
-                jobTagId: jobTagList["พัฒนาเว็ปไซต์"],
-              },
-              {
-                title: "เขียนบล็อกและ Tech-savvy Blogger",
-                status: "NOT_STARTED",
-                description:
-                  "Freelance writer ที่มี passion สำหรับเทคโนโลยีที่จะ ผลิต insightful \n \
+      jobs: {
+        create: [
+          {
+            title: "เขียนเว็บให้ SoeiCorp.",
+            status: "NOT_STARTED",
+            description: "หาเงินจากทำงานออนไลน์ง่าย ๆ แค่เพียง 2-3 ชม.ต่อวัน",
+            budget: 1000,
+            estimateStartDate: new Date("2024-01-22"),
+            estimateEndDate: new Date("2024-02-22"),
+            jobTagId: jobTagList["พัฒนาเว็ปไซต์"],
+          },
+          {
+            title: "Renovate Soei888 Web",
+            status: "IN_PROGRESS",
+            description: "รวยทางลัดกับธุรกิจสีเทา",
+            budget: 500,
+            numWorker: 10,
+            startDate: new Date("2023-09-21"),
+            estimateStartDate: new Date("2023-09-15"),
+            estimateEndDate: new Date("2024-03-31"),
+            jobTagId: jobTagList["พัฒนาเว็ปไซต์"],
+          },
+          {
+            title: "เขียนเว็บให้ SoeiCorp.",
+            status: "NOT_STARTED",
+            description: "หาเงินจากทำงานออนไลน์ง่าย ๆ แค่เพียง 2-3 ชม.ต่อวัน",
+            budget: 10000,
+            numWorker: 2,
+            estimateStartDate: new Date("2024-01-22"),
+            estimateEndDate: new Date("2024-02-22"),
+            jobTagId: jobTagList["พัฒนาเว็ปไซต์"],
+          },
+          {
+            title: "เขียนบล็อกและ Tech-savvy Blogger",
+            status: "NOT_STARTED",
+            description:
+              "Freelance writer ที่มี passion สำหรับเทคโนโลยีที่จะ ผลิต insightful \n \
 และ well-researched blog articles. Topics รวมถึง the latest trends,\n \
 บทวิจารณ์ผลิตภัณฑ์, และ ข้อมูลที่เกี่ยวข้องกับ industry.",
-                budget: 10000,
-                numWorker: 3,
-                estimateStartDate: new Date("2024-02-01"),
-                estimateEndDate: new Date("2024-04-30"),
-                jobTagId: jobTagList["งานเขียน"],
-              },
-              {
-                title: "นักออกแบบกราฟิกและ Graphic Design Guru",
-                status: "NOT_STARTED",
-                description:
-                  "ต้องการ graphic designer ที่มีความสามารถสูงสำหรับ freelance projects, \n \
+            budget: 10000,
+            numWorker: 3,
+            estimateStartDate: new Date("2024-02-01"),
+            estimateEndDate: new Date("2024-04-30"),
+            jobTagId: jobTagList["งานเขียน"],
+          },
+          {
+            title: "นักออกแบบกราฟิกและ Graphic Design Guru",
+            status: "NOT_STARTED",
+            description:
+              "ต้องการ graphic designer ที่มีความสามารถสูงสำหรับ freelance projects, \n \
 การสร้าง eye-catching visuals สำหรับ marketing materials, social media, \n \
 และ การจัดแบรนด์. ต้องมี proficiency ใน Adobe Creative Suite และ a strong portfolio.",
-                budget: 5000,
-                numWorker: 1,
-                estimateStartDate: new Date("2024-01-16"),
-                estimateEndDate: new Date("2024-03-31"),
-                jobTagId: jobTagList["กราฟิกดีไซน์"],
-              },
-              {
-                title: "ผู้ป้อนข้อมูลและ Data Entry Dynamo",
-                status: "NOT_STARTED",
-                description:
-                  "Detail-oriented individual ที่จำเป็นสำหรับงานป้อนข้อมูล, \n \
+            budget: 5000,
+            numWorker: 1,
+            estimateStartDate: new Date("2024-01-16"),
+            estimateEndDate: new Date("2024-03-31"),
+            jobTagId: jobTagList["กราฟิกดีไซน์"],
+          },
+          {
+            title: "ผู้ป้อนข้อมูลและ Data Entry Dynamo",
+            status: "NOT_STARTED",
+            description:
+              "Detail-oriented individual ที่จำเป็นสำหรับงานป้อนข้อมูล, \n \
 รวมถึง data organization, การตรวจสอบ, และการวิเคราะห์ข้อมูล. \n \
 Proficiency ใน Excel หรือ Google Sheets เป็น essential, \n \
 และ a knack สำหรับความถูกต้อง.",
-                budget: 4000,
-                numWorker: 1,
-                estimateStartDate: new Date("2024-01-11"),
-                estimateEndDate: new Date("2024-02-29"),
-                jobTagId: jobTagList["ไอทีโซลูชั่น"],
-              },
-              {
-                title:
-                  "Social Media Content Manager / ผู้จัดการเนื้อหาโซเชียลมีเดีย",
-                status: "NOT_STARTED",
-                description:
-                  "Looking for a dynamic individual with ทักษะในการสร้าง \n \
+            budget: 4000,
+            numWorker: 1,
+            estimateStartDate: new Date("2024-01-11"),
+            estimateEndDate: new Date("2024-02-29"),
+            jobTagId: jobTagList["ไอทีโซลูชั่น"],
+          },
+          {
+            title:
+              "Social Media Content Manager / ผู้จัดการเนื้อหาโซเชียลมีเดีย",
+            status: "NOT_STARTED",
+            description:
+              "Looking for a dynamic individual with ทักษะในการสร้าง \n \
 engaging content สำหรับ social media platforms. Responsibilities include \n \
 content creation, strategic planning, and performance analysis.",
-                budget: 14000,
-                numWorker: 2,
-                estimateStartDate: new Date("2024-01-22"),
-                estimateEndDate: new Date("2024-03-31"),
-                jobTagId: jobTagList["สื่อออนไลน์"],
-              },
-              {
-                title: "Data Analyst และผู้วิเคราะห์ข้อมูล",
-                status: "NOT_STARTED",
-                description:
-                  "Seeking a detail-oriented data analyst ที่สามารถ analyze data sets, \n \
-generate insights, และ provide data-driven recommendations. \n \
-จำเป็นต้องมี proficiency in data visualization tools.",
-                budget: 20000,
-                numWorker: 3,
-                estimateStartDate: new Date("2024-01-16"),
-                estimateEndDate: new Date("2024-03-31"),
-                jobTagId: jobTagList["ไอทีโซลูชั่น"],
-              },
-              {
-                title: "Data Analyst และผู้วิเคราะห์ข้อมูล",
-                status: "NOT_STARTED",
-                description:
-                  "Seeking a detail-oriented data analyst ที่สามารถ analyze data sets, \n \
-generate insights, และ provide data-driven recommendations. \n \
-จำเป็นต้องมี proficiency in data visualization tools.",
-                budget: 20000,
-                numWorker: 3,
-                estimateStartDate: new Date("2024-01-16"),
-                estimateEndDate: new Date("2024-03-31"),
-                jobTagId: jobTagList["ไอทีโซลูชั่น"],
-              },
-
-              // Add more job objects as needed
-            ],
+            budget: 14000,
+            numWorker: 2,
+            estimateStartDate: new Date("2024-01-22"),
+            estimateEndDate: new Date("2024-03-31"),
+            jobTagId: jobTagList["สื่อออนไลน์"],
           },
-        },
+          {
+            title: "Data Analyst และผู้วิเคราะห์ข้อมูล",
+            status: "NOT_STARTED",
+            description:
+              "Seeking a detail-oriented data analyst ที่สามารถ analyze data sets, \n \
+generate insights, และ provide data-driven recommendations. \n \
+จำเป็นต้องมี proficiency in data visualization tools.",
+            budget: 20000,
+            numWorker: 3,
+            estimateStartDate: new Date("2024-01-16"),
+            estimateEndDate: new Date("2024-03-31"),
+            jobTagId: jobTagList["ไอทีโซลูชั่น"],
+          },
+          {
+            title: "Data Analyst และผู้วิเคราะห์ข้อมูล",
+            status: "NOT_STARTED",
+            description:
+              "Seeking a detail-oriented data analyst ที่สามารถ analyze data sets, \n \
+generate insights, และ provide data-driven recommendations. \n \
+จำเป็นต้องมี proficiency in data visualization tools.",
+            budget: 20000,
+            numWorker: 3,
+            estimateStartDate: new Date("2024-01-16"),
+            estimateEndDate: new Date("2024-03-31"),
+            jobTagId: jobTagList["ไอทีโซลูชั่น"],
+          },
+          // Add more job objects as needed
+        ],
       },
     },
   });
 
-  const u5 = await prisma.user.upsert({
-    where: { email: "6437811521@student.chula.ac.th" },
-    update: {},
-    create: {
-      salutation: "ยัง",
-      firstname: "เฟย",
-      lastname: "มาเท่อ",
-      hashedPassword: "thisishashedpassword",
-      email: "6437811521@student.chula.ac.th",
-      employer: {
+  const e2 = await prisma.employer.create({
+    data: {
+      position: "Rapper",
+      organization: "Gold Element Temple",
+      publicEmail: "TikTokTeenager@yahoo.com",
+      user: {
         create: {
-          position: "Rapper",
-          organization: "Gold Element Temple",
-          publicEmail: "TikTokTeenager@yahoo.com",
-          Job: {
-            create: [
-              {
-                title: "ทำโมเดล AI Auto Tune",
-                status: "COMPLETED",
-                description: "เคยยืนรอเธอบนบีทีเอส",
-                budget: 3000,
-                numWorker: 5,
-                startDate: new Date("2022-08-01"),
-                endDate: new Date("2022-11-07"),
-                estimateStartDate: new Date("2022-08-01"),
-                estimateEndDate: new Date("2022-10-31"),
-                jobTagId: jobTagList["ไอทีโซลูชั่น"],
-              },
-              {
-                title: "ตัดต่อคลิปลง TikTok",
-                status: "NOT_STARTED",
-                description: "โอ้เบบี้เกิร์ลยูเรียนมาแตร์เดอี",
-                budget: 2000,
-                numWorker: 3,
-                estimateStartDate: new Date("2023-09-25"),
-                estimateEndDate: new Date("2023-12-31"),
-                jobTagId: jobTagList["สื่อออนไลน์"],
-              },
-              {
-                title: "UX/UI Designer และผู้สร้างประสบการณ์ผู้ใช้",
-                status: "NOT_STARTED",
-                description:
-                  "Looking for a creative mind ที่มีความสามารถในการออกแบบ \n \
+          salutation: "ยัง",
+          firstname: "เฟย",
+          lastname: "มาเท่อ",
+          hashedPassword: "thisishashedpassword",
+          email: "6437811521@student.chula.ac.th",
+        },
+      },
+      jobs: {
+        create: [
+          {
+            title: "ทำโมเดล AI Auto Tune",
+            status: "COMPLETED",
+            description: "เคยยืนรอเธอบนบีทีเอส",
+            budget: 3000,
+            numWorker: 5,
+            startDate: new Date("2022-08-01"),
+            endDate: new Date("2022-11-07"),
+            estimateStartDate: new Date("2022-08-01"),
+            estimateEndDate: new Date("2022-10-31"),
+            jobTagId: jobTagList["ไอทีโซลูชั่น"],
+          },
+          {
+            title: "ตัดต่อคลิปลง TikTok",
+            status: "NOT_STARTED",
+            description: "โอ้เบบี้เกิร์ลยูเรียนมาแตร์เดอี",
+            budget: 2000,
+            numWorker: 3,
+            estimateStartDate: new Date("2023-09-25"),
+            estimateEndDate: new Date("2023-12-31"),
+            jobTagId: jobTagList["สื่อออนไลน์"],
+          },
+          {
+            title: "UX/UI Designer และผู้สร้างประสบการณ์ผู้ใช้",
+            status: "NOT_STARTED",
+            description:
+              "Looking for a creative mind ที่มีความสามารถในการออกแบบ \n \
 user-friendly interfaces และ optimize the user experience. \n \
 Proficiency ใน design tools เป็น",
-                budget: 2000,
-                numWorker: 5,
-                estimateStartDate: new Date("2024-01-16"),
-                estimateEndDate: new Date("2024-03-31"),
-                jobTagId: jobTagList["ออกแบบ UX UI"],
-              },
-              {
-                title: "Content Translator และผู้แปลเนื้อหา",
-                status: "NOT_STARTED",
-                description:
-                  "กำลังมองหา bilingual content translator ที่สามารถ translate content \n \
+            budget: 2000,
+            numWorker: 5,
+            estimateStartDate: new Date("2024-01-16"),
+            estimateEndDate: new Date("2024-03-31"),
+            jobTagId: jobTagList["ออกแบบ UX UI"],
+          },
+          {
+            title: "Content Translator และผู้แปลเนื้อหา",
+            status: "NOT_STARTED",
+            description:
+              "กำลังมองหา bilingual content translator ที่สามารถ translate content \n \
 ในทั้งภาษาไทยและ English. Responsibilities รวมถึงการรักษาความถูกต้องทางภาษา และ adaptation ของเนื้อหา.",
-                budget: 3000,
-                numWorker: 5,
-                estimateStartDate: new Date("2024-01-16"),
-                estimateEndDate: new Date("2024-03-31"),
-                jobTagId: jobTagList["ภาษา"],
-              },
-              {
-                title: "ผู้เชี่ยวชาญด้านการดำเนินงาน E-commerce",
-                status: "NOT_STARTED",
-                description:
-                  "Seeking an expert in e-commerce operations ที่สามารถ \n \
+            budget: 3000,
+            numWorker: 5,
+            estimateStartDate: new Date("2024-01-16"),
+            estimateEndDate: new Date("2024-03-31"),
+            jobTagId: jobTagList["ภาษา"],
+          },
+          {
+            title: "ผู้เชี่ยวชาญด้านการดำเนินงาน E-commerce",
+            status: "NOT_STARTED",
+            description:
+              "Seeking an expert in e-commerce operations ที่สามารถ \n \
 manage order fulfillment, inventory และ coordinate \n \
 with logistics partners. มีความรู้เกี่ยวกับการจัดการพื้นฐานของระบบ E-commerce.",
-                budget: 5000,
-                numWorker: 5,
-                estimateStartDate: new Date("2024-02-11"),
-                estimateEndDate: new Date("2024-04-11"),
-                jobTagId: jobTagList["ธุรกิจและการเงิน"],
-              },
-              {
-                title: "Financial Analyst และนักวิเคราะห์ทางการเงิน",
-                status: "NOT_STARTED",
-                description:
-                  "Looking for a financial analyst ที่สามารถ analyze financial data, \n \
+            budget: 5000,
+            numWorker: 5,
+            estimateStartDate: new Date("2024-02-11"),
+            estimateEndDate: new Date("2024-04-11"),
+            jobTagId: jobTagList["ธุรกิจและการเงิน"],
+          },
+          {
+            title: "Financial Analyst และนักวิเคราะห์ทางการเงิน",
+            status: "NOT_STARTED",
+            description:
+              "Looking for a financial analyst ที่สามารถ analyze financial data, \n \
 prepare reports, และ provide insights for decision-making. \n \
 ความเข้าใจในเรื่องของการเงินและการวิเคราะห์ทางการเงิน.",
-                budget: 10000,
-                numWorker: 3,
-                estimateStartDate: new Date("2024-02-11"),
-                estimateEndDate: new Date("2024-04-11"),
-                jobTagId: jobTagList["ธุรกิจและการเงิน"],
-              },
-              {
-                title: "นักวิจัยตลาดและ Market Researcher",
-                status: "NOT_STARTED",
-                description:
-                  "Seeking a market researcher ที่สามารถ conduct market analysis, \n \
-gather insights, และ identify trends. Responsibilities รวมถึงการเขียนรายงานและการนำเสนอข้อมูลตลาด.",
-                budget: 10000,
-                numWorker: 3,
-                estimateStartDate: new Date("2024-02-11"),
-                estimateEndDate: new Date("2024-04-11"),
-                jobTagId: jobTagList["ธุรกิจและการเงิน"],
-              },
-              {
-                title: "นักวิจัยตลาดและ Market Researcher",
-                status: "NOT_STARTED",
-                description:
-                  "Seeking a market researcher ที่สามารถ conduct market analysis, \n \
-gather insights, และ identify trends. Responsibilities รวมถึงการเขียนรายงานและการนำเสนอข้อมูลตลาด.",
-                budget: 10000,
-                numWorker: 3,
-                estimateStartDate: new Date("2024-02-11"),
-                estimateEndDate: new Date("2024-04-11"),
-                jobTagId: jobTagList["ธุรกิจและการเงิน"],
-              },
-              // Add more job objects as needed
-            ],
+            budget: 10000,
+            numWorker: 3,
+            estimateStartDate: new Date("2024-02-11"),
+            estimateEndDate: new Date("2024-04-11"),
+            jobTagId: jobTagList["ธุรกิจและการเงิน"],
           },
-        },
+          {
+            title: "นักวิจัยตลาดและ Market Researcher",
+            status: "NOT_STARTED",
+            description:
+              "Seeking a market researcher ที่สามารถ conduct market analysis, \n \
+gather insights, และ identify trends. Responsibilities รวมถึงการเขียนรายงานและการนำเสนอข้อมูลตลาด.",
+            budget: 10000,
+            numWorker: 3,
+            estimateStartDate: new Date("2024-02-11"),
+            estimateEndDate: new Date("2024-04-11"),
+            jobTagId: jobTagList["ธุรกิจและการเงิน"],
+          },
+          {
+            title: "นักวิจัยตลาดและ Market Researcher",
+            status: "NOT_STARTED",
+            description:
+              "Seeking a market researcher ที่สามารถ conduct market analysis, \n \
+gather insights, และ identify trends. Responsibilities รวมถึงการเขียนรายงานและการนำเสนอข้อมูลตลาด.",
+            budget: 10000,
+            numWorker: 3,
+            estimateStartDate: new Date("2024-02-11"),
+            estimateEndDate: new Date("2024-04-11"),
+            jobTagId: jobTagList["ธุรกิจและการเงิน"],
+          },
+          // Add more job objects as needed
+        ],
       },
     },
   });
 
-  const u6 = await prisma.user.upsert({
-    where: { email: "6432345221@student.chula.ac.th" },
-    update: {},
-    create: {
-      salutation: "ศาสตราจารย์",
-      firstname: "ทิพ",
-      middlename: "สาม",
-      lastname: "บิด",
-      hashedPassword: "thisishashedpassword",
-      email: "6432345221@student.chula.ac.th",
-      employer: {
+  const e3 = await prisma.employer.create({
+    data: {
+      position: "Biker",
+      organization: "BidKub",
+      publicEmail: "TipBidder@gmail.com",
+      user: {
         create: {
-          position: "Biker",
-          organization: "BidKub",
-          publicEmail: "TipBidder@gmail.com",
-          Job: {
-            create: [
-              {
-                title: "เซนเซอร์ติดม่านกันแดดอัจฉริยะ",
-                status: "NOT_STARTED",
-                description:
-                  "แสงอาทิตย์ส่องมามันแยงตา แต่สายตาเธอที่ส่องมามันแยงใจ",
-                budget: 1500,
-                estimateStartDate: new Date("2024-02-20"),
-                estimateEndDate: new Date("2024-03-31"),
-                jobTagId: jobTagList["งาน IOT"],
-              },
-              {
-                title: "เขียนเว็บ ChaoChao",
-                status: "IN_PROGRESS",
-                description: "ไม่รู้จะเช่าไหนดี มาเช่านี่มา",
-                budget: 200,
-                startDate: new Date("2024-01-24"),
-                estimateStartDate: new Date("2024-01-21"),
-                estimateEndDate: new Date("2024-04-30"),
-                jobTagId: jobTagList["พัฒนาเว็ปไซต์"],
-              },
-              {
-                title: "Web Developer for เฮียหมู",
-                status: "NOT_STARTED",
-                description:
-                  "เฮียหมูเจ้าเก่าเจ้าเดิม เพิ่มเติมคือกำลังจะมีหน้าเว็บแล้ว",
-                budget: 3000,
-                numWorker: 4,
-                estimateStartDate: new Date("2023-11-01"),
-                estimateEndDate: new Date("2024-02-01"),
-                jobTagId: jobTagList["พัฒนาเว็ปไซต์"],
-              },
-              {
-                title: "รสดีเด็ด อิซากายะ Frontend Developer",
-                status: "NOT_STARTED",
-                description: "Application สำหรับจองคิวและโปรโมชั่น",
-                budget: 2000,
-                numWorker: 5,
-                estimateStartDate: new Date("2024-03-01"),
-                estimateEndDate: new Date("2024-05-31"),
-                jobTagId: jobTagList["พัฒนาแอพฯมือถือ"],
-              },
-              {
-                title: "Skip Backend Developer",
-                status: "NOT_STARTED",
-                description:
-                  "Application สำหรับสั่งออเดอร์และเรียกเติมน้ำชาเขียวรีฟิล",
-                budget: 1000,
-                numWorker: 3,
-                estimateStartDate: new Date("2024-03-01"),
-                estimateEndDate: new Date("2024-04-30"),
-                jobTagId: jobTagList["พัฒนาแอพฯมือถือ"],
-              },
-              {
-                title: "เฮียหมู Data Analytics",
-                status: "NOT_STARTED",
-                description:
-                  "วิเคราะห์เมนูกับแกล้มยอดนิยมเทียบกับจำนวนเบียร์ที่ลูกค้าสั่งต่อโต๊ะ",
-                budget: 4000,
-                estimateStartDate: new Date("2024-03-01"),
-                estimateEndDate: new Date("2024-03-31"),
-                jobTagId: jobTagList["ไอทีโซลูชั่น"],
-              },
-              {
-                title: "Implement Recommendation Model on Application",
-                status: "NOT_STARTED",
-                description:
-                  "Develop a ML model to recommend their favorite beers to users.",
-                budget: 10000,
-                numWorker: 2,
-                estimateStartDate: new Date("2024-02-17"),
-                estimateEndDate: new Date("2024-04-16"),
-                jobTagId: jobTagList["ไอทีโซลูชั่น"],
-              },
-              {
-                title: "Bad Guy Full-stack developer",
-                status: "NOT_STARTED",
-                description:
-                  "Develop Larb selling application for E-sarn People",
-                budget: 2000,
-                estimateStartDate: new Date("2024-02-02"),
-                estimateEndDate: new Date("2024-05-15"),
-                jobTagId: jobTagList["พัฒนาแอพฯมือถือ"],
-              },
-              {
-                title: "นักสร้างเนื้อหาและ Content Curator",
-                status: "NOT_STARTED",
-                description:
-                  "Looking for a freelance creative mind with ทักษะในการสร้าง \n \
+          salutation: "ศาสตราจารย์",
+          firstname: "ทิพ",
+          middlename: "สาม",
+          lastname: "บิด",
+          hashedPassword: "thisishashedpassword",
+          email: "6432345221@student.chula.ac.th",
+        },
+      },
+      jobs: {
+        create: [
+          {
+            title: "เซนเซอร์ติดม่านกันแดดอัจฉริยะ",
+            status: "NOT_STARTED",
+            description:
+              "แสงอาทิตย์ส่องมามันแยงตา แต่สายตาเธอที่ส่องมามันแยงใจ",
+            budget: 1500,
+            estimateStartDate: new Date("2024-02-20"),
+            estimateEndDate: new Date("2024-03-31"),
+            jobTagId: jobTagList["งาน IOT"],
+          },
+          {
+            title: "เขียนเว็บ ChaoChao",
+            status: "IN_PROGRESS",
+            description: "ไม่รู้จะเช่าไหนดี มาเช่านี่มา",
+            budget: 200,
+            startDate: new Date("2024-01-24"),
+            estimateStartDate: new Date("2024-01-21"),
+            estimateEndDate: new Date("2024-04-30"),
+            jobTagId: jobTagList["พัฒนาเว็ปไซต์"],
+          },
+          {
+            title: "Web Developer for เฮียหมู",
+            status: "NOT_STARTED",
+            description:
+              "เฮียหมูเจ้าเก่าเจ้าเดิม เพิ่มเติมคือกำลังจะมีหน้าเว็บแล้ว",
+            budget: 3000,
+            numWorker: 4,
+            estimateStartDate: new Date("2023-11-01"),
+            estimateEndDate: new Date("2024-02-01"),
+            jobTagId: jobTagList["พัฒนาเว็ปไซต์"],
+          },
+          {
+            title: "รสดีเด็ด อิซากายะ Frontend Developer",
+            status: "NOT_STARTED",
+            description: "Application สำหรับจองคิวและโปรโมชั่น",
+            budget: 2000,
+            numWorker: 5,
+            estimateStartDate: new Date("2024-03-01"),
+            estimateEndDate: new Date("2024-05-31"),
+            jobTagId: jobTagList["พัฒนาแอพฯมือถือ"],
+          },
+          {
+            title: "Skip Backend Developer",
+            status: "NOT_STARTED",
+            description:
+              "Application สำหรับสั่งออเดอร์และเรียกเติมน้ำชาเขียวรีฟิล",
+            budget: 1000,
+            numWorker: 3,
+            estimateStartDate: new Date("2024-03-01"),
+            estimateEndDate: new Date("2024-04-30"),
+            jobTagId: jobTagList["พัฒนาแอพฯมือถือ"],
+          },
+          {
+            title: "เฮียหมู Data Analytics",
+            status: "NOT_STARTED",
+            description:
+              "วิเคราะห์เมนูกับแกล้มยอดนิยมเทียบกับจำนวนเบียร์ที่ลูกค้าสั่งต่อโต๊ะ",
+            budget: 4000,
+            estimateStartDate: new Date("2024-03-01"),
+            estimateEndDate: new Date("2024-03-31"),
+            jobTagId: jobTagList["ไอทีโซลูชั่น"],
+          },
+          {
+            title: "Implement Recommendation Model on Application",
+            status: "NOT_STARTED",
+            description:
+              "Develop a ML model to recommend their favorite beers to users.",
+            budget: 10000,
+            numWorker: 2,
+            estimateStartDate: new Date("2024-02-17"),
+            estimateEndDate: new Date("2024-04-16"),
+            jobTagId: jobTagList["ไอทีโซลูชั่น"],
+          },
+          {
+            title: "Bad Guy Full-stack developer",
+            status: "NOT_STARTED",
+            description: "Develop Larb selling application for E-sarn People",
+            budget: 2000,
+            estimateStartDate: new Date("2024-02-02"),
+            estimateEndDate: new Date("2024-05-15"),
+            jobTagId: jobTagList["พัฒนาแอพฯมือถือ"],
+          },
+          {
+            title: "นักสร้างเนื้อหาและ Content Curator",
+            status: "NOT_STARTED",
+            description:
+              "Looking for a freelance creative mind with ทักษะในการสร้าง \n \
 engaging และ เนื้อหาสร้างสรรค์สำหรับ social media platforms. \n \
 ต้องมี a flair for storytelling และ a keen eye for visuals เพื่อที่จะ captivate audiences.",
-                budget: 10000,
-                numWorker: 5,
-                estimateStartDate: new Date("2024-02-01"),
-                estimateEndDate: new Date("2024-04-30"),
-                jobTagId: jobTagList["สื่อออนไลน์"],
-              },
-              {
-                title:
-                  "เจ้าหน้าที่ช่วยส่วนตัวและ Virtual Assistant Extraordinaire",
-                status: "NOT_STARTED",
-                description:
-                  "Seeking บุคคลที่มี detail-oriented virtual assistant \n \
+            budget: 10000,
+            numWorker: 5,
+            estimateStartDate: new Date("2024-02-01"),
+            estimateEndDate: new Date("2024-04-30"),
+            jobTagId: jobTagList["สื่อออนไลน์"],
+          },
+          {
+            title: "เจ้าหน้าที่ช่วยส่วนตัวและ Virtual Assistant Extraordinaire",
+            status: "NOT_STARTED",
+            description:
+              "Seeking บุคคลที่มี detail-oriented virtual assistant \n \
 ที่สามารถ handle administrative tasks, จัดการปฏิทิน, และ ช่วยเสริมสร้าง ใน various projects. \n \
 ทักษะการจัดระเบียบที่แข็งแกร่งและการสื่อสารที่เป็น",
-                budget: 5000,
-                numWorker: 2,
-                estimateStartDate: new Date("2024-02-01"),
-                estimateEndDate: new Date("2024-04-30"),
-                jobTagId: jobTagList["อื่น ๆ"],
-              },
-              {
-                title: "Creative Video Producer และโปรดิวเซอร์วิดีโอ",
-                status: "NOT_STARTED",
-                description:
-                  "Looking for a creative video producer ที่มีความสามารถในการสร้างและ \n \
+            budget: 5000,
+            numWorker: 2,
+            estimateStartDate: new Date("2024-02-01"),
+            estimateEndDate: new Date("2024-04-30"),
+            jobTagId: jobTagList["อื่น ๆ"],
+          },
+          {
+            title: "Creative Video Producer และโปรดิวเซอร์วิดีโอ",
+            status: "NOT_STARTED",
+            description:
+              "Looking for a creative video producer ที่มีความสามารถในการสร้างและ \n \
 produce compelling video content. Proficiency ใน video editing tools เป็น",
-                budget: 7000,
-                numWorker: 3,
-                estimateStartDate: new Date("2024-01-22"),
-                estimateEndDate: new Date("2024-03-11"),
-                jobTagId: jobTagList["รูปภาพและวีดีโอ"],
-              },
-              {
-                title: "HR Coordinator และผู้ประสานงานทรัพยากรบุคคล",
-                status: "NOT_STARTED",
-                description:
-                  "Seeking an HR coordinator ที่สามารถ assist with \n \
+            budget: 7000,
+            numWorker: 3,
+            estimateStartDate: new Date("2024-01-22"),
+            estimateEndDate: new Date("2024-03-11"),
+            jobTagId: jobTagList["รูปภาพและวีดีโอ"],
+          },
+          {
+            title: "HR Coordinator และผู้ประสานงานทรัพยากรบุคคล",
+            status: "NOT_STARTED",
+            description:
+              "Seeking an HR coordinator ที่สามารถ assist with \n \
 recruitment, employee onboarding, และ HR processes. \n \
 ความเข้าใจในกฎหมายแรงงานและนโยบาย HR.",
-                budget: 8000,
-                numWorker: 2,
-                estimateStartDate: new Date("2024-02-01"),
-                estimateEndDate: new Date("2024-04-30"),
-                jobTagId: jobTagList["อื่น ๆ"],
-              },
-              {
-                title: "Tech Support Specialist และผู้ช่วยเหลือทางเทคนอล็อค",
-                status: "NOT_STARTED",
-                description:
-                  "Looking for a tech support specialist ที่สามารถ provide technical \n \
+            budget: 8000,
+            numWorker: 2,
+            estimateStartDate: new Date("2024-02-01"),
+            estimateEndDate: new Date("2024-04-30"),
+            jobTagId: jobTagList["อื่น ๆ"],
+          },
+          {
+            title: "Tech Support Specialist และผู้ช่วยเหลือทางเทคนอล็อค",
+            status: "NOT_STARTED",
+            description:
+              "Looking for a tech support specialist ที่สามารถ provide technical \n \
 assistance to end-users, troubleshoot issues, และ ให้คำแนะนำในการแก้ไขปัญหาทางเทคนิค. \n \
 Strong communication skills และ customer service mindset จำเป็น.",
-                budget: 10000,
-                numWorker: 4,
-                estimateStartDate: new Date("2024-02-01"),
-                estimateEndDate: new Date("2024-03-11"),
-                jobTagId: jobTagList["ไอทีโซลูชั่น"],
-              },
-              // Add more job objects as needed
-            ],
+            budget: 10000,
+            numWorker: 4,
+            estimateStartDate: new Date("2024-02-01"),
+            estimateEndDate: new Date("2024-03-11"),
+            jobTagId: jobTagList["ไอทีโซลูชั่น"],
           },
-        },
+          // Add more job objects as needed
+        ],
       },
     },
   });
