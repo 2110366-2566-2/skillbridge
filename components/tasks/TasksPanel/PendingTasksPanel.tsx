@@ -88,9 +88,10 @@ const PendingTasksPanel = ({
   return (
     <main className="flex flex-col">
       <main className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 grid-flow-row gap-10">
-        {mockUpData.map((data) => {
+        {mockUpData.map((data, index) => {
           return (
             <TaskCard
+              key={index}
               name={data.name}
               budget={data.budget}
               description={data.description}
