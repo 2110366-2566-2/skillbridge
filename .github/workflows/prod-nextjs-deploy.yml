@@ -59,7 +59,6 @@ jobs:
 
      steps:
        - name: Discord Notification
-         uses: cl8dep/action-discord@0.1
+         uses: johnnyhuy/actions-discord-git-webhook@v1.0.0
          with: 
-           webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
-           message: "@soei main is updated, please pull and merge main to your branch!"
+           webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
