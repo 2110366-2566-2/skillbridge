@@ -64,3 +64,4 @@ jobs:
          uses: Sniddl/discord-commits@v1.6
          with: 
            webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+           message: "main มีการอัปเดทแล้ว ไป pull แล้ว merge กันด้วย ก่อนที่กูจะซัดหน้าพวกมึง\n ${{ github.event.head_commit.message }}"
