@@ -59,7 +59,7 @@ jobs:
 
      steps:
        - name: Discord Notification
-       - uses: cl8dep/action-discord@0.1
+         uses: cl8dep/action-discord@0.1
          with: 
            webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
            message: "@soei main is updated, please pull and merge main to your branch!"
