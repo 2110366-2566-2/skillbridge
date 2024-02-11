@@ -130,7 +130,7 @@ export default function Filter() {
                             <div>
                                 <input
                                     type="date"
-                                    className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:border-slate-500 block w-full p-2"
+                                    className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 block w-full p-2"
                                     placeholder="วว/ดด/ปปปป"
                                     name="startDate"
                                     value={filtered.startDate}
@@ -141,7 +141,7 @@ export default function Filter() {
                             <div>
                                 <input
                                     type="date"
-                                    className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:border-slate-500 block w-full p-2"
+                                    className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 block w-full p-2"
                                     placeholder="วว/ดด/ปปปป"
                                     name="endDate"
                                     value={filtered.endDate}
@@ -154,7 +154,7 @@ export default function Filter() {
                             <div className="relative">
                                 <input
                                     type="number"
-                                    className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:border-slate-500 block w-full p-2"
+                                    className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 block w-full p-2"
                                     placeholder="0"
                                     name="minPrice"
                                     value={filtered.minPrice === 0 ? "" : filtered.minPrice}
@@ -168,7 +168,7 @@ export default function Filter() {
                             <div className="relative">
                                 <input
                                     type="number"
-                                    className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:border-slate-500 block w-full p-2"
+                                    className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 block w-full p-2"
                                     placeholder="ราคาสูงสุด"
                                     name="maxPrice"
                                     value={filtered.maxPrice === 0 ? "" : filtered.maxPrice}
@@ -182,7 +182,7 @@ export default function Filter() {
                             <div className="font-bold text-[20px] text-slate-800 mt-6 mb-2">หมวดหมู่</div>
                             <select
                                 id="jobTags"
-                                className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:border-slate-500 block w-full p-[5.75px]" name="jobTags"
+                                className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 block w-full p-[5.75px]" name="jobTags"
                                 value={filtered.jobTags}
                                 onChange={handleChange}
                             >
