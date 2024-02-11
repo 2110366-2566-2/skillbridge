@@ -18,6 +18,7 @@ const TasksPanel = () => {
 
   return (
     <>
+      {/* Toggle between PendingTasksPanel and DoneTasksPanel based on the value of isPending. */}
       <nav className="mb-3">
         <div className="flex flex-row gap-1 bg-slate-100 w-fit p-2 rounded-sm">
           <button
@@ -35,8 +36,14 @@ const TasksPanel = () => {
         </div>
       </nav>
 
+      {/* Sort button and Create Work button */}
       <section className="my-3">
         <div className="flex flex-row gap-2 justify-end">
+
+          {/* This is made to contain height consistency */}
+          <div className="bg-transparent text-transparent py-2">|</div>
+
+          {/* Sort button */}
           <button
             className="bg-slate-300 font-medium text-md rounded-md px-3 py-2 hover:shadow-md lg:hidden"
             onClick={() => {
@@ -48,6 +55,8 @@ const TasksPanel = () => {
               <p>จัดเรียง</p>
             </div>
           </button>
+
+          {/* Create Work button */}
           <Link href={"/works/create"} key={"createWork"}>
             <button
               className={`${isPending ? "" : "hidden"} bg-slate-900 font-medium text-md text-white rounded-md px-3 py-2 hover:shadow-md`}
@@ -59,6 +68,7 @@ const TasksPanel = () => {
       </section>
 
       <div className="lg:flex lg:flex-row lg:justify-between gap-2">
+        {/* PendingTasksPanel and DoneTasksPanel */}
         {isPending ? (
           <PendingTasksPanel
             startDateSortOption={startDateSortOption}
@@ -74,6 +84,8 @@ const TasksPanel = () => {
             applicantsSortOption={applicantsSortOption}
           ></DoneTasksPanel>
         )}
+
+        {/* Sidebar for sorting for laptop */}
         <aside className="hidden lg:flex lg:flex-col bg-slate-100 rounded-sm pt-7 pb-2 px-4 w-[200px] h-fit">
           <div className="text-2xl font-semibold">จัดเรียง</div>
           <div className="text-lg font-semibold mt-4 mb-2">ช่วงเวลา</div>
@@ -143,9 +155,10 @@ const TasksPanel = () => {
           </div>
         </aside>
 
+        {/* Overlay for sidebar for sorting for mobile */}
         {isOpeningSideBar ? (
           <>
-            <aside className="z-10 bg-neutral-800 opacity-60 fixed top-0 right-0 left-0 bottom-0 md:hidden"></aside>
+            <div className="z-10 bg-neutral-800 opacity-60 fixed top-0 right-0 left-0 bottom-0 md:hidden"></div>
             <aside className="fixed font-ibm z-20 bg-slate-100 text-slate-900 top-0 left-0 w-2/3 h-screen flex flex-col items-center p-7 justify-between md:hidden">
               <div className="flex flex-col w-full h-full">
                 <div className="flex flex-col gap-8 justify-start w-full">
