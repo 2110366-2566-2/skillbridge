@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 const ibmPlexSansThaiLooped = IBM_Plex_Sans_Thai({
-  weight: ["400", "500", "600", "700"],
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
   subsets: ["thai"],
   variable: "--ibm-plex-sans-thai-font",
 });
@@ -24,7 +24,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(inter.className, ibmPlexSansThaiLooped.className, ("h-screen"))}>{children}</body>
+      <body
+        className={cn(
+          inter.className,
+          ibmPlexSansThaiLooped.className,
+          "h-full",
+        )}
+      >
+        {children}
+      </body>
     </html>
   );
 }
