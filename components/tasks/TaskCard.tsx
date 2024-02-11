@@ -21,7 +21,7 @@ const TaskCard = ({name, budget, description, category, applicants, maxApplicant
             <div className="font-semibold text-2xl">{name}</div>
             <div className="font-medium my-2">{startDate} - {endDate}</div>
           </div>
-          <button className={`${isPending ? '' : 'hidden'} bg-slate-50 border-2 border-solid rounded-full hover:shadow-md flex align-center w-fit h-fit p-2`}>
+          <button className={`${isPending ? '' : 'hidden'} bg-slate-50 border-2 border-solid rounded-full hover:shadow-md flex align-center w-fit h-fit p-2 mx-2`}>
             <EditFilled />
           </button>
         </div>
@@ -31,7 +31,7 @@ const TaskCard = ({name, budget, description, category, applicants, maxApplicant
         <div className="text-sm">{description}</div>
         <hr className="my-2" />
         <div className="flex flex-row align-text-bottom justify-between">
-            <div className="text-sm">สมัครแล้ว {applicants.toString()}/{maxApplicants.toString()} คน</div>
+            <div className="text-sm">รับแล้ว {applicants.toString()}/{maxApplicants.toString()} คน</div>
             <div className="text-xl text-end font-medium">฿{budget.toString()}</div>
         </div>
     </div>

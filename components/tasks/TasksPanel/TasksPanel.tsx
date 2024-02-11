@@ -40,8 +40,8 @@ const TasksPanel = () => {
             </div>
         </section>
 
-        <div className="flex flex-row justify-between gap-6">
-            {isPending ? <PendingTasksPanel></PendingTasksPanel> : <DoneTasksPanel></DoneTasksPanel>}
+        <div className="flex flex-row justify-between gap-2">
+            {isPending ? <PendingTasksPanel startDateSortOption={startDateSortOption} endDateSortOption={endDateSortOption} priceSortOption={priceSortOption} applicantsSortOption={applicantsSortOption}></PendingTasksPanel> : <DoneTasksPanel startDateSortOption={startDateSortOption} endDateSortOption={endDateSortOption} priceSortOption={priceSortOption} applicantsSortOption={applicantsSortOption}></DoneTasksPanel>}
             <aside className="flex flex-col bg-slate-100 rounded-sm py-7 px-4 w-[200px] h-fit">
                 <div className="text-2xl font-semibold">จัดเรียง</div>
                 <div className="text-lg font-semibold mt-4 mb-2">ช่วงเวลา</div>
@@ -61,24 +61,21 @@ const TasksPanel = () => {
                         <option value="desc">มากไปน้อย</option>
                     </select>
                 </div>
-                <div className="text-lg font-semibold mt-4 mb-2">ช่วงราคา</div>
+                <div className="text-lg font-semibold mt-4 mb-2">ราคา</div>
                 <div className="flex flex-col gap-1 mb-2">
-                    <p>ราคา</p>
                     <select value={priceSortOption} onChange={(e) => {setPriceSortOption(e.target.value)}}>
                         <option value="">-</option>
                         <option value="asc">น้อยไปมาก</option>
                         <option value="desc">มากไปน้อย</option>
                     </select>
                 </div>
-                <div className="text-lg font-semibold mt-4 mb-2">ผู้สมัคร</div>
+                <div className="text-lg font-semibold mt-4 mb-2">จำนวนผู้สมัคร</div>
                 <div className="flex flex-col gap-1 mb-2">
-                    <p>จำนวนผู้สมัคร</p>
                     <select value={applicantsSortOption} onChange={(e) => {setApplicantsSortOption(e.target.value)}}>
                         <option value="">-</option>
                         <option value="asc">น้อยไปมาก</option>
                         <option value="desc">มากไปน้อย</option>
                     </select>
-
                 </div>
             </aside>
         </div>
