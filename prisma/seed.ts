@@ -86,9 +86,9 @@ async function main() {
       Job: {
         create: [
           {
-            title: 'เขียนเว็บให้ SoeiCorp.',
-            status: 'NOT_STARTED',
-            description: 'หาเงินจากทำงานออนไลน์ง่าย ๆ แค่เพียง 2-3 ชม.ต่อวัน',
+            title: "เขียนเว็บให้ SoeiCorp.",
+            status: "NOT_STARTED",
+            description: "หาเงินจากทำงานออนไลน์ง่าย ๆ แค่เพียง 2-3 ชม.ต่อวัน",
             // jobTags: {
             //   create: ['web developer', 'front-end']
             // },
@@ -100,9 +100,9 @@ async function main() {
             estimateEndDate: new Date("2024-02-22"),
           },
           {
-            title: 'Renovate Soei888 Web',
-            status: 'IN_PROGRESS',
-            description: 'รวยทางลัดกับธุรกิจสีเทา',
+            title: "Renovate Soei888 Web",
+            status: "IN_PROGRESS",
+            description: "รวยทางลัดกับธุรกิจสีเทา",
             // jobTags: {
             //   create: ['web developer', 'front-end', '888']
             // },
@@ -114,9 +114,9 @@ async function main() {
             estimateEndDate: new Date("2024-03-31"),
           },
           {
-            title: 'เขียนเว็บให้ SoeiCorp.',
-            status: 'NOT_STARTED',
-            description: 'หาเงินจากทำงานออนไลน์ง่าย ๆ แค่เพียง 2-3 ชม.ต่อวัน',
+            title: "เขียนเว็บให้ SoeiCorp.",
+            status: "NOT_STARTED",
+            description: "หาเงินจากทำงานออนไลน์ง่าย ๆ แค่เพียง 2-3 ชม.ต่อวัน",
             // jobTags: {
             //   create: ['web developer', 'front-end']
             // },
@@ -128,11 +128,12 @@ async function main() {
             estimateEndDate: new Date("2024-02-22"),
           },
           {
-            title: 'เขียนบล็อกและ Tech-savvy Blogger',
-            status: 'NOT_STARTED',
-            description: 'Freelance writer ที่มี passion สำหรับเทคโนโลยีที่จะ ผลิต insightful \n \
+            title: "เขียนบล็อกและ Tech-savvy Blogger",
+            status: "NOT_STARTED",
+            description:
+              "Freelance writer ที่มี passion สำหรับเทคโนโลยีที่จะ ผลิต insightful \n \
 และ well-researched blog articles. Topics รวมถึง the latest trends,\n \
-บทวิจารณ์ผลิตภัณฑ์, และ ข้อมูลที่เกี่ยวข้องกับ industry.',
+บทวิจารณ์ผลิตภัณฑ์, และ ข้อมูลที่เกี่ยวข้องกับ industry.",
             // jobTags: {
             //   create: ['blog', 'writer']
             // },
@@ -144,11 +145,12 @@ async function main() {
             estimateEndDate: new Date("2024-04-30"),
           },
           {
-            title: 'นักออกแบบกราฟิกและ Graphic Design Guru',
-            status: 'NOT_STARTED',
-            description: 'ต้องการ graphic designer ที่มีความสามารถสูงสำหรับ freelance projects, \n \
+            title: "นักออกแบบกราฟิกและ Graphic Design Guru",
+            status: "NOT_STARTED",
+            description:
+              "ต้องการ graphic designer ที่มีความสามารถสูงสำหรับ freelance projects, \n \
 การสร้าง eye-catching visuals สำหรับ marketing materials, social media, \n \
-และ การจัดแบรนด์. ต้องมี proficiency ใน Adobe Creative Suite และ a strong portfolio.',
+และ การจัดแบรนด์. ต้องมี proficiency ใน Adobe Creative Suite และ a strong portfolio.",
             // jobTags: {
             //   create: ['graphic designer']
             // },
@@ -160,12 +162,13 @@ async function main() {
             estimateEndDate: new Date("2024-03-31"),
           },
           {
-            title: 'ผู้ป้อนข้อมูลและ Data Entry Dynamo',
-            status: 'NOT_STARTED',
-            description: 'Detail-oriented individual ที่จำเป็นสำหรับงานป้อนข้อมูล, \n \
+            title: "ผู้ป้อนข้อมูลและ Data Entry Dynamo",
+            status: "NOT_STARTED",
+            description:
+              "Detail-oriented individual ที่จำเป็นสำหรับงานป้อนข้อมูล, \n \
 รวมถึง data organization, การตรวจสอบ, และการวิเคราะห์ข้อมูล. \n \
 Proficiency ใน Excel หรือ Google Sheets เป็น essential, \n \
-และ a knack สำหรับความถูกต้อง.',
+และ a knack สำหรับความถูกต้อง.",
             budget: 10000,
             numWorker: 3,
             // jobTags: {
@@ -177,12 +180,14 @@ Proficiency ใน Excel หรือ Google Sheets เป็น essential, \n \
             estimateEndDate: new Date("2024-02-29"),
           },
           {
-            title: 'Social Media Content Manager / ผู้จัดการเนื้อหาโซเชียลมีเดีย',
-            status: 'NOT_STARTED',
-            description: 'Looking for a dynamic individual with ทักษะในการสร้าง \n \
+            title:
+              "Social Media Content Manager / ผู้จัดการเนื้อหาโซเชียลมีเดีย",
+            status: "NOT_STARTED",
+            description:
+              "Looking for a dynamic individual with ทักษะในการสร้าง \n \
 engaging content สำหรับ social media platforms. \n \
 Responsibilities include content creation, \n \
-strategic planning, and performance analysis.',
+strategic planning, and performance analysis.",
             budget: 14000,
             numWorker: 2,
             // jobTags: {
@@ -194,11 +199,12 @@ strategic planning, and performance analysis.',
             estimateEndDate: new Date("2024-03-31"),
           },
           {
-            title: 'Data Analyst และผู้วิเคราะห์ข้อมูล',
-            status: 'NOT_STARTED',
-            description: 'Seeking a detail-oriented data analyst ที่สามารถ analyze data sets, \n \
+            title: "Data Analyst และผู้วิเคราะห์ข้อมูล",
+            status: "NOT_STARTED",
+            description:
+              "Seeking a detail-oriented data analyst ที่สามารถ analyze data sets, \n \
 generate insights, และ provide data-driven recommendations. \n \
-จำเป็นต้องมี proficiency in data visualization tools.',
+จำเป็นต้องมี proficiency in data visualization tools.",
             budget: 20000,
             numWorker: 3,
             // jobTags: {
@@ -210,11 +216,12 @@ generate insights, และ provide data-driven recommendations. \n \
             estimateEndDate: new Date("2024-03-31"),
           },
           {
-            title: 'Data Analyst และผู้วิเคราะห์ข้อมูล',
-            status: 'NOT_STARTED',
-            description: 'Seeking a detail-oriented data analyst ที่สามารถ analyze data sets, \n \
+            title: "Data Analyst และผู้วิเคราะห์ข้อมูล",
+            status: "NOT_STARTED",
+            description:
+              "Seeking a detail-oriented data analyst ที่สามารถ analyze data sets, \n \
 generate insights, และ provide data-driven recommendations. \n \
-จำเป็นต้องมี proficiency in data visualization tools.',
+จำเป็นต้องมี proficiency in data visualization tools.",
             budget: 20000,
             numWorker: 3,
             // jobTags: {
@@ -248,9 +255,9 @@ generate insights, และ provide data-driven recommendations. \n \
       Job: {
         create: [
           {
-            title: 'ทำโมเดล AI Auto Tune',
-            status: 'COMPLETED',
-            description: 'เคยยืนรอเธอบนบีทีเอส',
+            title: "ทำโมเดล AI Auto Tune",
+            status: "COMPLETED",
+            description: "เคยยืนรอเธอบนบีทีเอส",
             // jobTags: {
             //   create: ['data scientist', 'ai']
             // },
@@ -262,9 +269,9 @@ generate insights, และ provide data-driven recommendations. \n \
             estimateEndDate: new Date("2022-10-31"),
           },
           {
-            title: 'ตัดต่อคลิปลง TikTok',
-            status: 'NOT_STARTED',
-            description: 'โอ้เบบี้เกิร์ลยูเรียนมาแตร์เดอี',
+            title: "ตัดต่อคลิปลง TikTok",
+            status: "NOT_STARTED",
+            description: "โอ้เบบี้เกิร์ลยูเรียนมาแตร์เดอี",
             // jobTags: {
             //   create: ['content creator', 'tiktok']
             // },
@@ -276,11 +283,12 @@ generate insights, และ provide data-driven recommendations. \n \
             estimateEndDate: new Date("2023-12-31"),
           },
           {
-            title: 'UX/UI Designer และผู้สร้างประสบการณ์ผู้ใช้',
-            status: 'NOT_STARTED',
-            description: 'Looking for a creative mind ที่มีความสามารถในการออกแบบ \n \
+            title: "UX/UI Designer และผู้สร้างประสบการณ์ผู้ใช้",
+            status: "NOT_STARTED",
+            description:
+              "Looking for a creative mind ที่มีความสามารถในการออกแบบ \n \
 user-friendly interfaces และ optimize the user experience. \n \
-Proficiency ใน design tools เป็น',
+Proficiency ใน design tools เป็น",
             budget: 2000,
             numWorker: 5,
             // jobTags: {
@@ -292,11 +300,12 @@ Proficiency ใน design tools เป็น',
             estimateEndDate: new Date("2024-03-31"),
           },
           {
-            title: 'Content Translator และผู้แปลเนื้อหา',
-            status: 'NOT_STARTED',
-            description: 'กำลังมองหา bilingual content translator ที่สามารถ translate content \n \
+            title: "Content Translator และผู้แปลเนื้อหา",
+            status: "NOT_STARTED",
+            description:
+              "กำลังมองหา bilingual content translator ที่สามารถ translate content \n \
 ในทั้งภาษาไทยและ English. Responsibilities รวมถึง \n \
-การรักษาความถูกต้องทางภาษา และ adaptation ของเนื้อหา.',
+การรักษาความถูกต้องทางภาษา และ adaptation ของเนื้อหา.",
             budget: 3000,
             numWorker: 5,
             // jobTags: {
@@ -308,11 +317,12 @@ Proficiency ใน design tools เป็น',
             estimateEndDate: new Date("2024-03-31"),
           },
           {
-            title: 'ผู้เชี่ยวชาญด้านการดำเนินงาน E-commerce',
-            status: 'NOT_STARTED',
-            description: 'Seeking an expert in e-commerce operations ที่สามารถ \n \
+            title: "ผู้เชี่ยวชาญด้านการดำเนินงาน E-commerce",
+            status: "NOT_STARTED",
+            description:
+              "Seeking an expert in e-commerce operations ที่สามารถ \n \
 manage order fulfillment, inventory และ coordinate \n \
-with logistics partners. มีความรู้เกี่ยวกับการจัดการพื้นฐานของระบบ E-commerce.',
+with logistics partners. มีความรู้เกี่ยวกับการจัดการพื้นฐานของระบบ E-commerce.",
             budget: 5000,
             numWorker: 5,
             // jobTags: {
@@ -324,11 +334,12 @@ with logistics partners. มีความรู้เกี่ยวกับ�
             estimateEndDate: new Date("2024-04-11"),
           },
           {
-            title: 'Financial Analyst และนักวิเคราะห์ทางการเงิน',
-            status: 'NOT_STARTED',
-            description: 'Looking for a financial analyst ที่สามารถ analyze financial data, \n \
+            title: "Financial Analyst และนักวิเคราะห์ทางการเงิน",
+            status: "NOT_STARTED",
+            description:
+              "Looking for a financial analyst ที่สามารถ analyze financial data, \n \
 prepare reports, และ provide insights for decision-making. \n \
-ความเข้าใจในเรื่องของการเงินและการวิเคราะห์ทางการเงิน.',
+ความเข้าใจในเรื่องของการเงินและการวิเคราะห์ทางการเงิน.",
             budget: 10000,
             numWorker: 3,
             // jobTags: {
@@ -340,11 +351,12 @@ prepare reports, และ provide insights for decision-making. \n \
             estimateEndDate: new Date("2024-04-11"),
           },
           {
-            title: 'นักวิจัยตลาดและ Market Researcher',
-            status: 'NOT_STARTED',
-            description: 'Seeking a market researcher ที่สามารถ conduct market analysis, \n \
+            title: "นักวิจัยตลาดและ Market Researcher",
+            status: "NOT_STARTED",
+            description:
+              "Seeking a market researcher ที่สามารถ conduct market analysis, \n \
 gather insights, และ identify trends. \n \
-Responsibilities รวมถึงการเขียนรายงานและการนำเสนอข้อมูลตลาด.',
+Responsibilities รวมถึงการเขียนรายงานและการนำเสนอข้อมูลตลาด.",
             budget: 10000,
             numWorker: 3,
             // jobTags: {
@@ -356,11 +368,12 @@ Responsibilities รวมถึงการเขียนรายงานแ
             estimateEndDate: new Date("2024-04-11"),
           },
           {
-            title: 'นักวิจัยตลาดและ Market Researcher',
-            status: 'NOT_STARTED',
-            description: 'Seeking a market researcher ที่สามารถ conduct market analysis, \n \
+            title: "นักวิจัยตลาดและ Market Researcher",
+            status: "NOT_STARTED",
+            description:
+              "Seeking a market researcher ที่สามารถ conduct market analysis, \n \
 gather insights, และ identify trends. \n \
-Responsibilities รวมถึงการเขียนรายงานและการนำเสนอข้อมูลตลาด.',
+Responsibilities รวมถึงการเขียนรายงานและการนำเสนอข้อมูลตลาด.",
             budget: 8000,
             numWorker: 3,
             // jobTags: {
@@ -395,9 +408,10 @@ Responsibilities รวมถึงการเขียนรายงานแ
       Job: {
         create: [
           {
-            title: 'เซนเซอร์ติดม่านกันแดดอัจฉริยะ',
-            status: 'NOT_STARTED',
-            description: 'แสงอาทิตย์ส่องมามันแยงตา แต่สายตาเธอที่ส่องมามันแยงใจ',
+            title: "เซนเซอร์ติดม่านกันแดดอัจฉริยะ",
+            status: "NOT_STARTED",
+            description:
+              "แสงอาทิตย์ส่องมามันแยงตา แต่สายตาเธอที่ส่องมามันแยงใจ",
             // jobTags: {
             //   create: ['iot']
             // },
@@ -409,9 +423,9 @@ Responsibilities รวมถึงการเขียนรายงานแ
             estimateEndDate: new Date("2024-03-31"),
           },
           {
-            title: 'เขียนเว็บ ChaoChao',
-            status: 'IN_PROGRESS',
-            description: 'ไม่รู้จะเช่าไหนดี มาเช่านี่มา',
+            title: "เขียนเว็บ ChaoChao",
+            status: "IN_PROGRESS",
+            description: "ไม่รู้จะเช่าไหนดี มาเช่านี่มา",
             // jobTags: {
             //   create: ['web developer', 'front-end', 'ChaoChao']
             // },
@@ -422,9 +436,10 @@ Responsibilities รวมถึงการเขียนรายงานแ
             estimateEndDate: new Date("2024-04-30"),
           },
           {
-            title: 'Web Developer for เฮียหมู',
-            status: 'NOT_STARTED',
-            description: 'เฮียหมูเจ้าเก่าเจ้าเดิม เพิ่มเติมคือกำลังจะมีหน้าเว็บแล้ว',
+            title: "Web Developer for เฮียหมู",
+            status: "NOT_STARTED",
+            description:
+              "เฮียหมูเจ้าเก่าเจ้าเดิม เพิ่มเติมคือกำลังจะมีหน้าเว็บแล้ว",
             // jobTags: {
             //   create: ['web developer', 'front-end']
             // },
@@ -436,9 +451,9 @@ Responsibilities รวมถึงการเขียนรายงานแ
             estimateEndDate: new Date("2024-02-01"),
           },
           {
-            title: 'รสดีเด็ด อิซากายะ Frontend Developer',
-            status: 'NOT_STARTED',
-            description: 'Web-based application สำหรับจองคิวและโปรโมชั่น',
+            title: "รสดีเด็ด อิซากายะ Frontend Developer",
+            status: "NOT_STARTED",
+            description: "Web-based application สำหรับจองคิวและโปรโมชั่น",
             // jobTags: {
             //   create: ['front-end']
             // },
@@ -465,9 +480,10 @@ Responsibilities รวมถึงการเขียนรายงานแ
             estimateEndDate: new Date("2024-04-30"),
           },
           {
-            title: 'เฮียหมู Data Analytics',
-            status: 'NOT_STARTED',
-            description: 'วิเคราะห์เมนูกับแกล้มยอดนิยมเทียบกับจำนวนเบียร์ที่ลูกค้าสั่งต่อโต๊ะ',
+            title: "เฮียหมู Data Analytics",
+            status: "NOT_STARTED",
+            description:
+              "วิเคราะห์เมนูกับแกล้มยอดนิยมเทียบกับจำนวนเบียร์ที่ลูกค้าสั่งต่อโต๊ะ",
             // jobTags: {
             //   create: ['data analytics']
             // },
@@ -493,9 +509,9 @@ Responsibilities รวมถึงการเขียนรายงานแ
             estimateEndDate: new Date("2024-04-16"),
           },
           {
-            title: 'Bad Guy Full-stack developer',
-            status: 'NOT_STARTED',
-            description: 'Develop Larb selling application for E-sarn People',
+            title: "Bad Guy Full-stack developer",
+            status: "NOT_STARTED",
+            description: "Develop Larb selling application for E-sarn People",
             budget: 200,
             // jobTags: {
             //   create: ['front-end', 'back-end', 'full-stack']
@@ -506,12 +522,13 @@ Responsibilities รวมถึงการเขียนรายงานแ
             estimateEndDate: new Date("2024-05-15"),
           },
           {
-            title: 'นักสร้างเนื้อหาและ Content Curator',
-            status: 'NOT_STARTED',
-            description: 'Looking for a freelance creative mind with ทักษะในการสร้าง \n \
+            title: "นักสร้างเนื้อหาและ Content Curator",
+            status: "NOT_STARTED",
+            description:
+              "Looking for a freelance creative mind with ทักษะในการสร้าง \n \
 engaging และ เนื้อหาสร้างสรรค์สำหรับ social media platforms. \n \
 ต้องมี a flair for storytelling และ a keen eye for visuals \n \
-เพื่อที่จะ captivate audiences.', 
+เพื่อที่จะ captivate audiences.",
             budget: 10000,
             numWorker: 5,
             // jobTags: {
@@ -523,12 +540,13 @@ engaging และ เนื้อหาสร้างสรรค์สำห�
             estimateEndDate: new Date("2024-04-30"),
           },
           {
-            title: 'เจ้าหน้าที่ช่วยส่วนตัวและ Virtual Assistant Extraordinaire',
-            status: 'NOT_STARTED',
-            description: 'Seeking บุคคลที่มี detail-oriented virtual assistant \n \
+            title: "เจ้าหน้าที่ช่วยส่วนตัวและ Virtual Assistant Extraordinaire",
+            status: "NOT_STARTED",
+            description:
+              "Seeking บุคคลที่มี detail-oriented virtual assistant \n \
 ที่สามารถ handle administrative tasks, จัดการปฏิทิน, \n \
 และ ช่วยเสริมสร้าง ใน various projects. \n \
-ทักษะการจัดระเบียบที่แข็งแกร่งและการสื่อสารที่เป็น must.',
+ทักษะการจัดระเบียบที่แข็งแกร่งและการสื่อสารที่เป็น must.",
             budget: 5000,
             numWorker: 2,
             // jobTags: {
@@ -540,11 +558,12 @@ engaging และ เนื้อหาสร้างสรรค์สำห�
             estimateEndDate: new Date("2024-04-30"),
           },
           {
-            title: 'Creative Video Producer และโปรดิวเซอร์วิดีโอ',
-            status: 'NOT_STARTED',
-            description: 'Looking for a creative video producer ที่มีความสามารถในการสร้างและ \n \
+            title: "Creative Video Producer และโปรดิวเซอร์วิดีโอ",
+            status: "NOT_STARTED",
+            description:
+              "Looking for a creative video producer ที่มีความสามารถในการสร้างและ \n \
 produce compelling video content. Proficiency ใน \n \
-video editing tools เป็น',
+video editing tools เป็น",
             budget: 7000,
             numWorker: 3,
             // jobTags: {
@@ -556,11 +575,12 @@ video editing tools เป็น',
             estimateEndDate: new Date("2024-03-11"),
           },
           {
-            title: 'HR Coordinator และผู้ประสานงานทรัพยากรบุคคล',
-            status: 'NOT_STARTED',
-            description: 'Seeking an HR coordinator ที่สามารถ assist with \n \
+            title: "HR Coordinator และผู้ประสานงานทรัพยากรบุคคล",
+            status: "NOT_STARTED",
+            description:
+              "Seeking an HR coordinator ที่สามารถ assist with \n \
 recruitment, employee onboarding, และ HR processes. \n \
-ความเข้าใจในกฎหมายแรงงานและนโยบาย HR.',
+ความเข้าใจในกฎหมายแรงงานและนโยบาย HR.",
             budget: 8000,
             numWorker: 2,
             // jobTags: {
@@ -572,11 +592,12 @@ recruitment, employee onboarding, และ HR processes. \n \
             estimateEndDate: new Date("2024-04-30"),
           },
           {
-            title: 'Tech Support Specialist และผู้ช่วยเหลือทางเทคนอล็อค',
-            status: 'NOT_STARTED',
-            description: 'Looking for a tech support specialist ที่สามารถ provide technical \n \
+            title: "Tech Support Specialist และผู้ช่วยเหลือทางเทคนอล็อค",
+            status: "NOT_STARTED",
+            description:
+              "Looking for a tech support specialist ที่สามารถ provide technical \n \
 assistance to end-users, troubleshoot issues, และ ให้คำแนะนำในการแก้ไขปัญหาทางเทคนิค. \n \
-Strong communication skills และ customer service mindset จำเป็น.',
+Strong communication skills และ customer service mindset จำเป็น.",
             budget: 10000,
             numWorker: 4,
             // jobTags: {
@@ -587,7 +608,7 @@ Strong communication skills และ customer service mindset จำเป็�
             estimateStartDate: new Date("2024-02-01"),
             estimateEndDate: new Date("2024-03-11"),
           },
-                
+
           // Add more job objects as needed
         ],
       },
