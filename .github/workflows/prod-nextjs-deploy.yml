@@ -64,5 +64,4 @@ jobs:
          uses: Sniddl/discord-commits@v1.6
          with: 
            webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
-           # message: "<@&1085297978266353694> main มีการอัปเดทแล้ว ไป pull แล้ว merge กันด้วย ก่อนที่จะโดนหมับหน้าเข้าให้"
-           embed: '{ "title": "{{ commit.title }}", "description": "{{ commit.description }}", "url": "{{ commit.url }}", "author": { "name": "{{ commit.author.name }} ({{ commit.author.username }})", "icon_url": "https://avatars.io/gravatar/{{ commit.author.email }}"} }'
+           message: "<@&1085297978266353694> main มีการอัปเดทแล้ว ไป pull แล้ว merge กันด้วย ก่อนที่จะโดนหมับหน้าเข้าให้ \nPR Title: ${{ github.event.pull_request.title }} \nPR Link: https://github.com/SoeiCorp/skillbridge/pulls/${{ github.event.number }}"
