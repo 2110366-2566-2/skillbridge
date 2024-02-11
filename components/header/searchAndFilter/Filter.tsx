@@ -16,7 +16,33 @@ export default function Filter() {
         minPrice: 0,
         maxPrice: 0
     })
-    const jobList = ["JOB 1", "JOB 2", "JOB 3", "JOB 4", "JOB 5", "JOB 6", "JOB 7", "JOB 8", "JOB 9", "JOB 10"]
+    const jobList = [
+        "กราฟิกดีไซน์",
+        "สถาปัตย์",
+        "ตกแต่งภายใน",
+        "ศิลปะและภาพวาด",
+        "ออกแบบ UX UI",
+        "พัฒนาแอพฯมือถือ",
+        "พัฒนาเว็ปไซต์",
+        "ไอทีโซลูชั่น",
+        "งาน IOT",
+        "อินฟลูเอนเซอร์",
+        "สื่อออนไลน์",
+        "แอดมินออนไลน์",
+        "ไลฟ์สไตล์",
+        "พัฒนาตัวเอง",
+        "ธุรกิจและการเงิน",
+        "รูปภาพและวีดีโอ",
+        "แต่งหน้า",
+        "สไตลิสต์",
+        "นักแสดง",
+        "นักพากย์เสียง",
+        "นักร้อง / นักดนตรี",
+        "ซาวด์เอ็นจิเนียร์",
+        "งานเขียน",
+        "ภาษา",
+        "อื่น ๆ",
+    ]
 
     const toggleOpen = () => {
         if (isOpen) {
@@ -162,7 +188,7 @@ export default function Filter() {
                             >
                                 <option value="">เลือกหมวดหมู่ที่ต้องการ</option>
                                 {jobList.map(job => (
-                                    <option value={job}>{job}</option>
+                                    <option key={job} value={job}>{job}</option>
                                 ))}
                             </select>
                         </div>
