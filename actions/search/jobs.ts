@@ -22,6 +22,7 @@ async function getDefaultSearchJobs(): Promise<job[]> {
             jobTags: true,
             Applied: true
         },
+        take: 12
     })
     
     // TODO : Filter for only jobs that are open
