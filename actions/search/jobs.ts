@@ -1,5 +1,5 @@
 "use server"
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, JobStatus } from '@prisma/client'
 const prisma = new PrismaClient();
 
 export interface job {
@@ -22,11 +22,14 @@ async function getDefaultSearchJobs(): Promise<job[]> {
             jobTags: true,
             Applied: true
         },
-        take: 12
+        where: {
+            status: {
+                equals: JobStatus.NOT_STARTED
+            }
+        },
+        take: 15
     })
     
-    // TODO : Filter for only jobs that are open
-    // Waiting for enum to finalize so it can check
     jobs.forEach((job) => {
         const tags = job.jobTags.map((tag) => String(tag.title));
 
