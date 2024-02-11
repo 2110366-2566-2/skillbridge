@@ -1,5 +1,5 @@
 "use server"
-import { PrismaClient, JobStatus } from '@prisma/client'
+import { PrismaClient, JobStatus, ApplicationStatus } from '@prisma/client'
 const prisma = new PrismaClient();
 
 export interface job {
@@ -19,8 +19,8 @@ async function getDefaultSearchJobs(): Promise<job[]> {
 
     const jobs = await prisma.job.findMany({
         include: {
-            jobTags: true,
-            Applied: true
+            jobTag: true,
+            Application: true
         },
         where: {
             status: {
@@ -31,16 +31,14 @@ async function getDefaultSearchJobs(): Promise<job[]> {
     })
     
     jobs.forEach((job) => {
-        const tags = job.jobTags.map((tag) => String(tag.title));
-
         const showJob: job = {
             id: job.id,
             title: job.title,
             startDate: job.estimateStartDate.toLocaleDateString('en-GB'),
             endDate: job.estimateEndDate.toLocaleDateString('en-GB'),
-            jobTags: "-", // Wait for db schema to change
+            jobTags: job.jobTag.title, // Wait for db schema to change
             description: job.description,
-            acceptNum: job.Applied.length, //TODO : Filter for accepted application
+            acceptNum: job.Application.filter(app => app.status==ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
             maxAcceptNum: job.numWorker,
             budget: job.budget
         };
