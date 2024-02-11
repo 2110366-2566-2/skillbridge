@@ -6,10 +6,6 @@ interface jobTagList {
   [key: string]: string;
 }
 
-interface jobTagEnum {
-
-}
-
 async function main() {
 
   await prisma.job.deleteMany({})
