@@ -27,7 +27,7 @@ export default function SearchJobItemList() {
     return (
         <div className="md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
             {loading ? ( // Render skeleton loader if loading is true
-                Array.from({ length: 8 }).map((_, index) => (
+                Array.from({ length: 12 }).map((_, index) => (
                     <LoadingJobItem key={index} />
                 ))) : (
                 jobs.map((job, index) => (
