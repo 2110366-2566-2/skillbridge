@@ -6,15 +6,18 @@
       <a href="#version-10">v1.0</a>
       <ul>
         <li><a href="#version-11">v1.1</a></li>
+        <ul>
+          <li><a href="#version-111">v1.11</a></li>
+        </ul>
       </ul>
     </li>
   </ul>
 </details>
 
-## Version 1.0
+## Version 1.00
 - init version as copied from the existed docs
 
-## Version 1.1
+## Version 1.10
 ### User
 - `email` is set to not required
 - `hashedPassword` is added as VarChar(512)
@@ -38,3 +41,11 @@
 ### Etc.
 - `isDeleted` is added for the deletion in `User, Job, JobTag, Applied, Transaction, Review` for referential integrity contraint
 - Change table name from `Applied` to `Application`
+
+## v1.11
+### User
+- Change the FK format to `Student` and `Employer`
+### Etc.
+- Change the name convention of the relation name
+- Refactor the seeding file to be `Student` and `Employer` based instead of `User` based
+- Fix the `npx prisma generate`
