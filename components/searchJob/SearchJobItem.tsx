@@ -69,9 +69,9 @@ export default function SearchJobItem({ job }: Props) {
                 <div className="flex flex-col justify-between h-[340px] w-[268px] p-4">
                     <div className="h-[3em] font-bold text-[29px] text-[#313866] text-wrap line-clamp-2">{job?.title}</div>
                     <div className="font-medium text-[15.5px] text-slate-500 text-wrap line-clamp-1">{job?.startDate ? FormattedDate(job.startDate) : "ไม่มีกำหนด"} - {job?.endDate ? FormattedDate(job.endDate) : "ไม่มีกำหนด"}</div>
-                    {job?.jobTags[0] ? (
+                    {job?.jobTags ? (
                         <div className="text-[14px] text-slate-800">
-                            <span className={`inline-block bg-slate-200 rounded py-1 px-2`}>{job?.jobTags}</span>
+                            <span className={`inline-block bg-slate-200 rounded py-1 px-2`}>{job.jobTags}</span>
                         </div>
                     ) : (
                         <div className="min-w-[236px] min-h-[29px]"></div>
