@@ -2,8 +2,8 @@ export default function LoadingJobItem() {
     return (
         <>
             {/* Mobile size */}
-            <div className="flex flex-row justify-between items-center max-h-[70px] pb-4 mb-4 border-b border-slate-300 md:hidden">
-                <div className="animate-pulse bg-slate-200 h-[54px] w-full rounded-lg"></div>
+            <div className="flex flex-row justify-between items-center max-h-[81.5px] pb-4 mb-4 border-b border-slate-300 md:hidden">
+                <div className="animate-pulse bg-slate-200 h-[65.5px] w-full rounded-lg"></div>
             </div>
 
             {/* Desktop size */}

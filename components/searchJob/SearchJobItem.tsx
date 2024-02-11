@@ -35,7 +35,7 @@ export default function SearchJobItem({ job }: Props) {
             {/* Mobile size */}
             <div className="flex flex-row justify-between items-center min-h-[70px] pb-4 mb-4 border-b border-slate-300 md:hidden">
                 <div className="flex flex-col justify-between w-[210.02px]">
-                    <div className="font-bold text-[#313866] line-clamp-1">{job?.title}</div>
+                    <div className="font-bold text-[#313866] h-[3em] line-clamp-2">{job?.title}</div>
                     <div className="flex flex-row justify-between">
                         <div className="font-medium text-[11px] text-slate-500">{job?.startDate ? FormattedDate(job.startDate) : "ไม่มีกำหนด"} - {job?.endDate ? FormattedDate(job.endDate) : "ไม่มีกำหนด"}</div>
                         <div className="text-[11px] text-[#838383]">รับแล้ว <span className="font-medium">{job?.acceptNum} / {job?.maxAcceptNum}</span> คน</div>
