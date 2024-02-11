@@ -61,6 +61,11 @@ export default function Filter() {
         })
     }
 
+    const handleSubmit = () => {
+        console.log("SUBMIT!!!")
+        toggleOpen();
+    }
+
     const handleChange = (evt: ChangeEvent) => {
         const changedInput = evt.target as HTMLInputElement; // Type assertion to HTMLInputElement
         const changedField = changedInput.name;
@@ -109,75 +114,96 @@ export default function Filter() {
                     {/* Shadow Background When Open */}
                     <div className="fixed inset-0 overflow-hidden z-40 bg-neutral-800 opacity-60"></div>
                     {/* Filter Form */}
-                    <div className="fixed inset-0 overflow-hidden font-ibm z-50 bg-slate-50 w-2/3 h-screen flex flex-col p-7 justify-between md:hidden">
+                    <div className="fixed inset-0 overflow-hidden font-ibm z-50 bg-slate-50 w-2/3 h-screen flex flex-col p-7 justify-between lg:w-[28%]">
                         <div className="flex flex-col">
-                            <div
-                                className="self-end rounded-[50%] p-1 hover:bg-slate-100"
-                                onClick={toggleOpen}
-                            >
-                                <Image
-                                    src={closeDarkIcon}
-                                    alt="closeDarkIcon"
-                                    width={30}
-                                    height={30}
-                                />
+                            <div className="flex flex-col lg:flex-row lg:justify-between">
+                                {/* Tablet and Desktop Topic */}
+                                <div className="hidden lg:inline-block lg:font-bold lg:text-[24px] lg:text-slate-800 lg:mb-6">จัดการตัวกรอง</div>
+                                <div
+                                    className="self-end rounded-[50%] p-1 hover:bg-slate-100 lg:self-baseline"
+                                    onClick={toggleOpen}
+                                >
+                                    <Image
+                                        src={closeDarkIcon}
+                                        alt="closeDarkIcon"
+                                        width={30}
+                                        height={30}
+                                    />
+                                </div>
+                                {/* Mobile Topic */}
+                                <div className="font-bold text-[24px] text-slate-800 mt-4 mb-6 lg:hidden">จัดการตัวกรอง</div>
                             </div>
-                            {/* Topic */}
-                            <div className="font-bold text-[24px] text-slate-800 mt-4 mb-6">จัดการตัวกรอง</div>
+
                             {/* Date Range */}
                             <div className="font-bold text-[20px] text-slate-800 mb-2">ช่วงเวลา</div>
-                            <div className="font-medium text-[16px] text-slate-800 mb-1">วันเริ่มต้น</div>
-                            <div>
-                                <input
-                                    type="date"
-                                    className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 block w-full p-2"
-                                    placeholder="วว/ดด/ปปปป"
-                                    name="startDate"
-                                    value={filtered.startDate}
-                                    onChange={handleChange}
-                                ></input>
+                            <div className="flex flex-col md:flex-row md:justify-between md:gap-2">
+                                <div className="flex flex-col md:w-full">
+                                    <div className="font-medium text-[16px] text-slate-800 mb-1">วันเริ่มต้น</div>
+                                    <div>
+                                        <input
+                                            type="date"
+                                            className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 block w-full p-2"
+                                            placeholder="วว/ดด/ปปปป"
+                                            name="startDate"
+                                            value={filtered.startDate}
+                                            onChange={handleChange}
+                                        ></input>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col md:w-full">
+                                    <div className="font-medium text-[16px] text-slate-800 mt-3 mb-1 md:mt-0">วันสิ้นสุด</div>
+                                    <div>
+                                        <input
+                                            type="date"
+                                            className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 block w-full p-2"
+                                            placeholder="วว/ดด/ปปปป"
+                                            name="endDate"
+                                            value={filtered.endDate}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                </div>
                             </div>
-                            <div className="font-medium text-[16px] text-slate-800 mt-3 mb-1">วันสิ้นสุด</div>
-                            <div>
-                                <input
-                                    type="date"
-                                    className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 block w-full p-2"
-                                    placeholder="วว/ดด/ปปปป"
-                                    name="endDate"
-                                    value={filtered.endDate}
-                                    onChange={handleChange}
-                                />
-                            </div>
+
                             {/* Price Range */}
                             <div className="font-bold text-[20px] text-slate-800 mt-6 mb-2">ช่วงราคา</div>
-                            <div className="font-medium text-[16px] text-slate-800 mb-1">ราคาต่ำสุด</div>
-                            <div className="relative">
-                                <input
-                                    type="number"
-                                    className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 block w-full p-2"
-                                    placeholder="0"
-                                    name="minPrice"
-                                    value={filtered.minPrice === 0 ? "" : filtered.minPrice}
-                                    onChange={handleChange}
-                                />
-                                <div className="absolute text-slate-400 inset-y-0 end-3 flex items-center pointer-events-none">
-                                    บาท
+                            <div className="flex flex-col md:flex-row md:justify-between md:gap-2">
+                                <div className="flex flex-col md:w-full">
+                                    <div className="font-medium text-[16px] text-slate-800 mb-1">ราคาต่ำสุด</div>
+                                    <div className="relative">
+                                        <input
+                                            type="number"
+                                            className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 block w-full p-2"
+                                            placeholder="0"
+                                            name="minPrice"
+                                            min={0}
+                                            value={filtered.minPrice === 0 ? "" : filtered.minPrice}
+                                            onChange={handleChange}
+                                        />
+                                        <div className="absolute text-slate-400 inset-y-0 end-3 flex items-center pointer-events-none">
+                                            บาท
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col md:w-full">
+                                    <div className="font-medium text-[16px] text-slate-800 mt-3 mb-1 md:mt-0">ราคาสูงสุด</div>
+                                    <div className="relative">
+                                        <input
+                                            type="number"
+                                            className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 block w-full p-2"
+                                            placeholder="ราคาสูงสุด"
+                                            name="maxPrice"
+                                            min={0}
+                                            value={filtered.maxPrice === 0 ? "" : filtered.maxPrice}
+                                            onChange={handleChange}
+                                        />
+                                        <div className="absolute text-slate-400 inset-y-0 end-3 flex items-center pointer-events-none">
+                                            บาท
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="font-medium text-[16px] text-slate-800 mt-3 mb-1">ราคาสูงสุด</div>
-                            <div className="relative">
-                                <input
-                                    type="number"
-                                    className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 block w-full p-2"
-                                    placeholder="ราคาสูงสุด"
-                                    name="maxPrice"
-                                    value={filtered.maxPrice === 0 ? "" : filtered.maxPrice}
-                                    onChange={handleChange}
-                                />
-                                <div className="absolute text-slate-400 inset-y-0 end-3 flex items-center pointer-events-none">
-                                    บาท
-                                </div>
-                            </div>
+
                             {/* Job Tag */}
                             <div className="font-bold text-[20px] text-slate-800 mt-6 mb-2">หมวดหมู่</div>
                             <select
@@ -196,7 +222,7 @@ export default function Filter() {
                         <div className="flex flex-row justify-between gap-2">
                             <button
                                 type="button"
-                                className="w-1/2 min-h-[40px] text-slate-700 text-[16px] rounded-md hover:bg-slate-200 focus:ring-4 focus:outline-none focus:ring-slate-300"
+                                className="w-1/2 min-h-[40px] text-slate-700 text-[16px] rounded-md hover:bg-slate-200 focus:ring-2 focus:outline-none focus:ring-slate-300"
                                 onClick={clearInput}
                             >
                                 ล้าง
@@ -204,7 +230,7 @@ export default function Filter() {
                             <button
                                 type="button"
                                 className="w-1/2 min-h-[40px] text-white text-[16px] rounded-md bg-slate-700 hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-slate-300"
-                                onClick={toggleOpen} // TODO: Fix to send filtered date
+                                onClick={handleSubmit} // TODO: Fix to send filtered date
                             >
                                 ยืนยัน
                             </button>
