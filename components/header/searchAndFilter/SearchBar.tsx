@@ -1,11 +1,19 @@
 "use client"
 
+import { ChangeEvent, useState } from "react";
 import Image from "next/image";
 
 const searchIcon = require("@/public/icons/jobSearch.svg") as string;
 const searchBigIcon = require("@/public/icons/jobSearchBig.svg") as string;
 
 export default function SearchBar() {
+    const [searchValue, setSearchValue] = useState("")
+
+    const handleChange = (evt: ChangeEvent) => {
+        const changedInput = evt.target as HTMLInputElement;
+        setSearchValue(changedInput.value)
+        console.log(changedInput.value)
+    }
     return (
         <>
             {/* Mobile and Tablet size */}
@@ -20,7 +28,15 @@ export default function SearchBar() {
                                 height={16}
                             />
                         </div>
-                        <input type="search" id="job-search" className="block w-full min-h-[40px] ps-10 text-[14px] text-slate-900 border border-slate-300 rounded bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-slate-500" placeholder="ค้นหางานที่ต้องการ..." required></input>
+                        <input
+                            type="search"
+                            id="job-search"
+                            className="block w-full min-h-[40px] ps-10 text-[14px] text-slate-900 border border-slate-300 rounded bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-slate-500"
+                            placeholder="ค้นหางานที่ต้องการ..."
+                            name="job-search"
+                            value={searchValue}
+                            onChange={handleChange}
+                            required></input>
                     </div>
                 </form>
             </div>
