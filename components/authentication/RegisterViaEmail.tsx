@@ -61,28 +61,46 @@ export default function RegisterViaEmail({
                         <Input name="fname" label="ชื่อ" inputType="text" warning="กรอกชื่อของคุณ" handleChange={handleChange} value={Form.fname} />
                         <Input name="lname" label="นามสกุล" inputType="text" warning="กรอกนามสกุลของคุณ" handleChange={handleChange} value={Form.lname} />
 
-                        <div className="mt-[20px]">
+                        <div className="mt-[30px] w-full relative">
                             {/* Link ไป ข้อตกลงและเงื่อนไขการใช้งานของ SkillBridge และ นโยบายคุ้มครองความเป็นส่วนตัว*/}
-                            <label className="block relative mb-[10px] text-[9.5px] pl-[20px]">ฉันได้อ่านและยอมรับ<Link href={'/'} className="text-[#326FE2]">ข้อตกลงและเงื่อนไขการใช้งานของ SkillBridge</Link>
-                                <input type="checkbox" name=""
-                                    className="absolute cursor-pointer left-0
-                                    checked:bg-[#334155] hover:bg-[#a3a3a3]
-                                    w-[14px] h-[14px] rounded-sm focus:outline-none
-                                    hover:ring hover:" />
-                            </label>
-
-                            <label className="block relative text-[9.5px] pl-[20px] ">ฉันได้อ่านและยอมรับ<Link href={'/'} className="text-[#326FE2]">นโยบายคุ้มครองความเป็นส่วนตัว</Link>
-                                <input type="checkbox" name="" className="absolute cursor-pointer left-0 checked:bg-[#334155]" />
+                            <input type="checkbox" name=""
+                                className="absolute cursor-pointer left-0 top-0 border
+                                    border-[#848484]
+                                    accent-[#334155]
+                                    cursor-pointer
+                                    rounded-sm
+                                    "
+                                required />
+                            <label className="block text-[9.5px] pl-[20px]">
+                                ฉันได้อ่านและยอมรับ
+                                <Link href={'/'} className="text-[#326FE2] hover:underline hover:underline-offset">ข้อตกลงและเงื่อนไขการใช้งานของ SkillBridge</Link>
                             </label>
                         </div>
+                        <div className="mt-[10px] w-full relative">
+                            <input type="checkbox" name=""
+                                className="absolute cursor-pointer left-0 top-0 border
+                                    border-[#848484]
+                                    accent-[#334155]
+                                    cursor-pointer
+                                    rounded-sm
+                                    "
+                                required />
+                            <label className="block text-[9.5px] pl-[20px]">
+                                ฉันได้อ่านและยอมรับ
+                                <Link href={'/'} className="text-[#326FE2] hover:underline hover:underline-offset">นโยบายคุ้มครองความเป็นส่วนตัว</Link>
+                            </label>
+                        </div>
+
 
                         <button id="submit" type="submit" className="w-full bg-[#334155] rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md">
                             สร้างบัญชี
                         </button>
 
-                        <button id="previousPage" type="button" className="mt-[20px] text-[#334155] text-md" onClick={handleNextPageSubmit}>
-                            ย้อนกลับ
-                        </button>
+                        <div id="previousPage" className="mt-[15px] flex justify-center">
+                            <p className="text-[#334155] text-md hover:underline hover:underline-offset cursor-pointer" onClick={handleNextPageSubmit}>
+                                ย้อนกลับ
+                            </p>
+                        </div>
 
                     </div>
 

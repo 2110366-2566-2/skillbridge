@@ -12,15 +12,19 @@
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.9",
+    "@mui/material": "^5.15.9",
+    "@prisma/client": "^5.9.1",
     "clsx": "^2.1.0",
     "next": "14.1.0",
     "next-auth": "^4.24.5",
     "prettier": "^3.2.5",
-    "@prisma/client": "^5.9.1",
     "react": "^18",
     "react-dom": "^18",
-    "ts-node": "^10.9.2",
-    "tailwind-merge": "^2.2.1"
+    "tailwind-merge": "^2.2.1",
+    "ts-node": "^10.9.2"
   },
   "devDependencies": {
     "@types/node": "^20.11.16",
