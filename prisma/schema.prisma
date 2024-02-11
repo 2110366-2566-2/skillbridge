@@ -8,27 +8,25 @@ datasource db {
 }
 
 model User {
-  id              String   @id @default(uuid())
+  id              String    @id @default(uuid())
   salutation      String
   firstname       String
   middlename      String?
   lastname        String
   profileImageUrl String?
-  lineId          String?  @unique
-  facebook        String?  @unique
-  email           String   @unique
-  hashedPassword  String   @db.VarChar(512)
-  isGmail         Boolean  @default(false)
-  isDeleted       Boolean  @default(false)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  lineId          String?   @unique
+  facebook        String?   @unique
+  email           String    @unique
+  hashedPassword  String    @db.VarChar(512)
+  isGmail         Boolean   @default(false)
+  isDeleted       Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  student         Student?
+  employer        Employer?
 
-  Student        Student?      @relation(fields: [studentUserId], references: [userId])
-  Employer       Employer?     @relation(fields: [employerUserId], references: [userId])
-  Application    Application[]
-  Message        Message[]
-  studentUserId  String?
-  employerUserId String?
+  applications Application[]
+  messages     Message[]
 
   @@map("_user")
 }
@@ -42,9 +40,9 @@ model Student {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  transaction Transaction[]
-  Review      Review[]
-  User        User[]
+  transactions Transaction[]
+  reviews      Review[]
+  user         User          @relation(fields: [userId], references: [id])
 
   @@map("student")
 }
@@ -57,9 +55,9 @@ model Employer {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  Job         Job[]
-  transaction Transaction[]
-  User        User[]
+  jobs         Job[]
+  transactions Transaction[]
+  user         User          @relation(fields: [userId], references: [id])
 
   @@map("employer")
 }
@@ -83,10 +81,10 @@ model Job {
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 
-  Application Application[]
-  chatroom    Chatroom[]
-  transaction Transaction[]
-  Review      Review[]
+  applications Application[]
+  chatrooms    Chatroom[]
+  transactions Transaction[]
+  reviews      Review[]
 
   @@map("job")
 }
@@ -97,7 +95,8 @@ model JobTag {
   isDeleted Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Job       Job[]
+
+  job Job[]
 
   @@map("job_tag")
 }
@@ -125,7 +124,7 @@ model Chatroom {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Message Message[]
+  messages Message[]
 
   @@map("chatroom")
 }
@@ -139,9 +138,9 @@ model Message {
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
 
-  Text     Text[]
-  Image    Image[]
-  Chatroom Chatroom @relation(fields: [chatroomId], references: [id])
+  texts    Text[]
+  images   Image[]
+  chatroom Chatroom @relation(fields: [chatroomId], references: [id])
 
   @@map("message")
 }
@@ -172,11 +171,11 @@ model Transaction {
   student         Student   @relation(fields: [studentId], references: [userId])
   paymentId       String? // need revise
   receiptImageUrl String?
-  PaymentType     String?
+  paymentType     String?
   isDeleted       Boolean   @default(false)
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
-  Employer        Employer? @relation(fields: [employerUserId], references: [userId])
+  employer        Employer? @relation(fields: [employerUserId], references: [userId])
   employerUserId  String?
 
   @@map("transaction")
@@ -188,7 +187,7 @@ model Review {
   student     Student  @relation(fields: [studentId], references: [userId])
   jobId       String
   description String
-  Stars       Int
+  stars       Int
   isDeleted   Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
