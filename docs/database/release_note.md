@@ -6,6 +6,9 @@
       <a href="#version-10">v1.0</a>
       <ul>
         <li><a href="#version-11">v1.1</a></li>
+        <ul>
+          <li><a href="#version-111">v1.11</a></li>
+        </ul>
       </ul>
     </li>
   </ul>
@@ -44,4 +47,5 @@
 - Change the FK format to `Student` and `Employer`
 ### Etc.
 - Change the name convention of the relation name
-- Refactor the seeding file
+- Refactor the seeding file to be `Student` and `Employer` based instead of `User` based
+- Fix the `npx prisma generate`
