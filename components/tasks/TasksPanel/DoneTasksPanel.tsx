@@ -2,6 +2,7 @@ import React from "react";
 import TaskCard from "../TaskCard";
 import sortArray from "./sortArray";
 import TaskCardType from "../Types/TaskCardType";
+import { getEmployerJobs } from "@/actions/lookup/employee/jobs";
 
 type Props = {
   startDateSortOption: String;
@@ -74,6 +75,8 @@ const DoneTasksPanel = ({
     priceSortOption,
     applicantsSortOption
   );
+
+  // console.log(getEmployerJobs("a9337827-e7cf-4ec4-8601-76fb5518eea1"));
 
   return (
     <main className="flex flex-col">
