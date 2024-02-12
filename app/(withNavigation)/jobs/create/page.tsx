@@ -4,5 +4,15 @@ import getJobTags from "@/actions/getJobTags";
 
 export default async function page() {
   const jobTags = await getJobTags();
-  return <JobForm isUpdate={false} jobTags={jobTags} />;
+  const formData = {
+    title: "",
+    description: "",
+    budget: "",
+    numWorker: "",
+    estimateStartDate: "",
+    estimateEndDate: "",
+    jobTagId: "",
+  };
+  return <JobForm isUpdate={false} jobTags={jobTags} initialData={formData} />;
 }
+

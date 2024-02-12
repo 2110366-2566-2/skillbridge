@@ -2,7 +2,7 @@ import React, { ChangeEvent, ChangeEventHandler } from "react";
 
 type Props = {
   label: string;
-  value: any;
+  value: string;
   jobTags: {
     id: string;
     title: string | null;
@@ -17,29 +17,19 @@ type Props = {
 };
 
 export default function SelectInput(props: Props) {
-  const {
-    label,
-    value,
-    jobTags,
-    name,
-    title,
-    placeholder,
-    errorMessage,
-    onChange,
-  } = props;
+  const { label, value, jobTags, name, title, placeholder, errorMessage, onChange } = props;
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1 flex-grow">
       <label htmlFor={name} className="text-[14px] font-medium text-slate-900">
         {label}
       </label>
       <select
         id={name}
-        className="bg-transparent border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:border-slate-500 block w-full p-[5.75px]"
+        value={value}
+        className="bg-transparent border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:border-slate-500 block w-full p-2 placeholder:text-slate-400"
         name={name}
         title={title}
-        value={value}
-        defaultValue="" // Use defaultValue instead of selected
-        onChange={onChange} // Add onChange handler for handling selection changes
+        onChange={onChange}
       >
         <option className="text-slate-400" value="" disabled>
           {placeholder}

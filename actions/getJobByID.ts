@@ -1,7 +1,6 @@
 import prisma from "../db/prisma";
 
-const getJobById = async (formData: FormData) => {
-  const jobId = formData.get("jobId") as string;
+const getJobById = async (jobId: string) => {
   console.log(jobId);
   const result = await prisma.job.findFirst({
     where: {
@@ -14,16 +13,10 @@ const getJobById = async (formData: FormData) => {
 
 export default getJobById;
 
-const main = async () => {
-  const data = {
-    jobId: "bdf21ad2-c998-4e38-85af-e888df8c6759",
-  };
-  let formData = new FormData();
-  Object.keys(data).forEach((key) =>
-    formData.append(key, data[key as keyof typeof data])
-  );
-  const result = await getJobById(formData);
-  console.log(result);
-};
+// const main = async () => {
+//   const jobId = "bdf21ad2-c998-4e38-85af-e888df8c6759";
+//   const result = await getJobById(jobId);
+//   console.log(result);
+// };
 
-main();
+// main();

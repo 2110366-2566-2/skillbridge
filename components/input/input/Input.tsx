@@ -14,7 +14,7 @@ export default function Input(props: Props) {
   const { type, label, value, name, placeholder, errorMessage, onChange } =
     props;
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1 flex-grow">
       <label htmlFor={name} className="text-[14px] font-medium text-slate-900">
         {label}
       </label>

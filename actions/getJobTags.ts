@@ -7,9 +7,9 @@ const getJobTags = async () => {
 
 export default getJobTags;
 
-const main = async () => {
-  const result = await getJobTags();
-  console.log(result);
-};
+// const main = async () => {
+//   const result = await getJobTags();
+//   console.log(result);
+// };
 
-main();
+// main();
