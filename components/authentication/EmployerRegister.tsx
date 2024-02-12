@@ -6,10 +6,10 @@ import { useState } from "react"
 
 export default function EmployerRegister() {
 
-    const [isFirstFormComplete, setIsFirstFormComplete] = useState(false);
+    const [isToggleForm, setIsToggleForm] = useState(false);
 
-    const handleFirstFormComplete = () => {
-        setIsFirstFormComplete(prev => !prev);
+    const handleToggleForm = () => {
+        setIsToggleForm(prev => !prev);
     }
 
     return (
@@ -18,16 +18,15 @@ export default function EmployerRegister() {
             <Title title='สร้างบัญชีสำหรับ' highlightText='ผู้ว่าจ้าง' highlightColor='#48953D' />
 
             {
-                !isFirstFormComplete ?
-                    <div className="mt-[25px] text-[#64748B] leading-6 text-sm w-full">
-                        <LoginViaGoogle />
-                        <Line />
-                    </div>
-                    :
-                    null
+                !isToggleForm &&
+                <div className="mt-[25px] text-[#64748B] leading-6 text-sm w-full">
+                    <LoginViaGoogle />
+                    <Line />
+                </div>
+
             }
 
-            <RegisterViaEmail handleFirstFormComplete={handleFirstFormComplete} isFirstFormComplete={isFirstFormComplete} />
+            <RegisterViaEmail handleToggleForm={handleToggleForm} isToggleForm={isToggleForm} />
 
         </div>
     )

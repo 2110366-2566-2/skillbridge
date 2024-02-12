@@ -25,6 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="shortcut icon" type="x-icon" href="/icons/logo.svg" />
+      </head>
       <body className={cn(inter.className, ibmPlexSansThaiLooped.className, "h-screen")}>
         <AuthProvider>{children}</AuthProvider>
       </body>

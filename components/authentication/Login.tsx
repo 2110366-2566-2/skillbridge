@@ -1,3 +1,4 @@
+"use client"
 import Title from "./Title"
 import LoginViaGoogle from "./LoginViaGoogle"
 import Line from "./Line"

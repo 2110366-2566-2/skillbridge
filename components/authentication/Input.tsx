@@ -1,3 +1,4 @@
+
 export default function Input({
     name,
     label,
@@ -13,13 +14,27 @@ export default function Input({
     handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
     value: string
 }) {
+
+
+
     return (
-        <div className="w-full mt-[12px]">
+        <div className="w-full mt-[12px] flex flex-col">
             <label htmlFor={label} className="text-sm leading-5 mb-[5px] inline-block">{label}</label>
-            <div className="h-[40px] border border-[#CBD5E1] rounded-md px-[12px] focus-within:ring-2 flex item-center">
-                <input name={name} id={label} type={inputType} placeholder={label} className="h-full text-md outline-none w-full" value={value} onChange={(e) => handleChange(e)} />
-            </div>
-            <p className="mt-[5px] text-sm leading-5 text-[#64748B] hidden">{warning}</p>
+
+            <input
+                name={name}
+                id={name}
+                type={inputType}
+                placeholder={label}
+                className="text-md h-[40px] border border-[#CBD5E1] rounded-md px-[12px] focus:ring-2 outline-none"
+                style={{ borderColor: warning ? "#f87171" : "#CBD5E1", boxShadow: warning ? "0px 0px 2px 2px rgba(248,113,113,1)" : "none" }}
+                value={value}
+                onChange={(e) => handleChange(e)} />
+
+            {
+                warning && <p id={`${name}Error`} className="mt-[5px] text-sm leading-5 text-[#EA4335]">{warning}</p>
+            }
+
         </div>
     )
 }
