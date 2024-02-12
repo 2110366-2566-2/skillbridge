@@ -108,3 +108,15 @@ const updateJob = async (formData: FormData) => {
 };
 
 export default updateJob;
+
+const main = async () => {
+  const data = {
+    jobId: "bdf21ad2-c998-4e38-85af-e888df8c6759",
+    title: "Test update work",
+    startDate: new Date().toISOString(),
+  } as unknown as FormData;
+  const result = await updateJob(data);
+  console.log(result);
+};
+
+main();
