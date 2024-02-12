@@ -3,9 +3,6 @@ import PasswordInput from "./PasswordInput"
 import Link from "next/link"
 import ConfirmPasswordInput from "./ConfirmPasswordInput"
 import { useState } from "react"
-import { registerWithCredentials } from "@/actions/register"
-import { useRouter } from "next/navigation"
-
 
 type Props = {
   handleToggleForm: () => void
@@ -31,13 +28,7 @@ type Form = {
 
 export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Props) {
 
-  const router = useRouter();
-
-  const handleNextPageSubmit = () => {
-    handleToggleForm()
-  }
-
-  const [data, setData] = useState({
+  const [data, setForm] = useState<Form>({
     email: "",
     password: "",
     cPassword: "",
@@ -129,15 +120,15 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setData({
+    setForm({
       ...data,
       [event.target.name]: event.target.value,
     })
+    // console.log(data)
   }
 
-  const handleSubmit = async () => {
-    const res = await registerWithCredentials(data)
-    router.push("/login")
+  const handleSubmit = (formData: FormData) => {
+    // console.log(data)
   }
 
   return (
@@ -195,7 +186,7 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
             value={data.lname}
           />
 
-          <div className="mt-[20px]">
+          <div className="mt-[30px] w-full relative">
             {/* Link ไป ข้อตกลงและเงื่อนไขการใช้งานของ SkillBridge และ นโยบายคุ้มครองความเป็นส่วนตัว*/}
             <input type="checkbox" name="checkOne"
               className="absolute cursor-pointer left-0 top-0 border
@@ -207,24 +198,24 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
               required />
             <label className="block text-[9.5px] pl-[20px]">
               ฉันได้อ่านและยอมรับ
-              <Link href={"/"} className="text-[#326FE2]">
-                ข้อตกลงและเงื่อนไขการใช้งานของ SkillBridge
-              </Link>
-              <input
-                type="checkbox"
-                name=""
-                className="absolute cursor-pointer left-0
-                                    checked:bg-[#334155] hover:bg-[#a3a3a3]
-                                    w-[14px] h-[14px] rounded-sm focus:outline-none
-                                    hover:ring hover:"
-              />
+              <Link href={'/'} className="text-[#326FE2] hover:underline hover:underline-offset">ข้อตกลงและเงื่อนไขการใช้งานของ SkillBridge</Link>
             </label>
-
-            <label className="block relative text-[9.5px] pl-[20px] ">
+          </div>
+          <div className="mt-[10px] w-full relative">
+            <input type="checkbox" name="checkTwo"
+              className="absolute cursor-pointer left-0 top-0 border
+                                    border-[#848484]
+                                    accent-[#334155]
+                                    cursor-pointer
+                                    rounded-sm
+                                    "
+              required />
+            <label className="block text-[9.5px] pl-[20px]">
               ฉันได้อ่านและยอมรับ
               <Link href={'/'} className="text-[#326FE2] hover:underline hover:underline-offset">นโยบายคุ้มครองความเป็นส่วนตัว</Link>
             </label>
           </div>
+
 
           <button
             id="submit"
