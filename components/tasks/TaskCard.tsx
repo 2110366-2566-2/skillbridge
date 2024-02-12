@@ -34,6 +34,7 @@ const TaskCard = ({
           </div>
         </div>
 
+        <div className={`${isPending ? "hidden": ""} h-[34.91px] w-[34.91px] p-2 mx-2`}></div>
         <button
           className={`${isPending ? "" : "hidden"} bg-slate-50 border-2 border-solid rounded-full hover:shadow-md flex align-center w-fit h-fit p-2 mx-2`}
         >

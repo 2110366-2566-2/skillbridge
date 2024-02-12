@@ -158,8 +158,8 @@ const TasksPanel = () => {
         {/* Overlay for sidebar for sorting for mobile */}
         {isOpeningSideBar ? (
           <>
-            <div className="z-10 bg-neutral-800 opacity-60 fixed top-0 right-0 left-0 bottom-0 md:hidden"></div>
-            <aside className="fixed font-ibm z-20 bg-slate-100 text-slate-900 top-0 left-0 w-2/3 h-screen flex flex-col items-center p-7 justify-between md:hidden">
+            <div className="z-10 bg-neutral-800 opacity-60 fixed top-0 right-0 left-0 bottom-0 lg:hidden"></div>
+            <aside className="fixed font-ibm z-20 bg-slate-100 text-slate-900 top-0 left-0 w-2/3 h-screen flex flex-col items-center p-7 justify-between lg:hidden">
               <div className="flex flex-col w-full h-full">
                 <div className="flex flex-col gap-8 justify-start w-full">
                   <div className="flex flex-row justify-between">
