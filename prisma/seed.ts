@@ -124,6 +124,7 @@ async function main() {
         },
       },
       jobs: {
+      jobs: {
         create: [
           {
             title: "เขียนเว็บให้ SoeiCorp.",
@@ -140,6 +141,7 @@ async function main() {
             description: "รวยทางลัดกับธุรกิจสีเทา",
             budget: 500,
             numWorker: 10,
+            startDate: new Date("2023-09-21"),
             startDate: new Date("2023-09-21"),
             estimateStartDate: new Date("2023-09-15"),
             estimateEndDate: new Date("2024-03-31"),
@@ -256,6 +258,7 @@ generate insights, และ provide data-driven recommendations. \n \
         },
       },
       jobs: {
+      jobs: {
         create: [
           {
             title: "ทำโมเดล AI Auto Tune",
@@ -263,6 +266,8 @@ generate insights, และ provide data-driven recommendations. \n \
             description: "เคยยืนรอเธอบนบีทีเอส",
             budget: 3000,
             numWorker: 5,
+            startDate: new Date("2022-08-01"),
+            endDate: new Date("2022-11-07"),
             startDate: new Date("2022-08-01"),
             endDate: new Date("2022-11-07"),
             estimateStartDate: new Date("2022-08-01"),
@@ -516,6 +521,7 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
           email: "6432345221@student.chula.ac.th",
         },
       },
+      jobs: {
       jobs: {
         create: [
           {
