@@ -3,7 +3,12 @@ import React, { ChangeEvent, ChangeEventHandler } from "react";
 type Props = {
   label: string;
   value: any;
-  options: any[];
+  jobTags: {
+    id: string;
+    title: string | null;
+    createdAt: Date;
+    updatedAt: Date;
+  }[];
   name: string;
   title: string;
   placeholder: string;
@@ -15,7 +20,7 @@ export default function SelectInput(props: Props) {
   const {
     label,
     value,
-    options,
+    jobTags,
     name,
     title,
     placeholder,
@@ -39,9 +44,9 @@ export default function SelectInput(props: Props) {
         <option className="text-slate-400" value="" disabled>
           {placeholder}
         </option>
-        {options.map((element: any) => (
-          <option key={element} value={element}>
-            {element}
+        {jobTags.map((jobTag: any) => (
+          <option key={jobTag.id} value={jobTag.id}>
+            {jobTag.title}
           </option>
         ))}
       </select>

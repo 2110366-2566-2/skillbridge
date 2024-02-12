@@ -1,44 +1,40 @@
 "use server";
+import { parse } from "path";
 import prisma from "../db/prisma";
 import cloudinary from "../lib/bucket";
+import { JobStatus } from "@prisma/client";
 //import {getServerSession} from "next-auth";
 //import {options} from "../api/auth/[...nextaut]/options"
 
-interface FormData {
-  employerId: string;
-  title: string;
-  description: string;
-  budget: number;
-  numWorker: number;
-  estimateStartDate: Date;
-  estimateEndDate: Date;
-  jobTagId: string;
-  files?: File;
-}
-
 const createJob = async (formData: FormData) => {
   try {
-    const employerId = formData.employerId;
-    const title = formData.title;
-    const status = "NOT_STARTED"; //ไม่น่าใช่ input จาก user เราคง้องกำหนดเอง
-    const description = formData.description;
-    const estimateStartDate = formData.estimateStartDate as Date;
-    const estimateEndDate = formData.estimateEndDate as Date;
-    const budget = formData.budget;
-    const jobTagId = formData.jobTagId;
-    const numWorker = formData.numWorker;
-    const files = formData.files as File;
+    const employerId = formData.get("employerId") as string;
+    const title = formData.get("title")  as string;
+    const description = formData.get("description")  as string;
+    const estimateStartDate = formData.get("estimateStartDate") as string;
+    const parsedStartDate = new Date(estimateStartDate);
+    const estimateEndDate = formData.get("estimateEndDate") as string;
+    const parsedEndDate = new Date(estimateEndDate);
+    const budget = parseInt(formData.get("budget") as string, 10);
+    const jobTagId = formData.get("jobTagId") as string;
+    const numWorker = parseInt(formData.get("numWorker") as string, 10);
+    const files = formData.getAll("files[]") as File[];
+    const status = "NOT_STARTED"  as JobStatus;
+
+    // Test log
     console.log(
+      employerId,
       title,
       status,
       description,
-      estimateStartDate,
-      estimateEndDate,
+      parsedStartDate,
+      parsedEndDate,
       budget,
       jobTagId,
       numWorker,
       files
     );
+
     //const session = await getServerSession(options);
     //const userId = session?.userId
     // const employer = await prisma.employer.findFirst({
@@ -53,36 +49,36 @@ const createJob = async (formData: FormData) => {
     //   }
     // }
 
-    if (files?.size >= 1024 * 1024 * 10 || files?.type != "application/pdf") {
-      throw {
-        message: "Invalid file format or file is too large.",
-      };
-    }
-    const arrayBuffer = await files?.arrayBuffer();
-    const buffer = new Uint8Array(arrayBuffer);
+    // if (files?.size >= 1024 * 1024 * 10 || files?.type != "application/pdf") {
+    //   throw {
+    //     message: "Invalid file format or file is too large.",
+    //   };
+    // }
+    // const arrayBuffer = await files?.arrayBuffer();
+    // const buffer = new Uint8Array(arrayBuffer);
 
-    const result = await new Promise((resolve, reject) => {
-      cloudinary.uploader
-        .upload_stream(
-          { folder: "test", format: "pdf" },
-          function (error, result) {
-            if (error) {
-              reject(error);
-              return;
-            }
-            resolve(result);
-          }
-        )
-        .end(buffer);
-    });
+    // const result = await new Promise((resolve, reject) => {
+    //   cloudinary.uploader
+    //     .upload_stream(
+    //       { folder: "test", format: "pdf" },
+    //       function (error, result) {
+    //         if (error) {
+    //           reject(error);
+    //           return;
+    //         }
+    //         resolve(result);
+    //       }
+    //     )
+    //     .end(buffer);
+    // });
     await prisma.job.create({
       data: {
         employerId: employerId,
         title: title,
         status: status,
         description: description,
-        estimateStartDate: estimateStartDate,
-        estimateEndDate: estimateEndDate,
+        estimateStartDate: parsedStartDate,
+        estimateEndDate: parsedEndDate,
         budget: budget,
         numWorker: numWorker,
         jobTagId: jobTagId,

@@ -2,6 +2,7 @@
 
 // import { useRouter } from "next/navigation";
 import React, { ChangeEvent, FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
 import Input from "../input/input/Input";
@@ -11,34 +12,6 @@ import FilesInput from "../input/fileInput/FileInput";
 import createJob from "@/actions/create_task";
 import deleteJob from "@/actions/delete_task";
 
-const jobList = [
-  "กราฟิกดีไซน์",
-  "สถาปัตย์",
-  "ตกแต่งภายใน",
-  "ศิลปะและภาพวาด",
-  "ออกแบบ UX UI",
-  "พัฒนาแอพฯมือถือ",
-  "พัฒนาเว็ปไซต์",
-  "ไอทีโซลูชั่น",
-  "งาน IOT",
-  "อินฟลูเอนเซอร์",
-  "สื่อออนไลน์",
-  "แอดมินออนไลน์",
-  "ไลฟ์สไตล์",
-  "พัฒนาตัวเอง",
-  "ธุรกิจและการเงิน",
-  "รูปภาพและวีดีโอ",
-  "แต่งหน้า",
-  "สไตลิสต์",
-  "นักแสดง",
-  "นักพากย์เสียง",
-  "นักร้อง / นักดนตรี",
-  "ซาวด์เอ็นจิเนียร์",
-  "งานเขียน",
-  "ภาษา",
-  "อื่น ๆ",
-];
-
 interface FormData {
   title: string;
   description: string;
@@ -46,8 +19,7 @@ interface FormData {
   numWorker: string;
   estimateStartDate: string;
   estimateEndDate: string;
-  jobTag: string;
-  files: FileList | null;
+  jobTagId: string;
 }
 
 interface FormErrors {
@@ -56,16 +28,22 @@ interface FormErrors {
   numWorker?: string;
   estimateStartDate?: string;
   estimateEndDate?: string;
-  jobTag?: string;
+  jobTagId?: string;
 }
 
 interface Props {
+  jobTags: {
+    id: string;
+    title: string | null;
+    createdAt: Date;
+    updatedAt: Date;
+  }[];
   isUpdate: boolean;
 }
 
 export default function JobForm(props: Props) {
-  // const router = useRouter();
-  const { isUpdate } = props;
+  const router = useRouter();
+  const { isUpdate, jobTags } = props;
   const [files, setFiles] = useState<FileList | null>(null);
   const [formData, setFormData] = useState<FormData>({
     title: "",
@@ -74,8 +52,7 @@ export default function JobForm(props: Props) {
     numWorker: "",
     estimateStartDate: "",
     estimateEndDate: "",
-    jobTag: "",
-    files: null,
+    jobTagId: "",
   });
 
   const [formErrors, setFormErrors] = useState<FormErrors>({
@@ -84,7 +61,7 @@ export default function JobForm(props: Props) {
     numWorker: "",
     estimateStartDate: "",
     estimateEndDate: "",
-    jobTag: "",
+    jobTagId: "",
   });
 
   const handleChange = (
@@ -95,7 +72,6 @@ export default function JobForm(props: Props) {
       ...prevData,
       [name]: value,
     }));
-    // Clear the error message when the user starts typing
     setFormErrors((prevErrors) => ({
       ...prevErrors,
       [name]: "",
@@ -121,20 +97,32 @@ export default function JobForm(props: Props) {
     if (!formData.estimateEndDate) {
       errors.estimateEndDate = "กรุณากรอกวันที่สิ้นสุดงาน";
     }
-    if (!formData.jobTag) {
-      errors.jobTag = "กรุณาเลือกหมวดหมู่งาน";
+    if (new Date(formData.estimateStartDate) > new Date(formData.estimateEndDate)) {
+      errors.estimateStartDate = "วันที่เริ่มงานต้องมาก่อน";
     }
-
-    // If there are errors, update the state to display warnings
+    if (!formData.jobTagId) {
+      errors.jobTagId = "กรุณาเลือกหมวดหมู่งาน";
+    }
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
     } else {
-      // TODO : send file to test in some test API.
-      // if (files) formData.files = files;
+      let formDataObject = new FormData();
+      formDataObject.append('employerId', "a9337827-e7cf-4ec4-8601-76fb5518eea1"); // TEMPORARY
+      formDataObject.append('title', formData.title);
+      formDataObject.append('description', formData.description);
+      formDataObject.append('budget', formData.budget);
+      formDataObject.append('numWorker', formData.numWorker);
+      formDataObject.append('estimateStartDate', formData.estimateStartDate);
+      formDataObject.append('estimateEndDate', formData.estimateEndDate);
+      formDataObject.append('jobTagId', formData.jobTagId);
+      if (files) {
+        for (let i = 0; i < files.length; i++) {
+          formDataObject.append('files[]', files[i]);
+        }
+      }
       if (!isUpdate) {
-        // Create job action
-        console.log(formData);
-        createJob(formData);
+        const res = createJob(formDataObject);
+        console.log(res);
       } else {
         // Update job action
       }
@@ -213,12 +201,12 @@ export default function JobForm(props: Props) {
 
         <SelectInput
           label="หมวดหมู่งาน"
-          value={formData.jobTag}
-          options={jobList}
-          name="jobTag"
-          title="jobtag"
+          value={formData.jobTagId}
+          jobTags={jobTags}
+          name="jobTagId"
+          title="jobTagId"
           placeholder="เลือกหมวดหมู่ที่ต้องการ"
-          errorMessage={formErrors.jobTag}
+          errorMessage={formErrors.jobTagId}
           onChange={handleChange}
         />
 
@@ -226,7 +214,7 @@ export default function JobForm(props: Props) {
           <div className="flex-grow"></div>
           <div className="flex flex-row gap-2">
             <button
-              // onClick={() => router.back()}
+              onClick={() => router.back()}
               className="border border-slate-300 px-[16px] py-[8px] text-slate-800 text-[14px] rounded-[6px] hover:bg-slate-200 focus:ring-4 focus:outline-none focus:ring-slate-300"
             >
               ยกเลิก

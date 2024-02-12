@@ -6,7 +6,6 @@ const getJobById = async (formData: FormData) => {
   const result = await prisma.job.findFirst({
     where: {
       id: jobId,
-      isDeleted: false,
     },
   });
 
