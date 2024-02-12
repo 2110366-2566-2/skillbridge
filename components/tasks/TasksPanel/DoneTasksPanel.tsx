@@ -75,8 +75,12 @@ const DoneTasksPanel = ({
     priceSortOption,
     applicantsSortOption
   );
-
-  // console.log(getEmployerJobs("a9337827-e7cf-4ec4-8601-76fb5518eea1"));
+  async function foo(){
+    const test = await getEmployerJobs("a9337827-e7cf-4ec4-8601-76fb5518eea1");
+    console.log(test);
+  }
+  foo();
+  
 
   return (
     <main className="flex flex-col">
