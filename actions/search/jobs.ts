@@ -53,7 +53,7 @@ async function getDefaultSearchJobs(): Promise<job[]> {
                 equals: JobStatus.NOT_STARTED
             }
         },
-        take: 15
+        take: 12
     })
     
     jobs.forEach((job) => {
@@ -116,7 +116,7 @@ async function getSearchJobs(query?: string, filter?: jobFilter): Promise<job[]>
                 },
                 ...prismaWhereFromFilter
             },
-            take: 15
+            take: 12
         })
         
         jobs.forEach((job) => {
@@ -185,7 +185,7 @@ async function getSearchJobs(query?: string, filter?: jobFilter): Promise<job[]>
             },
             ...prismaWhereFromFilter
         },
-        take: 15
+        take: 12
     });
     
     jobs.forEach((job) => {
