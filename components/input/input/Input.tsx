@@ -6,7 +6,7 @@ type Props = {
   value: any;
   name: string;
   placeholder: string;
-  errorMessage: string;
+  errorMessage?: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
 };
 
@@ -15,7 +15,9 @@ export default function Input(props: Props) {
     props;
   return (
     <div className="flex flex-col gap-1">
-      <label htmlFor={name} className="text-[14px] font-medium text-slate-900">{label}</label>
+      <label htmlFor={name} className="text-[14px] font-medium text-slate-900">
+        {label}
+      </label>
       <input
         id={name}
         className={

@@ -20,51 +20,62 @@ export default function FilesInput(props: Props) {
   const handleRemoveFile = (fileNameToRemove: string) => {
     if (!files) return;
     const filesArray = Array.from(files);
-    const newFilesArray = filesArray.filter(file => file.name !== fileNameToRemove);
+    const newFilesArray = filesArray.filter(
+      (file) => file.name !== fileNameToRemove,
+    );
     // Create a new FileList from the filtered array
     const newFiles = new DataTransfer();
-    newFilesArray.forEach(file => newFiles.items.add(file));
+    newFilesArray.forEach((file) => newFiles.items.add(file));
     // Set the new files
     setFiles(newFiles.files);
   };
 
   const truncateFileName = (fileName: string, maxLength: number) => {
     if (fileName.length > maxLength) {
-      const fileNameWithoutExtension = fileName.split('.').slice(0, -1).join('.');
-      const truncatedFileName = fileNameWithoutExtension.slice(0, maxLength) + "... ";
-      const fileExtension = fileName.split('.').pop();
+      const fileNameWithoutExtension = fileName
+        .split(".")
+        .slice(0, -1)
+        .join(".");
+      const truncatedFileName =
+        fileNameWithoutExtension.slice(0, maxLength) + "... ";
+      const fileExtension = fileName.split(".").pop();
       return truncatedFileName + "." + fileExtension;
     }
     return fileName;
   };
 
   let currentFiles = null;
-    if(files) {
-        const filesArray = Array.from(files);
-        currentFiles = filesArray.map(file => (
-            <div className="w-full flex justify-between p-2 bg-slate-100 rounded-md" key={file.name}>
-                <div className="flex gap-3 items-center">
-                    <p className="text-[12px] text-slate-500 font-semibold">{truncateFileName(file.name,20)}</p>
-                    <p className="text-[12px] text-slate-400">{(file.size/1024).toFixed(0)} KB</p>
-                </div>
-                <button title="remove-file" onClick={() => handleRemoveFile(file.name)}>
-                    <Image
-                        src={closeDarkIcon}
-                        alt="closeIcon"
-                        width={20}
-                        height={20}
-                    />
-                </button>
-            </div>
-        ))
-    }
-    
+  if (files) {
+    const filesArray = Array.from(files);
+    currentFiles = filesArray.map((file) => (
+      <div
+        className="w-full flex justify-between p-2 bg-slate-100 rounded-md"
+        key={file.name}
+      >
+        <div className="flex gap-3 items-center">
+          <p className="text-[12px] text-slate-500 font-semibold">
+            {truncateFileName(file.name, 20)}
+          </p>
+          <p className="text-[12px] text-slate-400">
+            {(file.size / 1024).toFixed(0)} KB
+          </p>
+        </div>
+        <button title="remove-file" onClick={() => handleRemoveFile(file.name)}>
+          <Image src={closeDarkIcon} alt="closeIcon" width={20} height={20} />
+        </button>
+      </div>
+    ));
+  }
+
   return (
     <div className="flex flex-col gap-1">
-      <label htmlFor="dropzone-file" className="text-[14px] font-medium text-slate-900">{label}</label>
-        <div className="flex flex-col gap-1">
-            {currentFiles}
-        </div>
+      <label
+        htmlFor="dropzone-file"
+        className="text-[14px] font-medium text-slate-900"
+      >
+        {label}
+      </label>
+      <div className="flex flex-col gap-1">{currentFiles}</div>
       <div className="flex items-center justify-center w-full">
         <label
           htmlFor="dropzone-file"
@@ -90,10 +101,8 @@ export default function FilesInput(props: Props) {
               <span className="font-semibold">กดเพื่ออัพโหลดไฟล์ </span>
               หรือวางไฟล์ที่นี่
             </p>
-            <p className="text-[12px] text-slate-400">
-              (ขนาดรวมไม่เกิน 1 MB)
-            </p>
-          </div>    
+            <p className="text-[12px] text-slate-400">(ขนาดรวมไม่เกิน 1 MB)</p>
+          </div>
           <input
             id="dropzone-file"
             type="file"

@@ -4,17 +4,31 @@ import prisma from "@/db/prisma";
 //import {getServerSession} from "next-auth";
 //import {options} from "../api/auth/[...nextaut]/options"
 
-const createJob = async (fromData: FormData) => {
+interface FormData {
+  title: string;
+  description: string;
+  budget: string;
+  numWorker: string;
+  estimateStartDate: string;
+  estimateEndDate: string;
+  jobTag: string;
+  files: FileList | null;
+}
+
+const createJob = async (formData: FormData) => {
   try {
-    const title = fromData.get("title");
-    const status = fromData.get("status");
-    const description = fromData.get("description");
-    const startDate = fromData.get("startDate");
-    const endDate = fromData.get("endDate");
-    const estimateStartDate = fromData.get("estimateStartDate");
-    const estimateEndDate = fromData.get("estimateEndDate");
-    const budget = fromData.get("budget");
-    const numWorker = fromData.get("NumWorker");
+    const title = formData.title;
+    const status = "NOT_STARTED"; //ไม่น่าใช่ input จาก user เราคง้องกำหนดเอง
+    const description = formData.description;
+    const estimateStartDate = formData.estimateStartDate;
+    const estimateEndDate = formData.estimateEndDate;
+    const budget = formData.budget;
+    const jobTag = formData.jobTag;
+    const numWorker = formData.numWorker;
+    const files = formData.files;
+    console.log(title, status, description, estimateStartDate, estimateEndDate, budget, jobTag, numWorker, files);
+    // const startDate = fromData.get("startDate"); --> อันนี้ไม่รู้ว่ามาจากไหนอะ งอง55
+    // const endDate = fromData.get("endDate"); --> อันนี้ไม่รู้ว่ามาจากไหนอะ งอง55 
 
     //const session = await getServerSession(options);
     //const userId = session?.userId
@@ -61,3 +75,5 @@ const createJob = async (fromData: FormData) => {
     };
   }
 };
+
+export default createJob;

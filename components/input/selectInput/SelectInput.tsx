@@ -7,7 +7,7 @@ type Props = {
   name: string;
   title: string;
   placeholder: string;
-  errorMessage: string;
+  errorMessage?: string;
   onChange: ChangeEventHandler<HTMLSelectElement>;
 };
 
@@ -24,7 +24,9 @@ export default function SelectInput(props: Props) {
   } = props;
   return (
     <div className="flex flex-col gap-1">
-      <label htmlFor={name} className="text-[14px] font-medium text-slate-900">{label}</label>
+      <label htmlFor={name} className="text-[14px] font-medium text-slate-900">
+        {label}
+      </label>
       <select
         id={name}
         className="bg-transparent border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:border-slate-500 block w-full p-[5.75px]"

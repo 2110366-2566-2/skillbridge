@@ -1,5 +1,6 @@
 "use client";
 
+// import { useRouter } from "next/navigation";
 import React, { ChangeEvent, FormEvent } from "react";
 import { useState } from "react";
 import Link from "next/link";
@@ -7,6 +8,8 @@ import Input from "../input/input/Input";
 import TextAreaInput from "../input/textAreaInput/TextAreaInput";
 import SelectInput from "../input/selectInput/SelectInput";
 import FilesInput from "../input/fileInput/FileInput";
+import createJob from "@/actions/create_task";
+import deleteJob from "@/actions/delete_task";
 
 const jobList = [
   "กราฟิกดีไซน์",
@@ -39,34 +42,40 @@ const jobList = [
 interface FormData {
   title: string;
   description: string;
-  file: File | null;
   budget: string;
   numWorker: string;
   estimateStartDate: string;
   estimateEndDate: string;
   jobTag: string;
+  files: FileList | null;
 }
 
 interface FormErrors {
-  title: string;
-  budget: string;
-  numWorker: string;
-  estimateStartDate: string;
-  estimateEndDate: string;
-  jobTag: string;
+  title?: string;
+  budget?: string;
+  numWorker?: string;
+  estimateStartDate?: string;
+  estimateEndDate?: string;
+  jobTag?: string;
 }
 
-export default function JobForm() {
+interface Props {
+  isUpdate: boolean;
+}
+
+export default function JobForm(props: Props) {
+  // const router = useRouter();
+  const { isUpdate } = props;
   const [files, setFiles] = useState<FileList | null>(null);
   const [formData, setFormData] = useState<FormData>({
     title: "",
     description: "",
-    file: null,
     budget: "",
     numWorker: "",
     estimateStartDate: "",
     estimateEndDate: "",
     jobTag: "",
+    files: null,
   });
 
   const [formErrors, setFormErrors] = useState<FormErrors>({
@@ -81,8 +90,6 @@ export default function JobForm() {
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
-    console.log(files);
-
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -95,17 +102,10 @@ export default function JobForm() {
     }));
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Validate the form data
-    const errors: FormErrors = {
-      title: "",
-      budget: "",
-      numWorker: "",
-      estimateStartDate: "",
-      estimateEndDate: "",
-      jobTag: "",
-    };
+    const errors: FormErrors = {};
     if (!formData.title) {
       errors.title = "กรุณากรอกชื่องาน";
     }
@@ -130,7 +130,15 @@ export default function JobForm() {
       setFormErrors(errors);
     } else {
       // TODO : send file to test in some test API.
-      console.log(formData);
+      // if (files) formData.files = files;
+      if (!isUpdate) {
+        // Create job action
+        console.log(formData)
+        createJob(formData);
+      } else {
+        // Update job action
+
+      }
     }
   };
 
@@ -218,17 +226,25 @@ export default function JobForm() {
         <div className="flex justify-between">
           <div className="flex-grow"></div>
           <div className="flex flex-row gap-2">
-            <Link
-              href="/jobs"
+            <button
+              // onClick={() => router.back()}
               className="border border-slate-300 px-[16px] py-[8px] text-slate-800 text-[14px] rounded-[6px] hover:bg-slate-200 focus:ring-4 focus:outline-none focus:ring-slate-300"
             >
               ยกเลิก
-            </Link>
+            </button>
+            {isUpdate && (
+              <button
+                type="submit"
+                className="border border-slate-300 px-[16px] py-[8px] text-white text-[14px] rounded-[6px] bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300"
+              >
+                ลบงาน
+              </button>
+            )}
             <button
               type="submit"
               className="border border-slate-300 px-[16px] py-[8px] text-white text-[14px] rounded-[6px] bg-slate-800 hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-slate-300"
             >
-              สร้างงาน
+              {isUpdate ? "ยืนยันการแก้ไข" : "สร้างงาน"}
             </button>
           </div>
         </div>
