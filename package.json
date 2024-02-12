@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -12,14 +12,15 @@
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
+    "@elastic/elasticsearch": "^8.12.1",
+    "@prisma/client": "^5.9.1",
     "clsx": "^2.1.0",
     "next": "14.1.0",
     "prettier": "^3.2.5",
-    "@prisma/client": "^5.9.1",
     "react": "^18",
     "react-dom": "^18",
-    "ts-node": "^10.9.2",
-    "tailwind-merge": "^2.2.1"
+    "tailwind-merge": "^2.2.1",
+    "ts-node": "^10.9.2"
   },
   "devDependencies": {
     "@types/node": "^20.11.16",
