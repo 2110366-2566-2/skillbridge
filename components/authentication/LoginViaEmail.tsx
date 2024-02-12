@@ -62,6 +62,8 @@ export default function LoginViaEmail() {
     const handleValidation = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setErrors(validateForm());
+
+
     }
 
     return (
