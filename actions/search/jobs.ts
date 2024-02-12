@@ -6,11 +6,11 @@ import { match } from 'assert';
 const prisma = new PrismaClient();
 
 const elasticClient = new Client({
-    node: 'https://b426ab52dd164499ada636cb8d8b3af9.us-central1.gcp.cloud.es.io/', // Elasticsearch endpoint
+    node: process.env.ELASTIC_NODE_URL, // Elasticsearch endpoint
     auth: {
         apiKey: { // API key ID and secret
-            id: 'eTxAhY0BhLRr9VLOzDKR',
-            api_key: 'TyOSbYw1RU6uTx81--qp4A',
+            id: process.env.ELASTIC_API_ID ? process.env.ELASTIC_API_ID : "",
+            api_key: process.env.ELASTIC_API_KEY ? process.env.ELASTIC_API_KEY : "",
         }
     }
 })
@@ -239,19 +239,19 @@ function getPrismaWhereFromJobFilter(filter: jobFilter) {
     return prismaWhereFilter;
 }
 
-/*
+
 async function main() {
     const filter: jobFilter = {
         lowestBudget: 1000+1,
         highestBudget: 9999
     };
 
-    const a = await getSearchJobs(undefined, undefined);
+    const a = await getSearchJobs("เขียนโปรแกรม");
     console.log(a);
 }
 
 main();
-*/
+
 
 
 export { getDefaultSearchJobs, getSearchJobs };
