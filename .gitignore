@@ -37,3 +37,4 @@ yarn-error.log*
 next-env.d.ts
 
 /app/test
+/actions/test_file.ts

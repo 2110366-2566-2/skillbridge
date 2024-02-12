@@ -1,6 +1,6 @@
 "use server";
 import prisma from "../db/prisma";
-
+import cloudinary from "../lib/bucket";
 //import {getServerSession} from "next-auth";
 //import {options} from "../api/auth/[...nextaut]/options"
 
@@ -13,7 +13,7 @@ interface FormData {
   estimateStartDate: Date;
   estimateEndDate: Date;
   jobTagId: string;
-  files: null;
+  files?: File;
 }
 
 const createJob = async (formData: FormData) => {
@@ -27,7 +27,7 @@ const createJob = async (formData: FormData) => {
     const budget = formData.budget;
     const jobTagId = formData.jobTagId;
     const numWorker = formData.numWorker;
-    // const files = formData.files;
+    const files = formData.files as File;
     console.log(
       title,
       status,
@@ -36,12 +36,9 @@ const createJob = async (formData: FormData) => {
       estimateEndDate,
       budget,
       jobTagId,
-      numWorker
-      // files
+      numWorker,
+      files
     );
-    // const startDate = fromData.get("startDate"); --> อันนี้ไม่รู้ว่ามาจากไหนอะ งอง55
-    // const endDate = fromData.get("endDate"); --> อันนี้ไม่รู้ว่ามาจากไหนอะ งอง55
-
     //const session = await getServerSession(options);
     //const userId = session?.userId
     // const employer = await prisma.employer.findFirst({
@@ -55,19 +52,29 @@ const createJob = async (formData: FormData) => {
     //     status: 401
     //   }
     // }
-    // let job = {
-    //   employerId: userId,
-    //   title: title,
-    //   status: status,
-    //   description: description,
-    //   startDate: startDate,
-    //   endDate: endDate,
-    //   estimateStartDate: estimateStartDate,
-    //   estimateEndDate: estimateEndDate,
-    //   budget: budget,
-    //   numWorker: numWorker,
-    //   jobTagId: jobTagId,
-    // };
+
+    if (files?.size >= 1024 * 1024 * 10 || files?.type != "application/pdf") {
+      throw {
+        message: "Invalid file format or file is too large.",
+      };
+    }
+    const arrayBuffer = await files?.arrayBuffer();
+    const buffer = new Uint8Array(arrayBuffer);
+
+    const result = await new Promise((resolve, reject) => {
+      cloudinary.uploader
+        .upload_stream(
+          { folder: "test", format: "pdf" },
+          function (error, result) {
+            if (error) {
+              reject(error);
+              return;
+            }
+            resolve(result);
+          }
+        )
+        .end(buffer);
+    });
     await prisma.job.create({
       data: {
         employerId: employerId,
