@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PendingTasksPanel from "./PendingTasksPanel";
 import DoneTasksPanel from "./DoneTasksPanel";
 import Link from "next/link";
 import { CloseOutlined, SortAscendingOutlined } from "@ant-design/icons";
+import TaskCardType from "../Types/TaskCardType";
+import { getEmployerJobs } from "@/actions/lookup/employee/jobs";
 
 type Props = {};
 
@@ -15,6 +17,9 @@ const TasksPanel = () => {
   const [priceSortOption, setPriceSortOption] = useState("-");
   const [applicantsSortOption, setApplicantsSortOption] = useState("-");
   const [isOpeningSideBar, setIsOpeningSideBar] = useState(false);
+  
+  
+    // {name: task.title, budget: task.budget, description: task.description, category: task.jobTags, applicants: task.acceptNum, maxApplicants: task.maxAcceptNum, startDate: task.startDate, endDate: task.endDate, isPending: task.jobStatus === "NOT_STARTED"}
 
   return (
     <>
@@ -70,32 +75,37 @@ const TasksPanel = () => {
       <div className="lg:flex lg:flex-row lg:justify-between gap-2">
         {/* PendingTasksPanel and DoneTasksPanel */}
         {isPending ? (
-          <PendingTasksPanel
-            startDateSortOption={startDateSortOption}
-            endDateSortOption={endDateSortOption}
-            priceSortOption={priceSortOption}
-            applicantsSortOption={applicantsSortOption}
-          ></PendingTasksPanel>
+          <DoneTasksPanel
+          startDateSortOption={startDateSortOption}
+          endDateSortOption={endDateSortOption}
+          priceSortOption={priceSortOption}
+          applicantsSortOption={applicantsSortOption}
+          data={[]}
+          isPending={isPending}
+        ></DoneTasksPanel>
         ) : (
           <DoneTasksPanel
             startDateSortOption={startDateSortOption}
             endDateSortOption={endDateSortOption}
             priceSortOption={priceSortOption}
             applicantsSortOption={applicantsSortOption}
+            data={[]}
+            isPending={isPending}
           ></DoneTasksPanel>
         )}
 
         {/* Sidebar for sorting for laptop */}
-        <aside className="hidden lg:flex lg:flex-col bg-slate-100 rounded-sm pt-7 pb-2 px-4 w-[200px] h-fit">
+        <aside className="hidden lg:flex lg:flex-col bg-slate-50 rounded-sm pt-7 pb-2 px-4 w-[200px] h-fit shadow-xl">
           <div className="text-2xl font-semibold">จัดเรียง</div>
-          <div className="text-lg font-semibold mt-4 mb-2">ช่วงเวลา</div>
+          <div className="text-lg font-semibold mt-4 mb-2 text-slate-800">ช่วงเวลา</div>
           <div className="flex flex-col gap-1 mb-2">
-            <p>วันที่เริ่มต้น</p>
+            <p className="font-medium text-[16px] text-slate-800 mb-1">วันที่เริ่มต้น</p>
             <select
               value={startDateSortOption}
               onChange={(e) => {
                 setStartDateSortOption(e.target.value);
               }}
+              className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 w-full p-2"
             >
               <option value="">-</option>
               <option value="asc">น้อยไปมาก</option>
@@ -103,52 +113,56 @@ const TasksPanel = () => {
             </select>
           </div>
           <div className="flex flex-col gap-1">
-            <p>วันที่สิ้นสุด</p>
+            <p className="font-medium text-[16px] text-slate-800 mb-1">วันที่สิ้นสุด</p>
             <select
               value={endDateSortOption}
               onChange={(e) => {
                 setEndDateSortOption(e.target.value);
               }}
+              className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 w-full p-2"
             >
               <option value="">-</option>
               <option value="asc">น้อยไปมาก</option>
               <option value="desc">มากไปน้อย</option>
             </select>
           </div>
-          <div className="text-lg font-semibold mt-4 mb-2">ราคา</div>
+          <div className="text-lg font-semibold mt-4 mb-2 text-slate-800">ราคา</div>
           <div className="flex flex-col gap-1 mb-2">
             <select
               value={priceSortOption}
               onChange={(e) => {
                 setPriceSortOption(e.target.value);
               }}
+              className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 w-full p-2"
             >
               <option value="">-</option>
               <option value="asc">น้อยไปมาก</option>
               <option value="desc">มากไปน้อย</option>
             </select>
           </div>
-          <div className="text-lg font-semibold mt-4 mb-2">จำนวนผู้สมัคร</div>
+          <div className="text-lg font-semibold mt-4 mb-2 text-slate-800">จำนวนผู้สมัคร</div>
           <div className="flex flex-col gap-1 mb-2">
             <select
               value={applicantsSortOption}
               onChange={(e) => {
                 setApplicantsSortOption(e.target.value);
               }}
+              className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 w-full p-2"
             >
               <option value="">-</option>
               <option value="asc">น้อยไปมาก</option>
               <option value="desc">มากไปน้อย</option>
             </select>
           </div>
-          <div className="flex justify-end mt-2">
-            <button
+          <div className="mt-2">
+          <button
               onClick={() => {
                 setStartDateSortOption("");
                 setEndDateSortOption("");
                 setPriceSortOption("");
                 setApplicantsSortOption("");
               }}
+              className="w-full min-h-[40px] text-slate-700 text-[16px] rounded-md hover:bg-slate-200 focus:ring-2 focus:outline-none focus:ring-slate-300"
             >
               ล้างตัวเลือก
             </button>
@@ -159,11 +173,11 @@ const TasksPanel = () => {
         {isOpeningSideBar ? (
           <>
             <div className="z-10 bg-neutral-800 opacity-60 fixed top-0 right-0 left-0 bottom-0 lg:hidden"></div>
-            <aside className="fixed font-ibm z-20 bg-slate-100 text-slate-900 top-0 left-0 w-2/3 h-screen flex flex-col items-center p-7 justify-between lg:hidden">
-              <div className="flex flex-col w-full h-full">
+            <aside className="fixed font-ibm z-20 bg-slate-50 text-slate-900 top-0 left-0 w-2/3 h-screen flex flex-col items-center p-7 justify-between lg:hidden">
+
                 <div className="flex flex-col gap-8 justify-start w-full">
                   <div className="flex flex-row justify-between">
-                    <div className="text-3xl font-semibold">จัดเรียง</div>
+                    <div className="text-3xl font-bold text-slate-800 mb-6">จัดเรียง</div>
                     <CloseOutlined
                       onClick={() => {
                         setIsOpeningSideBar(false);
@@ -171,28 +185,30 @@ const TasksPanel = () => {
                     />
                   </div>
 
-                  <div className="text-xl font-semibold mt-4">ช่วงเวลา</div>
-                  <div className="flex flex-row justify-between gap-8">
-                    <div className="flex flex-col gap-1 mb-2 w-full">
-                      <p>วันที่เริ่มต้น</p>
+                  <div className="text-xl font-bold text-slate-800 mt-2">ช่วงเวลา</div>
+                  <div className="flex flex-row justify-between gap-2">
+                    <div className="flex flex-col w-full">
+                      <p className="font-medium text-[16px] text-slate-800 mb-1">วันที่เริ่มต้น</p>
                       <select
                         value={startDateSortOption}
                         onChange={(e) => {
                           setStartDateSortOption(e.target.value);
                         }}
+                        className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 w-full p-2"
                       >
                         <option value="">-</option>
                         <option value="asc">น้อยไปมาก</option>
                         <option value="desc">มากไปน้อย</option>
                       </select>
                     </div>
-                    <div className="flex flex-col gap-1 w-full">
-                      <p>วันที่สิ้นสุด</p>
+                    <div className="flex flex-col w-full">
+                      <p className="font-medium text-[16px] text-slate-800 mb-1">วันที่สิ้นสุด</p>
                       <select
                         value={endDateSortOption}
                         onChange={(e) => {
                           setEndDateSortOption(e.target.value);
                         }}
+                        className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 w-full p-2"
                       >
                         <option value="">-</option>
                         <option value="asc">น้อยไปมาก</option>
@@ -201,20 +217,21 @@ const TasksPanel = () => {
                     </div>
                   </div>
 
-                  <div className="text-lg font-semibold mt-4">ราคา</div>
-                  <div className="flex flex-col gap-1 mb-2">
+                  <div className="text-xl font-bold text-slate-800 mt-2">ราคา</div>
+                  <div className="flex flex-col gap-2 mb-2">
                     <select
                       value={priceSortOption}
                       onChange={(e) => {
                         setPriceSortOption(e.target.value);
                       }}
+                      className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 w-full p-2"
                     >
                       <option value="">-</option>
                       <option value="asc">น้อยไปมาก</option>
                       <option value="desc">มากไปน้อย</option>
                     </select>
                   </div>
-                  <div className="text-lg font-semibold mt-4">
+                  <div className="text-xl font-bold text-slate-800 mt-2">
                     จำนวนผู้สมัคร
                   </div>
                   <div className="flex flex-col gap-1 mb-2">
@@ -223,6 +240,7 @@ const TasksPanel = () => {
                       onChange={(e) => {
                         setApplicantsSortOption(e.target.value);
                       }}
+                      className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 w-full p-2"
                     >
                       <option value="">-</option>
                       <option value="asc">น้อยไปมาก</option>
@@ -230,7 +248,7 @@ const TasksPanel = () => {
                     </select>
                   </div>
                 </div>
-                <div className="flex flex-row justify-end gap-4 mt-10">
+                <div className="flex flex-row justify-between gap-2 w-full">
                   <button
                     onClick={() => {
                       setStartDateSortOption("");
@@ -238,11 +256,12 @@ const TasksPanel = () => {
                       setPriceSortOption("");
                       setApplicantsSortOption("");
                     }}
+                    className="w-1/2 min-h-[40px] text-slate-700 text-[16px] rounded-md hover:bg-slate-200 focus:ring-2 focus:outline-none focus:ring-slate-300"
                   >
                     ล้างตัวเลือก
                   </button>
                   <button
-                    className="bg-slate-700 text-slate-50 px-10 py-2 rounded-md"
+                    className="w-1/2 min-h-[40px] text-white text-[16px] rounded-md bg-slate-700 hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-slate-300"
                     onClick={() => {
                       setIsOpeningSideBar(false);
                     }}
@@ -250,7 +269,6 @@ const TasksPanel = () => {
                     จัดเรียง
                   </button>
                 </div>
-              </div>
             </aside>
           </>
         ) : (

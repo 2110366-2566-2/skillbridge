@@ -7,6 +7,7 @@ type TaskCardType = {
     maxApplicants: Number;
     startDate: String;
     endDate: String;
+    isPending: Boolean;
   };
 
   export default TaskCardType;
