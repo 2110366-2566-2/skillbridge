@@ -55,16 +55,16 @@ async function getDefaultSearchJobs(): Promise<job[]> {
         },
         take: 12
     })
-    
+
     jobs.forEach((job) => {
         const showJob: job = {
             id: job.id,
             title: job.title,
             startDate: job.estimateStartDate.toLocaleDateString('en-GB'),
             endDate: job.estimateEndDate.toLocaleDateString('en-GB'),
-            jobTags: job.jobTag.title, 
+            jobTags: job.jobTag.title,
             description: job.description,
-            acceptNum: job.applications.filter(app => app.status==ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
+            acceptNum: job.applications.filter(app => app.status == ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
             maxAcceptNum: job.numWorker,
             budget: job.budget
         };
@@ -118,16 +118,16 @@ async function getSearchJobs(query?: string, filter?: jobFilter): Promise<job[]>
             },
             take: 12
         })
-        
+
         jobs.forEach((job) => {
             const showJob: job = {
                 id: job.id,
                 title: job.title,
                 startDate: job.estimateStartDate.toLocaleDateString('en-GB'),
                 endDate: job.estimateEndDate.toLocaleDateString('en-GB'),
-                jobTags: job.jobTag.title, 
+                jobTags: job.jobTag.title,
                 description: job.description,
-                acceptNum: job.applications.filter(app => app.status==ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
+                acceptNum: job.applications.filter(app => app.status == ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
                 maxAcceptNum: job.numWorker,
                 budget: job.budget
             };
@@ -145,15 +145,15 @@ async function getSearchJobs(query?: string, filter?: jobFilter): Promise<job[]>
         return output;
     }
 
-    /* STEP 1 */ 
+    /* STEP 1 */
     const res = await elasticClient.search<elasticJob>({
         index: "job_1",
         body: {
             "query": {
                 match: {
                     title: {
-                      query: query,
-                      fuzziness: "AUTO"
+                        query: query,
+                        fuzziness: "AUTO"
                     }
                 }
             }
@@ -187,16 +187,16 @@ async function getSearchJobs(query?: string, filter?: jobFilter): Promise<job[]>
         },
         take: 12
     });
-    
+
     jobs.forEach((job) => {
         const showJob: job = {
             id: job.id,
             title: job.title,
             startDate: job.estimateStartDate.toLocaleDateString('en-GB'),
             endDate: job.estimateEndDate.toLocaleDateString('en-GB'),
-            jobTags: job.jobTag.title, 
+            jobTags: job.jobTag.title,
             description: job.description,
-            acceptNum: job.applications.filter(app => app.status==ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
+            acceptNum: job.applications.filter(app => app.status == ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
             maxAcceptNum: job.numWorker,
             budget: job.budget
         };
@@ -219,19 +219,19 @@ function getPrismaWhereFromJobFilter(filter: jobFilter) {
 
     if (filter == null) return;
 
-    if (filter.startDate != null) 
+    if (filter.startDate != null)
         prismaWhereFilter.estimateStartDate = { gte: filter.startDate };
 
-    if (filter.endDate != null) 
+    if (filter.endDate != null)
         prismaWhereFilter.estimateEndDate = { lte: filter.endDate };
 
-    if (filter.lowestBudget != null) 
+    if (filter.lowestBudget != null)
         prismaWhereFilter.budget = { gte: filter.lowestBudget };
-    
-    if (filter.highestBudget != null) 
+
+    if (filter.highestBudget != null)
         if (prismaWhereFilter.budget == null) prismaWhereFilter.budget = {};
-        prismaWhereFilter.budget.lte = filter.highestBudget;
-    
+    prismaWhereFilter.budget.lte = filter.highestBudget;
+
     if (filter.jobTag != null) {
         prismaWhereFilter.jobTag = { equals: filter.jobTag };
     }
@@ -242,7 +242,7 @@ function getPrismaWhereFromJobFilter(filter: jobFilter) {
 
 async function main() {
     const filter: jobFilter = {
-        lowestBudget: 1000+1,
+        lowestBudget: 1000 + 1,
         highestBudget: 9999
     };
 

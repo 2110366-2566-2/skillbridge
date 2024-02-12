@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import SearchJobItem from "@/components/searchJob/SearchJobItem";
 import LoadingJobItem from "./LoadingJobItem";
 import SearchNotFound from "./SearchNotFound";
-import { getDefaultSearchJobs, getSearchJobs, job } from "@/actions/search/jobs";
+import { getDefaultSearchJobs, getSearchJobs, job, jobFilter } from "@/actions/search/jobs";
 
 export default function SearchJobItemList() {
     const [jobs, setJobs] = useState<job[]>([]);
@@ -33,9 +33,27 @@ export default function SearchJobItemList() {
         async function fetchJobs() {
             try {
                 setLoading(true);
-                const q = searchParams.get("q");
-                const queryJobs: job[] = q ? await getSearchJobs(q) : await getDefaultSearchJobs();
-                setJobs(queryJobs);
+                let queryJobs: job[]
+                const { q, filter_used } = Object.fromEntries(searchParams);
+                if (filter_used && q) {
+                    const { sd, ed, min, max, tag } = Object.fromEntries(searchParams);
+                    const jobFilter: jobFilter = {
+                        startDate: sd ? new Date(sd) : undefined,
+                        endDate: ed ? new Date(ed) : undefined,
+                        lowestBudget: min ? parseInt(min) : undefined,
+                        highestBudget: max ? parseInt(max) : undefined,
+                        jobTag: tag ? tag : undefined
+                    }
+                    console.log(jobFilter)
+                    queryJobs = await getSearchJobs(q, jobFilter);
+                    setJobs(queryJobs);
+                } else if (!filter_used && q) {
+                    queryJobs = await getSearchJobs(q);
+                    setJobs(queryJobs);
+                } else if (!filter_used && !q) {
+                    queryJobs = await getDefaultSearchJobs();
+                    setJobs(queryJobs);
+                }
             } catch (error) {
                 console.error("Error fetching jobs:", error);
             } finally {

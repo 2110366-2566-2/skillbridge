@@ -51,7 +51,6 @@ export default function SearchBar() {
                         name="job-search"
                         value={searchValue}
                         onChange={handleChange}
-                        required
                     />
                     <button
                         type="submit"

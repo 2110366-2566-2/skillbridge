@@ -1,7 +1,8 @@
 "use client"
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState, useEffect } from "react";
 import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const filterIcon = require("@/public/icons/filter.svg") as string;
 const filterDarkIcon = require("@/public/icons/filterDark.svg") as string;
@@ -43,11 +44,24 @@ export default function Filter() {
         "ภาษา",
         "อื่น ๆ",
     ]
+    const router = useRouter();
+    const [keyword, setKeyword] = useState("")
+    const searchParams = useSearchParams();
+
+    useEffect(() => {
+        async function setSearchKeyword() {
+            try {
+                const q = searchParams.get("q");
+                if (q !== null) setKeyword(q);
+            } catch (error) {
+                console.error("Error set SearchKeyword:", error);
+            }
+        }
+
+        setSearchKeyword();
+    }, [searchParams]);
 
     const toggleOpen = () => {
-        if (isOpen) {
-            clearInput()
-        }
         setIsOpen(prev => !prev)
     }
 
@@ -61,9 +75,20 @@ export default function Filter() {
         })
     }
 
-    const handleSubmit = () => {
-        console.log("SUBMIT!!!")
-        toggleOpen();
+    const handleSubmit = (evt: FormEvent) => {
+        evt.preventDefault();
+        const { startDate, endDate, jobTags, minPrice, maxPrice } = filtered;
+        let filterString: string = "";
+        if (startDate || endDate || jobTags || minPrice || maxPrice) {
+            filterString += "&filter_used=true"
+            if (startDate) filterString += `&sd=${startDate}`
+            if (endDate) filterString += `&ed=${endDate}`
+            if (minPrice) filterString += `&min=${minPrice}`
+            if (maxPrice) filterString += `&max=${maxPrice}`
+            if (jobTags) filterString += `&tag=${jobTags}`
+        }
+        router.push(`/search?q=${keyword}${filterString}`);
+        setIsOpen(prev => !prev)
     }
 
     const handleChange = (evt: ChangeEvent) => {
@@ -112,7 +137,7 @@ export default function Filter() {
 
             {/* Mobile and Desktop Filter Form */}
             {isOpen && (
-                <div>
+                <form onSubmit={handleSubmit}>
                     {/* Shadow Background When Open */}
                     <div className="fixed inset-0 overflow-hidden z-40 bg-neutral-800 opacity-60"></div>
                     {/* Filter Form */}
@@ -230,15 +255,14 @@ export default function Filter() {
                                 ล้าง
                             </button>
                             <button
-                                type="button"
+                                type="submit"
                                 className="w-1/2 min-h-[40px] text-white text-[16px] rounded-md bg-slate-700 hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-slate-300"
-                                onClick={handleSubmit} // TODO: Fix to send filtered date
                             >
                                 ยืนยัน
                             </button>
                         </div>
                     </div>
-                </div>
+                </form>
             )}
         </>
     )
