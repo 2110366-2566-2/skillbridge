@@ -1,6 +1,7 @@
 import React from "react";
 import TaskCard from "../TaskCard";
 import sortArray from "./sortArray";
+import TaskCardType from "../Types/TaskCardType";
 
 type Props = {
   startDateSortOption: String;
@@ -9,24 +10,13 @@ type Props = {
   applicantsSortOption: String;
 };
 
-type mockUpDatumn = {
-  name: String;
-  budget: Number;
-  description: String;
-  category: String;
-  applicants: Number;
-  maxApplicants: Number;
-  startDate: String;
-  endDate: String;
-};
-
 const PendingTasksPanel = ({
   startDateSortOption,
   endDateSortOption,
   priceSortOption,
   applicantsSortOption
 }: Props) => {
-  const mockUpDatumn1: mockUpDatumn = {
+  const mockUpDatumn1: TaskCardType = {
     name: "รับสมัคร TA วิชา Comp Prog",
     budget: 6000,
     description: "รักการสอนเด็ก ๆ, มีความรู้ python numpy",
@@ -37,7 +27,7 @@ const PendingTasksPanel = ({
     endDate: "2022-10-20"
   };
 
-  const mockUpDatumn2: mockUpDatumn = {
+  const mockUpDatumn2: TaskCardType = {
     name: "รับสมัคร TA วิชา Comp Prog",
     budget: 7000,
     description: "รักการสอนเด็ก ๆ, มีความรู้ python numpy",
@@ -48,7 +38,7 @@ const PendingTasksPanel = ({
     endDate: "2023-10-20"
   };
 
-  const mockUpDatumn3: mockUpDatumn = {
+  const mockUpDatumn3: TaskCardType = {
     name: "รับสมัคร TA วิชา Comp Prog",
     budget: 8000,
     description: "รักการสอนเด็ก ๆ, มีความรู้ python numpy",
@@ -59,7 +49,7 @@ const PendingTasksPanel = ({
     endDate: "2024-10-20"
   };
 
-  const mockUpDatumn4: mockUpDatumn = {
+  const mockUpDatumn4: TaskCardType = {
     name: "รับสมัคร TA วิชา Comp Prog",
     budget: 9000,
     description: "รักการสอนเด็ก ๆ, มีความรู้ python numpy",
@@ -70,7 +60,7 @@ const PendingTasksPanel = ({
     endDate: "2025-10-20"
   };
 
-  let mockUpData: Array<mockUpDatumn> = [
+  let mockUpData: Array<TaskCardType> = [
     mockUpDatumn1,
     mockUpDatumn2,
     mockUpDatumn3,
