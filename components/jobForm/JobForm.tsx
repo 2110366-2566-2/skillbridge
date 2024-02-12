@@ -88,7 +88,7 @@ export default function JobForm(props: Props) {
   });
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -133,11 +133,10 @@ export default function JobForm(props: Props) {
       // if (files) formData.files = files;
       if (!isUpdate) {
         // Create job action
-        console.log(formData)
+        console.log(formData);
         createJob(formData);
       } else {
         // Update job action
-
       }
     }
   };

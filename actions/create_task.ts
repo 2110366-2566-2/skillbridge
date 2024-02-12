@@ -1,33 +1,33 @@
 "use server";
+import prisma from "../db/prisma";
 
-import prisma from "@/db/prisma";
-import type { Job, JobStatus, Prisma } from "@prisma/client";
-import { Input } from "postcss";
 //import {getServerSession} from "next-auth";
 //import {options} from "../api/auth/[...nextaut]/options"
 
 interface FormData {
+  employerId: string;
   title: string;
   description: string;
-  budget: string;
-  numWorker: string;
-  estimateStartDate: string;
-  estimateEndDate: string;
-  jobTag: string;
-  files: FileList | null;
+  budget: number;
+  numWorker: number;
+  estimateStartDate: Date;
+  estimateEndDate: Date;
+  jobTagId: string;
+  files: null;
 }
 
 const createJob = async (formData: FormData) => {
   try {
+    const employerId = formData.employerId;
     const title = formData.title;
     const status = "NOT_STARTED"; //ไม่น่าใช่ input จาก user เราคง้องกำหนดเอง
     const description = formData.description;
-    const estimateStartDate = formData.estimateStartDate;
-    const estimateEndDate = formData.estimateEndDate;
+    const estimateStartDate = formData.estimateStartDate as Date;
+    const estimateEndDate = formData.estimateEndDate as Date;
     const budget = formData.budget;
-    const jobTag = formData.jobTag;
+    const jobTagId = formData.jobTagId;
     const numWorker = formData.numWorker;
-    const files = formData.files;
+    // const files = formData.files;
     console.log(
       title,
       status,
@@ -35,9 +35,9 @@ const createJob = async (formData: FormData) => {
       estimateStartDate,
       estimateEndDate,
       budget,
-      jobTag,
-      numWorker,
-      files
+      jobTagId,
+      numWorker
+      // files
     );
     // const startDate = fromData.get("startDate"); --> อันนี้ไม่รู้ว่ามาจากไหนอะ งอง55
     // const endDate = fromData.get("endDate"); --> อันนี้ไม่รู้ว่ามาจากไหนอะ งอง55
@@ -70,12 +70,10 @@ const createJob = async (formData: FormData) => {
     // };
     await prisma.job.create({
       data: {
-        employerId: userId,
+        employerId: employerId,
         title: title,
         status: status,
         description: description,
-        startDate: startDate,
-        endDate: endDate,
         estimateStartDate: estimateStartDate,
         estimateEndDate: estimateEndDate,
         budget: budget,
@@ -98,3 +96,20 @@ const createJob = async (formData: FormData) => {
 };
 
 export default createJob;
+
+const main = async () => {
+  const data = {
+    employerId: "d5a22b3d-49dc-4f55-acfd-88a78d88ada5",
+    title: "Test work",
+    description: "test description",
+    estimateStartDate: new Date().toISOString(),
+    estimateEndDate: new Date().toISOString(),
+    budget: 1000,
+    numWorker: 1,
+    jobTagId: "0ec26b18-7954-460c-895e-6838b72c77cd",
+    files: null,
+  } as unknown as FormData;
+  const result = await createJob(data);
+};
+
+main();
