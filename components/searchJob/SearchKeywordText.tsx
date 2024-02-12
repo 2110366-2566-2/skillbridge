@@ -11,7 +11,7 @@ export default function SearchKeywordText() {
     return (
         <>
             {keyword ? (
-                <div className="text-3xl text-slate-800">ผลการค้นหาสำหรับ "<span className="font-semibold">{keyword}</span>"</div>
+                <div className="text-3xl text-slate-800 h-[44.15px] translate-y-2">ผลการค้นหาสำหรับ "<span className="font-semibold">{keyword}</span>"</div>
             ) : (
                 <div className="font-semibold text-3xl text-slate-800">เริ่มต้นหางานฟรีแลนซ์ง่าย ๆ กับ<span> </span>
                     <span className="inline-block translate-y-2">
