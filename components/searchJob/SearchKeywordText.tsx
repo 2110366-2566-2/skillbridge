@@ -1,12 +1,27 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 
 const logoTextBlack = require("@/public/logos/logo-text-black.svg") as string;
 
 export default function SearchKeywordText() {
-    const [keyword, setKeyword] = useState("") // TODO: Make this work using Redux
+    const [keyword, setKeyword] = useState("")
+    const searchParams = useSearchParams();
+
+    useEffect(() => {
+        async function setSearchKeyword() {
+            try {
+                const q = searchParams.get("q");
+                if (q !== null) setKeyword(q);
+            } catch (error) {
+                console.error("Error set SearchKeyword:", error);
+            }
+        }
+
+        setSearchKeyword();
+    }, [searchParams]);
 
     return (
         <>
