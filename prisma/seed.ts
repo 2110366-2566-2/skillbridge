@@ -7,6 +7,8 @@ interface jobTagList {
 }
 
 async function main() {
+  await prisma.review.deleteMany({});
+  await prisma.application.deleteMany({});
   await prisma.job.deleteMany({});
   await prisma.jobTag.deleteMany({});
   await prisma.employer.deleteMany({});
@@ -124,7 +126,6 @@ async function main() {
         },
       },
       jobs: {
-      jobs: {
         create: [
           {
             title: "เขียนเว็บให้ SoeiCorp.",
@@ -134,7 +135,24 @@ async function main() {
             estimateStartDate: new Date("2024-01-22"),
             estimateEndDate: new Date("2024-02-22"),
             jobTagId: jobTagList["พัฒนาเว็ปไซต์"],
+            applications: {
+              create: [
+                {
+                  userId: s1.userId,
+                  bid: 1200,
+                  documentUrl:
+                    "https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png",
+                },
+                {
+                  userId: s2.userId,
+                  bid: 800,
+                  documentUrl:
+                    "https://global.discourse-cdn.com/standard14/uploads/daml/optimized/2X/0/07c87a4e2885ff7d9674efb218e08a5d354612f6_2_500x500.jpeg",
+                },
+              ],
+            },
           },
+
           {
             title: "Renovate Soei888 Web",
             status: "IN_PROGRESS",
@@ -146,7 +164,26 @@ async function main() {
             estimateStartDate: new Date("2023-09-15"),
             estimateEndDate: new Date("2024-03-31"),
             jobTagId: jobTagList["พัฒนาเว็ปไซต์"],
+            applications: {
+              create: [
+                {
+                  userId: s1.userId,
+                  bid: 600,
+                  documentUrl:
+                    "https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png",
+                  status: "ACCEPTED",
+                },
+                {
+                  userId: s3.userId,
+                  bid: 500,
+                  documentUrl:
+                    "https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH",
+                  status: "ACCEPTED",
+                },
+              ],
+            },
           },
+
           {
             title: "เขียนเว็บให้ SoeiCorp.",
             status: "NOT_STARTED",
@@ -156,10 +193,21 @@ async function main() {
             estimateStartDate: new Date("2024-01-22"),
             estimateEndDate: new Date("2024-02-22"),
             jobTagId: jobTagList["พัฒนาเว็ปไซต์"],
+            applications: {
+              create: [
+                {
+                  userId: s2.userId,
+                  bid: 10000,
+                  documentUrl:
+                    "https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png",
+                },
+              ],
+            },
           },
+
           {
             title: "เขียนบล็อกและ Tech-savvy Blogger",
-            status: "NOT_STARTED",
+            status: "COMPLETED",
             description:
               "Freelance writer ที่มี passion สำหรับเทคโนโลยีที่จะ ผลิต insightful \n \
 และ well-researched blog articles. Topics รวมถึง the latest trends,\n \
@@ -169,10 +217,50 @@ async function main() {
             estimateStartDate: new Date("2024-02-01"),
             estimateEndDate: new Date("2024-04-30"),
             jobTagId: jobTagList["งานเขียน"],
+            applications: {
+              create: [
+                {
+                  userId: s3.userId,
+                  bid: 10000,
+                  documentUrl:
+                    "https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH",
+                  status: "ACCEPTED",
+                },
+                {
+                  userId: s2.userId,
+                  bid: 15000,
+                  documentUrl:
+                    "https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png",
+                  status: "REJECTED",
+                },
+                {
+                  userId: s1.userId,
+                  bid: 8000,
+                  documentUrl:
+                    "https://global.discourse-cdn.com/standard14/uploads/daml/optimized/2X/0/07c87a4e2885ff7d9674efb218e08a5d354612f6_2_500x500.jpeg",
+                  status: "ACCEPTED",
+                },
+              ],
+            },
+            reviews: {
+              create: [
+                {
+                  studentId: s1.userId,
+                  stars: 4,
+                  description: "งานดีมาก! นิสิตทำได้ดีจริง ๆ",
+                },
+                {
+                  studentId: s3.userId,
+                  stars: 5,
+                  description: "Fantastic Nisit, Exceeded Expectations!",
+                },
+              ],
+            },
           },
+
           {
             title: "นักออกแบบกราฟิกและ Graphic Design Guru",
-            status: "NOT_STARTED",
+            status: "COMPLETED",
             description:
               "ต้องการ graphic designer ที่มีความสามารถสูงสำหรับ freelance projects, \n \
 การสร้าง eye-catching visuals สำหรับ marketing materials, social media, \n \
@@ -182,7 +270,45 @@ async function main() {
             estimateStartDate: new Date("2024-01-16"),
             estimateEndDate: new Date("2024-03-31"),
             jobTagId: jobTagList["กราฟิกดีไซน์"],
+            applications: {
+              create: [
+                {
+                  userId: s1.userId,
+                  bid: 6000,
+                  documentUrl:
+                    "https://global.discourse-cdn.com/standard14/uploads/daml/optimized/2X/0/07c87a4e2885ff7d9674efb218e08a5d354612f6_2_500x500.jpeg",
+                  status: "REJECTED",
+                },
+                {
+                  userId: s2.userId,
+                  bid: 5000,
+                  documentUrl:
+                    "https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png",
+                  status: "ACCEPTED",
+                },
+                {
+                  userId: s3.userId,
+                  bid: 5000,
+                  documentUrl:
+                    "https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH",
+                  status: "REJECTED",
+                },
+              ],
+            },
+            reviews: {
+              create: [
+                {
+                  studentId: s2.userId,
+                  stars: 5,
+                  description:
+                    "มีความสุขที่ได้ร่วมงานกับนิสิตที่มีความสามารถสูงในโปรเจกต์ล่าสุดนี้ ประสบการณ์นี้ไม่ได้แค่ดี ๆ แต่ยังเป็นที่ประทับใจจริง ๆ \n \
+บุคคลนี้แสดงให้เห็นถึงความเข้าใจที่ยอดเยี่ยมในงานที่กำลังดำเนินอยู่ การทำงานที่นำมานี้ไม่เพียงแต่มีคุณภาพสูง \n \
+แต่ยังสำเร็จลงมือทำล่วงหน้ากว่ากำหนดเสมอ ความรอบคอบในรายละเอียดและความสามารถในการแก้ไขปัญหาจริง ๆ ทำให้เขาเด่นชัดเจน",
+                },
+              ],
+            },
           },
+
           {
             title: "ผู้ป้อนข้อมูลและ Data Entry Dynamo",
             status: "NOT_STARTED",
@@ -196,7 +322,18 @@ Proficiency ใน Excel หรือ Google Sheets เป็น essential, \n \
             estimateStartDate: new Date("2024-01-11"),
             estimateEndDate: new Date("2024-02-29"),
             jobTagId: jobTagList["ไอทีโซลูชั่น"],
+            applications: {
+              create: [
+                {
+                  userId: s3.userId,
+                  bid: 5000,
+                  documentUrl:
+                    "https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH",
+                },
+              ],
+            },
           },
+
           {
             title:
               "Social Media Content Manager / ผู้จัดการเนื้อหาโซเชียลมีเดีย",
@@ -210,7 +347,44 @@ content creation, strategic planning, and performance analysis.",
             estimateStartDate: new Date("2024-01-22"),
             estimateEndDate: new Date("2024-03-31"),
             jobTagId: jobTagList["สื่อออนไลน์"],
+            applications: {
+              create: [
+                {
+                  userId: s1.userId,
+                  bid: 10000,
+                  documentUrl:
+                    "https://global.discourse-cdn.com/standard14/uploads/daml/optimized/2X/0/07c87a4e2885ff7d9674efb218e08a5d354612f6_2_500x500.jpeg",
+                  status: "ACCEPTED",
+                },
+                {
+                  userId: s3.userId,
+                  bid: 12000,
+                  documentUrl:
+                    "https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH",
+                  status: "ACCEPTED",
+                },
+              ],
+            },
+            reviews: {
+              create: [
+                {
+                  studentId: s1.userId,
+                  stars: 3,
+                  description:
+                    "การแสดงความคิดเป็นระเบียบและความสามารถในการแก้ไขปัญหาของเขาเป็นสิ่งที่ควรชมเชย การทำงานที่ส่งมอบละเมิดตามระเบียบเสมอ\n \
+ความมุ่งมั่นและความสามารถในการจัดการงานที่น่าชื่นชม ทำให้เขาเป็นส่วนหนึ่งที่สำคัญในทีมของเรา",
+                },
+                {
+                  studentId: s3.userId,
+                  stars: 4,
+                  description:
+                    "การทำงานกับนิสิตคนนี้เป็นความสุขแท้ ๆ ความสามารถทางวิชาการของเขาแสดงอย่างชัดเจนในวิธีที่เขาใกล้ชิดกับโปรเจกต์\n \
+สิ่งที่โดดเด่นที่สุดคือการสื่อสารที่ชัดเจนและรับผิดชอบในการทำงาน นี้สร้างสภาพแวดล้อมที่เป็นสมมติและความสามารถในการปรับตัวตามสถานการณ์ที่น่าประทับใจ",
+                },
+              ],
+            },
           },
+
           {
             title: "Data Analyst และผู้วิเคราะห์ข้อมูล",
             status: "NOT_STARTED",
@@ -223,7 +397,24 @@ generate insights, และ provide data-driven recommendations. \n \
             estimateStartDate: new Date("2024-01-16"),
             estimateEndDate: new Date("2024-03-31"),
             jobTagId: jobTagList["ไอทีโซลูชั่น"],
+            applications: {
+              create: [
+                {
+                  userId: s1.userId,
+                  bid: 18000,
+                  documentUrl:
+                    "https://global.discourse-cdn.com/standard14/uploads/daml/optimized/2X/0/07c87a4e2885ff7d9674efb218e08a5d354612f6_2_500x500.jpeg",
+                },
+                {
+                  userId: s2.userId,
+                  bid: 17000,
+                  documentUrl:
+                    "https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png",
+                },
+              ],
+            },
           },
+
           {
             title: "Data Analyst และผู้วิเคราะห์ข้อมูล",
             status: "NOT_STARTED",
@@ -236,6 +427,22 @@ generate insights, และ provide data-driven recommendations. \n \
             estimateStartDate: new Date("2024-01-16"),
             estimateEndDate: new Date("2024-03-31"),
             jobTagId: jobTagList["ไอทีโซลูชั่น"],
+            applications: {
+              create: [
+                {
+                  userId: s2.userId,
+                  bid: 20000,
+                  documentUrl:
+                    "https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png",
+                },
+                {
+                  userId: s3.userId,
+                  bid: 22000,
+                  documentUrl:
+                    "https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH",
+                },
+              ],
+            },
           },
           // Add more job objects as needed
         ],
@@ -257,7 +464,6 @@ generate insights, และ provide data-driven recommendations. \n \
           email: "6437811521@student.chula.ac.th",
         },
       },
-      jobs: {
       jobs: {
         create: [
           {
@@ -521,7 +727,6 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
           email: "6432345221@student.chula.ac.th",
         },
       },
-      jobs: {
       jobs: {
         create: [
           {
