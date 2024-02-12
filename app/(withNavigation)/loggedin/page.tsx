@@ -1,10 +1,10 @@
 "use client"
-import { useSession } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
 import Image from "next/image"
 
 export default function LoggedIn() {
-  const { data: session } = useSession()
-  if (!session)
+  const { data: session, status } = useSession()
+  if (status !== "authenticated")
     return (
       <>
         <div className="">Not Logged in</div>
@@ -18,6 +18,12 @@ export default function LoggedIn() {
         {session.user?.image && (
           <Image src={session.user?.image} alt="profile" height={100} width={100}></Image>
         )}
+        <button
+          onClick={() => {
+            signOut()
+          }}>
+          Log out
+        </button>
       </div>
     </>
   )

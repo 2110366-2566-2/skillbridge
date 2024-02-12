@@ -2,14 +2,14 @@ import NextAuth, { AuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { PrismaClient } from "@prisma/client"
-import { PrismaAdapter } from "@auth/prisma-adapter"
-import { Adapter } from "next-auth/adapters"
 import bcrypt from "bcrypt"
+import { NextApiRequest, NextApiResponse } from "next"
 
 const prisma = new PrismaClient()
+let userType = ""
 
 export const authOptions: AuthOptions = {
-  adapter: PrismaAdapter(prisma) as Adapter,
+  // adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID ?? "",
@@ -34,7 +34,7 @@ export const authOptions: AuthOptions = {
 
         const isMatch = await bcrypt.compare(credentials.password, user.hashedPassword)
         console.log("Match", isMatch)
-        if (!isMatch) return null
+        if (!isMatch) throw new Error("Invalid password")
 
         return user
 
@@ -55,8 +55,20 @@ export const authOptions: AuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    signIn: async ({ account, profile }) => {
-      console.log(account, "profile", profile)
+    async signIn({ account, profile, user, credentials }) {
+      console.log("userType", userType)
+
+      console.log(
+        "signIn",
+        "account",
+        account,
+        "profile",
+        profile,
+        "user",
+        user,
+        "credentials",
+        credentials
+      )
       if (account?.provider === "google" && profile?.email?.endsWith("21@student.chula.ac.th")) {
         console.log("Sign in success")
 
@@ -66,12 +78,24 @@ export const authOptions: AuthOptions = {
 
       return "/"
     },
-    session: async ({ session, user }) => {
+    async jwt({ token, account, profile, user }) {
+      console.log("jwt", "account", account, "profile", profile, "token", token, "user", user)
+      // Persist the OAuth access_token and or the user id to the token right after signin
+      if (account && profile) {
+        token.accessToken = account.access_token
+        token.profile = profile
+      }
+      if (user) token.user = user
+      return token
+    },
+    session: async ({ session, token, user }) => {
+      console.log("session", "session", session, "token", token, "user", user)
       return session
     },
   },
 }
 
-const handler = NextAuth(authOptions)
+const handler = async (req: NextApiRequest, res: NextApiResponse) =>
+  await NextAuth(req, res, authOptions)
 
 export { handler as GET, handler as POST }
