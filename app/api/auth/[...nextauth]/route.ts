@@ -1,9 +1,10 @@
 import NextAuth, { AuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
-import { PrismaClient } from "@prisma/client/extension"
+import { PrismaClient } from "@prisma/client"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { Adapter } from "next-auth/adapters"
+import bcrypt from "bcrypt"
 
 const prisma = new PrismaClient()
 
@@ -17,12 +18,25 @@ export const authOptions: AuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "jsmith" },
-        password: { label: "Password", type: "password" },
+        email: { label: "email", type: "email" },
+        password: { label: "password", type: "password" },
       },
       async authorize(credentials, req) {
-        // Add logic here to look up the user from the credentials supplied
-        const user = { id: "1", name: "J Smith", email: "jsmith@example.com" }
+        if (!credentials?.email || !credentials.password) return null
+
+        const user = await prisma.user.findUnique({
+          where: {
+            email: credentials.email,
+          },
+        })
+
+        if (!user) return null
+
+        const isMatch = await bcrypt.compare(credentials.password, user.hashedPassword)
+        console.log("Match", isMatch)
+        if (!isMatch) return null
+
+        return user
 
         if (user) {
           // Any object returned will be saved in `user` property of the JWT
@@ -42,11 +56,12 @@ export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     signIn: async ({ account, profile }) => {
+      console.log(account, "profile", profile)
       if (account?.provider === "google" && profile?.email?.endsWith("21@student.chula.ac.th")) {
         console.log("Sign in success")
 
         return true
-      }
+      } else if (account?.provider === "credentials") return true
       console.log("Sign in failed")
 
       return "/"

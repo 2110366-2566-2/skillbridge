@@ -3,6 +3,8 @@ import PasswordInput from "./PasswordInput"
 import Link from "next/link"
 import ConfirmPasswordInput from "./ConfirmPasswordInput"
 import { useState } from "react"
+import { registerWithCredentials } from "@/actions/register"
+import { useRouter } from "next/navigation"
 
 type Props = {
   handleFirstFormComplete: () => void
@@ -14,7 +16,9 @@ export default function RegisterViaEmail({ handleFirstFormComplete, isFirstFormC
     handleFirstFormComplete()
   }
 
-  const [data, setForm] = useState({
+  const router = useRouter()
+
+  const [data, setData] = useState({
     email: "",
     password: "",
     cPassword: "",
@@ -23,15 +27,15 @@ export default function RegisterViaEmail({ handleFirstFormComplete, isFirstFormC
   })
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({
+    setData({
       ...data,
       [event.target.name]: event.target.value,
     })
-    console.log(data)
   }
 
-  const handleSubmit = (formData: FormData) => {
-    console.log(data)
+  const handleSubmit = async () => {
+    const res = await registerWithCredentials(data)
+    router.push("/login")
   }
 
   return (
