@@ -26,10 +26,19 @@ export default function Input({
                 id={name}
                 type={inputType}
                 placeholder={label}
-                className="text-md h-[40px] border border-[#CBD5E1] rounded-md px-[12px] focus:ring-2 outline-none"
+                className="text-md h-[40px] border border-[#CBD5E1] rounded-md px-[12px] outline-none"
                 style={{ borderColor: warning ? "#f87171" : "#CBD5E1", boxShadow: warning ? "0px 0px 2px 2px rgba(248,113,113,1)" : "none" }}
                 value={value}
-                onChange={(e) => handleChange(e)} />
+                onChange={(e) => handleChange(e)}
+                onFocus={(e) => {
+                    e.target.style.borderColor = "#9dc0fa";
+                    e.target.style.boxShadow = "0 0 1px 2px #9dc0fa";
+                }}
+                onBlur={(e) => {
+                    e.target.style.borderColor = warning ? "#f87171" : "#CBD5E1";
+                    e.target.style.boxShadow = warning ? "0px 0px 2px 2px rgba(248,113,113,1)" : "none";
+                }}
+            />
 
             {
                 warning && <p id={`${name}Error`} className="mt-[5px] text-sm leading-5 text-[#EA4335]">{warning}</p>

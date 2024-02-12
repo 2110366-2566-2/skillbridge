@@ -32,7 +32,15 @@ export default function PasswordInput({
                 placeholder="รหัสผ่าน" className="h-[40px] border rounded-md px-[12px] focus-within:ring-2 text-md outline-none w-full"
                 style={{ borderColor: warning ? "#f87171" : "#CBD5E1", boxShadow: warning ? "0px 0px 1px 2px rgba(248,113,113,1)" : "none" }}
                 value={value}
-                onChange={(e) => handleChange(e)} />
+                onChange={(e) => handleChange(e)}
+                onFocus={(e) => {
+                    e.target.style.borderColor = "#9dc0fa";
+                    e.target.style.boxShadow = "0 0 1px 2px #9dc0fa";
+                }}
+                onBlur={(e) => {
+                    e.target.style.borderColor = warning ? "#f87171" : "#CBD5E1";
+                    e.target.style.boxShadow = warning ? "0px 0px 2px 2px rgba(248,113,113,1)" : "none";
+                }} />
 
             {
                 value.length >= 1 &&

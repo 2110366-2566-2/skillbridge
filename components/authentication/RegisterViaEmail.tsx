@@ -159,7 +159,7 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
           </div>
 
           <p className="w-full text-center text-sm mt-[10px]">
-            มีบัญชีอยู่แล้ว ?{" "}
+            มีบัญชีอยู่แล้ว ?
             <Link
               href={"/login"}
               className="text-[#326FE2] hover:underline hover:underline-offset-2">
