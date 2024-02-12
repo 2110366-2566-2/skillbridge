@@ -75,7 +75,7 @@ export default function Filter() {
             ...currData,
             [changedField]: newValue,
         }));
-        // console.log(changedField, newValue)
+        // console.log(changedField, newValue, typeof (newValue))
     };
     return (
         <>
