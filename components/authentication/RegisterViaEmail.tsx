@@ -190,12 +190,11 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
             {/* Link ไป ข้อตกลงและเงื่อนไขการใช้งานของ SkillBridge และ นโยบายคุ้มครองความเป็นส่วนตัว*/}
             <input type="checkbox" name="checkOne"
               className="absolute cursor-pointer left-0 top-0 border
-                                    border-red-200
+                                    border-[#848484]
                                     accent-[#334155]
                                     cursor-pointer
                                     rounded-sm
                                     "
-              style={{ borderColor: checkBoxError.checkOne ? "#f87171" : "#CBD5E1", boxShadow: checkBoxError.checkOne ? "0px 0px 1px 2px rgba(248,113,113,1)" : "none" }}
               required />
             <label className="block text-[9.5px] pl-[20px]">
               ฉันได้อ่านและยอมรับ
