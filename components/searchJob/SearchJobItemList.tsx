@@ -14,8 +14,7 @@ export default function SearchJobItemList() {
     useEffect(() => {
         async function fetchDefaultJobs() {
             try {
-                const q = searchParams.get("q");
-                if (!q) {
+                if (!searchParams) {
                     const defaultJobs: job[] = await getDefaultSearchJobs();
                     setJobs(defaultJobs);
                 }
