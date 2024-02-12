@@ -33,7 +33,7 @@ export default function SearchJobItemList() {
             try {
                 setLoading(true);
                 const q = searchParams.get("q");
-                const queryJobs: job[] = await getSearchJobs(q);
+                const queryJobs: job[] = q ? await getSearchJobs(q) : await getDefaultSearchJobs();
                 setJobs(queryJobs);
             } catch (error) {
                 console.error("Error fetching jobs:", error);
