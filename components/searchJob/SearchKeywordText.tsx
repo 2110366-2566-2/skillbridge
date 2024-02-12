@@ -6,7 +6,7 @@ import Image from "next/image";
 const logoTextBlack = require("@/public/logos/logo-text-black.svg") as string;
 
 export default function SearchKeywordText() {
-    const [keyword, setKeyword] = useState("การสอน") // TODO: Make this work using Redux
+    const [keyword, setKeyword] = useState("") // TODO: Make this work using Redux
 
     return (
         <>
