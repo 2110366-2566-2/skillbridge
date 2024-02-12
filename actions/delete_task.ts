@@ -24,7 +24,7 @@ const deleteJob = async (formData: FormData) => {
         id: job_id,
       },
       select: {
-        Applied: true,
+        applications: true,
         status: true,
       },
     });
@@ -35,16 +35,19 @@ const deleteJob = async (formData: FormData) => {
     if (
       !job_info ||
       job_info?.status != "NOT_STARTED" ||
-      job_info?.Applied.length > 0
+      job_info?.applications.length > 0
     ) {
       throw {
         message: "Can't delete this job",
       };
     }
 
-    await prisma.job.delete({
+    await prisma.job.update({
       where: {
         id: job_id,
+      },
+      data: {
+        isDeleted: true,
       },
     });
 

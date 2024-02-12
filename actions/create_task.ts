@@ -1,6 +1,8 @@
 "use server";
 
 import prisma from "@/db/prisma";
+import type { Job, JobStatus, Prisma } from "@prisma/client";
+import { Input } from "postcss";
 //import {getServerSession} from "next-auth";
 //import {options} from "../api/auth/[...nextaut]/options"
 
@@ -26,9 +28,19 @@ const createJob = async (formData: FormData) => {
     const jobTag = formData.jobTag;
     const numWorker = formData.numWorker;
     const files = formData.files;
-    console.log(title, status, description, estimateStartDate, estimateEndDate, budget, jobTag, numWorker, files);
+    console.log(
+      title,
+      status,
+      description,
+      estimateStartDate,
+      estimateEndDate,
+      budget,
+      jobTag,
+      numWorker,
+      files
+    );
     // const startDate = fromData.get("startDate"); --> อันนี้ไม่รู้ว่ามาจากไหนอะ งอง55
-    // const endDate = fromData.get("endDate"); --> อันนี้ไม่รู้ว่ามาจากไหนอะ งอง55 
+    // const endDate = fromData.get("endDate"); --> อันนี้ไม่รู้ว่ามาจากไหนอะ งอง55
 
     //const session = await getServerSession(options);
     //const userId = session?.userId
@@ -43,9 +55,8 @@ const createJob = async (formData: FormData) => {
     //     status: 401
     //   }
     // }
-
-    // const job = {
-    //   userId: userId,
+    // let job = {
+    //   employerId: userId,
     //   title: title,
     //   status: status,
     //   description: description,
@@ -55,18 +66,28 @@ const createJob = async (formData: FormData) => {
     //   estimateEndDate: estimateEndDate,
     //   budget: budget,
     //   numWorker: numWorker,
-    // } as JobInput
-
-    // await prisma.job.create({
-    //   data: {
-    //     job
-    //   },
-    // });
-
-    // return {
-    //   message: "Create Task Success",
-    //   status: 201,
+    //   jobTagId: jobTagId,
     // };
+    await prisma.job.create({
+      data: {
+        employerId: userId,
+        title: title,
+        status: status,
+        description: description,
+        startDate: startDate,
+        endDate: endDate,
+        estimateStartDate: estimateStartDate,
+        estimateEndDate: estimateEndDate,
+        budget: budget,
+        numWorker: numWorker,
+        jobTagId: jobTagId,
+      },
+    });
+
+    return {
+      message: "Create Task Success",
+      status: 201,
+    };
   } catch (error: any) {
     console.log(error);
     return {
