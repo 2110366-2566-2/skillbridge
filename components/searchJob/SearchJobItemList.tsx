@@ -1,13 +1,15 @@
 "use client"
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import SearchJobItem from "@/components/searchJob/SearchJobItem";
 import LoadingJobItem from "./LoadingJobItem";
-import { getDefaultSearchJobs, job } from "@/actions/search/jobs";
+import { getDefaultSearchJobs, getSearchJobs, job } from "@/actions/search/jobs";
 
 export default function SearchJobItemList() {
     const [jobs, setJobs] = useState<job[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const searchParams = useSearchParams();
 
     useEffect(() => {
         async function fetchDefaultJobs() {
@@ -23,6 +25,23 @@ export default function SearchJobItemList() {
 
         fetchDefaultJobs();
     }, []);
+
+    useEffect(() => {
+        async function fetchJobs() {
+            try {
+                setLoading(true);
+                const q = searchParams.get("q");
+                const queryJobs: job[] = await getSearchJobs(q);
+                setJobs(queryJobs);
+            } catch (error) {
+                console.error("Error fetching jobs:", error);
+            } finally {
+                setLoading(false); // Update loading state once data fetching is complete
+            }
+        }
+
+        fetchJobs();
+    }, [searchParams]);
 
     return (
         <div className="md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">

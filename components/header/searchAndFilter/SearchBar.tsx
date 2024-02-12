@@ -1,24 +1,33 @@
 "use client"
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const searchIcon = require("@/public/icons/jobSearch.svg") as string;
 const searchBigIcon = require("@/public/icons/jobSearchBig.svg") as string;
 
 export default function SearchBar() {
     const [searchValue, setSearchValue] = useState("")
+    const router = useRouter();
 
     const handleChange = (evt: ChangeEvent) => {
         const changedInput = evt.target as HTMLInputElement;
         setSearchValue(changedInput.value)
         // console.log(changedInput.value)
     }
+
+    const handleSubmit = (evt: FormEvent) => {
+        evt.preventDefault();
+        // console.log(searchValue)
+        router.push(`/search?q=${searchValue}`);
+    };
+
     return (
         <>
             {/* Mobile and Tablet size */}
             <div className="lg:hidden">
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="relative w-full">
                         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                             <Image
@@ -43,7 +52,7 @@ export default function SearchBar() {
 
             {/* Desktop */}
             <div className="hidden lg:inline-block">
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="relative ml-4 min-w-[35vw] max-w-[498px]">
                         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                             <Image
@@ -53,8 +62,20 @@ export default function SearchBar() {
                                 height={24}
                             />
                         </div>
-                        <input type="search" id="job-search" className="block w-full min-h-[48px] ps-12 text-[16px] text-slate-900 border border-slate-300 rounded-lg bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-400 focus:border-slate-500" placeholder="ค้นหางานที่ต้องการ..." required></input>
-                        <button type="submit" className="min-w-[84px] min-h-[38px] text-white text-[14px] rounded absolute end-[5px] bottom-[5px] bg-slate-800 hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-slate-400">ค้นหา</button>
+                        <input
+                            type="search"
+                            id="job-search"
+                            className="block w-full min-h-[48px] ps-12 text-[16px] text-slate-900 border border-slate-300 rounded-lg bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-400 focus:border-slate-500"
+                            placeholder="ค้นหางานที่ต้องการ..."
+                            value={searchValue}
+                            onChange={handleChange}
+                            required></input>
+                        <button
+                            type="submit"
+                            className="min-w-[84px] min-h-[38px] text-white text-[14px] rounded absolute end-[5px] bottom-[5px] bg-slate-800 hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-slate-400"
+                        >
+                            ค้นหา
+                        </button>
                     </div>
                 </form>
             </div>
