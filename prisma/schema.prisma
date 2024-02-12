@@ -63,7 +63,8 @@ model Job {
   id                String        @id @default(uuid())
   title             String
   status            JobStatus     @default(NOT_STARTED)
-  description       String
+  description       String?
+  descriptionUrl    String?
   budget            Int
   numWorker         Int           @default(1)
   startDate         DateTime?
