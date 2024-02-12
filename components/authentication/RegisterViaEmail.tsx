@@ -3,6 +3,8 @@ import PasswordInput from "./PasswordInput"
 import Link from "next/link"
 import ConfirmPasswordInput from "./ConfirmPasswordInput"
 import { useState } from "react"
+import { registerWithCredentials } from "@/actions/register"
+import { useRouter } from "next/navigation"
 
 type Props = {
   handleToggleForm: () => void
@@ -28,7 +30,13 @@ type Form = {
 
 export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Props) {
 
-  const [data, setForm] = useState<Form>({
+  const router = useRouter();
+
+  const handleNextPageSubmit = () => {
+    handleToggleForm()
+  }
+
+  const [data, setData] = useState({
     email: "",
     password: "",
     cPassword: "",
@@ -120,15 +128,15 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({
+    setData({
       ...data,
       [event.target.name]: event.target.value,
     })
-    // console.log(data)
   }
 
-  const handleSubmit = (formData: FormData) => {
-    // console.log(data)
+  const handleSubmit = async () => {
+    const res = await registerWithCredentials(data)
+    router.push("/login")
   }
 
   return (
