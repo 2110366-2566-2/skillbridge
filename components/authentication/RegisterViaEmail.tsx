@@ -6,6 +6,7 @@ import { useState } from "react"
 import { registerWithCredentials } from "@/actions/register"
 import { useRouter } from "next/navigation"
 
+
 type Props = {
   handleToggleForm: () => void
   isToggleForm: boolean
@@ -194,7 +195,7 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
             value={data.lname}
           />
 
-          <div className="mt-[30px] w-full relative">
+          <div className="mt-[20px]">
             {/* Link ไป ข้อตกลงและเงื่อนไขการใช้งานของ SkillBridge และ นโยบายคุ้มครองความเป็นส่วนตัว*/}
             <input type="checkbox" name="checkOne"
               className="absolute cursor-pointer left-0 top-0 border
@@ -206,24 +207,24 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
               required />
             <label className="block text-[9.5px] pl-[20px]">
               ฉันได้อ่านและยอมรับ
-              <Link href={'/'} className="text-[#326FE2] hover:underline hover:underline-offset">ข้อตกลงและเงื่อนไขการใช้งานของ SkillBridge</Link>
+              <Link href={"/"} className="text-[#326FE2]">
+                ข้อตกลงและเงื่อนไขการใช้งานของ SkillBridge
+              </Link>
+              <input
+                type="checkbox"
+                name=""
+                className="absolute cursor-pointer left-0
+                                    checked:bg-[#334155] hover:bg-[#a3a3a3]
+                                    w-[14px] h-[14px] rounded-sm focus:outline-none
+                                    hover:ring hover:"
+              />
             </label>
-          </div>
-          <div className="mt-[10px] w-full relative">
-            <input type="checkbox" name="checkTwo"
-              className="absolute cursor-pointer left-0 top-0 border
-                                    border-[#848484]
-                                    accent-[#334155]
-                                    cursor-pointer
-                                    rounded-sm
-                                    "
-              required />
-            <label className="block text-[9.5px] pl-[20px]">
+
+            <label className="block relative text-[9.5px] pl-[20px] ">
               ฉันได้อ่านและยอมรับ
               <Link href={'/'} className="text-[#326FE2] hover:underline hover:underline-offset">นโยบายคุ้มครองความเป็นส่วนตัว</Link>
             </label>
           </div>
-
 
           <button
             id="submit"
