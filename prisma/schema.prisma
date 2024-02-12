@@ -183,10 +183,8 @@ model Review {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   isDeleted   Boolean  @default(false)
-  studentId   String
   stars       Int
   job         Job      @relation(fields: [jobId], references: [id])
-  student     Student  @relation(fields: [studentId], references: [userId])
 
   @@map("review")
 }
