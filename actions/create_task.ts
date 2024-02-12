@@ -52,16 +52,15 @@ const createJob = async (formData: FormData) => {
     //     status: 401
     //   }
     // }
-
-    if (files?.size >= 1024 * 1024 * 10 || files?.type != "application/pdf") {
+    if (files?.size > 5 * 1024 * 1024) {
       throw {
-        message: "Invalid file format or file is too large.",
+        message: "File is too large",
       };
     }
-    const arrayBuffer = await files?.arrayBuffer();
+    const arrayBuffer = await files.arrayBuffer();
     const buffer = new Uint8Array(arrayBuffer);
 
-    const result = await new Promise((resolve, reject) => {
+    const result = (await new Promise((resolve, reject) => {
       cloudinary.uploader
         .upload_stream(
           { folder: "test", format: "pdf" },
@@ -74,7 +73,7 @@ const createJob = async (formData: FormData) => {
           }
         )
         .end(buffer);
-    });
+    })) as any;
     await prisma.job.create({
       data: {
         employerId: employerId,
@@ -86,6 +85,7 @@ const createJob = async (formData: FormData) => {
         budget: budget,
         numWorker: numWorker,
         jobTagId: jobTagId,
+        descriptionUrl: result?.secure_url,
       },
     });
 
@@ -106,14 +106,14 @@ export default createJob;
 
 const main = async () => {
   const data = {
-    employerId: "d5a22b3d-49dc-4f55-acfd-88a78d88ada5",
+    employerId: "d8e9d51d-fdfc-40db-8609-cd538d9b29d3",
     title: "Test work",
     description: "test description",
     estimateStartDate: new Date().toISOString(),
     estimateEndDate: new Date().toISOString(),
     budget: 1000,
     numWorker: 1,
-    jobTagId: "0ec26b18-7954-460c-895e-6838b72c77cd",
+    jobTagId: "bbd48fc1-f109-4321-a854-33604647ad2f",
     files: null,
   } as unknown as FormData;
   const result = await createJob(data);
