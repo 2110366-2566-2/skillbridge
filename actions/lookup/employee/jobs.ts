@@ -1,7 +1,6 @@
 "use server"
 import { PrismaClient, JobStatus, ApplicationStatus } from '@prisma/client'
 
-
 const prisma = new PrismaClient();
 
 export interface job {
@@ -13,7 +12,8 @@ export interface job {
     description: string,
     acceptNum: number,
     maxAcceptNum: number,
-    budget: number
+    budget: number,
+    jobStatus: JobStatus
 }
 
 async function getEmployerJobs(employeeId: string) {
@@ -39,9 +39,10 @@ async function getEmployerJobs(employeeId: string) {
             endDate: job.estimateEndDate.toLocaleDateString('en-GB'),
             jobTags: job.jobTag.title, 
             description: job.description,
-            acceptNum: job.applications.filter(app => app.status==ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
+            acceptNum: job.applications.filter(app => app.status==ApplicationStatus.ACCEPTED).length, 
             maxAcceptNum: job.numWorker,
-            budget: job.budget
+            budget: job.budget,
+            jobStatus: job.status
         };
 
         output.push(showJob);
