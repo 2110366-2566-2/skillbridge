@@ -116,7 +116,7 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
 
   const handleValidationSecondPage = () => {
     setErrors(validateSecondPage());
-    console.log(errors);
+    console.log(data);
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -132,7 +132,7 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
   }
 
   return (
-    <form className="w-full" action={handleValidationSecondPage} noValidate>
+    <form className="w-full" onSubmit={handleValidationSecondPage} noValidate>
       {!isToggleForm ? (
         <div className="pt-[5px]">
           {/* Email Input Component */}
