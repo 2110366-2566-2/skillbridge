@@ -46,7 +46,7 @@ async function getDefaultSearchJobs(): Promise<job[]> {
     const jobs = await prisma.job.findMany({
         include: {
             jobTag: true,
-            Application: true
+            applications: true
         },
         where: {
             status: {
@@ -64,7 +64,7 @@ async function getDefaultSearchJobs(): Promise<job[]> {
             endDate: job.estimateEndDate.toLocaleDateString('en-GB'),
             jobTags: job.jobTag.title, 
             description: job.description,
-            acceptNum: job.Application.filter(app => app.status==ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
+            acceptNum: job.applications.filter(app => app.status==ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
             maxAcceptNum: job.numWorker,
             budget: job.budget
         };
@@ -108,7 +108,7 @@ async function getSearchJobs(query?: string, filter?: jobFilter): Promise<job[]>
         const jobs = await prisma.job.findMany({
             include: {
                 jobTag: true,
-                Application: true
+                applications: true
             },
             where: {
                 status: {
@@ -127,7 +127,7 @@ async function getSearchJobs(query?: string, filter?: jobFilter): Promise<job[]>
                 endDate: job.estimateEndDate.toLocaleDateString('en-GB'),
                 jobTags: job.jobTag.title, 
                 description: job.description,
-                acceptNum: job.Application.filter(app => app.status==ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
+                acceptNum: job.applications.filter(app => app.status==ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
                 maxAcceptNum: job.numWorker,
                 budget: job.budget
             };
@@ -174,7 +174,7 @@ async function getSearchJobs(query?: string, filter?: jobFilter): Promise<job[]>
     const jobs = await prisma.job.findMany({
         include: {
             jobTag: true,
-            Application: true
+            applications: true
         },
         where: {
             status: {
@@ -196,7 +196,7 @@ async function getSearchJobs(query?: string, filter?: jobFilter): Promise<job[]>
             endDate: job.estimateEndDate.toLocaleDateString('en-GB'),
             jobTags: job.jobTag.title, 
             description: job.description,
-            acceptNum: job.Application.filter(app => app.status==ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
+            acceptNum: job.applications.filter(app => app.status==ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
             maxAcceptNum: job.numWorker,
             budget: job.budget
         };
@@ -246,7 +246,7 @@ async function main() {
         highestBudget: 9999
     };
 
-    const a = await getSearchJobs(undefined, filter);
+    const a = await getSearchJobs(undefined, undefined);
     console.log(a);
 }
 
