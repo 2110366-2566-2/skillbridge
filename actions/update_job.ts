@@ -63,10 +63,11 @@ const updateJob = async (formData: FormData) => {
       },
       select: {
         applications: true,
+        isDeleted: true,
       },
     });
 
-    if (!job) {
+    if (!job || job.isDeleted) {
       throw {
         message: "Job not found",
         status: 404,
