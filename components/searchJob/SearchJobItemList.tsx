@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import SearchJobItem from "@/components/searchJob/SearchJobItem";
 import LoadingJobItem from "./LoadingJobItem";
+import SearchNotFound from "./SearchNotFound";
 import { getDefaultSearchJobs, getSearchJobs, job } from "@/actions/search/jobs";
 
 export default function SearchJobItemList() {
@@ -51,9 +52,13 @@ export default function SearchJobItemList() {
                 Array.from({ length: 12 }).map((_, index) => (
                     <LoadingJobItem key={index} />
                 ))) : (
-                jobs.map((job, index) => (
+                jobs.length ? jobs.map((job, index) => (
                     <SearchJobItem key={index} job={job} />
-                ))
+                )) : (
+                    <div className="col-span-full">
+                        <SearchNotFound />
+                    </div>
+                )
             )}
         </div>
     );
