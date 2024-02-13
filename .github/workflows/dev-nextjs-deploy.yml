@@ -45,20 +45,32 @@ jobs:
           docker push ${{ secrets.GCP_DEV_NEXTJS_AR_LOCATION }}
 
       - name: Deploy to Cloud Run
-        run: |
-          gcloud run deploy ${{ secrets.GCP_DEV_NEXTJS_CR_NAME }} \
-            --set-env-vars "DATABASE_URL=${{ secrets.DATABASE_URL }}" \
-            --set-env-vars "GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}" \
-            --set-env-vars "GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}" \
-            --set-env-vars "NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL_DEV }}" \
-            --set-env-vars "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" \
-            --set-env-vars "NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=${{ secrets.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME }}" \
-            --set-env-vars "CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }}" \
-            --set-env-vars "CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }}" \
-            --set-env-vars "ELASTIC_NODE_URL=${{ secrets.ELASTIC_NODE_URL }}" \
-            --set-env-vars "ELASTIC_API_ID=${{ secrets.ELASTIC_API_ID }}" \
-            --set-env-vars "ELASTIC_API_KEY=${{ secrets.ELASTIC_API_KEY }}" \
-            --image "${{ secrets.GCP_DEV_NEXTJS_AR_LOCATION }}" \
-            --platform managed \
-            --region "${{ env.REGION }}" \
-            --allow-unauthenticated
+        uses: google-github-actions/deploy-cloudrun@main
+        with:
+          image: ${{ secrets.GCP_DEV_NEXTJS_AR_LOCATION }}
+          service: ${{ secrets.GCP_SA_KEY }}
+          region: ${{ env.REGION }}
+          platform: managed
+          allow-unauthenticated: true
+      #     env_vars: |
+      #         FOO=bar
+      #         ZIP=zap 
+
+      # - name: Deploy to Cloud Run
+      #   run: |
+      #     gcloud run deploy ${{ secrets.GCP_DEV_NEXTJS_CR_NAME }} \
+      #       --set-env-vars "DATABASE_URL=${{ secrets.DATABASE_URL }}" \
+      #       --set-env-vars "GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}" \
+      #       --set-env-vars "GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}" \
+      #       --set-env-vars "NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL_DEV }}" \
+      #       --set-env-vars "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" \
+      #       --set-env-vars "NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=${{ secrets.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME }}" \
+      #       --set-env-vars "CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }}" \
+      #       --set-env-vars "CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }}" \
+      #       --set-env-vars "ELASTIC_NODE_URL=${{ secrets.ELASTIC_NODE_URL }}" \
+      #       --set-env-vars "ELASTIC_API_ID=${{ secrets.ELASTIC_API_ID }}" \
+      #       --set-env-vars "ELASTIC_API_KEY=${{ secrets.ELASTIC_API_KEY }}" \
+      #       --image "${{ secrets.GCP_DEV_NEXTJS_AR_LOCATION }}" \
+      #       --platform managed \
+      #       --region "${{ env.REGION }}" \
+      #       --allow-unauthenticated
