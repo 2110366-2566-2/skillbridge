@@ -59,15 +59,11 @@ export default function LoginViaEmail() {
   const handleValidation = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setErrors(validateForm())
-    signIn(
-      "credentials",
-      {
-        email: form.email,
-        password: form.password,
-        callbackUrl: "/",
-      },
-      { login_hint: "info@example.com" }
-    )
+    signIn("credentials", {
+      email: form.email,
+      password: form.password,
+      callbackUrl: "/dash",
+    })
   }
 
   return (

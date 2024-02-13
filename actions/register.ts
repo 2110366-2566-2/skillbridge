@@ -34,16 +34,24 @@ async function registerWithCredentials(data: {
   const hashedPassword = await bcrypt.hash(data.password, 10)
   console.log(hashedPassword)
   // Extract middlename, salutation
-  const user = await prisma.user.create({
+  const employer = await prisma.employer.create({
     data: {
-      salutation: "Mr.",
-      firstname: data.fname,
-      lastname: data.lname,
-      email: data.email,
-      hashedPassword: hashedPassword,
+      position: "-",
+      organization: "-",
+      publicEmail: data.email,
+      user: {
+        create: {
+          salutation: "นาย",
+          firstname: data.fname,
+          middlename: "",
+          lastname: data.lname,
+          hashedPassword: hashedPassword,
+          email: data.email,
+        },
+      },
     },
   })
-  return user
+  return employer
 }
 
 export { registerWithCredentials }

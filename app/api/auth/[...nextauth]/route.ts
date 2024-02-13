@@ -6,10 +6,8 @@ import bcrypt from "bcrypt"
 import { NextApiRequest, NextApiResponse } from "next"
 
 const prisma = new PrismaClient()
-let userType = ""
 
 export const authOptions: AuthOptions = {
-  // adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID ?? "",
@@ -33,20 +31,13 @@ export const authOptions: AuthOptions = {
         if (!user) return null
 
         const isMatch = await bcrypt.compare(credentials.password, user.hashedPassword)
-        console.log("Match", isMatch)
+
         if (!isMatch) throw new Error("Invalid password")
 
         return user
-
-        if (user) {
-          // Any object returned will be saved in `user` property of the JWT
-          return user
-        } else {
-          // If you return null then an error will be displayed advising the user to check their details.
-          return null
-
-          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
-        }
+        // Any object returned will be saved in `user` property of the JWT
+        // If you return null then an error will be displayed advising the user to check their details.
+        // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
       },
     }),
   ],
@@ -56,8 +47,6 @@ export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async signIn({ account, profile, user, credentials }) {
-      console.log("userType", userType)
-
       console.log(
         "signIn",
         "account",
@@ -80,17 +69,14 @@ export const authOptions: AuthOptions = {
     },
     async jwt({ token, account, profile, user }) {
       console.log("jwt", "account", account, "profile", profile, "token", token, "user", user)
-      // Persist the OAuth access_token and or the user id to the token right after signin
-      if (account && profile) {
-        token.accessToken = account.access_token
-        token.profile = profile
-      }
+      if (account) token.account = account
+      if (profile) token.profile = profile
       if (user) token.user = user
       return token
     },
-    session: async ({ session, token, user }) => {
+    async session({ session, token, user }) {
       console.log("session", "session", session, "token", token, "user", user)
-      return session
+      return { ...token, expires: session.expires }
     },
   },
 }

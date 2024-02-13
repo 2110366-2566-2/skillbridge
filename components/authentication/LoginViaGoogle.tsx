@@ -6,13 +6,9 @@ export default function LoginViaGoogle() {
     <button
       className="w-full h-[40px] bg-[#F1F5F9] border border-[#CBD5E1] rounded-md flex items-center px-[20px]"
       onClick={() =>
-        signIn(
-          "google",
-          {
-            callbackUrl: "/",
-          },
-          { userType: "user" }
-        )
+        signIn("google", {
+          callbackUrl: "/",
+        })
       }>
       <div>
         <Image src={"/logos/google-logo.svg"} width={20} height={20} alt="google logo" />
