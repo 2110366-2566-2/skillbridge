@@ -15,8 +15,15 @@ async function main() {
   await prisma.student.deleteMany({});
   await prisma.user.deleteMany({});
 
-  const jobTagEnum: string[] = [
-    "กราฟิกดีไซน์",
+  await prisma.review.deleteMany({})
+  await prisma.application.deleteMany({})
+  await prisma.job.deleteMany({})
+  await prisma.jobTag.deleteMany({})
+  await prisma.employer.deleteMany({})
+  await prisma.student.deleteMany({})
+  await prisma.user.deleteMany({})
+
+  const jobTagEnum: string[] = ["กราฟิกดีไซน์",
     "สถาปัตย์",
     "ตกแต่งภายใน",
     "ศิลปะและภาพวาด",
@@ -127,6 +134,7 @@ async function main() {
       },
       jobs: {
         create: [
+
           {
             title: "เขียนเว็บให้ SoeiCorp.",
             status: "NOT_STARTED",
@@ -140,17 +148,15 @@ async function main() {
                 {
                   userId: s1.userId,
                   bid: 1200,
-                  documentUrl:
-                    "https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png",
-                },
+                  documentUrl: 'https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png',
+                }, 
                 {
                   userId: s2.userId,
                   bid: 800,
-                  documentUrl:
-                    "https://global.discourse-cdn.com/standard14/uploads/daml/optimized/2X/0/07c87a4e2885ff7d9674efb218e08a5d354612f6_2_500x500.jpeg",
-                },
-              ],
-            },
+                  documentUrl: 'https://global.discourse-cdn.com/standard14/uploads/daml/optimized/2X/0/07c87a4e2885ff7d9674efb218e08a5d354612f6_2_500x500.jpeg'
+                }
+              ]
+            }
           },
 
           {
@@ -169,19 +175,17 @@ async function main() {
                 {
                   userId: s1.userId,
                   bid: 600,
-                  documentUrl:
-                    "https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png",
-                  status: "ACCEPTED",
-                },
+                  documentUrl: 'https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png',
+                  status: 'ACCEPTED'
+                }, 
                 {
                   userId: s3.userId,
                   bid: 500,
-                  documentUrl:
-                    "https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH",
-                  status: "ACCEPTED",
-                },
-              ],
-            },
+                  documentUrl: 'https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH',
+                  status: 'ACCEPTED'
+                }
+              ]
+            }
           },
 
           {
@@ -198,18 +202,16 @@ async function main() {
                 {
                   userId: s2.userId,
                   bid: 10000,
-                  documentUrl:
-                    "https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png",
+                  documentUrl: 'https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png',
                 },
-              ],
-            },
+              ]
+            }
           },
 
           {
-            title: "เขียนบล็อกและ Tech-savvy Blogger",
-            status: "COMPLETED",
-            description:
-              "Freelance writer ที่มี passion สำหรับเทคโนโลยีที่จะ ผลิต insightful \n \
+            title: 'เขียนบล็อกและ Tech-savvy Blogger',
+            status: 'COMPLETED',
+            description: 'Freelance writer ที่มี passion สำหรับเทคโนโลยีที่จะ ผลิต insightful \n \
 และ well-researched blog articles. Topics รวมถึง the latest trends,\n \
 บทวิจารณ์ผลิตภัณฑ์, และ ข้อมูลที่เกี่ยวข้องกับ industry.",
             budget: 10000,
@@ -222,47 +224,43 @@ async function main() {
                 {
                   userId: s3.userId,
                   bid: 10000,
-                  documentUrl:
-                    "https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH",
-                  status: "ACCEPTED",
-                },
+                  documentUrl: 'https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH',
+                  status: 'ACCEPTED'
+                }, 
                 {
                   userId: s2.userId,
                   bid: 15000,
-                  documentUrl:
-                    "https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png",
-                  status: "REJECTED",
-                },
+                  documentUrl: 'https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png',
+                  status: 'REJECTED'
+                }, 
                 {
                   userId: s1.userId,
                   bid: 8000,
-                  documentUrl:
-                    "https://global.discourse-cdn.com/standard14/uploads/daml/optimized/2X/0/07c87a4e2885ff7d9674efb218e08a5d354612f6_2_500x500.jpeg",
-                  status: "ACCEPTED",
-                },
-              ],
+                  documentUrl: 'https://global.discourse-cdn.com/standard14/uploads/daml/optimized/2X/0/07c87a4e2885ff7d9674efb218e08a5d354612f6_2_500x500.jpeg',
+                  status: 'ACCEPTED'
+                }
+              ]
             },
             reviews: {
               create: [
                 {
                   studentId: s1.userId,
                   stars: 4,
-                  description: "งานดีมาก! นิสิตทำได้ดีจริง ๆ",
+                  description: 'งานดีมาก! นิสิตทำได้ดีจริง ๆ'
                 },
                 {
                   studentId: s3.userId,
                   stars: 5,
-                  description: "Fantastic Nisit, Exceeded Expectations!",
-                },
-              ],
-            },
+                  description: 'Fantastic Nisit, Exceeded Expectations!'
+                }
+              ]
+            }
           },
 
           {
-            title: "นักออกแบบกราฟิกและ Graphic Design Guru",
-            status: "COMPLETED",
-            description:
-              "ต้องการ graphic designer ที่มีความสามารถสูงสำหรับ freelance projects, \n \
+            title: 'นักออกแบบกราฟิกและ Graphic Design Guru',
+            status: 'COMPLETED',
+            description: 'ต้องการ graphic designer ที่มีความสามารถสูงสำหรับ freelance projects, \n \
 การสร้าง eye-catching visuals สำหรับ marketing materials, social media, \n \
 และ การจัดแบรนด์. ต้องมี proficiency ใน Adobe Creative Suite และ a strong portfolio.",
             budget: 5000,
@@ -275,38 +273,34 @@ async function main() {
                 {
                   userId: s1.userId,
                   bid: 6000,
-                  documentUrl:
-                    "https://global.discourse-cdn.com/standard14/uploads/daml/optimized/2X/0/07c87a4e2885ff7d9674efb218e08a5d354612f6_2_500x500.jpeg",
-                  status: "REJECTED",
+                  documentUrl: 'https://global.discourse-cdn.com/standard14/uploads/daml/optimized/2X/0/07c87a4e2885ff7d9674efb218e08a5d354612f6_2_500x500.jpeg',
+                  status: 'REJECTED'
                 },
                 {
                   userId: s2.userId,
                   bid: 5000,
-                  documentUrl:
-                    "https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png",
-                  status: "ACCEPTED",
+                  documentUrl: 'https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png',
+                  status: 'ACCEPTED'
                 },
                 {
                   userId: s3.userId,
                   bid: 5000,
-                  documentUrl:
-                    "https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH",
-                  status: "REJECTED",
-                },
-              ],
+                  documentUrl: 'https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH',
+                  status: 'REJECTED'
+                }, 
+              ]
             },
             reviews: {
               create: [
                 {
                   studentId: s2.userId,
                   stars: 5,
-                  description:
-                    "มีความสุขที่ได้ร่วมงานกับนิสิตที่มีความสามารถสูงในโปรเจกต์ล่าสุดนี้ ประสบการณ์นี้ไม่ได้แค่ดี ๆ แต่ยังเป็นที่ประทับใจจริง ๆ \n \
+                  description: 'มีความสุขที่ได้ร่วมงานกับนิสิตที่มีความสามารถสูงในโปรเจกต์ล่าสุดนี้ ประสบการณ์นี้ไม่ได้แค่ดี ๆ แต่ยังเป็นที่ประทับใจจริง ๆ \n \
 บุคคลนี้แสดงให้เห็นถึงความเข้าใจที่ยอดเยี่ยมในงานที่กำลังดำเนินอยู่ การทำงานที่นำมานี้ไม่เพียงแต่มีคุณภาพสูง \n \
-แต่ยังสำเร็จลงมือทำล่วงหน้ากว่ากำหนดเสมอ ความรอบคอบในรายละเอียดและความสามารถในการแก้ไขปัญหาจริง ๆ ทำให้เขาเด่นชัดเจน",
-                },
-              ],
-            },
+แต่ยังสำเร็จลงมือทำล่วงหน้ากว่ากำหนดเสมอ ความรอบคอบในรายละเอียดและความสามารถในการแก้ไขปัญหาจริง ๆ ทำให้เขาเด่นชัดเจน'
+                }
+              ]
+            }
           },
 
           {
@@ -327,10 +321,9 @@ Proficiency ใน Excel หรือ Google Sheets เป็น essential, \n \
                 {
                   userId: s3.userId,
                   bid: 5000,
-                  documentUrl:
-                    "https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH",
-                },
-              ],
+                  documentUrl: 'https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH',
+                }, 
+              ]
             },
           },
 
@@ -352,37 +345,33 @@ content creation, strategic planning, and performance analysis.",
                 {
                   userId: s1.userId,
                   bid: 10000,
-                  documentUrl:
-                    "https://global.discourse-cdn.com/standard14/uploads/daml/optimized/2X/0/07c87a4e2885ff7d9674efb218e08a5d354612f6_2_500x500.jpeg",
-                  status: "ACCEPTED",
+                  documentUrl: 'https://global.discourse-cdn.com/standard14/uploads/daml/optimized/2X/0/07c87a4e2885ff7d9674efb218e08a5d354612f6_2_500x500.jpeg',
+                  status: 'ACCEPTED'
                 },
                 {
                   userId: s3.userId,
                   bid: 12000,
-                  documentUrl:
-                    "https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH",
-                  status: "ACCEPTED",
-                },
-              ],
+                  documentUrl: 'https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH',
+                  status: 'ACCEPTED'
+                }, 
+              ]
             },
             reviews: {
               create: [
                 {
                   studentId: s1.userId,
                   stars: 3,
-                  description:
-                    "การแสดงความคิดเป็นระเบียบและความสามารถในการแก้ไขปัญหาของเขาเป็นสิ่งที่ควรชมเชย การทำงานที่ส่งมอบละเมิดตามระเบียบเสมอ\n \
-ความมุ่งมั่นและความสามารถในการจัดการงานที่น่าชื่นชม ทำให้เขาเป็นส่วนหนึ่งที่สำคัญในทีมของเรา",
+                  description: 'การแสดงความคิดเป็นระเบียบและความสามารถในการแก้ไขปัญหาของเขาเป็นสิ่งที่ควรชมเชย การทำงานที่ส่งมอบละเมิดตามระเบียบเสมอ\n \
+ความมุ่งมั่นและความสามารถในการจัดการงานที่น่าชื่นชม ทำให้เขาเป็นส่วนหนึ่งที่สำคัญในทีมของเรา'
                 },
                 {
                   studentId: s3.userId,
                   stars: 4,
-                  description:
-                    "การทำงานกับนิสิตคนนี้เป็นความสุขแท้ ๆ ความสามารถทางวิชาการของเขาแสดงอย่างชัดเจนในวิธีที่เขาใกล้ชิดกับโปรเจกต์\n \
-สิ่งที่โดดเด่นที่สุดคือการสื่อสารที่ชัดเจนและรับผิดชอบในการทำงาน นี้สร้างสภาพแวดล้อมที่เป็นสมมติและความสามารถในการปรับตัวตามสถานการณ์ที่น่าประทับใจ",
-                },
-              ],
-            },
+                  description: 'การทำงานกับนิสิตคนนี้เป็นความสุขแท้ ๆ ความสามารถทางวิชาการของเขาแสดงอย่างชัดเจนในวิธีที่เขาใกล้ชิดกับโปรเจกต์\n \
+สิ่งที่โดดเด่นที่สุดคือการสื่อสารที่ชัดเจนและรับผิดชอบในการทำงาน นี้สร้างสภาพแวดล้อมที่เป็นสมมติและความสามารถในการปรับตัวตามสถานการณ์ที่น่าประทับใจ'
+                }
+              ]
+            }
           },
 
           {
@@ -402,16 +391,14 @@ generate insights, และ provide data-driven recommendations. \n \
                 {
                   userId: s1.userId,
                   bid: 18000,
-                  documentUrl:
-                    "https://global.discourse-cdn.com/standard14/uploads/daml/optimized/2X/0/07c87a4e2885ff7d9674efb218e08a5d354612f6_2_500x500.jpeg",
+                  documentUrl: 'https://global.discourse-cdn.com/standard14/uploads/daml/optimized/2X/0/07c87a4e2885ff7d9674efb218e08a5d354612f6_2_500x500.jpeg',
                 },
                 {
                   userId: s2.userId,
                   bid: 17000,
-                  documentUrl:
-                    "https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png",
+                  documentUrl: 'https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png',
                 },
-              ],
+              ]
             },
           },
 
@@ -432,16 +419,14 @@ generate insights, และ provide data-driven recommendations. \n \
                 {
                   userId: s2.userId,
                   bid: 20000,
-                  documentUrl:
-                    "https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png",
+                  documentUrl: 'https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png',
                 },
                 {
                   userId: s3.userId,
                   bid: 22000,
-                  documentUrl:
-                    "https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH",
-                },
-              ],
+                  documentUrl: 'https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH',
+                }, 
+              ]
             },
           },
           // Add more job objects as needed
@@ -484,26 +469,25 @@ generate insights, และ provide data-driven recommendations. \n \
                 {
                   userId: s1.userId,
                   bid: 3000,
-                  status: "ACCEPTED",
+                  status: 'ACCEPTED',
                 },
                 {
                   userId: s3.userId,
                   bid: 2000,
-                  status: "REJECTED",
-                },
-              ],
+                  status: 'REJECTED',
+                }, 
+              ]
             },
             reviews: {
               create: [
                 {
                   studentId: s1.userId,
                   stars: 5,
-                  description:
-                    "การทำงานกับนิสิตในโปรเจกต์นี้เป็นที่ประทับใจมาก ไม่เพียงแต่ทักษะทางวิชาการที่น่าทึ่งแต่ยังสามารถสื่อสารและทำงานร่วมกับทีมได้อย่างไร้ปัญหา\n\
-ความเข้าใจในภารกิจและการเสนอแนะที่มีประโยชน์ทำให้เขาเป็นส่วนที่สำคัญของทีมที่ดีขึ้น",
+                  description: 'การทำงานกับนิสิตในโปรเจกต์นี้เป็นที่ประทับใจมาก ไม่เพียงแต่ทักษะทางวิชาการที่น่าทึ่งแต่ยังสามารถสื่อสารและทำงานร่วมกับทีมได้อย่างไร้ปัญหา\n\
+ความเข้าใจในภารกิจและการเสนอแนะที่มีประโยชน์ทำให้เขาเป็นส่วนที่สำคัญของทีมที่ดีขึ้น'
                 },
-              ],
-            },
+              ]
+            }
           },
 
           {
@@ -524,8 +508,8 @@ generate insights, และ provide data-driven recommendations. \n \
                 {
                   userId: s3.userId,
                   bid: 2000,
-                },
-              ],
+                }, 
+              ]
             },
           },
 
@@ -547,7 +531,7 @@ Proficiency ใน design tools เป็น",
                   userId: s1.userId,
                   bid: 3000,
                 },
-              ],
+              ]
             },
           },
 
@@ -567,8 +551,8 @@ Proficiency ใน design tools เป็น",
                 {
                   userId: s3.userId,
                   bid: 2000,
-                },
-              ],
+                }, 
+              ]
             },
           },
 
@@ -593,16 +577,15 @@ with logistics partners. มีความรู้เกี่ยวกับ�
                 {
                   userId: s3.userId,
                   bid: 5500,
-                },
-              ],
+                }, 
+              ]
             },
           },
 
           {
-            title: "Financial Analyst และนักวิเคราะห์ทางการเงิน",
-            status: "COMPLETED",
-            description:
-              "Looking for a financial analyst ที่สามารถ analyze financial data, \n \
+            title: 'Financial Analyst และนักวิเคราะห์ทางการเงิน',
+            status: 'COMPLETED',
+            description: 'Looking for a financial analyst ที่สามารถ analyze financial data, \n \
 prepare reports, และ provide insights for decision-making. \n \
 ความเข้าใจในเรื่องของการเงินและการวิเคราะห์ทางการเงิน.",
             budget: 10000,
@@ -615,46 +598,43 @@ prepare reports, และ provide insights for decision-making. \n \
                 {
                   userId: s1.userId,
                   bid: 10000,
-                  status: "ACCEPTED",
+                  status: 'ACCEPTED',
                 },
                 {
                   userId: s2.userId,
                   bid: 12000,
-                  status: "ACCEPTED",
+                  status: 'ACCEPTED',
                 },
                 {
                   userId: s3.userId,
                   bid: 9000,
-                  status: "ACCEPTED",
-                },
-              ],
+                  status: 'ACCEPTED',
+                }, 
+              ]
             },
             reviews: {
               create: [
                 {
                   studentId: s1.userId,
                   stars: 4,
-                  description:
-                    "นิสิตคนนี้มีความสามารถในการจัดการงานและสามารถปฏิบัติงานตามที่ได้รับมอบหมายได้อย่างมีประสิทธิภาพ\n\
-ความรวดเร็วในการตอบสนองและสามารถทำงานภารกิจที่ซับซ้อนอย่างมีประสิทธิภาพ การมีสมาธิในการปรับตัวตามสถานการณ์ได้ดีเยี่ยม",
+                  description: 'นิสิตคนนี้มีความสามารถในการจัดการงานและสามารถปฏิบัติงานตามที่ได้รับมอบหมายได้อย่างมีประสิทธิภาพ\n\
+ความรวดเร็วในการตอบสนองและสามารถทำงานภารกิจที่ซับซ้อนอย่างมีประสิทธิภาพ การมีสมาธิในการปรับตัวตามสถานการณ์ได้ดีเยี่ยม'
                 },
                 {
                   studentId: s2.userId,
                   stars: 3,
-                  description:
-                    "การร่วมงานกับนิสิตนี้เป็นประสบการณ์ที่ทรงพลังมาก ทักษะทางวิชาการของเขามีคุณภาพสูง\n\
-การทำงานที่ให้ได้มีความละเอียดสูงและการแก้ไขปัญหาที่เกิดขึ้นอย่างมีประสิทธิภาพ นอกจากนี้ ความมุ่งมั่นที่แสดงออกมาทำให้เขาเป็นส่วนสำคัญในการสำเร็จของโปรเจกต์",
+                  description: 'การร่วมงานกับนิสิตนี้เป็นประสบการณ์ที่ทรงพลังมาก ทักษะทางวิชาการของเขามีคุณภาพสูง\n\
+การทำงานที่ให้ได้มีความละเอียดสูงและการแก้ไขปัญหาที่เกิดขึ้นอย่างมีประสิทธิภาพ นอกจากนี้ ความมุ่งมั่นที่แสดงออกมาทำให้เขาเป็นส่วนสำคัญในการสำเร็จของโปรเจกต์'
                 },
                 {
                   studentId: s3.userId,
                   stars: 5,
-                  description:
-                    "ไม่สามารถพูดถึงความพึงพอใจต่อการทำงานกับนิสิตคนนี้ออกมาได้หมด การแสดงความคิดเป็นระเบียบ\n\
+                  description: 'ไม่สามารถพูดถึงความพึงพอใจต่อการทำงานกับนิสิตคนนี้ออกมาได้หมด การแสดงความคิดเป็นระเบียบ\n\
 และความสามารถในการแก้ไขปัญหาของเขาเป็นสิ่งที่ควรชมเชย การทำงานที่ส่งมอบละเมิดตามระเบียบเสมอ\n\
-ความมุ่งมั่นและความสามารถในการจัดการงานที่น่าชื่นชม ทำให้เขาเป็นส่วนหนึ่งที่สำคัญในทีมของเรา",
+ความมุ่งมั่นและความสามารถในการจัดการงานที่น่าชื่นชม ทำให้เขาเป็นส่วนหนึ่งที่สำคัญในทีมของเรา'
                 },
-              ],
-            },
+              ]
+            }
           },
 
           {
@@ -677,8 +657,8 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
                 {
                   userId: s2.userId,
                   bid: 11500,
-                },
-              ],
+                }, 
+              ]
             },
           },
 
@@ -702,8 +682,8 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
                 {
                   userId: s3.userId,
                   bid: 12000,
-                },
-              ],
+                }, 
+              ]
             },
           },
           // Add more job objects as needed
@@ -747,15 +727,15 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
                 {
                   userId: s3.userId,
                   bid: 2000,
-                },
-              ],
+                }, 
+              ]
             },
           },
 
           {
-            title: "เขียนเว็บ ChaoChao",
-            status: "IN_PROGRESS",
-            description: "ไม่รู้จะเช่าไหนดี มาเช่านี่มา",
+            title: 'เขียนเว็บ ChaoChao',
+            status: 'IN_PROGRESS',
+            description: 'ไม่รู้จะเช่าไหนดี มาเช่านี่มา',
             budget: 2000,
             startDate: new Date("2024-01-24"),
             estimateStartDate: new Date("2024-01-21"),
@@ -766,14 +746,14 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
                 {
                   userId: s1.userId,
                   bid: 1200,
-                  status: "ACCEPTED",
+                  status: 'ACCEPTED',
                 },
                 {
                   userId: s2.userId,
                   bid: 2000,
-                  status: "REJECTED",
-                },
-              ],
+                  status: 'REJECTED',
+                }, 
+              ]
             },
           },
 
@@ -796,15 +776,15 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
                 {
                   userId: s3.userId,
                   bid: 2000,
-                },
-              ],
+                }, 
+              ]
             },
           },
 
           {
-            title: "รสดีเด็ด อิซากายะ Frontend Developer",
-            status: "COMPLETED",
-            description: "Application สำหรับจองคิวและโปรโมชั่น",
+            title: 'รสดีเด็ด อิซากายะ Frontend Developer',
+            status: 'COMPLETED',
+            description: 'Application สำหรับจองคิวและโปรโมชั่น',
             budget: 2000,
             numWorker: 5,
             estimateStartDate: new Date("2024-03-01"),
@@ -815,35 +795,33 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
                 {
                   userId: s1.userId,
                   bid: 2200,
-                  status: "ACCEPTED",
+                  status: 'ACCEPTED',
                 },
                 {
                   userId: s2.userId,
                   bid: 2000,
-                  status: "ACCEPTED",
-                },
-              ],
+                  status: 'ACCEPTED',
+                }, 
+              ]
             },
             reviews: {
               create: [
                 {
                   studentId: s1.userId,
                   stars: 4,
-                  description:
-                    "I am genuinely impressed with the collaborative spirit and problem-solving abilities of this nisit.\n\
+                  description: 'I am genuinely impressed with the collaborative spirit and problem-solving abilities of this nisit.\n\
 Their academic prowess shines through in every aspect of the project. The ease with which they communicated \n\
-and took responsibility for their work created an environment that was not only productive but also enjoyable.",
+and took responsibility for their work created an environment that was not only productive but also enjoyable.'
                 },
                 {
                   studentId: s2.userId,
                   stars: 5,
-                  description:
-                    "Working with this nisit has been a truly enlightening experience.\n\
+                  description: 'Working with this nisit has been a truly enlightening experience.\n\
 Their academic proficiency is evident in the exceptional way they approached and executed tasks within the project. \n\
-The standout quality was their impeccable attention to detail and problem-solving capabilities, distinguishing them as a standout contributor.",
+The standout quality was their impeccable attention to detail and problem-solving capabilities, distinguishing them as a standout contributor.'
                 },
-              ],
-            },
+              ]
+            }
           },
 
           {
@@ -862,7 +840,7 @@ The standout quality was their impeccable attention to detail and problem-solvin
                   userId: s3.userId,
                   bid: 2000,
                 },
-              ],
+              ]
             },
           },
 
@@ -888,8 +866,8 @@ The standout quality was their impeccable attention to detail and problem-solvin
                 {
                   userId: s3.userId,
                   bid: 4400,
-                },
-              ],
+                }, 
+              ]
             },
           },
 
@@ -915,15 +893,15 @@ The standout quality was their impeccable attention to detail and problem-solvin
                 {
                   userId: s3.userId,
                   bid: 9900,
-                },
-              ],
+                }, 
+              ]
             },
           },
 
           {
-            title: "Bad Guy Full-stack developer",
-            status: "COMPLETED",
-            description: "Develop Larb selling application for E-sarn People",
+            title: 'Bad Guy Full-stack developer',
+            status: 'COMPLETED',
+            description: 'Develop Larb selling application for E-sarn People',
             budget: 2000,
             numWorker: 2,
             estimateStartDate: new Date("2024-02-02"),
@@ -934,41 +912,39 @@ The standout quality was their impeccable attention to detail and problem-solvin
                 {
                   userId: s1.userId,
                   bid: 2000,
-                  status: "REJECTED",
+                  status: 'REJECTED',
                 },
                 {
                   userId: s2.userId,
                   bid: 3000,
-                  status: "ACCEPTED",
+                  status: 'ACCEPTED',
                 },
                 {
                   userId: s3.userId,
                   bid: 1999,
-                  status: "ACCEPTED",
-                },
-              ],
+                  status: 'ACCEPTED',
+                }, 
+              ]
             },
             reviews: {
               create: [
                 {
                   studentId: s2.userId,
                   stars: 5,
-                  description:
-                    "Working with this nisit has been a pleasure from start to finish. Their efficient task management skills \n\
-and ability to fulfill assignments were noteworthy. Their work ethic and adaptability to different phases of the project ensured a smooth and successful collaboration.",
+                  description: 'Working with this nisit has been a pleasure from start to finish. Their efficient task management skills \n\
+and ability to fulfill assignments were noteworthy. Their work ethic and adaptability to different phases of the project ensured a smooth and successful collaboration.'
                 },
                 {
                   studentId: s3.userId,
                   stars: 4,
-                  description:
-                    "This nisit brought a level of creativity and innovation that greatly enhanced the project. \n\
+                  description: 'This nisit brought a level of creativity and innovation that greatly enhanced the project. \n\
 Their ability to think outside the box and present solutions was truly commendable. The final deliverables reflected a unique \n\
-and fresh perspective, exceeding our expectations.",
+and fresh perspective, exceeding our expectations.'
                 },
-              ],
-            },
+              ]
+            }
           },
-
+          
           {
             title: "นักสร้างเนื้อหาและ Content Curator",
             status: "NOT_STARTED",
@@ -991,15 +967,14 @@ engaging และ เนื้อหาสร้างสรรค์สำห�
                   userId: s2.userId,
                   bid: 11000,
                 },
-              ],
+              ]
             },
           },
 
           {
-            title: "เจ้าหน้าที่ช่วยส่วนตัวและ Virtual Assistant Extraordinaire",
-            status: "IN_PROGRESS",
-            description:
-              "Seeking บุคคลที่มี detail-oriented virtual assistant \n \
+            title: 'เจ้าหน้าที่ช่วยส่วนตัวและ Virtual Assistant Extraordinaire',
+            status: 'IN_PROGRESS',
+            description: 'Seeking บุคคลที่มี detail-oriented virtual assistant \n \
 ที่สามารถ handle administrative tasks, จัดการปฏิทิน, และ ช่วยเสริมสร้าง ใน various projects. \n \
 ทักษะการจัดระเบียบที่แข็งแกร่งและการสื่อสารที่เป็น",
             budget: 5000,
@@ -1012,9 +987,9 @@ engaging และ เนื้อหาสร้างสรรค์สำห�
                 {
                   userId: s1.userId,
                   bid: 5000,
-                  status: "ACCEPTED",
+                  status: 'ACCEPTED'
                 },
-              ],
+              ]
             },
           },
 
@@ -1044,7 +1019,7 @@ recruitment, employee onboarding, และ HR processes. \n \
             estimateEndDate: new Date("2024-04-30"),
             jobTagId: jobTagList["อื่น ๆ"],
           },
-
+          
           {
             title: "Tech Support Specialist และผู้ช่วยเหลือทางเทคนอล็อค",
             status: "NOT_STARTED",
