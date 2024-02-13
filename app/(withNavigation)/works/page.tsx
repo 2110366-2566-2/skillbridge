@@ -1,11 +1,11 @@
 import React from "react";
-import TasksPanel from "@/components/tasks/TasksPanel/TasksPanel";
+import TasksMenu from "@/components/tasks/TasksPanel/TasksMenu";
 
 export default function WorkPage() {
 
   return <div className="px-10">
     <header className="text-[36px] font-semibold mb-10">งานของฉัน</header>
 
-    <TasksPanel></TasksPanel>
+    <TasksMenu></TasksMenu>
   </div>;
 };

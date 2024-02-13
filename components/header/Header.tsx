@@ -19,6 +19,7 @@ export default async function Header() {
           alt="logo"
           width={110}
           height={110}
+          priority={true}
         />
       </Link>
       <Navbar session={session} isStudent={isStudent} />
