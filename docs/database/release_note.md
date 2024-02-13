@@ -21,6 +21,8 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Version 1.10
 ### User
 - `email` is set to not required
@@ -45,6 +47,8 @@
 ### Etc.
 - `isDeleted` is added for the deletion in `User, Job, JobTag, Applied, Transaction, Review` for referential integrity contraint
 - Change table name from `Applied` to `Application`
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
