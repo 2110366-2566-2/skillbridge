@@ -75,11 +75,11 @@ model Job {
   isDeleted         Boolean           @default(false)
   jobTagId          String
   employerId        String
-  jobDocumentFiles  JobDocumentFile[]
   applications      Application[]
   chatrooms         Chatroom[]
   employer          Employer          @relation(fields: [employerId], references: [userId])
   jobTag            JobTag            @relation(fields: [jobTagId], references: [id])
+  jobDocumentFiles  JobDocumentFile[]
   reviews           Review[]
   transactions      Transaction[]
 
