@@ -7,7 +7,7 @@ export default async function CommentCards() {
   return (
     <>
       <div className="w-screen overflow-x-scroll flex gap-3 pb-5 px-5 md:hidden">
-        {reviews.map((review:any) => (
+        {reviews.map((review: any) => (
           <CommentCard
             key={review.id}
             name={review.name}
@@ -20,7 +20,7 @@ export default async function CommentCards() {
       </div>
       <div className="hidden md:flex w-full justify-center md:px-32 md:max-w-[1600px]">
         <CardSlider>
-          {reviews.map((review:any) => (
+          {reviews.map((review: any) => (
             <CommentCard
               key={review.id}
               name={review.name}

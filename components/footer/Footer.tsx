@@ -31,10 +31,16 @@ export default function Footer() {
         </Link>
       </div>
       <div className="flex gap-4 opacity-60 underline underline-offset-1">
-        <Link href="/landing" className="md:hover:opacity-80 md:duration-300 active:opacity-40">
+        <Link
+          href="/landing"
+          className="md:hover:opacity-80 md:duration-300 active:opacity-40"
+        >
           ข้อตกลงและเงื่อนไขการใช้งาน
         </Link>
-        <Link href="/landing" className="md:hover:opacity-80 md:duration-300 active:opacity-40">
+        <Link
+          href="/landing"
+          className="md:hover:opacity-80 md:duration-300 active:opacity-40"
+        >
           นโยบายคุ้มครองความเป็นส่วนตัว
         </Link>
       </div>

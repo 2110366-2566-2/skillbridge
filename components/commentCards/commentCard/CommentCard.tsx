@@ -36,9 +36,7 @@ export default function CommentCard(props: Props) {
             width={40}
           />
           <div className="flex flex-col">
-            <h3 className="text-[15px] font-medium pb-1 md:text-lg">
-              {name}
-            </h3>
+            <h3 className="text-[15px] font-medium pb-1 md:text-lg">{name}</h3>
             <p className="text-[10px] text-slate-400 md:text-sm">
               {position} {organization}
             </p>

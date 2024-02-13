@@ -224,9 +224,9 @@ export default async function LandingPage() {
               สำเร็จไปแล้วกว่า 100 ครั้ง!
             </p>
           </div>
-          <Suspense fallback={(<CommentCardsLoading />)}>
+          <Suspense fallback={<CommentCardsLoading />}>
             <CommentCards />
-          </Suspense>            
+          </Suspense>
         </div>
       </div>
     </div>

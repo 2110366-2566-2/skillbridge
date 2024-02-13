@@ -62,8 +62,8 @@ export default function Navbar(props: Props) {
   const TRANSITION_DURATION = 300;
   const transitionClasses = `transition-all duration-${TRANSITION_DURATION}`;
   const classes = open
-    ? { cart: "translate-x-full"}
-    : { cart: "translate-x-0"};
+    ? { cart: "translate-x-full" }
+    : { cart: "translate-x-0" };
 
   return (
     <>
@@ -106,61 +106,60 @@ export default function Navbar(props: Props) {
               height={35}
             />
           </button>
-          
-            
-              <div className={`z-10 bg-neutral-800 fixed top-0 right-0 left-0 bottom-0 md:hidden duration-500 
-                ${open ? "opacity-60" : "opacity-0 invisible"}`}></div>
-              <div className={`font-ibm z-20 bg-slate-800 text-slate-50 fixed top-0 right-0 w-2/3 h-screen flex flex-col items-center p-7 justify-between md:hidden ease-in-out duration-500 
-                ${open ? "translate-x-0 " : "translate-x-full"}`}>
-                <div className="flex flex-col gap-8 justify-start w-full">
-                  <div className="flex flex-col gap-5">
-                    <div className="flex justify-between items-start">
-                      <Image
-                        className="rounded-full"
-                        src={avatar}
-                        alt="avatar"
-                        width={70}
-                        height={70}
-                      />
-                      <button
-                        className="md:hidden active:opacity-40"
-                        onClick={() => setOpen((prevOpen) => !prevOpen)}
-                      >
-                        <Image
-                          className="w-auto h-auto"
-                          src={closeIcon}
-                          alt="close"
-                          width={35}
-                          height={35}
-                        />
-                      </button>
-                    </div>
-                    <div className="flex flex-col gap-1">
-                      <p>
-                        <b className="font-medium">{name}</b>
-                      </p>
-                      <p className="text-xs">{company}</p>
-                    </div>
-                  </div>
-                  <div className="w-full flex flex-col gap-2">
-                    {(isStudent ? studentLinks : employerLinks).map((link) => (
-                      <NavLink key={"mobile : " + link.title} link={link} />
-                    ))}
-                  </div>
+
+          <div
+            className={`z-10 bg-neutral-800 fixed top-0 right-0 left-0 bottom-0 md:hidden duration-500 
+                ${open ? "opacity-60" : "opacity-0 invisible"}`}
+          ></div>
+          <div
+            className={`font-ibm z-20 bg-slate-800 text-slate-50 fixed top-0 right-0 w-2/3 h-screen flex flex-col items-center p-7 justify-between md:hidden ease-in-out duration-500 
+                ${open ? "translate-x-0 " : "translate-x-full"}`}
+          >
+            <div className="flex flex-col gap-8 justify-start w-full">
+              <div className="flex flex-col gap-5">
+                <div className="flex justify-between items-start">
+                  <Image
+                    className="rounded-full"
+                    src={avatar}
+                    alt="avatar"
+                    width={70}
+                    height={70}
+                  />
+                  <button
+                    className="md:hidden active:opacity-40"
+                    onClick={() => setOpen((prevOpen) => !prevOpen)}
+                  >
+                    <Image
+                      className="w-auto h-auto"
+                      src={closeIcon}
+                      alt="close"
+                      width={35}
+                      height={35}
+                    />
+                  </button>
                 </div>
-                <Link
-                  className="w-full flex gap-8 justify-start active:opacity-40"
-                  href="/"
-                  key="mobile : ออกจากระบบ"
-                >
-                  <Image src={logoutIcon} alt="icon" width={30} height={30} />
-                  <h2 className="text-lg font-semibold text-red-500">
-                    ออกจากระบบ
-                  </h2>
-                </Link>
+                <div className="flex flex-col gap-1">
+                  <p>
+                    <b className="font-medium">{name}</b>
+                  </p>
+                  <p className="text-xs">{company}</p>
+                </div>
               </div>
-            
-          
+              <div className="w-full flex flex-col gap-2">
+                {(isStudent ? studentLinks : employerLinks).map((link) => (
+                  <NavLink key={"mobile : " + link.title} link={link} />
+                ))}
+              </div>
+            </div>
+            <Link
+              className="w-full flex gap-8 justify-start active:opacity-40"
+              href="/"
+              key="mobile : ออกจากระบบ"
+            >
+              <Image src={logoutIcon} alt="icon" width={30} height={30} />
+              <h2 className="text-lg font-semibold text-red-500">ออกจากระบบ</h2>
+            </Link>
+          </div>
         </>
       ) : (
         <div className="flex items-center gap-4 text-xs font-ibm md:gap-7 md:text-sm">

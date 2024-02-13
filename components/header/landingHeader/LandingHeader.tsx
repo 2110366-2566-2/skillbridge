@@ -17,7 +17,7 @@ type Props = {
     createdAt: Date;
     updatedAt: Date;
     isDeleted: boolean;
-  }[],
+  }[];
   isStudent: boolean;
 };
 

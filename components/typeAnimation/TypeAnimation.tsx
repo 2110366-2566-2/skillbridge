@@ -9,7 +9,7 @@ type Props = {
     createdAt: Date;
     updatedAt: Date;
     isDeleted: boolean;
-  }[],
+  }[];
 };
 
 export default function TypeAnimation(props: Props) {
