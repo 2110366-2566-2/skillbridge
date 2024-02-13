@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 import noavatar from "@/public/icons/noavatar.svg";
 import doubleQuote from "@/public/icons/double-quote.svg";
 

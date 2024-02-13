@@ -1,15 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import getJobTags from "@/actions/getJobTags";
-
 import Marquee from "@/components/maquee/Maquee";
 import CommentCards from "@/components/commentCards/CommentCards";
-
-const studentMobileImg =
-  require("@/public/images/student-mobile.png") as string;
-const studentDesktopImg =
-  require("@/public/images/student-desktop.png") as string;
-const guaranteeLogo = require("@/public/logos/guatantee-logo.svg") as string;
+import studentMobileImg from "@/public/images/student-mobile.png";
+import studentDesktopImg from "@/public/images/student-desktop.png";
+import guaranteeLogo from "@/public/logos/guatantee-logo.svg";
+import { Suspense } from "react";
+import CommentCardsLoading from "@/components/commentCards/commentCardsLoading/CommentCardsLoading";
 
 // TEMPORARY
 const isStudent = true;
@@ -226,7 +224,9 @@ export default async function LandingPage() {
               สำเร็จไปแล้วกว่า 100 ครั้ง!
             </p>
           </div>
-          <CommentCards />
+          <Suspense fallback={(<CommentCardsLoading />)}>
+            <CommentCards />
+          </Suspense>            
         </div>
       </div>
     </div>

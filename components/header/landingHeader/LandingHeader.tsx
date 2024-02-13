@@ -3,48 +3,27 @@
 import React from "react";
 import TypeAnimation from "@/components/typeAnimation/TypeAnimation";
 import Link from "next/link";
-import searchIcon from "@/public/icons/search.svg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 
+const searchIcon = require("@/public/icons/search.svg") as string;
+
 type Props = {
+  jobTags: {
+    id: string;
+    title: string;
+    createdAt: Date;
+    updatedAt: Date;
+    isDeleted: boolean;
+  }[],
   isStudent: boolean;
 };
 
-const taskCategories = [
-  "กราฟิกดีไซน์",
-  "สถาปัตย์",
-  "ตกแต่งภายใน",
-  "ศิลปะและภาพวาด",
-  "ออกแบบ UX UI",
-  "พัฒนาแอพฯมือถือ",
-  "พัฒนาเว็ปไซต์",
-  "ไอทีโซลูชั่น",
-  "งาน IOT",
-  "อินฟลูเอนเซอร์",
-  "สื่อออนไลน์",
-  "แอดมินออนไลน์",
-  "ไลฟ์สไตล์",
-  "พัฒนาตัวเอง",
-  "การตลาด",
-  "ธุรกิจและการเงิน",
-  "รูปภาพและวีดีโอ",
-  "แต่งหน้า",
-  "สไตลิสต์",
-  "นักแสดง",
-  "นักพากย์เสียง",
-  "นักร้อง / นักดนตรี",
-  "ซาวด์เอ็นจิเนียร์",
-  "งานเขียน",
-  "ภาษา",
-  "อื่น ๆ",
-];
-
 export default function LandingHeader(props: Props) {
   const pathName = usePathname();
-  const { isStudent } = props;
+  const { isStudent, jobTags } = props;
   const router = useRouter();
   const [keyword, setKeyword] = useState("");
 
@@ -67,7 +46,9 @@ export default function LandingHeader(props: Props) {
             </span>
             ด้าน...
           </h2>
-          <TypeAnimation taskCategories={taskCategories} />
+          <div className="h-[56px] md:h-[112px] flex justify-center items-center">
+            <TypeAnimation jobTags={jobTags} />
+          </div>
           <h2 className="text-base font-normal md:text-3xl md:font-medium">
             {isStudent
               ? "ที่พร้อมให้คุณได้แสดงฝีมือ!"
@@ -77,7 +58,7 @@ export default function LandingHeader(props: Props) {
           {isStudent ? (
             <form
               onSubmit={handleSearch}
-              className="px-2 py-1 md:px-3 md:py-2 text-slate-800 font-bold bg-white rounded-2xl flex justify-center items-center border-b-4 border-pink-400 md:border-b-8 md:text-3xl md:duration-300 md:active:border-b-4 md:active:mt-1"
+              className="px-2 py-1 md:px-3 md:py-2 text-slate-800 font-bold bg-white rounded-2xl flex justify-center items-center border-b-4 border-pink-400 md:border-b-8 md:text-3xl md:duration-300 md:active:border-b-4 md:active:mt-1 active:opacity-40"
             >
               <input
                 className="focus:outline-none"
@@ -102,7 +83,7 @@ export default function LandingHeader(props: Props) {
           ) : (
             <Link
               href="/works"
-              className="text-slate-800 font-bold bg-white rounded-2xl px-24 py-1 border-b-4 border-pink-400 md:border-b-8 md:text-3xl md:py-2 md:px-40 md:hover:border-slate-50 md:hover:text-white md:hover:bg-pink-400 md:duration-300 md:active:border-b-4 md:active:mt-1 "
+              className="text-slate-800 font-bold bg-white rounded-2xl px-24 py-1 border-b-4 border-pink-400 md:border-b-8 md:text-3xl md:py-2 md:px-40 md:hover:border-slate-50 md:hover:text-white md:hover:bg-pink-400 md:duration-300 md:active:border-b-4 md:active:mt-1 active:opacity-40 "
             >
               โพสงานเลย!
             </Link>

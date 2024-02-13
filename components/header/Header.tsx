@@ -3,20 +3,22 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "./navbar/Navbar";
 import LandingHeader from "./landingHeader/LandingHeader";
+import getJobTags from "@/actions/getJobTags";
+import whiteLogo from "@/public/logos/logo-white.svg";
 
-const whiteLogo = require("@/public/logos/logo-white.svg") as string;
+export default async function Header() {
+  const jobTags = await getJobTags();
 
-export default function Header() {
   // TEMPORARY : Should use "auth" on layout?
   const session = true;
   const isStudent = true;
 
   return (
     <div>
-      <div className="flex justify-between items-center py-4 pl-3 pr-5 md:pr-10">
+      <div className="flex justify-between items-center py-5 pl-5 pr-8 md:pr-10">
         <Link href="/landing">
           <Image
-            className="w-auto h-auto md:w-36 md:hover:scale-105 md:duration-500"
+            className="w-auto h-auto md:w-36 md:hover:scale-105 md:duration-500 active:opacity-40"
             src={whiteLogo}
             alt="logo"
             width={110}
@@ -25,7 +27,7 @@ export default function Header() {
         </Link>
         <Navbar session={session} isStudent={isStudent} />
       </div>
-      <LandingHeader isStudent={isStudent} />
+      <LandingHeader isStudent={isStudent} jobTags={jobTags} />
     </div>
   );
 }
