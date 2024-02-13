@@ -43,11 +43,12 @@ interface Props {
   }[];
   isUpdate: boolean;
   initialData: FormData;
+  jobId: string;
 }
 
 export default function JobForm(props: Props) {
   const router = useRouter();
-  const { isUpdate, jobTags, initialData } = props;
+  const { isUpdate, jobTags, initialData, jobId } = props;
   const [files, setFiles] = useState<FileList | null>(null);
   const [formData, setFormData] = useState<FormData>(initialData);
 
@@ -122,10 +123,11 @@ export default function JobForm(props: Props) {
         }
       }
       if (!isUpdate) {
-        const res = createJob(formDataObject);
+        const res = await createJob(formDataObject);
         console.log(res);
       } else {
-        // const res = updateJob(formDataObject);
+        formDataObject.append("jobId", jobId);
+        const res = updateJob(formDataObject);
       }
     }
   };

@@ -1,46 +1,31 @@
 import type { JobStatus } from "@prisma/client";
 import prisma from "../db/prisma";
 
-interface FormData {
-  jobId: string;
-  title?: string;
-  status?: JobStatus;
-  description?: string;
-  budget?: number;
-  numWorker?: number;
-  estimateStartDate?: Date;
-  estimateEndDate?: Date;
-  jobTagId?: string;
-  files?: File | null;
-  startDate?: Date;
-  endDate?: Date;
-}
-
 const updateJob = async (formData: FormData) => {
   try {
-    const jobId = formData.jobId;
-    const title = formData.title;
-    const status = formData.status; //ไม่น่าใช่ input จาก user เราคง้องกำหนดเอง
-    const description = formData.description;
-    const estimateStartDate = formData.estimateStartDate as Date;
-    const estimateEndDate = formData.estimateEndDate as Date;
-    const budget = formData.budget;
-    const jobTagId = formData.jobTagId;
-    const numWorker = formData.numWorker;
-    const startDate = formData.startDate;
-    const endDate = formData.endDate;
-    const files = formData.files;
+    const jobId = formData.get("jobId") as string;
+    const employerId = formData.get("employerId") as string;
+    const title = formData.get("title")  as string;
+    const description = formData.get("description")  as string;
+    const estimateStartDate = formData.get("estimateStartDate") as string;
+    const parsedStartDate = new Date(estimateStartDate);
+    const estimateEndDate = formData.get("estimateEndDate") as string;
+    const parsedEndDate = new Date(estimateEndDate);
+    const budget = parseInt(formData.get("budget") as string, 10);
+    const jobTagId = formData.get("jobTagId") as string;
+    const numWorker = parseInt(formData.get("numWorker") as string, 10);
+    const files = formData.getAll("files[]") as File[];
+
     console.log(
+      jobId,
+      employerId,
       title,
-      status,
       description,
-      estimateStartDate,
-      estimateEndDate,
+      parsedStartDate,
+      parsedEndDate,
       budget,
       jobTagId,
       numWorker,
-      startDate,
-      endDate,
       files
     );
 
@@ -57,6 +42,7 @@ const updateJob = async (formData: FormData) => {
     //     status: 401
     //   }
     // }
+
     const job = await prisma.job.findFirst({
       where: {
         id: jobId,
@@ -84,15 +70,12 @@ const updateJob = async (formData: FormData) => {
       },
       data: {
         title,
-        status,
         description,
         estimateStartDate,
         estimateEndDate,
         budget,
         jobTagId,
         numWorker,
-        startDate,
-        endDate,
       },
     });
     return {
@@ -110,14 +93,14 @@ const updateJob = async (formData: FormData) => {
 
 export default updateJob;
 
-const main = async () => {
-  const data = {
-    jobId: "bdf21ad2-c998-4e38-85af-e888df8c6759",
-    title: "Test update work",
-    startDate: new Date().toISOString(),
-  } as unknown as FormData;
-  const result = await updateJob(data);
-  console.log(result);
-};
+// const main = async () => {
+//   const data = {
+//     jobId: "bdf21ad2-c998-4e38-85af-e888df8c6759",
+//     title: "Test update work",
+//     startDate: new Date().toISOString(),
+//   } as unknown as FormData;
+//   const result = await updateJob(data);
+//   console.log(result);
+// };
 
-main();
+// main();

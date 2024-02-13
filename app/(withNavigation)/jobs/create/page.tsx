@@ -13,6 +13,6 @@ export default async function page() {
     estimateEndDate: "",
     jobTagId: "",
   };
-  return <JobForm isUpdate={false} jobTags={jobTags} initialData={formData} />;
+  return <JobForm isUpdate={false} jobTags={jobTags} initialData={formData} jobId={""} />;
 }
 

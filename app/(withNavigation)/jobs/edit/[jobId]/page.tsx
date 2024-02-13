@@ -19,5 +19,5 @@ export default async function page({ params }: { params: { jobId: string } }) {
     estimateEndDate: (job.estimateEndDate).toISOString().split('T')[0],
     jobTagId: job.jobTagId,
   };
-  return <JobForm isUpdate={true} jobTags={jobTags} initialData={formData} />;
+  return <JobForm isUpdate={true} jobTags={jobTags} initialData={formData} jobId={jobId} />;
 }
