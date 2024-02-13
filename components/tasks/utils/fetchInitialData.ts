@@ -12,7 +12,7 @@ const fetchInitialData = () => {
     const mockUpDatumn1: TaskCardType = {
             name: "รับสมัคร TA วิชา Comp Prog",
             budget: 6000,
-            description: "รักการสอนเด็ก ๆ, มีความรู้ python numpy",
+            description: "รักการสอนเด็ก ๆ, มีความรู้ python numpy lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, molestie ipsum et, tincidunt nunc lorem efdeiowpfkj0eipwfjeiwfjpewfjeopwfj",
             category: "การสอน",
             applicants: 7,
             maxApplicants: 10,
@@ -22,7 +22,7 @@ const fetchInitialData = () => {
           };
         
           const mockUpDatumn2: TaskCardType = {
-            name: "รับสมัคร TA วิชา Comp Prog",
+            name: "รับสมัคร TA วิชา Comp Progefefef ยำดสำยสา้เบพนยานบ",
             budget: 7000,
             description: "รักการสอนเด็ก ๆ, มีความรู้ python numpy",
             category: "การสอน",
@@ -48,7 +48,7 @@ const fetchInitialData = () => {
           const mockUpDatumn4: TaskCardType = {
             name: "รับสมัคร TA วิชา Comp Prog",
             budget: 9000,
-            description: "รักการสอนเด็ก ๆ, มีความรู้ python numpy",
+            description: "รักการสอนเด็ก ๆ, มีความรู้ python numpy lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, molestie ipsum et, tincidunt nunc lorem efdeiowpfkj0eipwfjeiwfjpewfjeopwfj",
             category: "การสอน",
             applicants: 10,
             maxApplicants: 13,

@@ -25,10 +25,12 @@ const TaskCard = ({
   isPending
 }: Props) => {
   return (
-    <div className="bg-gradient-to-r from-slate-100 px-5 pt-7 pb-2 rounded-3xl shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-slate-200">
+    <div className="bg-gradient-to-r from-slate-100 px-5 pt-7 pb-2 rounded-3xl shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-slate-200 max-w-[500px]">
       <div className="flex flex-row justify-between">
-        <div>
-          <div className="font-semibold text-2xl">{name}</div>
+        <div className="w-[85%]">
+          <div className="h-[60px]">
+            <p className="font-semibold text-2xl line-clamp-2">{name}</p>
+          </div>
           <div className="font-medium my-2">
             {startDate} - {endDate}
           </div>
@@ -47,7 +49,7 @@ const TaskCard = ({
       <div className="font-medium text-sm mt-3">คำอธิบายเกี่ยวกับงาน</div>
       <hr className="mb-2" />
 
-      <div className="text-sm">{description}</div>
+      <div className="text-sm line-clamp-2 h-10">{description}</div>
       <hr className="my-2" />
 
       <div className="flex flex-row align-text-bottom justify-between">
