@@ -35,6 +35,7 @@ export default function SearchKeywordText() {
                             alt="logoTextBlack"
                             // width={16}
                             height={34.75}
+                            priority={true}
                         />
                     </span>
                 </div>
