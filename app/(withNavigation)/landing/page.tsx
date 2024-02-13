@@ -1,10 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import getJobTags from "@/actions/getJobTags";
 
 import Marquee from "@/components/maquee/Maquee";
 import CommentCards from "@/components/commentCards/CommentCards";
-import TypeAnimation from "@/components/typeAnimation/TypeAnimation";
-import CardSlider from "@/components/cardSlider/CardSlider";
 
 const studentMobileImg =
   require("@/public/images/student-mobile.png") as string;
@@ -14,36 +13,9 @@ const guaranteeLogo = require("@/public/logos/guatantee-logo.svg") as string;
 
 // TEMPORARY
 const isStudent = true;
-const taskCategories = [
-  "กราฟิกดีไซน์",
-  "สถาปัตย์",
-  "ตกแต่งภายใน",
-  "ศิลปะและภาพวาด",
-  "ออกแบบ UX UI",
-  "พัฒนาแอพฯมือถือ",
-  "พัฒนาเว็ปไซต์",
-  "ไอทีโซลูชั่น",
-  "งาน IOT",
-  "อินฟลูเอนเซอร์",
-  "สื่อออนไลน์",
-  "แอดมินออนไลน์",
-  "ไลฟ์สไตล์",
-  "พัฒนาตัวเอง",
-  "การตลาด",
-  "ธุรกิจและการเงิน",
-  "รูปภาพและวีดีโอ",
-  "แต่งหน้า",
-  "สไตลิสต์",
-  "นักแสดง",
-  "นักพากย์เสียง",
-  "นักร้อง / นักดนตรี",
-  "ซาวด์เอ็นจิเนียร์",
-  "งานเขียน",
-  "ภาษา",
-  "อื่น ๆ",
-];
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  const jobTags = await getJobTags();
   return (
     <div className="flex justify-center items-center">
       <div className="flex flex-col h-full py-10 md:py-14 md:max-w-[1600px] md:w-full">
@@ -185,8 +157,8 @@ export default function LandingPage() {
                 </p>
               )}
             </div>
-            <Marquee taskCategories={taskCategories} isLeft={true} />
-            <Marquee taskCategories={taskCategories} isLeft={false} />
+            <Marquee jobTags={jobTags} isLeft={true} />
+            <Marquee jobTags={jobTags} isLeft={false} />
           </div>
 
           {/* 3.2-desktop */}
@@ -213,8 +185,8 @@ export default function LandingPage() {
         </div>
 
         <div className="hidden md:flex md:flex-col md:gap-8 md:pb-40 md:w-full">
-          <Marquee taskCategories={taskCategories} isLeft={true} />
-          <Marquee taskCategories={taskCategories} isLeft={false} />
+          <Marquee jobTags={jobTags} isLeft={true} />
+          <Marquee jobTags={jobTags} isLeft={false} />
         </div>
 
         {/* 2 */}
