@@ -7,8 +7,9 @@ import { useSearchParams } from "next/navigation";
 const logoTextBlack = require("@/public/logos/logo-text-black.svg") as string;
 
 export default function SearchKeywordText() {
-    const [keyword, setKeyword] = useState("")
     const searchParams = useSearchParams();
+    const queryString = searchParams.get("q");
+    const [keyword, setKeyword] = useState(queryString)
 
     useEffect(() => {
         async function setSearchKeyword() {

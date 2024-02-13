@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import SearchBar from "./SearchBar";
 import Filter from "./Filter";
+import { Suspense } from "react";
 
 export default function SearchAndFilter() {
     const pathName = usePathname();
@@ -24,7 +25,9 @@ export default function SearchAndFilter() {
                                 <SearchBar />
                             </div>
                             <div>
-                                <Filter />
+                                <Suspense>
+                                    <Filter />
+                                </Suspense>
                             </div>
                         </div>
                     </div>
@@ -37,7 +40,9 @@ export default function SearchAndFilter() {
                                 <SearchBar />
                             </div>
                             <div>
-                                <Filter />
+                                <Suspense>
+                                    <Filter />
+                                </Suspense>
                             </div>
                         </div>
                     </div>
