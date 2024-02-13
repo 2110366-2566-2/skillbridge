@@ -60,26 +60,26 @@ model Employer {
 }
 
 model Job {
-  id                String        @id @default(uuid())
+  id                String            @id @default(uuid())
   title             String
-  status            JobStatus     @default(NOT_STARTED)
+  status            JobStatus         @default(NOT_STARTED)
   description       String?
-  descriptionUrl    String?
   budget            Int
-  numWorker         Int           @default(1)
+  numWorker         Int               @default(1)
   startDate         DateTime?
   endDate           DateTime?
   estimateStartDate DateTime
   estimateEndDate   DateTime
-  createdAt         DateTime      @default(now())
-  updatedAt         DateTime      @updatedAt
-  isDeleted         Boolean       @default(false)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  isDeleted         Boolean           @default(false)
   jobTagId          String
   employerId        String
+  jobDocumentFiles  JobDocumentFile[]
   applications      Application[]
   chatrooms         Chatroom[]
-  employer          Employer      @relation(fields: [employerId], references: [userId])
-  jobTag            JobTag        @relation(fields: [jobTagId], references: [id])
+  employer          Employer          @relation(fields: [employerId], references: [userId])
+  jobTag            JobTag            @relation(fields: [jobTagId], references: [id])
   reviews           Review[]
   transactions      Transaction[]
 
@@ -95,6 +95,18 @@ model JobTag {
   job       Job[]
 
   @@map("job_tag")
+}
+
+model JobDocumentFile {
+  id        String   @id @default(uuid())
+  jobId     String
+  fileUrl   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  isDeleted Boolean  @default(false)
+  job       Job      @relation(fields: [jobId], references: [id])
+
+  @@map("job_document_file")
 }
 
 model Application {
