@@ -56,7 +56,7 @@ const TaskCard = ({
         <div className="text-sm">
           รับแล้ว {applicants.toString()}/{maxApplicants.toString()} คน
         </div>
-        <div className="text-xl text-end font-medium">฿{budget.toString()}</div>
+        <div className="text-xl text-end font-medium">฿{budget.toLocaleString()}</div>
       </div>
     </div>
   );

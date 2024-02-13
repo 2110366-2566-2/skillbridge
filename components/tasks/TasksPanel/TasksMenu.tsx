@@ -23,9 +23,12 @@ const TasksMenu = () => {
   const [doneTasks, setDoneTasks] = useState<TaskCardType[]>([]);
 
   useEffect(() => {
-    const [pendingTasks, doneTasks] = fetchInitialData();
-    setPendingTasks(pendingTasks);
-    setDoneTasks(doneTasks);
+    async function fetchData() {
+      const [pendingTasks, doneTasks] = await fetchInitialData();
+      setPendingTasks(pendingTasks);
+      setDoneTasks(doneTasks);
+    }
+    fetchData();
   }, []);
 
   return (
@@ -180,7 +183,7 @@ const TasksMenu = () => {
               }}
               className="w-full min-h-[40px] text-slate-700 text-[16px] rounded-md hover:bg-slate-200 focus:ring-2 focus:outline-none focus:ring-slate-300"
             >
-              ล้างตัวเลือก
+              ล้าง
             </button>
           </div>
         </aside>
@@ -283,7 +286,7 @@ const TasksMenu = () => {
                   }}
                   className="w-1/2 min-h-[40px] text-slate-700 text-[16px] rounded-md hover:bg-slate-200 focus:ring-2 focus:outline-none focus:ring-slate-300"
                 >
-                  ล้างตัวเลือก
+                  ล้าง
                 </button>
                 <button
                   className="w-1/2 min-h-[40px] text-white text-[16px] rounded-md bg-slate-700 hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-slate-300"
