@@ -5,14 +5,14 @@ export default function LoggedIn() {
   // const session = await getServerSession(authOptions) //Server
   const { data: session } = useSession() //Client
 
-  console.log(session)
-
   if (!session)
     return (
       <>
         <div className="">Not Logged in</div>
       </>
     )
+
+  console.log(session)
   return (
     <>
       <div className="flex flex-col">
