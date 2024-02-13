@@ -62,7 +62,7 @@ async function getDefaultSearchJobs(): Promise<job[]> {
             startDate: job.estimateStartDate.toLocaleDateString('en-GB'),
             endDate: job.estimateEndDate.toLocaleDateString('en-GB'),
             jobTags: job.jobTag.title, 
-            description: job.description,
+            description: job.description ? job.description : "",
             acceptNum: job.applications.filter(app => app.status==ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
             maxAcceptNum: job.numWorker,
             budget: job.budget
@@ -125,7 +125,7 @@ async function getSearchJobs(query?: string, filter?: jobFilter): Promise<job[]>
                 startDate: job.estimateStartDate.toLocaleDateString('en-GB'),
                 endDate: job.estimateEndDate.toLocaleDateString('en-GB'),
                 jobTags: job.jobTag.title, 
-                description: job.description,
+                description: job.description ? job.description : "",
                 acceptNum: job.applications.filter(app => app.status==ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
                 maxAcceptNum: job.numWorker,
                 budget: job.budget
@@ -194,7 +194,7 @@ async function getSearchJobs(query?: string, filter?: jobFilter): Promise<job[]>
             startDate: job.estimateStartDate.toLocaleDateString('en-GB'),
             endDate: job.estimateEndDate.toLocaleDateString('en-GB'),
             jobTags: job.jobTag.title, 
-            description: job.description,
+            description: job.description ? job.description : "",
             acceptNum: job.applications.filter(app => app.status==ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
             maxAcceptNum: job.numWorker,
             budget: job.budget
@@ -216,22 +216,26 @@ async function getSearchJobs(query?: string, filter?: jobFilter): Promise<job[]>
 function getPrismaWhereFromJobFilter(filter: jobFilter) {
     let prismaWhereFilter: any = {};
 
-    if (filter == null) return {};
+    if (filter == undefined) return {};
 
-    if (filter.startDate != null) 
+    if (filter.startDate != undefined) 
         prismaWhereFilter.estimateStartDate = { gte: filter.startDate };
 
-    if (filter.endDate != null) 
+    if (filter.endDate != undefined) 
         prismaWhereFilter.estimateEndDate = { lte: filter.endDate };
 
-    if (filter.lowestBudget != null) 
+    if (filter.lowestBudget != undefined) 
         prismaWhereFilter.budget = { gte: filter.lowestBudget };
     
-    if (filter.highestBudget != null) 
-        if (prismaWhereFilter.budget == null) prismaWhereFilter.budget = {};
+    if (filter.highestBudget != undefined) {
+        if (prismaWhereFilter.budget == undefined) {
+            prismaWhereFilter.budget = {};
+            console.log("WTF");
+        }
         prismaWhereFilter.budget.lte = filter.highestBudget;
+    }
     
-    if (filter.jobTag != null) {
+    if (filter.jobTag != undefined) {
         prismaWhereFilter.jobTag = { title: { equals: filter.jobTag} };
     }
 
@@ -240,35 +244,22 @@ function getPrismaWhereFromJobFilter(filter: jobFilter) {
 
 /*
 async function main() {
-    
     const filter: jobFilter = {
-        lowestBudget: 1000+1,
-        highestBudget: undefined
+        highestBudget: 9999
     };
 
-    const a = await getSearchJobs("เขียนโปรแกรม");
+    const a = await getSearchJobs(undefined, filter);
     console.log(a);
 
-    // const jobs = await prisma.job.findMany({
-    //     include: {
-    //         jobTag: true,
-    //         applications: true
-    //     },
-    //     where: {
-    //         jobTag: {
-    //             title: {
-    //                 equals: undefined
-    //             }
-    //         }
-    //     }
-    // })
+    // const a = await prisma.job.findMany();
 
-    // console.log(jobs);
-    // console.log(jobs.length);
+    // console.log(a);
+
 }
 
 main();
 */
+
 
 
 
