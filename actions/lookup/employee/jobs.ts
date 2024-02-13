@@ -38,7 +38,7 @@ async function getEmployerJobs(employeeId: string) {
             startDate: job.estimateStartDate.toLocaleDateString('en-GB'),
             endDate: job.estimateEndDate.toLocaleDateString('en-GB'),
             jobTags: job.jobTag.title, 
-            description: job.description,
+            description: job.description ? job.description : "",
             acceptNum: job.applications.filter(app => app.status==ApplicationStatus.ACCEPTED).length, 
             maxAcceptNum: job.numWorker,
             budget: job.budget,
