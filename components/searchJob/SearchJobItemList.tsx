@@ -20,7 +20,7 @@ export default function SearchJobItemList() {
                     setJobs(defaultJobs);
                 }
             } catch (error) {
-                console.error("Error fetching jobs:", error);
+                console.error("Error fetching default jobs:", error);
             } finally {
                 setLoading(false); // Update loading state once data fetching is complete
             }
