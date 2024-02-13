@@ -44,7 +44,7 @@ export default function SearchJobItemList() {
                         highestBudget: max ? parseInt(max) : undefined,
                         jobTag: tag ? tag : undefined
                     }
-                    console.log(jobFilter)
+                    // console.log(jobFilter)
                     queryJobs = await getSearchJobs(q, jobFilter);
                     setJobs(queryJobs);
                 } else if (!filter_used && q) {
