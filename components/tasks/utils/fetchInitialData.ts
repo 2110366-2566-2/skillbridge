@@ -8,7 +8,6 @@ const fetchInitialData = async () => {
     "64cef790-e24e-4265-8be6-856f6d32414a"];
     
     const result = await getEmployerJobs(idSample[Math.floor(Math.random() * idSample.length)]);
-    console.log(result);
 
     const tasks: Array<TaskCardType>  = result.map((task) => {return {name: task.title, budget: task.budget, description: task.description, category: task.jobTags, applicants: task.acceptNum, maxApplicants: task.maxAcceptNum, startDate: task.startDate, endDate: task.endDate, isPending: task.jobStatus === "NOT_STARTED"}});
 
