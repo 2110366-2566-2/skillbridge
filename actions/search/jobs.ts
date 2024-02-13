@@ -1,7 +1,6 @@
 "use server"
 import { PrismaClient, JobStatus, ApplicationStatus } from '@prisma/client'
 import { Client } from '@elastic/elasticsearch';
-import { match } from 'assert';
 
 const prisma = new PrismaClient();
 
@@ -55,16 +54,16 @@ async function getDefaultSearchJobs(): Promise<job[]> {
         },
         take: 12
     })
-
+    
     jobs.forEach((job) => {
         const showJob: job = {
             id: job.id,
             title: job.title,
             startDate: job.estimateStartDate.toLocaleDateString('en-GB'),
             endDate: job.estimateEndDate.toLocaleDateString('en-GB'),
-            jobTags: job.jobTag.title,
+            jobTags: job.jobTag.title, 
             description: job.description,
-            acceptNum: job.applications.filter(app => app.status == ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
+            acceptNum: job.applications.filter(app => app.status==ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
             maxAcceptNum: job.numWorker,
             budget: job.budget
         };
@@ -118,16 +117,16 @@ async function getSearchJobs(query?: string, filter?: jobFilter): Promise<job[]>
             },
             take: 12
         })
-
+        
         jobs.forEach((job) => {
             const showJob: job = {
                 id: job.id,
                 title: job.title,
                 startDate: job.estimateStartDate.toLocaleDateString('en-GB'),
                 endDate: job.estimateEndDate.toLocaleDateString('en-GB'),
-                jobTags: job.jobTag.title,
+                jobTags: job.jobTag.title, 
                 description: job.description,
-                acceptNum: job.applications.filter(app => app.status == ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
+                acceptNum: job.applications.filter(app => app.status==ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
                 maxAcceptNum: job.numWorker,
                 budget: job.budget
             };
@@ -145,15 +144,15 @@ async function getSearchJobs(query?: string, filter?: jobFilter): Promise<job[]>
         return output;
     }
 
-    /* STEP 1 */
+    /* STEP 1 */ 
     const res = await elasticClient.search<elasticJob>({
         index: "job_1",
         body: {
             "query": {
                 match: {
                     title: {
-                        query: query,
-                        fuzziness: "AUTO"
+                      query: query,
+                      fuzziness: "AUTO"
                     }
                 }
             }
@@ -187,16 +186,16 @@ async function getSearchJobs(query?: string, filter?: jobFilter): Promise<job[]>
         },
         take: 12
     });
-
+    
     jobs.forEach((job) => {
         const showJob: job = {
             id: job.id,
             title: job.title,
             startDate: job.estimateStartDate.toLocaleDateString('en-GB'),
             endDate: job.estimateEndDate.toLocaleDateString('en-GB'),
-            jobTags: job.jobTag.title,
+            jobTags: job.jobTag.title, 
             description: job.description,
-            acceptNum: job.applications.filter(app => app.status == ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
+            acceptNum: job.applications.filter(app => app.status==ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
             maxAcceptNum: job.numWorker,
             budget: job.budget
         };
@@ -217,40 +216,59 @@ async function getSearchJobs(query?: string, filter?: jobFilter): Promise<job[]>
 function getPrismaWhereFromJobFilter(filter: jobFilter) {
     let prismaWhereFilter: any = {};
 
-    if (filter == null) return;
+    if (filter == null) return {};
 
-    if (filter.startDate != null)
+    if (filter.startDate != null) 
         prismaWhereFilter.estimateStartDate = { gte: filter.startDate };
 
-    if (filter.endDate != null)
+    if (filter.endDate != null) 
         prismaWhereFilter.estimateEndDate = { lte: filter.endDate };
 
-    if (filter.lowestBudget != null)
+    if (filter.lowestBudget != null) 
         prismaWhereFilter.budget = { gte: filter.lowestBudget };
-
-    if (filter.highestBudget != null)
+    
+    if (filter.highestBudget != null) 
         if (prismaWhereFilter.budget == null) prismaWhereFilter.budget = {};
-    prismaWhereFilter.budget.lte = filter.highestBudget;
-
+        prismaWhereFilter.budget.lte = filter.highestBudget;
+    
     if (filter.jobTag != null) {
-        prismaWhereFilter.jobTag = { equals: filter.jobTag };
+        prismaWhereFilter.jobTag = { title: { equals: filter.jobTag} };
     }
 
     return prismaWhereFilter;
 }
 
-
+/*
 async function main() {
+    
     const filter: jobFilter = {
-        lowestBudget: 1000 + 1,
-        highestBudget: 9999
+        lowestBudget: 1000+1,
+        highestBudget: undefined
     };
 
     const a = await getSearchJobs("เขียนโปรแกรม");
     console.log(a);
+
+    // const jobs = await prisma.job.findMany({
+    //     include: {
+    //         jobTag: true,
+    //         applications: true
+    //     },
+    //     where: {
+    //         jobTag: {
+    //             title: {
+    //                 equals: undefined
+    //             }
+    //         }
+    //     }
+    // })
+
+    // console.log(jobs);
+    // console.log(jobs.length);
 }
 
 main();
+*/
 
 
 
