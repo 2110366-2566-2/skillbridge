@@ -1,3 +1,5 @@
+import DeleteModal from "@/components/jobForm/deleteModal/DeleteModal";
+
 export default function LandingPage() {
-  return <div>This is landing page.</div>;
+  return <DeleteModal />;
 }

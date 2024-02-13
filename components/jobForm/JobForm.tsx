@@ -108,7 +108,7 @@ export default function JobForm(props: Props) {
       let formDataObject = new FormData();
       formDataObject.append(
         "employerId",
-        "a9337827-e7cf-4ec4-8601-76fb5518eea1",
+        "eecf6f76-9c05-4ced-a706-abb6b18007b1",
       ); // TEMPORARY
       formDataObject.append("title", formData.title);
       formDataObject.append("description", formData.description);
@@ -124,10 +124,13 @@ export default function JobForm(props: Props) {
       }
       if (!isUpdate) {
         const res = await createJob(formDataObject);
+        console.log(formDataObject);
         console.log(res);
       } else {
         formDataObject.append("jobId", jobId);
-        const res = updateJob(formDataObject);
+        console.log(formDataObject);
+        const res = await updateJob(formDataObject);
+        console.log(res);
       }
     }
   };
@@ -137,12 +140,15 @@ export default function JobForm(props: Props) {
       <div className="hidden lg:flex lg:flex-col lg:gap-5 lg:justify-center lg:items-center lg:flex-grow lg:max-w-lg">
         <h1 className="text-[32px] font-semibold self-start leading-7">
           มาหาคนมาทำงานให้คุณกันเถอะ...
-          <br/>
-          <Link href="/landing" className="underline self-start text-[14px] font-normal">
+          <br />
+          <Link
+            href="/landing"
+            className="underline self-start text-[14px] font-normal"
+          >
             คลิกที่นี่หากคุณสงสัยว่าจะสร้างงานอย่างไร
           </Link>
         </h1>
-        
+
         <Image
           className="lg:pt-5"
           src={humanImage}
@@ -151,7 +157,10 @@ export default function JobForm(props: Props) {
           height={300}
         />
       </div>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3 flex-grow lg:max-w-screen-md">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-3 flex-grow lg:max-w-screen-md"
+      >
         <Input
           type="text"
           label="ชื่องาน"
@@ -231,27 +240,24 @@ export default function JobForm(props: Props) {
 
           <div className="flex justify-between md:justify-center md:items-center md:flex-grow">
             <div className="flex-grow md:hidden"></div>
-            <div className="flex flex-row gap-2 flex-grow">
+            <div className="flex flex-row gap-2 md:flex-grow">
               <button
                 type="button"
                 onClick={() => router.back()}
-                className="border border-slate-300 px-[16px] py-[12px] text-slate-800 text-[14px] rounded-[6px] hover:bg-slate-200 focus:ring-4 focus:outline-none focus:ring-slate-300 flex-grow"
+                className="border border-slate-300 px-[16px] py-[8px] md:py-[12px] text-slate-800 text-[14px] rounded-[6px] hover:bg-slate-200 focus:ring-4 focus:outline-none focus:ring-slate-300 md:flex-grow"
               >
                 ยกเลิก
               </button>
               {isUpdate && (
-                <button
-                  type="submit"
-                  className="border border-slate-300 px-[16px] py-[12px] text-white text-[14px] rounded-[6px] bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 flex-grow"
-                >
+                <button className="border border-slate-300 px-[16px] py-[8px] md:py-[12px] text-white text-[14px] rounded-[6px] bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 md:flex-grow">
                   ลบงาน
                 </button>
               )}
               <button
                 type="submit"
-                className="border border-slate-300 px-[16px] py-[12px] text-white text-[14px] rounded-[6px] bg-slate-800 hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-slate-300 flex-grow"
+                className="border border-slate-300 px-[16px] py-[8px] md:py-[12px] text-white text-[14px] rounded-[6px] bg-slate-800 hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-slate-300 md:flex-grow"
               >
-                {isUpdate ? "ยืนยันการแก้ไข" : "สร้างงาน"}
+                {isUpdate ? "บันทึก" : "สร้างงาน"}
               </button>
             </div>
           </div>

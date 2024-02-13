@@ -9,8 +9,8 @@ import { JobStatus } from "@prisma/client";
 const createJob = async (formData: FormData) => {
   try {
     const employerId = formData.get("employerId") as string;
-    const title = formData.get("title")  as string;
-    const description = formData.get("description")  as string;
+    const title = formData.get("title") as string;
+    const description = formData.get("description") as string;
     const estimateStartDate = formData.get("estimateStartDate") as string;
     const parsedStartDate = new Date(estimateStartDate);
     const estimateEndDate = formData.get("estimateEndDate") as string;
@@ -19,7 +19,7 @@ const createJob = async (formData: FormData) => {
     const jobTagId = formData.get("jobTagId") as string;
     const numWorker = parseInt(formData.get("numWorker") as string, 10);
     const files = formData.getAll("files[]") as File[];
-    const status = "NOT_STARTED"  as JobStatus;
+    const status = "NOT_STARTED" as JobStatus;
 
     // Test log
     console.log(
@@ -32,7 +32,7 @@ const createJob = async (formData: FormData) => {
       budget,
       jobTagId,
       numWorker,
-      files
+      files,
     );
 
     //const session = await getServerSession(options);
@@ -71,6 +71,7 @@ const createJob = async (formData: FormData) => {
     //     )
     //     .end(buffer);
     // });
+    
     await prisma.job.create({
       data: {
         employerId: employerId,

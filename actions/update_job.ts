@@ -1,3 +1,5 @@
+"use server";
+
 import type { JobStatus } from "@prisma/client";
 import prisma from "../db/prisma";
 
@@ -5,12 +7,15 @@ const updateJob = async (formData: FormData) => {
   try {
     const jobId = formData.get("jobId") as string;
     const employerId = formData.get("employerId") as string;
-    const title = formData.get("title")  as string;
-    const description = formData.get("description")  as string;
+    const title = formData.get("title") as string;
+    const description = formData.get("description") as string;
+
     const estimateStartDate = formData.get("estimateStartDate") as string;
     const parsedStartDate = new Date(estimateStartDate);
+
     const estimateEndDate = formData.get("estimateEndDate") as string;
     const parsedEndDate = new Date(estimateEndDate);
+
     const budget = parseInt(formData.get("budget") as string, 10);
     const jobTagId = formData.get("jobTagId") as string;
     const numWorker = parseInt(formData.get("numWorker") as string, 10);
@@ -26,7 +31,7 @@ const updateJob = async (formData: FormData) => {
       budget,
       jobTagId,
       numWorker,
-      files
+      files,
     );
 
     //const session = await getServerSession(options);
@@ -71,17 +76,21 @@ const updateJob = async (formData: FormData) => {
       data: {
         title,
         description,
-        estimateStartDate,
-        estimateEndDate,
+        estimateStartDate: parsedStartDate,
+        estimateEndDate: parsedEndDate,
         budget,
         jobTagId,
         numWorker,
       },
     });
-    return {
+
+    const successResponse = {
       message: "Create Task Success",
       status: 201,
     };
+
+    console.log(successResponse);
+    return successResponse;
   } catch (error: any) {
     console.log(error);
     return {

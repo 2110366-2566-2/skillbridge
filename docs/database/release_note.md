@@ -87,16 +87,22 @@
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 # v1.12
+
 ### Job
+
 - `description` is set to not required
 - `descriptionUrl` is added and not required
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 # v1.13
+
 ### Job
+
 - `descriptionUrl` is deleted
+
 ### JobDocumentFile
+
 - This table is added for storing multiple files in a single job
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

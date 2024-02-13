@@ -17,7 +17,16 @@ type Props = {
 };
 
 export default function SelectInput(props: Props) {
-  const { label, value, jobTags, name, title, placeholder, errorMessage, onChange } = props;
+  const {
+    label,
+    value,
+    jobTags,
+    name,
+    title,
+    placeholder,
+    errorMessage,
+    onChange,
+  } = props;
   return (
     <div className="flex flex-col gap-1 flex-grow">
       <label htmlFor={name} className="text-[14px] font-medium text-slate-900">

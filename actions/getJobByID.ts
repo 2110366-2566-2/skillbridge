@@ -1,3 +1,5 @@
+"use server";
+
 import prisma from "../db/prisma";
 
 const getJobById = async (jobId: string) => {
