@@ -1,11 +1,11 @@
-import prisma from "../db/prisma";
+// import prisma from "../db/prisma";
 
-const getJobTags = async () => {
-  const result = await prisma.jobTag.findMany();
-  return result;
-};
+// const getJobTags = async () => {
+//   const result = await prisma.jobTag.findMany();
+//   return result;
+// };
 
-export default getJobTags;
+// export default getJobTags;
 
 // const main = async () => {
 //   const result = await getJobTags();
