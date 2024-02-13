@@ -48,7 +48,7 @@ jobs:
         uses: google-github-actions/deploy-cloudrun@main
         with:
           image: ${{ secrets.GCP_DEV_NEXTJS_AR_LOCATION }}
-          service: ${{ secrets.GCP_SA_KEY }}
+          service: ${{ secrets.GCP_DEV_NEXTJS_CR_NAME }}
           region: ${{ env.REGION }}
           platform: managed
           allow-unauthenticated: true
