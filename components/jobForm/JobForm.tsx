@@ -231,25 +231,25 @@ export default function JobForm(props: Props) {
 
           <div className="flex justify-between md:justify-center md:items-center md:flex-grow">
             <div className="flex-grow md:hidden"></div>
-            <div className="flex flex-row gap-2">
+            <div className="flex flex-row gap-2 flex-grow">
               <button
                 type="button"
                 onClick={() => router.back()}
-                className="border border-slate-300 px-[16px] py-[8px] text-slate-800 text-[14px] rounded-[6px] hover:bg-slate-200 focus:ring-4 focus:outline-none focus:ring-slate-300"
+                className="border border-slate-300 px-[16px] py-[12px] text-slate-800 text-[14px] rounded-[6px] hover:bg-slate-200 focus:ring-4 focus:outline-none focus:ring-slate-300 flex-grow"
               >
                 ยกเลิก
               </button>
               {isUpdate && (
                 <button
                   type="submit"
-                  className="border border-slate-300 px-[16px] py-[8px] text-white text-[14px] rounded-[6px] bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300"
+                  className="border border-slate-300 px-[16px] py-[12px] text-white text-[14px] rounded-[6px] bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 flex-grow"
                 >
                   ลบงาน
                 </button>
               )}
               <button
                 type="submit"
-                className="border border-slate-300 px-[16px] py-[8px] text-white text-[14px] rounded-[6px] bg-slate-800 hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-slate-300"
+                className="border border-slate-300 px-[16px] py-[12px] text-white text-[14px] rounded-[6px] bg-slate-800 hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-slate-300 flex-grow"
               >
                 {isUpdate ? "ยืนยันการแก้ไข" : "สร้างงาน"}
               </button>

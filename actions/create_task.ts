@@ -82,7 +82,6 @@ const createJob = async (formData: FormData) => {
         budget: budget,
         numWorker: numWorker,
         jobTagId: jobTagId,
-        descriptionUrl: result?.secure_url,
       },
     });
 

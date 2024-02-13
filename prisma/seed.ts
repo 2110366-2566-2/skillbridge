@@ -166,7 +166,7 @@ async function main() {
             budget: 500,
             numWorker: 10,
             startDate: new Date("2023-09-21"),
-            startDate: new Date("2023-09-21"),
+            endDate: new Date("2023-09-21"),
             estimateStartDate: new Date("2023-09-15"),
             estimateEndDate: new Date("2024-03-31"),
             jobTagId: jobTagList["พัฒนาเว็ปไซต์"],
@@ -213,7 +213,7 @@ async function main() {
             status: 'COMPLETED',
             description: 'Freelance writer ที่มี passion สำหรับเทคโนโลยีที่จะ ผลิต insightful \n \
 และ well-researched blog articles. Topics รวมถึง the latest trends,\n \
-บทวิจารณ์ผลิตภัณฑ์, และ ข้อมูลที่เกี่ยวข้องกับ industry.",
+บทวิจารณ์ผลิตภัณฑ์, และ ข้อมูลที่เกี่ยวข้องกับ industry.',
             budget: 10000,
             numWorker: 3,
             estimateStartDate: new Date("2024-02-01"),
@@ -262,7 +262,7 @@ async function main() {
             status: 'COMPLETED',
             description: 'ต้องการ graphic designer ที่มีความสามารถสูงสำหรับ freelance projects, \n \
 การสร้าง eye-catching visuals สำหรับ marketing materials, social media, \n \
-และ การจัดแบรนด์. ต้องมี proficiency ใน Adobe Creative Suite และ a strong portfolio.",
+และ การจัดแบรนด์. ต้องมี proficiency ใน Adobe Creative Suite และ a strong portfolio.',
             budget: 5000,
             numWorker: 1,
             estimateStartDate: new Date("2024-01-16"),
@@ -459,8 +459,6 @@ generate insights, และ provide data-driven recommendations. \n \
             numWorker: 5,
             startDate: new Date("2022-08-01"),
             endDate: new Date("2022-11-07"),
-            startDate: new Date("2022-08-01"),
-            endDate: new Date("2022-11-07"),
             estimateStartDate: new Date("2022-08-01"),
             estimateEndDate: new Date("2022-10-31"),
             jobTagId: jobTagList["ไอทีโซลูชั่น"],
@@ -587,7 +585,7 @@ with logistics partners. มีความรู้เกี่ยวกับ�
             status: 'COMPLETED',
             description: 'Looking for a financial analyst ที่สามารถ analyze financial data, \n \
 prepare reports, และ provide insights for decision-making. \n \
-ความเข้าใจในเรื่องของการเงินและการวิเคราะห์ทางการเงิน.",
+ความเข้าใจในเรื่องของการเงินและการวิเคราะห์ทางการเงิน.',
             budget: 10000,
             numWorker: 3,
             estimateStartDate: new Date("2024-02-11"),
@@ -976,7 +974,7 @@ engaging และ เนื้อหาสร้างสรรค์สำห�
             status: 'IN_PROGRESS',
             description: 'Seeking บุคคลที่มี detail-oriented virtual assistant \n \
 ที่สามารถ handle administrative tasks, จัดการปฏิทิน, และ ช่วยเสริมสร้าง ใน various projects. \n \
-ทักษะการจัดระเบียบที่แข็งแกร่งและการสื่อสารที่เป็น",
+ทักษะการจัดระเบียบที่แข็งแกร่งและการสื่อสารที่เป็น',
             budget: 5000,
             numWorker: 2,
             estimateStartDate: new Date("2024-02-01"),
