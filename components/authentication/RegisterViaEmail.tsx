@@ -52,7 +52,12 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
     } else if (data.cPassword != data.password) {
       errors.cPassword = "รหัสผ่านไม่ตรงกัน"
     }
-    console.log(errors)
+
+    setCheckBoxError({
+      checkOne: false,
+      checkTwo: false
+    })
+    // console.log(errors)
     return errors
   }
 
@@ -83,15 +88,18 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
     }, 0)
   }
 
-  const handleValidationSecondPage = () => {
+  const handleValidationSecondPage = async () => {
     const { errors, success } = validateSecondPage()
-    if (!success) {
-      setErrors(errors)
-      return
-    }
-    const res = registerWithCredentials(data)
-    router.push("/login")
-    console.log(errors)
+    setTimeout(async () => {
+      if (!success) {
+        setErrors(errors)
+        return
+      }
+
+      const res = await registerWithCredentials(data)
+      router.push("/login")
+      // console.log(errors)
+    }, 0);
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -99,7 +107,7 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
       ...data,
       [event.target.name]: event.target.value,
     })
-    console.log(data)
+    // console.log(data)
   }
 
   const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
