@@ -277,7 +277,7 @@ export default function JobForm(props: Props) {
             errorMessage={formErrors.estimateStartDate}
             onChange={handleChange}
             isDisabled={isLoading}
-            min={new Date().toISOString().split('T')[0]}
+            min={new Date().toISOString().split("T")[0]}
           />
 
           <Input
@@ -289,7 +289,7 @@ export default function JobForm(props: Props) {
             errorMessage={formErrors.estimateEndDate}
             onChange={handleChange}
             isDisabled={isLoading}
-            min={new Date().toISOString().split('T')[0]}
+            min={new Date().toISOString().split("T")[0]}
           />
 
           <SelectInput
@@ -322,7 +322,7 @@ export default function JobForm(props: Props) {
                   isDisabled={isLoading}
                 />
               )}
-              
+
               {isCreateUpdateClick ? (
                 <LoadingButton
                   bgColor="bg-slate-700"
