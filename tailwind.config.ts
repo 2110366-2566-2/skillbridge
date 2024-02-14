@@ -13,6 +13,20 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      animation: {
+        marqueeLeft: "marqueeLeft 60s linear infinite",
+        marqueeRight: "marqueeRight 60s linear infinite",
+      },
+      keyframes: {
+        marqueeLeft: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+        marqueeRight: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(100%)" },
+        },
+      },
     },
     fontFamily: {
       ibm: ["var(--ibm-plex-sans-thai-looped-font)"],
