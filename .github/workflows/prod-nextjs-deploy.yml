@@ -43,7 +43,9 @@ jobs:
       - name: Build and Push to Artifact Registry
         run: |
           docker image prune -a
-          docker build -t ${{ secrets.GCP_PROD_NEXTJS_AR_LOCATION }} .
+          docker build -t ${{ secrets.GCP_PROD_NEXTJS_AR_LOCATION }} \
+            --build-arg DATABASE_URL="${{ secrets.DATABASE_URL }}" \
+            .
           docker push ${{ secrets.GCP_PROD_NEXTJS_AR_LOCATION }}
 
       - name: Deploy to Cloud Run
@@ -55,7 +57,6 @@ jobs:
           platform: managed
           allow-unauthenticated: true
           env_vars: |
-              DATABASE_URL=${{ secrets.DATABASE_URL }}
               GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} 
               GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }} 
               NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL_PROD }} 
