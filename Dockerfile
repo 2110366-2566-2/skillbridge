@@ -6,11 +6,9 @@ COPY . .
 
 RUN npm install
 
-# ARG NEXTAUTH_URL
-# ARG NEXTAUTH_SECRET
+ARG DATABASE_URL
 
-# RUN echo "NEXTAUTH_URL=${NEXTAUTH_URL}" > .env \
-#     && echo "NEXTAUTH_SECRET=${NEXTAUTH_SECRET}" >> .env 
+RUN echo "DATABASE_URL=${DATABASE_URL}" > .env 
 
 RUN npm run build
 
