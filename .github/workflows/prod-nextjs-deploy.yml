@@ -75,14 +75,18 @@ jobs:
               ELASTIC_API_KEY=${{ secrets.ELASTIC_API_KEY }} 
             
   discord-noti:
-     if: github.event.pull_request.merged == true
-     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
 
-     steps:
-       - uses: actions/checkout@v2
-       
-       - name: Discord Notification
-         uses: Sniddl/discord-commits@v1.6
-         with: 
-           webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
-           message: "<@&1085297978266353694> main มีการอัปเดทแล้ว ไป pull แล้ว merge กันด้วย ก่อนที่จะโดนหมับหน้าเข้าให้ \nPR Title: ${{ github.event.pull_request.title }} \nPR Author: ${{ github.event.pull_request.user.login }} \nPR head branch: ${{ github.head_ref }} \nPR Link: https://github.com/SoeiCorp/skillbridge/pull/${{ github.event.number }}"
+  discord-noti:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Discord Notification
+        uses: Sniddl/discord-commits@v1.6
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          message: "<@&1085297978266353694> main มีการอัปเดทแล้ว ไป pull แล้ว merge กันด้วย ก่อนที่จะโดนหมับหน้าเข้าให้ \nPR Title: ${{ github.event.pull_request.title }} \nPR Author: ${{ github.event.pull_request.user.login }} \nPR head branch: ${{ github.head_ref }} \nPR Link: https://github.com/SoeiCorp/skillbridge/pull/${{ github.event.number }}"
