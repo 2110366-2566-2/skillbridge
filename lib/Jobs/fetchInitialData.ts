@@ -1,5 +1,5 @@
 import { getEmployerJobs } from "@/actions/lookup/employee/jobs";
-import TaskCardType from "../Types/TaskCardType";
+import TaskCardType from "../../types/TaskCardType";
 
 const fetchInitialData = async () => {
     const idSample = ["92e60ed5-51d8-4875-bb4e-5760a09a0449",

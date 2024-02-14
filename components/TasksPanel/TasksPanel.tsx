@@ -1,6 +1,6 @@
 import TaskCard from "./TaskCard";
-import sortArray from "../utils/sortArray";
-import TaskCardType from "../Types/TaskCardType";
+import sortArray from "../../lib/Jobs/sortArray";
+import TaskCardType from "../../types/TaskCardType";
 
 type Props = {
   startDateSortOption: String;

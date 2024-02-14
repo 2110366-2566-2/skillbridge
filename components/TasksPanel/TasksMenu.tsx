@@ -4,9 +4,8 @@ import React, { useState, useEffect } from "react";
 import TasksPanel from "./TasksPanel";
 import Link from "next/link";
 import { CloseOutlined, SortAscendingOutlined } from "@ant-design/icons";
-import TaskCardType from "../Types/TaskCardType";
-import { getEmployerJobs } from "@/actions/lookup/employee/jobs";
-import fetchInitialData from "../utils/fetchInitialData";
+import TaskCardType from "../../types/TaskCardType";
+import fetchInitialData from "../../lib/Jobs/fetchInitialData";
 
 type Props = {};
 
@@ -71,7 +70,7 @@ const TasksMenu = () => {
           </button>
 
           {/* Create Work button */}
-          <Link href={"/works/create"} key={"createWork"}>
+          <Link href={"/jobs/create"} key={"createJob"}>
             <button
               className={`${isPending ? "" : "hidden"} bg-slate-900 font-medium text-md text-white rounded-md px-3 py-2 hover:shadow-md`}
             >

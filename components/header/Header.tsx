@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "./navbar/Navbar";
 import SearchAndFilter from "./searchAndFilter/SearchAndFilter";
+import TaskHeader from "../TasksPanel/TaskHeader";
 
 const whiteLogo = require("@/public/logos/logo-white.svg") as string;
 
@@ -36,6 +37,8 @@ export default async function Header() {
         {/* Only shows at "/search" */}
         <SearchAndFilter />
       </div>
+      {/* Only shows at "/works" */}
+      <TaskHeader />
     </div>
   );
 }
