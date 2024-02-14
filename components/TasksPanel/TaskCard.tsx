@@ -1,7 +1,9 @@
 import { EditFilled } from "@ant-design/icons";
 import React from "react";
+import Link from "next/link";
 
 type Props = {
+  jobId: string;
   name: string;
   budget: Number;
   description: string;
@@ -14,6 +16,7 @@ type Props = {
 };
 
 const TaskCard = ({
+  jobId,
   name,
   budget,
   description,
@@ -22,7 +25,7 @@ const TaskCard = ({
   maxApplicants,
   startDate,
   endDate,
-  isPending
+  isPending,
 }: Props) => {
   return (
     <div className="bg-gradient-to-r from-slate-100 px-5 pt-7 pb-2 rounded-3xl shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-slate-200 max-w-[500px]">
@@ -36,12 +39,15 @@ const TaskCard = ({
           </div>
         </div>
 
-        <div className={`${isPending ? "hidden": ""} h-[34.91px] w-[34.91px] p-2 mx-2`}></div>
-        <button
+        <div
+          className={`${isPending ? "hidden" : ""} h-[34.91px] w-[34.91px] p-2 mx-2`}
+        ></div>
+        <Link
           className={`${isPending ? "" : "hidden"} bg-slate-50 border-2 border-solid rounded-full hover:shadow-md flex align-center w-fit h-fit p-2 mx-2`}
+          href={`/jobs/update/${jobId}`}
         >
           <EditFilled />
-        </button>
+        </Link>
       </div>
 
       <div className="bg-slate-200 rounded-sm p-2 w-fit">{category}</div>
@@ -56,7 +62,9 @@ const TaskCard = ({
         <div className="text-sm">
           รับแล้ว {applicants.toString()}/{maxApplicants.toString()} คน
         </div>
-        <div className="text-xl text-end font-medium">฿{budget.toLocaleString()}</div>
+        <div className="text-xl text-end font-medium">
+          ฿{budget.toLocaleString()}
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import { revalidatePath } from "next/cache";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { customTrim } from "@/lib/utils";
@@ -156,7 +157,6 @@ export default function JobForm(props: Props) {
         console.error("Error Create job:", error);
       } finally {
         router.push("/jobs");
-        setIsLoading(false);
       }
     }
   };
@@ -277,7 +277,6 @@ export default function JobForm(props: Props) {
             errorMessage={formErrors.estimateStartDate}
             onChange={handleChange}
             isDisabled={isLoading}
-            min={new Date().toISOString().split("T")[0]}
           />
 
           <Input
@@ -289,7 +288,6 @@ export default function JobForm(props: Props) {
             errorMessage={formErrors.estimateEndDate}
             onChange={handleChange}
             isDisabled={isLoading}
-            min={new Date().toISOString().split("T")[0]}
           />
 
           <SelectInput

@@ -14,6 +14,7 @@ import homeDarkIcon from "@/public/icons/homeDark.svg";
 import searchDarkIcon from "@/public/icons/searchDark.svg";
 import workDarkIcon from "@/public/icons/workDark.svg";
 import noavatar from "@/public/icons/noavatar.svg";
+import { signOut } from "next-auth/react";
 
 const studentLinks = [
   {
@@ -46,42 +47,39 @@ const employerLinks = [
 ];
 
 type Props = {
-  session: boolean;
+  session: any;
   isStudent: boolean;
+  userInfo: string;
 };
 
 export default function Navbar(props: Props) {
-  const { session, isStudent } = props;
   const [open, setOpen] = useState(false);
 
-  // TEMPORARY
+  // Authenticated User Info
+  const { session, isStudent, userInfo } = props;
+  const name =
+    session?.user.salutation +
+    session?.user.firstname +
+    " " +
+    session?.user.lastname;
   const avatar = noavatar;
-  const name = "คุณชื่อจริง นามสกุล";
-  const company = "ตำแหน่ง บริษัทตัวอย่าง จำกัด (มหาชน)";
-
-  const TRANSITION_DURATION = 300;
-  const transitionClasses = `transition-all duration-${TRANSITION_DURATION}`;
-  const classes = open
-    ? { cart: "translate-x-full" }
-    : { cart: "translate-x-0" };
 
   return (
     <>
-      {session ? (
+      {!!session ? (
         <>
-          <div className="hidden font-ibm md:flex md:items-center md:gap-6 md:text-sm">
+          <div className="hidden font-ibm md:flex md:items-center md:text-sm">
             {(isStudent ? studentLinks : employerLinks).map((link) => (
               <NavLink key={"desktop : " + link.title} link={link} />
             ))}
-            <Link
+            <button
               className="hidden md:block px-5 py-2 rounded-full duration-300 active:opacity-40"
-              href={"/"}
-              key={"desktop : " + "ออกจากระบบ"}
+              onClick={() => signOut({ callbackUrl: process.env.NEXTAUTH_URL })}
             >
               <p className="hidden text-sm text-slate-50 hover:text-red-400 duration-300 md:block font-bold">
                 ออกจากระบบ
               </p>
-            </Link>
+            </button>
             <div className="flex items-center gap-3 pl-2 md:hover:opacity-80 md:duration-300">
               <p className="text-slate-50">{name}</p>
               <Image
@@ -142,7 +140,7 @@ export default function Navbar(props: Props) {
                   <p>
                     <b className="font-medium">{name}</b>
                   </p>
-                  <p className="text-xs">{company}</p>
+                  <p className="text-xs">{userInfo}</p>
                 </div>
               </div>
               <div className="w-full flex flex-col gap-2">
@@ -151,14 +149,14 @@ export default function Navbar(props: Props) {
                 ))}
               </div>
             </div>
-            <Link
+            <button
               className="w-full flex gap-8 justify-start active:opacity-40"
-              href="/"
+              onClick={() => signOut({ callbackUrl: process.env.NEXTAUTH_URL })}
               key="mobile : ออกจากระบบ"
             >
               <Image src={logoutIcon} alt="icon" width={30} height={30} />
               <h2 className="text-lg font-semibold text-red-500">ออกจากระบบ</h2>
-            </Link>
+            </button>
           </div>
         </>
       ) : (
@@ -178,4 +176,3 @@ export default function Navbar(props: Props) {
     </>
   );
 }
-
