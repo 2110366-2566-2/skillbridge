@@ -34,7 +34,7 @@ export default function LoginViaEmail() {
 
   const validateForm = () => {
     const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,6}$/
-    const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/
+    // const password_pattern = /^.{8}$/
     let success = true
     const errors: Error = {
       email: "",
@@ -51,7 +51,7 @@ export default function LoginViaEmail() {
     if (form.password === "") {
       errors.password = "กรอกรหัสผ่านของคุณ"
       success = false
-    } else if (!password_pattern.test(form.password)) {
+    } else if (form.password.length < 8) {
       errors.password = "รหัสผ่านไม่ถูกต้อง"
       success = false
     }
@@ -62,17 +62,16 @@ export default function LoginViaEmail() {
   const handleValidation = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const { errors, success } = validateForm()
-    setTimeout(async () => {
-      if (!success) {
-        setErrors(errors)
-        return
-      }
+    if (!success) {
+      setErrors(errors)
+      return
+    } else {
       signIn("credentials", {
         email: form.email,
         password: form.password,
-        callbackUrl: "/landing",
+        callbackUrl: "/dash",
       })
-    }, 0)
+    }
   }
 
   return (
@@ -97,7 +96,7 @@ export default function LoginViaEmail() {
 
       <button
         type="submit"
-        className="w-full bg-[#334155] rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md ">
+        className="w-full bg-[#334155] hover:bg-slate-600 rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md ">
         เข้าสู่ระบบ
       </button>
 
