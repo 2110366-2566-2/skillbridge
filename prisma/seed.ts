@@ -981,7 +981,7 @@ and fresh perspective, exceeding our expectations.",
             description:
               "Looking for a freelance creative mind with ทักษะในการสร้าง \n \
 engaging และ เนื้อหาสร้างสรรค์สำหรับ social media platforms. \n \
-ต้องมี a flair for storytelling และ a keen eye for visuals เพื่อที่จะ captivate audiences.",
+ต้องมี a flair for storytelling และ a keen eye for visuals เพื่อที่จะ captivate audiences.',
             budget: 10000,
             numWorker: 5,
             estimateStartDate: new Date("2024-02-01"),

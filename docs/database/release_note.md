@@ -87,9 +87,7 @@
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 # v1.12
-
 ### Job
-
 - `description` is set to not required
 - `descriptionUrl` is added and not required
 

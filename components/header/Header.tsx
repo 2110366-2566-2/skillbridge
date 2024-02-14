@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "./navbar/Navbar";
+import SearchAndFilter from "./searchAndFilter/SearchAndFilter";
 import CreateJobHeader from "./createJobHeader/CreateJobHeader";
 import EditJobHeader from "./editJobHeader/EditJobHeader";
 
@@ -22,12 +23,23 @@ export default async function Header() {
             alt="logo"
             width={110}
             height={110}
+            priority={true}
           />
         </Link>
+        {/* Desktop */}
+        <div className="hidden lg:inline-block">
+          {/* Only shows at "/search" */}
+          <SearchAndFilter />
+        </div>
         <Navbar session={session} isStudent={isStudent} />
       </div>
       <CreateJobHeader />
       <EditJobHeader />
+      {/* Mobile and Tablet */}
+      <div className="lg:hidden">
+        {/* Only shows at "/search" */}
+        <SearchAndFilter />
+      </div>
     </div>
   );
 }
