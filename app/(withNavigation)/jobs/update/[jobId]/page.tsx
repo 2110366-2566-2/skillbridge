@@ -3,7 +3,11 @@ import getJobById from "@/actions/getJobByID";
 import JobForm from "@/components/jobForm/JobForm";
 import getJobTags from "@/actions/getJobTags";
 
-export default async function page({ params }: { params: { jobId: string } }) {
+export default async function UpdateJobPage({
+  params,
+}: {
+  params: { jobId: string };
+}) {
   const jobId = params.jobId;
   const jobTags = await getJobTags();
   const job = await getJobById(jobId);

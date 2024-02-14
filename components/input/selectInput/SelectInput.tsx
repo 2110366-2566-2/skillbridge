@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ChangeEventHandler } from "react";
+import React, { ChangeEventHandler } from "react";
 
 type Props = {
   label: string;
@@ -14,6 +14,7 @@ type Props = {
   placeholder: string;
   errorMessage?: string;
   onChange: ChangeEventHandler<HTMLSelectElement>;
+  isDisabled: boolean;
 };
 
 export default function SelectInput(props: Props) {
@@ -26,6 +27,7 @@ export default function SelectInput(props: Props) {
     placeholder,
     errorMessage,
     onChange,
+    isDisabled,
   } = props;
   return (
     <div className="flex flex-col gap-1 flex-grow">
@@ -35,10 +37,11 @@ export default function SelectInput(props: Props) {
       <select
         id={name}
         value={value}
-        className="bg-transparent border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:border-slate-500 block w-full p-2 placeholder:text-slate-400"
+        className={`bg-transparent border ${errorMessage ? "border-red-600" : "border-slate-300"} text-slate-800 text-[16px] rounded-lg focus:outline-none focus:border-slate-500 block w-full p-2 placeholder:text-slate-400 disabled:opacity-75`}
         name={name}
         title={title}
         onChange={onChange}
+        disabled={isDisabled}
       >
         <option className="text-slate-400" value="" disabled>
           {placeholder}

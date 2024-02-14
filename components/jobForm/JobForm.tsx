@@ -1,19 +1,21 @@
 "use client";
 
-// import { useRouter } from "next/navigation";
-import React, { ChangeEvent, FormEvent } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { customTrim } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
 import Input from "../input/input/Input";
 import TextAreaInput from "../input/textAreaInput/TextAreaInput";
 import SelectInput from "../input/selectInput/SelectInput";
 import FilesInput from "../input/fileInput/FileInput";
-import createJob from "@/actions/create_task";
-import deleteJob from "@/actions/delete_task";
-import humanImage from "@/public/images/human.png";
+import createJob from "@/actions/create_job";
+import deleteJob from "@/actions/delete_job";
 import updateJob from "@/actions/update_job";
+import DeleteModal from "./deleteModal/DeleteModal";
+import LoadingButton from "./loadingButton/LoadingButton";
+import humanImage from "@/public/images/human.png";
+import toast from "react-hot-toast";
 
 interface FormData {
   title: string;
@@ -50,6 +52,9 @@ export default function JobForm(props: Props) {
   const router = useRouter();
   const { isUpdate, jobTags, initialData, jobId } = props;
   const [files, setFiles] = useState<FileList | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isCreateUpdateClick, setCreateUpdateClick] = useState(false);
+  const [isDeleteClick, setDeleteClick] = useState(false);
   const [formData, setFormData] = useState<FormData>(initialData);
 
   const [formErrors, setFormErrors] = useState<FormErrors>({
@@ -77,8 +82,8 @@ export default function JobForm(props: Props) {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Validate the form data
     const errors: FormErrors = {};
+    // Validate the form data
     if (!formData.title) {
       errors.title = "กรุณากรอกชื่องาน";
     }
@@ -94,6 +99,9 @@ export default function JobForm(props: Props) {
     if (!formData.estimateEndDate) {
       errors.estimateEndDate = "กรุณากรอกวันที่สิ้นสุดงาน";
     }
+    if (!isUpdate && new Date(formData.estimateStartDate) < new Date()) {
+      errors.estimateStartDate = "วันที่เริ่มงานไม่เป็นปัจจุบัน";
+    }
     if (
       new Date(formData.estimateStartDate) > new Date(formData.estimateEndDate)
     ) {
@@ -105,35 +113,76 @@ export default function JobForm(props: Props) {
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
     } else {
-      let formDataObject = new FormData();
+      setCreateUpdateClick(true);
+      setIsLoading(true);
+      const formDataObject = new FormData();
       formDataObject.append(
         "employerId",
-        "eecf6f76-9c05-4ced-a706-abb6b18007b1",
+        "92e60ed5-51d8-4875-bb4e-5760a09a0449",
       ); // TEMPORARY
-      formDataObject.append("title", formData.title);
-      formDataObject.append("description", formData.description);
-      formDataObject.append("budget", formData.budget);
-      formDataObject.append("numWorker", formData.numWorker);
-      formDataObject.append("estimateStartDate", formData.estimateStartDate);
-      formDataObject.append("estimateEndDate", formData.estimateEndDate);
-      formDataObject.append("jobTagId", formData.jobTagId);
+      Object.entries(formData).forEach(([key, value]) => {
+        formDataObject.append(key, customTrim(value));
+      });
       if (files) {
         for (let i = 0; i < files.length; i++) {
           formDataObject.append("files[]", files[i]);
         }
       }
-      if (!isUpdate) {
-        const res = await createJob(formDataObject);
-        console.log(formDataObject);
-        console.log(res);
-      } else {
-        formDataObject.append("jobId", jobId);
-        console.log(formDataObject);
-        const res = await updateJob(formDataObject);
-        console.log(res);
+      try {
+        if (!isUpdate) {
+          // Create Job
+          const res = await createJob(formDataObject);
+          console.log(res);
+          if (res.status === 201) {
+            toast.success("สร้างงานสำเร็จ");
+          } else {
+            toast.error(res.message);
+          }
+        } else {
+          // Update Job
+          formDataObject.append("jobId", jobId);
+          const res = await updateJob(formDataObject);
+          console.log(res);
+          if (res.status === 201) {
+            toast.success("แก้ไขงานสำเร็จ");
+          } else if (res.status === 404) {
+            toast.error("ไม่พบงานในระบบ");
+          } else if (res.status === 423) {
+            toast.error("ไม่สามารถลบงานที่ดำเนินการแล้วได้");
+          } else {
+            toast.error(res.message);
+          }
+        }
+      } catch (error) {
+        console.error("Error Create job:", error);
+      } finally {
+        router.push("/jobs");
+        setIsLoading(false);
       }
     }
   };
+
+  async function handleDeleteJob() {
+    setIsLoading(true);
+    try {
+      const res = await deleteJob(jobId);
+      console.log(res);
+      if (res.status === 200) {
+        toast.success("ลบงานสำเร็จ");
+      } else if (res.status === 404) {
+        toast.error("ไม่พบงานในระบบ");
+      } else if (res.status === 423) {
+        toast.error("ไม่สามารถลบงานที่ดำเนินการแล้วได้");
+      } else {
+        toast.error(res.message);
+      }
+    } catch (error) {
+      console.error("Error Delete job:", error);
+    } finally {
+      router.push("/jobs");
+      setIsLoading(false);
+    }
+  }
 
   return (
     <div className="flex justify-center lg:p-14 lg:gap-12 xl:gap-24">
@@ -169,6 +218,7 @@ export default function JobForm(props: Props) {
           placeholder="งานของฉัน"
           errorMessage={formErrors.title}
           onChange={handleChange}
+          isDisabled={isLoading}
         />
 
         <div className="flex flex-col gap-3 md:grid md:grid-cols-2 md:gap-5">
@@ -179,32 +229,42 @@ export default function JobForm(props: Props) {
             placeholder="ฉันอยากจ้างใครสักคนเพื่อมาทำงานให้ฉัน"
             errorMessage={""}
             onChange={handleChange}
+            isDisabled={isLoading}
           />
 
           <FilesInput
             label="รายละเอียดเกี่ยวกับงาน (ไม่บังคับ)"
             files={files}
             setFiles={setFiles}
+            isDisabled={isLoading}
           />
 
           <Input
             type="number"
             label="งบประมาณ"
-            value={parseInt(formData.budget)}
+            value={
+              formData.budget ? parseInt(formData.budget) : formData.budget
+            }
             name="budget"
             placeholder="1000"
             errorMessage={formErrors.budget}
             onChange={handleChange}
+            isDisabled={isLoading}
           />
 
           <Input
             type="number"
             label="จำนวนคนที่จ้าง"
-            value={parseInt(formData.numWorker)}
+            value={
+              formData.numWorker
+                ? parseInt(formData.numWorker)
+                : formData.numWorker
+            }
             name="numWorker"
             placeholder="1"
             errorMessage={formErrors.numWorker}
             onChange={handleChange}
+            isDisabled={isLoading}
           />
 
           <Input
@@ -215,6 +275,7 @@ export default function JobForm(props: Props) {
             placeholder="วว/ดด/ปปปป"
             errorMessage={formErrors.estimateStartDate}
             onChange={handleChange}
+            isDisabled={isLoading}
           />
 
           <Input
@@ -225,6 +286,7 @@ export default function JobForm(props: Props) {
             placeholder="วว/ดด/ปปปป"
             errorMessage={formErrors.estimateEndDate}
             onChange={handleChange}
+            isDisabled={isLoading}
           />
 
           <SelectInput
@@ -236,6 +298,7 @@ export default function JobForm(props: Props) {
             placeholder="เลือกหมวดหมู่ที่ต้องการ"
             errorMessage={formErrors.jobTagId}
             onChange={handleChange}
+            isDisabled={isLoading}
           />
 
           <div className="flex justify-between md:justify-center md:items-center md:flex-grow">
@@ -244,21 +307,32 @@ export default function JobForm(props: Props) {
               <button
                 type="button"
                 onClick={() => router.back()}
-                className="border border-slate-300 px-[16px] py-[8px] md:py-[12px] text-slate-800 text-[14px] rounded-[6px] hover:bg-slate-200 focus:ring-4 focus:outline-none focus:ring-slate-300 md:flex-grow"
+                className="border border-slate-300 px-[16px] py-[8px] md:py-[12px] text-slate-800 text-[14px] rounded-[6px] hover:bg-slate-200 focus:ring-4 focus:outline-none focus:ring-slate-300 md:flex-grow disabled:opacity-75"
+                disabled={isLoading}
               >
                 ยกเลิก
               </button>
-              {isUpdate && (
-                <button className="border border-slate-300 px-[16px] py-[8px] md:py-[12px] text-white text-[14px] rounded-[6px] bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 md:flex-grow">
-                  ลบงาน
+
+              <DeleteModal
+                deleteAction={handleDeleteJob}
+                isDisabled={isLoading}
+              />
+
+              {isCreateUpdateClick ? (
+                <LoadingButton
+                  bgColor="bg-slate-700"
+                  textColor="text-slate-50"
+                  text="กำลังสร้าง..."
+                />
+              ) : (
+                <button
+                  type="submit"
+                  className="border border-slate-300 px-[16px] py-[8px] md:py-[12px] text-white text-[14px] rounded-[6px] bg-slate-800 hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-slate-300 md:flex-grow disabled:opacity-75"
+                  disabled={isLoading}
+                >
+                  {isUpdate ? "บันทึก" : "สร้างงาน"}
                 </button>
               )}
-              <button
-                type="submit"
-                className="border border-slate-300 px-[16px] py-[8px] md:py-[12px] text-white text-[14px] rounded-[6px] bg-slate-800 hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-slate-300 md:flex-grow"
-              >
-                {isUpdate ? "บันทึก" : "สร้างงาน"}
-              </button>
             </div>
           </div>
         </div>

@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, IBM_Plex_Sans_Thai } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header/Header";
-import Footer from "@/components/footer/Footer";
 import { cn } from "@/lib/utils";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 const ibmPlexSansThaiLooped = IBM_Plex_Sans_Thai({
@@ -31,6 +30,18 @@ export default function RootLayout({
           "h-full",
         )}
       >
+        <Toaster
+          position="bottom-right"
+          toastOptions={{
+            className: "font-semibold bg-white text-slate-800",
+            success: {
+              iconTheme: {
+                primary: "#1e293b",
+                secondary: "white",
+              },
+            },
+          }}
+        />
         {children}
       </body>
     </html>

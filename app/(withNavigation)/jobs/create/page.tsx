@@ -2,7 +2,7 @@ import React from "react";
 import JobForm from "@/components/jobForm/JobForm";
 import getJobTags from "@/actions/getJobTags";
 
-export default async function page() {
+export default async function CreateJobPage() {
   const jobTags = await getJobTags();
   const formData = {
     title: "",

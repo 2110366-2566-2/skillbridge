@@ -1,5 +1,4 @@
 "use server";
-import { parse } from "path";
 import prisma from "../db/prisma";
 import cloudinary from "../lib/bucket";
 import { JobStatus } from "@prisma/client";
@@ -73,7 +72,7 @@ const createJob = async (formData: FormData) => {
                 return;
               }
               resolve(result);
-            }
+            },
           )
           .end(buffers[i]);
       });
@@ -101,10 +100,13 @@ const createJob = async (formData: FormData) => {
         },
       });
     }
-    return {
+
+    const successResponse = {
       message: "Create Task Success",
       status: 201,
     };
+    console.log(successResponse);
+    return successResponse;
   } catch (error: any) {
     console.log(error);
     return {
@@ -116,19 +118,19 @@ const createJob = async (formData: FormData) => {
 
 export default createJob;
 
-const main = async () => {
-  const data = {
-    employerId: "d8e9d51d-fdfc-40db-8609-cd538d9b29d3",
-    title: "Test work",
-    description: "test description",
-    estimateStartDate: new Date().toISOString(),
-    estimateEndDate: new Date().toISOString(),
-    budget: 1000,
-    numWorker: 1,
-    jobTagId: "bbd48fc1-f109-4321-a854-33604647ad2f",
-    files: null,
-  } as unknown as FormData;
-  const result = await createJob(data);
-};
+// const main = async () => {
+//   const data = {
+//     employerId: "d8e9d51d-fdfc-40db-8609-cd538d9b29d3",
+//     title: "Test work",
+//     description: "test description",
+//     estimateStartDate: new Date().toISOString(),
+//     estimateEndDate: new Date().toISOString(),
+//     budget: 1000,
+//     numWorker: 1,
+//     jobTagId: "bbd48fc1-f109-4321-a854-33604647ad2f",
+//     files: null,
+//   } as unknown as FormData;
+//   const result = await createJob(data);
+// };
 
-main();
+// main();

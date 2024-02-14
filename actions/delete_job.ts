@@ -2,9 +2,8 @@
 
 import prisma from "@/db/prisma";
 
-const deleteJob = async (formData: FormData) => {
+const deleteJob = async (job_id: string) => {
   try {
-    const job_id = formData.get("id") as string;
     console.log(job_id);
     //const session = await getServerSession(options);
     //const userId = session?.userId
@@ -25,20 +24,22 @@ const deleteJob = async (formData: FormData) => {
       },
       select: {
         applications: true,
-        status: true,
+        isDeleted: true,
       },
     });
     // console.log(job_info);
     // console.log(!job_info);
     // console.log(job_info?.status != "NOT_STARTED");
     // console.log(job_info?.Applied);
-    if (
-      !job_info ||
-      job_info?.status != "NOT_STARTED" ||
-      job_info?.applications.length > 0
-    ) {
+    if (!job_info || job_info.isDeleted) {
       throw {
-        message: "Can't delete this job",
+        message: "Job not found",
+        status: 404,
+      };
+    } else if (job_info?.applications.length > 0) {
+      throw {
+        message: "Can't edit this job",
+        status: 423,
       };
     }
 

@@ -1,6 +1,5 @@
 "use server";
 
-import type { JobStatus } from "@prisma/client";
 import prisma from "../db/prisma";
 
 const updateJob = async (formData: FormData) => {
@@ -66,6 +65,7 @@ const updateJob = async (formData: FormData) => {
     } else if (job?.applications.length > 0) {
       throw {
         message: "Can't edit this job",
+        status: 423,
       };
     }
 
@@ -85,7 +85,7 @@ const updateJob = async (formData: FormData) => {
     });
 
     const successResponse = {
-      message: "Create Task Success",
+      message: "Update Task Success",
       status: 201,
     };
 
