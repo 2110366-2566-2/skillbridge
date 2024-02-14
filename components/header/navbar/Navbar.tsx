@@ -3,18 +3,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import homeIcon from "@/public/icons/home.svg";
+import searchIcon from "@/public/icons/search.svg";
+import workIcon from "@/public/icons/work.svg";
+import logoutIcon from "@/public/icons/logout.svg";
+import closeIcon from "@/public/icons/close.svg";
 import NavLink from "./navLink/NavLink";
-
-const homeIcon = require("@/public/icons/home.svg") as string;
-const searchIcon = require("@/public/icons/search.svg") as string;
-const workIcon = require("@/public/icons/work.svg") as string;
-const logoutIcon = require("@/public/icons/logout.svg") as string;
-const hambergerIcon = require("@/public/icons/hamberger-button.svg") as string;
-const closeIcon = require("@/public/icons/close.svg") as string;
-const homeDarkIcon = require("@/public/icons/homeDark.svg") as string;
-const searchDarkIcon = require("@/public/icons/searchDark.svg") as string;
-const workDarkIcon = require("@/public/icons/workDark.svg") as string;
-const noavatar = require("@/public/icons/noavatar.svg") as string;
+import hamburgerIcon from "@/public/icons/hamburger-button.svg";
+import homeDarkIcon from "@/public/icons/homeDark.svg";
+import searchDarkIcon from "@/public/icons/searchDark.svg";
+import workDarkIcon from "@/public/icons/workDark.svg";
+import noavatar from "@/public/icons/noavatar.svg";
 
 const studentLinks = [
   {
@@ -60,6 +59,12 @@ export default function Navbar(props: Props) {
   const name = "คุณชื่อจริง นามสกุล";
   const company = "ตำแหน่ง บริษัทตัวอย่าง จำกัด (มหาชน)";
 
+  const TRANSITION_DURATION = 300;
+  const transitionClasses = `transition-all duration-${TRANSITION_DURATION}`;
+  const classes = open
+    ? { cart: "translate-x-full" }
+    : { cart: "translate-x-0" };
+
   return (
     <>
       {session ? (
@@ -68,7 +73,16 @@ export default function Navbar(props: Props) {
             {(isStudent ? studentLinks : employerLinks).map((link) => (
               <NavLink key={"desktop : " + link.title} link={link} />
             ))}
-            <div className="flex items-center gap-3 pl-2">
+            <Link
+              className="hidden md:block px-5 py-2 rounded-full duration-300 active:opacity-40"
+              href={"/"}
+              key={"desktop : " + "ออกจากระบบ"}
+            >
+              <p className="hidden text-sm text-slate-50 hover:text-red-400 duration-300 md:block font-bold">
+                ออกจากระบบ
+              </p>
+            </Link>
+            <div className="flex items-center gap-3 pl-2 md:hover:opacity-80 md:duration-300">
               <p className="text-slate-50">{name}</p>
               <Image
                 className="rounded-full"
@@ -81,76 +95,81 @@ export default function Navbar(props: Props) {
           </div>
 
           <button
-            className="z-30 md:hidden"
+            className="md:hidden active:opacity-40"
             onClick={() => setOpen((prevOpen) => !prevOpen)}
           >
-            {open ? (
-              <Image
-                className="w-auto h-auto"
-                src={closeIcon}
-                alt="close"
-                width={35}
-                height={35}
-              />
-            ) : (
-              <Image
-                className="w-auto h-auto"
-                src={hambergerIcon}
-                alt="hamberger"
-                width={35}
-                height={35}
-              />
-            )}
+            <Image
+              className="w-auto h-auto active:opacity-40"
+              src={hamburgerIcon}
+              alt="hamberger"
+              width={35}
+              height={35}
+            />
           </button>
-          {open && (
-            <>
-              <div className="z-10 bg-neutral-800 opacity-60 absolute top-0 right-0 left-0 bottom-0 md:hidden"></div>
-              <div className="font-ibm z-20 bg-slate-800 text-slate-50 absolute top-0 right-0 w-2/3 h-screen flex flex-col items-center p-7 justify-between md:hidden">
-                <div className="flex flex-col gap-8 justify-start w-full">
-                  <div className="flex flex-col gap-5">
+
+          <div
+            className={`z-10 bg-neutral-800 fixed top-0 right-0 left-0 bottom-0 md:hidden duration-500 
+                ${open ? "opacity-60" : "opacity-0 invisible"}`}
+          ></div>
+          <div
+            className={`font-ibm z-20 bg-slate-800 text-slate-50 fixed top-0 right-0 w-2/3 h-screen flex flex-col items-center p-7 justify-between md:hidden ease-in-out duration-500 
+                ${open ? "translate-x-0 " : "translate-x-full"}`}
+          >
+            <div className="flex flex-col gap-8 justify-start w-full">
+              <div className="flex flex-col gap-5">
+                <div className="flex justify-between items-start">
+                  <Image
+                    className="rounded-full"
+                    src={avatar}
+                    alt="avatar"
+                    width={70}
+                    height={70}
+                  />
+                  <button
+                    className="md:hidden active:opacity-40"
+                    onClick={() => setOpen((prevOpen) => !prevOpen)}
+                  >
                     <Image
-                      className="rounded-full"
-                      src={avatar}
-                      alt="avatar"
-                      width={70}
-                      height={70}
+                      className="w-auto h-auto"
+                      src={closeIcon}
+                      alt="close"
+                      width={35}
+                      height={35}
                     />
-                    <div className="flex flex-col gap-1">
-                      <p>
-                        <b className="font-medium">{name}</b>
-                      </p>
-                      <p className="text-xs">{company}</p>
-                    </div>
-                  </div>
-                  <div className="w-full flex flex-col gap-2">
-                    {(isStudent ? studentLinks : employerLinks).map((link) => (
-                      <NavLink key={"mobile : " + link.title} link={link} />
-                    ))}
-                  </div>
+                  </button>
                 </div>
-                <Link
-                  className="w-full flex gap-8 justify-start"
-                  href="/"
-                  key="mobile : ออกจากระบบ"
-                >
-                  <Image src={logoutIcon} alt="icon" width={30} height={30} />
-                  <h2 className="text-lg font-semibold text-red-500">
-                    ออกจากระบบ
-                  </h2>
-                </Link>
+                <div className="flex flex-col gap-1">
+                  <p>
+                    <b className="font-medium">{name}</b>
+                  </p>
+                  <p className="text-xs">{company}</p>
+                </div>
               </div>
-            </>
-          )}
+              <div className="w-full flex flex-col gap-2">
+                {(isStudent ? studentLinks : employerLinks).map((link) => (
+                  <NavLink key={"mobile : " + link.title} link={link} />
+                ))}
+              </div>
+            </div>
+            <Link
+              className="w-full flex gap-8 justify-start active:opacity-40"
+              href="/"
+              key="mobile : ออกจากระบบ"
+            >
+              <Image src={logoutIcon} alt="icon" width={30} height={30} />
+              <h2 className="text-lg font-semibold text-red-500">ออกจากระบบ</h2>
+            </Link>
+          </div>
         </>
       ) : (
         <div className="flex items-center gap-4 text-xs font-ibm md:gap-7 md:text-sm">
-          <button className="bg-slate-50 px-3 py-2 rounded-md">
+          <button className="bg-slate-50 px-3 py-2 rounded-md active:opacity-40">
             <Link href="/login" className="text-slate-800 font-bold">
               เข้าสู่ระบบ
             </Link>
           </button>
           <button>
-            <Link href="/register" className="text-slate-50">
+            <Link href="/register" className="text-slate-50 active:opacity-40">
               สมัครเป็นนิสิต
             </Link>
           </button>
@@ -159,3 +178,4 @@ export default function Navbar(props: Props) {
     </>
   );
 }
+
