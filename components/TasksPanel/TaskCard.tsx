@@ -2,14 +2,14 @@ import { EditFilled } from "@ant-design/icons";
 import React from "react";
 
 type Props = {
-  name: String;
+  name: string;
   budget: Number;
-  description: String;
-  category: String;
+  description: string;
+  category: string;
   applicants: Number;
   maxApplicants: Number;
-  startDate: String;
-  endDate: String;
+  startDate: string;
+  endDate: string;
   isPending: Boolean;
 };
 

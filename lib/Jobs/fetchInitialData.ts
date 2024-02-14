@@ -1,5 +1,5 @@
 import { getEmployerJobs } from "@/actions/lookup/employee/jobs";
-import TaskCardType from "../Types/TaskCardType";
+import TaskCardType from "../../types/TaskCardType";
 
 const fetchInitialData = async () => {
     const idSample = ["92e60ed5-51d8-4875-bb4e-5760a09a0449",
@@ -10,6 +10,8 @@ const fetchInitialData = async () => {
     const result = await getEmployerJobs(idSample[Math.floor(Math.random() * idSample.length)]);
 
     const tasks: Array<TaskCardType>  = result.map((task) => {return {name: task.title, budget: task.budget, description: task.description, category: task.jobTags, applicants: task.acceptNum, maxApplicants: task.maxAcceptNum, startDate: task.startDate, endDate: task.endDate, isPending: task.jobStatus === "NOT_STARTED"}});
+
+    console.log(tasks)
 
     const pendingTasks: Array<TaskCardType> = tasks.filter((task) => task.isPending === true);
     const doneTasks: Array<TaskCardType> = tasks.filter((task) => task.isPending === false);
