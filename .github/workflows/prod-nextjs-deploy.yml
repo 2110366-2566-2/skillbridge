@@ -72,6 +72,10 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
+  discord-noti:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
 
