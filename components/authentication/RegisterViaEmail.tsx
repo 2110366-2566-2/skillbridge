@@ -150,13 +150,13 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
 
           <div
             id="nextPage"
-            className="w-full bg-[#334155] text-center cursor-pointer rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md"
+            className="w-full bg-[#334155] hover:bg-slate-600 text-center cursor-pointer rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md"
             onClick={handleValidationFirstPage}>
             ถัดไป
           </div>
 
           <p className="w-full text-center text-sm mt-[10px]">
-            มีบัญชีอยู่แล้ว ?
+            มีบัญชีอยู่แล้ว ? {" "}
             <Link
               href={"/login"}
               className="text-[#326FE2] hover:underline hover:underline-offset-2">
@@ -188,6 +188,7 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
             <input
               type="checkbox"
               name="checkOne"
+              id="checkOne"
               className="absolute left-0 top-0 border
                                     border-[#848484]
                                     accent-[#334155]
@@ -197,7 +198,7 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
               onChange={(e) => { handleCheckBoxChange(e) }}
               required
             />
-            <label className="block text-[9.5px] pl-[20px]">
+            <label htmlFor="checkOne" className="block text-[9.5px] pl-[20px] cursor-pointer">
               ฉันได้อ่านและยอมรับ
               <Link href={"/"} className="text-[#326FE2] hover:underline hover:underline-offset">
                 ข้อตกลงและเงื่อนไขการใช้งานของ SkillBridge
@@ -208,6 +209,7 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
             <input
               type="checkbox"
               name="checkTwo"
+              id="checkTwo"
               className="absolute cursor-pointer left-0 top-0 border
                                     border-[#848484]
                                     accent-[#334155]
@@ -216,7 +218,7 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
               onChange={(e) => { handleCheckBoxChange(e) }}
               required
             />
-            <label className="block text-[9.5px] pl-[20px]">
+            <label htmlFor="checkTwo" className="block text-[9.5px] pl-[20px] cursor-pointer">
               ฉันได้อ่านและยอมรับ
               <Link href={"/"} className="text-[#326FE2] hover:underline hover:underline-offset">
                 นโยบายคุ้มครองความเป็นส่วนตัว
@@ -229,7 +231,7 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
               <button
                 id="submit"
                 type="submit"
-                className="w-full bg-[#334155] rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md">
+                className="w-full bg-[#334155] hover:bg-slate-600 rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md">
                 สร้างบัญชี
               </button>
               :
@@ -242,7 +244,7 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
           <div id="previousPage" className="mt-[15px] flex justify-center">
             <p
               onClick={handleToggleForm}
-              className="hover:underline hover:underline-offset text-[#334155] text-md cursor-pointer">
+              className="hover:underline hover:underline-offset text-[#334155] hover:text-slate-600 text-md cursor-pointer">
               ย้อนกลับ
             </p>
           </div>

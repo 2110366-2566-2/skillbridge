@@ -98,7 +98,7 @@ export default function LoginViaEmail() {
 
       <button
         type="submit"
-        className="w-full bg-[#334155] rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md ">
+        className="w-full bg-[#334155] hover:bg-slate-600 rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md ">
         เข้าสู่ระบบ
       </button>
 
