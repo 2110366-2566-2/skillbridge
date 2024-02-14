@@ -143,7 +143,7 @@ export default function Filter() {
                             {/* Shadow Background When Open */}
                             <div className="fixed inset-0 overflow-hidden z-40 bg-neutral-800 opacity-60"></div>
                             {/* Filter Form */}
-                            <div className="fixed inset-0 overflow-y-auto font-ibm z-50 bg-slate-50 w-2/3 h-screen flex flex-col pt-7 px-7 pb-40 md:pb-7 justify-between lg:w-[28%]">
+                            <div className="fixed inset-0 overflow-y-auto font-ibm z-50 bg-slate-50 w-2/3 h-screen flex flex-col pt-7 px-7 pb-24 md:pb-7 justify-between lg:w-[28%]">
                                 <div className="flex flex-col">
                                     <div className="flex flex-col lg:flex-row lg:justify-between">
                                         {/* Tablet and Desktop Topic */}
