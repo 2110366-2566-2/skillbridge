@@ -3,6 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "./navbar/Navbar";
 import SearchAndFilter from "./searchAndFilter/SearchAndFilter";
+import CreateJobHeader from "./createJobHeader/CreateJobHeader";
+import EditJobHeader from "./editJobHeader/EditJobHeader";
 import LandingHeader from "./landingHeader/LandingHeader";
 import getJobTags from "@/actions/getJobTags";
 import whiteLogo from "@/public/logos/logo-white.svg";
@@ -35,6 +37,8 @@ export default async function Header() {
         </div>
         <Navbar session={session} isStudent={isStudent} />
       </div>
+      <CreateJobHeader />
+      <EditJobHeader />
       <LandingHeader isStudent={isStudent} jobTags={jobTags} />
       </div>
       {/* Mobile and Tablet */}

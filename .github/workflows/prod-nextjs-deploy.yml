@@ -69,8 +69,8 @@ jobs:
               ELASTIC_API_KEY=${{ secrets.ELASTIC_API_KEY }} 
             
   discord-noti:
-     if: github.event.pull_request.merged == true
-     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
 
   discord-noti:
     if: github.event.pull_request.merged == true

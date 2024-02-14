@@ -3,6 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import homeIcon from "@/public/icons/home.svg";
+import searchIcon from "@/public/icons/search.svg";
+import workIcon from "@/public/icons/work.svg";
+import logoutIcon from "@/public/icons/logout.svg";
+import hambergerIcon from "@/public/icons/hamberger-button.svg";
+import closeIcon from "@/public/icons/close.svg";
 import NavLink from "./navLink/NavLink";
 import homeIcon from "@/public/icons/home.svg";
 import searchIcon from "@/public/icons/search.svg";
@@ -55,7 +61,7 @@ export default function Navbar(props: Props) {
   const [open, setOpen] = useState(false);
 
   // TEMPORARY
-  const avatar = noavatar;
+  const avatar = "/noavatar.png";
   const name = "คุณชื่อจริง นามสกุล";
   const company = "ตำแหน่ง บริษัทตัวอย่าง จำกัด (มหาชน)";
 
@@ -178,3 +184,4 @@ export default function Navbar(props: Props) {
     </>
   );
 }
+

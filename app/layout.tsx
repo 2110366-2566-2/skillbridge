@@ -5,10 +5,11 @@ import Header from "@/components/header/Header"
 import Footer from "@/components/footer/Footer"
 import { cn } from "@/lib/utils"
 import AuthProvider from "@/providers/AuthProvider"
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] })
 const ibmPlexSansThaiLooped = IBM_Plex_Sans_Thai({
-  weight: ["400", "500", "600", "700"],
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
   subsets: ["thai"],
   variable: "--ibm-plex-sans-thai-font",
 })
@@ -28,8 +29,22 @@ export default function RootLayout({
       <head>
         <link rel="shortcut icon" type="x-icon" href="/icons/logo.svg" />
       </head>
-      <body className={cn(inter.className, ibmPlexSansThaiLooped.className, "h-full")}>
-        <AuthProvider>{children}</AuthProvider>
+      <body className={cn(inter.className, ibmPlexSansThaiLooped.className, "h-screen")}>
+        <AuthProvider>
+          <Toaster
+            position="bottom-right"
+            toastOptions={{
+              className: "font-semibold bg-white text-slate-800",
+              success: {
+                iconTheme: {
+                  primary: "#1e293b",
+                  secondary: "white",
+                },
+              },
+            }}
+          />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   )
