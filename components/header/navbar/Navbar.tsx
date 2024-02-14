@@ -39,7 +39,7 @@ const employerLinks = [
   },
   {
     title: "งานของฉัน",
-    path: "/works",
+    path: "/jobs",
     icon: workIcon,
     activeIcon: workDarkIcon,
   },
