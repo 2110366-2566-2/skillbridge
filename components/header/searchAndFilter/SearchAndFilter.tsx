@@ -33,9 +33,9 @@ export default function SearchAndFilter() {
                     </div>
 
                     {/* Desktop */}
-                    <div className="hidden lg:inline-block">
+                    <div className="hidden lg:inline-block lg:mr-2">
                         {/* SearchBar and Filter */}
-                        <div className="flex gap-7">
+                        <div className="flex gap-4">
                             <div>
                                 <SearchBar />
                             </div>
