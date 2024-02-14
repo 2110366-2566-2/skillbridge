@@ -143,7 +143,7 @@ export default function Filter() {
                             {/* Shadow Background When Open */}
                             <div className="fixed inset-0 overflow-hidden z-40 bg-neutral-800 opacity-60"></div>
                             {/* Filter Form */}
-                            <div className="fixed inset-0 overflow-hidden font-ibm z-50 bg-slate-50 w-2/3 h-screen flex flex-col p-7 justify-between lg:w-[28%]">
+                            <div className="fixed inset-0 overflow-y-auto font-ibm z-50 bg-slate-50 w-2/3 h-screen flex flex-col pt-7 px-7 pb-40 md:pb-7 justify-between lg:w-[28%]">
                                 <div className="flex flex-col">
                                     <div className="flex flex-col lg:flex-row lg:justify-between">
                                         {/* Tablet and Desktop Topic */}
@@ -248,7 +248,7 @@ export default function Filter() {
                                     </select>
                                 </div>
 
-                                <div className="flex flex-row justify-between gap-2 mb-14 lg:mb-0">
+                                <div className="flex flex-row justify-between gap-2 mt-8 md:mt-0">
                                     <button
                                         type="button"
                                         className="w-1/2 min-h-[40px] text-slate-700 text-[16px] rounded-md hover:bg-slate-200 focus:ring-2 focus:outline-none focus:ring-slate-300"
