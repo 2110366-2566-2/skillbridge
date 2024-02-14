@@ -33,7 +33,7 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
 
   const validateFirstPage = () => {
     const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,6}$/
-    const password_pattern = /^.{8}$/
+    // const password_pattern = /^.{8,}$/
     const errors: Form = structuredClone(defaultForm)
     if (data.email === "") {
       errors.email = "กรอกที่อยู่อีเมลของคุณ"
@@ -43,7 +43,7 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
 
     if (data.password === "") {
       errors.password = "กรอกรหัสผ่านของคุณ"
-    } else if (!password_pattern.test(data.password)) {
+    } else if (data.password.length < 8) {
       errors.password = "รหัสผ่านต้องมี 8 ตัวอักษร หรือมากกว่า"
     }
 

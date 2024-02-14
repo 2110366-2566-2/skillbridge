@@ -34,7 +34,7 @@ export default function LoginViaEmail() {
 
   const validateForm = () => {
     const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,6}$/
-    const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/
+    // const password_pattern = /^.{8}$/
     let success = true;
     const errors: Error = {
       email: "",
@@ -51,7 +51,7 @@ export default function LoginViaEmail() {
     if (form.password === "") {
       errors.password = "กรอกรหัสผ่านของคุณ"
       success = false
-    } else if (!password_pattern.test(form.password)) {
+    } else if (form.password.length < 8) {
       errors.password = "รหัสผ่านไม่ถูกต้อง"
       success = false
     }
@@ -66,12 +66,13 @@ export default function LoginViaEmail() {
       if (!success) {
         setErrors(errors)
         return
+      } else {
+        signIn("credentials", {
+          email: form.email,
+          password: form.password,
+          callbackUrl: "/dash",
+        })
       }
-      signIn("credentials", {
-        email: form.email,
-        password: form.password,
-        callbackUrl: "/dash",
-      })
     }, 0);
   }
 
@@ -102,7 +103,7 @@ export default function LoginViaEmail() {
       </button>
 
       <p className="w-full text-center text-sm mt-[10px]">
-        ไม่เคยมีบัญชี ?{" "}
+        ไม่เคยมีบัญชี ? {" "}
         <Link
           href={"/register"}
           className="text-[#326FE2] hover:underline hover:underline-offset-2">
