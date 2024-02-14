@@ -19,7 +19,7 @@ export default async function Header() {
   return (
     <div>
       <div>
-      <div className="flex justify-between items-center py-5 pl-5 pr-8 md:pr-10">
+        <div className="flex justify-between items-center py-5 pl-5 pr-8 md:pr-10">
           <Link href="/landing">
             <Image
               className="w-auto h-auto md:w-36 md:hover:scale-105 md:duration-500 active:opacity-40"
@@ -28,18 +28,18 @@ export default async function Header() {
               width={110}
               height={110}
               priority={true}
-          />
+            />
           </Link>
           {/* Desktop */}
-        <div className="hidden lg:inline-block">
-          {/* Only shows at "/search" */}
-          <SearchAndFilter />
+          <div className="hidden lg:inline-block">
+            {/* Only shows at "/search" */}
+            <SearchAndFilter />
+          </div>
+          <Navbar session={session} isStudent={isStudent} />
         </div>
-        <Navbar session={session} isStudent={isStudent} />
-      </div>
-      <CreateJobHeader />
-      <EditJobHeader />
-      <LandingHeader isStudent={isStudent} jobTags={jobTags} />
+        <CreateJobHeader />
+        <EditJobHeader />
+        <LandingHeader isStudent={isStudent} jobTags={jobTags} />
       </div>
       {/* Mobile and Tablet */}
       <div className="lg:hidden">

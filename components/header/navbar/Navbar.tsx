@@ -7,15 +7,9 @@ import homeIcon from "@/public/icons/home.svg";
 import searchIcon from "@/public/icons/search.svg";
 import workIcon from "@/public/icons/work.svg";
 import logoutIcon from "@/public/icons/logout.svg";
-import hambergerIcon from "@/public/icons/hamberger-button.svg";
 import closeIcon from "@/public/icons/close.svg";
 import NavLink from "./navLink/NavLink";
-import homeIcon from "@/public/icons/home.svg";
-import searchIcon from "@/public/icons/search.svg";
-import workIcon from "@/public/icons/work.svg";
-import logoutIcon from "@/public/icons/logout.svg";
 import hamburgerIcon from "@/public/icons/hamburger-button.svg";
-import closeIcon from "@/public/icons/close.svg";
 import homeDarkIcon from "@/public/icons/homeDark.svg";
 import searchDarkIcon from "@/public/icons/searchDark.svg";
 import workDarkIcon from "@/public/icons/workDark.svg";
@@ -61,7 +55,7 @@ export default function Navbar(props: Props) {
   const [open, setOpen] = useState(false);
 
   // TEMPORARY
-  const avatar = "/noavatar.png";
+  const avatar = noavatar;
   const name = "คุณชื่อจริง นามสกุล";
   const company = "ตำแหน่ง บริษัทตัวอย่าง จำกัด (มหาชน)";
 
