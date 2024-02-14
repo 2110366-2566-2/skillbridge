@@ -2,10 +2,10 @@ import TaskCardType from "../../types/TaskCardType";
 
 const sortArray = (
     array: Array<TaskCardType> = [],
-    startDateSortOption: String = "",
-    endDateSortOption: String = "",
-    priceSortOption: String = "",
-    applicantsSortOption: String = ""
+    startDateSortOption: string = "",
+    endDateSortOption: string = "",
+    priceSortOption: string = "",
+    applicantsSortOption: string = ""
   ) => {
     if (startDateSortOption === "asc") {
       array.sort((a: TaskCardType, b: TaskCardType) => {

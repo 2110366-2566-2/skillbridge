@@ -3,10 +3,10 @@ import sortArray from "../../lib/Jobs/sortArray";
 import TaskCardType from "../../types/TaskCardType";
 
 type Props = {
-  startDateSortOption: String;
-  endDateSortOption: String;
-  priceSortOption: String;
-  applicantsSortOption: String;
+  startDateSortOption: string;
+  endDateSortOption: string;
+  priceSortOption: string;
+  applicantsSortOption: string;
   data: Array<TaskCardType>;
   isPending: Boolean;
 };
