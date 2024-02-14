@@ -37,6 +37,7 @@ const DoneTasksPanel = ({
           return (
             <TaskCard
               key={index}
+              jobId={data.jobId}
               name={data.name}
               budget={data.budget}
               description={data.description}

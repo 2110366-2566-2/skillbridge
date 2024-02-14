@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 
 export interface job {
     id: string,
+    isDeleted: boolean,
     title: string,
     startDate: string,
     endDate: string,
@@ -34,6 +35,7 @@ async function getEmployerJobs(employeeId: string) {
     jobs.forEach((job) => {
         const showJob: job = {
             id: job.id,
+            isDeleted: job.isDeleted,
             title: job.title,
             startDate: job.estimateStartDate.toLocaleDateString('en-GB'),
             endDate: job.estimateEndDate.toLocaleDateString('en-GB'),
@@ -47,7 +49,7 @@ async function getEmployerJobs(employeeId: string) {
 
         output.push(showJob);
     });
-
+    
     return output;
 }
 

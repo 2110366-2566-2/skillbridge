@@ -119,7 +119,7 @@ export default function Filter() {
                     {/* Tablet and Desktop Button */}
                     <button
                         type="button"
-                        className="hidden md:hover:bg-slate-200 md:flex md:flex-row md:items-center md:justify-center md:min-w-[99px] md:min-h-[40px] md:bg-slate-300 md:rounded-[6px] lg:min-w-[109px] lg:min-h-[48px] "
+                        className="hidden md:hover:bg-slate-200 md:flex md:flex-row md:items-center md:justify-center md:min-w-[99px] md:min-h-[40px] md:bg-slate-300 md:rounded-[6px] lg:min-w-[109px] lg:min-h-[48px] duration-500 "
                         onClick={toggleOpen}
                     >
                         <div className="">
@@ -232,6 +232,7 @@ export default function Filter() {
                                     {/* Job Tag */}
                                     <div className="font-bold text-[20px] text-slate-800 mt-6 mb-2">หมวดหมู่</div>
                                     <select
+                                        title="jobTags"
                                         id="jobTags"
                                         className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 block w-full p-[5.75px]" name="jobTags"
                                         value={filtered.jobTags}
@@ -239,7 +240,7 @@ export default function Filter() {
                                     >
                                         <option value="">เลือกหมวดหมู่ที่ต้องการ</option>
                                         {jobList.map(job => (
-                                            <option key={job} value={job}>{job}</option>
+                                            <option key={job.title} value={job.title}>{job.title}</option>
                                         ))}
                                     </select>
                                 </div>
@@ -247,14 +248,14 @@ export default function Filter() {
                                 <div className="flex flex-row justify-between gap-2 mt-8 md:mt-0">
                                     <button
                                         type="button"
-                                        className="w-1/2 min-h-[40px] text-slate-700 text-[16px] rounded-md hover:bg-slate-200 focus:ring-2 focus:outline-none focus:ring-slate-300"
+                                        className="w-1/2 min-h-[40px] text-slate-700 text-[16px] rounded-md hover:bg-slate-200 focus:ring-2 focus:outline-none focus:ring-slate-300 duration-500"
                                         onClick={clearInput}
                                     >
                                         ล้าง
                                     </button>
                                     <button
                                         type="submit"
-                                        className="w-1/2 min-h-[40px] text-white text-[16px] rounded-md bg-slate-700 hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-slate-300"
+                                        className="w-1/2 min-h-[40px] text-white text-[16px] rounded-md bg-slate-700 hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-slate-300 duration-500"
                                     >
                                         ยืนยัน
                                     </button>

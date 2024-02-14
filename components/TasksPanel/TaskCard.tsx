@@ -1,7 +1,9 @@
 import { EditFilled } from "@ant-design/icons";
 import React from "react";
+import Link from "next/link";
 
 type Props = {
+  jobId: string;
   name: string;
   budget: Number;
   description: string;
@@ -14,6 +16,7 @@ type Props = {
 };
 
 const TaskCard = ({
+  jobId,
   name,
   budget,
   description,
@@ -37,11 +40,12 @@ const TaskCard = ({
         </div>
 
         <div className={`${isPending ? "hidden": ""} h-[34.91px] w-[34.91px] p-2 mx-2`}></div>
-        <button
+        <Link
           className={`${isPending ? "" : "hidden"} bg-slate-50 border-2 border-solid rounded-full hover:shadow-md flex align-center w-fit h-fit p-2 mx-2`}
+          href={`/jobs/update/${jobId}`}
         >
           <EditFilled />
-        </button>
+        </Link>
       </div>
 
       <div className="bg-slate-200 rounded-sm p-2 w-fit">{category}</div>

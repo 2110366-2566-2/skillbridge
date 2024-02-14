@@ -1,4 +1,6 @@
 type TaskCardType = {
+    jobId: string;
+    isDeleted: boolean;
     name: string;
     budget: Number;
     description: string;
