@@ -15,6 +15,7 @@ export default function Footer() {
           alt="logo"
           width={150}
           height={150}
+          priority={true}
         />
       </Link>
       <div className="flex flex-col items-center gap-1 md:flex-row md:gap-3 md:text-base">
