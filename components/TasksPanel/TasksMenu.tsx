@@ -191,7 +191,7 @@ const TasksMenu = () => {
         {isOpeningSideBar ? (
           <>
             <div className="z-10 bg-neutral-800 opacity-60 fixed top-0 right-0 left-0 bottom-0 lg:hidden"></div>
-            <aside className="fixed font-ibm z-20 bg-slate-50 text-slate-900 top-0 left-0 w-2/3 h-screen flex flex-col items-center p-7 justify-between lg:hidden">
+            <aside className="fixed font-ibm z-20 bg-slate-50 text-slate-900 top-0 left-0 w-2/3 h-screen flex flex-col items-center pt-7 px-7 pb-40 md:pb-7 justify-between lg:hidden overflow-y-auto">
               <div className="flex flex-col gap-8 justify-start w-full">
                 <div className="flex flex-row justify-between">
                   <div className="text-3xl font-bold text-slate-800 mb-6">
@@ -275,7 +275,7 @@ const TasksMenu = () => {
                   </select>
                 </div>
               </div>
-              <div className="flex flex-row justify-between gap-2 w-full">
+              <div className="flex flex-row justify-between gap-2 w-full mt-8 md:mt-0">
                 <button
                   onClick={() => {
                     setStartDateSortOption("");
