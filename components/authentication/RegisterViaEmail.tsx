@@ -83,8 +83,6 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
     }, 0)
   }
 
-  const router = useRouter()
-
   const handleValidationSecondPage = () => {
     const { errors, success } = validateSecondPage()
     if (!success) {
@@ -103,6 +101,15 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
     })
     console.log(data)
   }
+
+  const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCheckBoxError({
+      ...checkBoxError,
+      [event.target.name]: event.target.checked
+    })
+  }
+
+  const router = useRouter()
 
   return (
     <form className="w-full" action={handleValidationSecondPage} noValidate>
@@ -179,6 +186,7 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
                                     cursor-pointer
                                     rounded-sm
                                     "
+              onChange={(e) => { handleCheckBoxChange(e) }}
               required
             />
             <label className="block text-[9.5px] pl-[20px]">
@@ -197,6 +205,7 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
                                     accent-[#334155]
                                     rounded-sm
                                     "
+              onChange={(e) => { handleCheckBoxChange(e) }}
               required
             />
             <label className="block text-[9.5px] pl-[20px]">
@@ -207,12 +216,20 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
             </label>
           </div>
 
-          <button
-            id="submit"
-            type="submit"
-            className="w-full bg-[#334155] rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md">
-            สร้างบัญชี
-          </button>
+          {
+            checkBoxError.checkOne && checkBoxError.checkTwo ?
+              <button
+                id="submit"
+                type="submit"
+                className="w-full bg-[#334155] rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md">
+                สร้างบัญชี
+              </button>
+              :
+              <div
+                className="w-full bg-[#CBD5E1] rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md text-center cursor-pointer">
+                สร้างบัญชี
+              </div>
+          }
 
           <div id="previousPage" className="mt-[15px] flex justify-center">
             <p
