@@ -3,13 +3,23 @@
 import { ChangeEvent, FormEvent, useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
+import getJobTags from "@/actions/getJobTags";
 
 const filterIcon = require("@/public/icons/filter.svg") as string;
 const filterDarkIcon = require("@/public/icons/filterDark.svg") as string;
 const closeDarkIcon = require("@/public/icons/closeDark.svg") as string;
 
+type JobTag = {
+    id: string;
+    title: string;
+    createdAt: Date;
+    updatedAt: Date;
+    isDeleted: boolean;
+  };
+
 export default function Filter() {
     const [isOpen, setIsOpen] = useState(false);
+    const [jobList, setJobList] = useState<JobTag[]>([]);
     const [filtered, setFiltered] = useState({
         startDate: "",
         endDate: "",
@@ -17,36 +27,22 @@ export default function Filter() {
         minPrice: 0,
         maxPrice: 0
     })
-    const jobList = [
-        "กราฟิกดีไซน์",
-        "สถาปัตย์",
-        "ตกแต่งภายใน",
-        "ศิลปะและภาพวาด",
-        "ออกแบบ UX UI",
-        "พัฒนาแอพฯมือถือ",
-        "พัฒนาเว็ปไซต์",
-        "ไอทีโซลูชั่น",
-        "งาน IOT",
-        "อินฟลูเอนเซอร์",
-        "สื่อออนไลน์",
-        "แอดมินออนไลน์",
-        "ไลฟ์สไตล์",
-        "พัฒนาตัวเอง",
-        "ธุรกิจและการเงิน",
-        "รูปภาพและวีดีโอ",
-        "แต่งหน้า",
-        "สไตลิสต์",
-        "นักแสดง",
-        "นักพากย์เสียง",
-        "นักร้อง / นักดนตรี",
-        "ซาวด์เอ็นจิเนียร์",
-        "งานเขียน",
-        "ภาษา",
-        "อื่น ๆ",
-    ]
+
     const router = useRouter();
     const [keyword, setKeyword] = useState("")
     const searchParams = useSearchParams();
+
+    useEffect(() => {
+        async function getAllJobTags() {
+          try {
+            const jobTags = await getJobTags();
+            setJobList(jobTags);
+          } catch (error) {
+            console.error("Error fetching job tags:", error);
+          }
+        }
+        getAllJobTags();
+      }, []);
 
     useEffect(() => {
         async function setSearchKeyword() {
@@ -121,7 +117,7 @@ export default function Filter() {
             {/* Tablet and Desktop Button */}
             <button
                 type="button"
-                className="hidden md:hover:bg-slate-200 md:flex md:flex-row md:items-center md:justify-center md:min-w-[99px] md:min-h-[40px] md:bg-slate-300 md:rounded-[6px] lg:min-w-[109px] lg:min-h-[48px] "
+                className="hidden md:hover:bg-slate-200 md:flex md:flex-row md:items-center md:justify-center md:min-w-[99px] md:min-h-[40px] md:bg-slate-300 md:rounded-[6px] lg:min-w-[109px] lg:min-h-[48px] duration-500 "
                 onClick={toggleOpen}
             >
                 <div className="">
@@ -241,7 +237,7 @@ export default function Filter() {
                             >
                                 <option value="">เลือกหมวดหมู่ที่ต้องการ</option>
                                 {jobList.map(job => (
-                                    <option key={job} value={job}>{job}</option>
+                                    <option key={job.title} value={job.title}>{job.title}</option>
                                 ))}
                             </select>
                         </div>
@@ -249,14 +245,14 @@ export default function Filter() {
                         <div className="flex flex-row justify-between gap-2">
                             <button
                                 type="button"
-                                className="w-1/2 min-h-[40px] text-slate-700 text-[16px] rounded-md hover:bg-slate-200 focus:ring-2 focus:outline-none focus:ring-slate-300"
+                                className="w-1/2 min-h-[40px] text-slate-700 text-[16px] rounded-md hover:bg-slate-200 focus:ring-2 focus:outline-none focus:ring-slate-300 duration-500"
                                 onClick={clearInput}
                             >
                                 ล้าง
                             </button>
                             <button
                                 type="submit"
-                                className="w-1/2 min-h-[40px] text-white text-[16px] rounded-md bg-slate-700 hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-slate-300"
+                                className="w-1/2 min-h-[40px] text-white text-[16px] rounded-md bg-slate-700 hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-slate-300 duration-500"
                             >
                                 ยืนยัน
                             </button>

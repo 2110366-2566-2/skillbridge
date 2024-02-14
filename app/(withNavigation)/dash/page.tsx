@@ -1,6 +1,11 @@
 "use client"
 import { signOut, useSession } from "next-auth/react"
 
+import { NextRequest } from 'next/server'
+import { getServerSession } from 'next-auth'
+import { authOptions } from './app/api/auth/[...nextauth]/auth'
+
+
 export default function LoggedIn() {
   // const session = await getServerSession(authOptions) //Server
   const { data: session } = useSession() //Client
