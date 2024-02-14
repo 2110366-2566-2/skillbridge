@@ -20,7 +20,6 @@ const TasksMenu = () => {
   const [isOpeningSideBar, setIsOpeningSideBar] = useState(false);
   const [pendingTasks, setPendingTasks] = useState<TaskCardType[]>([]);
   const [doneTasks, setDoneTasks] = useState<TaskCardType[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -29,7 +28,6 @@ const TasksMenu = () => {
       setDoneTasks(doneTasks);
     }
     fetchData();
-    setIsLoading(false);
   }, []);
 
   return (
@@ -92,7 +90,6 @@ const TasksMenu = () => {
             applicantsSortOption={applicantsSortOption}
             data={pendingTasks}
             isPending={isPending}
-            isLoading={isLoading}
           ></TasksPanel>
         ) : (
           <TasksPanel
@@ -102,7 +99,6 @@ const TasksMenu = () => {
             applicantsSortOption={applicantsSortOption}
             data={doneTasks}
             isPending={isPending}
-            isLoading={isLoading}
           ></TasksPanel>
         )}
 

@@ -11,6 +11,8 @@ const fetchInitialData = async () => {
 
     const tasks: Array<TaskCardType>  = result.map((task) => {return {name: task.title, budget: task.budget, description: task.description, category: task.jobTags, applicants: task.acceptNum, maxApplicants: task.maxAcceptNum, startDate: task.startDate, endDate: task.endDate, isPending: task.jobStatus === "NOT_STARTED"}});
 
+    console.log(tasks)
+
     const pendingTasks: Array<TaskCardType> = tasks.filter((task) => task.isPending === true);
     const doneTasks: Array<TaskCardType> = tasks.filter((task) => task.isPending === false);
 
