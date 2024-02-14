@@ -4,9 +4,8 @@ import React, { useState, useEffect } from "react";
 import TasksPanel from "./TasksPanel";
 import Link from "next/link";
 import { CloseOutlined, SortAscendingOutlined } from "@ant-design/icons";
-import TaskCardType from "../Types/TaskCardType";
-import { getEmployerJobs } from "@/actions/lookup/employee/jobs";
-import fetchInitialData from "../utils/fetchInitialData";
+import TaskCardType from "../../types/TaskCardType";
+import fetchInitialData from "../../lib/Jobs/fetchInitialData";
 
 type Props = {};
 
@@ -71,7 +70,7 @@ const TasksMenu = () => {
           </button>
 
           {/* Create Work button */}
-          <Link href={"/works/create"} key={"createWork"}>
+          <Link href={"/jobs/create"} key={"createJob"}>
             <button
               className={`${isPending ? "" : "hidden"} bg-slate-900 font-medium text-md text-white rounded-md px-3 py-2 hover:shadow-md`}
             >
@@ -192,7 +191,7 @@ const TasksMenu = () => {
         {isOpeningSideBar ? (
           <>
             <div className="z-10 bg-neutral-800 opacity-60 fixed top-0 right-0 left-0 bottom-0 lg:hidden"></div>
-            <aside className="fixed font-ibm z-20 bg-slate-50 text-slate-900 top-0 left-0 w-2/3 h-screen flex flex-col items-center p-7 justify-between lg:hidden">
+            <aside className="fixed font-ibm z-20 bg-slate-50 text-slate-900 top-0 left-0 w-2/3 h-screen flex flex-col items-center pt-7 px-7 pb-40 md:pb-7 justify-between lg:hidden overflow-y-auto">
               <div className="flex flex-col gap-8 justify-start w-full">
                 <div className="flex flex-row justify-between">
                   <div className="text-3xl font-bold text-slate-800 mb-6">
@@ -276,7 +275,7 @@ const TasksMenu = () => {
                   </select>
                 </div>
               </div>
-              <div className="flex flex-row justify-between gap-2 w-full">
+              <div className="flex flex-row justify-between gap-2 w-full mt-8 md:mt-0">
                 <button
                   onClick={() => {
                     setStartDateSortOption("");
