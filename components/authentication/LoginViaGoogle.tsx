@@ -7,7 +7,7 @@ export default function LoginViaGoogle() {
       className="w-full h-[40px] bg-[#F1F5F9] border border-[#CBD5E1] rounded-md flex items-center px-[20px]"
       onClick={() =>
         signIn("google", {
-          callbackUrl: "/",
+          callbackUrl: "/landing",
         })
       }>
       <div>

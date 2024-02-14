@@ -46,6 +46,7 @@ export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async signIn({ account, profile, user, credentials }) {
+      if (account?.provider === "credentials" && user) return true
       console.log(
         "signIn",
         "account",
@@ -57,14 +58,61 @@ export const authOptions: AuthOptions = {
         "credentials",
         credentials
       )
-      if (account?.provider === "google" && profile?.email?.endsWith("21@student.chula.ac.th")) {
-        console.log("Sign in success")
+      if (account?.provider !== "google" || !(profile && user)) return "/landing"
 
-        return true
-      } else if (account?.provider === "credentials") return true
-      console.log("Sign in failed")
+      const queriedUser = await prisma.user.findUnique({
+        where: {
+          email: profile?.email,
+        },
+      })
 
-      return "/"
+      const isStudent = profile?.email?.endsWith("@student.chula.ac.th")
+      // 1: Create new user and 2
+      // 2: Redirect to register page
+      // 3: Redirect to landing page
+      if (!queriedUser) {
+        if (isStudent) {
+          const student = await prisma.student.create({
+            data: {
+              user: {
+                create: {
+                  salutation: "-",
+                  firstname: "-",
+                  lastname: "-",
+                  hashedPassword: "incomplete",
+                  email: profile.email || "",
+                  profileImageUrl: profile.image,
+                  isGmail: true,
+                },
+              },
+            },
+          })
+        } else {
+          const employer = await prisma.employer.create({
+            data: {
+              position: "-",
+              organization: "-",
+              publicEmail: profile.email || "",
+              user: {
+                create: {
+                  salutation: "-",
+                  firstname: "-",
+                  middlename: "",
+                  lastname: "-",
+                  hashedPassword: "incomplete",
+                  email: profile.email || "",
+                  profileImageUrl: profile.image,
+                  isGmail: true,
+                },
+              },
+            },
+          })
+        }
+      }
+
+      if (!queriedUser || (queriedUser && queriedUser.hashedPassword === "incomplete")) {
+        return `/register?isStudent=${isStudent}&fname=${profile.name?.split(" ")[0]}&lname=${profile.name?.split(" ")[1]}`
+      } else return true
     },
     async jwt({ token, account, profile, user }) {
       console.log("jwt", "account", account, "profile", profile, "token", token, "user", user)

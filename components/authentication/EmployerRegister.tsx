@@ -3,31 +3,29 @@ import LoginViaGoogle from "./LoginViaGoogle"
 import Line from "./Line"
 import RegisterViaEmail from "./RegisterViaEmail"
 import { useState } from "react"
+import { useSearchParams } from "next/navigation"
 
 export default function EmployerRegister() {
+  const defaultToggle = useSearchParams().get("isStudent") !== null
 
-    const [isToggleForm, setIsToggleForm] = useState(false);
+  const [isToggleForm, setIsToggleForm] = useState(defaultToggle)
 
-    const handleToggleForm = () => {
-        setIsToggleForm(prev => !prev);
-    }
+  const handleToggleForm = () => {
+    setIsToggleForm((prev) => !prev)
+  }
 
-    return (
-        <div className="flex flex-col w-[280px] mt-[30px]">
+  return (
+    <div className="flex flex-col w-[280px] mt-[30px]">
+      <Title title="สร้างบัญชีสำหรับ" highlightText="ผู้ว่าจ้าง" highlightColor="#48953D" />
 
-            <Title title='สร้างบัญชีสำหรับ' highlightText='ผู้ว่าจ้าง' highlightColor='#48953D' />
-
-            {
-                !isToggleForm &&
-                <div className="mt-[25px] text-[#64748B] leading-6 text-sm w-full">
-                    <LoginViaGoogle />
-                    <Line />
-                </div>
-
-            }
-
-            <RegisterViaEmail handleToggleForm={handleToggleForm} isToggleForm={isToggleForm} />
-
+      {!isToggleForm && (
+        <div className="mt-[25px] text-[#64748B] leading-6 text-sm w-full">
+          <LoginViaGoogle />
+          <Line />
         </div>
-    )
+      )}
+
+      <RegisterViaEmail handleToggleForm={handleToggleForm} isToggleForm={isToggleForm} />
+    </div>
+  )
 }

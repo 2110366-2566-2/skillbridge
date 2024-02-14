@@ -35,7 +35,7 @@ export default function LoginViaEmail() {
   const validateForm = () => {
     const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,6}$/
     const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/
-    let success = true;
+    let success = true
     const errors: Error = {
       email: "",
       password: "",
@@ -70,9 +70,9 @@ export default function LoginViaEmail() {
       signIn("credentials", {
         email: form.email,
         password: form.password,
-        callbackUrl: "/dash",
+        callbackUrl: "/landing",
       })
-    }, 0);
+    }, 0)
   }
 
   return (
