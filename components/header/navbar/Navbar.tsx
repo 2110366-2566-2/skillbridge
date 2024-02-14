@@ -70,7 +70,7 @@ export default function Navbar(props: Props) {
             ))}
             <button
               className="hidden md:block px-5 py-2 rounded-full duration-300 active:opacity-40"
-              onClick={() => signOut()}
+              onClick={() => signOut({ callbackUrl: process.env.NEXTAUTH_URL })}
             >
               <p className="hidden text-sm text-slate-50 hover:text-red-400 duration-300 md:block font-bold">
                 ออกจากระบบ
@@ -145,14 +145,14 @@ export default function Navbar(props: Props) {
                 ))}
               </div>
             </div>
-            <Link
+            <button
               className="w-full flex gap-8 justify-start active:opacity-40"
-              href="/"
+              onClick={() => signOut({ callbackUrl: process.env.NEXTAUTH_URL })}
               key="mobile : ออกจากระบบ"
             >
               <Image src={logoutIcon} alt="icon" width={30} height={30} />
               <h2 className="text-lg font-semibold text-red-500">ออกจากระบบ</h2>
-            </Link>
+            </button>
           </div>
         </>
       ) : (

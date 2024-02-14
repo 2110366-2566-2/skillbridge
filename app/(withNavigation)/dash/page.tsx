@@ -1,9 +1,8 @@
 "use client"
 import { signOut, useSession } from "next-auth/react"
-
 import { NextRequest } from 'next/server'
 import { getServerSession } from 'next-auth'
-import { authOptions } from './app/api/auth/[...nextauth]/auth'
+import { authOptions } from './app/api/auth/[...nextauth]/auth';
 
 
 export default function LoggedIn() {
@@ -24,7 +23,7 @@ export default function LoggedIn() {
         <p>{JSON.stringify(session, null, 2)}</p>
         <button
           onClick={() => {
-            signOut()
+            signOut({ callbackUrl: process.env.NEXTAUTH_URL })
           }}>
           Log out
         </button>

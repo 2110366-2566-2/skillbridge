@@ -77,5 +77,6 @@ export const authOptions: AuthOptions = {
       console.log("session", "session", session, "token", token, "user", user)
       return { ...token, expires: session.expires }
     },
+    
   },
 }

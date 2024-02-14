@@ -1,4 +1,3 @@
-import { signOut } from "next-auth/react"
 import Logo from "@/components/authentication/Logo"
 import Login from "@/components/authentication/Login"
 
