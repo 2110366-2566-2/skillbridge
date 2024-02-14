@@ -12,6 +12,7 @@
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.3.0",
     "@prisma/client": "^5.9.1",
     "@types/bcryptjs": "^2.4.6",
     "bcrypt": "^5.1.1",
