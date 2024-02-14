@@ -1,9 +1,17 @@
 import Title from "./Title"
 import LoginViaGoogle from "./LoginViaGoogle"
-import Line from "./Line"
-import RegisterViaEmail from "./RegisterViaEmail"
+import { useState } from "react"
+import RegisterViaGoogle from "./RegisterViaGoogle";
+
 
 export default function StudentRegister() {
+
+    const [isToggleForm, setIsToggleForm] = useState(false);
+
+    const handleToggleForm = () => {
+        setIsToggleForm(prev => !prev);
+    }
+
     return (
         <div className="flex flex-col w-[280px] mt-[30px]">
 
@@ -14,7 +22,6 @@ export default function StudentRegister() {
             <div className="mt-[25px] text-[#64748B] leading-6 text-sm w-full">
                 <LoginViaGoogle />
             </div>
-
 
         </div>
     )
