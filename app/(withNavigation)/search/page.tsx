@@ -1,5 +1,3 @@
-"use client"
-
 import SearchJobItemList from "@/components/searchJob/SearchJobItemList";
 import SearchKeywordText from "@/components/searchJob/SearchKeywordText";
 import { Suspense } from "react";
