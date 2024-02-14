@@ -3,6 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "./navbar/Navbar";
 import SearchAndFilter from "./searchAndFilter/SearchAndFilter";
+import CreateJobHeader from "./createJobHeader/CreateJobHeader";
+import EditJobHeader from "./editJobHeader/EditJobHeader";
 
 const whiteLogo = require("@/public/logos/logo-white.svg") as string;
 
@@ -31,6 +33,8 @@ export default async function Header() {
         </div>
         <Navbar session={session} isStudent={isStudent} />
       </div>
+      <CreateJobHeader />
+      <EditJobHeader />
       {/* Mobile and Tablet */}
       <div className="lg:hidden">
         {/* Only shows at "/search" */}

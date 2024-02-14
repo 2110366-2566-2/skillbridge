@@ -10,6 +10,7 @@ async function main() {
 
   await prisma.review.deleteMany({})
   await prisma.application.deleteMany({})
+  await prisma.jobDocumentFile.deleteMany({})
   await prisma.job.deleteMany({})
   await prisma.jobTag.deleteMany({})
   await prisma.employer.deleteMany({})
@@ -50,7 +51,7 @@ async function main() {
     })
     jobTagList[jobTagName] = jobTag.id
   }
-
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   const s1 = await prisma.student.create({
     data: {
       resumeUrl: 'https://i.pinimg.com/736x/87/91/53/87915397fcb2d0b04899cd90420f4acc.jpg',
@@ -68,7 +69,7 @@ async function main() {
       }
     }
   })
-
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   const s2 = await prisma.student.create({
     data: {
       resumeUrl: 'https://s3-us-west-2.amazonaws.com/hiration/ghost/2021/02/resume-meme-10.jpg',
@@ -86,7 +87,7 @@ async function main() {
       }
     }
   })
-
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   const s3 = await prisma.student.create({
     data: {
       resumeUrl: 'https://cdn-images.zety.com/pages/resume_meme_2.png',
@@ -104,7 +105,7 @@ async function main() {
       }
     }
   })
-
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   const e1 = await prisma.employer.create({
     data: {
       position: 'Billionaire',
@@ -121,7 +122,7 @@ async function main() {
       },
       jobs: {
         create: [
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'เขียนเว็บให้ SoeiCorp.',
             status: 'NOT_STARTED',
@@ -136,7 +137,7 @@ async function main() {
                   userId: s1.userId,
                   bid: 1200,
                   documentUrl: 'https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png',
-                }, 
+                },
                 {
                   userId: s2.userId,
                   bid: 800,
@@ -145,7 +146,7 @@ async function main() {
               ]
             }
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'Renovate Soei888 Web',
             status: 'IN_PROGRESS',
@@ -163,7 +164,7 @@ async function main() {
                   bid: 600,
                   documentUrl: 'https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png',
                   status: 'ACCEPTED'
-                }, 
+                },
                 {
                   userId: s3.userId,
                   bid: 500,
@@ -173,7 +174,7 @@ async function main() {
               ]
             }
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'เขียนเว็บให้ SoeiCorp.',
             status: 'NOT_STARTED',
@@ -193,7 +194,7 @@ async function main() {
               ]
             }
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'เขียนบล็อกและ Tech-savvy Blogger',
             status: 'COMPLETED',
@@ -212,13 +213,13 @@ async function main() {
                   bid: 10000,
                   documentUrl: 'https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH',
                   status: 'ACCEPTED'
-                }, 
+                },
                 {
                   userId: s2.userId,
                   bid: 15000,
                   documentUrl: 'https://programmerhumor.io/wp-content/uploads/2022/07/programmerhumor-io-frontend-memes-programming-memes-c0e265eaf665a17.png',
                   status: 'REJECTED'
-                }, 
+                },
                 {
                   userId: s1.userId,
                   bid: 8000,
@@ -242,7 +243,7 @@ async function main() {
               ]
             }
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'นักออกแบบกราฟิกและ Graphic Design Guru',
             status: 'COMPLETED',
@@ -273,7 +274,7 @@ async function main() {
                   bid: 5000,
                   documentUrl: 'https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH',
                   status: 'REJECTED'
-                }, 
+                },
               ]
             },
             reviews: {
@@ -307,11 +308,11 @@ Proficiency ใน Excel หรือ Google Sheets เป็น essential, \n \
                   userId: s3.userId,
                   bid: 5000,
                   documentUrl: 'https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH',
-                }, 
+                },
               ]
             },
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'Social Media Content Manager / ผู้จัดการเนื้อหาโซเชียลมีเดีย',
             status: 'NOT_STARTED',
@@ -336,7 +337,7 @@ content creation, strategic planning, and performance analysis.',
                   bid: 12000,
                   documentUrl: 'https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH',
                   status: 'ACCEPTED'
-                }, 
+                },
               ]
             },
             reviews: {
@@ -356,7 +357,7 @@ content creation, strategic planning, and performance analysis.',
               ]
             }
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'Data Analyst และผู้วิเคราะห์ข้อมูล',
             status: 'NOT_STARTED',
@@ -383,7 +384,7 @@ generate insights, และ provide data-driven recommendations. \n \
               ]
             },
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'Data Analyst และผู้วิเคราะห์ข้อมูล',
             status: 'NOT_STARTED',
@@ -406,16 +407,17 @@ generate insights, และ provide data-driven recommendations. \n \
                   userId: s3.userId,
                   bid: 22000,
                   documentUrl: 'https://miro.medium.com/v2/resize:fit:679/0*SkoybD8Dp8CLnAtH',
-                }, 
+                },
               ]
             },
           },
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////          
           // Add more job objects as needed
         ]
       }
     }
   })
-
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   const e2 = await prisma.employer.create({
     data: {
       position: 'Rapper',
@@ -432,6 +434,7 @@ generate insights, และ provide data-driven recommendations. \n \
       },
       jobs: {
         create: [
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'ทำโมเดล AI Auto Tune',
             status: 'COMPLETED',
@@ -454,7 +457,7 @@ generate insights, และ provide data-driven recommendations. \n \
                   userId: s3.userId,
                   bid: 2000,
                   status: 'REJECTED',
-                }, 
+                },
               ]
             },
             reviews: {
@@ -468,7 +471,7 @@ generate insights, และ provide data-driven recommendations. \n \
               ]
             }
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'ตัดต่อคลิปลง TikTok',
             status: 'NOT_STARTED',
@@ -487,11 +490,11 @@ generate insights, และ provide data-driven recommendations. \n \
                 {
                   userId: s3.userId,
                   bid: 2000,
-                }, 
+                },
               ]
             },
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'UX/UI Designer และผู้สร้างประสบการณ์ผู้ใช้',
             status: 'NOT_STARTED',
@@ -512,7 +515,7 @@ Proficiency ใน design tools เป็น',
               ]
             },
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'Content Translator และผู้แปลเนื้อหา',
             status: 'NOT_STARTED',
@@ -528,11 +531,11 @@ Proficiency ใน design tools เป็น',
                 {
                   userId: s3.userId,
                   bid: 2000,
-                }, 
+                },
               ]
             },
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'ผู้เชี่ยวชาญด้านการดำเนินงาน E-commerce',
             status: 'NOT_STARTED',
@@ -553,11 +556,11 @@ with logistics partners. มีความรู้เกี่ยวกับ�
                 {
                   userId: s3.userId,
                   bid: 5500,
-                }, 
+                },
               ]
             },
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'Financial Analyst และนักวิเคราะห์ทางการเงิน',
             status: 'COMPLETED',
@@ -585,7 +588,7 @@ prepare reports, และ provide insights for decision-making. \n \
                   userId: s3.userId,
                   bid: 9000,
                   status: 'ACCEPTED',
-                }, 
+                },
               ]
             },
             reviews: {
@@ -612,7 +615,7 @@ prepare reports, และ provide insights for decision-making. \n \
               ]
             }
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'นักวิจัยตลาดและ Market Researcher',
             status: 'NOT_STARTED',
@@ -632,11 +635,11 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
                 {
                   userId: s2.userId,
                   bid: 11500,
-                }, 
+                },
               ]
             },
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'นักวิจัยตลาดและ Market Researcher',
             status: 'NOT_STARTED',
@@ -656,16 +659,17 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
                 {
                   userId: s3.userId,
                   bid: 12000,
-                }, 
+                },
               ]
             },
           },
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////         
           // Add more job objects as needed
         ]
       }
     }
   })
-
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   const e3 = await prisma.employer.create({
     data: {
       position: 'Biker',
@@ -683,6 +687,7 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
       },
       jobs: {
         create: [
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////          
           {
             title: 'เซนเซอร์ติดม่านกันแดดอัจฉริยะ',
             status: 'NOT_STARTED',
@@ -691,6 +696,16 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
             estimateStartDate: new Date("2024-02-20"),
             estimateEndDate: new Date("2024-03-31"),
             jobTagId: jobTagList["งาน IOT"],
+            jobDocumentFiles: {
+              create: [
+                {
+                  fileUrl: 'https://codequotient.com/blog/wp-content/uploads/2021/09/Seven-Reasons-Why-Job-Descriptions.jpg',
+                },
+                {
+                  fileUrl: 'https://www.myjobmag.com/news/700/868098215_JOB%20DESCRIPTION%20EXAMPLES.png',
+                },
+              ]
+            },
             applications: {
               create: [
                 {
@@ -700,11 +715,11 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
                 {
                   userId: s3.userId,
                   bid: 2000,
-                }, 
+                },
               ]
             },
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'เขียนเว็บ ChaoChao',
             status: 'IN_PROGRESS',
@@ -714,6 +729,16 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
             estimateStartDate: new Date("2024-01-21"),
             estimateEndDate: new Date("2024-04-30"),
             jobTagId: jobTagList["พัฒนาเว็ปไซต์"],
+            jobDocumentFiles: {
+              create: [
+                {
+                  fileUrl: 'https://codequotient.com/blog/wp-content/uploads/2021/09/Seven-Reasons-Why-Job-Descriptions.jpg',
+                },
+                {
+                  fileUrl: 'https://www.myjobmag.com/news/700/868098215_JOB%20DESCRIPTION%20EXAMPLES.png',
+                },
+              ]
+            },
             applications: {
               create: [
                 {
@@ -725,11 +750,11 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
                   userId: s2.userId,
                   bid: 2000,
                   status: 'REJECTED',
-                }, 
+                },
               ]
             },
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'Web Developer for เฮียหมู',
             status: 'NOT_STARTED',
@@ -739,6 +764,16 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
             estimateStartDate: new Date("2023-11-01"),
             estimateEndDate: new Date("2024-02-01"),
             jobTagId: jobTagList["พัฒนาเว็ปไซต์"],
+            jobDocumentFiles: {
+              create: [
+                {
+                  fileUrl: 'https://codequotient.com/blog/wp-content/uploads/2021/09/Seven-Reasons-Why-Job-Descriptions.jpg',
+                },
+                {
+                  fileUrl: 'https://www.myjobmag.com/news/700/868098215_JOB%20DESCRIPTION%20EXAMPLES.png',
+                },
+              ]
+            },
             applications: {
               create: [
                 {
@@ -748,11 +783,11 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
                 {
                   userId: s3.userId,
                   bid: 2000,
-                }, 
+                },
               ]
             },
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'รสดีเด็ด อิซากายะ Frontend Developer',
             status: 'COMPLETED',
@@ -762,6 +797,13 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
             estimateStartDate: new Date("2024-03-01"),
             estimateEndDate: new Date("2024-05-31"),
             jobTagId: jobTagList["พัฒนาแอพฯมือถือ"],
+            jobDocumentFiles: {
+              create: [
+                {
+                  fileUrl: 'https://codequotient.com/blog/wp-content/uploads/2021/09/Seven-Reasons-Why-Job-Descriptions.jpg',
+                },
+              ]
+            },
             applications: {
               create: [
                 {
@@ -773,7 +815,7 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
                   userId: s2.userId,
                   bid: 2000,
                   status: 'ACCEPTED',
-                }, 
+                },
               ]
             },
             reviews: {
@@ -795,7 +837,7 @@ The standout quality was their impeccable attention to detail and problem-solvin
               ]
             }
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'Skip Backend Developer',
             status: 'NOT_STARTED',
@@ -805,6 +847,13 @@ The standout quality was their impeccable attention to detail and problem-solvin
             estimateStartDate: new Date("2024-03-01"),
             estimateEndDate: new Date("2024-04-30"),
             jobTagId: jobTagList["พัฒนาแอพฯมือถือ"],
+            jobDocumentFiles: {
+              create: [
+                {
+                  fileUrl: 'https://www.myjobmag.com/news/700/868098215_JOB%20DESCRIPTION%20EXAMPLES.png',
+                },
+              ]
+            },
             applications: {
               create: [
                 {
@@ -814,7 +863,7 @@ The standout quality was their impeccable attention to detail and problem-solvin
               ]
             },
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'เฮียหมู Data Analytics',
             status: 'NOT_STARTED',
@@ -823,6 +872,16 @@ The standout quality was their impeccable attention to detail and problem-solvin
             estimateStartDate: new Date("2024-03-01"),
             estimateEndDate: new Date("2024-03-31"),
             jobTagId: jobTagList["ไอทีโซลูชั่น"],
+            jobDocumentFiles: {
+              create: [
+                {
+                  fileUrl: 'https://codequotient.com/blog/wp-content/uploads/2021/09/Seven-Reasons-Why-Job-Descriptions.jpg',
+                },
+                {
+                  fileUrl: 'https://www.myjobmag.com/news/700/868098215_JOB%20DESCRIPTION%20EXAMPLES.png',
+                },
+              ]
+            },
             applications: {
               create: [
                 {
@@ -836,11 +895,11 @@ The standout quality was their impeccable attention to detail and problem-solvin
                 {
                   userId: s3.userId,
                   bid: 4400,
-                }, 
+                },
               ]
             },
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'Implement Recommendation Model on Application',
             status: 'NOT_STARTED',
@@ -849,6 +908,13 @@ The standout quality was their impeccable attention to detail and problem-solvin
             estimateStartDate: new Date("2024-02-17"),
             estimateEndDate: new Date("2024-04-16"),
             jobTagId: jobTagList["ไอทีโซลูชั่น"],
+            jobDocumentFiles: {
+              create: [
+                {
+                  fileUrl: 'https://codequotient.com/blog/wp-content/uploads/2021/09/Seven-Reasons-Why-Job-Descriptions.jpg',
+                },
+              ]
+            },
             applications: {
               create: [
                 {
@@ -862,11 +928,11 @@ The standout quality was their impeccable attention to detail and problem-solvin
                 {
                   userId: s3.userId,
                   bid: 9900,
-                }, 
+                },
               ]
             },
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'Bad Guy Full-stack developer',
             status: 'COMPLETED',
@@ -876,6 +942,16 @@ The standout quality was their impeccable attention to detail and problem-solvin
             estimateStartDate: new Date("2024-02-02"),
             estimateEndDate: new Date("2024-05-15"),
             jobTagId: jobTagList["พัฒนาแอพฯมือถือ"],
+            jobDocumentFiles: {
+              create: [
+                {
+                  fileUrl: 'https://codequotient.com/blog/wp-content/uploads/2021/09/Seven-Reasons-Why-Job-Descriptions.jpg',
+                },
+                {
+                  fileUrl: 'https://www.myjobmag.com/news/700/868098215_JOB%20DESCRIPTION%20EXAMPLES.png',
+                },
+              ]
+            },
             applications: {
               create: [
                 {
@@ -892,7 +968,7 @@ The standout quality was their impeccable attention to detail and problem-solvin
                   userId: s3.userId,
                   bid: 1999,
                   status: 'ACCEPTED',
-                }, 
+                },
               ]
             },
             reviews: {
@@ -913,7 +989,7 @@ and fresh perspective, exceeding our expectations.'
               ]
             }
           },
-          
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////         
           {
             title: 'นักสร้างเนื้อหาและ Content Curator',
             status: 'NOT_STARTED',
@@ -925,6 +1001,13 @@ engaging และ เนื้อหาสร้างสรรค์สำห�
             estimateStartDate: new Date("2024-02-01"),
             estimateEndDate: new Date("2024-04-30"),
             jobTagId: jobTagList["สื่อออนไลน์"],
+            jobDocumentFiles: {
+              create: [
+                {
+                  fileUrl: 'https://www.myjobmag.com/news/700/868098215_JOB%20DESCRIPTION%20EXAMPLES.png',
+                },
+              ]
+            },
             applications: {
               create: [
                 {
@@ -938,7 +1021,7 @@ engaging และ เนื้อหาสร้างสรรค์สำห�
               ]
             },
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'เจ้าหน้าที่ช่วยส่วนตัวและ Virtual Assistant Extraordinaire',
             status: 'IN_PROGRESS',
@@ -950,6 +1033,16 @@ engaging และ เนื้อหาสร้างสรรค์สำห�
             estimateStartDate: new Date("2024-02-01"),
             estimateEndDate: new Date("2024-04-30"),
             jobTagId: jobTagList["อื่น ๆ"],
+            jobDocumentFiles: {
+              create: [
+                {
+                  fileUrl: 'https://codequotient.com/blog/wp-content/uploads/2021/09/Seven-Reasons-Why-Job-Descriptions.jpg',
+                },
+                {
+                  fileUrl: 'https://www.myjobmag.com/news/700/868098215_JOB%20DESCRIPTION%20EXAMPLES.png',
+                },
+              ]
+            },
             applications: {
               create: [
                 {
@@ -960,7 +1053,7 @@ engaging และ เนื้อหาสร้างสรรค์สำห�
               ]
             },
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'Creative Video Producer และโปรดิวเซอร์วิดีโอ',
             status: 'NOT_STARTED',
@@ -970,9 +1063,16 @@ produce compelling video content. Proficiency ใน video editing tools เป�
             numWorker: 3,
             estimateStartDate: new Date("2024-01-22"),
             estimateEndDate: new Date("2024-03-11"),
-            jobTagId: jobTagList["รูปภาพและวีดีโอ"]
+            jobTagId: jobTagList["รูปภาพและวีดีโอ"],
+            jobDocumentFiles: {
+              create: [
+                {
+                  fileUrl: 'https://www.myjobmag.com/news/700/868098215_JOB%20DESCRIPTION%20EXAMPLES.png',
+                },
+              ]
+            },
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: 'HR Coordinator และผู้ประสานงานทรัพยากรบุคคล',
             status: 'NOT_STARTED',
@@ -983,9 +1083,16 @@ recruitment, employee onboarding, และ HR processes. \n \
             numWorker: 2,
             estimateStartDate: new Date("2024-02-01"),
             estimateEndDate: new Date("2024-04-30"),
-            jobTagId: jobTagList["อื่น ๆ"]
+            jobTagId: jobTagList["อื่น ๆ"],
+            jobDocumentFiles: {
+              create: [
+                {
+                  fileUrl: 'https://codequotient.com/blog/wp-content/uploads/2021/09/Seven-Reasons-Why-Job-Descriptions.jpg',
+                },
+              ]
+            },
           },
-          
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////          
           {
             title: 'Tech Support Specialist และผู้ช่วยเหลือทางเทคนอล็อค',
             status: 'NOT_STARTED',
@@ -996,15 +1103,26 @@ Strong communication skills และ customer service mindset จำเป็�
             numWorker: 4,
             estimateStartDate: new Date("2024-02-01"),
             estimateEndDate: new Date("2024-03-11"),
-            jobTagId: jobTagList["ไอทีโซลูชั่น"]
+            jobTagId: jobTagList["ไอทีโซลูชั่น"],
+            jobDocumentFiles: {
+              create: [
+                {
+                  fileUrl: 'https://codequotient.com/blog/wp-content/uploads/2021/09/Seven-Reasons-Why-Job-Descriptions.jpg',
+                },
+                {
+                  fileUrl: 'https://www.myjobmag.com/news/700/868098215_JOB%20DESCRIPTION%20EXAMPLES.png',
+                },
+              ]
+            },
           },
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////         
           // Add more job objects as needed
         ]
       }
     }
   })
 
-  console.log({ s1, s2, s3, e1, e2, e3 })
+  // console.log({ s1, s2, s3, e1, e2, e3 })
 }
 
 main()
