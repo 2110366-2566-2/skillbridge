@@ -7,9 +7,9 @@ export default function NavigationLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="max-h-fit min-h-screen bg-slate-800 flex flex-col justify-between">
+    <div className="min-h-full bg-slate-800 flex flex-col justify-between">
       <Header />
-      <div className="min-h-full max-h-fit rounded-3xl bg-slate-50 p-5">{children}</div>
+      <div className="rounded-3xl bg-slate-50 min-h-[80vh] p-5">{children}</div>
       <Footer />
     </div>
   );
