@@ -248,7 +248,7 @@ export default function Filter() {
                                     </select>
                                 </div>
 
-                                <div className="flex flex-row justify-between gap-2">
+                                <div className="flex flex-row justify-between gap-2 mb-14 lg:mb-0">
                                     <button
                                         type="button"
                                         className="w-1/2 min-h-[40px] text-slate-700 text-[16px] rounded-md hover:bg-slate-200 focus:ring-2 focus:outline-none focus:ring-slate-300"
