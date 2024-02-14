@@ -22,7 +22,7 @@ export default function NavLink(props: Props) {
     <>
       <Link
         className={
-          "w-full flex gap-8 md:hidden p-2 " +
+          "w-full flex gap-8 md:hidden p-2 active:opacity-40 " +
           (isActive && "bg-slate-50 rounded-md")
         }
         href={link.path}
@@ -50,7 +50,7 @@ export default function NavLink(props: Props) {
 
       <Link
         className={
-          "hidden md:block px-5 py-2 rounded-full " +
+          "hidden md:block px-5 py-2 rounded-full hover:opacity-70 duration-300 active:opacity-40 " +
           (isActive && "bg-slate-50")
         }
         href={link.path}

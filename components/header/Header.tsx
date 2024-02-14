@@ -6,36 +6,42 @@ import SearchAndFilter from "./searchAndFilter/SearchAndFilter";
 import TaskHeader from "../TasksPanel/TaskHeader";
 import CreateJobHeader from "./createJobHeader/CreateJobHeader";
 import EditJobHeader from "./editJobHeader/EditJobHeader";
-
-const whiteLogo = require("@/public/logos/logo-white.svg") as string;
+import LandingHeader from "./landingHeader/LandingHeader";
+import getJobTags from "@/actions/getJobTags";
+import whiteLogo from "@/public/logos/logo-white.svg";
 
 export default async function Header() {
-  // TEMPORARY
+  const jobTags = await getJobTags();
+
+  // TEMPORARY : Should use "auth" on layout?
   const session = true;
-  const isStudent = false;
+  const isStudent = true;
 
   return (
     <div>
-      <div className="flex justify-between items-center py-4 pl-3 pr-5 md:pr-10">
-        <Link href="/landing">
-          <Image
-            className="w-auto h-auto md:w-36"
-            src={whiteLogo}
-            alt="logo"
-            width={110}
-            height={110}
-            priority={true}
-          />
-        </Link>
-        {/* Desktop */}
-        <div className="hidden lg:inline-block">
-          {/* Only shows at "/search" */}
-          <SearchAndFilter />
+      <div>
+        <div className="flex justify-between items-center py-5 pl-5 pr-8 md:pr-10">
+          <Link href="/landing">
+            <Image
+              className="w-auto h-auto md:w-36 md:hover:scale-105 md:duration-500 active:opacity-40"
+              src={whiteLogo}
+              alt="logo"
+              width={110}
+              height={110}
+              priority={true}
+            />
+          </Link>
+          {/* Desktop */}
+          <div className="hidden lg:inline-block">
+            {/* Only shows at "/search" */}
+            <SearchAndFilter />
+          </div>
+          <Navbar session={session} isStudent={isStudent} />
         </div>
-        <Navbar session={session} isStudent={isStudent} />
+        <CreateJobHeader />
+        <EditJobHeader />
+        <LandingHeader isStudent={isStudent} jobTags={jobTags} />
       </div>
-      <CreateJobHeader />
-      <EditJobHeader />
       {/* Mobile and Tablet */}
       <div className="lg:hidden">
         {/* Only shows at "/search" */}
