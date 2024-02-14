@@ -9,6 +9,7 @@ type Props = {
   errorMessage?: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   isDisabled: boolean;
+  min?: string;
 };
 
 export default function Input(props: Props) {
@@ -21,6 +22,7 @@ export default function Input(props: Props) {
     errorMessage,
     onChange,
     isDisabled,
+    min,
   } = props;
   return (
     <div className="flex flex-col gap-1 flex-grow">
@@ -36,6 +38,7 @@ export default function Input(props: Props) {
         onChange={onChange}
         placeholder={placeholder}
         disabled={isDisabled}
+        min={min}
       />
       <span className="h-[14px] text-[14px] text-red-600">
         {errorMessage && errorMessage}

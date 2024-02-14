@@ -54,7 +54,6 @@ export default function JobForm(props: Props) {
   const [files, setFiles] = useState<FileList | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isCreateUpdateClick, setCreateUpdateClick] = useState(false);
-  const [isDeleteClick, setDeleteClick] = useState(false);
   const [formData, setFormData] = useState<FormData>(initialData);
 
   const [formErrors, setFormErrors] = useState<FormErrors>({
@@ -250,6 +249,7 @@ export default function JobForm(props: Props) {
             errorMessage={formErrors.budget}
             onChange={handleChange}
             isDisabled={isLoading}
+            min="0"
           />
 
           <Input
@@ -265,6 +265,7 @@ export default function JobForm(props: Props) {
             errorMessage={formErrors.numWorker}
             onChange={handleChange}
             isDisabled={isLoading}
+            min="1"
           />
 
           <Input
@@ -276,6 +277,7 @@ export default function JobForm(props: Props) {
             errorMessage={formErrors.estimateStartDate}
             onChange={handleChange}
             isDisabled={isLoading}
+            min={new Date().toISOString().split('T')[0]}
           />
 
           <Input
@@ -287,6 +289,7 @@ export default function JobForm(props: Props) {
             errorMessage={formErrors.estimateEndDate}
             onChange={handleChange}
             isDisabled={isLoading}
+            min={new Date().toISOString().split('T')[0]}
           />
 
           <SelectInput
@@ -313,11 +316,13 @@ export default function JobForm(props: Props) {
                 ยกเลิก
               </button>
 
-              <DeleteModal
-                deleteAction={handleDeleteJob}
-                isDisabled={isLoading}
-              />
-
+              {isUpdate && (
+                <DeleteModal
+                  deleteAction={handleDeleteJob}
+                  isDisabled={isLoading}
+                />
+              )}
+              
               {isCreateUpdateClick ? (
                 <LoadingButton
                   bgColor="bg-slate-700"
