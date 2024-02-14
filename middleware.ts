@@ -7,20 +7,20 @@ export default withAuth(
     const path = req.nextUrl.pathname;
 
     // Unauthenticated
-    if (!token) return NextResponse.redirect(new URL('/login', req.url))
-    
+    if (!token) return NextResponse.redirect(new URL("/login", req.url));
+
     // Authenticated
     const userEmail = token.email;
-    if(userEmail?.split("@")[1] === "student.chula.ac.th") {
-        // As Student
-        if(path.startsWith("/jobs")) {
-            return NextResponse.redirect(new URL('/landing', req.url))
-        }
+    if (userEmail?.split("@")[1] === "student.chula.ac.th") {
+      // As Student
+      if (path.startsWith("/jobs")) {
+        return NextResponse.redirect(new URL("/landing", req.url));
+      }
     } else {
-        // As Employer
-        if(path.startsWith("/search")) {
-            return NextResponse.redirect(new URL('/landing', req.url))
-        }
+      // As Employer
+      if (path.startsWith("/search")) {
+        return NextResponse.redirect(new URL("/landing", req.url));
+      }
     }
   },
   {
@@ -28,9 +28,9 @@ export default withAuth(
       authorized: ({ token }) => !!token,
     },
     pages: {
-        signIn: "/login",
+      signIn: "/login",
     },
-  }
+  },
 );
 
 export const config = { matcher: ["/search/:path*", "/jobs/:path*"] };

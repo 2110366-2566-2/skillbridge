@@ -5,9 +5,9 @@ const nextConfig = {
     domains: ["lh3.googleusercontent.com"],
   },
   webpack: (config) => {
-    config.externals = [...config.externals, 'bcrypt'];
+    config.externals = [...config.externals, "bcrypt"];
     return config;
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;

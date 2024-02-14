@@ -64,7 +64,7 @@ const updateJob = async (formData: FormData) => {
         status: 404,
       };
     } else if (job?.applications.length > 0) {
-      console.log(job)
+      console.log(job);
       throw {
         message: "Can't edit this job",
         status: 423,
@@ -84,7 +84,6 @@ const updateJob = async (formData: FormData) => {
         jobTagId,
         numWorker,
       },
-      
     });
 
     // Revalidate the data on jobs page (not working ;-;)

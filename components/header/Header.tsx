@@ -19,13 +19,13 @@ export default async function Header() {
 
   // Sesion with info
   const session = await getServerSession(authOptions);
-  const isStudent = session?.email.split("@")[1] === "student.chula.ac.th"; 
+  const isStudent = session?.email.split("@")[1] === "student.chula.ac.th";
   let userInfo = "นิสิตจุฬาลงกรณ๋์มหาวิทยาลัย";
-  if(session && !isStudent) {
+  if (session && !isStudent) {
     const employerInfo = await getEmployerInfoById(session?.user.id);
     userInfo = employerInfo?.position + " " + employerInfo?.organization;
   }
-  
+
   return (
     <div>
       <div>
@@ -45,7 +45,7 @@ export default async function Header() {
             {/* Only shows at "/search" */}
             <SearchAndFilter />
           </div>
-          <Navbar session={session} isStudent={isStudent} userInfo={userInfo}  />
+          <Navbar session={session} isStudent={isStudent} userInfo={userInfo} />
         </div>
         <CreateJobHeader />
         <EditJobHeader />

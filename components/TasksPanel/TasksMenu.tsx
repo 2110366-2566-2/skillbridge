@@ -24,13 +24,17 @@ const TasksMenu = () => {
 
   useEffect(() => {
     async function fetchData() {
-      if(session) {
+      if (session) {
         try {
           // session.user.id
-          const [pendingTasks, doneTasks] = await fetchInitialData("92e60ed5-51d8-4875-bb4e-5760a09a0449");
-          setPendingTasks(pendingTasks.filter(taskCard => !taskCard.isDeleted));
-          setDoneTasks(doneTasks.filter(taskCard => !taskCard.isDeleted));
-        } catch(err) {
+          const [pendingTasks, doneTasks] = await fetchInitialData(
+            "92e60ed5-51d8-4875-bb4e-5760a09a0449",
+          );
+          setPendingTasks(
+            pendingTasks.filter((taskCard) => !taskCard.isDeleted),
+          );
+          setDoneTasks(doneTasks.filter((taskCard) => !taskCard.isDeleted));
+        } catch (err) {
           console.log("Fetching user's jobs error :", err);
         }
       }

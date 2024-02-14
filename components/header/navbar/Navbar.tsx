@@ -57,7 +57,11 @@ export default function Navbar(props: Props) {
 
   // Authenticated User Info
   const { session, isStudent, userInfo } = props;
-  const name = session?.user.salutation + session?.user.firstname + " " + session?.user.lastname;
+  const name =
+    session?.user.salutation +
+    session?.user.firstname +
+    " " +
+    session?.user.lastname;
   const avatar = noavatar;
 
   return (
@@ -172,4 +176,3 @@ export default function Navbar(props: Props) {
     </>
   );
 }
-

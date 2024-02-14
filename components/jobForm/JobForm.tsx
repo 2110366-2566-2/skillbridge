@@ -1,6 +1,6 @@
 "use client";
 
-import { revalidatePath } from 'next/cache'
+import { revalidatePath } from "next/cache";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { customTrim } from "@/lib/utils";
@@ -156,7 +156,7 @@ export default function JobForm(props: Props) {
       } catch (error) {
         console.error("Error Create job:", error);
       } finally {
-        router.push("/jobs")
+        router.push("/jobs");
       }
     }
   };

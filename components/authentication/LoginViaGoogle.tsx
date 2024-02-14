@@ -1,5 +1,5 @@
-import { signIn } from "next-auth/react"
-import Image from "next/image"
+import { signIn } from "next-auth/react";
+import Image from "next/image";
 
 export default function LoginViaGoogle() {
   return (
@@ -9,11 +9,19 @@ export default function LoginViaGoogle() {
         signIn("google", {
           callbackUrl: "/",
         })
-      }>
+      }
+    >
       <div>
-        <Image src={"/logos/google-logo.svg"} width={20} height={20} alt="google logo" />
+        <Image
+          src={"/logos/google-logo.svg"}
+          width={20}
+          height={20}
+          alt="google logo"
+        />
       </div>
-      <p className="w-full font-normal font-sm leading-5">เข้าสู่ระบบด้วยบัญชี Google</p>
+      <p className="w-full font-normal font-sm leading-5">
+        เข้าสู่ระบบด้วยบัญชี Google
+      </p>
     </button>
-  )
+  );
 }
