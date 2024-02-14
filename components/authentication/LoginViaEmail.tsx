@@ -35,35 +35,44 @@ export default function LoginViaEmail() {
   const validateForm = () => {
     const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,6}$/
     const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/
+    let success = true;
     const errors: Error = {
       email: "",
       password: "",
     }
     if (form.email === "") {
       errors.email = "กรอกที่อยู่อีเมลของคุณ"
+      success = false
     } else if (!email_pattern.test(form.email)) {
-      // ไม่รู้ใช้คำไรดี
       errors.email = "อีเมลไม่ถูกต้อง"
+      success = false
     }
 
     if (form.password === "") {
       errors.password = "กรอกรหัสผ่านของคุณ"
+      success = false
     } else if (!password_pattern.test(form.password)) {
-      // ไม่รู้ใช้คำไรดี
-      //   errors.password = "รหัสผ่านไม่ถูกต้อง"
+      errors.password = "รหัสผ่านไม่ถูกต้อง"
+      success = false
     }
-    // console.log(errors)
-    return errors
+
+    return { errors, success }
   }
 
   const handleValidation = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    setErrors(validateForm())
-    signIn("credentials", {
-      email: form.email,
-      password: form.password,
-      callbackUrl: "/dash",
-    })
+    const { errors, success } = validateForm()
+    setTimeout(async () => {
+      if (!success) {
+        setErrors(errors)
+        return
+      }
+      signIn("credentials", {
+        email: form.email,
+        password: form.password,
+        callbackUrl: "/dash",
+      })
+    }, 0);
   }
 
   return (
