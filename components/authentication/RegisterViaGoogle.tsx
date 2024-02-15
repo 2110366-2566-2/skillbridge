@@ -4,6 +4,8 @@ import Link from "next/link"
 import ConfirmPasswordInput from "./ConfirmPasswordInput"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { signIn } from "next-auth/react"
+import Image from "next/image"
 
 type Form = {
   fname: string
@@ -12,7 +14,18 @@ type Form = {
 
 const defaultForm = { fname: "", lname: "" }
 
-export default function RegisterViaGoogle() {
+export default function RegisterViaGoogle({
+  handleToggleForm,
+  isToggleForm
+}: {
+  handleToggleForm: () => void,
+  isToggleForm: boolean
+}) {
+
+  const handleGoogleComplete = () => {
+    // ถ้ากดปุ่ม Google หน้าแรกสำเร็จ
+    handleToggleForm();
+  }
 
   const [data, setForm] = useState<Form>(structuredClone(defaultForm))
 
@@ -68,83 +81,11 @@ export default function RegisterViaGoogle() {
   const router = useRouter()
 
   return (
-    <div className={"pt-[10px] flex flex-col"}>
-      <Input
-        name="fname"
-        label="ชื่อ"
-        inputType="text"
-        warning={errors.fname}
-        handleChange={handleChange}
-        value={data.fname}
-      />
-      <Input
-        name="lname"
-        label="นามสกุล"
-        inputType="text"
-        warning={errors.lname}
-        handleChange={handleChange}
-        value={data.lname}
-      />
-
-      <div className="mt-[30px] w-full relative">
-        {/* Link ไป ข้อตกลงและเงื่อนไขการใช้งานของ SkillBridge และ นโยบายคุ้มครองความเป็นส่วนตัว*/}
-        <input
-          type="checkbox"
-          name="checkOne"
-          id="checkOne"
-          className="absolute left-0 top-0 border
-                                    border-[#848484]
-                                    accent-[#334155]
-                                    cursor-pointer
-                                    rounded-sm
-                                    "
-          onChange={(e) => { handleCheckBoxChange(e) }}
-          required
-        />
-        <label htmlFor="checkOne" className="block text-[9.5px] pl-[20px] cursor-pointer">
-          ฉันได้อ่านและยอมรับ
-          <Link href={"/"} className="text-[#326FE2] hover:underline hover:underline-offset">
-            ข้อตกลงและเงื่อนไขการใช้งานของ SkillBridge
-          </Link>
-        </label>
-      </div>
-      <div className="mt-[10px] w-full relative">
-        <input
-          type="checkbox"
-          name="checkTwo"
-          id="checkTwo"
-          className="absolute cursor-pointer left-0 top-0 border
-                                    border-[#848484]
-                                    accent-[#334155]
-                                    rounded-sm
-                                    "
-          onChange={(e) => { handleCheckBoxChange(e) }}
-          required
-        />
-        <label htmlFor="checkTwo" className="block text-[9.5px] pl-[20px] cursor-pointer">
-          ฉันได้อ่านและยอมรับ
-          <Link href={"/"} className="text-[#326FE2] hover:underline hover:underline-offset">
-            นโยบายคุ้มครองความเป็นส่วนตัว
-          </Link>
-        </label>
-      </div>
-
-      {
-        checkBoxError.checkOne && checkBoxError.checkTwo ?
-          <button
-            id="submit"
-            type="submit"
-            className="w-full bg-[#334155] hover:bg-slate-600 rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md">
-            สร้างบัญชี
-          </button>
-          :
-          <div
-            className="w-full bg-[#CBD5E1] rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md text-center cursor-pointer">
-            สร้างบัญชี
-          </div>
-      }
-
+    <div className="w-full">
 
     </div>
+
   )
 }
+
+
