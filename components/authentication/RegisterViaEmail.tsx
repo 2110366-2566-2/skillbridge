@@ -1,123 +1,136 @@
-import Input from "./Input"
-import PasswordInput from "./PasswordInput"
-import Link from "next/link"
-import ConfirmPasswordInput from "./ConfirmPasswordInput"
-import { useState } from "react"
-import { registerWithCredentials } from "@/actions/register"
-import { useRouter } from "next/navigation"
+import Input from "./Input";
+import PasswordInput from "./PasswordInput";
+import Link from "next/link";
+import ConfirmPasswordInput from "./ConfirmPasswordInput";
+import { useState } from "react";
+import { registerWithCredentials } from "@/actions/register";
+import { useRouter } from "next/navigation";
 
 type Props = {
-  handleToggleForm: () => void
-  isToggleForm: boolean
-}
+  handleToggleForm: () => void;
+  isToggleForm: boolean;
+};
 
 type Form = {
-  email: string
-  password: string
-  cPassword: string
-  fname: string
-  lname: string
-}
+  email: string;
+  password: string;
+  cPassword: string;
+  fname: string;
+  lname: string;
+};
 
-const defaultForm = { email: "", password: "", cPassword: "", fname: "", lname: "" }
+const defaultForm = {
+  email: "",
+  password: "",
+  cPassword: "",
+  fname: "",
+  lname: "",
+};
 
-export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Props) {
-  const [data, setForm] = useState<Form>(structuredClone(defaultForm))
+export default function RegisterViaEmail({
+  handleToggleForm,
+  isToggleForm,
+}: Props) {
+  const [data, setForm] = useState<Form>(structuredClone(defaultForm));
 
   const [checkBoxError, setCheckBoxError] = useState({
     checkOne: false,
     checkTwo: false,
-  })
+  });
 
-  const [errors, setErrors] = useState<Form>(structuredClone(defaultForm))
+  const [errors, setErrors] = useState<Form>(structuredClone(defaultForm));
 
   const validateFirstPage = () => {
-    const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,6}$/
+    const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,6}$/;
     // const password_pattern = /^.{8,}$/
-    const errors: Form = structuredClone(defaultForm)
+    const errors: Form = structuredClone(defaultForm);
     if (data.email === "") {
-      errors.email = "กรอกที่อยู่อีเมลของคุณ"
+      errors.email = "กรอกที่อยู่อีเมลของคุณ";
     } else if (!email_pattern.test(data.email)) {
-      errors.email = "อีเมลไม่ถูกต้อง"
+      errors.email = "อีเมลไม่ถูกต้อง";
     }
 
     if (data.password === "") {
-      errors.password = "กรอกรหัสผ่านของคุณ"
+      errors.password = "กรอกรหัสผ่านของคุณ";
     } else if (data.password.length < 8) {
-      errors.password = "รหัสผ่านต้องมี 8 ตัวอักษร หรือมากกว่า"
+      errors.password = "รหัสผ่านต้องมี 8 ตัวอักษร หรือมากกว่า";
     }
 
     if (data.cPassword === "") {
-      errors.cPassword = "กรอกรหัสผ่านของคุณ"
+      errors.cPassword = "กรอกรหัสผ่านของคุณ";
     } else if (data.cPassword != data.password) {
-      errors.cPassword = "รหัสผ่านไม่ตรงกัน"
+      errors.cPassword = "รหัสผ่านไม่ตรงกัน";
     }
 
     setCheckBoxError({
       checkOne: false,
-      checkTwo: false
-    })
+      checkTwo: false,
+    });
     // console.log(errors)
-    return errors
-  }
+    return errors;
+  };
 
   const validateSecondPage = () => {
-    const errors: Form = structuredClone(defaultForm)
-    let success = true
+    const errors: Form = structuredClone(defaultForm);
+    let success = true;
 
     if (data.fname === "") {
-      errors.fname = "กรอกชื่อของคุณ"
-      success = false
+      errors.fname = "กรอกชื่อของคุณ";
+      success = false;
     }
 
     if (data.lname === "") {
-      errors.lname = "กรอกนามสกุลของคุณ"
-      success = false
+      errors.lname = "กรอกนามสกุลของคุณ";
+      success = false;
     }
-    return { errors, success }
-  }
+    return { errors, success };
+  };
 
   const handleValidationFirstPage = () => {
-    const validationErrors = validateFirstPage()
-    setErrors(validationErrors)
+    const validationErrors = validateFirstPage();
+    setErrors(validationErrors);
 
     setTimeout(() => {
-      if (!validationErrors.email && !validationErrors.password && !validationErrors.cPassword) {
-        handleToggleForm()
+      if (
+        !validationErrors.email &&
+        !validationErrors.password &&
+        !validationErrors.cPassword
+      ) {
+        handleToggleForm();
       }
-    }, 0)
-  }
+    }, 0);
+  };
 
   const handleValidationSecondPage = async () => {
-    const { errors, success } = validateSecondPage()
+    const { errors, success } = validateSecondPage();
     setTimeout(async () => {
       if (!success) {
-        setErrors(errors)
-        return
+        setErrors(errors);
+        return;
       }
 
-      const res = await registerWithCredentials(data)
-      router.push("/login")
+      const res = await registerWithCredentials(data);
+      router.push("/login");
       // console.log(errors)
     }, 0);
-  }
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
       ...data,
       [event.target.name]: event.target.value,
-    })
+    });
     // console.log(data)
-  }
+  };
 
   const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCheckBoxError({
       ...checkBoxError,
-      [event.target.name]: event.target.checked
-    })
-  }
+      [event.target.name]: event.target.checked,
+    });
+  };
 
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <form className="w-full" action={handleValidationSecondPage} noValidate>
@@ -151,15 +164,17 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
           <div
             id="nextPage"
             className="w-full bg-[#334155] hover:bg-slate-600 text-center cursor-pointer rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md"
-            onClick={handleValidationFirstPage}>
+            onClick={handleValidationFirstPage}
+          >
             ถัดไป
           </div>
 
           <p className="w-full text-center text-sm mt-[10px]">
-            มีบัญชีอยู่แล้ว ? {" "}
+            มีบัญชีอยู่แล้ว ?{" "}
             <Link
               href={"/login"}
-              className="text-[#326FE2] hover:underline hover:underline-offset-2">
+              className="text-[#326FE2] hover:underline hover:underline-offset-2"
+            >
               เข้าสู่ระบบ
             </Link>
           </p>
@@ -195,12 +210,20 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
                                     cursor-pointer
                                     rounded-sm
                                     "
-              onChange={(e) => { handleCheckBoxChange(e) }}
+              onChange={(e) => {
+                handleCheckBoxChange(e);
+              }}
               required
             />
-            <label htmlFor="checkOne" className="block text-[9.5px] pl-[20px] cursor-pointer">
+            <label
+              htmlFor="checkOne"
+              className="block text-[9.5px] pl-[20px] cursor-pointer"
+            >
               ฉันได้อ่านและยอมรับ
-              <Link href={"/"} className="text-[#326FE2] hover:underline hover:underline-offset">
+              <Link
+                href={"/"}
+                className="text-[#326FE2] hover:underline hover:underline-offset"
+              >
                 ข้อตกลงและเงื่อนไขการใช้งานของ SkillBridge
               </Link>
             </label>
@@ -215,41 +238,49 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
                                     accent-[#334155]
                                     rounded-sm
                                     "
-              onChange={(e) => { handleCheckBoxChange(e) }}
+              onChange={(e) => {
+                handleCheckBoxChange(e);
+              }}
               required
             />
-            <label htmlFor="checkTwo" className="block text-[9.5px] pl-[20px] cursor-pointer">
+            <label
+              htmlFor="checkTwo"
+              className="block text-[9.5px] pl-[20px] cursor-pointer"
+            >
               ฉันได้อ่านและยอมรับ
-              <Link href={"/"} className="text-[#326FE2] hover:underline hover:underline-offset">
+              <Link
+                href={"/"}
+                className="text-[#326FE2] hover:underline hover:underline-offset"
+              >
                 นโยบายคุ้มครองความเป็นส่วนตัว
               </Link>
             </label>
           </div>
 
-          {
-            checkBoxError.checkOne && checkBoxError.checkTwo ?
-              <button
-                id="submit"
-                type="submit"
-                className="w-full bg-[#334155] hover:bg-slate-600 rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md">
-                สร้างบัญชี
-              </button>
-              :
-              <div
-                className="w-full bg-[#CBD5E1] rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md text-center cursor-pointer">
-                สร้างบัญชี
-              </div>
-          }
+          {checkBoxError.checkOne && checkBoxError.checkTwo ? (
+            <button
+              id="submit"
+              type="submit"
+              className="w-full bg-[#334155] hover:bg-slate-600 rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md"
+            >
+              สร้างบัญชี
+            </button>
+          ) : (
+            <div className="w-full bg-[#CBD5E1] rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md text-center cursor-pointer">
+              สร้างบัญชี
+            </div>
+          )}
 
           <div id="previousPage" className="mt-[15px] flex justify-center">
             <p
               onClick={handleToggleForm}
-              className="hover:underline hover:underline-offset text-[#334155] hover:text-slate-600 text-md cursor-pointer">
+              className="hover:underline hover:underline-offset text-[#334155] hover:text-slate-600 text-md cursor-pointer"
+            >
               ย้อนกลับ
             </p>
           </div>
         </div>
       )}
     </form>
-  )
+  );
 }

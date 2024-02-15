@@ -8,11 +8,12 @@ import studentDesktopImg from "@/public/images/student-desktop.png";
 import guaranteeLogo from "@/public/logos/guatantee-logo.svg";
 import { Suspense } from "react";
 import CommentCardsLoading from "@/components/commentCards/commentCardsLoading/CommentCardsLoading";
-
-// TEMPORARY
-const isStudent = true;
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 
 export default async function LandingPage() {
+  const session = await getServerSession(authOptions);
+  const isStudent = session?.email.split("@")[1] === "student.chula.ac.th";
   const jobTags = await getJobTags();
   return (
     <div className="flex justify-center items-center">

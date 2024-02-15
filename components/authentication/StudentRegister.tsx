@@ -1,28 +1,22 @@
 import Title from "./Title"
 import LoginViaGoogle from "./LoginViaGoogle"
 import { useState } from "react"
-import RegisterViaGoogle from "./RegisterViaGoogle";
-
+import RegisterViaGoogle from "./RegisterViaGoogle"
 
 export default function StudentRegister() {
+  const [isToggleForm, setIsToggleForm] = useState(false)
 
-    const [isToggleForm, setIsToggleForm] = useState(false);
+  const handleToggleForm = () => {
+    setIsToggleForm((prev) => !prev)
+  }
 
-    const handleToggleForm = () => {
-        setIsToggleForm(prev => !prev);
-    }
+  return (
+    <div className="flex flex-col w-[280px] mt-[30px]">
+      <p className="mt-[22px] text-sm">ใช้อีเมลจุฬาฯ เพื่อยืนยันสถานภาพการเป็นนิสิต</p>
 
-    return (
-        <div className="flex flex-col w-[280px] mt-[30px]">
-
-            <Title title='สร้างบัญชีสำหรับ' highlightText='นิสิต' highlightColor='#FF66C4' />
-
-            <p className="mt-[22px] text-sm">ใช้อีเมลจุฬาฯ เพื่อยืนยันสถานภาพการเป็นนิสิต</p>
-
-            <div className="mt-[25px] text-[#64748B] leading-6 text-sm w-full">
-                <LoginViaGoogle />
-            </div>
-
-        </div>
-    )
+      <div className="mt-[25px] text-[#64748B] leading-6 text-sm w-full">
+        <LoginViaGoogle />
+      </div>
+    </div>
+  )
 }

@@ -69,7 +69,7 @@ export default function LoginViaEmail() {
       signIn("credentials", {
         email: form.email,
         password: form.password,
-        callbackUrl: "/dash",
+        callbackUrl: "/landing",
       })
     }
   }
