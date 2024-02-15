@@ -86,8 +86,8 @@ const updateJob = async (formData: FormData) => {
       },
     });
 
-    // Revalidate the data on jobs page (not working ;-;)
-    // revalidatePath("/jobs");
+    // Revalidate the data on jobs page
+    revalidatePath('/jobs/update/[jobId]');
 
     const successResponse = {
       message: "Update Task Success",
