@@ -59,23 +59,21 @@ export const authOptions: AuthOptions = {
 
       const queriedUser = await prisma.user.findUnique({
         where: {
-          email: profile?.email,
+          email: profile.email,
         },
       })
 
-      const isStudent = profile?.email?.endsWith("@student.chula.ac.th")
+      const isStudent = profile.email?.endsWith("@student.chula.ac.th")
 
       if (!queriedUser) {
-        const nameSplit = profile.name?.split(" ") || "-"
-
         const defaultUserData = {
           salutation: "-",
-          firstname: nameSplit[0].trim() || "-",
+          firstname: profile.given_name || "-",
           middlename: "",
-          lastname: nameSplit[nameSplit.length - 1].trim() || "-",
+          lastname: profile.family_name || "-",
           hashedPassword: "-",
           email: profile.email || "",
-          profileImageUrl: user.image,
+          profileImageUrl: profile.picture,
           isGmail: true,
         }
         if (isStudent) {
@@ -103,18 +101,8 @@ export const authOptions: AuthOptions = {
       return true
     },
     async jwt({ token, account, profile, user }) {
-      console.log(
-        "jwt Callback",
-        "account\n",
-        account,
-        "profile\n",
-        profile,
-        "token\n",
-        token,
-        "user\n",
-        user
-      )
-      if (!account || !profile) return token
+      console.log("jwt Callback", "account\n", account, "token\n", token, "user\n", user)
+      if (!account) return token
 
       token.account = account
 
@@ -122,7 +110,7 @@ export const authOptions: AuthOptions = {
       else {
         const queriedUser = await prisma.user.findUnique({
           where: {
-            email: profile.email,
+            email: token.email,
           },
         })
 
@@ -136,6 +124,7 @@ export const authOptions: AuthOptions = {
       return token
     },
     async session({ session, token, user }) {
+      // user is always undefined
       console.log("session Callback", "session\n", session, "token\n", token)
       return { ...token, expires: session.expires }
     },

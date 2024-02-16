@@ -1,6 +1,7 @@
 import { User as UserDB } from "@prisma/client"
 import NextAuth, { Account } from "next-auth"
 import { JWT } from "next-auth/jwt"
+import { GoogleProfile } from "next-auth/providers/google"
 
 declare module "next-auth" {
   /**
@@ -20,6 +21,8 @@ declare module "next-auth" {
   }
 
   interface User extends UserDB {}
+
+  interface Profile extends GoogleProfile {}
 }
 
 declare module "next-auth/jwt" {
