@@ -27,16 +27,13 @@ export const authOptions: AuthOptions = {
           },
         })
 
-        if (!user) return null
+        if (!user) throw new Error("User not found")
 
         const isMatch = await bcrypt.compare(credentials.password, user.hashedPassword)
 
-        if (!isMatch) throw new Error("Invalid password")
+        if (!isMatch) throw new Error("Wrong password")
 
         return user
-        // Any object returned will be saved in `user` property of the JWT
-        // If you return null then an error will be displayed advising the user to check their details.
-        // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
       },
     }),
   ],
@@ -48,17 +45,17 @@ export const authOptions: AuthOptions = {
     async signIn({ account, profile, user, credentials }) {
       if (account?.provider === "credentials" && user) return true
       console.log(
-        "signIn",
-        "account",
+        "signIn Callback\n",
+        "account\n",
         account,
-        "profile",
+        "profile\n",
         profile,
-        "user",
+        "user\n",
         user,
-        "credentials",
+        "credentials\n",
         credentials
       )
-      if (account?.provider !== "google" || !(profile && user)) return "/landing"
+      if (account?.provider !== "google" || !profile || !user) return "/landing"
 
       const queriedUser = await prisma.user.findUnique({
         where: {
@@ -67,23 +64,25 @@ export const authOptions: AuthOptions = {
       })
 
       const isStudent = profile?.email?.endsWith("@student.chula.ac.th")
-      // 1: Create new user and 2
-      // 2: Redirect to register page
-      // 3: Redirect to landing page
+
       if (!queriedUser) {
+        const nameSplit = profile.name?.split(" ") || "-"
+
+        const defaultUserData = {
+          salutation: "-",
+          firstname: nameSplit[0].trim() || "-",
+          middlename: "",
+          lastname: nameSplit[nameSplit.length - 1].trim() || "-",
+          hashedPassword: "-",
+          email: profile.email || "",
+          profileImageUrl: user.image,
+          isGmail: true,
+        }
         if (isStudent) {
           const student = await prisma.student.create({
             data: {
               user: {
-                create: {
-                  salutation: "-",
-                  firstname: "-",
-                  lastname: "-",
-                  hashedPassword: "incomplete",
-                  email: profile.email || "",
-                  profileImageUrl: profile.image,
-                  isGmail: true,
-                },
+                create: defaultUserData,
               },
             },
           })
@@ -94,35 +93,50 @@ export const authOptions: AuthOptions = {
               organization: "-",
               publicEmail: profile.email || "",
               user: {
-                create: {
-                  salutation: "-",
-                  firstname: "-",
-                  middlename: "",
-                  lastname: "-",
-                  hashedPassword: "incomplete",
-                  email: profile.email || "",
-                  profileImageUrl: profile.image,
-                  isGmail: true,
-                },
+                create: defaultUserData,
               },
             },
           })
         }
       }
 
-      if (!queriedUser || (queriedUser && queriedUser.hashedPassword === "incomplete")) {
-        return `/register?isStudent=${isStudent}&fname=${profile.name?.split(" ")[0]}&lname=${profile.name?.split(" ")[1]}`
-      } else return true
+      return true
     },
     async jwt({ token, account, profile, user }) {
-      console.log("jwt", "account", account, "profile", profile, "token", token, "user", user)
-      if (account) token.account = account
-      if (profile) token.profile = profile
-      if (user) token.user = user
+      console.log(
+        "jwt Callback",
+        "account\n",
+        account,
+        "profile\n",
+        profile,
+        "token\n",
+        token,
+        "user\n",
+        user
+      )
+      if (!account || !profile) return token
+
+      token.account = account
+
+      if (account.provider === "credentials") token.user = user
+      else {
+        const queriedUser = await prisma.user.findUnique({
+          where: {
+            email: profile.email,
+          },
+        })
+
+        if (queriedUser) {
+          token.user = queriedUser
+          token.sub = queriedUser.id
+        }
+      }
+
+      // if (profile) token.profile = profile //Only Available on Google provider
       return token
     },
     async session({ session, token, user }) {
-      console.log("session", "session", session, "token", token, "user", user)
+      console.log("session Callback", "session\n", session, "token\n", token)
       return { ...token, expires: session.expires }
     },
   },
