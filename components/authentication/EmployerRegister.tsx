@@ -2,17 +2,20 @@ import Title from "./Title"
 import LoginViaGoogle from "./LoginViaGoogle"
 import Line from "./Line"
 import RegisterViaEmail from "./RegisterViaEmail"
-import { useState } from "react"
-import { useSearchParams } from "next/navigation"
+import { useEffect, useState } from "react"
 
-export default function EmployerRegister() {
-  const defaultToggle = useSearchParams().get("isStudent") !== null
+type Props = { isLoggedIn: boolean }
 
-  const [isToggleForm, setIsToggleForm] = useState(defaultToggle)
+export default function EmployerRegister({ isLoggedIn }: Props) {
+  const [isToggleForm, setIsToggleForm] = useState(isLoggedIn)
+  console.log("isToggleForm", isToggleForm)
 
   const handleToggleForm = () => {
     setIsToggleForm((prev) => !prev)
   }
+  useEffect(() => {
+    setIsToggleForm(isLoggedIn)
+  }, [isLoggedIn])
 
   return (
     <div className="flex flex-col w-[280px] mt-[30px]">

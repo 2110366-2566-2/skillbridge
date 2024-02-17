@@ -1,12 +1,15 @@
 "use client"
-import { useSearchParams } from "next/navigation"
 import EmployerRegister from "./EmployerRegister"
 import StudentRegister from "./StudentRegister"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
 
 export default function Register() {
-  const isStudent = useSearchParams().get("isStudent") === "true" || false
-  const [isEmployerPage, setIsEmployerPage] = useState(!isStudent)
+  const { data: session } = useSession()
+  const [isEmployerPage, setIsEmployerPage] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const router = useRouter()
 
   const handleEmployerPage = () => {
     setIsEmployerPage(true)
@@ -15,6 +18,17 @@ export default function Register() {
   const handleNisitPage = () => {
     setIsEmployerPage(false)
   }
+
+  useEffect(() => {
+    if (session?.user) {
+      if (session.user.hashedPassword === "incomplete") {
+        setIsLoggedIn(true)
+        setIsEmployerPage(session.email.split("@")[1] !== "student.chula.ac.th")
+      } else {
+        router.push("/landing")
+      }
+    }
+  }, [session])
 
   return (
     <div className="flex flex-col items-center w-[305px] mt-[25px] ">
@@ -33,7 +47,11 @@ export default function Register() {
         </button>
       </div>
 
-      {isEmployerPage ? <EmployerRegister /> : <StudentRegister />}
+      {isEmployerPage ? (
+        <EmployerRegister isLoggedIn={isLoggedIn} />
+      ) : (
+        <StudentRegister isLoggedIn={isLoggedIn} />
+      )}
     </div>
   )
 }

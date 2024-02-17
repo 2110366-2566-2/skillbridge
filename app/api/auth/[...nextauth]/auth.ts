@@ -1,7 +1,7 @@
 import { AuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
-import { PrismaClient } from "@prisma/client"
+import { PrismaClient, User } from "@prisma/client"
 import bcrypt from "bcrypt"
 
 const prisma = new PrismaClient()
@@ -71,7 +71,7 @@ export const authOptions: AuthOptions = {
           firstname: profile.given_name || "-",
           middlename: "",
           lastname: profile.family_name || "-",
-          hashedPassword: "-",
+          hashedPassword: "incomplete",
           email: profile.email || "",
           profileImageUrl: profile.picture,
           isGmail: true,
@@ -101,12 +101,12 @@ export const authOptions: AuthOptions = {
       return true
     },
     async jwt({ token, account, profile, user }) {
-      console.log("jwt Callback", "account\n", account, "token\n", token, "user\n", user)
+      // console.log("jwt Callback", "account\n", account, "token\n", token, "user\n", user)
       if (!account) return token
 
       token.account = account
 
-      if (account.provider === "credentials") token.user = user
+      if (account.provider === "credentials") token.user = user as User
       else {
         const queriedUser = await prisma.user.findUnique({
           where: {
@@ -126,6 +126,7 @@ export const authOptions: AuthOptions = {
     async session({ session, token, user }) {
       // user is always undefined
       console.log("session Callback", "session\n", session, "token\n", token)
+
       return { ...token, expires: session.expires }
     },
   },

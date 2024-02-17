@@ -1,13 +1,19 @@
 import Title from "./Title"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import RegisterViaGoogle from "./RegisterViaGoogle"
 
-export default function StudentRegister() {
-  const [isToggleForm, setIsToggleForm] = useState(false)
+type Props = { isLoggedIn: boolean }
+
+export default function StudentRegister({ isLoggedIn }: Props) {
+  const [isToggleForm, setIsToggleForm] = useState(isLoggedIn)
 
   const handleToggleForm = () => {
     setIsToggleForm((prev) => !prev)
   }
+
+  useEffect(() => {
+    setIsToggleForm(isLoggedIn)
+  }, [isLoggedIn])
 
   return (
     <div className="flex flex-col w-[280px] mt-[30px]">
