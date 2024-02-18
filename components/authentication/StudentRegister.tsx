@@ -2,18 +2,18 @@ import Title from "./Title"
 import { useEffect, useState } from "react"
 import RegisterViaGoogle from "./RegisterViaGoogle"
 
-type Props = { isLoggedIn: boolean }
+type Props = { loggedinEmail: string }
 
-export default function StudentRegister({ isLoggedIn }: Props) {
-  const [isToggleForm, setIsToggleForm] = useState(isLoggedIn)
+export default function StudentRegister({ loggedinEmail }: Props) {
+  const [isToggleForm, setIsToggleForm] = useState(false)
 
   const handleToggleForm = () => {
     setIsToggleForm((prev) => !prev)
   }
 
   useEffect(() => {
-    setIsToggleForm(isLoggedIn)
-  }, [isLoggedIn])
+    setIsToggleForm(!!loggedinEmail)
+  }, [loggedinEmail])
 
   return (
     <div className="flex flex-col w-[280px] mt-[30px]">
@@ -21,7 +21,11 @@ export default function StudentRegister({ isLoggedIn }: Props) {
       <p className="mt-[22px] text-sm">ใช้อีเมลจุฬาฯ เพื่อยืนยันสถานภาพการเป็นนิสิต</p>
 
       <div className="mt-[25px] text-[#64748B] leading-6 text-sm w-full">
-        <RegisterViaGoogle handleToggleForm={handleToggleForm} isToggleForm={isToggleForm} />
+        <RegisterViaGoogle
+          handleToggleForm={handleToggleForm}
+          isToggleForm={isToggleForm}
+          loggedinEmail={loggedinEmail}
+        />
       </div>
     </div>
   )

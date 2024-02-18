@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation"
 export default function Register() {
   const { data: session } = useSession()
   const [isEmployerPage, setIsEmployerPage] = useState(true)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [loggedinEmail, setLoggedInEmail] = useState("")
   const router = useRouter()
 
   const handleEmployerPage = () => {
@@ -22,7 +22,7 @@ export default function Register() {
   useEffect(() => {
     if (session?.user) {
       if (session.user.hashedPassword === "incomplete") {
-        setIsLoggedIn(true)
+        setLoggedInEmail(session.email)
         setIsEmployerPage(session.email.split("@")[1] !== "student.chula.ac.th")
       } else {
         router.push("/landing")
@@ -48,9 +48,9 @@ export default function Register() {
       </div>
 
       {isEmployerPage ? (
-        <EmployerRegister isLoggedIn={isLoggedIn} />
+        <EmployerRegister loggedinEmail={loggedinEmail} />
       ) : (
-        <StudentRegister isLoggedIn={isLoggedIn} />
+        <StudentRegister loggedinEmail={loggedinEmail} />
       )}
     </div>
   )

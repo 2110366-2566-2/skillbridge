@@ -1,12 +1,10 @@
 "use server"
+import prisma from "@/db/prisma"
 import { splitSalutation } from "@/lib/utils"
 import { EmailRegisterSchema } from "@/schemas/EmailRegisterSchema"
-import { PrismaClient } from "@prisma/client"
 import bcrypt from "bcrypt"
 
-const prisma = new PrismaClient()
-
-async function registerWithCredentials(data: {
+export async function registerWithCredentials(data: {
   email: string
   password: string
   cPassword: string
@@ -56,4 +54,21 @@ async function registerWithCredentials(data: {
   return employer
 }
 
-export { registerWithCredentials }
+export async function updateName(email: string, fname: string, lname: string) {
+  const [salutation, firstname] = splitSalutation(fname)
+  const lnameArr = lname.split(/\s+/)
+
+  const user = await prisma.user.update({
+    where: {
+      email,
+    },
+    data: {
+      salutation,
+      firstname,
+      lastname: lnameArr.pop() || lname,
+      middlename: lnameArr.join(" ") || "",
+      hashedPassword: "completed",
+    },
+  })
+  return user
+}

@@ -3,13 +3,14 @@ import PasswordInput from "./PasswordInput"
 import Link from "next/link"
 import ConfirmPasswordInput from "./ConfirmPasswordInput"
 import { useState } from "react"
-import { registerWithCredentials } from "@/actions/register"
+import { registerWithCredentials, updateName } from "@/actions/register"
 import { useRouter } from "next/navigation"
 import { signIn } from "next-auth/react"
 
-type Props = {
+export type RegisterProps = {
   handleToggleForm: () => void
   isToggleForm: boolean
+  loggedinEmail: string
 }
 
 type Form = {
@@ -28,7 +29,11 @@ const defaultForm = {
   lname: "",
 }
 
-export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Props) {
+export default function RegisterViaEmail({
+  handleToggleForm,
+  isToggleForm,
+  loggedinEmail,
+}: RegisterProps) {
   const [data, setForm] = useState<Form>(structuredClone(defaultForm))
 
   const [checkBoxError, setCheckBoxError] = useState({
@@ -103,8 +108,13 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
         return
       }
 
+      if (loggedinEmail) {
+        const res = await updateName(loggedinEmail, data.fname, data.lname)
+        router.push("/landing")
+        return
+      }
+
       const res = await registerWithCredentials(data)
-      console.log("res", res)
 
       if (res) {
         signIn("credentials", {
@@ -112,7 +122,7 @@ export default function RegisterViaEmail({ handleToggleForm, isToggleForm }: Pro
           password: data.password,
           callbackUrl: "/landing",
         })
-      } else router.push("/register")
+      } else router.push("/login")
       // console.log(errors)
     }, 0)
   }

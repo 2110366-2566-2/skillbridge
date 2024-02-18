@@ -4,18 +4,17 @@ import Line from "./Line"
 import RegisterViaEmail from "./RegisterViaEmail"
 import { useEffect, useState } from "react"
 
-type Props = { isLoggedIn: boolean }
+type Props = { loggedinEmail: string }
 
-export default function EmployerRegister({ isLoggedIn }: Props) {
-  const [isToggleForm, setIsToggleForm] = useState(isLoggedIn)
-  console.log("isToggleForm", isToggleForm)
+export default function EmployerRegister({ loggedinEmail }: Props) {
+  const [isToggleForm, setIsToggleForm] = useState(false)
 
   const handleToggleForm = () => {
     setIsToggleForm((prev) => !prev)
   }
   useEffect(() => {
-    setIsToggleForm(isLoggedIn)
-  }, [isLoggedIn])
+    setIsToggleForm(!!loggedinEmail)
+  }, [loggedinEmail])
 
   return (
     <div className="flex flex-col w-[280px] mt-[30px]">
@@ -23,12 +22,16 @@ export default function EmployerRegister({ isLoggedIn }: Props) {
 
       {!isToggleForm && (
         <div className="mt-[25px] text-[#64748B] leading-6 text-sm w-full">
-          <LoginViaGoogle />
+          <LoginViaGoogle callbackUrl="/register" />
           <Line />
         </div>
       )}
 
-      <RegisterViaEmail handleToggleForm={handleToggleForm} isToggleForm={isToggleForm} />
+      <RegisterViaEmail
+        handleToggleForm={handleToggleForm}
+        isToggleForm={isToggleForm}
+        loggedinEmail={loggedinEmail}
+      />
     </div>
   )
 }
