@@ -2,15 +2,17 @@ import Input from "./Input"
 import PasswordInput from "./PasswordInput"
 import Link from "next/link"
 import ConfirmPasswordInput from "./ConfirmPasswordInput"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { registerWithCredentials, updateName } from "@/actions/register"
 import { useRouter } from "next/navigation"
 import { signIn } from "next-auth/react"
+import { Session } from "next-auth"
 
 export type RegisterProps = {
   handleToggleForm: () => void
   isToggleForm: boolean
-  loggedinEmail: string
+  session: Session | null
+  updateSession: (data?: any) => Promise<Session | null>
 }
 
 type Form = {
@@ -32,9 +34,11 @@ const defaultForm = {
 export default function RegisterViaEmail({
   handleToggleForm,
   isToggleForm,
-  loggedinEmail,
+  session,
+  updateSession,
 }: RegisterProps) {
   const [data, setForm] = useState<Form>(structuredClone(defaultForm))
+  const router = useRouter()
 
   const [checkBoxError, setCheckBoxError] = useState({
     checkOne: false,
@@ -108,8 +112,18 @@ export default function RegisterViaEmail({
         return
       }
 
-      if (loggedinEmail) {
-        const res = await updateName(loggedinEmail, data.fname, data.lname)
+      if (session?.user) {
+        await Promise.all([
+          updateName(data.email, data.fname, data.lname),
+          updateSession({
+            user: {
+              firstname: data.fname,
+              lastname: data.lname,
+              hashedPassword: "completed",
+            },
+          }),
+        ])
+
         router.push("/landing")
         return
       }
@@ -142,7 +156,16 @@ export default function RegisterViaEmail({
     })
   }
 
-  const router = useRouter()
+  useEffect(() => {
+    if (session?.user) {
+      setForm({
+        ...data,
+        email: session.email,
+        fname: session.user.firstname,
+        lname: session.user.lastname,
+      })
+    }
+  }, [session])
 
   return (
     <form className="w-full" action={handleValidationSecondPage} noValidate>
@@ -268,13 +291,15 @@ export default function RegisterViaEmail({
             </div>
           )}
 
-          <div id="previousPage" className="mt-[15px] flex justify-center">
-            <p
-              onClick={handleToggleForm}
-              className="hover:underline hover:underline-offset text-[#334155] hover:text-slate-600 text-md cursor-pointer">
-              ย้อนกลับ
-            </p>
-          </div>
+          {!session?.user && (
+            <div id="previousPage" className="mt-[15px] flex justify-center">
+              <p
+                onClick={handleToggleForm}
+                className="hover:underline hover:underline-offset text-[#334155] hover:text-slate-600 text-md cursor-pointer">
+                ย้อนกลับ
+              </p>
+            </div>
+          )}
         </div>
       )}
     </form>

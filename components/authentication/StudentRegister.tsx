@@ -1,10 +1,11 @@
 import Title from "./Title"
 import { useEffect, useState } from "react"
 import RegisterViaGoogle from "./RegisterViaGoogle"
+import { Session } from "next-auth"
 
-type Props = { loggedinEmail: string }
+type Props = { session: Session | null; updateSession: (data?: any) => Promise<Session | null> }
 
-export default function StudentRegister({ loggedinEmail }: Props) {
+export default function StudentRegister({ session, updateSession }: Props) {
   const [isToggleForm, setIsToggleForm] = useState(false)
 
   const handleToggleForm = () => {
@@ -12,8 +13,8 @@ export default function StudentRegister({ loggedinEmail }: Props) {
   }
 
   useEffect(() => {
-    setIsToggleForm(!!loggedinEmail)
-  }, [loggedinEmail])
+    setIsToggleForm(!!session?.email)
+  }, [session])
 
   return (
     <div className="flex flex-col w-[280px] mt-[30px]">
@@ -24,7 +25,8 @@ export default function StudentRegister({ loggedinEmail }: Props) {
         <RegisterViaGoogle
           handleToggleForm={handleToggleForm}
           isToggleForm={isToggleForm}
-          loggedinEmail={loggedinEmail}
+          session={session}
+          updateSession={updateSession}
         />
       </div>
     </div>

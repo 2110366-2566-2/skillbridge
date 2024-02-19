@@ -1,6 +1,6 @@
 import Input from "./Input"
 import Link from "next/link"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { signIn } from "next-auth/react"
 import Image from "next/image"
@@ -17,7 +17,8 @@ const defaultForm = { fname: "", lname: "" }
 export default function RegisterViaGoogle({
   handleToggleForm,
   isToggleForm,
-  loggedinEmail,
+  session,
+  updateSession,
 }: RegisterProps) {
   const handleGoogleComplete = () => {
     // ถ้ากดปุ่ม Google หน้าแรกสำเร็จ
@@ -57,11 +58,32 @@ export default function RegisterViaGoogle({
         return
       }
 
-      const res = await updateName(loggedinEmail, data.fname, data.lname)
-      router.push("/landing")
-      return
+      if (session?.user) {
+        await Promise.all([
+          updateName(session.user.email, data.fname, data.lname),
+          updateSession({
+            user: {
+              firstname: data.fname,
+              lastname: data.lname,
+              hashedPassword: "completed",
+            },
+          }),
+        ])
+
+        router.push("/landing")
+        return
+      }
     }, 0)
   }
+  useEffect(() => {
+    if (session?.user) {
+      setForm({
+        ...data,
+        fname: session.user.firstname,
+        lname: session.user.lastname,
+      })
+    }
+  }, [session])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
@@ -177,13 +199,15 @@ export default function RegisterViaGoogle({
               </div>
             )}
 
-            <div id="previousPage" className="mt-[15px] flex justify-center">
-              <p
-                onClick={handleToggleForm}
-                className="hover:underline hover:underline-offset text-[#334155] hover:text-slate-600 text-md cursor-pointer">
-                ย้อนกลับ
-              </p>
-            </div>
+            {!session?.user && (
+              <div id="previousPage" className="mt-[15px] flex justify-center">
+                <p
+                  onClick={handleToggleForm}
+                  className="hover:underline hover:underline-offset text-[#334155] hover:text-slate-600 text-md cursor-pointer">
+                  ย้อนกลับ
+                </p>
+              </div>
+            )}
           </div>
         </form>
       )}

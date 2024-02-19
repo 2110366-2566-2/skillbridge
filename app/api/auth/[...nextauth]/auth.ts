@@ -99,8 +99,12 @@ export const authOptions: AuthOptions = {
 
       return true
     },
-    async jwt({ token, account, profile, user }) {
-      // console.log("jwt Callback", "account\n", account, "token\n", token, "user\n", user)
+    async jwt({ token, account, user, trigger, session }) {
+      // console.log("jwt Callback", "account\n", account, "token\n", token, "user\n", user,'session\n',session)
+      if (trigger === "update" && session) {
+        token.user = { ...token.user, ...session.user, updatedAt: new Date() }
+      }
+
       if (!account) return token
 
       token.account = account
@@ -124,7 +128,7 @@ export const authOptions: AuthOptions = {
     },
     async session({ session, token, user }) {
       // user is always undefined
-      console.log("session Callback", "session\n", session, "token\n", token)
+      // console.log("session Callback", "session\n", session, "token\n", token)
 
       return { ...token, expires: session.expires }
     },
