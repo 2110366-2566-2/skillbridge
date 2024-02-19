@@ -79,8 +79,8 @@ export default function RegisterViaGoogle({
     if (session?.user) {
       setForm({
         ...data,
-        fname: session.user.firstname,
-        lname: session.user.lastname,
+        fname: session.user.salutation + " " + session.user.firstname,
+        lname: session.user.middlename + " " + session.user.lastname,
       })
     }
   }, [session])

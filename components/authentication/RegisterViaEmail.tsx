@@ -161,8 +161,8 @@ export default function RegisterViaEmail({
       setForm({
         ...data,
         email: session.email,
-        fname: session.user.firstname,
-        lname: session.user.lastname,
+        fname: session.user.salutation + " " + session.user.firstname,
+        lname: session.user.middlename + " " + session.user.lastname,
       })
     }
   }, [session])
