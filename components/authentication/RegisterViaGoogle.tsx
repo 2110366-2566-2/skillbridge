@@ -105,7 +105,7 @@ export default function RegisterViaGoogle({
   return (
     <div className="w-full">
       {!isToggleForm ? (
-        <div className="text-[#64748B] leading-6 text-sm w-full">
+        <div className="text-[#64748B] leading-6 text-sm w-full mt-[25px]">
           <button
             className="w-full h-[40px] bg-[#F1F5F9] border border-[#CBD5E1] rounded-md flex items-center px-[20px]"
             onClick={() =>
@@ -200,7 +200,7 @@ export default function RegisterViaGoogle({
             )}
 
             {!session?.user && (
-              <div id="previousPage" className="mt-[15px] flex justify-center">
+              <div id="previousPage" className="flex justify-center">
                 <p
                   onClick={handleToggleForm}
                   className="hover:underline hover:underline-offset text-[#334155] hover:text-slate-600 text-md cursor-pointer">

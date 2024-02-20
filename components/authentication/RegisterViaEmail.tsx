@@ -7,6 +7,7 @@ import { registerWithCredentials, updateName } from "@/actions/register"
 import { useRouter } from "next/navigation"
 import { signIn } from "next-auth/react"
 import { Session } from "next-auth"
+import getUniqueEmail from "@/actions/authentication/getUnique"
 
 export type RegisterProps = {
   handleToggleForm: () => void
@@ -47,14 +48,26 @@ export default function RegisterViaEmail({
 
   const [errors, setErrors] = useState<Form>(structuredClone(defaultForm))
 
-  const validateFirstPage = () => {
+  const validateFirstPage = async () => {
     const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,6}$/
+    let checkUnique: null | object = null;
+
+    await new Promise<void>((resolve) => {
+      setTimeout(async () => {
+        checkUnique = await getUniqueEmail(data.email);
+        console.log(checkUnique);
+        resolve();
+      }, 0);
+    });
+
     // const password_pattern = /^.{8,}$/
     const errors: Form = structuredClone(defaultForm)
     if (data.email === "") {
       errors.email = "กรอกที่อยู่อีเมลของคุณ"
     } else if (!email_pattern.test(data.email)) {
       errors.email = "อีเมลไม่ถูกต้อง"
+    } else if (checkUnique) {
+      errors.email = "อีเมลนี้มีอยู่ในระบบแล้ว"
     }
 
     if (data.password === "") {
@@ -93,8 +106,8 @@ export default function RegisterViaEmail({
     return { errors, success }
   }
 
-  const handleValidationFirstPage = () => {
-    const validationErrors = validateFirstPage()
+  const handleValidationFirstPage = async () => {
+    const validationErrors = await validateFirstPage()
     setErrors(validationErrors)
 
     setTimeout(() => {
