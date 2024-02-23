@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation"
 import { signIn } from "next-auth/react"
 import { Session } from "next-auth"
 import getUniqueEmail from "@/actions/authentication/getUnique"
+import { z } from "zod"
 
 export type RegisterProps = {
   handleToggleForm: () => void
@@ -49,24 +50,12 @@ export default function RegisterViaEmail({
   const [errors, setErrors] = useState<Form>(structuredClone(defaultForm))
 
   const validateFirstPage = async () => {
-    const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,6}$/
-    let checkUnique: null | object = null;
-
-    await new Promise<void>((resolve) => {
-      setTimeout(async () => {
-        checkUnique = await getUniqueEmail(data.email);
-        console.log(checkUnique);
-        resolve();
-      }, 0);
-    });
-
-    // const password_pattern = /^.{8,}$/
     const errors: Form = structuredClone(defaultForm)
     if (data.email === "") {
       errors.email = "กรอกที่อยู่อีเมลของคุณ"
-    } else if (!email_pattern.test(data.email)) {
+    } else if (z.string().email().safeParse(data.email).success === false) {
       errors.email = "อีเมลไม่ถูกต้อง"
-    } else if (checkUnique) {
+    } else if (await getUniqueEmail(data.email)) {
       errors.email = "อีเมลนี้มีอยู่ในระบบแล้ว"
     }
 
@@ -92,66 +81,63 @@ export default function RegisterViaEmail({
 
   const validateSecondPage = () => {
     const errors: Form = structuredClone(defaultForm)
-    let success = true
 
     if (data.fname === "") {
       errors.fname = "กรอกชื่อของคุณ"
-      success = false
     }
 
     if (data.lname === "") {
       errors.lname = "กรอกนามสกุลของคุณ"
-      success = false
     }
-    return { errors, success }
+    return errors
   }
 
   const handleValidationFirstPage = async () => {
     const validationErrors = await validateFirstPage()
-    setErrors(validationErrors)
+    const haveErrors = Object.values(validationErrors).some((x) => x !== null && x !== "")
 
-    setTimeout(() => {
-      if (!validationErrors.email && !validationErrors.password && !validationErrors.cPassword) {
-        handleToggleForm()
-      }
-    }, 0)
+    if (haveErrors) {
+      setErrors(validationErrors)
+    } else {
+      handleToggleForm()
+    }
   }
 
   const handleValidationSecondPage = async () => {
-    const { errors, success } = validateSecondPage()
-    setTimeout(async () => {
-      if (!success) {
-        setErrors(errors)
-        return
-      }
+    const validationErrors = validateSecondPage()
+    const haveErrors = Object.values(validationErrors).some((x) => x !== null && x !== "")
 
-      if (session?.user) {
-        await Promise.all([
-          updateName(data.email, data.fname, data.lname),
-          updateSession({
-            user: {
-              firstname: data.fname,
-              lastname: data.lname,
-              hashedPassword: "completed",
-            },
-          }),
-        ])
+    if (haveErrors) {
+      setErrors(validationErrors)
+      return
+    }
 
-        router.push("/landing")
-        return
-      }
+    if (session?.user) {
+      await Promise.all([
+        updateName(data.email, data.fname, data.lname),
+        updateSession({
+          user: {
+            firstname: data.fname,
+            lastname: data.lname,
+            hashedPassword: "completed",
+          },
+        }),
+      ])
 
-      const res = await registerWithCredentials(data)
+      router.push("/landing")
+      return
+    }
 
-      if (res) {
-        signIn("credentials", {
-          email: data.email,
-          password: data.password,
-          callbackUrl: "/landing",
-        })
-      } else router.push("/login")
-      // console.log(errors)
-    }, 0)
+    const res = await registerWithCredentials(data)
+
+    if (res) {
+      signIn("credentials", {
+        email: data.email,
+        password: data.password,
+        callbackUrl: "/landing",
+      })
+    } else router.push("/login")
+    // console.log(errors)
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

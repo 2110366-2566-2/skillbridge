@@ -22,7 +22,7 @@ export function splitSalutation(input: string): [string, string] {
   if (match) {
     const salutation = match[0].trim()
     const name = input.slice(match[0].length).trim()
-    return [salutation, name]
+    if (name !== "") return [salutation, name]
   }
 
   return ["-", input.trim()]

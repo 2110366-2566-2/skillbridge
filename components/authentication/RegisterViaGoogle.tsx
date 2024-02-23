@@ -52,28 +52,27 @@ export default function RegisterViaGoogle({
 
   const handleValidationSecondPage = async () => {
     const { errors, success } = validateSecondPage()
-    setTimeout(async () => {
-      if (!success) {
-        setErrors(errors)
-        return
-      }
 
-      if (session?.user) {
-        await Promise.all([
-          updateName(session.user.email, data.fname, data.lname),
-          updateSession({
-            user: {
-              firstname: data.fname,
-              lastname: data.lname,
-              hashedPassword: "completed",
-            },
-          }),
-        ])
+    if (!success) {
+      setErrors(errors)
+      return
+    }
 
-        router.push("/landing")
-        return
-      }
-    }, 0)
+    if (session?.user) {
+      await Promise.all([
+        updateName(session.user.email, data.fname, data.lname),
+        updateSession({
+          user: {
+            firstname: data.fname,
+            lastname: data.lname,
+            hashedPassword: "completed",
+          },
+        }),
+      ])
+
+      router.push("/landing")
+      return
+    }
   }
   useEffect(() => {
     if (session?.user) {
