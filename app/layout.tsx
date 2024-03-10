@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, IBM_Plex_Sans_Thai } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header/Header";
-import Footer from "@/components/footer/Footer";
 import { cn } from "@/lib/utils";
 import AuthProvider from "@/providers/AuthProvider";
 import { Toaster } from "react-hot-toast";
