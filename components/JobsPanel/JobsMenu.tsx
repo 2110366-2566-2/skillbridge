@@ -7,13 +7,16 @@ import { CloseOutlined, SortAscendingOutlined } from "@ant-design/icons";
 import JobCardType from "../../types/JobCardType";
 import fetchInitialData from "../../lib/Jobs/fetchInitialData";
 import { useSession } from "next-auth/react";
+import JobToggler from "./JobToggler";
 
 type Props = {};
+
+const jobTypeList = ['งานปัจจุบัน', 'งานที่เสร็จสิ้น'];
 
 // export function
 const JobsMenu = () => {
   const { data: session } = useSession();
-  const [isPending, setIsPending] = useState(true);
+  const [jobType, setJobType] = useState('งานปัจจุบัน');
   const [startDateSortOption, setStartDateSortOption] = useState("-");
   const [endDateSortOption, setEndDateSortOption] = useState("-");
   const [priceSortOption, setPriceSortOption] = useState("-");
@@ -45,22 +48,8 @@ const JobsMenu = () => {
   return (
     <>
       {/* Toggle between PendingJobsPanel and DoneJobsPanel based on the value of isPending. */}
-      <nav className="mb-3">
-        <div className="flex flex-row gap-1 bg-slate-100 w-fit p-2 rounded-sm">
-          <button
-            className={`${isPending ? "bg-slate-50" : ""} hover:shadow-inner font-medium text-md rounded-sm px-[12px] py-[6px] `}
-            onClick={() => setIsPending(true)}
-          >
-            งานปัจจุบัน
-          </button>
-          <button
-            className={`${isPending ? "" : "bg-slate-50"} hover:shadow-inner font-medium text-md rounded-sm px-[12px] py-[6px]`}
-            onClick={() => setIsPending(false)}
-          >
-            งานที่เสร็จแล้ว
-          </button>
-        </div>
-      </nav>
+      <JobToggler status={jobType} setStatus={setJobType} statusList={jobTypeList} />
+      
 
       {/* Sort button and Create Work button */}
       <section className="my-3">
@@ -84,7 +73,7 @@ const JobsMenu = () => {
           {/* Create Work button */}
           <Link href={"/jobs/create"} key={"createJob"}>
             <button
-              className={`${isPending ? "" : "hidden"} bg-slate-900 font-medium text-md text-white rounded-md px-3 py-2 hover:shadow-md`}
+              className={`${jobType === 'งานปัจจุบัน' ? "" : "hidden"} bg-slate-900 font-medium text-md text-white rounded-md px-3 py-2 hover:shadow-md`}
             >
               สร้างงาน
             </button>
@@ -94,14 +83,14 @@ const JobsMenu = () => {
 
       <div className="lg:flex lg:flex-row lg:justify-between gap-2">
         {/* PendingJobsPanel and DoneJobsPanel */}
-        {isPending ? (
+        {jobType === 'งานปัจจุบัน' ? (
           <JobsPanel
             startDateSortOption={startDateSortOption}
             endDateSortOption={endDateSortOption}
             priceSortOption={priceSortOption}
             applicantsSortOption={applicantsSortOption}
             data={pendingJobs}
-            isPending={isPending}
+            isPending={jobType === 'งานปัจจุบัน'}
           ></JobsPanel>
         ) : (
           <JobsPanel
@@ -110,7 +99,7 @@ const JobsMenu = () => {
             priceSortOption={priceSortOption}
             applicantsSortOption={applicantsSortOption}
             data={doneJobs}
-            isPending={isPending}
+            isPending={jobType === 'งานปัจจุบัน'}
           ></JobsPanel>
         )}
 
