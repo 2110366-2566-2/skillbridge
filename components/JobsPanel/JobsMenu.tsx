@@ -1,17 +1,17 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import TasksPanel from "./TasksPanel";
+import JobsPanel from "./JobsPanel";
 import Link from "next/link";
 import { CloseOutlined, SortAscendingOutlined } from "@ant-design/icons";
-import TaskCardType from "../../types/TaskCardType";
+import JobCardType from "../../types/JobCardType";
 import fetchInitialData from "../../lib/Jobs/fetchInitialData";
 import { useSession } from "next-auth/react";
 
 type Props = {};
 
 // export function
-const TasksMenu = () => {
+const JobsMenu = () => {
   const { data: session } = useSession();
   const [isPending, setIsPending] = useState(true);
   const [startDateSortOption, setStartDateSortOption] = useState("-");
@@ -19,21 +19,21 @@ const TasksMenu = () => {
   const [priceSortOption, setPriceSortOption] = useState("-");
   const [applicantsSortOption, setApplicantsSortOption] = useState("-");
   const [isOpeningSideBar, setIsOpeningSideBar] = useState(false);
-  const [pendingTasks, setPendingTasks] = useState<TaskCardType[]>([]);
-  const [doneTasks, setDoneTasks] = useState<TaskCardType[]>([]);
+  const [pendingJobs, setPendingJobs] = useState<JobCardType[]>([]);
+  const [doneJobs, setDoneJobs] = useState<JobCardType[]>([]);
 
   useEffect(() => {
     async function fetchData() {
       if (session) {
         try {
           // session.user.id
-          const [pendingTasks, doneTasks] = await fetchInitialData(
+          const [pendingJobs, doneJobs] = await fetchInitialData(
             "92e60ed5-51d8-4875-bb4e-5760a09a0449",
           );
-          setPendingTasks(
-            pendingTasks.filter((taskCard) => !taskCard.isDeleted),
+          setPendingJobs(
+            pendingJobs.filter((jobCard) => !jobCard.isDeleted),
           );
-          setDoneTasks(doneTasks.filter((taskCard) => !taskCard.isDeleted));
+          setDoneJobs(doneJobs.filter((jobCard) => !jobCard.isDeleted));
         } catch (err) {
           console.log("Fetching user's jobs error :", err);
         }
@@ -44,7 +44,7 @@ const TasksMenu = () => {
 
   return (
     <>
-      {/* Toggle between PendingTasksPanel and DoneTasksPanel based on the value of isPending. */}
+      {/* Toggle between PendingJobsPanel and DoneJobsPanel based on the value of isPending. */}
       <nav className="mb-3">
         <div className="flex flex-row gap-1 bg-slate-100 w-fit p-2 rounded-sm">
           <button
@@ -93,25 +93,25 @@ const TasksMenu = () => {
       </section>
 
       <div className="lg:flex lg:flex-row lg:justify-between gap-2">
-        {/* PendingTasksPanel and DoneTasksPanel */}
+        {/* PendingJobsPanel and DoneJobsPanel */}
         {isPending ? (
-          <TasksPanel
+          <JobsPanel
             startDateSortOption={startDateSortOption}
             endDateSortOption={endDateSortOption}
             priceSortOption={priceSortOption}
             applicantsSortOption={applicantsSortOption}
-            data={pendingTasks}
+            data={pendingJobs}
             isPending={isPending}
-          ></TasksPanel>
+          ></JobsPanel>
         ) : (
-          <TasksPanel
+          <JobsPanel
             startDateSortOption={startDateSortOption}
             endDateSortOption={endDateSortOption}
             priceSortOption={priceSortOption}
             applicantsSortOption={applicantsSortOption}
-            data={doneTasks}
+            data={doneJobs}
             isPending={isPending}
-          ></TasksPanel>
+          ></JobsPanel>
         )}
 
         {/* Sidebar for sorting for laptop */}
@@ -318,4 +318,4 @@ const TasksMenu = () => {
   );
 };
 
-export default TasksMenu;
+export default JobsMenu;

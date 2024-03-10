@@ -1,5 +1,5 @@
 import React from "react";
-import TasksMenu from "@/components/TasksPanel/TasksMenu";
+import TasksMenu from "@/components/JobsPanel/JobsMenu";
 
 export default function WorkPage() {
   return (

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "./navbar/Navbar";
 import SearchAndFilter from "./searchAndFilter/SearchAndFilter";
-import TaskHeader from "../TasksPanel/TaskHeader";
+import TaskHeader from "../JobsPanel/JobHeader";
 import CreateJobHeader from "./createJobHeader/CreateJobHeader";
 import EditJobHeader from "./editJobHeader/EditJobHeader";
 import LandingHeader from "./landingHeader/LandingHeader";
