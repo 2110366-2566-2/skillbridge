@@ -7,10 +7,11 @@ type Props = {
   files: FileList | null;
   setFiles: Dispatch<SetStateAction<FileList | null>>;
   isDisabled: boolean;
+  maxSizeInMegaByte: number;
 };
 
 export default function FilesInput(props: Props) {
-  const { label, files, setFiles, isDisabled } = props;
+  const { label, files, setFiles, isDisabled, maxSizeInMegaByte } = props;
 
   const handleRemoveFile = (fileNameToRemove: string) => {
     if (!files) return;
@@ -55,8 +56,13 @@ export default function FilesInput(props: Props) {
             {(file.size / 1024).toFixed(0)} KB
           </p>
         </div>
-        <button title="remove-file" onClick={() => handleRemoveFile(file.name)}>
-          <Image src={closeDarkIcon} alt="closeIcon" width={20} height={20} />
+        <button
+          title="remove-file"
+          onClick={() => handleRemoveFile(file.name)}
+          className="hover:opacity-80 active:opacity-60"
+          disabled={isDisabled}
+        >
+          <Image src={closeDarkIcon} alt="closeIcon" width={15} height={15} />
         </button>
       </div>
     ));
@@ -74,7 +80,7 @@ export default function FilesInput(props: Props) {
       <div className="flex items-center justify-center w-full">
         <label
           htmlFor="dropzone-file"
-          className={`flex flex-col items-center justify-center w-full border-[1px] border-slate-400 border-dashed rounded-lg cursor-pointer bg-transparent hover:bg-slate-200 ${isDisabled && "opacity-75"}`}
+          className={`flex flex-col items-center justify-center w-full border-[1px] border-slate-400 border-dashed rounded-lg bg-transparent hover:opacity-80 active:opacity-60 cursor-pointer ${isDisabled && "opacity-80 cursor-default"}`}
         >
           <div className="flex flex-col items-center justify-center p-3">
             <svg
@@ -96,7 +102,7 @@ export default function FilesInput(props: Props) {
               <span className="font-semibold">กดเพื่ออัพโหลดไฟล์</span>
               <span>หรือวางไฟล์ที่นี่</span>
             </p>
-            <p className="text-[12px] text-slate-400">(ขนาดรวมไม่เกิน 1 MB)</p>
+            <p className="text-[12px] text-slate-400">(ขนาดรวมไม่เกิน {maxSizeInMegaByte} MB)</p>
           </div>
           <input
             id="dropzone-file"
