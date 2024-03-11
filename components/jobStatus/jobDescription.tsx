@@ -63,12 +63,13 @@ export default function jobDescription({
                     </div>
 
                     <div className="absolute w-[330px] flex justify-between bottom-[10px]">
+                        {/* AcceptedApplication Number Component */}
                         <div className="flex items-center">
                             <p className="text-xs text-[#64748b]">
                                 สมัครแล้ว {nubmerOfAcceptedApplication}/{numberOfMaximumAccepted} คน
                             </p>
                         </div>
-
+                        {/* Price Component */}
                         <p className="text-md text-[#313866] font-semibold">
                             {price}
                         </p>
