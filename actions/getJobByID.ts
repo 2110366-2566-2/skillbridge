@@ -12,6 +12,10 @@ const getJobById = async (jobId: string) => {
       employer: true,
       jobTag: true,
       jobDocumentFiles: true,
+      applications: true,
+      chatrooms: true,
+      transactions: true,
+      reviews: true,
     },
   });
 
@@ -20,10 +24,10 @@ const getJobById = async (jobId: string) => {
 
 export default getJobById;
 
-// const main = async () => {
-//   const jobId = "bdf21ad2-c998-4e38-85af-e888df8c6759";
-//   const result = await getJobById(jobId);
-//   console.log(result);
-// };
+const main = async () => {
+  const jobId = "bdf21ad2-c998-4e38-85af-e888df8c6759";
+  const result = await getJobById(jobId);
+  console.log(result);
+};
 
-// main();
+main();
