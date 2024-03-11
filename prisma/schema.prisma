@@ -190,18 +190,19 @@ model Image {
 }
 
 model Transaction {
-  id              String    @id @default(uuid())
-  jobId           String
-  studentId       String
-  employerUserId  String
-  receiptImageUrl String
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-  isDeleted       Boolean   @default(false)
-  paymentType     String
-  employer        Employer? @relation(fields: [employerUserId], references: [userId])
-  job             Job       @relation(fields: [jobId], references: [id])
-  student         Student   @relation(fields: [studentId], references: [userId])
+  id               String            @id @default(uuid())
+  jobId            String
+  studentId        String
+  employerUserId   String
+  receiptImageName String
+  status           TransactionStatus @default(PENDING)
+  amount           Float?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  isDeleted        Boolean           @default(false)
+  employer         Employer?         @relation(fields: [employerUserId], references: [userId])
+  job              Job               @relation(fields: [jobId], references: [id])
+  student          Student           @relation(fields: [studentId], references: [userId])
 
   @@map("transaction")
 }
@@ -228,6 +229,12 @@ enum JobStatus {
 }
 
 enum ApplicationStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+enum TransactionStatus {
   PENDING
   ACCEPTED
   REJECTED
