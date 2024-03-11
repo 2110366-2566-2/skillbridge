@@ -1,24 +1,48 @@
 "use server";
 
 import prisma from "../db/prisma";
+import { ApplicationStatus } from "@prisma/client";
 
 const getJobById = async (jobId: string) => {
   console.log(jobId);
-  const result = await prisma.job.findFirst({
+  const job: any = await prisma.job.findFirst({
     where: {
       id: jobId,
     },
     include: {
       employer: true,
       jobTag: true,
-      jobDocumentFiles: true,
       applications: true,
-      chatrooms: true,
-      transactions: true,
-      reviews: true,
+    },
+  });
+  // console.log(job);
+  const userName: any = await prisma.user.findFirst({
+    where: {
+      id: job.employer.userId,
+    },
+    select: {
+      firstname: true,
+      middlename: true,
+      lastname: true,
     },
   });
 
+  const result: any = {
+    id: job.id,
+    title: job.title,
+    startDate: job.estimateStartDate.toLocaleDateString("en-GB"),
+    endDate: job.estimateEndDate.toLocaleDateString("en-GB"),
+    jobTags: job.jobTag.title,
+    description: job.description ? job.description : "",
+    acceptNum: job.applications.filter(
+      (app: any) => app.status == ApplicationStatus.ACCEPTED
+    ).length, //TODO : Filter for accepted application
+    maxAcceptNum: job.numWorker,
+    budget: job.budget,
+    userName: userName,
+    position: job.employer.position,
+    status: job.status,
+  };
   return result;
 };
 

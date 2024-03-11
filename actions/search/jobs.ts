@@ -65,7 +65,7 @@ async function getDefaultSearchJobs(): Promise<job[]> {
       jobTags: job.jobTag.title,
       description: job.description ? job.description : "",
       acceptNum: job.applications.filter(
-        (app) => app.status == ApplicationStatus.ACCEPTED,
+        (app) => app.status == ApplicationStatus.ACCEPTED
       ).length, //TODO : Filter for accepted application
       maxAcceptNum: job.numWorker,
       budget: job.budget,
@@ -90,7 +90,7 @@ TODO
 */
 async function getSearchJobs(
   query?: string,
-  filter?: jobFilter,
+  filter?: jobFilter
 ): Promise<job[]> {
   /*
         Filter is yet to be implemented
@@ -134,7 +134,7 @@ async function getSearchJobs(
         jobTags: job.jobTag.title,
         description: job.description ? job.description : "",
         acceptNum: job.applications.filter(
-          (app) => app.status == ApplicationStatus.ACCEPTED,
+          (app) => app.status == ApplicationStatus.ACCEPTED
         ).length, //TODO : Filter for accepted application
         maxAcceptNum: job.numWorker,
         budget: job.budget,
@@ -204,7 +204,7 @@ async function getSearchJobs(
       jobTags: job.jobTag.title,
       description: job.description ? job.description : "",
       acceptNum: job.applications.filter(
-        (app) => app.status == ApplicationStatus.ACCEPTED,
+        (app) => app.status == ApplicationStatus.ACCEPTED
       ).length, //TODO : Filter for accepted application
       maxAcceptNum: job.numWorker,
       budget: job.budget,
