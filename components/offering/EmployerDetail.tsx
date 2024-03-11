@@ -8,7 +8,7 @@ export default async function EmployerDetail() {
 
     return (
         <>
-            <div className="w-full bg-slate-100 rounded-b-[9.54px] border-slate-300 border-[2px] flex flex-col px-6 py-3 lg:w-[543px]">
+            <div className="w-full bg-slate-100 rounded-b-[9.54px] border-slate-300 border-[2px] flex flex-col px-6 py-3 md:w-[390px] lg:w-[543px]">
                 <div className="font-semibold text-[14px] text-slate-800">ผู้ว่าจ้าง</div>
                 <div className="flex flex-row mt-2">
                     <Image

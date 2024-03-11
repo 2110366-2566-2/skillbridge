@@ -6,7 +6,7 @@ export default async function JobDetail() {
 
     return (
         <>
-            <div className="w-full rounded-t-[9.54px] border-slate-300 border-[0.5px] border-b-0 flex flex-col px-6 py-4 lg:w-[543px]">
+            <div className="w-full rounded-t-[9.54px] border-slate-300 border-[0.5px] border-b-0 flex flex-col px-6 py-4 md:w-[390px] lg:w-[543px]">
                 <div className="font-bold text-[24px] text-[#313866] h-[3em] line-clamp-2 lg:text-[30px]">รับสมัคร TA วิชา Comp Prog เทอม 1/2567</div>
                 <div className="text-[14px] text-slate-800 mt-3 lg:text-[16px]">
                     <span className="font-semibold">หมวดหมู่</span>
