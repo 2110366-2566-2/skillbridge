@@ -1,4 +1,4 @@
-import TaskCardType from "../../types/TaskCardType";
+import TaskCardType from "../../types/JobCardType";
 
 const sortArray = (
   array: Array<TaskCardType> = [],
