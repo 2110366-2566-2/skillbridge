@@ -340,7 +340,7 @@ Proficiency ใน Excel หรือ Google Sheets เป็น essential, \n \
             status: 'NOT_STARTED',
             description: 'Looking for a dynamic individual with ทักษะในการสร้าง \n \
 engaging content สำหรับ social media platforms. Responsibilities include \n \
-content creation, strategic planning, and performance analysis.",
+content creation, strategic planning, and performance analysis.',
             budget: 14000,
             numWorker: 2,
             estimateStartDate: new Date("2024-01-22"),
