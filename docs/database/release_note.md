@@ -17,6 +17,11 @@
   </ul>
 </details>
 
+## Current Database Schema 
+> _automatically-generated_ from Prisma Database Schema
+
+<img src="./ERD.svg">
+
 ## Version 1.00
 
 - init version as copied from the existed docs

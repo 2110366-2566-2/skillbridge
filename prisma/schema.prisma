@@ -2,6 +2,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator erd {
+  provider = "prisma-erd-generator"
+  output   = "../docs/database/ERD.svg"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -110,19 +115,28 @@ model JobDocumentFile {
 }
 
 model Application {
-  userId      String
-  jobId       String
-  bid         Float
-  documentUrl String?
-  status      ApplicationStatus @default(PENDING)
-  isDeleted   Boolean           @default(false)
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
-  job         Job               @relation(fields: [jobId], references: [id])
-  user        User              @relation(fields: [userId], references: [id])
+  userId                  String
+  jobId                   String
+  bid                     Float
+  documentUrl             String?
+  status                  ApplicationStatus         @default(PENDING)
+  isDeleted               Boolean                   @default(false)
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime                  @updatedAt
+  job                     Job                       @relation(fields: [jobId], references: [id])
+  user                    User                      @relation(fields: [userId], references: [id])
+  ApplicationDocumentFile ApplicationDocumentFile[]
 
   @@id([userId, jobId])
   @@map("application")
+}
+
+model ApplicationDocumentFile {
+  id                String @id @default(uuid())
+  applicationUserId String
+  applicationJobId  String
+
+  application Application @relation(fields: [applicationUserId, applicationJobId], references: [userId, jobId])
 }
 
 model Chatroom {
