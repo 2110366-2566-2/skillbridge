@@ -92,25 +92,27 @@ export default function FilesInput(props: Props) {
           htmlFor="dropzone-file"
           className={`flex flex-col items-center justify-center w-full border-[1px] border-slate-400 border-dashed rounded-lg bg-transparent ${isDisabled ? "opacity-60 cursor-default" : "active:opacity-60 cursor-pointer hover:opacity-80"}`}
         >
-          <div className="flex flex-col items-center justify-center p-3">
-            <svg
-              className="w-8 h-8 mb-2 text-slate-500"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 16"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-              />
-            </svg>
-            <p className="mb-2 text-[14px] text-slate-500 flex flex-wrap gap-1 justify-center items-center">
-              <span className="font-semibold">กดเพื่ออัพโหลดไฟล์</span>
-              <span>หรือวางไฟล์ที่นี่</span>
+          <div className="flex flex-col gap-1 items-center justify-center p-3">
+            <div className="flex gap-3 items-center justify-center">
+              <svg
+                className="w-8 h-8 mb-2 text-slate-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 16"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                />
+              </svg>
+              <span className="text-slate-500">วางไฟล์ที่นี่</span>
+            </div>
+            <p className="mb-2 px-[20px] py-[12px] rounded-[6px] text-sm text-slate-50 bg-slate-400 flex flex-wrap gap-1 justify-center items-center">
+              <span className="font-normal">กดเพื่ออัพโหลดไฟล์</span> 
             </p>
             <p className="text-[12px] text-slate-400">
               (ขนาดรวมไม่เกิน {maxSizeInMegaByte} MB)
