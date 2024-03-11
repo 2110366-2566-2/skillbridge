@@ -111,3 +111,15 @@
 - This table is added for storing multiple files in a single job
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+# v1.20
+
+### ApplicationDocumentFile
+
+- This table is added for storing multiple files in a single application
+
+### Transaction
+- `paymentId` is deleted
+- `receiptImageUrl` is set to required
+- `employerUserId` is changed to `employerId` and is set to required
+ 
