@@ -63,7 +63,7 @@ export default function SearchJobItem({ job }: Props) {
             height={40}
             // Open link in new tab
             // TODO: Add destination route
-            onClick={() => window.open("/offer", "_blank", "noopener,noreferrer")}
+            onClick={() => window.open("/offer/a2f6c9d2-b463-4045-b5c3-566e5ca179d6", "_blank", "noopener,noreferrer")}
             role="link"
             tabIndex={0}
           />
@@ -75,7 +75,7 @@ export default function SearchJobItem({ job }: Props) {
         className="hidden md:inline-block md:m-[20px] md:border-[0.5px] md:border-slate-200 md:bg-white md:rounded-xl md:hover:shadow-xl md:hover:cursor-pointer"
         // Open link in new tab
         // TODO: Add destination route
-        onClick={() => window.open("/offer", "_blank", "noopener,noreferrer")}
+        onClick={() => window.open("/offer/a2f6c9d2-b463-4045-b5c3-566e5ca179d6", "_blank", "noopener,noreferrer")}
         role="link"
         tabIndex={0}
       >

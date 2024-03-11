@@ -3,7 +3,17 @@
 import Image from "next/image";
 import noavatar from "@/public/icons/noavatar.svg";
 
-export default async function EmployerDetail() {
+type Props = {
+    employerData: {
+        firstName: string;
+        middleName: string;
+        lastName: string;
+        position: string;
+        organization: string;
+    };
+};
+
+export default async function EmployerDetail({ employerData }: Props) {
     const avatar = noavatar
 
     return (
@@ -19,8 +29,8 @@ export default async function EmployerDetail() {
                         height={36}
                     />
                     <div className="flex flex-col ml-5">
-                        <div className="font-medium text-[14px] text-slate-800">Awat Singdamrong</div>
-                        <div className="text-[11px] text-slate-800 line-clamp-1">Co-Founder บริษัทน้องบิวสั่งข้าว จำกัด (มหาชน) ประเทศไทย ภูมิภาคเอเชีย</div>
+                        <div className="font-medium text-[14px] text-slate-800">{employerData.firstName} {employerData.middleName} {employerData.lastName}</div>
+                        <div className="text-[11px] text-slate-800 line-clamp-1">{employerData.position} {employerData.organization}</div>
                     </div>
                 </div>
             </div>
