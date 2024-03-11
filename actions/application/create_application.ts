@@ -1,34 +1,63 @@
 "use server";
-import { Session, getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import s3 from "@/lib/bucket";
+import prisma from "@/db/prisma";
+import { float } from "@elastic/elasticsearch/lib/api/types";
+import uploadFileToS3 from "../uploadFileToS3";
 
-export const uploadFile = async (file: File, path: string) => {
-  const validPath = ["jobFiles", "applicationFiles"];
-  if (!validPath.includes(path)) {
-    return {
-      message: "Invalid upload arguments",
-    };
-  }
-  const putObjectCommand = new PutObjectCommand({
-    Bucket: process.env.NEXT_AWS_S3_BUCKET_NAME,
-    Key: "test-file",
-    ContentType: "pdf",
-  });
-  const response = await s3.send(putObjectCommand);
-};
+const acceptedType = "application/pdf";
 
 const createApplication = async (formData: FormData) => {
   try {
-    const session = await getServerSession(authOptions);
+    const session: any = await getServerSession(authOptions);
     if (!session) {
       throw {
         message: "Not Authenticated",
         status: 401,
       };
     }
+
+    const file = formData.get("file") as File;
+    const bid = formData.get("bid") as unknown as float;
+    const jobID = formData.get("jobID") as string;
+
+    if (file.size > 1024 * 1024 * 5) {
+      throw {
+        message: "Files are too large",
+      };
+    }
+
+    if (file.type !== acceptedType) {
+      throw {
+        message: "Invalid File Type",
+      };
+    }
+    const buffer = new Uint8Array(await file.arrayBuffer());
+    const url: string | any = await uploadFileToS3(
+      buffer,
+      file.type,
+      file.size,
+      "/applicationFiles"
+    );
+
+    if (url.message) {
+      throw url;
+    }
+
+    const application = await prisma.application.create({
+      data: {
+        userId: session.user.id,
+        jobId: jobID,
+        bid: bid,
+        documentUrl: url,
+      },
+    });
+
+    const successResponse = {
+      message: "Create Application Success",
+      status: 201,
+    };
+    return successResponse;
   } catch (error: any) {
     console.log(error);
     return {
@@ -38,3 +67,9 @@ const createApplication = async (formData: FormData) => {
   }
 };
 export default createApplication;
+
+// const main = async () => {
+//   uploadFileToS3("jobFiles");
+// };
+
+// main();
