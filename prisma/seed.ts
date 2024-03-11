@@ -1129,9 +1129,16 @@ produce compelling video content. Proficiency ใน video editing tools เป�
             numWorker: 3,
             estimateStartDate: new Date("2024-01-22"),
             estimateEndDate: new Date("2024-03-11"),
-            jobTagId: jobTagList["รูปภาพและวีดีโอ"]
+            jobTagId: jobTagList["รูปภาพและวีดีโอ"],
+            jobDocumentFiles: {
+              create: [
+                {
+                  fileUrl: 'https://www.myjobmag.com/news/700/868098215_JOB%20DESCRIPTION%20EXAMPLES.png',
+                },
+              ]
+            },
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           {
             title: "HR Coordinator และผู้ประสานงานทรัพยากรบุคคล",
             status: "NOT_STARTED",
@@ -1143,9 +1150,16 @@ recruitment, employee onboarding, และ HR processes. \n \
             numWorker: 2,
             estimateStartDate: new Date("2024-02-01"),
             estimateEndDate: new Date("2024-04-30"),
-            jobTagId: jobTagList["อื่น ๆ"]
+            jobTagId: jobTagList["อื่น ๆ"],
+            jobDocumentFiles: {
+              create: [
+                {
+                  fileUrl: 'https://codequotient.com/blog/wp-content/uploads/2021/09/Seven-Reasons-Why-Job-Descriptions.jpg',
+                },
+              ]
+            },
           },
-
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////          
           {
             title: "Tech Support Specialist และผู้ช่วยเหลือทางเทคนอล็อค",
             status: "NOT_STARTED",
@@ -1157,8 +1171,19 @@ Strong communication skills และ customer service mindset จำเป็�
             numWorker: 4,
             estimateStartDate: new Date("2024-02-01"),
             estimateEndDate: new Date("2024-03-11"),
-            jobTagId: jobTagList["ไอทีโซลูชั่น"]
+            jobTagId: jobTagList["ไอทีโซลูชั่น"],
+            jobDocumentFiles: {
+              create: [
+                {
+                  fileUrl: 'https://codequotient.com/blog/wp-content/uploads/2021/09/Seven-Reasons-Why-Job-Descriptions.jpg',
+                },
+                {
+                  fileUrl: 'https://www.myjobmag.com/news/700/868098215_JOB%20DESCRIPTION%20EXAMPLES.png',
+                },
+              ]
+            },
           },
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////         
           // Add more job objects as needed
         ],
       },
