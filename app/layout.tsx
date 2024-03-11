@@ -38,11 +38,23 @@ export default function RootLayout({
           <Toaster
             position="bottom-right"
             toastOptions={{
-              className: "font-semibold bg-white text-slate-800",
+              className: "font-semibold text-slate-800 md:text-xl",
               success: {
+                style: {
+                  background: "#f0fdf4",
+                },
                 iconTheme: {
-                  primary: "#1e293b",
-                  secondary: "white",
+                  primary: "#65a30d",
+                  secondary: "#f8fafc",
+                },
+              },
+              error: {
+                style: {
+                  background: "#fef2f2",
+                },
+                iconTheme: {
+                  primary: "#dc2626",
+                  secondary: "#f8fafc",
                 },
               },
             }}

@@ -26,17 +26,27 @@ export default function FilesInput(props: Props) {
     setFiles(newFiles.files);
   };
 
-  const truncateFileName = (fileName: string, maxLength: number) => {
+  const truncateFileName = (
+    fileName: string,
+    frontLength: number,
+    backLength: number,
+  ) => {
+    const maxLength = frontLength + backLength + 3; // 3 for the ellipsis and dot in the middle
+
     if (fileName.length > maxLength) {
       const fileNameWithoutExtension = fileName
         .split(".")
         .slice(0, -1)
         .join(".");
-      const truncatedFileName =
-        fileNameWithoutExtension.slice(0, maxLength) + "... ";
+
+      const truncatedFront = fileNameWithoutExtension.slice(0, frontLength);
+      const truncatedBack = fileNameWithoutExtension.slice(-backLength);
+      const truncatedFileName = truncatedFront + "..." + truncatedBack;
+
       const fileExtension = fileName.split(".").pop();
       return truncatedFileName + "." + fileExtension;
     }
+
     return fileName;
   };
 
@@ -48,18 +58,18 @@ export default function FilesInput(props: Props) {
         className="w-full flex justify-between p-2 bg-slate-100 rounded-md"
         key={file.name}
       >
-        <div className="flex gap-3 items-center">
+        <div className="flex gap-3 justify-center items-center">
           <p className="text-[12px] text-slate-500 font-semibold">
-            {truncateFileName(file.name, 20)}
+            {truncateFileName(file.name, 25, 3)}
           </p>
           <p className="text-[12px] text-slate-400">
-            {(file.size / 1024).toFixed(0)} KB
+            {(file.size / 1024 / 1024).toFixed(1)} MB
           </p>
         </div>
         <button
           title="remove-file"
           onClick={() => handleRemoveFile(file.name)}
-          className="hover:opacity-80 active:opacity-60"
+          className="hover:opacity-80 active:opacity-60 disabled:opacity-60"
           disabled={isDisabled}
         >
           <Image src={closeDarkIcon} alt="closeIcon" width={15} height={15} />
@@ -80,7 +90,7 @@ export default function FilesInput(props: Props) {
       <div className="flex items-center justify-center w-full">
         <label
           htmlFor="dropzone-file"
-          className={`flex flex-col items-center justify-center w-full border-[1px] border-slate-400 border-dashed rounded-lg bg-transparent hover:opacity-80 active:opacity-60 cursor-pointer ${isDisabled && "opacity-80 cursor-default"}`}
+          className={`flex flex-col items-center justify-center w-full border-[1px] border-slate-400 border-dashed rounded-lg bg-transparent ${isDisabled ? "opacity-60 cursor-default" : "active:opacity-60 cursor-pointer hover:opacity-80"}`}
         >
           <div className="flex flex-col items-center justify-center p-3">
             <svg
@@ -111,7 +121,12 @@ export default function FilesInput(props: Props) {
             type="file"
             multiple
             onChange={(e) => {
-              setFiles(e.target.files);
+              const inputFiles = e.target.files;
+              setFiles(inputFiles);
+            }}
+            onClick={(e) => {
+              const target = e.target as HTMLInputElement;
+              target.value = "";
             }}
             className="hidden"
             disabled={isDisabled}
