@@ -106,7 +106,7 @@ model JobTag {
 model JobDocumentFile {
   id        String   @id @default(uuid())
   jobId     String
-  fileUrl   String
+  fileName  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   isDeleted Boolean  @default(false)
@@ -119,7 +119,7 @@ model Application {
   userId                  String
   jobId                   String
   bid                     Float
-  documentUrl             String?
+  isAcknowledged          Boolean                   @default(false)
   status                  ApplicationStatus         @default(PENDING)
   isDeleted               Boolean                   @default(false)
   createdAt               DateTime                  @default(now())
@@ -136,7 +136,7 @@ model ApplicationDocumentFile {
   id                String   @id @default(uuid())
   applicationUserId String
   applicationJobId  String
-  fileUrl           String
+  fileName          String
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 
@@ -231,7 +231,13 @@ enum JobStatus {
 enum ApplicationStatus {
   PENDING
   ACCEPTED
-  REJECTED
+  REJECTED // final state
+  DEPOSIT_PENDING
+  IN_PROGRESS
+  DELIVERED
+  WAGE_PAYMENT_PENDING
+  DONE // final state
+  CANCELED // final state
 }
 
 enum TransactionStatus {
