@@ -20,11 +20,7 @@ export default function Register() {
 
   useEffect(() => {
     if (session?.user) {
-      if (session.user.hashedPassword === "incomplete") {
-        setIsEmployerPage(session.email.split("@")[1] !== "student.chula.ac.th")
-      } else {
-        router.push("/landing")
-      }
+      setIsEmployerPage(session.email.split("@")[1] !== "student.chula.ac.th")
     }
   }, [session])
 
