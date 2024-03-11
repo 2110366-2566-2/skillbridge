@@ -1,5 +1,5 @@
 import { getEmployerJobs } from "@/actions/lookup/employee/jobs";
-import TaskCardType from "../../types/TaskCardType";
+import TaskCardType from "../../types/JobCardType";
 
 const fetchInitialData = async (userId: string) => {
   const result = await getEmployerJobs(userId);

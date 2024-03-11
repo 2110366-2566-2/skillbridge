@@ -5,13 +5,13 @@ import React from "react";
 
 type Props = {};
 
-const TaskHeader = (props: Props) => {
+const JobHeader = (props: Props) => {
   const pathName = usePathname();
-  const isTaskPage = pathName.startsWith("/works");
+  const isJobPage = pathName.startsWith("/jobs");
 
   return (
     <>
-      {isTaskPage && (
+      {isJobPage && (
         <div className="font-semibold text-[30px] text-white ml-5 mb-4">
           งานของฉัน
         </div>
@@ -20,4 +20,4 @@ const TaskHeader = (props: Props) => {
   );
 };
 
-export default TaskHeader;
+export default JobHeader;
