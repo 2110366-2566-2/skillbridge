@@ -5,7 +5,7 @@ generator client {
 generator erd {
   provider = "prisma-erd-generator"
   output   = "../docs/database/ERD.svg"
-  disabled = true
+  disabled = "true"
 }
 
 datasource db {
@@ -106,10 +106,10 @@ model JobTag {
 model JobDocumentFile {
   id        String   @id @default(uuid())
   jobId     String
-  fileName  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   isDeleted Boolean  @default(false)
+  fileName  String
   job       Job      @relation(fields: [jobId], references: [id])
 
   @@map("job_document_file")
@@ -119,11 +119,11 @@ model Application {
   userId                  String
   jobId                   String
   bid                     Float
-  isAcknowledged          Boolean                   @default(false)
   status                  ApplicationStatus         @default(PENDING)
   isDeleted               Boolean                   @default(false)
   createdAt               DateTime                  @default(now())
   updatedAt               DateTime                  @updatedAt
+  isAcknowledged          Boolean                   @default(false)
   job                     Job                       @relation(fields: [jobId], references: [id])
   user                    User                      @relation(fields: [userId], references: [id])
   ApplicationDocumentFile ApplicationDocumentFile[]
@@ -133,14 +133,13 @@ model Application {
 }
 
 model ApplicationDocumentFile {
-  id                String   @id @default(uuid())
+  id                String      @id @default(uuid())
   applicationUserId String
   applicationJobId  String
   fileName          String
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
-
-  application Application @relation(fields: [applicationUserId, applicationJobId], references: [userId, jobId])
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  application       Application @relation(fields: [applicationUserId, applicationJobId], references: [userId, jobId])
 
   @@map("application_document_file")
 }
@@ -193,14 +192,14 @@ model Transaction {
   id               String            @id @default(uuid())
   jobId            String
   studentId        String
-  employerUserId   String
-  receiptImageName String
-  status           TransactionStatus @default(PENDING)
-  amount           Float?
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
   isDeleted        Boolean           @default(false)
-  employer         Employer?         @relation(fields: [employerUserId], references: [userId])
+  employerUserId   String
+  amount           Float?
+  receiptImageName String
+  status           TransactionStatus @default(PENDING)
+  employer         Employer          @relation(fields: [employerUserId], references: [userId])
   job              Job               @relation(fields: [jobId], references: [id])
   student          Student           @relation(fields: [studentId], references: [userId])
 
@@ -231,13 +230,13 @@ enum JobStatus {
 enum ApplicationStatus {
   PENDING
   ACCEPTED
-  REJECTED // final state
+  REJECTED
   DEPOSIT_PENDING
   IN_PROGRESS
   DELIVERED
   WAGE_PAYMENT_PENDING
-  DONE // final state
-  CANCELED // final state
+  DONE
+  CANCELED
 }
 
 enum TransactionStatus {
