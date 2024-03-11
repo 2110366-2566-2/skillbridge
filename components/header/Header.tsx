@@ -12,6 +12,7 @@ import whiteLogo from "@/public/logos/logo-white.svg";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import getEmployerInfoById from "@/actions/getUserInfo";
+import StudentJobHeader from "../JobsPanel/StudentJobHeader";
 
 export default async function Header() {
   // Fetch Job tags
@@ -56,8 +57,10 @@ export default async function Header() {
         {/* Only shows at "/search" */}
         <SearchAndFilter />
       </div>
-      {/* Only shows at "/works" */}
+      {/* Only shows at "/jobs" */}
       <TaskHeader />
+      {/* only shows at "/studentjobs" */}
+      <StudentJobHeader />
     </div>
   );
 }

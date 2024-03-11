@@ -21,6 +21,9 @@ export default withAuth(
       if (path.startsWith("/search")) {
         return NextResponse.redirect(new URL("/landing", req.url));
       }
+      else if (path.startsWith("/studentjobs")) {
+        return NextResponse.redirect(new URL("/landing", req.url));
+      }
     }
   },
   {
