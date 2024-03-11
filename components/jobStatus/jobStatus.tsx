@@ -26,13 +26,13 @@ export default function JobStatus({
     status: string,
 }) {
 
-    const [isDropDown, setIsDropDown] = useState(false);
+    const [isDropDownOpen, setisDropDownOpen] = useState(false);
     const [dropDownAbove, setDropDownAbove] = useState('27px');
 
     const handleDropDownClicked = () => {
-        setIsDropDown((prev) => !prev);
+        setisDropDownOpen((prev) => !prev);
         setDropDownAbove((prev) => {
-            if (isDropDown) {
+            if (isDropDownOpen) {
                 return '27px'
             } else {
                 return '72px'
@@ -85,7 +85,7 @@ export default function JobStatus({
 
     return (
         <div className="flex flex-col items-end w-[370px]">
-            <div style={{ height: isDropDown ? "215px" : "170px" }} className="relative w-[370px] px-[20px] pt-[25px] bg-white rounded-xl shadow-lg">
+            <div style={{ height: isDropDownOpen ? "215px" : "170px" }} className="relative w-[370px] px-[20px] pt-[25px] bg-white rounded-xl shadow-lg">
                 <div className="w-full">
                     <div className="relative">
 
@@ -97,7 +97,7 @@ export default function JobStatus({
                         </div>
 
                         {/* Title Component */}
-                        <div className="flex">
+                        <div className="flex h-[56px]   ">
                             <p style={{ width: statusWidth }} className="font-semibold text-[#313866] text-xl line-clamp-2">
                                 {title}
                             </p>
@@ -107,7 +107,7 @@ export default function JobStatus({
 
                     {/* Period Component */}
                     <div className="mt-[10px]">
-                        <p className="font-medium text-[11px] text-slate-500">
+                        <p className="font-medium text-[15.5px] text-slate-500 text-wrap line-clamp-1">
                             {period}
                         </p>
                     </div>
@@ -123,14 +123,14 @@ export default function JobStatus({
 
                         {/* DropDown Button */}
                         <div style={{ bottom: dropDownAbove }} className="absolute right-[16px] cursor-pointer">
-                            <Image src={isDropDown ? '/icons/dropup.svg' : '/icons/dropdown.svg'} width={20} height={20} alt={isDropDown ? 'dropup' : 'dropdown'} onClick={handleDropDownClicked}></Image>
+                            <Image src={isDropDownOpen ? '/icons/dropup.svg' : '/icons/dropdown.svg'} width={20} height={20} alt={isDropDownOpen ? 'dropup' : 'dropdown'} onClick={handleDropDownClicked}></Image>
                         </div>
 
                     </div>
 
                     {/* DropDownObject Of Each Status */}
                     {
-                        isDropDown &&
+                        isDropDownOpen &&
                         dropDownObject
                     }
                 </div>
