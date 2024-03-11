@@ -15,7 +15,7 @@ type Props = {
   isPending: Boolean;
 };
 
-const TaskCard = ({
+const JobCard = ({
   jobId,
   name,
   budget,
@@ -70,4 +70,4 @@ const TaskCard = ({
   );
 };
 
-export default TaskCard;
+export default JobCard;

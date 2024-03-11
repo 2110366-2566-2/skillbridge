@@ -1,4 +1,4 @@
-type TaskCardType = {
+type JobCardType = {
   jobId: string;
   isDeleted: boolean;
   name: string;
@@ -12,4 +12,4 @@ type TaskCardType = {
   isPending: Boolean;
 };
 
-export default TaskCardType;
+export default JobCardType;

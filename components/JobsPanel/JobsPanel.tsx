@@ -1,6 +1,6 @@
-import TaskCard from "./TaskCard";
+import JobCard from "./JobCard";
 import sortArray from "../../lib/Jobs/sortArray";
-import TaskCardType from "../../types/TaskCardType";
+import JobCardType from "../../types/JobCardType";
 import { LoadingOutlined } from "@ant-design/icons";
 
 type Props = {
@@ -8,12 +8,12 @@ type Props = {
   endDateSortOption: string;
   priceSortOption: string;
   applicantsSortOption: string;
-  data: Array<TaskCardType>;
+  data: Array<JobCardType>;
   isPending: Boolean;
 };
 
 // export function
-const DoneTasksPanel = ({
+const DoneJobsPanel = ({
   startDateSortOption,
   endDateSortOption,
   priceSortOption,
@@ -21,7 +21,7 @@ const DoneTasksPanel = ({
   data,
   isPending,
 }: Props) => {
-  const taskCardList = sortArray(
+  const jobCardList = sortArray(
     data,
     startDateSortOption,
     endDateSortOption,
@@ -32,10 +32,10 @@ const DoneTasksPanel = ({
   return (
     <main className="flex flex-col">
       <main className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 grid-flow-row gap-10">
-        {taskCardList.length !== 0 ? (
-          taskCardList.map((data, index) => {
+        {jobCardList.length !== 0 ? (
+          jobCardList.map((data, index) => {
             return (
-              <TaskCard
+              <JobCard
                 key={index}
                 jobId={data.jobId}
                 name={data.name}
@@ -47,7 +47,7 @@ const DoneTasksPanel = ({
                 startDate={data.startDate}
                 endDate={data.endDate}
                 isPending={isPending}
-              ></TaskCard>
+              ></JobCard>
             );
           })
         ) : (
@@ -62,4 +62,4 @@ const DoneTasksPanel = ({
   );
 };
 
-export default DoneTasksPanel;
+export default DoneJobsPanel;
