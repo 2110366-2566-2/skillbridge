@@ -31,7 +31,7 @@ function JobsMenu(props: Props){
         try {
           // session.user.id
           const [pendingJobs, doneJobs] = await fetchInitialData(
-            "92e60ed5-51d8-4875-bb4e-5760a09a0449",
+            session.user.id,
           );
           setPendingJobs(
             pendingJobs.filter((jobCard) => !jobCard.isDeleted),
