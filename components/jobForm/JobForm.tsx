@@ -236,6 +236,7 @@ export default function JobForm(props: Props) {
             files={files}
             setFiles={setFiles}
             isDisabled={isLoading}
+            maxSizeInMegaByte={5}
           />
 
           <Input
