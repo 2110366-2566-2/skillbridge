@@ -1,4 +1,4 @@
-import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import s3 from "@/lib/bucket";
 import crypto from "crypto";
@@ -19,10 +19,10 @@ const uploadFileToS3 = async (
     };
   }
   const fileName = generateFileName();
-  const URL = `${process.env.NEXT_AWS_S3_BUCKET_NAME}.${process.env.NEXT_AWS_S3_REGION}.amazonaws.com/${fileName}`;
+  // const URL = `${process.env.BUCKET_NAME}.s3.${process.env.BUCKET_REGION}.amazonaws.com/${fileName}`;
 
   const putObjectCommand = new PutObjectCommand({
-    Bucket: process.env.NEXT_AWS_S3_BUCKET_NAME,
+    Bucket: process.env.BUCKET_NAME,
     Key: fileName,
     Body: buffer,
     ContentType: type,
@@ -31,8 +31,16 @@ const uploadFileToS3 = async (
 
   try {
     const response = await s3.send(putObjectCommand);
-    return URL;
+    const getObjectParams = {
+      Bucket: process.env.BUCKET_NAME,
+      Key: fileName,
+    };
+    const command = new GetObjectCommand(getObjectParams);
+    const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
+    console.log(response);
+    return url;
   } catch (error) {
+    console.log(error);
     throw { message: "Upload Failed" };
   }
 };
