@@ -102,7 +102,9 @@ export default function FilesInput(props: Props) {
               <span className="font-semibold">กดเพื่ออัพโหลดไฟล์</span>
               <span>หรือวางไฟล์ที่นี่</span>
             </p>
-            <p className="text-[12px] text-slate-400">(ขนาดรวมไม่เกิน {maxSizeInMegaByte} MB)</p>
+            <p className="text-[12px] text-slate-400">
+              (ขนาดรวมไม่เกิน {maxSizeInMegaByte} MB)
+            </p>
           </div>
           <input
             id="dropzone-file"
