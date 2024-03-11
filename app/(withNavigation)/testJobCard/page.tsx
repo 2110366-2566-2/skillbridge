@@ -10,7 +10,7 @@ export default function testJobCard() {
                 title="รับสมัคร TA วิชา Comp Prog"
                 period="18/10/2545 - 21/10/2545"
                 tag="การสอน"
-                status="กำลังรอ"
+                status="รอส่งมอบงาน"
             />
         </main>
     )

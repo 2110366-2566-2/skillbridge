@@ -26,14 +26,6 @@ export default function JobStatus({
     status: string,
 }) {
 
-    // <TaskPassStatusBox userId={userId} jobId={jobId} />
-    // <TaskWaitingStatusBox userId={userId} jobId={jobId} />
-    // <TaskFailStatusBox userId={userId} jobId={jobId} />
-    // <TaskInProgressStatusBox userId={userId} jobId={jobId} />
-    // <TaskPledgeStatusBox userId={userId} jobId={jobId} />
-    // <TaskPaymentStatusBox userId={userId} jobId={jobId} />
-    // <TaskCancelStatusBox userId={userId} jobId={jobId} />
-
     const [isDropDown, setIsDropDown] = useState(false);
 
     const handleDropDownClicked = () => {
@@ -41,11 +33,14 @@ export default function JobStatus({
     }
 
     let dropDownObject = <div></div>;
-    let statusColor = '#dcfce7'
+    let statusColor = '#dcfce7';
+    let statusWidth = '220px';
+
     switch (status) {
         case 'กำลังรอ':
             dropDownObject = <TaskWaitingStatusBox userId={userId} jobId={jobId} />
             statusColor = '#fef9c3'
+            statusWidth = '250px'
             break;
         case 'ผ่านการคัดเลือก':
             dropDownObject = <TaskPassStatusBox userId={userId} jobId={jobId} />
@@ -57,6 +52,7 @@ export default function JobStatus({
         case 'รอส่งมอบงาน':
             dropDownObject = <TaskInProgressStatusBox userId={userId} jobId={jobId} />
             statusColor = '#fef9c3'
+            statusWidth = '230px'
             break;
         case 'รอผู้จ่างจ่ายมัดจำ':
             dropDownObject = <TaskPledgeStatusBox userId={userId} jobId={jobId} />
@@ -68,10 +64,12 @@ export default function JobStatus({
             break;
         case 'เสร็จสิ้น':
             dropDownObject = <TaskDoneStatusBox userId={userId} jobId={jobId} />
+            statusWidth = '250px'
             break;
         case 'ถูกยกเลิกงาน':
             dropDownObject = <TaskCancelStatusBox userId={userId} jobId={jobId} />
             statusColor = '#ffe4e6'
+            statusWidth = '230px'
             break;
         default:
             break;
@@ -92,10 +90,9 @@ export default function JobStatus({
 
                         {/* Title Component */}
                         <div className="flex">
-                            <p className="font-semibold text-[#313866] text-xl line-clamp-2">
-                                {title}
+                            <p style={{ width: statusWidth }} className="font-semibold text-[#313866] text-xl line-clamp-2">
+                                {title} It is a long established fact that a reader will be distracted by the readable content of a page when
                             </p>
-                            <div className="w-[113px] h-[25px]"></div>
                         </div>
 
                     </div>
