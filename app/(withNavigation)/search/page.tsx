@@ -9,7 +9,7 @@ export default async function SearchPage() {
   // const {data : session} = useSession();
 
   // console.log("------------------------------------------------------------")
-  const session = await getServerSession(authOptions) //Server
+  const session = await getServerSession(authOptions); //Server
 
   // console.log("session : \n", session);
   if (!session) {
@@ -31,5 +31,5 @@ export default async function SearchPage() {
         </Suspense>
       </div>
     </>
-  )
+  );
 }

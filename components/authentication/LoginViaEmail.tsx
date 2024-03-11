@@ -1,79 +1,80 @@
-import Link from "next/link"
-import Input from "./Input"
-import PasswordInput from "./PasswordInput"
-import { useState } from "react"
-import { signIn } from "next-auth/react"
+import Link from "next/link";
+import Input from "./Input";
+import PasswordInput from "./PasswordInput";
+import { useState } from "react";
+import { signIn } from "next-auth/react";
 
 type Error = {
-  email: string
-  password: string
-}
+  email: string;
+  password: string;
+};
 
 type Form = {
-  email: string
-  password: string
-}
+  email: string;
+  password: string;
+};
 
 export default function LoginViaEmail() {
   const [form, setForm] = useState<Form>({
     email: "",
     password: "",
-  })
+  });
 
   const [errors, setErrors] = useState<Error>({
     email: "",
     password: "",
-  })
+  });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
       ...form,
       [event.target.name]: event.target.value,
-    })
-  }
+    });
+  };
 
   const validateForm = () => {
-    const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,6}$/
-    const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/
+    const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,6}$/;
+    // const password_pattern = /^.{8}$/
     let success = true;
     const errors: Error = {
       email: "",
       password: "",
-    }
+    };
     if (form.email === "") {
-      errors.email = "กรอกที่อยู่อีเมลของคุณ"
-      success = false
+      errors.email = "กรอกที่อยู่อีเมลของคุณ";
+      success = false;
     } else if (!email_pattern.test(form.email)) {
-      errors.email = "อีเมลไม่ถูกต้อง"
-      success = false
+      errors.email = "อีเมลไม่ถูกต้อง";
+      success = false;
     }
 
     if (form.password === "") {
-      errors.password = "กรอกรหัสผ่านของคุณ"
-      success = false
-    } else if (!password_pattern.test(form.password)) {
-      errors.password = "รหัสผ่านไม่ถูกต้อง"
-      success = false
+      errors.password = "กรอกรหัสผ่านของคุณ";
+      success = false;
+    } else if (form.password.length < 8) {
+      errors.password = "รหัสผ่านไม่ถูกต้อง";
+      success = false;
     }
 
-    return { errors, success }
-  }
+    return { errors, success };
+  };
 
   const handleValidation = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const { errors, success } = validateForm()
+    event.preventDefault();
+    const { errors, success } = validateForm();
     setTimeout(async () => {
       if (!success) {
-        setErrors(errors)
-        return
+        setErrors(errors);
+        return;
+      } else {
+        signIn("credentials", {
+          email: form.email,
+          password: form.password,
+          callbackUrl: "/landing",
+        });
       }
-      signIn("credentials", {
-        email: form.email,
-        password: form.password,
-        callbackUrl: "/dash",
-      })
     }, 0);
-  }
+  };
 
   return (
     <form className="mt-[10px] w-full" onSubmit={handleValidation} noValidate>
@@ -97,7 +98,8 @@ export default function LoginViaEmail() {
 
       <button
         type="submit"
-        className="w-full bg-[#334155] rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md ">
+        className="w-full bg-[#334155] hover:bg-slate-600 rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md "
+      >
         เข้าสู่ระบบ
       </button>
 
@@ -105,10 +107,11 @@ export default function LoginViaEmail() {
         ไม่เคยมีบัญชี ?{" "}
         <Link
           href={"/register"}
-          className="text-[#326FE2] hover:underline hover:underline-offset-2">
+          className="text-[#326FE2] hover:underline hover:underline-offset-2"
+        >
           สร้างบัญชี
         </Link>
       </p>
     </form>
-  )
+  );
 }
