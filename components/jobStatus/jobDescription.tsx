@@ -25,8 +25,8 @@ export default function jobDescription({
                 <div className="w-full">
 
                     {/* Title Component */}
-                    <div className="flex">
-                        <p className="font-semibold text-[#313866] text-xl line-clamp-2">
+                    <div className="flex w-[330px]">
+                        <p className="font-semibold text-[#313866] text-xl line-clamp-1">
                             {title}
                         </p>
 

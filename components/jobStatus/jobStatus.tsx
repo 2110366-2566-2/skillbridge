@@ -97,8 +97,8 @@ export default function JobStatus({
                         </div>
 
                         {/* Title Component */}
-                        <div className="flex h-[56px]   ">
-                            <p style={{ width: statusWidth }} className="font-semibold text-[#313866] text-xl line-clamp-2">
+                        <div style={{ width: statusWidth }} className="h-[56px]">
+                            <p className="font-semibold text-[#313866] text-xl line-clamp-2">
                                 {title}
                             </p>
                         </div>

@@ -65,7 +65,7 @@ export default function testJobCard() {
             <JobStatus
                 userId="001"
                 jobId="001"
-                title="รับสมัคร TA วิชา Comp Progsdfasdfasdfsdsdafasdfsdfasdfasdfasdfasdfasdfasdfasfasfasdfsdfsdfsadfasdfasdfasdf"
+                title="รับสมัคร TA วิชา Comp Prog sdfasdfasdfsdsdafasdfsdfasdfasdfasdfasdfasdfasdfasfasfasdfsdfsdfsadfasdfasdfasdf"
                 period="18/10/2545 - 21/10/2545"
                 tag="การสอน"
                 status="ถูกยกเลิกงาน"
@@ -77,7 +77,7 @@ export default function testJobCard() {
                 jobDescription="veryhardjob"
                 nubmerOfAcceptedApplication="2"
                 numberOfMaximumAccepted="10"
-                title="รับสมัคร TA วิชา Comp Prog"
+                title="รับสมัคร TA วิชา Comp Prog asdfasdfsdfadsfasdfasdfasdfasdf"
                 period="18/10/2545 - 21/10/2545"
                 tag="การสอน"
                 price="฿1,000"
