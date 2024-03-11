@@ -8,6 +8,10 @@ const getJobById = async (jobId: string) => {
     where: {
       id: jobId,
     },
+    include: {
+      employer: true,
+      jobTag: true,
+    },
   });
 
   return result;

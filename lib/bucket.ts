@@ -1,10 +1,11 @@
-import { v2 as cloudinary } from "cloudinary";
+import { S3Client } from "@aws-sdk/client-s3";
 
-cloudinary.config({
-  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-  secure: true,
+const s3 = new S3Client({
+  region: process.env.NEXT_AWS_S3_REGION!,
+  credentials: {
+    accessKeyId: process.env.NEXT_AWS_S3_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.NEXT_AWS_S3_SECRET_ACCESS_KEY!,
+  },
 });
 
-export default cloudinary;
+export default s3;
