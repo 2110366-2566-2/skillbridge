@@ -27,9 +27,17 @@ export default function JobStatus({
 }) {
 
     const [isDropDown, setIsDropDown] = useState(false);
+    const [dropDownAbove, setDropDownAbove] = useState('27px');
 
     const handleDropDownClicked = () => {
         setIsDropDown((prev) => !prev);
+        setDropDownAbove((prev) => {
+            if (isDropDown) {
+                return '27px'
+            } else {
+                return '72px'
+            }
+        })
     }
 
     let dropDownObject = <div></div>;
@@ -77,7 +85,7 @@ export default function JobStatus({
 
     return (
         <div className="flex flex-col items-end w-[370px]">
-            <div style={{ height: isDropDown ? "215px" : "170px" }} className="w-[370px] px-[20px] pt-[25px] bg-white rounded-xl shadow-lg">
+            <div style={{ height: isDropDown ? "215px" : "170px" }} className="relative w-[370px] px-[20px] pt-[25px] bg-white rounded-xl shadow-lg">
                 <div className="w-full">
                     <div className="relative">
 
@@ -91,7 +99,7 @@ export default function JobStatus({
                         {/* Title Component */}
                         <div className="flex">
                             <p style={{ width: statusWidth }} className="font-semibold text-[#313866] text-xl line-clamp-2">
-                                {title} It is a long established fact that a reader will be distracted by the readable content of a page when
+                                {title}
                             </p>
                         </div>
 
@@ -104,7 +112,7 @@ export default function JobStatus({
                         </p>
                     </div>
 
-                    <div className="relative flex mt-[10px]">
+                    <div className="flex mt-[10px]">
 
                         {/* Tag Component */}
                         <div className="flex justify-center items-center bg-[#e2e8f0] px-[10px] py-[5px] mr-[5px] rounded-[4px]">
@@ -114,7 +122,7 @@ export default function JobStatus({
                         </div>
 
                         {/* DropDown Button */}
-                        <div className="absolute right-0 top-1 cursor-pointer">
+                        <div style={{ bottom: dropDownAbove }} className="absolute right-[16px] cursor-pointer">
                             <Image src={isDropDown ? '/icons/dropup.svg' : '/icons/dropdown.svg'} width={20} height={20} alt={isDropDown ? 'dropup' : 'dropdown'} onClick={handleDropDownClicked}></Image>
                         </div>
 
