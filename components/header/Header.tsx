@@ -3,18 +3,28 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "./navbar/Navbar";
 import SearchAndFilter from "./searchAndFilter/SearchAndFilter";
+import TaskHeader from "../JobsPanel/JobHeader";
 import CreateJobHeader from "./createJobHeader/CreateJobHeader";
 import EditJobHeader from "./editJobHeader/EditJobHeader";
 import LandingHeader from "./landingHeader/LandingHeader";
 import getJobTags from "@/actions/getJobTags";
 import whiteLogo from "@/public/logos/logo-white.svg";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
+import getEmployerInfoById from "@/actions/getUserInfo";
 
 export default async function Header() {
+  // Fetch Job tags
   const jobTags = await getJobTags();
 
-  // TEMPORARY : Should use "auth" on layout?
-  const session = true;
-  const isStudent = true;
+  // Sesion with info
+  const session = await getServerSession(authOptions);
+  const isStudent = session?.email.split("@")[1] === "student.chula.ac.th";
+  let userInfo = "นิสิตจุฬาลงกรณ๋์มหาวิทยาลัย";
+  if (session && !isStudent) {
+    const employerInfo = await getEmployerInfoById(session?.user.id);
+    userInfo = employerInfo?.position + " " + employerInfo?.organization;
+  }
 
   return (
     <div>
@@ -35,7 +45,7 @@ export default async function Header() {
             {/* Only shows at "/search" */}
             <SearchAndFilter />
           </div>
-          <Navbar session={session} isStudent={isStudent} />
+          <Navbar session={session} isStudent={isStudent} userInfo={userInfo} />
         </div>
         <CreateJobHeader />
         <EditJobHeader />
@@ -46,6 +56,8 @@ export default async function Header() {
         {/* Only shows at "/search" */}
         <SearchAndFilter />
       </div>
+      {/* Only shows at "/works" */}
+      <TaskHeader />
     </div>
   );
 }

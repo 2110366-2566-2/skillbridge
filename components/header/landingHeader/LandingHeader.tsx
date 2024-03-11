@@ -31,7 +31,7 @@ export default function LandingHeader(props: Props) {
     e.preventDefault();
     if (keyword.trim() !== "") {
       // Navigate to /search?keyword={inputValue}
-      router.push(`/search?keyword=${encodeURIComponent(keyword.trim())}`);
+      router.push(`/search?q=${encodeURIComponent(keyword.trim())}`);
     }
   }
 
@@ -82,7 +82,7 @@ export default function LandingHeader(props: Props) {
             </form>
           ) : (
             <Link
-              href="/works"
+              href="/jobs"
               className="text-slate-800 font-bold bg-white rounded-2xl px-24 py-1 border-b-4 border-pink-400 md:border-b-8 md:text-3xl md:py-2 md:px-40 md:hover:border-slate-50 md:hover:text-white md:hover:bg-pink-400 md:duration-300 md:active:border-b-4 md:active:mt-1 active:opacity-40 "
             >
               โพสงานเลย!
