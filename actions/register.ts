@@ -1,6 +1,6 @@
 "use server";
 import { EmailRegisterSchema } from "@/schemas/EmailRegisterSchema";
-import { prisma } from "../lib/prisma"
+import { prisma } from "../lib/prisma";
 import bcrypt from "bcrypt";
 
 async function registerWithCredentials(data: {
