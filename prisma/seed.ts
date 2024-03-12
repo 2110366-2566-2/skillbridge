@@ -1529,7 +1529,7 @@ and fresh perspective, exceeding our expectations.",
       studentId: s3.userId,
       employerUserId: e1.userId,
       amount: 100,
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: '8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e',
     }
   })
@@ -1541,7 +1541,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e1.userId,
       amount: 2000,
       status: 'ACCEPTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: 'bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46',
     }
   })
@@ -1553,7 +1553,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e1.userId,
       amount: 2000,
       status: 'REJECTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: 'bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46',
     }
   })
@@ -1565,7 +1565,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e1.userId,
       amount: 2000,
       status: 'ACCEPTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: 'bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68',
     }
   })
@@ -1577,7 +1577,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e1.userId,
       amount: 8000,
       status: 'ACCEPTED',
-      // isDeposit: false,
+      isDeposit: false,
       receiptImageName: '8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e',
     }
   })
@@ -1589,7 +1589,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e1.userId,
       amount: 1000,
       status: 'ACCEPTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: 'bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68',
     }
   })
@@ -1601,7 +1601,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e1.userId,
       amount: 4000,
       status: 'ACCEPTED',
-      // isDeposit: false,
+      isDeposit: false,
       receiptImageName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733',
     }
   })
@@ -1613,7 +1613,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e1.userId,
       amount: 1500,
       status: 'REJECTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733',
     }
   })
@@ -1625,7 +1625,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e1.userId,
       amount: 1500,
       status: 'ACCEPTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296',
     }
   })
@@ -1636,7 +1636,7 @@ and fresh perspective, exceeding our expectations.",
       studentId: s1.userId,
       employerUserId: e1.userId,
       amount: 8500,
-      // isDeposit: false,
+      isDeposit: false,
       receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
     }
   })
@@ -1648,7 +1648,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e1.userId,
       amount: 1500,
       status: 'ACCEPTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
     }
   })
@@ -1660,7 +1660,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e1.userId,
       amount: 8500,
       status: 'ACCEPTED',
-      // isDeposit: false,
+      isDeposit: false,
       receiptImageName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296',
     }
   })
@@ -1672,7 +1672,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e2.userId,
       amount: 500,
       status: 'ACCEPTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: '1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef',
     }
   })
@@ -1684,7 +1684,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e2.userId,
       amount: 2500,
       status: 'REJECTED',
-      // isDeposit: false,
+      isDeposit: false,
       receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
     }
   })
@@ -1696,7 +1696,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e2.userId,
       amount: 2000,
       status: 'REJECTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: '24467125aeb077e4cdf8705d08e6e0ed5f4e7c303cb1656f3b9afe46f7346644',
     }
   })
@@ -1708,7 +1708,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e2.userId,
       amount: 2000,
       status: 'ACCEPTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: '1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef',
     }
   })
@@ -1719,7 +1719,7 @@ and fresh perspective, exceeding our expectations.",
       studentId: s1.userId,
       employerUserId: e2.userId,
       amount: 8000,
-      // isDeposit: false,
+      isDeposit: false,
       receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
     }
   })
@@ -1731,7 +1731,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e2.userId,
       amount: 3000,
       status: 'ACCEPTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
     }
   })
@@ -1743,7 +1743,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e2.userId,
       amount: 2000,
       status: 'ACCEPTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: '24467125aeb077e4cdf8705d08e6e0ed5f4e7c303cb1656f3b9afe46f7346644',
     }
   })
@@ -1755,7 +1755,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e2.userId,
       amount: 7000,
       status: 'ACCEPTED',
-      // isDeposit: false,
+      isDeposit: false,
       receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
     }
   })
@@ -1767,7 +1767,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e2.userId,
       amount: 1200,
       status: 'ACCEPTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296',
     }
   })
@@ -1779,7 +1779,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e2.userId,
       amount: 2000,
       status: 'ACCEPTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296',
     }
   })
@@ -1791,7 +1791,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e3.userId,
       amount: 300,
       status: 'ACCEPTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
     }
   })
@@ -1803,7 +1803,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e3.userId,
       amount: 500,
       status: 'ACCEPTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
     }
   })
@@ -1815,7 +1815,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e3.userId,
       amount: 400,
       status: 'ACCEPTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
     }
   })
@@ -1827,7 +1827,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e3.userId,
       amount: 1800,
       status: 'ACCEPTED',
-      // isDeposit: false,
+      isDeposit: false,
       receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
     }
   })
@@ -1839,7 +1839,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e3.userId,
       amount: 400,
       status: 'ACCEPTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: '1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef',
     }
   })
@@ -1851,7 +1851,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e3.userId,
       amount: 1600,
       status: 'ACCEPTED',
-      // isDeposit: false,
+      isDeposit: false,
       receiptImageName: 'bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68',
     }
   })
@@ -1863,7 +1863,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e3.userId,
       amount: 1500,
       status: 'REJECTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: '1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef',
     }
   })
@@ -1874,7 +1874,7 @@ and fresh perspective, exceeding our expectations.",
       studentId: s2.userId,
       employerUserId: e3.userId,
       amount: 1500,
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: '1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef',
     }
   })
@@ -1886,7 +1886,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e3.userId,
       amount: 500,
       status: 'REJECTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296',
     }
   })
@@ -1898,7 +1898,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e3.userId,
       amount: 500,
       status: 'ACCEPTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: '24467125aeb077e4cdf8705d08e6e0ed5f4e7c303cb1656f3b9afe46f7346644',
     }
   })
@@ -1910,7 +1910,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e3.userId,
       amount: 2500,
       status: 'ACCEPTED',
-      // isDeposit: false,
+      isDeposit: false,
       receiptImageName: '1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef',
     }
   })
@@ -1922,7 +1922,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e3.userId,
       amount: 400,
       status: 'ACCEPTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: 'bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46',
     }
   })
@@ -1934,7 +1934,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e3.userId,
       amount: 1600,
       status: 'ACCEPTED',
-      // isDeposit: false,
+      isDeposit: false,
       receiptImageName: '3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609',
     }
   })
@@ -1946,7 +1946,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e3.userId,
       amount: 800,
       status: 'ACCEPTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: '3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609',
     }
   })
@@ -1958,7 +1958,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e3.userId,
       amount: 1000,
       status: 'ACCEPTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296',
     }
   })
@@ -1969,7 +1969,7 @@ and fresh perspective, exceeding our expectations.",
       studentId: s2.userId,
       employerUserId: e3.userId,
       amount: 5000,
-      // isDeposit: false,
+      isDeposit: false,
       receiptImageName: '3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609',
     }
   })
@@ -1981,7 +1981,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e3.userId,
       amount: 700,
       status: 'ACCEPTED',
-      // isDeposit: true,
+      isDeposit: true,
       receiptImageName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733',
     }
   })
@@ -1993,7 +1993,7 @@ and fresh perspective, exceeding our expectations.",
       employerUserId: e3.userId,
       amount: 4800,
       status: 'REJECTED',
-      // isDeposit: false,
+      isDeposit: false,
       receiptImageName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296',
     }
   })
@@ -2004,7 +2004,7 @@ and fresh perspective, exceeding our expectations.",
       studentId: s3.userId,
       employerUserId: e3.userId,
       amount: 4800,
-      // isDeposit: false,
+      isDeposit: false,
       receiptImageName: 'bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68',
     }
   })
