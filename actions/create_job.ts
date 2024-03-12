@@ -1,5 +1,5 @@
 "use server";
-import prisma from "../db/prisma";
+import { prisma } from "../lib/prisma";
 import cloudinary from "../lib/bucket";
 import { JobStatus } from "@prisma/client";
 //import {getServerSession} from "next-auth";
