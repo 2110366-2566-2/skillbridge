@@ -43,8 +43,8 @@ export default async function JobDetail({ jobId, isStudentView }: Props) {
 
     return (
         <>
-            <div className="w-full rounded-t-[9.54px] border-slate-300 border-[0.5px] border-b-0 flex flex-col px-6 py-4 md:w-[390px] lg:w-[543px]">
-                <div className="font-bold text-[24px] text-[#313866] h-[3em] line-clamp-2 lg:text-[30px]">{jobData.title}</div>
+            <div className="w-full rounded-t-[9.54px] border-slate-300 border-[0.5px] border-b-0 flex flex-col px-6 py-4 md:w-[50%] lg:w-[45%]">
+                <div className="font-bold text-[24px] text-[#313866] lg:text-[30px]">{jobData.title}</div>
                 <div className="text-[14px] text-slate-800 mt-3 lg:text-[16px]">
                     <span className="font-semibold">หมวดหมู่</span>
                     <span className="inline-block bg-slate-200 rounded py-1 px-2 ml-2">
@@ -52,22 +52,22 @@ export default async function JobDetail({ jobId, isStudentView }: Props) {
                     </span>
                 </div>
                 <div className="flex flex-col mt-4">
-                    <div className="font-semibold text-[14px] text-slate-800 mb-1">
+                    <div className="font-semibold text-[14px] text-slate-800 mb-1 lg:text-[16px]">
                         คำอธิบายเกี่ยวกับงาน
                     </div>
                     <hr className="border-slate-300" />
-                    <div className="text-[14px] text-[#838383] my-[9px]">
+                    <div className="text-[14px] text-slate-800 my-[9px] lg:text-[16px]">
                         {jobData.description}
                     </div>
                     <hr className="border-slate-300" />
                 </div>
-                <div className="flex flex-row justify-between mt-4">
-                    <div className="flex flex-col text-[15px] text-slate-600">
+                <div className="flex flex-row justify-between mt-4 lg:mt-5">
+                    <div className="flex flex-col text-[15px] text-slate-600 lg:text-[17px] lg:gap-2">
                         <div><span className="font-semibold">วันเริ่มต้นงาน : </span><span className="font-medium">{jobData.estimateStartDate ? FormattedDate(jobData.estimateStartDate) : "ไม่มีกำหนด"}</span></div>
                         <div><span className="font-semibold">วันสิ้นสุดงาน : </span><span className="font-medium">{jobData.estimateEndDate ? FormattedDate(jobData.estimateEndDate) : "ไม่มีกำหนด"}</span></div>
                     </div>
                     <div>
-                        <div className="flex flex-col text-[15px] items-end">
+                        <div className="flex flex-col text-[15px] items-end lg:text-[17px] lg:gap-2">
                             {/* To show in student's view */}
                             {isStudentView && <div className="font-semibold text-green-600">ยังเปิดรับอยู่</div>}
                             {/* To show in employer's view */}
