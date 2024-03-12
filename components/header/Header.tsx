@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "./navbar/Navbar";
 import SearchAndFilter from "./searchAndFilter/SearchAndFilter";
-import TaskHeader from "./jobHeader/JobHeader";
+import TaskHeader from "../JobsPanel/JobHeader";
 import CreateJobHeader from "./createJobHeader/CreateJobHeader";
 import EditJobHeader from "./editJobHeader/EditJobHeader";
 import LandingHeader from "./landingHeader/LandingHeader";
@@ -59,6 +59,8 @@ export default async function Header() {
       </div>
       {/* Only shows at "/jobs" */}
       <TaskHeader />
+      {/* only shows at "/studentjobs" */}
+      <StudentJobHeader />
     </div>
   );
 }

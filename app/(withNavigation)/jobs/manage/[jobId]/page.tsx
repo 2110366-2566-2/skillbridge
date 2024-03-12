@@ -1,9 +1,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import DangerButton from "@/components/buttons/dangerButton/DangerButton";
-import getStudentByJob from "@/actions/getStudentByJob";
-import getJobById from "@/actions/getJobByID";
-import { redirect } from "next/navigation";
 
 type Props = {
     params: {
@@ -11,19 +8,9 @@ type Props = {
     };
 };
 
-async function ManagePage({ params }: Props) {
+function ManagePage({ params }: Props) {
 
     const jobId = params.jobId;
-
-    const fetchedData = await getStudentByJob(jobId);
-    console.log("This is fetchedData from 'getStudentByJob' action : ", fetchedData);
-    const jobData = await getJobById(jobId);
-    if(jobData === null)
-    {
-        redirect("/jobs");
-    }
-    console.log("This is jobById from 'getJobById' action : ", jobData);
-
 
     const DynamicStudentOffer = dynamic(() => import("@/components/studentOffer/studentOffer"), {
         ssr: false,
@@ -34,9 +21,7 @@ async function ManagePage({ params }: Props) {
         <main className="flex flex-col px-10 gap-10">
             <section className="flex flex-row justify-between">
                 <div className="flex flex-row gap-4">
-                    <p className="font-bold text-2xl line-clamp-2 flex items-center">
-                        {jobData?.title}
-                    </p>
+                    <p className="font-bold text-2xl line-clamp-2 flex items-center">รับสมัคร TA วิชา Comp Prog</p>
                     <div className="bg-slate-200 rounded-sm p-2 w-fit">{"การสอน"}</div>
                 </div>
                 <DangerButton>ปิดรับสมัคร</DangerButton>
