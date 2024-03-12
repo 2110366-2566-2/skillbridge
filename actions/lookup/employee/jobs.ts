@@ -1,7 +1,6 @@
 "use server";
-import { PrismaClient, JobStatus, ApplicationStatus } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { JobStatus, ApplicationStatus } from "@prisma/client";
+import { prisma } from "../../../lib/prisma";
 
 export interface job {
   id: string;
