@@ -50,7 +50,7 @@ const getApplicationByUserId = async (jobId: string, userId?: string) => {
       bid: application?.bid ? application.bid : null,
       applicationStatus: application?.status ? application.status : null,
       url: signUrl ? signUrl : null,
-      budget: application?.job.budget ? application.job.budget : null,
+      budget: jobBudget ? jobBudget : null,
       jobStatus: jobStatus ? jobStatus : null,
     };
     return output;

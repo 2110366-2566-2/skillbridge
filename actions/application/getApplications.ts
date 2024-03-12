@@ -42,3 +42,5 @@ const getApplications = async (jobID: string) => {
     };
   }
 };
+
+export default getApplications;
