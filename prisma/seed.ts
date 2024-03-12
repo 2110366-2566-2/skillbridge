@@ -70,18 +70,18 @@ async function main() {
 
   const e_test = await prisma.employer.create({
     data: {
-        position: "Billionaire",
-        organization: "SoeiCorp.",
-        publicEmail: "employer@employer.com",
-        user: {
-            create: {
-                salutation: 'เดอะ',
-                firstname: 'ลีซาน',
-                lastname: 'อัลไกอีบ',
-                hashedPassword: '$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W',
-                email: 'employer@employer.com'
-            }
+      position: "Billionaire",
+      organization: "SoeiCorp.",
+      publicEmail: "employer@employer.com",
+      user: {
+        create: {
+          salutation: 'เดอะ',
+          firstname: 'ลีซาน',
+          lastname: 'อัลไกอีบ',
+          hashedPassword: '$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W',
+          email: 'employer@employer.com'
         }
+      }
     }
   })
 
@@ -787,7 +787,7 @@ prepare reports, และ provide insights for decision-making. \n \
       jobId: j1.id,
       userId: s1.userId,
       bid: 1200,
-      applicationDocumentFiles:{
+      applicationDocumentFiles: {
         create: [
           {
             fileName: '8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e'
@@ -805,7 +805,7 @@ prepare reports, และ provide insights for decision-making. \n \
       jobId: j1.id,
       userId: s2.userId,
       bid: 800,
-      applicationDocumentFiles:{
+      applicationDocumentFiles: {
         create: [
           {
             fileName: 'bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68'
@@ -821,7 +821,7 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s1.userId,
       bid: 600,
       status: "DEPOSIT_PENDING",
-      applicationDocumentFiles:{
+      applicationDocumentFiles: {
         create: [
           {
             fileName: '8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e'
@@ -837,7 +837,7 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s3.userId,
       bid: 500,
       status: "IN_PROGRESS",
-      applicationDocumentFiles:{
+      applicationDocumentFiles: {
         create: [
           {
             fileName: 'bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46'
@@ -852,7 +852,7 @@ prepare reports, และ provide insights for decision-making. \n \
       jobId: j3.id,
       userId: s2.userId,
       bid: 10000,
-      applicationDocumentFiles:{
+      applicationDocumentFiles: {
         create: [
           {
             fileName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733'
@@ -871,7 +871,7 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s3.userId,
       bid: 10000,
       status: "DONE",
-      applicationDocumentFiles:{
+      applicationDocumentFiles: {
         create: [
           {
             fileName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733'
@@ -890,7 +890,7 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s2.userId,
       bid: 15000,
       status: "WAGE_PAYMENT_PENDING",
-      applicationDocumentFiles:{
+      applicationDocumentFiles: {
         create: [
           {
             fileName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733'
@@ -909,7 +909,7 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s1.userId,
       bid: 8000,
       status: "DONE",
-      applicationDocumentFiles:{
+      applicationDocumentFiles: {
         create: [
           {
             fileName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9'
@@ -925,7 +925,7 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s1.userId,
       bid: 6000,
       status: "REJECTED",
-      applicationDocumentFiles:{
+      applicationDocumentFiles: {
         create: [
           {
             fileName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733'
@@ -944,7 +944,7 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s2.userId,
       bid: 5000,
       status: "DONE",
-      applicationDocumentFiles:{
+      applicationDocumentFiles: {
         create: [
           {
             fileName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9'
@@ -960,7 +960,7 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s3.userId,
       bid: 5000,
       status: "CANCELED",
-      applicationDocumentFiles:{
+      applicationDocumentFiles: {
         create: [
           {
             fileName: '8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e'
@@ -975,7 +975,7 @@ prepare reports, และ provide insights for decision-making. \n \
       jobId: j6.id,
       userId: s3.userId,
       bid: 5000,
-      applicationDocumentFiles:{
+      applicationDocumentFiles: {
         create: [
           {
             fileName: '3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609'
@@ -991,7 +991,7 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s1.userId,
       bid: 10000,
       status: "DONE",
-      applicationDocumentFiles:{
+      applicationDocumentFiles: {
         create: [
           {
             fileName: '3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609'
@@ -1010,7 +1010,7 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s3.userId,
       bid: 12000,
       status: "DONE",
-      applicationDocumentFiles:{
+      applicationDocumentFiles: {
         create: [
           {
             fileName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9'
@@ -1028,7 +1028,7 @@ prepare reports, และ provide insights for decision-making. \n \
       jobId: j8.id,
       userId: s1.userId,
       bid: 18000,
-      applicationDocumentFiles:{
+      applicationDocumentFiles: {
         create: [
           {
             fileName: 'bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46'
@@ -1043,7 +1043,7 @@ prepare reports, และ provide insights for decision-making. \n \
       jobId: j8.id,
       userId: s2.userId,
       bid: 17000,
-      applicationDocumentFiles:{
+      applicationDocumentFiles: {
         create: [
           {
             fileName: '24467125aeb077e4cdf8705d08e6e0ed5f4e7c303cb1656f3b9afe46f7346644'
@@ -1061,7 +1061,7 @@ prepare reports, และ provide insights for decision-making. \n \
       jobId: j9.id,
       userId: s2.userId,
       bid: 20000,
-      applicationDocumentFiles:{
+      applicationDocumentFiles: {
         create: [
           {
             fileName: '24467125aeb077e4cdf8705d08e6e0ed5f4e7c303cb1656f3b9afe46f7346644'
@@ -1076,7 +1076,7 @@ prepare reports, และ provide insights for decision-making. \n \
       jobId: j9.id,
       userId: s3.userId,
       bid: 22000,
-      applicationDocumentFiles:{
+      applicationDocumentFiles: {
         create: [
           {
             fileName: '8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e'
