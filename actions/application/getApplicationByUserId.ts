@@ -21,24 +21,27 @@ const getApplicationByUserId = async (jobId: string, userId?: string) => {
       },
     });
 
-    if (!application) {
-      throw {
-        message: "Application not found",
-      };
+    // if (!application) {
+    //   throw {
+    //     message: "Application not found",
+    //   };
+    // }
+    let signUrl: string | any = null
+    if (application?.applicationDocumentFile) {
+      signUrl = await getS3URL(
+        application.applicationDocumentFile.fileName
+      );
     }
 
-    const signUrl: string | any = await getS3URL(
-      application.applicationDocumentFile.fileName
-    );
+    // if (signUrl.message) {
+    //   throw signUrl;
+    // }
 
-    if (signUrl.message) {
-      throw signUrl;
-    }
     let output = {
-      bid: application.bid,
-      applicationStatus: application.status,
-      url: signUrl,
-      budget: application.job.budget,
+      bid: application?.bid ? application.bid : null,
+      applicationStatus: application?.status ? application.status : null,
+      url: signUrl ? signUrl : null,
+      budget: application?.job.budget ? application.job.budget : null,
     };
     return output;
   } catch (error: any) {
@@ -49,3 +52,5 @@ const getApplicationByUserId = async (jobId: string, userId?: string) => {
     };
   }
 };
+
+export default getApplicationByUserId;
