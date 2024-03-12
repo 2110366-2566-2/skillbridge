@@ -3,42 +3,47 @@
 import { prisma } from "../lib/prisma";
 
 const getStudentByJob = async (jobId: string) => {
-  const result = await prisma.application.findMany({
-    where: {
-      jobId: jobId,
-      isDeleted: false,
-    },
-    include: {
-      user: {
-        select: {
-          salutation: true,
-          firstname: true,
-          middlename: true,
-          lastname: true,
-          profileImageUrl: true,
-          lineId: true,
-          facebook: true,
-          email: true,
+  try {
+    const result = await prisma.application.findMany({
+      where: {
+        jobId: jobId,
+        isDeleted: false,
+      },
+      include: {
+        user: {
+          select: {
+            salutation: true,
+            firstname: true,
+            middlename: true,
+            lastname: true,
+            profileImageUrl: true,
+            lineId: true,
+            facebook: true,
+            email: true,
+          },
+        },
+        applicationDocumentFiles: {
+          select: {
+            fileName: true,
+          },
         },
       },
-      applicationDocumentFiles: {
-        select: {
-          fileName: true,
-        },
-      },
-    },
-  });
-  return result;
+    });
+    return result;
+  } catch (error) {
+    console.error("Error in getStudentByJob:", error);
+  }
 };
 
 export default getStudentByJob;
 
 // const main = async () => {
-//   const jobId = "00ad50f7-e7a9-47df-bfc7-4fb2e75e60ec";
+//   const jobId = "13d5b60d-332f-4b8a-8024-b12ebc8ea559";
 //   const result = await getStudentByJob(jobId);
 //   console.log("\n")
 //   console.log("This is response from 'getStudentByJob(jobId)' action : \n", result);
 //   console.log("\n")
+//   if(result)
 //   console.log("Inside the 'applicationDocumentFiles' is look like this : \n", result[0].applicationDocumentFiles);
 // };
 // main();
