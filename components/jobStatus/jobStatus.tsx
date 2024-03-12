@@ -84,8 +84,7 @@ export default function JobStatus({
     }
 
     return (
-        <div className="flex flex-col items-end w-[370px]">
-            <div style={{ height: isDropDownOpen ? "220px" : "175px" }} className="relative w-[370px] px-[20px] pt-[25px] bg-white rounded-xl shadow-lg">
+            <div style={{ height: isDropDownOpen ? "220px" : "175px" }} className="relative max-w-[500px] px-5 pt-7 pb-2 bg-white rounded-xl shadow-md hover:shadow-xl">
                 <div className="w-full">
                     <div className="relative">
 
@@ -135,6 +134,5 @@ export default function JobStatus({
                     }
                 </div>
             </div>
-        </div>
     )
 }
