@@ -20,28 +20,35 @@ const getApplicationByUserId = async (jobId: string, userId?: string) => {
         job: true,
       },
     });
-
-    // if (!application) {
-    //   throw {
-    //     message: "Application not found",
-    //   };
-    // }
-    let signUrl: string | any = null
-    if (application?.applicationDocumentFile) {
-      signUrl = await getS3URL(
-        application.applicationDocumentFile.fileName
-      );
+    let jobBudget = application?.job.budget;
+    let jobStatus = application?.job.status;
+    if (!application) {
+      const query: any = await prisma.job.findFirst({
+        where: {
+          id: jobId,
+        },
+        select: {
+          budget: true,
+          status: true,
+        },
+      });
+      jobBudget = query.budget;
+      jobStatus = query.status;
     }
 
-    // if (signUrl.message) {
-    //   throw signUrl;
-    // }
+    let signUrl: string | any = await getS3URL(
+      application.applicationDocumentFile.fileName
+    );
 
+    if (signUrl.message) {
+      signUrl = null;
+    }
     let output = {
-      bid: application?.bid ? application.bid : null,
-      applicationStatus: application?.status ? application.status : null,
-      url: signUrl ? signUrl : null,
-      budget: application?.job.budget ? application.job.budget : null,
+      bid: application?.bid,
+      applicationStatus: application?.status,
+      url: signUrl,
+      budget: jobBudget,
+      jobStatus: jobStatus,
     };
     return output;
   } catch (error: any) {
@@ -52,5 +59,3 @@ const getApplicationByUserId = async (jobId: string, userId?: string) => {
     };
   }
 };
-
-export default getApplicationByUserId;
