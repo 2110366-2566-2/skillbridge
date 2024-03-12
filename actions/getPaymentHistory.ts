@@ -1,5 +1,5 @@
 "use server";
-
+import { getStudentName } from "./getUserInfo";
 import { prisma } from "../lib/prisma";
 
 const getUserTransactionMonthsAndYears = async (userId: string) => {
@@ -34,13 +34,8 @@ const getUserTransactionMonthsAndYears = async (userId: string) => {
     return deduplicatedMonthsAndYears;
   } catch (error: any) {
     console.error(error);
-    return {
-      message: error.message || "Internal Server Error",
-      status: error.status || 500,
-    };
   }
 };
-
 
 interface PaymentHistoryInput {
   userId: string;
@@ -59,16 +54,32 @@ const getUserPaymentHistory = async ({ userId, year, month }: PaymentHistoryInpu
 
     if (year && month) {
       whereCondition.updatedAt = {
-        gte: new Date(year, month - 1, 1), // Starting from the first day of the specified month
-        lt: new Date(year, month, 1), // Up to the first day of the next month
+        gte: new Date(year, month - 1, 1),
+        lt: new Date(year, month, 1),
       };
     }
-
-    const result = await prisma.transaction.findMany({
+    
+    let result = await prisma.transaction.findMany({
       where: whereCondition,
+      include: {
+        job: {
+          select: {
+            title: true,
+          },
+        }
+      },
     });
-
-    return result;
+    
+    // Add the "isStudent" field to each transaction in the result
+    const resultWithIsStudent = await Promise.all(result.map(async (transaction) => {
+      const studentName = await getStudentName(transaction.studentId);
+      return {
+        ...transaction,
+        isStudent: transaction.studentId === userId,
+        studentName: studentName
+      };
+    }));
+    return resultWithIsStudent;
   } catch (error: any) {
     console.error(error);
     return {
@@ -78,26 +89,27 @@ const getUserPaymentHistory = async ({ userId, year, month }: PaymentHistoryInpu
   }
 };
 
+
 export { getUserPaymentHistory, getUserTransactionMonthsAndYears };
 
-// const main = async () => {
-//   // Example usage without specifying year and month
-//   const userIdWithoutDate = "6945f76a-8a1b-404b-8b0c-ebd2be1aca29";
-//   const userPaymentHistoryWithoutDate = await getUserPaymentHistory({ userId: userIdWithoutDate });
-//   console.log("userPaymentHistoryWithoutDate : ", userPaymentHistoryWithoutDate);
+const main = async () => {
+  // Example usage without specifying year and month
+  const userIdWithoutDate = "45f2b0d1-1a44-4028-836e-c1da532a3cab";
+  const userPaymentHistoryWithoutDate = await getUserPaymentHistory({ userId: userIdWithoutDate });
+  console.log("userPaymentHistoryWithoutDate : ", userPaymentHistoryWithoutDate);
 
-//   // Example usage with specifying year and month
-//   const userIdWithDate = "6945f76a-8a1b-404b-8b0c-ebd2be1aca29";
-//   const userPaymentHistoryWithDate = await getUserPaymentHistory({
-//     userId: userIdWithDate,
-//     year: 2024,
-//     month: 3,
-//   });
-//   console.log("userPaymentHistoryWithDate :" ,userPaymentHistoryWithDate);
+  // Example usage with specifying year and month
+  const userIdWithDate = "45f2b0d1-1a44-4028-836e-c1da532a3cab";
+  const userPaymentHistoryWithDate = await getUserPaymentHistory({
+    userId: userIdWithDate,
+    year: 2024,
+    month: 3,
+  });
+  console.log("userPaymentHistoryWithDate :" ,userPaymentHistoryWithDate);
 
-//   const userId = "6945f76a-8a1b-404b-8b0c-ebd2be1aca29";
-//   const userTransactionMonthsAndYears = await getUserTransactionMonthsAndYears(userId);
-//   console.log("serTransactionMonthsAndYears : ",userTransactionMonthsAndYears);
-// };
+  const userId = "45f2b0d1-1a44-4028-836e-c1da532a3cab";
+  const userTransactionMonthsAndYears = await getUserTransactionMonthsAndYears(userId);
+  console.log("serTransactionMonthsAndYears : ",userTransactionMonthsAndYears);
+};
 
 // main();

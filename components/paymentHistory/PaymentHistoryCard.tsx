@@ -16,35 +16,66 @@ type Transaction = {
     amount: number;
     receiptImageName: string;
     status: 'ACCEPTED' | 'PENDING' | 'REJECTED' | 'OTHER_STATUS'; // Adjust this union type based on actual possible values
+    job: {
+        title: string;
+    }
+    isStudent: false;
+    studentName: {
+        salutation: string,
+        firstname: string,
+        lastname: string,
+    }
 };
 
 export default function PaymentHistoryCard(props:Transaction) {
+    const transactionData = props;
     const [isOpen, setOpen] = useState(false);
-
-
-    const successStatus = (<p className='border rounded-[6px] border-green-600 text-green-600 text-[11px] font-bold px-[8px] py-[3px]'>สำเร็จ</p>);
-    const pendingStatus = (<p className='border rounded-[6px] border-amber-500 text-amber-500 text-[11px] font-bold px-[8px] py-[3px]'>กำลังตรวจสอบ</p>);
-    const failStatus = (<p className='border rounded-[6px] border-red-500 text-red-500 text-[11px] font-bold px-[8px] py-[3px]'>ไม่สำเร็จ</p>);
-
     
-    
+    const successStatus = (<p className='border rounded-[6px] border-green-600 text-green-600 text-[11px] md:text-[16px] font-bold px-[8px] py-[3px]'>สำเร็จ</p>);
+    const pendingStatus = (<p className='border rounded-[6px] border-amber-500 text-amber-500 text-[11px] md:text-[16px] font-bold px-[8px] py-[3px]'>กำลังตรวจสอบ</p>);
+    const failStatus = (<p className='border rounded-[6px] border-red-500 text-red-500 text-[11px] md:text-[16px] font-bold px-[8px] py-[3px]'>ไม่สำเร็จ</p>);
+
+    function formatAmount(amount: number, isStudent: boolean): string {
+        const currencySymbol = '฿';
+        const studentSign = isStudent ? '+' : '-';
+        const result = `${studentSign} ${currencySymbol}${amount.toLocaleString()}`;
+        return result;
+    }
+
+    function formatDateThai(dateTime: Date): string {
+        const optionsDate: Intl.DateTimeFormatOptions = {
+          day: '2-digit',
+          month: '2-digit',
+          year: '2-digit',
+        };
+        const optionsTime: Intl.DateTimeFormatOptions = {
+          hour: '2-digit',
+          minute: '2-digit',
+        };
+        const formattedDate = new Intl.DateTimeFormat('th-TH', optionsDate).format(dateTime);
+        const formattedTime = new Intl.DateTimeFormat('th-TH', optionsTime).format(dateTime);
+        return `${formattedDate} | ${formattedTime} น.`;
+    }
+
     return (
         <div 
-            className='flex flex-col gap-[10px] border-b border-slate-300'
+            className='flex flex-col gap-[10px] border-b border-slate-300 mt-[10px] md:mt-[20px] md:pb-[10px]'
             onClick={() => setOpen(!isOpen)}
         >
-            <div className='flex flex-col'>
-                <div className='flex justify-between items-center'>
-                    <h2 className='font-bold text-slate-700 text-[16px]'>ทำ Frontend LMS ชื่อดังในจุฬา</h2>
-                    <h1 className='font-semibold text-red-500 text-[20px]'>- ฿1,000</h1>
+            <div className='flex flex-col gap-1'>
+                <div className='flex justify-between items-center gap-2'>
+                    <h2 className='font-bold text-slate-700 text-[16px] md:text-[20px]'>{props.job.title}</h2>
+                    <h1 className='font-semibold text-red-500 text-[20px] text-nowrap self-start md:text-[24px]'>{formatAmount(props.amount, props.isStudent)}</h1>
                 </div>
                 <div className='flex justify-between'>
                     <div className='flex justify-center items-center gap-[10px]'>
-                        <p className='text-slate-500 font-medium text-[11px]'>26/02/67  |  19.01 น.</p>
-                        {successStatus}
+                        <p className='text-slate-500 font-medium text-[11px] md:text-[16px]'>{formatDateThai(props.updatedAt)}</p>
+                        {props.status === "ACCEPTED" && (successStatus)}
+                        {props.status === "PENDING" && (pendingStatus)}
+                        {props.status === "REJECTED" && (failStatus)}
                     </div>
                     <Image
-                    className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
+                    className={`md:w-[28px] md:h-[28px] transition-transform ${isOpen ? "rotate-180" : ""}`}
                     src={downArrowDark}
                     alt="arrow"
                     width={24}
@@ -52,19 +83,19 @@ export default function PaymentHistoryCard(props:Transaction) {
                     />
                 </div>
             </div>
-            <div className={`flex flex-col border border-slate-300 rounded-[6px] px-[12px] transition-all duration-150 overflow-hidden ${isOpen ? ("max-h-100 py-[8px] mb-[10px] opacity-100") : ("max-h-0 opacity-0")}`}>
-                <h3 className='font-bold text-[16px] text-slate-600'>นิสิต สุรพีร์ สุวรรณ์</h3>
-                <div className='flex justify-between font-normal text-[14px] text-slate-500'>
+            <div className={`flex flex-col md:gap-[3px] border border-slate-300 rounded-[6px] md:rounded-[12px] px-[12px] md:px-[16px] transition-all duration-150 overflow-hidden ${isOpen ? ("max-h-100 py-[8px] md:py-[12px] mb-[10px] md:mb-[16px] opacity-100") : ("max-h-0 opacity-0")}`}>
+                <h3 className='font-bold text-[16px] text-slate-600'>นิสิต {props.studentName.firstname} {props.studentName.lastname}</h3>
+                <div className='flex justify-between font-normal text-[14px] md:text-[16px] text-slate-500'>
                     <p>ค่ามัดจำการจ้างงาน</p>
-                    <p>100 บาท</p>
+                    <p>{props.amount * 0.85} บาท</p>
                 </div>
-                <div className='flex justify-between font-normal text-[14px] text-slate-500'>
+                <div className='flex justify-between font-normal text-[14px] md:text-[16px] text-slate-500'>
                     <p>ค่าบริการ 15 %</p>
-                    <p>15 บาท</p>
+                    <p>{props.amount * 0.15} บาท</p>
                 </div>
-                <div className='flex justify-between font-normal text-[14px] text-slate-700'>
+                <div className='flex justify-between font-normal text-[14px] md:text-[16px] text-slate-700'>
                     <p>ยอดชำระทั้งหมด</p>
-                    <p>115 บาท</p>
+                    <p>{props.amount} บาท</p>
                 </div>
             </div>
         </div>

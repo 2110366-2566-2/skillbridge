@@ -12,7 +12,7 @@ import getJobTags from "@/actions/getJobTags";
 import whiteLogo from "@/public/logos/logo-white.svg";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
-import getEmployerInfoById from "@/actions/getUserInfo";
+import { getEmployerInfoById } from "@/actions/getUserInfo";
 
 export default async function Header() {
   // Fetch Job tags

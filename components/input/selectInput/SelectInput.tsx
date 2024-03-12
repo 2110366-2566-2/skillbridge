@@ -15,7 +15,7 @@ type Props = {
   errorMessage?: string;
   onChange: ChangeEventHandler<HTMLSelectElement>;
   isDisabled?: boolean;
-  defaultOption?: Option; // Add defaultOption prop
+  defaultOption?: Option;
 };
 
 export default function SelectInput(props: Props) {
@@ -40,17 +40,17 @@ export default function SelectInput(props: Props) {
       <select
         id={name}
         value={value}
-        className={`bg-transparent border ${errorMessage ? "border-red-600" : "border-slate-300"} text-slate-800 text-[16px] rounded-lg focus:outline-none focus:border-slate-500 block w-full p-2 placeholder:text-slate-400 disabled:opacity-75`}
+        className={`bg-transparent border ${errorMessage ? "border-red-600" : "border-slate-300"} text-slate-800 text-[16px] rounded-lg focus:outline-none focus:border-slate-500 block w-full px-2 py-1 placeholder:text-slate-400 disabled:opacity-75`}
         name={name}
         title={title}
         onChange={onChange}
         disabled={isDisabled}
       >
         <option className="text-slate-400" value="" disabled>
-          {placeholder || (defaultOption && defaultOption.title) || "Select an option"}
+          {placeholder || "Select an option"}
         </option>
-        {(defaultOption ? [defaultOption] : []).concat(options).map((option: Option) => (
-          <option key={option.value} value={option.value}>
+        {(defaultOption ? [defaultOption] : []).concat(options).map((option: Option, index) => (
+          <option key={index} value={option.value}>
             {option.title}
           </option>
         ))}

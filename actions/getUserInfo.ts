@@ -12,7 +12,25 @@ const getEmployerInfoById = async (userId: string) => {
   return result;
 };
 
-export default getEmployerInfoById;
+const getStudentName = async (userId: string) => {
+  try {
+    const result  = await prisma.user.findFirst({
+      where: {
+        id: userId,
+      },
+      select: {
+        salutation: true,
+        firstname: true,
+        lastname: true,
+      }
+    })
+    return result;
+  } catch(err) {
+    console.log("Error fetching student name")
+  }
+}
+
+export {getEmployerInfoById, getStudentName};
 
 // const main = async () => {
 //   const jobId = "bdf21ad2-c998-4e38-85af-e888df8c6759";
