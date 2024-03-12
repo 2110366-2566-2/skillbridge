@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "../db/prisma";
+import { prisma } from "../lib/prisma";
 import { revalidatePath } from "next/cache";
 
 const updateJob = async (formData: FormData) => {

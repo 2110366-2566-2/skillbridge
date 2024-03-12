@@ -4,7 +4,7 @@
   <summary>Table of Contents</summary>
   <ul>
     <li>
-      <a href="#version-10">v1.0</a>
+      <a href="#version-10">v1</a>
       <ul>
         <li><a href="#version-11">v1.1</a></li>
         <ul>
@@ -12,16 +12,23 @@
           <li><a href="#version-112">v1.12</a></li>
           <li><a href="#version-113">v1.13</a></li>
         </ul>
+        <li><a href="#version-12">v1.2</a></li>
+        <ul>
+          <li><a href="#version-121">v1.21</a></li>
+        </ul>
       </ul>
     </li>
   </ul>
 </details>
 
+## Current Database Schema 
+> _automatically-generated_ from Prisma Database Schema
+
+<img src="./ERD.svg">
+
 ## Version 1.00
 
 - init version as copied from the existed docs
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -70,8 +77,6 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ## v1.11
 
 ### User
@@ -104,5 +109,45 @@
 ### JobDocumentFile
 
 - This table is added for storing multiple files in a single job
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+# v1.20
+
+### JobDocumentFile
+- `fileUrl` is changed to `fileName`
+
+### Application
+- `isAcknowledged` is added and set default to false
+- `documentUrl` is deleted as we use the serepate table (ApplicationDocumentFile) instead
+
+
+### ApplicationDocumentFile
+
+- This table is added for storing multiple files in a single application
+
+### Transaction
+- `paymentId` is deleted
+- `receiptImageUrl` is changed to `receiptImageName` and set to required
+- `employerUserId` is changed to `employerId` and set to required
+- `paymentType` is deleted as we only have one type - promptpay qr
+- `status` is added and set default to `PENDING`
+- `amount` is added and set to not required
+
+### ApplicationStatus
+- edited as requested from backend team
+
+### TransactionStatus
+- consists of `PENDING`, `ACCEPTED`, and `REJECTED`
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+# v1.21
+
+### MailLog
+- This table is added for keeping track of emails sended from the system
+
+### ApplicationStatus
+- `DISCLAIMED` is added
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

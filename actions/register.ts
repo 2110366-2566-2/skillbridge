@@ -1,9 +1,7 @@
 "use server";
 import { EmailRegisterSchema } from "@/schemas/EmailRegisterSchema";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "../lib/prisma"
 import bcrypt from "bcrypt";
-
-const prisma = new PrismaClient();
 
 async function registerWithCredentials(data: {
   email: string;
