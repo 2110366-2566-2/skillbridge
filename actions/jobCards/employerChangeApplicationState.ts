@@ -3,7 +3,7 @@ import { ApplicationStatus, Application } from "@prisma/client";
 import { prisma } from "../../lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
-import { getApplication, getEmployerUserId } from "./utils";
+import { getApplication, getEmployerUserId, validateJobOwner } from "./utils";
 
 /*
 Application states : 
@@ -17,22 +17,6 @@ WAGE_PAYMENT_PENDING
 DONE // final state
 CANCELED // final state
 */
-
-async function validateJobOwner(employerUserId: string, jobId: string) {
-    const job = await prisma.job.findUniqueOrThrow({
-        where: {
-            id: jobId
-        }
-    })
-
-    if (job.employerId !== employerUserId) {
-        console.log("EmployerId is not the owner of such jobId")
-        throw {
-            message: "Authorization failed",
-            status: 400
-        }
-    }
-}
 
 async function pendingToAccepted(studentUserId: string, jobId: string) {
     const employerUserId = await getEmployerUserId(); // get employer id from session

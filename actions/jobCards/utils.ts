@@ -79,4 +79,20 @@ async function getApplication(studentUserId:string, jobId: string): Promise<Appl
     })
 }
 
-export { getStudentUserId, getEmployerUserId, getApplication }
+async function validateJobOwner(employerUserId: string, jobId: string) {
+    const job = await prisma.job.findUniqueOrThrow({
+        where: {
+            id: jobId
+        }
+    })
+
+    if (job.employerId !== employerUserId) {
+        console.log("EmployerId is not the owner of such jobId")
+        throw {
+            message: "Authorization failed",
+            status: 400
+        }
+    }
+}
+
+export { getStudentUserId, getEmployerUserId, getApplication, validateJobOwner }
