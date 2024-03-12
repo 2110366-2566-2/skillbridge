@@ -5,7 +5,7 @@ generator client {
 generator erd {
   provider = "prisma-erd-generator"
   output   = "../docs/database/ERD.svg"
-  disabled = "true"
+  disabled = "false"
 }
 
 datasource db {
@@ -32,6 +32,7 @@ model User {
   employer        Employer?
   messages        Message[]
   student         Student?
+  MailLog         MailLog[]
 
   @@map("_user")
 }
@@ -219,6 +220,14 @@ model Review {
   student     Student  @relation(fields: [studentId], references: [userId])
 
   @@map("review")
+}
+
+model MailLog {
+  id        String   @id
+  userId    String
+  isSuccess Boolean
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 enum JobStatus {
