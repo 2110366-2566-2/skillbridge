@@ -32,7 +32,7 @@ model User {
   employer        Employer?
   messages        Message[]
   student         Student?
-  MailLog         MailLog[]
+  mailLogs        MailLog[]
 
   @@map("_user")
 }
