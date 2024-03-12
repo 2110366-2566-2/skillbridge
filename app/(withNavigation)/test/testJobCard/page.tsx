@@ -83,16 +83,74 @@ export default function testJobCard() {
                 tag="การสอน"
                 price="฿1,000"
             />
+            <div className="flex flex-col mt-[300px]">
 
-            <StudentOffer
-                studentId="001"
-                jobId="001"
-                studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
-                applicationDate="18/10/2545"
-                applicationTime="21:59 น."
-                status="สมัคร"
-                price="฿1,000"
-            />
+                <StudentOffer
+                    studentId="001"
+                    jobId="001"
+                    studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว ฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกหฟกฟหกฟหกฟหกฟหกฟหกฟหกฟหกหฟกฟหกฟหกฟหก"
+                    applicationDate="18/10/2545"
+                    applicationTime="21:59 น."
+                    status="สมัคร"
+                    price="฿1,000"
+                />
+                <StudentOffer
+                    studentId="001"
+                    jobId="001"
+                    studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
+                    applicationDate="18/10/2545"
+                    applicationTime="21:59 น."
+                    status="สละสิทธิ์"
+                    price="฿1,000"
+                />
+                <StudentOffer
+                    studentId="001"
+                    jobId="001"
+                    studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
+                    applicationDate="18/10/2545"
+                    applicationTime="21:59 น."
+                    status="ปฏิเสธ"
+                    price="฿1,000"
+                />
+                <StudentOffer
+                    studentId="001"
+                    jobId="001"
+                    studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
+                    applicationDate="18/10/2545"
+                    applicationTime="21:59 น."
+                    status="รอจ่ายมัดจำ"
+                    price="฿1,000"
+                />
+                <StudentOffer
+                    studentId="001"
+                    jobId="001"
+                    studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
+                    applicationDate="18/10/2545"
+                    applicationTime="21:59 น."
+                    status="รอส่งมอบงาน"
+                    price="฿1,000"
+                />
+                <StudentOffer
+                    studentId="001"
+                    jobId="001"
+                    studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
+                    applicationDate="18/10/2545"
+                    applicationTime="21:59 น."
+                    status="ส่งมอบงานแล้ว"
+                    price="฿1,000"
+                />
+                <StudentOffer
+                    studentId="001"
+                    jobId="001"
+                    studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
+                    applicationDate="18/10/2545"
+                    applicationTime="21:59 น."
+                    status="รอจ่ายค่าจ้าง"
+                    price="฿1,000"
+                />
+            </div>
+
+
         </main>
     )
 }

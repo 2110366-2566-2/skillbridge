@@ -13,7 +13,7 @@ const ibmPlexSansThaiLooped = IBM_Plex_Sans_Thai({
 });
 
 export const metadata: Metadata = {
-  title: "Skillbridge",
+  title: "SkillBridge",
   description: "Skillbridge by Soei",
 };
 

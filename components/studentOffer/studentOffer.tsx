@@ -1,6 +1,11 @@
 'use client'
-import { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Image from "next/image";
+import AppliedStatus from "./dropDownObject/appliedStatus";
+import WaitedForDepositStatus from "./dropDownObject/waitedForDepositStatus";
+import WaitedForSubmissionStatus from "./dropDownObject/waitedForSubmissionStatus";
+import SubmittedStatus from "./dropDownObject/submittedStatus";
+import WaitedForWageStatus from "./dropDownObject/waitedForWageStatus";
 
 export default function StudentOffer({
     studentId,
@@ -21,14 +26,41 @@ export default function StudentOffer({
 }) {
 
     const [isDropDownOpen, setisDropDownOpen] = useState(false);
-    const [dropDownAbove, setDropDownAbove] = useState('26px');
+    const [dropDownAbove, setDropDownAbove] = useState('19px');
+
+    const [windowSize, setWindowSize] = useState({ width: window.innerWidth });
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowSize({
+                width: window.innerWidth,
+            });
+            setDropDownAbove(() => {
+                if (isDropDownOpen) {
+                    return '19px'
+                } else {
+                    if (isOneLineDropDownObject || windowSize.width >= 768) {
+                        return '61px'
+                    }
+                    return '106px'
+                }
+            })
+        };
+
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const handleDropDownClicked = () => {
         setisDropDownOpen((prev) => !prev);
         setDropDownAbove(() => {
             if (isDropDownOpen) {
-                return '26px'
+                return '19px'
             } else {
+                if (isOneLineDropDownObject || windowSize.width >= 768) {
+                    return '61px'
+                }
                 return '106px'
             }
         })
@@ -36,26 +68,39 @@ export default function StudentOffer({
 
     let dropDownObject = <div></div>;
     let statusColor = '#dcfce7';
-    let statusWidth = '235px';
+    let statusWidth = windowSize.width >= 768 ? "1050px" : '235px';
+    let heightOfDropDownCard = windowSize.width >= 768 ? "142px" : "215px";
+    let heightCard = windowSize.width >= 768 ? "100px" : '128px';
+    let isOneLineDropDownObject = false
+    let titleLineClamp = windowSize.width >= 768 ? "line-clamp-1" : "line-clamp-2"
 
     switch (status) {
         case 'สมัคร':
+            dropDownObject = <AppliedStatus studentId={studentId} jobId={jobId} />
             break;
         case 'สละสิทธิ์':
             statusColor = '#ffe4e6'
+            isOneLineDropDownObject = true;
+            heightOfDropDownCard = windowSize.width >= 768 ? "142px" : '170px'
             break;
         case 'ปฏิเสธ':
             statusColor = '#ffe4e6'
+            isOneLineDropDownObject = true;
+            heightOfDropDownCard = windowSize.width >= 768 ? "142px" : '170px'
             break;
         case 'รอจ่ายมัดจำ':
+            dropDownObject = <WaitedForDepositStatus studentId={studentId} jobId={jobId} />
             statusColor = '#fef9c3'
             break;
         case 'รอส่งมอบงาน':
+            dropDownObject = <WaitedForSubmissionStatus studentId={studentId} jobId={jobId} />
             statusColor = '#fef9c3'
             break;
         case 'ส่งมอบงานแล้ว':
+            dropDownObject = <SubmittedStatus studentId={studentId} jobId={jobId} />
             break;
         case 'รอจ่ายค่าจ้าง':
+            dropDownObject = <WaitedForWageStatus studentId={studentId} jobId={jobId} />
             statusColor = '#fef9c3'
             break;
         default:
@@ -63,8 +108,8 @@ export default function StudentOffer({
     }
 
     return (
-        <div className="flex flex-col items-end w-[370px]">
-            <div style={{ height: isDropDownOpen ? "215px" : "135px" }} className="relative w-[370px] px-[20px] pt-[20px] bg-white rounded-xl shadow-lg">
+        <div className="flex flex-col items-end w-[370px] mt-[10px] md:w-[1190px]">
+            <div style={{ height: isDropDownOpen ? heightOfDropDownCard : heightCard }} className="relative w-[370px] px-[20px] pt-[20px] bg-white rounded-xl shadow-lg md:w-[1190px]">
                 <div className="w-full">
                     <div className="relative">
 
@@ -76,8 +121,8 @@ export default function StudentOffer({
                         </div>
 
                         {/* Title Component */}
-                        <div style={{ width: statusWidth }} className="h-[56px]">
-                            <p className="font-bold text-[#313866] text-xl line-clamp-2">
+                        <div style={{ width: statusWidth }} className="">
+                            <p className={`font-bold text-[#313866] text-xl ${titleLineClamp}`}>
                                 {studentName}
                             </p>
                         </div>
@@ -107,21 +152,13 @@ export default function StudentOffer({
                     {/* DropDownObject Of Each Status */}
                     {
                         isDropDownOpen &&
-                        <div className="w-[330px] mt-[10px]">
-                            <button className="h-[35px] bg-[#f8fafc] text-sm text-white rounded-md w-[100%] hover:opacity-80 active:opacity-60 text-black border border-[#334155] flex justify-center items-center">
+                        <div className="w-[330px] mt-[10px] md:w-[1150px] md:flex md:justify-between">
+                            <button className="h-[35px] bg-[#f8fafc] text-sm text-white rounded-md w-[100%] hover:opacity-80 active:opacity-60 text-black border border-[#334155] flex justify-center items-center md:w-[100px]">
                                 <p className="text-[#334155]">
                                     ไปที่โปรไฟล์
                                 </p>
                             </button>
-                            {/* {dropDownObject} */}
-                            <div className="w-[330px] flex justify-between mt-[10px]">
-                                <button className="h-[35px] bg-[#ef4444] text-sm text-white rounded-md w-[48%] hover:opacity-80 active:opacity-60">
-                                    ปฏิเสธ
-                                </button>
-                                <button className="h-[35px] bg-[#334155] text-sm text-white rounded-md w-[48%] hover:opacity-80 active:opacity-60">
-                                    ยืนยัน
-                                </button>
-                            </div>
+                            {dropDownObject}
                         </div>
                     }
                 </div>
