@@ -14,15 +14,17 @@ export default function JobStatus({
     userId,
     jobId,
     title,
-    period,
-    tag,
+    startDate,
+    endDate,
+    category,
     status,
 }: {
     userId: string,
     jobId: string,
     title: string,
-    period: string,
-    tag: string,
+    startDate: string,
+    endDate: string,
+    category: string,
     status: string,
 }) {
 
@@ -108,7 +110,7 @@ export default function JobStatus({
                     {/* Period Component */}
                     <div className="mt-[10px]">
                         <p className="font-medium text-[15.5px] text-slate-500 text-wrap line-clamp-1">
-                            {period}
+                            {`${startDate} - ${endDate}`}
                         </p>
                     </div>
 
@@ -117,7 +119,7 @@ export default function JobStatus({
                         {/* Tag Component */}
                         <div className="flex justify-center items-center bg-[#e2e8f0] px-[10px] py-[5px] mr-[5px] rounded-[4px]">
                             <p className="text-sm">
-                                {tag}
+                                {category}
                             </p>
                         </div>
 
