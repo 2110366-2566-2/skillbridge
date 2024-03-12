@@ -131,7 +131,7 @@ export default function StudentOffer({
                     {
                         isDropDownOpen &&
                         <div className="w-[330px] mt-[10px] xl:w-[1150px] xl:flex xl:justify-between">
-                            <button className="h-[35px] bg-[#f8fafc] text-sm text-white rounded-md w-[100%] hover:opacity-80 active:opacity-60 text-black border border-[#334155] flex justify-center items-center xl:w-[100px]">
+                            <button className="h-[35px] bg-[#f8fafc] text-sm rounded-md w-[100%] hover:opacity-80 active:opacity-60 text-black border border-[#334155] flex justify-center items-center xl:w-[100px]">
                                 <p className="text-[#334155]">
                                     ไปที่โปรไฟล์
                                 </p>

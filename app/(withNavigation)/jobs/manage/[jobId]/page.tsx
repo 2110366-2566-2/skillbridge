@@ -37,7 +37,7 @@ async function ManagePage({ params }: Props) {
                     <p className="font-bold text-2xl line-clamp-2 flex items-center">
                         {jobData?.title}
                     </p>
-                    <div className="bg-slate-200 rounded-sm p-2 w-fit">{"การสอน"}</div>
+                    <div className="bg-slate-200 rounded-sm p-2 w-fit">{jobData?.jobTag.title}</div>
                 </div>
                 <DangerButton>ปิดรับสมัคร</DangerButton>
             </section>
@@ -64,132 +64,22 @@ async function ManagePage({ params }: Props) {
                     </div>
 
                     <aside className="flex flex-col gap-3">
-                        <DynamicStudentOffer
-                        studentId="001"
-                        jobId="001"
-                        studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว ฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกหฟกฟหกฟหกฟหกฟหกฟหกฟหกฟหกหฟกฟหกฟหกฟหก"
-                        applicationDate="18/10/2545"
-                        applicationTime="21:59 น."
-                        status="สมัคร"
-                        price="฿1,000"
-                        />
-                        <DynamicStudentOffer
-                            studentId="001"
-                            jobId="001"
-                            studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
-                            applicationDate="18/10/2545"
-                            applicationTime="21:59 น."
-                            status="สละสิทธิ์"
-                            price="฿1,000"
-                        />
-                        <DynamicStudentOffer
-                            studentId="001"
-                            jobId="001"
-                            studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
-                            applicationDate="18/10/2545"
-                            applicationTime="21:59 น."
-                            status="ปฏิเสธ"
-                            price="฿1,000"
-                        />
-                        <DynamicStudentOffer
-                            studentId="001"
-                            jobId="001"
-                            studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
-                            applicationDate="18/10/2545"
-                            applicationTime="21:59 น."
-                            status="รอจ่ายมัดจำ"
-                            price="฿1,000"
-                        />
-                        <DynamicStudentOffer
-                            studentId="001"
-                            jobId="001"
-                            studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
-                            applicationDate="18/10/2545"
-                            applicationTime="21:59 น."
-                            status="รอส่งมอบงาน"
-                            price="฿1,000"
-                        />
-                        <DynamicStudentOffer
-                            studentId="001"
-                            jobId="001"
-                            studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
-                            applicationDate="18/10/2545"
-                            applicationTime="21:59 น."
-                            status="ส่งมอบงานแล้ว"
-                            price="฿1,000"
-                        />
-                        <DynamicStudentOffer
-                            studentId="001"
-                            jobId="001"
-                            studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
-                            applicationDate="18/10/2545"
-                            applicationTime="21:59 น."
-                            status="รอจ่ายค่าจ้าง"
-                            price="฿1,000"
-                        />
-                        <DynamicStudentOffer
-                        studentId="001"
-                        jobId="001"
-                        studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว ฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกหฟกฟหกฟหกฟหกฟหกฟหกฟหกฟหกหฟกฟหกฟหกฟหก"
-                        applicationDate="18/10/2545"
-                        applicationTime="21:59 น."
-                        status="สมัคร"
-                        price="฿1,000"
-                        />
-                        <DynamicStudentOffer
-                            studentId="001"
-                            jobId="001"
-                            studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
-                            applicationDate="18/10/2545"
-                            applicationTime="21:59 น."
-                            status="สละสิทธิ์"
-                            price="฿1,000"
-                        />
-                        <DynamicStudentOffer
-                            studentId="001"
-                            jobId="001"
-                            studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
-                            applicationDate="18/10/2545"
-                            applicationTime="21:59 น."
-                            status="ปฏิเสธ"
-                            price="฿1,000"
-                        />
-                        <DynamicStudentOffer
-                            studentId="001"
-                            jobId="001"
-                            studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
-                            applicationDate="18/10/2545"
-                            applicationTime="21:59 น."
-                            status="รอจ่ายมัดจำ"
-                            price="฿1,000"
-                        />
-                        <DynamicStudentOffer
-                            studentId="001"
-                            jobId="001"
-                            studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
-                            applicationDate="18/10/2545"
-                            applicationTime="21:59 น."
-                            status="รอส่งมอบงาน"
-                            price="฿1,000"
-                        />
-                        <DynamicStudentOffer
-                            studentId="001"
-                            jobId="001"
-                            studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
-                            applicationDate="18/10/2545"
-                            applicationTime="21:59 น."
-                            status="ส่งมอบงานแล้ว"
-                            price="฿1,000"
-                        />
-                        <DynamicStudentOffer
-                            studentId="001"
-                            jobId="001"
-                            studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
-                            applicationDate="18/10/2545"
-                            applicationTime="21:59 น."
-                            status="รอจ่ายค่าจ้าง"
-                            price="฿1,000"
-                        />
+                        {fetchedData?.map((student, index) => {
+                            const name = `${student.user.salutation}${student.user.firstname}${student.user.middlename ? ` ${student.user.middlename} ` : " "}${student.user.lastname}`;
+                            return (
+                                <div key={index}>
+                                    <DynamicStudentOffer
+                                        studentId={student.userId}
+                                        jobId={student.jobId}
+                                        studentName={name}
+                                        applicationDate={`${student.createdAt.getDate()}/${student.createdAt.getMonth()}/${student.createdAt.getFullYear()}`}
+                                        applicationTime={`${student.createdAt.getHours()}:${student.createdAt.getMinutes()} น.`}
+                                        status={student.status}
+                                        price={`฿${student.bid.toLocaleString()}`}
+                                    />
+                                </div>
+                            )
+                        })}
                     </aside>
                 </aside>
             </section>
