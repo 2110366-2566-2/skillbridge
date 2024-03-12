@@ -49,9 +49,9 @@ const Sorter = ({
     
               {/* sort options */}
               {
-                sortOptions.map((option) => {
+                sortOptions.map((option, index) => {
                   return (
-                    <section>
+                    <section key={index}>
                       <div className="text-xl font-bold text-slate-800 mt-2">{option.name}</div>
                       <div className="flex flex-col gap-2 mb-2">
                         <select
