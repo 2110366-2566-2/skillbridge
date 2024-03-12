@@ -33,23 +33,30 @@ const createApplication = async (formData: FormData) => {
       };
     }
     const buffer = new Uint8Array(await file.arrayBuffer());
-    const url: string | any = await uploadFileToS3(
+    const fileName: string | any = await uploadFileToS3(
       buffer,
       file.type,
       file.size,
       "/applicationFiles"
     );
 
-    if (url.message) {
-      throw url;
+    if (fileName.message) {
+      throw fileName;
     }
+    const app_docs: any = await prisma.applicationDocumentFile.create({
+      data: {
+        applicationUserId: session.user.id,
+        applicationJobId: jobID,
+        fileName: fileName,
+      },
+    });
 
     const application = await prisma.application.create({
       data: {
         userId: session.user.id,
         jobId: jobID,
         bid: bid,
-        // documentUrl: url,
+        applicationDocumentFiles: app_docs,
       },
     });
 

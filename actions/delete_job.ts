@@ -25,6 +25,7 @@ const deleteJob = async (job_id: string) => {
       select: {
         applications: true,
         isDeleted: true,
+        jobDocumentFiles: true,
       },
     });
     // console.log(job_info);
@@ -43,6 +44,16 @@ const deleteJob = async (job_id: string) => {
       };
     }
 
+    for (const doc of job_info.jobDocumentFiles) {
+      await prisma.jobDocumentFile.update({
+        where: {
+          id: doc.id,
+        },
+        data: {
+          isDeleted: true,
+        },
+      });
+    }
     await prisma.job.update({
       where: {
         id: job_id,

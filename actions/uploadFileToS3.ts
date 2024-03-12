@@ -31,14 +31,7 @@ const uploadFileToS3 = async (
 
   try {
     const response = await s3.send(putObjectCommand);
-    const getObjectParams = {
-      Bucket: process.env.BUCKET_NAME,
-      Key: fileName,
-    };
-    const command = new GetObjectCommand(getObjectParams);
-    const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
-    console.log(response);
-    return url;
+    return fileName;
   } catch (error) {
     console.log(error);
     throw { message: "Upload Failed" };

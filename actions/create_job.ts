@@ -1,17 +1,9 @@
 "use server";
 import { prisma } from "../lib/prisma";
-import cloudinary from "../lib/bucket";
 import { JobStatus } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
-import uploadFileToS3 from "./uploadFileToS3";
-
-const acceptedTypes = [
-  "image/jpeg",
-  "image/png",
-  "image/webp",
-  "application/pdf",
-];
+import uploadMultipleFilesToS3 from "@/actions/uploadMultipleFilesToS3";
 
 const createJob = async (formData: FormData) => {
   try {
@@ -55,42 +47,11 @@ const createJob = async (formData: FormData) => {
         status: 401,
       };
     }
-    let buffers: Uint8Array[] = [];
-    let size_list: number[] = [];
-    let types: string[] = [];
-    let sumSize = 0;
-    for (const f of files) {
-      if (!acceptedTypes.includes(f.type)) {
-        throw {
-          message: "Invalid files type",
-        };
-      }
-      sumSize = sumSize + f.size;
-      const arrayBuffer = await f?.arrayBuffer();
-      const buffer = new Uint8Array(arrayBuffer);
-      buffers.push(buffer);
-      size_list.push(f.size);
-      types.push(f.type);
-    }
-    if (sumSize > 1024 * 1024 * 5) {
-      throw {
-        message: "Files is too large.",
-      };
-    }
-    let results: string[] = [];
-    for (let i = 0; i < buffers.length; i++) {
-      const result: string | any = await uploadFileToS3(
-        buffers[i],
-        types[i],
-        size_list[i],
-        "jobFiles"
-      );
-      if (result.message) {
-        throw result;
-      }
-      results.push(result);
-    }
 
+    const results: string[] | any = await uploadMultipleFilesToS3(files);
+    if (results.message) {
+      throw results;
+    }
     let job = await prisma.job.create({
       data: {
         employerId: employerId,
@@ -108,7 +69,7 @@ const createJob = async (formData: FormData) => {
       await prisma.jobDocumentFile.create({
         data: {
           jobId: job.id,
-          fileName: results[i].secure_url,
+          fileName: results[i],
         },
       });
     }
