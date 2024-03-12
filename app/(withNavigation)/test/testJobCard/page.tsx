@@ -1,8 +1,14 @@
 import JobStatus from "@/components/jobStatus/jobStatus";
 import JobDescription from "@/components/jobStatus/jobDescription";
 import StudentOffer from "@/components/studentOffer/studentOffer";
+import dynamic from "next/dynamic";
 
 export default function testJobCard() {
+
+    const DynamicStudentOffer = dynamic(() => import("@/components/studentOffer/studentOffer"), {
+        ssr: false,
+        // loading: () => <p>Loading...</p> if i have more time to do this na
+    })
 
     return (
         <main className="h-screen p-[30px] w-screen flex justify-around flex-wrap ">
@@ -85,7 +91,7 @@ export default function testJobCard() {
             />
             <div className="flex flex-col mt-[300px]">
 
-                <StudentOffer
+                <DynamicStudentOffer
                     studentId="001"
                     jobId="001"
                     studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว ฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกฟหกหฟกฟหกฟหกฟหกฟหกฟหกฟหกฟหกหฟกฟหกฟหกฟหก"
@@ -94,7 +100,7 @@ export default function testJobCard() {
                     status="สมัคร"
                     price="฿1,000"
                 />
-                <StudentOffer
+                <DynamicStudentOffer
                     studentId="001"
                     jobId="001"
                     studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
@@ -103,7 +109,7 @@ export default function testJobCard() {
                     status="สละสิทธิ์"
                     price="฿1,000"
                 />
-                <StudentOffer
+                <DynamicStudentOffer
                     studentId="001"
                     jobId="001"
                     studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
@@ -112,7 +118,7 @@ export default function testJobCard() {
                     status="ปฏิเสธ"
                     price="฿1,000"
                 />
-                <StudentOffer
+                <DynamicStudentOffer
                     studentId="001"
                     jobId="001"
                     studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
@@ -121,7 +127,7 @@ export default function testJobCard() {
                     status="รอจ่ายมัดจำ"
                     price="฿1,000"
                 />
-                <StudentOffer
+                <DynamicStudentOffer
                     studentId="001"
                     jobId="001"
                     studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
@@ -130,7 +136,7 @@ export default function testJobCard() {
                     status="รอส่งมอบงาน"
                     price="฿1,000"
                 />
-                <StudentOffer
+                <DynamicStudentOffer
                     studentId="001"
                     jobId="001"
                     studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
@@ -139,7 +145,7 @@ export default function testJobCard() {
                     status="ส่งมอบงานแล้ว"
                     price="฿1,000"
                 />
-                <StudentOffer
+                <DynamicStudentOffer
                     studentId="001"
                     jobId="001"
                     studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"

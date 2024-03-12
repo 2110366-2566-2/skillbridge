@@ -26,7 +26,6 @@ export default function StudentOffer({
 }) {
 
     const [isDropDownOpen, setisDropDownOpen] = useState(false);
-    const [dropDownAbove, setDropDownAbove] = useState('19px');
 
     const [windowSize, setWindowSize] = useState({ width: window.innerWidth });
 
@@ -35,16 +34,6 @@ export default function StudentOffer({
             setWindowSize({
                 width: window.innerWidth,
             });
-            setDropDownAbove(() => {
-                if (isDropDownOpen) {
-                    return '19px'
-                } else {
-                    if (isOneLineDropDownObject || windowSize.width >= 768) {
-                        return '61px'
-                    }
-                    return '106px'
-                }
-            })
         };
 
 
@@ -54,24 +43,13 @@ export default function StudentOffer({
 
     const handleDropDownClicked = () => {
         setisDropDownOpen((prev) => !prev);
-        setDropDownAbove(() => {
-            if (isDropDownOpen) {
-                return '19px'
-            } else {
-                if (isOneLineDropDownObject || windowSize.width >= 768) {
-                    return '61px'
-                }
-                return '106px'
-            }
-        })
     }
 
     let dropDownObject = <div></div>;
     let statusColor = '#dcfce7';
-    let statusWidth = windowSize.width >= 768 ? "1050px" : '235px';
+    let titleWidth = windowSize.width >= 768 ? "1050px" : '235px';
     let heightOfDropDownCard = windowSize.width >= 768 ? "142px" : "215px";
     let heightCard = windowSize.width >= 768 ? "100px" : '128px';
-    let isOneLineDropDownObject = false
     let titleLineClamp = windowSize.width >= 768 ? "line-clamp-1" : "line-clamp-2"
 
     switch (status) {
@@ -80,12 +58,10 @@ export default function StudentOffer({
             break;
         case 'สละสิทธิ์':
             statusColor = '#ffe4e6'
-            isOneLineDropDownObject = true;
             heightOfDropDownCard = windowSize.width >= 768 ? "142px" : '170px'
             break;
         case 'ปฏิเสธ':
             statusColor = '#ffe4e6'
-            isOneLineDropDownObject = true;
             heightOfDropDownCard = windowSize.width >= 768 ? "142px" : '170px'
             break;
         case 'รอจ่ายมัดจำ':
@@ -113,7 +89,7 @@ export default function StudentOffer({
                 <div className="w-full">
                     <div className="relative">
 
-                        {/* Status Component */}
+                        {/* Price Component */}
                         <div className="absolute right-0 top-0 h-[24px] flex justify-center items-center">
                             <p className="text-2xl text-[#313866] font-semibold">
                                 {price}
@@ -121,7 +97,7 @@ export default function StudentOffer({
                         </div>
 
                         {/* Title Component */}
-                        <div style={{ width: statusWidth }} className="">
+                        <div style={{ width: titleWidth }}>
                             <p className={`font-bold text-[#313866] text-xl ${titleLineClamp}`}>
                                 {studentName}
                             </p>
@@ -129,22 +105,24 @@ export default function StudentOffer({
 
                     </div>
 
-                    <div className="mt-[10px] flex">
+                    <div className="mt-[10px] flex justify-between">
 
-                        {/* Application Time Component */}
-                        <p className="font-medium text-[15.5px] text-slate-500 text-wrap line-clamp-1 mr-[10px]">
-                            {applicationDate} | {applicationTime}
-                        </p>
-
-                        {/* Status Component */}
-                        <div style={{ backgroundColor: statusColor }} className="h-[24px] rounded-full flex justify-center items-center px-[10px] py-[5px]">
-                            <p className="text-xs">
-                                {status}
+                        <div className="flex">
+                            {/* Application Time Component */}
+                            <p className="font-medium text-[15.5px] text-slate-500 text-wrap line-clamp-1 mr-[10px]">
+                                {applicationDate} | {applicationTime}
                             </p>
+
+                            {/* Status Component */}
+                            <div style={{ backgroundColor: statusColor }} className="h-[24px] rounded-full flex justify-center items-center px-[10px] py-[5px]">
+                                <p className="text-xs">
+                                    {status}
+                                </p>
+                            </div>
                         </div>
 
                         {/* DropDown Button */}
-                        <div style={{ bottom: dropDownAbove }} className="absolute right-[16px] cursor-pointer">
+                        <div className="cursor-pointer">
                             <Image src={isDropDownOpen ? '/icons/dropup.svg' : '/icons/dropdown.svg'} width={20} height={20} alt={isDropDownOpen ? 'dropup' : 'dropdown'} onClick={handleDropDownClicked}></Image>
                         </div>
                     </div>
