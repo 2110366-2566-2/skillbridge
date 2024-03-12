@@ -7,6 +7,7 @@ import TaskHeader from "../JobsPanel/JobHeader";
 import CreateJobHeader from "./createJobHeader/CreateJobHeader";
 import EditJobHeader from "./editJobHeader/EditJobHeader";
 import LandingHeader from "./landingHeader/LandingHeader";
+import PaymentHeader from "./paymentHeader/PaymentHeader";
 import getJobTags from "@/actions/getJobTags";
 import whiteLogo from "@/public/logos/logo-white.svg";
 import { getServerSession } from "next-auth";
@@ -58,6 +59,8 @@ export default async function Header() {
       </div>
       {/* Only shows at "/works" */}
       <TaskHeader />
+      {/* Only shows at "/jobs/:id/payment" */}
+      <PaymentHeader />
     </div>
   );
 }
