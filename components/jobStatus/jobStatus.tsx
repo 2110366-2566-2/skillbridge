@@ -44,13 +44,13 @@ export default function JobStatus({
 
     let dropDownObject = <div></div>;
     let statusColor = '#dcfce7';
-    let statusWidth = '220px';
+    let statusWidth = '185px';
 
     switch (status) {
         case 'กำลังรอ':
             dropDownObject = <TaskWaitingStatusBox userId={userId} jobId={jobId} />
             statusColor = '#fef9c3'
-            statusWidth = '250px'
+            statusWidth = '215px'
             break;
         case 'ผ่านการคัดเลือก':
             dropDownObject = <TaskPassStatusBox userId={userId} jobId={jobId} />
@@ -62,7 +62,7 @@ export default function JobStatus({
         case 'รอส่งมอบงาน':
             dropDownObject = <TaskInProgressStatusBox userId={userId} jobId={jobId} />
             statusColor = '#fef9c3'
-            statusWidth = '230px'
+            statusWidth = '195px'
             break;
         case 'รอผู้จ้างจ่ายมัดจำ':
             dropDownObject = <TaskPledgeStatusBox userId={userId} jobId={jobId} />
@@ -74,20 +74,20 @@ export default function JobStatus({
             break;
         case 'เสร็จสิ้น':
             dropDownObject = <TaskDoneStatusBox userId={userId} jobId={jobId} />
-            statusWidth = '250px'
+            statusWidth = '215px'
             break;
         case 'ถูกยกเลิกงาน':
             dropDownObject = <TaskCancelStatusBox userId={userId} jobId={jobId} />
             statusColor = '#ffe4e6'
-            statusWidth = '230px'
+            statusWidth = '195px'
             break;
         default:
             break;
     }
 
     return (
-        <div className="flex flex-col items-end w-[370px]">
-            <div style={{ height: isDropDownOpen ? "220px" : "175px" }} className="relative w-[370px] px-[20px] pt-[25px] bg-white rounded-xl shadow-lg">
+        <div className="flex flex-col items-end w-[335px]">
+            <div style={{ height: isDropDownOpen ? "220px" : "175px" }} className="relative w-[335px] px-[20px] pt-[25px] bg-white rounded-xl shadow-lg">
                 <div className="w-full">
                     <div className="relative">
 
