@@ -95,4 +95,17 @@ async function validateJobOwner(employerUserId: string, jobId: string) {
     }
 }
 
-export { getStudentUserId, getEmployerUserId, getApplication, validateJobOwner }
+async function getEmail(userId: string): Promise<string> {
+    const res = await prisma.user.findFirstOrThrow({
+        where: {
+            id: userId
+        },
+        select: {
+            email: true
+        }
+    });
+
+    return res.email;
+}
+
+export { getStudentUserId, getEmployerUserId, getApplication, validateJobOwner, getEmail };
