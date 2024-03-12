@@ -1,34 +1,37 @@
 import React, { ChangeEventHandler } from "react";
 
+type Option = {
+  value: any;
+  title: any;
+};
+
 type Props = {
   label: string;
-  value: string;
-  jobTags: {
-    id: string;
-    title: string | null;
-    createdAt: Date;
-    updatedAt: Date;
-  }[];
+  value?: string;
+  options: Option[];
   name: string;
   title: string;
-  placeholder: string;
+  placeholder?: string;
   errorMessage?: string;
   onChange: ChangeEventHandler<HTMLSelectElement>;
-  isDisabled: boolean;
+  isDisabled?: boolean;
+  defaultOption?: Option; // Add defaultOption prop
 };
 
 export default function SelectInput(props: Props) {
   const {
     label,
     value,
-    jobTags,
+    options,
     name,
     title,
     placeholder,
     errorMessage,
     onChange,
     isDisabled,
+    defaultOption,
   } = props;
+
   return (
     <div className="flex flex-col gap-1 flex-grow">
       <label htmlFor={name} className="text-[14px] font-medium text-slate-900">
@@ -44,11 +47,11 @@ export default function SelectInput(props: Props) {
         disabled={isDisabled}
       >
         <option className="text-slate-400" value="" disabled>
-          {placeholder}
+          {placeholder || (defaultOption && defaultOption.title) || "Select an option"}
         </option>
-        {jobTags.map((jobTag: any) => (
-          <option key={jobTag.id} value={jobTag.id}>
-            {jobTag.title}
+        {(defaultOption ? [defaultOption] : []).concat(options).map((option: Option) => (
+          <option key={option.value} value={option.value}>
+            {option.title}
           </option>
         ))}
       </select>

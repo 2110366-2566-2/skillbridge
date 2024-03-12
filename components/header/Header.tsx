@@ -7,6 +7,7 @@ import TaskHeader from "../JobsPanel/JobHeader";
 import CreateJobHeader from "./createJobHeader/CreateJobHeader";
 import EditJobHeader from "./editJobHeader/EditJobHeader";
 import LandingHeader from "./landingHeader/LandingHeader";
+import PaymentHistoryHeader from "./paymentHistoryHeader/PaymentHistoryHeader";
 import getJobTags from "@/actions/getJobTags";
 import whiteLogo from "@/public/logos/logo-white.svg";
 import { getServerSession } from "next-auth";
@@ -47,9 +48,10 @@ export default async function Header() {
           </div>
           <Navbar session={session} isStudent={isStudent} userInfo={userInfo} />
         </div>
+        <LandingHeader isStudent={isStudent} jobTags={jobTags} />
         <CreateJobHeader />
         <EditJobHeader />
-        <LandingHeader isStudent={isStudent} jobTags={jobTags} />
+        <PaymentHistoryHeader />
       </div>
       {/* Mobile and Tablet */}
       <div className="lg:hidden">
