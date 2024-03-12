@@ -15,6 +15,7 @@
     "@ant-design/icons": "^5.3.0",
     "@elastic/elasticsearch": "^8.12.1",
     "@prisma/client": "^5.9.1",
+    "@tailwindcss/line-clamp": "^0.4.4",
     "@types/bcryptjs": "^2.4.6",
     "bcrypt": "^5.1.1",
     "cloudinary": "^2.0.1",
