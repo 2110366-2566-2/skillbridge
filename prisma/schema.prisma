@@ -247,6 +247,7 @@ enum ApplicationStatus {
   DONE
   CANCELED
   DISCLAIMED
+  DELIVERED
 }
 
 enum TransactionStatus {

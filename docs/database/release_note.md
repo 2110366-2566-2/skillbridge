@@ -15,6 +15,7 @@
         <li><a href="#version-12">v1.2</a></li>
         <ul>
           <li><a href="#version-121">v1.21</a></li>
+          <li><a href="#version-122">v1.22</a></li>
         </ul>
       </ul>
     </li>
@@ -153,5 +154,12 @@
 ### ApplicationStatus
 - `DISCLAIMED` is added
 - `DELIVERED` is deleted
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+# v1.22
+
+### ApplicationStatus
+- `DELIVERED` is added back due to the code dependency, maybe revert back later
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
