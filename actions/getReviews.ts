@@ -1,4 +1,4 @@
-import prisma from "../db/prisma";
+import { prisma } from "../lib/prisma";
 
 const getReviews = async () => {
   const results = await prisma.review.findMany({

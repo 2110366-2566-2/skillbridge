@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/db/prisma";
+import { prisma } from "../lib/prisma";
 
 const deleteJob = async (job_id: string) => {
   try {
