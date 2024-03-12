@@ -1,7 +1,7 @@
 "use server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
-import prisma from "@/db/prisma";
+import { prisma } from "@/lib/prisma";
 import { float } from "@elastic/elasticsearch/lib/api/types";
 import uploadFileToS3 from "../uploadFileToS3";
 
@@ -49,7 +49,7 @@ const createApplication = async (formData: FormData) => {
         userId: session.user.id,
         jobId: jobID,
         bid: bid,
-        documentUrl: url,
+        // documentUrl: url,
       },
     });
 

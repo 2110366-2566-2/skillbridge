@@ -18,8 +18,8 @@ export default async function JobDetail({ jobId, view }: Props) {
         budget: job.budget.toString(),
         acceptNum: job.acceptNum.toString(),
         maxAcceptNum: job.maxAcceptNum.toString(),
-        estimateStartDate: job.estimateStartDate.toISOString().split("T")[0],
-        estimateEndDate: job.estimateEndDate.toISOString().split("T")[0],
+        estimateStartDate: job.estimateStartDate,
+        estimateEndDate: job.estimateEndDate,
         jobTagTitle: job.jobTags,
     };
 

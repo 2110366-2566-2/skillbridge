@@ -4,7 +4,7 @@ import { prisma } from "../lib/prisma";
 import { ApplicationStatus } from "@prisma/client";
 
 const getJobById = async (jobId: string) => {
-  console.log(jobId);
+  console.log("testttttt: ", jobId);
   const job: any = await prisma.job.findFirst({
     where: {
       id: jobId,
@@ -30,8 +30,8 @@ const getJobById = async (jobId: string) => {
   const result: any = {
     id: job.id,
     title: job.title,
-    startDate: job.estimateStartDate.toLocaleDateString("en-GB"),
-    endDate: job.estimateEndDate.toLocaleDateString("en-GB"),
+    estimateStartDate: job.estimateStartDate.toLocaleDateString("en-GB"),
+    estimateEndDate: job.estimateEndDate.toLocaleDateString("en-GB"),
     jobTags: job.jobTag.title,
     description: job.description ? job.description : "",
     acceptNum: job.applications.filter(
