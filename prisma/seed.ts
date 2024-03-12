@@ -889,7 +889,7 @@ prepare reports, และ provide insights for decision-making. \n \
       jobId: j4.id,
       userId: s2.userId,
       bid: 15000,
-      status: "DELIVERED",
+      status: "WAGE_PAYMENT_PENDING",
       applicationDocumentFiles:{
         create: [
           {
@@ -1214,7 +1214,7 @@ prepare reports, และ provide insights for decision-making. \n \
       jobId: j17.id,
       userId: s3.userId,
       bid: 12000,
-      status: "DELIVERED",
+      status: "WAGE_PAYMENT_PENDING",
     },
   })
 
@@ -1239,7 +1239,7 @@ prepare reports, และ provide insights for decision-making. \n \
       jobId: j19.id,
       userId: s1.userId,
       bid: 1200,
-      status: "DELIVERED",
+      status: "WAGE_PAYMENT_PENDING",
     },
   })
 
@@ -1552,6 +1552,451 @@ ensured a smooth and successful collaboration.",
 Their ability to think outside the box and present solutions was truly commendable. The final deliverables reflected a unique \n\
 and fresh perspective, exceeding our expectations.",
     },
+  })
+
+  const t1 = await prisma.transaction.create({
+    data: {
+      jobId: j2.id,
+      studentId: s3.userId,
+      employerUserId: e1.userId,
+      amount: 100,
+      receiptImageName: '8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e',
+    }
+  })
+
+  const t2 = await prisma.transaction.create({
+    data: {
+      jobId: j4.id,
+      studentId: s2.userId,
+      employerUserId: e1.userId,
+      amount: 2000,
+      status: 'ACCEPTED',
+      receiptImageName: 'bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46',
+    }
+  })
+
+  const t3 = await prisma.transaction.create({
+    data: {
+      jobId: j4.id,
+      studentId: s1.userId,
+      employerUserId: e1.userId,
+      amount: 2000,
+      status: 'REJECTED',
+      receiptImageName: 'bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46',
+    }
+  })
+
+  const t4 = await prisma.transaction.create({
+    data: {
+      jobId: j4.id,
+      studentId: s1.userId,
+      employerUserId: e1.userId,
+      amount: 2000,
+      status: 'ACCEPTED',
+      receiptImageName: 'bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68',
+    }
+  })
+
+  const t5 = await prisma.transaction.create({
+    data: {
+      jobId: j4.id,
+      studentId: s1.userId,
+      employerUserId: e1.userId,
+      amount: 8000,
+      status: 'ACCEPTED',
+      receiptImageName: '8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e',
+    }
+  })
+
+  const t6 = await prisma.transaction.create({
+    data: {
+      jobId: j5.id,
+      studentId: s2.userId,
+      employerUserId: e1.userId,
+      amount: 1000,
+      status: 'ACCEPTED',
+      receiptImageName: 'bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68',
+    }
+  })
+
+  const t7 = await prisma.transaction.create({
+    data: {
+      jobId: j5.id,
+      studentId: s2.userId,
+      employerUserId: e1.userId,
+      amount: 4000,
+      status: 'ACCEPTED',
+      receiptImageName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733',
+    }
+  })
+
+  const t8 = await prisma.transaction.create({
+    data: {
+      jobId: j7.id,
+      studentId: s1.userId,
+      employerUserId: e1.userId,
+      amount: 1500,
+      status: 'REJECTED',
+      receiptImageName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733',
+    }
+  })
+
+  const t9 = await prisma.transaction.create({
+    data: {
+      jobId: j7.id,
+      studentId: s1.userId,
+      employerUserId: e1.userId,
+      amount: 1500,
+      status: 'ACCEPTED',
+      receiptImageName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296',
+    }
+  })
+
+  const t10 = await prisma.transaction.create({
+    data: {
+      jobId: j7.id,
+      studentId: s1.userId,
+      employerUserId: e1.userId,
+      amount: 8500,
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
+
+  const t11 = await prisma.transaction.create({
+    data: {
+      jobId: j7.id,
+      studentId: s3.userId,
+      employerUserId: e1.userId,
+      amount: 1500,
+      status: 'ACCEPTED',
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
+
+  const t12 = await prisma.transaction.create({
+    data: {
+      jobId: j7.id,
+      studentId: s3.userId,
+      employerUserId: e1.userId,
+      amount: 8500,
+      status: 'ACCEPTED',
+      receiptImageName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296',
+    }
+  })
+
+  const t13 = await prisma.transaction.create({
+    data: {
+      jobId: j10.id,
+      studentId: s1.userId,
+      employerUserId: e2.userId,
+      amount: 500,
+      status: 'ACCEPTED',
+      receiptImageName: '1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef',
+    }
+  })
+
+  const t14 = await prisma.transaction.create({
+    data: {
+      jobId: j10.id,
+      studentId: s1.userId,
+      employerUserId: e2.userId,
+      amount: 2500,
+      status: 'REJECTED',
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
+
+  const t15 = await prisma.transaction.create({
+    data: {
+      jobId: j15.id,
+      studentId: s1.userId,
+      employerUserId: e2.userId,
+      amount: 2000,
+      status: 'REJECTED',
+      receiptImageName: '24467125aeb077e4cdf8705d08e6e0ed5f4e7c303cb1656f3b9afe46f7346644',
+    }
+  })
+
+  const t16 = await prisma.transaction.create({
+    data: {
+      jobId: j15.id,
+      studentId: s1.userId,
+      employerUserId: e2.userId,
+      amount: 2000,
+      status: 'ACCEPTED',
+      receiptImageName: '1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef',
+    }
+  })
+
+  const t17 = await prisma.transaction.create({
+    data: {
+      jobId: j15.id,
+      studentId: s1.userId,
+      employerUserId: e2.userId,
+      amount: 8000,
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
+
+  const t18 = await prisma.transaction.create({
+    data: {
+      jobId: j15.id,
+      studentId: s2.userId,
+      employerUserId: e2.userId,
+      amount: 3000,
+      status: 'ACCEPTED',
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
+
+  const t19 = await prisma.transaction.create({
+    data: {
+      jobId: j15.id,
+      studentId: s3.userId,
+      employerUserId: e2.userId,
+      amount: 2000,
+      status: 'ACCEPTED',
+      receiptImageName: '24467125aeb077e4cdf8705d08e6e0ed5f4e7c303cb1656f3b9afe46f7346644',
+    }
+  })
+
+  const t20 = await prisma.transaction.create({
+    data: {
+      jobId: j15.id,
+      studentId: s3.userId,
+      employerUserId: e2.userId,
+      amount: 7000,
+      status: 'ACCEPTED',
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
+
+  const t21 = await prisma.transaction.create({
+    data: {
+      jobId: j17.id,
+      studentId: s2.userId,
+      employerUserId: e2.userId,
+      amount: 1200,
+      status: 'ACCEPTED',
+      receiptImageName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296',
+    }
+  })
+
+  const t22 = await prisma.transaction.create({
+    data: {
+      jobId: j17.id,
+      studentId: s3.userId,
+      employerUserId: e2.userId,
+      amount: 2000,
+      status: 'ACCEPTED',
+      receiptImageName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296',
+    }
+  })
+
+  const t23 = await prisma.transaction.create({
+    data: {
+      jobId: j19.id,
+      studentId: s1.userId,
+      employerUserId: e3.userId,
+      amount: 300,
+      status: 'ACCEPTED',
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
+
+  const t24 = await prisma.transaction.create({
+    data: {
+      jobId: j19.id,
+      studentId: s2.userId,
+      employerUserId: e3.userId,
+      amount: 500,
+      status: 'ACCEPTED',
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
+
+  const t25 = await prisma.transaction.create({
+    data: {
+      jobId: j21.id,
+      studentId: s1.userId,
+      employerUserId: e3.userId,
+      amount: 400,
+      status: 'ACCEPTED',
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
+
+  const t26 = await prisma.transaction.create({
+    data: {
+      jobId: j21.id,
+      studentId: s1.userId,
+      employerUserId: e3.userId,
+      amount: 1800,
+      status: 'ACCEPTED',
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
+
+  const t27 = await prisma.transaction.create({
+    data: {
+      jobId: j21.id,
+      studentId: s2.userId,
+      employerUserId: e3.userId,
+      amount: 400,
+      status: 'ACCEPTED',
+      receiptImageName: '1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef',
+    }
+  })
+
+  const t28 = await prisma.transaction.create({
+    data: {
+      jobId: j21.id,
+      studentId: s2.userId,
+      employerUserId: e3.userId,
+      amount: 1600,
+      status: 'ACCEPTED',
+      receiptImageName: 'bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68',
+    }
+  })
+
+  const t29 = await prisma.transaction.create({
+    data: {
+      jobId: j24.id,
+      studentId: s2.userId,
+      employerUserId: e3.userId,
+      amount: 1500,
+      status: 'REJECTED',
+      receiptImageName: '1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef',
+    }
+  })
+
+  const t30 = await prisma.transaction.create({
+    data: {
+      jobId: j24.id,
+      studentId: s2.userId,
+      employerUserId: e3.userId,
+      amount: 1500,
+      receiptImageName: '1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef',
+    }
+  })
+
+  const t31 = await prisma.transaction.create({
+    data: {
+      jobId: j25.id,
+      studentId: s3.userId,
+      employerUserId: e3.userId,
+      amount: 500,
+      status: 'REJECTED',
+      receiptImageName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296',
+    }
+  })
+
+  const t32 = await prisma.transaction.create({
+    data: {
+      jobId: j25.id,
+      studentId: s3.userId,
+      employerUserId: e3.userId,
+      amount: 500,
+      status: 'ACCEPTED',
+      receiptImageName: '24467125aeb077e4cdf8705d08e6e0ed5f4e7c303cb1656f3b9afe46f7346644',
+    }
+  })
+
+  const t33 = await prisma.transaction.create({
+    data: {
+      jobId: j25.id,
+      studentId: s3.userId,
+      employerUserId: e3.userId,
+      amount: 2500,
+      status: 'ACCEPTED',
+      receiptImageName: '1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef',
+    }
+  })
+
+  const t34 = await prisma.transaction.create({
+    data: {
+      jobId: j25.id,
+      studentId: s2.userId,
+      employerUserId: e3.userId,
+      amount: 400,
+      status: 'ACCEPTED',
+      receiptImageName: 'bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46',
+    }
+  })
+
+  const t35 = await prisma.transaction.create({
+    data: {
+      jobId: j25.id,
+      studentId: s2.userId,
+      employerUserId: e3.userId,
+      amount: 1600,
+      status: 'ACCEPTED',
+      receiptImageName: '3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609',
+    }
+  })
+
+  const t36 = await prisma.transaction.create({
+    data: {
+      jobId: j27.id,
+      studentId: s1.userId,
+      employerUserId: e3.userId,
+      amount: 800,
+      status: 'ACCEPTED',
+      receiptImageName: '3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609',
+    }
+  })
+
+  const t37 = await prisma.transaction.create({
+    data: {
+      jobId: j27.id,
+      studentId: s2.userId,
+      employerUserId: e3.userId,
+      amount: 1000,
+      status: 'ACCEPTED',
+      receiptImageName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296',
+    }
+  })
+
+  const t38 = await prisma.transaction.create({
+    data: {
+      jobId: j27.id,
+      studentId: s2.userId,
+      employerUserId: e3.userId,
+      amount: 5000,
+      receiptImageName: '3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609',
+    }
+  })
+
+  const t39 = await prisma.transaction.create({
+    data: {
+      jobId: j27.id,
+      studentId: s3.userId,
+      employerUserId: e3.userId,
+      amount: 700,
+      status: 'ACCEPTED',
+      receiptImageName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733',
+    }
+  })
+
+  const t40 = await prisma.transaction.create({
+    data: {
+      jobId: j27.id,
+      studentId: s3.userId,
+      employerUserId: e3.userId,
+      amount: 4800,
+      status: 'REJECTED',
+      receiptImageName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296',
+    }
+  })
+
+  const t41 = await prisma.transaction.create({
+    data: {
+      jobId: j27.id,
+      studentId: s3.userId,
+      employerUserId: e3.userId,
+      amount: 4800,
+      receiptImageName: 'bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68',
+    }
   })
 
 }
