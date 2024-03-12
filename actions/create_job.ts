@@ -7,7 +7,7 @@ import uploadMultipleFilesToS3 from "@/actions/uploadMultipleFilesToS3";
 
 const createJob = async (formData: FormData) => {
   try {
-    const employerId = formData.get("employerId") as string;
+    // const employerId = formData.get("employerId") as string;
     const title = formData.get("title") as string;
     const description = formData.get("description") as string;
     const estimateStartDate = formData.get("estimateStartDate") as string;
@@ -22,7 +22,6 @@ const createJob = async (formData: FormData) => {
 
     // Test log
     console.log(
-      employerId,
       title,
       status,
       description,
@@ -54,7 +53,7 @@ const createJob = async (formData: FormData) => {
     }
     let job = await prisma.job.create({
       data: {
-        employerId: employerId,
+        employerId: session.user.id,
         title: title,
         status: status,
         description: description,
