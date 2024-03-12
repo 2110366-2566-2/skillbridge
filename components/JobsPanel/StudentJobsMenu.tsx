@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import JobToggler from "./JobToggler";
 import Sorter from "./Sorter";
 import StudentJobsPanel from "./StudentJobsPanel";
+import filterStudentJobs from "@/lib/Jobs/filterJobToggler";
+import StudentDoneJobsPanel from "./StudentDoneJobsPanel";
 
 const data = [
 	{
@@ -81,6 +83,20 @@ const data = [
 	},
 ];
 
+const doneData = [{
+jobId: '234324',
+isDeleted: false,
+  name: 'Comp Progdcsfe',
+  budget: 50000,
+  description: 'tewtstes',
+  category: 'Dick',
+  applicants: 50,
+  maxApplicants: 100,
+  startDate: "2/2/3",
+  endDate: "5/2/3",
+  isPending: false,
+}]
+
 type Props = {};
 
 const jobTypeList = ["งานที่กำลังสมัคร", "งานปัจจุบัน", "งานที่เสร็จสิ้น"];
@@ -116,14 +132,14 @@ const StudentJobsMenu = (props: Props) => {
 					</div>
 
 					{/* Sort button */}
-					<Sorter
+					{jobType !== "งานที่เสร็จสิ้น" ? <Sorter
 						sideBarState={{
 							name: "sidebar",
 							value: isOpeningSideBar,
 							set: setIsOpeningSideBar,
 						}}
 						sortOptions={sortOptions}
-					/>
+					/> : ''}
 				</div>
 			</section>
 
@@ -135,12 +151,17 @@ const StudentJobsMenu = (props: Props) => {
 						startDateSortOption={startDateSortOption}
 						endDateSortOption={endDateSortOption}
 						statusSortOption={statusSortOption}
-						data={data}
+						data={data.filter((arg) => filterStudentJobs(arg, jobType))}
 					/>
 				) : jobType === "งานปัจจุบัน" ? (
-					<div>Current Jobs</div>
+					<StudentJobsPanel
+						startDateSortOption={startDateSortOption}
+						endDateSortOption={endDateSortOption}
+						statusSortOption={statusSortOption}
+						data={data.filter((arg) => filterStudentJobs(arg, jobType))}
+					/>
 				) : (
-					<div>Done Jobs</div>
+					<StudentDoneJobsPanel data={doneData} />
 				)}
 			</div>
 		</>
