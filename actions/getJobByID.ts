@@ -44,6 +44,7 @@ const getJobById = async (jobId: string) => {
     organization: job.employer.organization,
     status: job.status,
     numWorker: job.numWorker,
+    jobTagId: job.jobTag.id,
   };
   return result;
 };
