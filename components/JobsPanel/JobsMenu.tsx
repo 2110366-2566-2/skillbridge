@@ -15,6 +15,7 @@ const jobTypeList = ['งานปัจจุบัน', 'งานที่เ
 
 // export function
 function JobsMenu(props: Props){
+  const { data: session } = useSession();
   const [jobType, setJobType] = useState('งานปัจจุบัน');
   const [startDateSortOption, setStartDateSortOption] = useState("-");
   const [endDateSortOption, setEndDateSortOption] = useState("-");
@@ -26,9 +27,12 @@ function JobsMenu(props: Props){
 
   useEffect(() => {
     async function fetchData() {
-      /* TODO: later improvement to useServerSide session and pass as props to the client side */
+      if (session) {
         try {
-          const [pendingJobs, doneJobs] = await fetchInitialData();
+          // session.user.id
+          const [pendingJobs, doneJobs] = await fetchInitialData(
+            "92e60ed5-51d8-4875-bb4e-5760a09a0449",
+          );
           setPendingJobs(
             pendingJobs.filter((jobCard) => !jobCard.isDeleted),
           );
@@ -36,6 +40,7 @@ function JobsMenu(props: Props){
         } catch (err) {
           console.log("Fetching user's jobs error :", err);
         }
+      }
     }
     fetchData();
   }, []);

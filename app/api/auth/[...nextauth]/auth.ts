@@ -48,17 +48,17 @@ export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async signIn({ account, profile, user, credentials }) {
-      // console.log(
-      //   "signIn",
-      //   "account",
-      //   account,
-      //   "profile",
-      //   profile,
-      //   "user",
-      //   user,
-      //   "credentials",
-      //   credentials,
-      // );
+      console.log(
+        "signIn",
+        "account",
+        account,
+        "profile",
+        profile,
+        "user",
+        user,
+        "credentials",
+        credentials,
+      );
       if (
         account?.provider === "google" &&
         profile?.email?.endsWith("21@student.chula.ac.th")
@@ -72,23 +72,24 @@ export const authOptions: AuthOptions = {
       return "/";
     },
     async jwt({ token, account, profile, user }) {
-      // console.log(
-      //   "jwt",
-      //   "account",
-      //   account,
-      //   "profile",
-      //   profile,
-      //   "token",
-      //   token,
-      //   "user",
-      //   user,
-      // );
+      console.log(
+        "jwt",
+        "account",
+        account,
+        "profile",
+        profile,
+        "token",
+        token,
+        "user",
+        user,
+      );
       if (account) token.account = account;
       if (profile) token.profile = profile;
       if (user) token.user = user;
       return token;
     },
     async session({ session, token, user }) {
+      console.log("session", "session", session, "token", token, "user", user);
       return { ...token, expires: session.expires };
     },
   },

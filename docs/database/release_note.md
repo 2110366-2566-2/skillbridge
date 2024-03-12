@@ -13,9 +13,6 @@
           <li><a href="#version-113">v1.13</a></li>
         </ul>
         <li><a href="#version-12">v1.2</a></li>
-        <ul>
-          <li><a href="#version-121">v1.21</a></li>
-        </ul>
       </ul>
     </li>
   </ul>
@@ -29,6 +26,8 @@
 ## Version 1.00
 
 - init version as copied from the existed docs
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -74,6 +73,8 @@
 
 - `isDeleted` is added for the deletion in `User, Job, JobTag, Applied, Transaction, Review` for referential integrity contraint
 - Change table name from `Applied` to `Application`
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -139,15 +140,5 @@
 
 ### TransactionStatus
 - consists of `PENDING`, `ACCEPTED`, and `REJECTED`
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-# v1.21
-
-### MailLog
-- This table is added for keeping track of emails sended from the system
-
-### ApplicationStatus
-- `DISCLAIMED` is added
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

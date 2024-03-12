@@ -6,13 +6,20 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import uploadMultipleFilesToS3 from "@/actions/uploadMultipleFilesToS3";
 
 const createJob = async (formData: FormData) => {
-  const session = await getServerSession(authOptions);
   try {
-    if (session?.user?.id) {
-      const employer = await prisma.employer.findFirst({
-        where: { userId: session.user.id },
-        select: { userId: true }
-      })
+    const employerId = formData.get("employerId") as string;
+    const title = formData.get("title") as string;
+    const description = formData.get("description") as string;
+    const estimateStartDate = formData.get("estimateStartDate") as string;
+    const parsedStartDate = new Date(estimateStartDate);
+    const estimateEndDate = formData.get("estimateEndDate") as string;
+    const parsedEndDate = new Date(estimateEndDate);
+    const budget = parseInt(formData.get("budget") as string, 10);
+    const jobTagId = formData.get("jobTagId") as string;
+    const numWorker = parseInt(formData.get("numWorker") as string, 10);
+    const files = formData.getAll("files[]") as File[];
+    const status = "NOT_STARTED" as JobStatus;
+
     // Test log
     console.log(
       employerId,
@@ -65,22 +72,14 @@ const createJob = async (formData: FormData) => {
           fileName: results[i],
         },
       });
-      for (let i = 0; i < results.length; i++) {
-        await prisma.jobDocumentFile.create({
-          data: {
-            jobId: job.id,
-            fileName: results[i].secure_url,
-          },
-        });
-      }
-
-      const successResponse = {
-        message: "Create Task Success",
-        status: 201,
-      };
-      console.log(successResponse);
-      return successResponse;
     }
+
+    const successResponse = {
+      message: "Create Task Success",
+      status: 201,
+    };
+    console.log(successResponse);
+    return successResponse;
   } catch (error: any) {
     console.log(error);
     return {
