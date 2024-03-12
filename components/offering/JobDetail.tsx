@@ -5,10 +5,10 @@ import EmployerDetail from "./EmployerDetail";
 
 type Props = {
     jobId: string,
-    view: string
+    isStudentView: boolean
 };
 
-export default async function JobDetail({ jobId, view }: Props) {
+export default async function JobDetail({ jobId, isStudentView }: Props) {
     const job = await getJobById(jobId);
     if (!job) return;
 
@@ -68,10 +68,11 @@ export default async function JobDetail({ jobId, view }: Props) {
                     </div>
                     <div>
                         <div className="flex flex-col text-[15px]">
-                            <div className="font-semibold text-green-600 self-end">ยังเปิดรับอยู่</div>
-                            {/* TODO: Works with Nut's page */}
-                            <div className="hidden font-semibold self-end">{jobData.budget}</div>
-                            <div className="text-[#838383]"><span className="font-medium">รับแล้ว : </span><span className="font-semibold">{jobData.acceptNum} / {jobData.maxAcceptNum}</span><span className="font-medium"> คน</span></div>
+                            {/* To show in student's view */}
+                            {isStudentView && <div className="font-semibold text-green-600 self-end">ยังเปิดรับอยู่</div>}
+                            {/* To show in employer's view */}
+                            {!isStudentView && <div className="text-[#313866] self-end"><span className="font-medium">ค่าจ้างที่ตั้งไว้ : </span><span className="font-semibold">฿{jobData.budget.toLocaleString()}</span></div>}
+                            <div className="text-[#838383] self-end"><span className="font-medium">รับแล้ว : </span><span className="font-semibold">{jobData.acceptNum} / {jobData.maxAcceptNum}</span><span className="font-medium"> คน</span></div>
                         </div>
                     </div>
                 </div>
