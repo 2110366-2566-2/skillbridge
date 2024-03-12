@@ -10,9 +10,9 @@ import Input from "../input/input/Input";
 import TextAreaInput from "../input/textAreaInput/TextAreaInput";
 import SelectInput from "../input/selectInput/SelectInput";
 import FilesInput from "../input/fileInput/FileInput";
-import createJob from "@/actions/create_job";
-import deleteJob from "@/actions/delete_job";
-import updateJob from "@/actions/update_job";
+import createJob from "@/actions/createJob";
+import deleteJob from "@/actions/deleteJob";
+import updateJob from "@/actions/updateJob";
 import DeleteModal from "./deleteModal/DeleteModal";
 import LoadingButton from "./loadingButton/LoadingButton";
 import humanImage from "@/public/images/human.png";
@@ -67,7 +67,7 @@ export default function JobForm(props: Props) {
   });
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -129,10 +129,10 @@ export default function JobForm(props: Props) {
           // Create Job
           const res = await createJob(formDataObject);
           console.log(res);
-          if (res?.status === 201) {
+          if (res.status === 201) {
             toast.success("สร้างงานสำเร็จ");
           } else {
-            toast.error(res?.message);
+            toast.error(res.message);
           }
         } else {
           // Update Job

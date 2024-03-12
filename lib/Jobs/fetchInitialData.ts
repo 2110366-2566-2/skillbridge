@@ -23,19 +23,16 @@ const fetchInitialData = async () => {
 
     console.log(tasks);
     const pendingTasks: Array<TaskCardType> = tasks.filter(
-      (task) => task.isPending === true,
+      (task) => task.isPending === true
     );
     const doneTasks: Array<TaskCardType> = tasks.filter(
-      (task) => task.isPending === false,
+      (task) => task.isPending === false
     );
 
     return [pendingTasks, doneTasks];
   } else {
-    return [[], []]
+    return [[], []];
   }
-
 };
 
 export default fetchInitialData;
-
-// {name: task.title, budget: task.budget, description: task.description, category: task.jobTags, applicants: task.acceptNum, maxApplicants: task.maxAcceptNum, startDate: task.startDate, endDate: task.endDate, isPending: task.jobStatus === "NOT_STARTED"}
