@@ -47,7 +47,7 @@ export default function StudentOffer({
 
     let dropDownObject = <div></div>;
     let statusColor = '#dcfce7';
-    let titleWidth = windowSize.width >= 1280 ? "1050px" : '235px';
+    let titleWidth = windowSize.width >= 1280 ? "1015px" : '200px';
     let heightOfDropDownCard = windowSize.width >= 1280 ? "142px" : "215px";
     let heightCard = windowSize.width >= 1280 ? "100px" : '128px';
     let titleLineClamp = windowSize.width >= 1280 ? "line-clamp-1" : "line-clamp-2"
@@ -84,8 +84,8 @@ export default function StudentOffer({
     }
 
     return (
-        <div className="flex flex-col items-end w-[370px] mt-[10px] xl:w-[1190px]">
-            <div style={{ height: isDropDownOpen ? heightOfDropDownCard : heightCard }} className="relative w-[370px] px-[20px] pt-[20px] bg-white rounded-xl shadow-md xl:w-[1190px]">
+        <div className="flex flex-col items-end w-[335px] xl:w-[1190px]">
+            <div style={{ height: isDropDownOpen ? heightOfDropDownCard : heightCard }} className="relative w-[335px] px-[20px] pt-[20px] bg-white rounded-xl shadow-md xl:w-[1190px]">
                 <div className="w-full">
                     <div className="relative">
 
