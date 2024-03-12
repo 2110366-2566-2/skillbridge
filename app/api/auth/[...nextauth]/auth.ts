@@ -4,7 +4,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "../../../../lib/prisma";
 import bcrypt from "bcrypt";
 
-
 export const authOptions: AuthOptions = {
   providers: [
     GoogleProvider({
@@ -30,7 +29,7 @@ export const authOptions: AuthOptions = {
 
         const isMatch = await bcrypt.compare(
           credentials.password,
-          user.hashedPassword,
+          user.hashedPassword
         );
 
         if (!isMatch) throw new Error("Invalid password");
@@ -89,6 +88,7 @@ export const authOptions: AuthOptions = {
       return token;
     },
     async session({ session, token, user }) {
+      // console.log("session", "session", session, "token", token, "user", user);
       return { ...token, expires: session.expires };
     },
   },
