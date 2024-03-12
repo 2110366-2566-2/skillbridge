@@ -1,5 +1,6 @@
 import JobStatus from "@/components/jobStatus/jobStatus";
 import JobDescription from "@/components/jobStatus/jobDescription";
+import StudentOffer from "@/components/studentOffer/studentOffer";
 
 export default function testJobCard() {
 
@@ -43,7 +44,7 @@ export default function testJobCard() {
                 title="รับสมัคร TA วิชา Comp Prog"
                 period="18/10/2545 - 21/10/2545"
                 tag="การสอน"
-                status="รอผู้จ่างจ่ายมัดจำ"
+                status="รอผู้จ้างจ่ายมัดจำ"
             />
             <JobStatus
                 userId="001"
@@ -51,7 +52,7 @@ export default function testJobCard() {
                 title="รับสมัคร TA วิชา Comp Prog"
                 period="18/10/2545 - 21/10/2545"
                 tag="การสอน"
-                status="รอผู้จ่างจ่ายค่าจ้าง"
+                status="รอผู้จ้างจ่ายค่าจ้าง"
             />
 
             <JobStatus
@@ -81,7 +82,16 @@ export default function testJobCard() {
                 period="18/10/2545 - 21/10/2545"
                 tag="การสอน"
                 price="฿1,000"
+            />
 
+            <StudentOffer
+                studentId="001"
+                jobId="001"
+                studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
+                applicationDate="18/10/2545"
+                applicationTime="21:59 น."
+                status="สมัคร"
+                price="฿1,000"
             />
         </main>
     )

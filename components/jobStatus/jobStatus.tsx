@@ -31,7 +31,7 @@ export default function JobStatus({
 
     const handleDropDownClicked = () => {
         setisDropDownOpen((prev) => !prev);
-        setDropDownAbove((prev) => {
+        setDropDownAbove(() => {
             if (isDropDownOpen) {
                 return '27px'
             } else {
@@ -62,11 +62,11 @@ export default function JobStatus({
             statusColor = '#fef9c3'
             statusWidth = '230px'
             break;
-        case 'รอผู้จ่างจ่ายมัดจำ':
+        case 'รอผู้จ้างจ่ายมัดจำ':
             dropDownObject = <TaskPledgeStatusBox userId={userId} jobId={jobId} />
             statusColor = '#fef9c3'
             break;
-        case 'รอผู้จ่างจ่ายค่าจ้าง':
+        case 'รอผู้จ้างจ่ายค่าจ้าง':
             dropDownObject = <TaskPaymentStatusBox userId={userId} jobId={jobId} />
             statusColor = '#fef9c3'
             break;
@@ -85,7 +85,7 @@ export default function JobStatus({
 
     return (
         <div className="flex flex-col items-end w-[370px]">
-            <div style={{ height: isDropDownOpen ? "215px" : "170px" }} className="relative w-[370px] px-[20px] pt-[25px] bg-white rounded-xl shadow-lg">
+            <div style={{ height: isDropDownOpen ? "220px" : "175px" }} className="relative w-[370px] px-[20px] pt-[25px] bg-white rounded-xl shadow-lg">
                 <div className="w-full">
                     <div className="relative">
 
@@ -98,7 +98,7 @@ export default function JobStatus({
 
                         {/* Title Component */}
                         <div style={{ width: statusWidth }} className="h-[56px]">
-                            <p className="font-semibold text-[#313866] text-xl line-clamp-2">
+                            <p className="font-bold text-[#313866] text-xl line-clamp-2">
                                 {title}
                             </p>
                         </div>
