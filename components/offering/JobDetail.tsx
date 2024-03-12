@@ -67,12 +67,12 @@ export default async function JobDetail({ jobId, isStudentView }: Props) {
                         <div><span className="font-semibold">วันสิ้นสุดงาน : </span><span className="font-medium">{jobData.estimateEndDate ? FormattedDate(jobData.estimateEndDate) : "ไม่มีกำหนด"}</span></div>
                     </div>
                     <div>
-                        <div className="flex flex-col text-[15px]">
+                        <div className="flex flex-col text-[15px] items-end">
                             {/* To show in student's view */}
-                            {isStudentView && <div className="font-semibold text-green-600 self-end">ยังเปิดรับอยู่</div>}
+                            {isStudentView && <div className="font-semibold text-green-600">ยังเปิดรับอยู่</div>}
                             {/* To show in employer's view */}
-                            {!isStudentView && <div className="text-[#313866] self-end"><span className="font-medium">ค่าจ้างที่ตั้งไว้ : </span><span className="font-semibold">฿{jobData.budget.toLocaleString()}</span></div>}
-                            <div className="text-[#838383] self-end"><span className="font-medium">รับแล้ว : </span><span className="font-semibold">{jobData.acceptNum} / {jobData.maxAcceptNum}</span><span className="font-medium"> คน</span></div>
+                            {!isStudentView && <div className="text-[#313866]"><span className="font-medium">ค่าจ้างที่ตั้งไว้ : </span><span className="font-semibold">฿{jobData.budget.toLocaleString()}</span></div>}
+                            <div className="text-[#838383]"><span className="font-medium">รับแล้ว : </span><span className="font-semibold">{jobData.acceptNum} / {jobData.maxAcceptNum}</span><span className="font-medium"> คน</span></div>
                         </div>
                     </div>
                 </div>
