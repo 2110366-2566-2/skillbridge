@@ -1,5 +1,6 @@
 "use server";
-import prisma from "../db/prisma";
+import { prisma } from "../lib/prisma";
+import cloudinary from "../lib/bucket";
 import { JobStatus } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
@@ -107,7 +108,7 @@ const createJob = async (formData: FormData) => {
       await prisma.jobDocumentFile.create({
         data: {
           jobId: job.id,
-          fileUrl: results[i],
+          fileName: results[i].secure_url,
         },
       });
     }

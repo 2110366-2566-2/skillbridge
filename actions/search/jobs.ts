@@ -1,8 +1,7 @@
 "use server";
-import { PrismaClient, JobStatus, ApplicationStatus } from "@prisma/client";
+import { JobStatus, ApplicationStatus } from "@prisma/client";
+import { prisma } from "../../lib/prisma"
 import { Client } from "@elastic/elasticsearch";
-
-const prisma = new PrismaClient();
 
 const elasticClient = new Client({
   node: process.env.ELASTIC_NODE_URL, // Elasticsearch endpoint
