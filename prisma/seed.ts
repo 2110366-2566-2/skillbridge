@@ -8,6 +8,7 @@ interface jobTagList {
 
 async function main() {
   await prisma.review.deleteMany({});
+  await prisma.applicationDocumentFile.deleteMany({});
   await prisma.application.deleteMany({});
   await prisma.jobDocumentFile.deleteMany({});
   await prisma.job.deleteMany({});
@@ -53,6 +54,37 @@ async function main() {
     jobTagList[jobTagName] = jobTag.id;
   }
 
+  const s_test = await prisma.student.create({
+    data: {
+      user: {
+        create: {
+          salutation: 'นาย',
+          firstname: 'นักศึกษา',
+          lastname: 'นักล่าปริญญา',
+          hashedPassword: '$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W',
+          email: 'student@student.chula.ac.th'
+        }
+      }
+    }
+  })
+
+  const e_test = await prisma.employer.create({
+    data: {
+        position: "Billionaire",
+        organization: "SoeiCorp.",
+        publicEmail: "employer@employer.com",
+        user: {
+            create: {
+                salutation: 'เดอะ',
+                firstname: 'ลีซาน',
+                lastname: 'อัลไกอีบ',
+                hashedPassword: '$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W',
+                email: 'employer@employer.com'
+            }
+        }
+    }
+  })
+
   const s1 = await prisma.student.create({
     data: {
       resumeUrl:
@@ -66,7 +98,7 @@ async function main() {
           salutation: 'นาย',
           firstname: 'ศุภณัฐ',
           lastname: 'ตั้งสินมั่นคง',
-          hashedPassword: 'thisishashespassword',
+          hashedPassword: '$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W',
           email: '6430388021@student.chula.ac.th'
         }
       }
@@ -86,7 +118,7 @@ async function main() {
           salutation: 'นาย',
           firstname: 'พิตตินันท์',
           lastname: 'หาญสิงห์กุญช์',
-          hashedPassword: 'thisishashespassword',
+          hashedPassword: '$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W',
           email: '6432115421@student.chula.ac.th'
         }
       }
@@ -105,7 +137,7 @@ async function main() {
           salutation: 'บัก',
           firstname: 'นอร์ธ',
           lastname: 'ข้นอีสาน',
-          hashedPassword: 'thisishashespassword',
+          hashedPassword: '$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W',
           email: '6437820221@student.chula.ac.th',
         }
       }
@@ -122,7 +154,7 @@ async function main() {
           salutation: "เสี่ย",
           firstname: "ปิง",
           lastname: "บรูไน",
-          hashedPassword: "thisishashespassword",
+          hashedPassword: "$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W",
           email: "6435644121@student.chula.ac.th",
         },
       },
@@ -142,7 +174,7 @@ async function main() {
                 {
                   userId: s1.userId,
                   bid: 1200,
-                  applicationDocumentFiles: {
+                  applicationDocumentFiles:{
                     create: [
                       {
                         fileName: '8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e'
@@ -156,7 +188,7 @@ async function main() {
                 {
                   userId: s2.userId,
                   bid: 800,
-                  applicationDocumentFiles: {
+                  applicationDocumentFiles:{
                     create: [
                       {
                         fileName: 'bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68'
@@ -183,26 +215,26 @@ async function main() {
                 {
                   userId: s1.userId,
                   bid: 600,
-                  applicationDocumentFiles: {
+                  applicationDocumentFiles:{
                     create: [
                       {
                         fileName: '8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e'
                       },
                     ]
                   },
-                  status: "ACCEPTED",
+                  status: "DEPOSIT_PENDING",
                 },
                 {
                   userId: s3.userId,
                   bid: 500,
-                  applicationDocumentFiles: {
+                  applicationDocumentFiles:{
                     create: [
                       {
                         fileName: 'bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46'
                       },
                     ]
                   },
-                  status: "ACCEPTED",
+                  status: "IN_PROGRESS",
                 },
               ],
             },
@@ -222,7 +254,7 @@ async function main() {
                 {
                   userId: s2.userId,
                   bid: 10000,
-                  applicationDocumentFiles: {
+                  applicationDocumentFiles:{
                     create: [
                       {
                         fileName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733'
@@ -254,7 +286,7 @@ async function main() {
                 {
                   userId: s3.userId,
                   bid: 10000,
-                  applicationDocumentFiles: {
+                  applicationDocumentFiles:{
                     create: [
                       {
                         fileName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733'
@@ -264,12 +296,12 @@ async function main() {
                       },
                     ]
                   },
-                  status: "ACCEPTED",
+                  status: "DONE",
                 },
                 {
                   userId: s2.userId,
                   bid: 15000,
-                  applicationDocumentFiles: {
+                  applicationDocumentFiles:{
                     create: [
                       {
                         fileName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733'
@@ -279,19 +311,19 @@ async function main() {
                       },
                     ]
                   },
-                  status: "REJECTED",
+                  status: "DELIVERED",
                 },
                 {
                   userId: s1.userId,
                   bid: 8000,
-                  applicationDocumentFiles: {
+                  applicationDocumentFiles:{
                     create: [
                       {
                         fileName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9'
                       },
                     ]
                   },
-                  status: "ACCEPTED",
+                  status: "DONE",
                 },
               ],
             },
@@ -328,7 +360,7 @@ async function main() {
                 {
                   userId: s1.userId,
                   bid: 6000,
-                  applicationDocumentFiles: {
+                  applicationDocumentFiles:{
                     create: [
                       {
                         fileName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733'
@@ -343,26 +375,26 @@ async function main() {
                 {
                   userId: s2.userId,
                   bid: 5000,
-                  applicationDocumentFiles: {
+                  applicationDocumentFiles:{
                     create: [
                       {
                         fileName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9'
                       },
                     ]
                   },
-                  status: "ACCEPTED",
+                  status: "DONE",
                 },
                 {
                   userId: s3.userId,
                   bid: 5000,
-                  applicationDocumentFiles: {
+                  applicationDocumentFiles:{
                     create: [
                       {
                         fileName: '8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e'
                       },
                     ]
                   },
-                  status: "REJECTED",
+                  status: "CANCELED",
                 },
               ],
             },
@@ -398,7 +430,7 @@ Proficiency ใน Excel หรือ Google Sheets เป็น essential, \n \
                 {
                   userId: s3.userId,
                   bid: 5000,
-                  applicationDocumentFiles: {
+                  applicationDocumentFiles:{
                     create: [
                       {
                         fileName: '3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609'
@@ -412,7 +444,7 @@ Proficiency ใน Excel หรือ Google Sheets เป็น essential, \n \
 
           {
             title: 'Social Media Content Manager / ผู้จัดการเนื้อหาโซเชียลมีเดีย',
-            status: 'NOT_STARTED',
+            status: 'COMPLETED',
             description: 'Looking for a dynamic individual with ทักษะในการสร้าง \n \
 engaging content สำหรับ social media platforms. Responsibilities include \n \
 content creation, strategic planning, and performance analysis.',
@@ -426,7 +458,7 @@ content creation, strategic planning, and performance analysis.',
                 {
                   userId: s1.userId,
                   bid: 10000,
-                  applicationDocumentFiles: {
+                  applicationDocumentFiles:{
                     create: [
                       {
                         fileName: '3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609'
@@ -436,12 +468,12 @@ content creation, strategic planning, and performance analysis.',
                       },
                     ]
                   },
-                  status: "ACCEPTED",
+                  status: "DONE",
                 },
                 {
                   userId: s3.userId,
                   bid: 12000,
-                  applicationDocumentFiles: {
+                  applicationDocumentFiles:{
                     create: [
                       {
                         fileName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9'
@@ -451,7 +483,7 @@ content creation, strategic planning, and performance analysis.',
                       },
                     ]
                   },
-                  status: "ACCEPTED",
+                  status: "DONE",
                 },
               ],
             },
@@ -492,7 +524,7 @@ generate insights, และ provide data-driven recommendations. \n \
                 {
                   userId: s1.userId,
                   bid: 18000,
-                  applicationDocumentFiles: {
+                  applicationDocumentFiles:{
                     create: [
                       {
                         fileName: 'bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46'
@@ -503,7 +535,7 @@ generate insights, และ provide data-driven recommendations. \n \
                 {
                   userId: s2.userId,
                   bid: 17000,
-                  applicationDocumentFiles: {
+                  applicationDocumentFiles:{
                     create: [
                       {
                         fileName: '24467125aeb077e4cdf8705d08e6e0ed5f4e7c303cb1656f3b9afe46f7346644'
@@ -535,7 +567,7 @@ generate insights, และ provide data-driven recommendations. \n \
                 {
                   userId: s2.userId,
                   bid: 20000,
-                  applicationDocumentFiles: {
+                  applicationDocumentFiles:{
                     create: [
                       {
                         fileName: '24467125aeb077e4cdf8705d08e6e0ed5f4e7c303cb1656f3b9afe46f7346644'
@@ -546,7 +578,7 @@ generate insights, และ provide data-driven recommendations. \n \
                 {
                   userId: s3.userId,
                   bid: 22000,
-                  applicationDocumentFiles: {
+                  applicationDocumentFiles:{
                     create: [
                       {
                         fileName: '8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e'
@@ -573,7 +605,7 @@ generate insights, และ provide data-driven recommendations. \n \
           salutation: "ยัง",
           firstname: "เฟย",
           lastname: "มาเท่อ",
-          hashedPassword: "thisishashedpassword",
+          hashedPassword: "$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W",
           email: "6437811521@student.chula.ac.th",
         },
       },
@@ -595,12 +627,12 @@ generate insights, และ provide data-driven recommendations. \n \
                 {
                   userId: s1.userId,
                   bid: 3000,
-                  status: "ACCEPTED",
+                  status: "DONE",
                 },
                 {
                   userId: s3.userId,
                   bid: 2000,
-                  status: "REJECTED",
+                  status: "CANCELED",
                 },
               ],
             },
@@ -678,6 +710,7 @@ Proficiency ใน design tools เป็น",
                 {
                   userId: s3.userId,
                   bid: 2000,
+                  status: "DEPOSIT_PENDING",
                 },
               ],
             },
@@ -700,10 +733,12 @@ with logistics partners. มีความรู้เกี่ยวกับ�
                 {
                   userId: s1.userId,
                   bid: 5000,
+                  status: "DEPOSIT_PENDING",
                 },
                 {
                   userId: s3.userId,
                   bid: 5500,
+                  status: "CANCELED",
                 },
               ],
             },
@@ -726,17 +761,17 @@ prepare reports, และ provide insights for decision-making. \n \
                 {
                   userId: s1.userId,
                   bid: 10000,
-                  status: "ACCEPTED",
+                  status: "DONE",
                 },
                 {
                   userId: s2.userId,
                   bid: 12000,
-                  status: "ACCEPTED",
+                  status: "WAGE_PAYMENT_PENDING",
                 },
                 {
                   userId: s3.userId,
                   bid: 9000,
-                  status: "ACCEPTED",
+                  status: "DONE",
                 },
               ],
             },
@@ -748,13 +783,6 @@ prepare reports, และ provide insights for decision-making. \n \
                   description:
                     "นิสิตคนนี้มีความสามารถในการจัดการงานและสามารถปฏิบัติงานตามที่ได้รับมอบหมายได้อย่างมีประสิทธิภาพ\n\
 ความรวดเร็วในการตอบสนองและสามารถทำงานภารกิจที่ซับซ้อนอย่างมีประสิทธิภาพ การมีสมาธิในการปรับตัวตามสถานการณ์ได้ดีเยี่ยม",
-                },
-                {
-                  studentId: s2.userId,
-                  stars: 3,
-                  description:
-                    "การร่วมงานกับนิสิตนี้เป็นประสบการณ์ที่ทรงพลังมาก ทักษะทางวิชาการของเขามีคุณภาพสูง\n\
-การทำงานที่ให้ได้มีความละเอียดสูงและการแก้ไขปัญหาที่เกิดขึ้นอย่างมีประสิทธิภาพ นอกจากนี้ ความมุ่งมั่นที่แสดงออกมาทำให้เขาเป็นส่วนสำคัญในการสำเร็จของโปรเจกต์",
                 },
                 {
                   studentId: s3.userId,
@@ -784,10 +812,12 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
                 {
                   userId: s1.userId,
                   bid: 9000,
+                  status: "CANCELED",
                 },
                 {
                   userId: s2.userId,
                   bid: 11500,
+                  status: "DEPOSIT_PENDING",
                 },
               ],
             },
@@ -795,7 +825,7 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
 
           {
             title: "นักวิจัยตลาดและ Market Researcher",
-            status: "NOT_STARTED",
+            status: "IN_PROGRESS",
             description:
               "Seeking a market researcher ที่สามารถ conduct market analysis, \n \
 gather insights, และ identify trends. Responsibilities รวมถึงการเขียนรายงานและการนำเสนอข้อมูลตลาด.",
@@ -809,10 +839,12 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
                 {
                   userId: s2.userId,
                   bid: 10000,
+                  status: "IN_PROGRESS",
                 },
                 {
                   userId: s3.userId,
                   bid: 12000,
+                  status: "DELIVERED",
                 },
               ],
             },
@@ -834,7 +866,7 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
           firstname: "ทิพ",
           middlename: "สาม",
           lastname: "บิด",
-          hashedPassword: "thisishashedpassword",
+          hashedPassword: "$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W",
           email: "6432345221@student.chula.ac.th",
         },
       },
@@ -897,12 +929,12 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
                 {
                   userId: s1.userId,
                   bid: 1200,
-                  status: "ACCEPTED",
+                  status: "DELIVERED",
                 },
                 {
                   userId: s2.userId,
                   bid: 2000,
-                  status: "REJECTED",
+                  status: "IN_PROGRESS",
                 },
               ],
             },
@@ -933,10 +965,12 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
                 {
                   userId: s2.userId,
                   bid: 3300,
+                  status: "DEPOSIT_PENDING",
                 },
                 {
                   userId: s3.userId,
                   bid: 2000,
+                  status: "DEPOSIT_PENDING",
                 },
               ],
             },
@@ -963,12 +997,12 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
                 {
                   userId: s1.userId,
                   bid: 2200,
-                  status: "ACCEPTED",
+                  status: "DONE",
                 },
                 {
                   userId: s2.userId,
                   bid: 2000,
-                  status: "ACCEPTED",
+                  status: "DONE",
                 },
               ],
             },
@@ -1016,6 +1050,7 @@ The standout quality was their impeccable attention to detail and problem-solvin
                 {
                   userId: s3.userId,
                   bid: 2000,
+                  status: "CANCELED",
                 },
               ],
             },
@@ -1049,10 +1084,12 @@ The standout quality was their impeccable attention to detail and problem-solvin
                 {
                   userId: s2.userId,
                   bid: 5000,
+                  status: "CANCELED",
                 },
                 {
                   userId: s3.userId,
                   bid: 4400,
+                  status: "REJECTED",
                 },
               ],
             },
@@ -1083,10 +1120,12 @@ The standout quality was their impeccable attention to detail and problem-solvin
                 {
                   userId: s2.userId,
                   bid: 11000,
+                  status: "DEPOSIT_PENDING",
                 },
                 {
                   userId: s3.userId,
                   bid: 9900,
+                  status: "CANCELED",
                 },
               ],
             },
@@ -1121,12 +1160,12 @@ The standout quality was their impeccable attention to detail and problem-solvin
                 {
                   userId: s2.userId,
                   bid: 3000,
-                  status: "ACCEPTED",
+                  status: "DONE",
                 },
                 {
                   userId: s3.userId,
                   bid: 1999,
-                  status: "ACCEPTED",
+                  status: "DONE",
                 },
               ],
             },
@@ -1211,7 +1250,7 @@ engaging และ เนื้อหาสร้างสรรค์สำห�
                 {
                   userId: s1.userId,
                   bid: 5000,
-                  status: "ACCEPTED",
+                  status: "IN_PROGRESS",
                 },
               ],
             },
@@ -1263,7 +1302,7 @@ recruitment, employee onboarding, และ HR processes. \n \
               ],
             },
           },
-
+         
           {
             title: "Tech Support Specialist และผู้ช่วยเหลือทางเทคนอล็อค",
             status: "NOT_STARTED",
@@ -1284,7 +1323,7 @@ Strong communication skills และ customer service mindset จำเป็�
               ],
             },
           },
-
+                   
           // Add more job objects as needed
         ],
       },
