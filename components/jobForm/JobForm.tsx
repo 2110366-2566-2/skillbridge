@@ -116,10 +116,6 @@ export default function JobForm(props: Props) {
       setCreateUpdateClick(true);
       setIsLoading(true);
       const formDataObject = new FormData();
-      formDataObject.append(
-        "employerId",
-        "9a6103c8-0a86-43ae-9148-ae20d6a48e11",
-      ); // TEMPORARY
       Object.entries(formData).forEach(([key, value]) => {
         formDataObject.append(key, customTrim(value));
       });
@@ -133,10 +129,10 @@ export default function JobForm(props: Props) {
           // Create Job
           const res = await createJob(formDataObject);
           console.log(res);
-          if (res.status === 201) {
+          if (res?.status === 201) {
             toast.success("สร้างงานสำเร็จ");
           } else {
-            toast.error(res.message);
+            toast.error(res?.message);
           }
         } else {
           // Update Job
