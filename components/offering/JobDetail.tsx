@@ -25,8 +25,8 @@ export default async function JobDetail({ jobId, isStudentView }: Props) {
 
     const employerData = {
         firstName: job.userName.firstname,
-        middleName: job.userName.middleName ? job.userName.middleName : "",
-        lastName: job.userName.lastName,
+        middleName: job.userName.middlename ? job.userName.middlename : "",
+        lastName: job.userName.lastname,
         position: job.position,
         organization: job.organization
     }
