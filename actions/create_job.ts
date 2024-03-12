@@ -5,21 +5,20 @@ import { JobStatus } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 
-
 const createJob = async (formData: FormData) => {
   const session = await getServerSession(authOptions);
   try {
     if (session?.user?.id) {
       const employer = await prisma.employer.findFirst({
         where: { userId: session.user.id },
-        select: { userId: true }
-      })
+        select: { userId: true },
+      });
 
       if (!session || !employer) {
         throw {
           message: "Authentication fail",
-          status: 401
-        }
+          status: 401,
+        };
       }
       const employerId = session.user.id as string;
       const title = formData.get("title") as string;
