@@ -4,6 +4,8 @@ import { prisma } from "../lib/prisma";
 import { revalidatePath } from "next/cache";
 import uploadMultipleFilesToS3 from "../lib/S3/uploadMultipleFilesToS3";
 import { string } from "zod";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 
 const acceptedTypes = [
   "image/jpeg",
@@ -15,7 +17,6 @@ const acceptedTypes = [
 const updateJob = async (formData: FormData) => {
   try {
     const jobId = formData.get("jobId") as string;
-    const employerId = formData.get("employerId") as string;
     const title = formData.get("title") as string;
     const description = formData.get("description") as string;
 
@@ -32,7 +33,6 @@ const updateJob = async (formData: FormData) => {
 
     console.log(
       jobId,
-      employerId,
       title,
       description,
       parsedStartDate,
@@ -43,19 +43,19 @@ const updateJob = async (formData: FormData) => {
       files
     );
 
-    //const session = await getServerSession(options);
-    //const userId = session?.userId
-    // const employer = await prisma.employer.findFirst({
-    //   where:{ userId: userId},
-    //   select:{userId:true}
-    // })
+    const session = await getServerSession(authOptions);
+    const userId = session?.user.id;
+    const employer = await prisma.employer.findFirst({
+      where: { userId: userId },
+      select: { userId: true },
+    });
 
-    // if (!session || !employer){
-    //   throw {
-    //     message: "Authentication fail",
-    //     status: 401
-    //   }
-    // }
+    if (!session || !employer) {
+      throw {
+        message: "Authentication fail",
+        status: 401,
+      };
+    }
 
     const job: any = await prisma.job.findFirst({
       where: {
