@@ -7,7 +7,7 @@ const createTransaction = async (
   studentId: string,
   employerUserId: string,
   amount: number,
-  receipt: File
+  receipt: Uint8Array
 ) => {
   try {
     const receiptImageName = ""
@@ -23,6 +23,7 @@ const createTransaction = async (
     return result
   } catch (error) {
     console.error("Error in createTransaction:", error)
+    return null
   }
 }
 

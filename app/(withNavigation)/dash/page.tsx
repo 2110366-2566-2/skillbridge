@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth"
 import QRCode from "react-qr-code"
 import generatePayload from "promptpay-qr"
 import { toJpeg } from "html-to-image"
-import getPaymentInfo from "@/actions/payment/getPaymentInfo"
+import getPaymentsInfo from "@/actions/payment/getPaymentsInfo"
 // import { authOptions } from "./app/api/auth/[...nextauth]/auth";
 
 export default function LoggedIn() {
@@ -20,10 +20,7 @@ export default function LoggedIn() {
 
   console.log(session)
   const getData = async () => {
-    const data = await getPaymentInfo(
-      "0b6fcb5c-fdc6-4fb3-aa1b-247a4d9f206a",
-      "753ec45a-3b3d-41ce-b801-53b2416e6c24"
-    )
+    const data = await getPaymentsInfo("0b6fcb5c-fdc6-4fb3-aa1b-247a4d9f206a")
     console.log(data)
   }
 
