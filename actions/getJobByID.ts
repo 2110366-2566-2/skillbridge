@@ -4,7 +4,7 @@ import { prisma } from "../lib/prisma";
 import { ApplicationStatus } from "@prisma/client";
 
 const getJobById = async (jobId: string) => {
-  console.log("testttttt: ", jobId);
+  // console.log("testttttt: ", jobId);
   const job: any = await prisma.job.findFirst({
     where: {
       id: jobId,
