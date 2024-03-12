@@ -47,10 +47,10 @@ export default function StudentOffer({
 
     let dropDownObject = <div></div>;
     let statusColor = '#dcfce7';
-    let titleWidth = windowSize.width >= 768 ? "1050px" : '235px';
-    let heightOfDropDownCard = windowSize.width >= 768 ? "142px" : "215px";
-    let heightCard = windowSize.width >= 768 ? "100px" : '128px';
-    let titleLineClamp = windowSize.width >= 768 ? "line-clamp-1" : "line-clamp-2"
+    let titleWidth = windowSize.width >= 1280 ? "1050px" : '235px';
+    let heightOfDropDownCard = windowSize.width >= 1280 ? "142px" : "215px";
+    let heightCard = windowSize.width >= 1280 ? "100px" : '128px';
+    let titleLineClamp = windowSize.width >= 1280 ? "line-clamp-1" : "line-clamp-2"
 
     switch (status) {
         case 'สมัคร':
@@ -58,11 +58,11 @@ export default function StudentOffer({
             break;
         case 'สละสิทธิ์':
             statusColor = '#ffe4e6'
-            heightOfDropDownCard = windowSize.width >= 768 ? "142px" : '170px'
+            heightOfDropDownCard = windowSize.width >= 1280 ? "142px" : '170px'
             break;
         case 'ปฏิเสธ':
             statusColor = '#ffe4e6'
-            heightOfDropDownCard = windowSize.width >= 768 ? "142px" : '170px'
+            heightOfDropDownCard = windowSize.width >= 1280 ? "142px" : '170px'
             break;
         case 'รอจ่ายมัดจำ':
             dropDownObject = <WaitedForDepositStatus studentId={studentId} jobId={jobId} />
@@ -84,8 +84,8 @@ export default function StudentOffer({
     }
 
     return (
-        <div className="flex flex-col items-end w-[370px] mt-[10px] md:w-[1190px]">
-            <div style={{ height: isDropDownOpen ? heightOfDropDownCard : heightCard }} className="relative w-[370px] px-[20px] pt-[20px] bg-white rounded-xl shadow-lg md:w-[1190px]">
+        <div className="flex flex-col items-end w-[370px] mt-[10px] xl:w-[1190px]">
+            <div style={{ height: isDropDownOpen ? heightOfDropDownCard : heightCard }} className="relative w-[370px] px-[20px] pt-[20px] bg-white rounded-xl shadow-md xl:w-[1190px]">
                 <div className="w-full">
                     <div className="relative">
 
@@ -130,8 +130,8 @@ export default function StudentOffer({
                     {/* DropDownObject Of Each Status */}
                     {
                         isDropDownOpen &&
-                        <div className="w-[330px] mt-[10px] md:w-[1150px] md:flex md:justify-between">
-                            <button className="h-[35px] bg-[#f8fafc] text-sm text-white rounded-md w-[100%] hover:opacity-80 active:opacity-60 text-black border border-[#334155] flex justify-center items-center md:w-[100px]">
+                        <div className="w-[330px] mt-[10px] xl:w-[1150px] xl:flex xl:justify-between">
+                            <button className="h-[35px] bg-[#f8fafc] text-sm text-white rounded-md w-[100%] hover:opacity-80 active:opacity-60 text-black border border-[#334155] flex justify-center items-center xl:w-[100px]">
                                 <p className="text-[#334155]">
                                     ไปที่โปรไฟล์
                                 </p>
