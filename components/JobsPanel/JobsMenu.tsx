@@ -25,6 +25,13 @@ function JobsMenu(props: Props){
   const [pendingJobs, setPendingJobs] = useState<JobCardType[]>([]);
   const [doneJobs, setDoneJobs] = useState<JobCardType[]>([]);
 
+  // args for sorter and sidebar
+  const sideBarState = {name: "sidebar", value: isOpeningSideBar, set: setIsOpeningSideBar};
+  const sortOptions = [{name: "วันที่เริ่มต้น", value: startDateSortOption, set: setStartDateSortOption}, 
+                      {name: "วันที่สิ้นสุด", value: endDateSortOption, set: setEndDateSortOption}, 
+                      {name: "ราคา", value: priceSortOption, set: setPriceSortOption}, 
+                      {name: "จำนวนผู้สมัคร", value: applicantsSortOption, set: setApplicantsSortOption}];
+
   useEffect(() => {
     async function fetchData() {
       if (session) {
@@ -58,17 +65,7 @@ function JobsMenu(props: Props){
           <div className="bg-transparent text-transparent py-2">|</div>
 
           {/* Sort button */}
-          <Sorter isOpeningSideBar={isOpeningSideBar}
-                  setIsOpeningSideBar={setIsOpeningSideBar} 
-                  startDateSortOption={startDateSortOption} 
-                  setStartDateSortOption={setStartDateSortOption} 
-                  endDateSortOption={endDateSortOption} 
-                  setEndDateSortOption={setEndDateSortOption} 
-                  priceSortOption={priceSortOption} 
-                  setPriceSortOption={setPriceSortOption} 
-                  applicantsSortOption={applicantsSortOption} 
-                  setApplicantsSortOption={setApplicantsSortOption}
-            />
+          <Sorter sideBarState={sideBarState} sortOptions={sortOptions} />
 
           {/* Create Work button */}
           <Link href={"/jobs/create"} key={"createJob"}>

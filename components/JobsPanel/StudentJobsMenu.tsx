@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import JobToggler from './JobToggler';
+import Sorter from './Sorter';
 
 type Props = {}
 
@@ -9,7 +10,11 @@ const jobTypeList = ['งานที่กำลังสมัคร', 'งา
 
 const StudentJobsMenu = (props: Props) => {
     const [jobType, setJobType] = useState('งานที่กำลังสมัคร');
+    const [isOpeningSideBar, setIsOpeningSideBar] = useState(false);
+    const [statusSortOption, setStatusSortOption] = useState("-");
     
+  const sortOptions = [{name: "สถานะ", value: statusSortOption, set: setStatusSortOption}];
+
   return (
     <>
         {/* Toggle between PendingJobsPanel and DoneJobsPanel based on the value of isPending. */}
@@ -22,7 +27,11 @@ const StudentJobsMenu = (props: Props) => {
           <div className="bg-transparent text-transparent py-2">|</div>
 
           {/* Sort button */}
-          <button className='bg-slate-100 px-4 rounded-md'>Sorter</button>
+          <Sorter sideBarState={{
+            name: 'sidebar',
+            value: isOpeningSideBar,
+            set: setIsOpeningSideBar
+          }} sortOptions={sortOptions} />
 
         </div>
       </section>
