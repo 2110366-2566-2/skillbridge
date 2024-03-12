@@ -147,4 +147,7 @@
 ### MailLog
 - This table is added for keeping track of emails sended from the system
 
+### ApplicationStatus
+- `DISCLAIMED` is added
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

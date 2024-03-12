@@ -246,6 +246,7 @@ enum ApplicationStatus {
   WAGE_PAYMENT_PENDING
   DONE
   CANCELED
+  DISCLAIMED
 }
 
 enum TransactionStatus {
