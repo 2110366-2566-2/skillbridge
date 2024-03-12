@@ -23,15 +23,14 @@ async function getEmployerJobs() {
   if (session?.user?.id) {
     const employer = await prisma.employer.findFirst({
       where: { userId: session.user.id },
-      select: { userId: true }
-    })
-
+      select: { userId: true },
+    });
 
     if (!session || !employer) {
       throw {
         message: "Authentication fail",
-        status: 401
-      }
+        status: 401,
+      };
     }
 
     const output: job[] = [];
@@ -58,7 +57,7 @@ async function getEmployerJobs() {
         jobTags: job.jobTag.title,
         description: job.description ? job.description : "",
         acceptNum: job.applications.filter(
-          (app) => app.status == ApplicationStatus.ACCEPTED,
+          (app) => app.status == ApplicationStatus.ACCEPTED
         ).length,
         maxAcceptNum: job.numWorker,
         budget: job.budget,

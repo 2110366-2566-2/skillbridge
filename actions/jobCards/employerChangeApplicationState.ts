@@ -23,7 +23,7 @@ async function pendingToAccepted(studentUserId: string, jobId: string) {
     await validateJobOwner(employerUserId, jobId); // check if employer is the owner of the job. if not just throw an error
 
     const application = await getApplication(studentUserId, jobId);
-
+    
     if (application.status !== ApplicationStatus.PENDING) {
         throw {
             message: "Application status is not valid",
@@ -200,3 +200,5 @@ async function wagePaymentPendingToDone(studentUserId: string, jobId: string) {
         }
     });
 }
+
+export { pendingToAccepted, pendingToRejected, depositPendingToInProgress, deliveredToInProgress, deliveredToCanceled, deliveredToWagePaymentPending, wagePaymentPendingToDone };

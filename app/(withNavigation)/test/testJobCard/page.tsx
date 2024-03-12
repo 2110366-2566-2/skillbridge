@@ -11,7 +11,7 @@ export default function testJobCard() {
     })
 
     return (
-        <main className="h-screen p-[30px] w-screen flex justify-around flex-wrap ">
+        <main className="h-screen p-[30px] w-screen flex flex-col justify-around flex-wrap ">
             <JobStatus
                 userId="001"
                 jobId="001"
