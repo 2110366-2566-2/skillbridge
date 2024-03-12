@@ -96,7 +96,7 @@ const createJob = async (formData: FormData) => {
       await prisma.jobDocumentFile.create({
         data: {
           jobId: job.id,
-          fileUrl: results[i].secure_url,
+          fileName: results[i].secure_url,
         },
       });
     }
