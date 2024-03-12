@@ -18,8 +18,8 @@ export default async function UpdateJobPage({
     description: job.description ? job.description : "",
     budget: job.budget.toString(),
     numWorker: job.numWorker.toString(),
-    estimateStartDate: job.estimateStartDate.toISOString().split("T")[0],
-    estimateEndDate: job.estimateEndDate.toISOString().split("T")[0],
+    estimateStartDate: job.estimateStartDate.split("/").reverse().join("-"),
+    estimateEndDate: job.estimateEndDate.split("/").reverse().join("-"),
     jobTagId: job.jobTagId,
   };
   return (

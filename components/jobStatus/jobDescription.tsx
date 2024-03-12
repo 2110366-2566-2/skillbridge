@@ -20,12 +20,12 @@ export default function jobDescription({
     price: string
 }) {
     return (
-        <div className="flex flex-col items-end w-[370px]">
-            <div className="relative w-[370px] h-[215px] px-[20px] pt-[25px] bg-white rounded-xl shadow-lg">
+        <div className="flex flex-col items-end w-[335px]">
+            <div className="relative w-[335px] h-[185px] px-[20px] pt-[25px] bg-white rounded-xl shadow-lg">
                 <div className="w-full">
 
                     {/* Title Component */}
-                    <div className="flex w-[330px]">
+                    <div className="flex w-[295px]">
                         <p className="font-semibold text-[#313866] text-xl line-clamp-1">
                             {title}
                         </p>
@@ -52,17 +52,17 @@ export default function jobDescription({
 
                     {/* Job Description Component */}
                     <div className="flex mt-[10px]">
-                        <p className="mr-[10px] text-sm flex justify-center items-center w-[140px] font-medium">
+                        <p className="mr-[10px] text-sm flex justify-center w-[126px] items-center font-medium">
                             คำอธิบายเกี่ยวกับงาน
                         </p>
-                        <div className="w-[190px] flex items-center">
-                            <p className="text-xs text-[#838383] truncate">
+                        <div className="flex items-center">
+                            <p className="text-xs text-[#838383] truncate w-[159px]">
                                 {jobDescription}
                             </p>
                         </div>
                     </div>
 
-                    <div className="absolute w-[330px] flex justify-between bottom-[10px]">
+                    <div className="absolute w-[295px] flex justify-between bottom-[10px]">
                         {/* AcceptedApplication Number Component */}
                         <div className="flex items-center">
                             <p className="text-xs text-[#64748b]">
