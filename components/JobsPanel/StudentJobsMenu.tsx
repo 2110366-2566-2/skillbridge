@@ -38,7 +38,7 @@ const StudentJobsMenu = (props: Props) => {
       </section>
 
       {/* show jobs */}
-        <div className="lg:flex lg:flex-row lg:justify-between gap-2">
+        <div>
             {/* applied, current, done jobs */}
             { jobType === 'งานที่กำลังสมัคร' ? (
                 <StudentJobsPanel />

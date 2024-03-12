@@ -49,7 +49,7 @@ function StudentJobsPanel({}: Props) {
                 title="รับสมัคร TA วิชา Comp Prog"
                 period="18/10/2545 - 21/10/2545"
                 tag="การสอน"
-                status="รอผู้จ่างจ่ายมัดจำ"
+                status="รอผู้จ้างจ่ายมัดจำ"
             />
             <JobStatus
                 userId="001"
@@ -57,7 +57,7 @@ function StudentJobsPanel({}: Props) {
                 title="รับสมัคร TA วิชา Comp Prog"
                 period="18/10/2545 - 21/10/2545"
                 tag="การสอน"
-                status="รอผู้จ่างจ่ายค่าจ้าง"
+                status="รอผู้จ้างจ่ายค่าจ้าง"
             />
 
             <JobStatus
