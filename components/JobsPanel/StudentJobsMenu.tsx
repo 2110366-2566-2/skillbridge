@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import JobToggler from './JobToggler';
 import Sorter from './Sorter';
+import StudentJobsPanel from './StudentJobsPanel';
 
 type Props = {}
 
@@ -40,7 +41,7 @@ const StudentJobsMenu = (props: Props) => {
         <div className="lg:flex lg:flex-row lg:justify-between gap-2">
             {/* applied, current, done jobs */}
             { jobType === 'งานที่กำลังสมัคร' ? (
-                <div>Applied Jobs</div>
+                <StudentJobsPanel />
             ) : (jobType === 'งานปัจจุบัน' ? (
                 <div>Current Jobs</div>
             ) : (

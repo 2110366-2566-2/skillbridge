@@ -1,6 +1,7 @@
 import React from 'react'
 import JobStatus from '../jobStatus/jobStatus'
 import JobDescription from '../jobStatus/jobDescription'
+import StudentOffer from '../studentOffer/studentOffer'
 
 type Props = {}
 
@@ -9,7 +10,7 @@ function StudentJobsPanel({}: Props) {
     <main className="flex flex-col">
       <main className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 grid-flow-row gap-10">
         {true ? (
-            <section>
+            <>
                 <JobStatus
                 userId="001"
                 jobId="001"
@@ -87,7 +88,16 @@ function StudentJobsPanel({}: Props) {
                 tag="การสอน"
                 price="฿1,000"
             />
-            </section>
+            <StudentOffer
+                studentId="001"
+                jobId="001"
+                studentName="นายกออากอกา ชอบกินไก่ใส่ไข่ดาว"
+                applicationDate="18/10/2545"
+                applicationTime="21:59 น."
+                status="สมัคร"
+                price="฿1,000"
+            />
+            </>
         ) : (
           <div className="flex justify-center items-center">
             <div className="font-medium text-lg text-slate-500 mt-4 mx-auto md:text-2xl md:my-6 lg:font-normal">
