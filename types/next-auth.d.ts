@@ -17,7 +17,7 @@ declare module "next-auth" {
     sub: string;
   }
 
-  interface User extends UserDB {}
+  interface User extends UserDB { }
 }
 
 declare module "next-auth/jwt" {
