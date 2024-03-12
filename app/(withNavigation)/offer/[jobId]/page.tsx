@@ -1,7 +1,5 @@
 import OfferingForm from "@/components/offering/OfferingForm";
 import JobDetail from "@/components/offering/JobDetail";
-import EmployerDetail from "@/components/offering/EmployerDetail";
-import getJobById from "@/actions/getJobByID";
 
 export default async function OfferingPage({
     params,
