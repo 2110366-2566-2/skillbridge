@@ -1,5 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
-import getS3URL from "@/lib/getS3URL";
+import getS3URL from "@/lib/S3/getS3URL";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 
@@ -17,6 +17,7 @@ const getApplicationByUserId = async (jobId: string, userId?: string) => {
       },
       include: {
         applicationDocumentFiles: true,
+        job: true,
       },
     });
 
@@ -33,9 +34,13 @@ const getApplicationByUserId = async (jobId: string, userId?: string) => {
     if (signUrl.message) {
       throw signUrl;
     }
-
-    application.url = signUrl;
-    return application;
+    let output = {
+      bid: application.bid,
+      applicationStatus: application.status,
+      url: signUrl,
+      budget: application.job.budget,
+    };
+    return output;
   } catch (error: any) {
     console.log(error);
     return {

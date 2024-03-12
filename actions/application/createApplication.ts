@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import { prisma } from "@/lib/prisma";
 import { float } from "@elastic/elasticsearch/lib/api/types";
-import uploadFileToS3 from "../uploadFileToS3";
+import uploadFileToS3 from "../../lib/S3/uploadFileToS3";
 
 const acceptedType = "application/pdf";
 

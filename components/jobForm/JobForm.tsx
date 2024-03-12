@@ -10,9 +10,9 @@ import Input from "../input/input/Input";
 import TextAreaInput from "../input/textAreaInput/TextAreaInput";
 import SelectInput from "../input/selectInput/SelectInput";
 import FilesInput from "../input/fileInput/FileInput";
-import createJob from "@/actions/create_job";
-import deleteJob from "@/actions/delete_job";
-import updateJob from "@/actions/update_job";
+import createJob from "@/actions/createJob";
+import deleteJob from "@/actions/deleteJob";
+import updateJob from "@/actions/updateJob";
 import DeleteModal from "./deleteModal/DeleteModal";
 import LoadingButton from "./loadingButton/LoadingButton";
 import humanImage from "@/public/images/human.png";
@@ -67,7 +67,7 @@ export default function JobForm(props: Props) {
   });
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -118,7 +118,7 @@ export default function JobForm(props: Props) {
       const formDataObject = new FormData();
       formDataObject.append(
         "employerId",
-        "9a6103c8-0a86-43ae-9148-ae20d6a48e11",
+        "9a6103c8-0a86-43ae-9148-ae20d6a48e11"
       ); // TEMPORARY
       Object.entries(formData).forEach(([key, value]) => {
         formDataObject.append(key, customTrim(value));

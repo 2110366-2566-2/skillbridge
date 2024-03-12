@@ -2,7 +2,7 @@
 
 import { prisma } from "../lib/prisma";
 import { revalidatePath } from "next/cache";
-import uploadMultipleFilesToS3 from "./uploadMultipleFilesToS3";
+import uploadMultipleFilesToS3 from "../lib/S3/uploadMultipleFilesToS3";
 import { string } from "zod";
 
 const acceptedTypes = [
