@@ -8,10 +8,11 @@ type Props = {};
 const JobHeader = (props: Props) => {
   const pathName = usePathname();
   const isJobPage = pathName.startsWith("/jobs");
+  const isStudentJobPage = pathName.startsWith("/studentjobs");
 
   return (
     <>
-      {isJobPage && (
+      {(isJobPage || isStudentJobPage) && (
         <div className="font-semibold text-[30px] text-white ml-5 mb-4">
           งานของฉัน
         </div>
