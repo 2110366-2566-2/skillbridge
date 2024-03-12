@@ -10,7 +10,13 @@ const acceptedType = "application/pdf";
 const createApplication = async (formData: FormData) => {
   try {
     const session: any = await getServerSession(authOptions);
-    if (!session) {
+    const userId = session?.user.id;
+    const student = await prisma.student.findFirst({
+      where: { userId: userId },
+      select: { userId: true },
+    });
+
+    if (!session || !student) {
       throw {
         message: "Not Authenticated",
         status: 401,
@@ -43,7 +49,7 @@ const createApplication = async (formData: FormData) => {
     if (fileName.message) {
       throw fileName;
     }
-    const app_docs: any = await prisma.applicationDocumentFile.create({
+    const appDocs: any = await prisma.applicationDocumentFile.create({
       data: {
         applicationUserId: session.user.id,
         applicationJobId: jobID,
@@ -56,7 +62,7 @@ const createApplication = async (formData: FormData) => {
         userId: session.user.id,
         jobId: jobID,
         bid: bid,
-        applicationDocumentFiles: app_docs,
+        applicationDocumentFiles: appDocs,
       },
     });
 

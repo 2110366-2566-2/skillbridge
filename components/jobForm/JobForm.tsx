@@ -116,10 +116,6 @@ export default function JobForm(props: Props) {
       setCreateUpdateClick(true);
       setIsLoading(true);
       const formDataObject = new FormData();
-      formDataObject.append(
-        "employerId",
-        "9a6103c8-0a86-43ae-9148-ae20d6a48e11"
-      ); // TEMPORARY
       Object.entries(formData).forEach(([key, value]) => {
         formDataObject.append(key, customTrim(value));
       });
