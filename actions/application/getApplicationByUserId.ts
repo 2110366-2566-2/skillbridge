@@ -36,19 +36,22 @@ const getApplicationByUserId = async (jobId: string, userId?: string) => {
       jobStatus = query.status;
     }
 
-    let signUrl: string | any = await getS3URL(
-      application.applicationDocumentFile.fileName
-    );
-
-    if (signUrl.message) {
-      signUrl = null;
+    let signUrl: string | any = null
+    if (application?.applicationDocumentFile) {
+      signUrl = await getS3URL(
+        application.applicationDocumentFile.fileName
+      );
     }
+
+    // if (signUrl.message) {
+    //   signUrl = null;
+    // }
     let output = {
-      bid: application?.bid,
-      applicationStatus: application?.status,
-      url: signUrl,
-      budget: jobBudget,
-      jobStatus: jobStatus,
+      bid: application?.bid ? application.bid : null,
+      applicationStatus: application?.status ? application.status : null,
+      url: signUrl ? signUrl : null,
+      budget: application?.job.budget ? application.job.budget : null,
+      jobStatus: jobStatus ? jobStatus : null,
     };
     return output;
   } catch (error: any) {
@@ -59,3 +62,5 @@ const getApplicationByUserId = async (jobId: string, userId?: string) => {
     };
   }
 };
+
+export default getApplicationByUserId;

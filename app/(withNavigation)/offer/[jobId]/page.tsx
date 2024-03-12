@@ -10,7 +10,7 @@ export default async function OfferingPage({
     const jobId = params.jobId;
 
     const application = await getApplicationByUserId(jobId);
-    console.log("ping: ", application)
+    // console.log("ping: ", application)
 
     return (
         <>
