@@ -5,72 +5,64 @@ import JobsPanel from "./JobsPanel";
 import Link from "next/link";
 import JobCardType from "../../types/JobCardType";
 import fetchInitialData from "../../lib/Jobs/fetchInitialData";
-import { useSession } from "next-auth/react";
 import JobToggler from "./JobToggler";
 import Sorter from "./Sorter";
 
 type Props = {};
 
-const jobTypeList = ["งานปัจจุบัน", "งานที่เสร็จสิ้น"];
+const jobTypeList = ['งานปัจจุบัน', 'งานที่เสร็จสิ้น'];
 
 // export function
-function JobsMenu(props: Props) {
-    const { data: session, status } = useSession();
-    const [jobType, setJobType] = useState("งานปัจจุบัน");
-    const [startDateSortOption, setStartDateSortOption] = useState("-");
-    const [endDateSortOption, setEndDateSortOption] = useState("-");
-    const [priceSortOption, setPriceSortOption] = useState("-");
-    const [applicantsSortOption, setApplicantsSortOption] = useState("-");
-    const [isOpeningSideBar, setIsOpeningSideBar] = useState(false);
-    const [pendingJobs, setPendingJobs] = useState<JobCardType[]>([]);
-    const [doneJobs, setDoneJobs] = useState<JobCardType[]>([]);
+function JobsMenu(props: Props){
+  const [jobType, setJobType] = useState('งานปัจจุบัน');
+  const [startDateSortOption, setStartDateSortOption] = useState("-");
+  const [endDateSortOption, setEndDateSortOption] = useState("-");
+  const [priceSortOption, setPriceSortOption] = useState("-");
+  const [applicantsSortOption, setApplicantsSortOption] = useState("-");
+  const [isOpeningSideBar, setIsOpeningSideBar] = useState(false);
+  const [pendingJobs, setPendingJobs] = useState<JobCardType[]>([]);
+  const [doneJobs, setDoneJobs] = useState<JobCardType[]>([]);
 
-    // args for sorter and sidebar
-    const sideBarState = {
-        name: "sidebar",
-        value: isOpeningSideBar,
-        set: setIsOpeningSideBar,
-    };
-    const sortOptions = [
-        {
-            name: "วันที่เริ่มต้น",
-            value: startDateSortOption,
-            set: setStartDateSortOption,
-        },
-        {
-            name: "วันที่สิ้นสุด",
-            value: endDateSortOption,
-            set: setEndDateSortOption,
-        },
-        { name: "ราคา", value: priceSortOption, set: setPriceSortOption },
-        {
-            name: "จำนวนผู้สมัคร",
-            value: applicantsSortOption,
-            set: setApplicantsSortOption,
-        },
-    ];
+ // args for sorter and sidebar
+ const sideBarState = {
+  name: "sidebar",
+  value: isOpeningSideBar,
+  set: setIsOpeningSideBar,
+};
+const sortOptions = [
+  {
+      name: "วันที่เริ่มต้น",
+      value: startDateSortOption,
+      set: setStartDateSortOption,
+  },
+  {
+      name: "วันที่สิ้นสุด",
+      value: endDateSortOption,
+      set: setEndDateSortOption,
+  },
+  { name: "ราคา", value: priceSortOption, set: setPriceSortOption },
+  {
+      name: "จำนวนผู้สมัคร",
+      value: applicantsSortOption,
+      set: setApplicantsSortOption,
+  },
+];
 
-    useEffect(() => {
-        async function fetchData() {
-            /* TODO: later improvement to useServerSide session and pass as props to the client side */
-            if (session?.user?.id) {
-                try {
-                    const [pendingJobs, doneJobs] = await fetchInitialData(
-                        session.user.id
-                    );
-                    setPendingJobs(
-                        pendingJobs.filter((jobCard) => !jobCard.isDeleted)
-                    );
-                    setDoneJobs(
-                        doneJobs.filter((jobCard) => !jobCard.isDeleted)
-                    );
-                } catch (err) {
-                    console.log("Fetching user's jobs error :", err);
-                }
-            }
-        }
-        fetchData();
-    }, [session]);
+useEffect(() => {
+  async function fetchData() {
+    /* TODO: later improvement to useServerSide session and pass as props to the client side */
+      try {
+        const [pendingJobs, doneJobs] = await fetchInitialData();
+        setPendingJobs(
+          pendingJobs.filter((jobCard) => !jobCard.isDeleted),
+        );
+        setDoneJobs(doneJobs.filter((jobCard) => !jobCard.isDeleted));
+      } catch (err) {
+        console.log("Fetching user's jobs error :", err);
+      }
+  }
+  fetchData();
+}, []);
 
     return (
         <>
