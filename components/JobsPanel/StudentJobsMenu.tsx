@@ -7,6 +7,9 @@ import StudentJobsPanel from "./StudentJobsPanel";
 import filterStudentJobs from "@/lib/Jobs/filterJobToggler";
 import StudentDoneJobsPanel from "./StudentDoneJobsPanel";
 
+
+// 1st and 2nd tab
+// ignore userId
 const data = [
 	{
 		userId: "001",
@@ -83,6 +86,7 @@ const data = [
 	},
 ];
 
+// 3rd tab
 const doneData = [{
 jobId: '234324',
 isDeleted: false,
