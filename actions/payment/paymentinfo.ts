@@ -28,11 +28,6 @@ const getPaymentInfo = async (jobId: string, userId: string) => {
             middlename: true,
             lastname: true,
             profileImageUrl: true,
-            student: {
-              select: {
-                bankAccountNo: true,
-              },
-            },
           },
         },
       },
@@ -67,11 +62,6 @@ const getAllPaymentInfo = async (jobId: string) => {
             middlename: true,
             lastname: true,
             profileImageUrl: true,
-            student: {
-              select: {
-                bankAccountNo: true,
-              },
-            },
           },
         },
       },
