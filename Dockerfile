@@ -6,10 +6,6 @@ COPY . .
 
 RUN npm install
 
-ARG DATABASE_URL
-
-RUN echo "DATABASE_URL=${DATABASE_URL}" > .env 
-
 RUN npm run build
 
 EXPOSE 3000

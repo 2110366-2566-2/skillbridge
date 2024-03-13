@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "../db/prisma";
+import { prisma } from "../lib/prisma";
 
 const getJobTags = async () => {
   const result = await prisma.jobTag.findMany();

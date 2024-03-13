@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "../db/prisma";
+import { prisma } from "../lib/prisma";
 
 const getEmployerInfoById = async (userId: string) => {
   const result = await prisma.employer.findFirst({

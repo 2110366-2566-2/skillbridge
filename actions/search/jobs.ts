@@ -1,42 +1,42 @@
-"use server"
-import { PrismaClient, JobStatus, ApplicationStatus } from '@prisma/client'
-import { Client } from '@elastic/elasticsearch';
-
-const prisma = new PrismaClient();
+"use server";
+import { JobStatus, ApplicationStatus } from "@prisma/client";
+import { prisma } from "../../lib/prisma"
+import { Client } from "@elastic/elasticsearch";
 
 const elasticClient = new Client({
     node: process.env.ELASTIC_NODE_URL, // Elasticsearch endpoint
     auth: {
-        apiKey: { // API key ID and secret
+        apiKey: {
+            // API key ID and secret
             id: process.env.ELASTIC_API_ID ? process.env.ELASTIC_API_ID : "",
             api_key: process.env.ELASTIC_API_KEY ? process.env.ELASTIC_API_KEY : "",
-        }
-    }
-})
+        },
+    },
+});
 
 export interface job {
-    id: string,
-    title: string,
-    startDate: string,
-    endDate: string,
-    jobTags: string,
-    description: string,
-    acceptNum: number,
-    maxAcceptNum: number,
-    budget: number
+    id: string;
+    title: string;
+    startDate: string;
+    endDate: string;
+    jobTags: string;
+    description: string;
+    acceptNum: number;
+    maxAcceptNum: number;
+    budget: number;
 }
 
 export interface jobFilter {
-    startDate?: Date,
-    endDate?: Date,
-    lowestBudget?: number,
-    highestBudget?: number,
-    jobTag?: string
+    startDate?: Date;
+    endDate?: Date;
+    lowestBudget?: number;
+    highestBudget?: number;
+    jobTag?: string;
 }
 
 interface elasticJob {
-    id: string,
-    title: string
+    id: string;
+    title: string;
 }
 
 async function getDefaultSearchJobs(): Promise<job[]> {
@@ -70,14 +70,14 @@ async function getDefaultSearchJobs(): Promise<job[]> {
         };
 
         output.push(showJob);
-    })
+    });
 
     output.sort((a, b) => {
         const aAcceptRate = a.acceptNum / a.maxAcceptNum;
         const bAcceptRate = b.acceptNum / b.maxAcceptNum;
 
         return aAcceptRate - bAcceptRate;
-    })
+    });
 
     return output;
 }
@@ -86,24 +86,28 @@ TODO
 1. write getSearchJobs without filter functionality
 2. add filter functionality
 */
-async function getSearchJobs(query?: string, filter?: jobFilter): Promise<job[]> {
+async function getSearchJobs(
+    query?: string,
+    filter?: jobFilter,
+): Promise<job[]> {
     /*
-        Filter is yet to be implemented
-    */
+          Filter is yet to be implemented
+      */
 
     /*
-    get jobs that match query with title
-    steps:
-    1. query in elastic search for all the jobs matches
-    2. query in psql to get necessarily details
-    3. format the data for ease of use in frontend page
-    */
+      get jobs that match query with title
+      steps:
+      1. query in elastic search for all the jobs matches
+      2. query in psql to get necessarily details
+      3. format the data for ease of use in frontend page
+      */
 
     if (query == null) {
         const output: job[] = [];
 
-        let prismaWhereFromFilter = filter ? getPrismaWhereFromJobFilter(filter) : {};
-
+        let prismaWhereFromFilter = filter
+            ? getPrismaWhereFromJobFilter(filter)
+            : {};
 
         const jobs = await prisma.job.findMany({
             include: {
@@ -114,7 +118,7 @@ async function getSearchJobs(query?: string, filter?: jobFilter): Promise<job[]>
                 status: {
                     equals: JobStatus.NOT_STARTED
                 },
-                isDeleted : false
+                isDeleted : false,
                 ...prismaWhereFromFilter
             },
             take: 12
@@ -134,43 +138,42 @@ async function getSearchJobs(query?: string, filter?: jobFilter): Promise<job[]>
             };
 
             output.push(showJob);
-        })
+        });
 
         output.sort((a, b) => {
             const aAcceptRate = a.acceptNum / a.maxAcceptNum;
             const bAcceptRate = b.acceptNum / b.maxAcceptNum;
 
             return aAcceptRate - bAcceptRate;
-        })
+        });
 
         return output;
     }
 
-    /* STEP 1 */ 
+    /* STEP 1 */
     const res = await elasticClient.search<elasticJob>({
         index: "job_1",
         body: {
-            "query": {
+            query: {
                 match: {
                     title: {
-                      query: query,
-                      fuzziness: "AUTO"
-                    }
-                }
-            }
-        }
+                        query: query,
+                        fuzziness: "AUTO",
+                    },
+                },
+            },
+        },
     });
 
     // extract jobId from request
-    const resJobId = res.hits.hits.map(e => {
-        if (!e._source) return ""
-        return e._source.id
+    const resJobId = res.hits.hits.map((e) => {
+        if (!e._source) return "";
+        return e._source.id;
     });
 
     const output: job[] = [];
 
     let prismaWhereFromFilter = filter ? getPrismaWhereFromJobFilter(filter) : {};
-
 
     const jobs = await prisma.job.findMany({
         include: {
@@ -221,15 +224,15 @@ function getPrismaWhereFromJobFilter(filter: jobFilter) {
 
     if (filter == undefined) return {};
 
-    if (filter.startDate != undefined) 
+    if (filter.startDate != undefined)
         prismaWhereFilter.estimateStartDate = { gte: filter.startDate };
 
-    if (filter.endDate != undefined) 
+    if (filter.endDate != undefined)
         prismaWhereFilter.estimateEndDate = { lte: filter.endDate };
 
-    if (filter.lowestBudget != undefined) 
+    if (filter.lowestBudget != undefined)
         prismaWhereFilter.budget = { gte: filter.lowestBudget };
-    
+
     if (filter.highestBudget != undefined) {
         if (prismaWhereFilter.budget == undefined) {
             prismaWhereFilter.budget = {};
@@ -237,9 +240,9 @@ function getPrismaWhereFromJobFilter(filter: jobFilter) {
         }
         prismaWhereFilter.budget.lte = filter.highestBudget;
     }
-    
+
     if (filter.jobTag != undefined) {
-        prismaWhereFilter.jobTag = { title: { equals: filter.jobTag} };
+        prismaWhereFilter.jobTag = { title: { equals: filter.jobTag } };
     }
 
     return prismaWhereFilter;
