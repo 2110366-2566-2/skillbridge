@@ -7,6 +7,7 @@ import TaskHeader from "./jobHeader/JobHeader";
 import CreateJobHeader from "./createJobHeader/CreateJobHeader";
 import EditJobHeader from "./editJobHeader/EditJobHeader";
 import LandingHeader from "./landingHeader/LandingHeader";
+import OfferingHeader from "./offeringHeader/OfferingHeader";
 import getJobTags from "@/actions/getJobTags";
 import whiteLogo from "@/public/logos/logo-white.svg";
 import { getServerSession } from "next-auth";
@@ -51,6 +52,8 @@ export default async function Header() {
         <CreateJobHeader />
         <EditJobHeader />
         <LandingHeader isStudent={isStudent} jobTags={jobTags} />
+
+        <OfferingHeader />
       </div>
       {/* Mobile and Tablet */}
       <div className="lg:hidden">
