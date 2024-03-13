@@ -8,14 +8,13 @@ export default function WaitedForSubmissionStatus({
     studentId: string;
     jobId: string;
 }) {
-    const router = useRouter();
     return (
         <div className="w-[330px] flex justify-between mt-[10px] xl:mt-0">
             <button
                 className="h-[35px] bg-[#ef4444] text-sm rounded-md w-[48%] hover:opacity-80 active:opacity-60"
                 onClick={async () => {
                     await inProgressToCanceled(studentId, jobId);
-                    router.reload();
+                    location.reload();
                 }}
             >
                 ยกเลิกงาน
