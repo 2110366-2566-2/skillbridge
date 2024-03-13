@@ -45,29 +45,28 @@ async function getDefaultSearchJobs(): Promise<job[]> {
     const jobs = await prisma.job.findMany({
         include: {
             jobTag: true,
-            applications: true,
+            applications: true
         },
         where: {
             status: {
-                equals: JobStatus.NOT_STARTED,
+                equals: JobStatus.NOT_STARTED
             },
+            isDeleted : false
         },
-        take: 12,
+        take: 12
     });
-
+    
     jobs.forEach((job) => {
         const showJob: job = {
             id: job.id,
             title: job.title,
-            startDate: job.estimateStartDate.toLocaleDateString("en-GB"),
-            endDate: job.estimateEndDate.toLocaleDateString("en-GB"),
-            jobTags: job.jobTag.title,
+            startDate: job.estimateStartDate.toLocaleDateString('en-GB'),
+            endDate: job.estimateEndDate.toLocaleDateString('en-GB'),
+            jobTags: job.jobTag.title, 
             description: job.description ? job.description : "",
-            acceptNum: job.applications.filter(
-                (app) => app.status == ApplicationStatus.ACCEPTED,
-            ).length, //TODO : Filter for accepted application
+            acceptNum: job.applications.filter(app => app.status==ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
             maxAcceptNum: job.numWorker,
-            budget: job.budget,
+            budget: job.budget
         };
 
         output.push(showJob);
@@ -113,30 +112,29 @@ async function getSearchJobs(
         const jobs = await prisma.job.findMany({
             include: {
                 jobTag: true,
-                applications: true,
+                applications: true
             },
             where: {
                 status: {
-                    equals: JobStatus.NOT_STARTED,
+                    equals: JobStatus.NOT_STARTED
                 },
-                ...prismaWhereFromFilter,
+                isDeleted : false,
+                ...prismaWhereFromFilter
             },
-            take: 12,
-        });
-
+            take: 12
+        })
+        
         jobs.forEach((job) => {
             const showJob: job = {
                 id: job.id,
                 title: job.title,
-                startDate: job.estimateStartDate.toLocaleDateString("en-GB"),
-                endDate: job.estimateEndDate.toLocaleDateString("en-GB"),
-                jobTags: job.jobTag.title,
+                startDate: job.estimateStartDate.toLocaleDateString('en-GB'),
+                endDate: job.estimateEndDate.toLocaleDateString('en-GB'),
+                jobTags: job.jobTag.title, 
                 description: job.description ? job.description : "",
-                acceptNum: job.applications.filter(
-                    (app) => app.status == ApplicationStatus.ACCEPTED,
-                ).length, //TODO : Filter for accepted application
+                acceptNum: job.applications.filter(app => app.status==ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
                 maxAcceptNum: job.numWorker,
-                budget: job.budget,
+                budget: job.budget
             };
 
             output.push(showJob);
@@ -180,33 +178,32 @@ async function getSearchJobs(
     const jobs = await prisma.job.findMany({
         include: {
             jobTag: true,
-            applications: true,
+            applications: true
         },
         where: {
             status: {
-                equals: JobStatus.NOT_STARTED,
+                equals: JobStatus.NOT_STARTED
             },
+            isDeleted: false,
             id: {
-                in: resJobId,
+                in: resJobId
             },
-            ...prismaWhereFromFilter,
+            ...prismaWhereFromFilter
         },
-        take: 12,
+        take: 12
     });
-
+    
     jobs.forEach((job) => {
         const showJob: job = {
             id: job.id,
             title: job.title,
-            startDate: job.estimateStartDate.toLocaleDateString("en-GB"),
-            endDate: job.estimateEndDate.toLocaleDateString("en-GB"),
-            jobTags: job.jobTag.title,
+            startDate: job.estimateStartDate.toLocaleDateString('en-GB'),
+            endDate: job.estimateEndDate.toLocaleDateString('en-GB'),
+            jobTags: job.jobTag.title, 
             description: job.description ? job.description : "",
-            acceptNum: job.applications.filter(
-                (app) => app.status == ApplicationStatus.ACCEPTED,
-            ).length, //TODO : Filter for accepted application
+            acceptNum: job.applications.filter(app => app.status==ApplicationStatus.ACCEPTED).length, //TODO : Filter for accepted application
             maxAcceptNum: job.numWorker,
-            budget: job.budget,
+            budget: job.budget
         };
 
         output.push(showJob);
@@ -268,5 +265,8 @@ async function main() {
 
 main();
 */
+
+
+
 
 export { getDefaultSearchJobs, getSearchJobs };
