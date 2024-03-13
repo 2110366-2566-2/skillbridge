@@ -8,8 +8,10 @@ import PrimaryButton from "../buttons/primaryButton/PrimaryButton";
 import SecondaryButton from "../buttons/secondaryButton/SecondaryButton";
 import DangerModal from "@/components/modal/dangerModal/DangerModal";
 import toast from "react-hot-toast";
+import createApplication from "@/actions/application/createApplication";
 
 type Props = {
+    jobId: string,
     application: {
         bid: number | null,
         applicationStatus: string | null,
@@ -20,7 +22,7 @@ type Props = {
 };
 
 interface FormData {
-    file: File,
+    file: File | null,
     bid: number,
     jobId: string
 }
@@ -32,7 +34,7 @@ interface FormErrors {
 const questionMarkCircle = require("@/public/icons/questionMarkCircle.svg") as string;
 
 
-export default function OfferingForm({ application }: Props) {
+export default function OfferingForm({ jobId, application }: Props) {
     const [primaryLoading, setPrimaryLoading] = useState(false);
     const [disabled, setDisabled] = useState(false);
     const [isShowModal, setShowModal] = useState(false);
@@ -41,8 +43,10 @@ export default function OfferingForm({ application }: Props) {
     const [isBudgetInfoVisible, setIsBudgetInfoVisible] = useState(false);
     const [isBidInfoVisible, setIsBidInfoVisible] = useState(false);
     const { bid, applicationStatus, url, budget, jobStatus } = application
-    const [formData, setFormData] = useState({
-        bid: 0
+    const [formData, setFormData] = useState<FormData>({
+        bid: 0,
+        file: null,
+        jobId: jobId
     })
 
     const handleChange = (evt: ChangeEvent) => {
@@ -57,12 +61,21 @@ export default function OfferingForm({ application }: Props) {
         // console.log(changedField, newValue, typeof (newValue))
     };
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const errors: FormErrors = {};
         setPrimaryLoading((prev) => !prev);
         setDisabled(true);
         try {
+            formData.file = files && files.length > 0 ? files[0] : null
+            const formDataObject = new FormData();
+            Object.entries(formData).forEach(([key, value]) => {
+                formDataObject.append(key, value);
+                console.log("test: ", key, value);
+            });
+            console.log("ping: ", formDataObject)
+            const res = await createApplication(formDataObject);
+            console.log(res);
             setPrimaryLoading((prev) => !prev);
             setDisabled(false);
             toast.success("ข้อเสนอของคุณถูกส่งไปยังผู้ว่าจ้างแล้ว");
@@ -184,7 +197,7 @@ export default function OfferingForm({ application }: Props) {
                         type="submit"
                         isDisabled={disabled}
                         isLoading={primaryLoading}
-                        loadingMessage="loading"
+                        loadingMessage="กำลังดำเนินการ"
                     >
                         ยืนยัน
                     </PrimaryButton>
