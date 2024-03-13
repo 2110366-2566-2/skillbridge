@@ -17,6 +17,7 @@
           <li><a href="#version-121">v1.21</a></li>
           <li><a href="#version-122">v1.22</a></li>
           <li><a href="#version-123">v1.23</a></li>
+          <li><a href="#version-124">v1.24</a></li>
         </ul>
       </ul>
     </li>
@@ -170,4 +171,16 @@
 ### TransactionDetail
 - This table is added and it will be served for storing transaction details in the case where that transaction is successfully verified by api
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a>)</ p>
+
+# v1.24
+
+### TransactionDetail
+- `receiverAccountType` is deleted as the api response contains only an empty string
+- `receiverAccountValue` is deleted as the api response contains only an empty string
+- Add mapping to `transaction_detail`
+
+### MailLog
+- Add mapping to `mail_log`
+
+<p align="right">(<a href="#readme-top">back to top</a>)</ p>
