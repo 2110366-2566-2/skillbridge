@@ -36,7 +36,7 @@ async function ManagePage({ params }: Props) {
             </section>
 
             <section className="flex lg:flex-row gap-8 flex-col justify-around">
-                <article className="">
+                <article className="mx-auto">
                     {/* job detail */}
                     <JobDetail jobId={jobId} isStudentView={false} />
                 </article>
