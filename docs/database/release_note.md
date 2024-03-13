@@ -16,6 +16,7 @@
         <ul>
           <li><a href="#version-121">v1.21</a></li>
           <li><a href="#version-122">v1.22</a></li>
+          <li><a href="#version-123">v1.23</a></li>
         </ul>
       </ul>
     </li>
@@ -161,5 +162,12 @@
 
 ### ApplicationStatus
 - `DELIVERED` is added back due to the code dependency, maybe revert back later
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+# v1.23
+
+### TransactionDetail
+- This table is added and it will be served for storing transaction details in the case where that transaction is successfully verified by api
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
