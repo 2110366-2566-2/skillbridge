@@ -10,7 +10,7 @@ export default async function OfferingPage({
     const jobId = params.jobId;
 
     const application = await getApplicationByUserId(jobId);
-
+    if (!application) return;
     return (
         <div className="flex justify-center">
             <div className="flex flex-col md:flex-row md:gap-8">
