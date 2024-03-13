@@ -199,6 +199,7 @@ model Transaction {
   employerUserId   String
   amount           Float?
   receiptImageName String
+  isDeposit        Boolean
   status           TransactionStatus @default(PENDING)
   employer         Employer          @relation(fields: [employerUserId], references: [userId])
   job              Job               @relation(fields: [jobId], references: [id])
@@ -242,11 +243,11 @@ enum ApplicationStatus {
   REJECTED
   DEPOSIT_PENDING
   IN_PROGRESS
-  DELIVERED
   WAGE_PAYMENT_PENDING
   DONE
   CANCELED
   DISCLAIMED
+  DELIVERED
 }
 
 enum TransactionStatus {

@@ -3,15 +3,17 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "./navbar/Navbar";
 import SearchAndFilter from "./searchAndFilter/SearchAndFilter";
-import TaskHeader from "../JobsPanel/JobHeader";
+import TaskHeader from "./jobHeader/JobHeader";
 import CreateJobHeader from "./createJobHeader/CreateJobHeader";
 import EditJobHeader from "./editJobHeader/EditJobHeader";
 import LandingHeader from "./landingHeader/LandingHeader";
+import OfferingHeader from "./offeringHeader/OfferingHeader";
 import getJobTags from "@/actions/getJobTags";
 import whiteLogo from "@/public/logos/logo-white.svg";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import getEmployerInfoById from "@/actions/getUserInfo";
+import StudentJobHeader from "../JobsPanel/StudentJobHeader";
 
 export default async function Header() {
   // Fetch Job tags
@@ -50,13 +52,15 @@ export default async function Header() {
         <CreateJobHeader />
         <EditJobHeader />
         <LandingHeader isStudent={isStudent} jobTags={jobTags} />
+
+        <OfferingHeader />
       </div>
       {/* Mobile and Tablet */}
       <div className="lg:hidden">
         {/* Only shows at "/search" */}
         <SearchAndFilter />
       </div>
-      {/* Only shows at "/works" */}
+      {/* Only shows at "/jobs" */}
       <TaskHeader />
     </div>
   );
