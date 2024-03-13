@@ -139,6 +139,46 @@ async function depositPendingToInProgress(studentUserId: string, jobId: string) 
 
     sendEmail(studentUserId, subject, text);
 }
+
+async function inProgressToCanceled(studentUserId: string, jobId: string) {
+    const employerUserId = await getEmployerUserId(); // get employer id from session
+    await validateJobOwner(employerUserId, jobId); // check if employer is the owner of the job. if not just throw an error
+
+    const application = await getApplication(studentUserId, jobId);
+
+    if (application.status !== ApplicationStatus.IN_PROGRESS) {
+        throw {
+            message: "Application status is not valid",
+            status: 400
+        }
+    }
+
+    prisma.application.update({
+        where: {
+            userId_jobId: {
+                userId: studentUserId,
+                jobId: jobId
+            },
+        },
+        data: {
+            status: ApplicationStatus.CANCELED
+        }
+    });
+
+    const job = await prisma.job.findUniqueOrThrow({
+        where: {
+            id: jobId
+        },
+        select: {
+            title: true
+        }
+    })
+
+    const subject = `ผู้จ้างยกเลิกงาน ${job.title} ของคุณ`;
+    const text = `ผู้จ้างยกเลิกงาน ${job.title} ของคุณ`;
+
+    sendEmail(studentUserId, subject, text);
+}
  
 async function deliveredToInProgress(studentUserId: string, jobId: string) {
     const employerUserId = await getEmployerUserId(); // get employer id from session
