@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import getS3URL from "@/lib/S3/getS3URL";
+import getS3URL from "../S3/getS3URL";
 
 const getApplications = async (jobID: string) => {
   try {
@@ -42,3 +42,5 @@ const getApplications = async (jobID: string) => {
     };
   }
 };
+
+export default getApplications;

@@ -12,7 +12,7 @@ export default function testJobCard() {
 
     return (
         <main className="h-screen p-[30px] w-screen flex flex-col justify-around flex-wrap ">
-            <JobStatus
+            {/* <JobStatus
                 userId="001"
                 jobId="001"
                 title="รับสมัคร TA วิชา Comp Prog"
@@ -88,7 +88,7 @@ export default function testJobCard() {
                 period="18/10/2545 - 21/10/2545"
                 tag="การสอน"
                 price="฿1,000"
-            />
+            /> */}
             <div className="flex flex-col mt-[300px]">
 
                 <DynamicStudentOffer

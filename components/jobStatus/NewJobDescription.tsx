@@ -28,13 +28,11 @@ const JobCard = ({
   isPending,
 }: Props) => {
   return (
-    <div className="bg-gradient-to-r from-slate-100 px-5 pt-7 pb-2 rounded-3xl shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-slate-200 max-w-[500px]">
+    <div className="bg-white px-5 pt-7 pb-2 rounded-3xl shadow-md hover:shadow-xl hover:slate-50 max-w-[500px]">
       <div className="flex flex-row justify-between">
         <div className="w-[85%]">
-          <div className="h-[60px]">
-            <Link href={`/jobs/manage/${jobId}`}>
-              <p className="font-semibold text-2xl line-clamp-2 hover:underline">{name}</p>
-            </Link>
+          <div className="max-h-[60px]">
+            <p className="font-semibold text-2xl line-clamp-2">{name}</p>
           </div>
           <div className="font-medium my-2">
             {startDate} - {endDate}
