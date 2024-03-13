@@ -3,6 +3,10 @@
 import uploadFileToS3 from "../../lib/S3/uploadFileToS3"
 import { prisma } from "../../lib/prisma"
 import { TransactionStatus } from "@prisma/client"
+import {
+  depositPendingToInProgress,
+  wagePaymentPendingToDone,
+} from "../jobCards/employerChangeApplicationState"
 
 const createTransaction = async (
   jobId: string,
@@ -34,16 +38,22 @@ const createTransaction = async (
       },
     })
     // Validate receipt
-    const result = await prisma.transaction.update({
-      where: {
-        id: newTransaction.id,
-      },
-      data: {
-        status: TransactionStatus.ACCEPTED,
-      },
-    })
+    const results = await Promise.all([
+      prisma.transaction.update({
+        where: {
+          id: newTransaction.id,
+        },
+        data: {
+          status: TransactionStatus.ACCEPTED,
+        },
+      }),
+      isDeposit
+        ? depositPendingToInProgress(studentId, jobId)
+        : wagePaymentPendingToDone(studentId, jobId),
+      // if pay wage, transfer money to student
+    ])
 
-    return result
+    return results
   } catch (error) {
     console.error("Error in createTransaction:", error)
     return null
