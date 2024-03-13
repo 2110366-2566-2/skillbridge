@@ -7,7 +7,7 @@ type Props = {};
 
 const JobHeader = (props: Props) => {
   const pathName = usePathname();
-  const isJobPage = pathName === "/jobs";
+  const isJobPage = pathName.startsWith("/jobs");
 
   return (
     <>
