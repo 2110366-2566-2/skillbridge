@@ -1,5 +1,6 @@
+import { inProgressToCanceled } from "@/actions/jobCards/employerChangeApplicationState";
 import Image from "next/image";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 export default function WaitedForSubmissionStatus({
     studentId,
     jobId,
@@ -13,7 +14,7 @@ export default function WaitedForSubmissionStatus({
             <button
                 className="h-[35px] bg-[#ef4444] text-sm rounded-md w-[48%] hover:opacity-80 active:opacity-60"
                 onClick={async () => {
-                    // await something
+                    await inProgressToCanceled(studentId, jobId);
                     router.reload();
                 }}
             >

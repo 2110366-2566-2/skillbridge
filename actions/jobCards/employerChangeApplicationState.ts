@@ -340,4 +340,4 @@ async function wagePaymentPendingToDone(studentUserId: string, jobId: string) {
     sendEmail(studentUserId, subject, text);
 }
 
-export { pendingToAccepted, pendingToRejected, depositPendingToInProgress, deliveredToInProgress, deliveredToCanceled, deliveredToWagePaymentPending, wagePaymentPendingToDone };
+export { pendingToAccepted, pendingToRejected, depositPendingToInProgress, deliveredToInProgress, deliveredToCanceled, deliveredToWagePaymentPending, wagePaymentPendingToDone, inProgressToCanceled };
