@@ -1,4 +1,6 @@
-import uploadFileToS3 from "@/lib/S3/uploadFileToS3";
+"use server"
+
+import uploadFileToS3 from "./uploadFileToS3";
 
 const acceptedTypes = [
   "image/jpeg",

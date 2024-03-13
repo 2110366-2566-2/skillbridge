@@ -2,13 +2,13 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../app/api/auth/[...nextauth]/auth";
 import { prisma } from "../../lib/prisma";
-import uploadFileToS3 from "../../lib/S3/uploadFileToS3";
+import uploadFileToS3 from "../S3/uploadFileToS3";
 import { boolean } from "zod";
-import {File} from '@web-std/file';
+import { File } from '@web-std/file';
 
 const acceptedType = "application/pdf";
 
-const createApplication = async (formData: FormData, userId?:string) => {
+const createApplication = async (formData: FormData, userId?: string) => {
   try {
     // let session = undefined
     const session: any = await getServerSession(authOptions);
@@ -37,7 +37,7 @@ const createApplication = async (formData: FormData, userId?:string) => {
       };
     }
     // console.log((file?.type) , (file?.type !== acceptedType))
-    if ( file?.type && (file?.type !== acceptedType)) {
+    if (file?.type && (file?.type !== acceptedType)) {
       throw {
         message: "Invalid File Type",
       };
@@ -62,7 +62,7 @@ const createApplication = async (formData: FormData, userId?:string) => {
       );
 
       if (fileName?.message) {
-          throw fileName;
+        throw fileName;
       }
       appDocs = await prisma.applicationDocumentFile.create({
         data: {
