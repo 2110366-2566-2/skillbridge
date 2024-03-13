@@ -12,6 +12,7 @@ export default async function PaymentPage({
   return (
     <div className="w-full h-full">
       {/* Applcation status as props in paymentinfo */}
+
       <Payment
         studentName={
           data
@@ -21,6 +22,8 @@ export default async function PaymentPage({
         price={data ? data.bid : 0}
         jobId={params.jobId}
       />
+
+
     </div>
   )
 }

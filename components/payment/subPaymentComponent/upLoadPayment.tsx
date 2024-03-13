@@ -132,27 +132,29 @@ export default function FilesInput(props: Props) {
     }
 
     return (
-        <div className="flex flex-col gap-1 flex-grow mt-[13px]">
-            <p
-                className="text-[14px] font-medium text-slate-900"
-            >
-                {label}
-            </p>
+        <div className="flex flex-col gap-1 flex-grow mt-[13px] lg:order-3 lg:row-span-3">
+            <div className="flex">
+                <p
+                    className="text-[14px] font-medium text-slate-900 lg:text-xl"
+                >
+                    {label}
+                </p>
+            </div>
             <div className="flex flex-col gap-1">{currentFiles}</div>
             <form action={handleFileUpload} method="POST" encType="multipart/form-data" className="flex items-center justify-center w-full flex-col">
                 <label
                     htmlFor="dropzone-file"
                     style={{ borderColor: isWarnUpLoadFile ? '#dc2626' : '#94a3b8' }}
-                    className={`flex flex-col items-center justify-center w-full border-[1px] border-dashed rounded-lg bg-transparent ${isDisabled ? "opacity-60 cursor-default" : "active:opacity-60 cursor-pointer hover:opacity-80"}`}
+                    className={`flex flex-col items-center justify-center w-full border-[1px] border-dashed rounded-lg bg-transparent lg:border-2 ${isDisabled ? "opacity-60 cursor-default" : "active:opacity-60 cursor-pointer hover:opacity-80"}`}
                 >
-                    <div className="flex flex-col gap-2 items-center justify-center p-3">
+                    <div className="flex flex-col gap-2 items-center justify-center p-3 lg:p-12">
                         <div className="flex items-center justify-center h-[24px] mt-2">
                             <Image src={'/icons/upload.svg'} width={24} height={24} alt="upload icon" />
 
-                            <span className="text-slate-500 text-sm ml-[6px] text-slate-800">วางไฟล์ที่นี่</span>
+                            <span className="text-slate-500 text-sm ml-[6px] text-slate-800 lg:text-[16px]">วางไฟล์ที่นี่</span>
                         </div>
-                        <p className="mb-3 px-[15px] h-[32px] rounded-lg text-sm text-slate-50 bg-slate-400 flex flex-wrap gap-1 justify-center items-center ">
-                            <span className="text-sm">กดเพื่ออัพโหลดไฟล์</span>
+                        <p className="mb-3 px-[15px] h-[32px] rounded-lg text-sm text-slate-50 bg-slate-400 flex flex-wrap gap-1 justify-center items-center lg:h-[40px]">
+                            <span className="text-sm lg:text-[16px]">กดเพื่ออัพโหลดไฟล์</span>
                         </p>
                     </div>
                     <input
@@ -172,15 +174,17 @@ export default function FilesInput(props: Props) {
                         disabled={isDisabled}
                     />
                 </label>
+                <div className="flex w-full">
+                    <p style={{ visibility: isWarnUpLoadFile ? "visible" : "hidden" }} className="text-red-600 text-sm font-medium mt-[13px] lg:text-[16px]">
+                        กรุณาอัพโหลดสลิปโอนเงิน
+                    </p>
 
-                <p style={{ display: isWarnUpLoadFile ? "" : "none" }} className="text-red-600 text-sm font-medium w-full mt-[13px]">
-                    กรุณาอัพโหลดสลิปโอนเงิน
-                </p>
+                </div>
 
-                <div className="mt-[13px] flex w-full justify-between">
+                <div className="mt-[13px] flex w-full justify-between lg:justify-end lg:mt-[18px]">
                     <SecondaryButton
                         isDisabled={isDisabled}
-                        className="w-[48%]"
+                        className="w-[48%] lg:w-[20%]"
                         onClick={() => router.push(cancelPath)}
                     >ยกเลิก
                     </SecondaryButton>
@@ -201,15 +205,15 @@ export default function FilesInput(props: Props) {
 
 
                                 //if (!isWarnUpLoadFile && upload หลังบ้านสำเร็จ){toast.success("ระบบกำลังตรวจสอบ");}
-                                //else if(upload server หลังบ้านไม่สำเร็จ) { toast.error("อัพโหลดไม่สำเร็จ โปรดลองอีกครั้ง"); setDisabled(false);}
-                                //else ไม่ต้องทำไร
+                                //else { toast.error("อัพโหลดไม่สำเร็จ โปรดลองอีกครั้ง"); setDisabled(false);}
+                                setDisabled(false);
 
 
 
 
                             }, 1500);
                         }}
-                        className="w-[48%]"
+                        className="w-[48%] lg:w-[40%] lg:ml-[2%]"
                         isLoading={primaryLoading}
                         loadingMessage="กำลังอัพโหลด"
                     >
