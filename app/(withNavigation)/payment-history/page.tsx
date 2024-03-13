@@ -35,6 +35,7 @@ type Transaction = {
   employerUserId: string;
   amount: number;
   receiptImageName: string;
+  isDeposit: boolean;
   status: "ACCEPTED" | "PENDING" | "REJECTED" | "OTHER_STATUS"; // Adjust this union type based on actual possible values
   job: {
     title: string;
@@ -98,6 +99,7 @@ export default function Page() {
         month: monthYear?.month,
         year: monthYear?.year,
       })) as Transaction[];
+      // console.log(currentPaymentHistoryData);
       setPaymentData(currentPaymentHistoryData);
       setLoading(false);
       setFirstLoad(false);
@@ -137,6 +139,7 @@ export default function Page() {
     const { value } = e.target;
     setMonthYear(parseThaiDate(value) as MonthYear);
   };
+
 
   return (
     <div className="w-full flex justify-center">

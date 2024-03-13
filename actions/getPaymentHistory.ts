@@ -103,18 +103,18 @@ const main = async () => {
   );
 
   // Example usage with specifying year and month
-  const userIdWithDate = "45f2b0d1-1a44-4028-836e-c1da532a3cab";
+  const userIdWithDate = "4839bedf-5cdd-4d8a-b0b2-93849e585d15";
   const userPaymentHistoryWithDate = await getUserPaymentHistory({
     userId: userIdWithDate,
-    year: 2024,
-    month: 3,
+    year: 2023,
+    month: 11,
   });
   console.log("userPaymentHistoryWithDate :", userPaymentHistoryWithDate);
 
-  const userId = "45f2b0d1-1a44-4028-836e-c1da532a3cab";
+  const userId = "4839bedf-5cdd-4d8a-b0b2-93849e585d15";
   const userTransactionMonthsAndYears =
     await getUserTransactionMonthsAndYears(userId);
   console.log("serTransactionMonthsAndYears : ", userTransactionMonthsAndYears);
 };
 
-// main();
+main();

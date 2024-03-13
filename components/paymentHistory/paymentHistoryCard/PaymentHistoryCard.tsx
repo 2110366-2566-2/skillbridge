@@ -15,6 +15,7 @@ type Transaction = {
   employerUserId: string;
   amount: number;
   receiptImageName: string;
+  isDeposit: boolean;
   status: "ACCEPTED" | "PENDING" | "REJECTED" | "OTHER_STATUS"; // Adjust this union type based on actual possible values
   job: {
     title: string;
@@ -28,7 +29,6 @@ type Transaction = {
 };
 
 export default function PaymentHistoryCard(props: Transaction) {
-  const transactionData = props;
   const [isOpen, setOpen] = useState(false);
 
   const successStatus = (
@@ -112,7 +112,7 @@ export default function PaymentHistoryCard(props: Transaction) {
           นิสิต {props.studentName.firstname} {props.studentName.lastname}
         </h3>
         <div className="flex justify-between font-normal text-[14px] md:text-[16px] text-slate-500">
-          <p>ค่ามัดจำการจ้างงาน</p>
+          <p>{props.isDeposit ? ("ค่ามัดจำการจ้างงาน") : ("ค่าตอบแทนการจ้างงาน")}</p>
           <p>{props.amount * 0.85} บาท</p>
         </div>
         <div className="flex justify-between font-normal text-[14px] md:text-[16px] text-slate-500">
