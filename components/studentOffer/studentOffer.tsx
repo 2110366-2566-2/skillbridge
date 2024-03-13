@@ -84,8 +84,8 @@ export default function StudentOffer({
     }
 
     return (
-        <div className="flex flex-col items-end w-[335px] xl:w-[1190px]">
-            <div style={{ height: isDropDownOpen ? heightOfDropDownCard : heightCard }} className="relative w-[335px] px-[20px] pt-[20px] bg-white rounded-xl shadow-md xl:w-[1190px]">
+        <div className="flex flex-col w-full">
+            <div style={{ height: isDropDownOpen ? heightOfDropDownCard : heightCard }} className="relative w-full px-[20px] pt-[20px] bg-white rounded-xl shadow-md">
                 <div className="w-full">
                     <div className="relative">
 
@@ -131,7 +131,7 @@ export default function StudentOffer({
                     {
                         isDropDownOpen &&
                         <div className="w-[330px] mt-[10px] xl:w-[1150px] xl:flex xl:justify-between">
-                            <button className="h-[35px] bg-[#f8fafc] text-sm text-white rounded-md w-[100%] hover:opacity-80 active:opacity-60 text-black border border-[#334155] flex justify-center items-center xl:w-[100px]">
+                            <button className="h-[35px] bg-[#f8fafc] text-sm rounded-md w-[100%] hover:opacity-80 active:opacity-60 text-black border border-[#334155] flex justify-center items-center xl:w-[100px]">
                                 <p className="text-[#334155]">
                                     ไปที่โปรไฟล์
                                 </p>
