@@ -4,7 +4,8 @@ import { getServerSession } from "next-auth"
 import QRCode from "react-qr-code"
 import generatePayload from "promptpay-qr"
 import { toJpeg } from "html-to-image"
-import getPaymentsInfo from "@/actions/payment/getPaymentsInfo"
+import { getPaymentInfo } from "@/actions/payment/paymentinfo"
+import { downloadImage } from "@/lib/utils"
 // import { authOptions } from "./app/api/auth/[...nextauth]/auth";
 
 export default function LoggedIn() {
@@ -20,33 +21,13 @@ export default function LoggedIn() {
 
   console.log(session)
   const getData = async () => {
-    const data = await getPaymentsInfo("0b6fcb5c-fdc6-4fb3-aa1b-247a4d9f206a")
+    const data = await getPaymentInfo(
+      "0b6fcb5c-fdc6-4fb3-aa1b-247a4d9f206a",
+      "753ec45a-3b3d-41ce-b801-53b2416e6c24"
+    )
     console.log(data)
   }
 
-  const convertImage = async (element: HTMLElement) => {
-    let dataUrl = ""
-    const minDataLength = 150000
-    const maxAttempts = 20
-
-    for (let i = 0; dataUrl.length < minDataLength && i < maxAttempts; ++i) {
-      dataUrl = await toJpeg(element, { quality: 0.95 })
-    }
-
-    return dataUrl
-  }
-
-  const downloadImage = async () => {
-    const postcard = document.getElementById("qr")
-    if (!postcard) return
-
-    const dataUrl = await convertImage(postcard)
-
-    const link = document.createElement("a")
-    link.download = "PromptpayQR.jpeg"
-    link.href = dataUrl
-    link.click()
-  }
   return (
     <>
       <div className="flex flex-col">
@@ -58,7 +39,12 @@ export default function LoggedIn() {
           Log out
         </button>
         <QRCode size={256} id="qr" value={payload} viewBox={`0 0 256 256`} />
-        <button onClick={downloadImage}>Download</button>
+        <button
+          onClick={() => {
+            downloadImage("qr", "PromptpayQR.jpeg")
+          }}>
+          Download
+        </button>
         <button onClick={getData}>GetData</button>
       </div>
     </>
