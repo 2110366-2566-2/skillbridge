@@ -1,5 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
-import getS3URL from "@/lib/S3/getS3URL";
+import getS3URL from "../S3/getS3URL";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 
