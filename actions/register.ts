@@ -1,5 +1,5 @@
 "use server"
-import prisma from "@/db/prisma"
+import { prisma } from "@/lib/prisma"
 import { splitSalutation } from "@/lib/utils"
 import { EmailRegisterSchema } from "@/schemas/EmailRegisterSchema"
 import bcrypt from "bcrypt"

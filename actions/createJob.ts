@@ -1,13 +1,13 @@
 "use server";
-import prisma from "../db/prisma";
-import cloudinary from "../lib/bucket";
+import { prisma } from "../lib/prisma";
 import { JobStatus } from "@prisma/client";
-//import {getServerSession} from "next-auth";
-//import {options} from "../api/auth/[...nextaut]/options"
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
+import uploadMultipleFilesToS3 from "@/lib/S3/uploadMultipleFilesToS3";
 
 const createJob = async (formData: FormData) => {
   try {
-    const employerId = formData.get("employerId") as string;
+    // const employerId = formData.get("employerId") as string;
     const title = formData.get("title") as string;
     const description = formData.get("description") as string;
     const estimateStartDate = formData.get("estimateStartDate") as string;
@@ -22,7 +22,6 @@ const createJob = async (formData: FormData) => {
 
     // Test log
     console.log(
-      employerId,
       title,
       status,
       description,
@@ -31,57 +30,30 @@ const createJob = async (formData: FormData) => {
       budget,
       jobTagId,
       numWorker,
-      files,
+      files
     );
 
-    //const session = await getServerSession(options);
-    //const userId = session?.userId
-    // const employer = await prisma.employer.findFirst({
-    //   where:{ userId: userId},
-    //   select:{userId:true}
-    // })
+    const session: any = await getServerSession(authOptions);
+    const userId = session?.user.id;
+    const employer = await prisma.employer.findFirst({
+      where: { userId: userId },
+      select: { userId: true },
+    });
 
-    // if (!session || !employer){
-    //   throw {
-    //     message: "Authentication fail",
-    //     status: 401
-    //   }
-    // }
-    let buffers: Uint8Array[] = [];
-    let sumSize = 0;
-    for (const f of files) {
-      sumSize = sumSize + f.size;
-      const arrayBuffer = await f?.arrayBuffer();
-      const buffer = new Uint8Array(arrayBuffer);
-      buffers.push(buffer);
-    }
-    if (sumSize > 1024 * 1024 * 5) {
+    if (!session || !employer) {
       throw {
-        message: "Invalid file format or file is too large.",
+        message: "Not Authenticated",
+        status: 401,
       };
     }
-    let results: any[] = [];
-    for (let i = 0; i < buffers.length; i++) {
-      const result = await new Promise((resolve, reject) => {
-        cloudinary.uploader
-          .upload_stream(
-            { folder: "test", timeout: 120000 },
-            function (error, result) {
-              if (error) {
-                reject(error);
-                return;
-              }
-              resolve(result);
-            },
-          )
-          .end(buffers[i]);
-      });
-      results.push(result);
-    }
 
+    const results: string[] | any = await uploadMultipleFilesToS3(files);
+    if (results.message) {
+      throw results;
+    }
     let job = await prisma.job.create({
       data: {
-        employerId: employerId,
+        employerId: session.user.id,
         title: title,
         status: status,
         description: description,
@@ -96,7 +68,7 @@ const createJob = async (formData: FormData) => {
       await prisma.jobDocumentFile.create({
         data: {
           jobId: job.id,
-          fileUrl: results[i].secure_url,
+          fileName: results[i],
         },
       });
     }

@@ -2,6 +2,12 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator erd {
+  provider = "prisma-erd-generator"
+  output   = "../docs/database/ERD.svg"
+  disabled = "true"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -26,6 +32,7 @@ model User {
   employer        Employer?
   messages        Message[]
   student         Student?
+  mailLogs        MailLog[]
 
   @@map("_user")
 }
@@ -100,29 +107,42 @@ model JobTag {
 model JobDocumentFile {
   id        String   @id @default(uuid())
   jobId     String
-  fileUrl   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   isDeleted Boolean  @default(false)
+  fileName  String
   job       Job      @relation(fields: [jobId], references: [id])
 
   @@map("job_document_file")
 }
 
 model Application {
-  userId      String
-  jobId       String
-  bid         Float
-  documentUrl String?
-  status      ApplicationStatus @default(PENDING)
-  isDeleted   Boolean           @default(false)
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
-  job         Job               @relation(fields: [jobId], references: [id])
-  user        User              @relation(fields: [userId], references: [id])
+  userId                   String
+  jobId                    String
+  bid                      Float
+  status                   ApplicationStatus         @default(PENDING)
+  isDeleted                Boolean                   @default(false)
+  createdAt                DateTime                  @default(now())
+  updatedAt                DateTime                  @updatedAt
+  isAcknowledged           Boolean                   @default(false)
+  job                      Job                       @relation(fields: [jobId], references: [id])
+  user                     User                      @relation(fields: [userId], references: [id])
+  applicationDocumentFiles ApplicationDocumentFile[]
 
   @@id([userId, jobId])
   @@map("application")
+}
+
+model ApplicationDocumentFile {
+  id                String      @id @default(uuid())
+  applicationUserId String
+  applicationJobId  String
+  fileName          String
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  application       Application @relation(fields: [applicationUserId, applicationJobId], references: [userId, jobId])
+
+  @@map("application_document_file")
 }
 
 model Chatroom {
@@ -170,19 +190,20 @@ model Image {
 }
 
 model Transaction {
-  id              String    @id @default(uuid())
-  jobId           String
-  studentId       String
-  paymentId       String?
-  receiptImageUrl String?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-  isDeleted       Boolean   @default(false)
-  employerUserId  String?
-  paymentType     String?
-  employer        Employer? @relation(fields: [employerUserId], references: [userId])
-  job             Job       @relation(fields: [jobId], references: [id])
-  student         Student   @relation(fields: [studentId], references: [userId])
+  id               String            @id @default(uuid())
+  jobId            String
+  studentId        String
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  isDeleted        Boolean           @default(false)
+  employerUserId   String
+  amount           Float?
+  receiptImageName String
+  isDeposit        Boolean
+  status           TransactionStatus @default(PENDING)
+  employer         Employer          @relation(fields: [employerUserId], references: [userId])
+  job              Job               @relation(fields: [jobId], references: [id])
+  student          Student           @relation(fields: [studentId], references: [userId])
 
   @@map("transaction")
 }
@@ -202,6 +223,14 @@ model Review {
   @@map("review")
 }
 
+model MailLog {
+  id        String   @id
+  userId    String
+  isSuccess Boolean
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}
+
 enum JobStatus {
   NOT_STARTED
   IN_PROGRESS
@@ -209,6 +238,19 @@ enum JobStatus {
 }
 
 enum ApplicationStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  DEPOSIT_PENDING
+  IN_PROGRESS
+  WAGE_PAYMENT_PENDING
+  DONE
+  CANCELED
+  DISCLAIMED
+  DELIVERED
+}
+
+enum TransactionStatus {
   PENDING
   ACCEPTED
   REJECTED
