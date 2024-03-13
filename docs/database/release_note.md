@@ -18,7 +18,8 @@
   </ul>
 </details>
 
-## Current Database Schema 
+## Current Database Schema
+
 > _automatically-generated_ from Prisma Database Schema
 
 <img src="./ERD.svg">
@@ -116,18 +117,20 @@
 # v1.20
 
 ### JobDocumentFile
+
 - `fileUrl` is changed to `fileName`
 
 ### Application
+
 - `isAcknowledged` is added and set default to false
 - `documentUrl` is deleted as we use the serepate table (ApplicationDocumentFile) instead
-
 
 ### ApplicationDocumentFile
 
 - This table is added for storing multiple files in a single application
 
 ### Transaction
+
 - `paymentId` is deleted
 - `receiptImageUrl` is changed to `receiptImageName` and set to required
 - `employerUserId` is changed to `employerId` and set to required
@@ -136,9 +139,11 @@
 - `amount` is added and set to not required
 
 ### ApplicationStatus
+
 - edited as requested from backend team
 
 ### TransactionStatus
+
 - consists of `PENDING`, `ACCEPTED`, and `REJECTED`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

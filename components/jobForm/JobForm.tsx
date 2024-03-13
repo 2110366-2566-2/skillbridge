@@ -290,7 +290,10 @@ export default function JobForm(props: Props) {
           <SelectInput
             label="หมวดหมู่งาน"
             value={formData.jobTagId}
-            options={jobTags.map(tag => ({ value: tag.id, title: tag.title }))}
+            options={jobTags.map((tag) => ({
+              value: tag.id,
+              title: tag.title,
+            }))}
             name="jobTagId"
             title="jobTagId"
             placeholder="เลือกหมวดหมู่ที่ต้องการ"

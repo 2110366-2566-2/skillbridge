@@ -9,11 +9,11 @@ type Props = {
   statusList: string[];
 };
 
-const JobToggler = ({status, setStatus, statusList}: Props) => {
+const JobToggler = ({ status, setStatus, statusList }: Props) => {
   return (
     <nav className="mb-3">
       <div className="flex flex-row gap-1 bg-slate-100 w-fit p-2 rounded-sm">
-      {statusList.map((option) => (
+        {statusList.map((option) => (
           <button
             key={option}
             className={`${status === option ? "bg-slate-50" : ""} hover:shadow-inner font-medium text-md rounded-sm px-[12px] py-[6px] `}
@@ -21,7 +21,7 @@ const JobToggler = ({status, setStatus, statusList}: Props) => {
           >
             {option}
           </button>
-      ))}
+        ))}
       </div>
     </nav>
   );

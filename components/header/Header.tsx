@@ -30,7 +30,7 @@ export default async function Header() {
   return (
     <div>
       <div>
-        <div className="flex justify-between items-center py-5 pl-5 pr-8 md:pr-10">
+        <div className="flex justify-between items-center py-5 pl-5 pr-3 md:pr-5">
           <Link href="/landing">
             <Image
               className="w-auto h-auto md:w-36 md:hover:scale-105 md:duration-500 active:opacity-40"

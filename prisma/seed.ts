@@ -63,15 +63,15 @@ async function main() {
       avgStar: 4.99,
       user: {
         create: {
-          salutation: 'นาย',
-          firstname: 'ศุภณัฐ',
-          lastname: 'ตั้งสินมั่นคง',
-          hashedPassword: 'thisishashespassword',
-          email: '6430388021@student.chula.ac.th'
-        }
-      }
-    }
-  })
+          salutation: "นาย",
+          firstname: "ศุภณัฐ",
+          lastname: "ตั้งสินมั่นคง",
+          hashedPassword: "thisishashespassword",
+          email: "6430388021@student.chula.ac.th",
+        },
+      },
+    },
+  });
 
   const s2 = await prisma.student.create({
     data: {
@@ -83,15 +83,15 @@ async function main() {
       avgStar: 3.33,
       user: {
         create: {
-          salutation: 'นาย',
-          firstname: 'พิตตินันท์',
-          lastname: 'หาญสิงห์กุญช์',
-          hashedPassword: 'thisishashespassword',
-          email: '6432115421@student.chula.ac.th'
-        }
-      }
-    }
-  })
+          salutation: "นาย",
+          firstname: "พิตตินันท์",
+          lastname: "หาญสิงห์กุญช์",
+          hashedPassword: "thisishashespassword",
+          email: "6432115421@student.chula.ac.th",
+        },
+      },
+    },
+  });
 
   const s3 = await prisma.student.create({
     data: {
@@ -102,15 +102,15 @@ async function main() {
       avgStar: 4.69,
       user: {
         create: {
-          salutation: 'บัก',
-          firstname: 'นอร์ธ',
-          lastname: 'ข้นอีสาน',
-          hashedPassword: 'thisishashespassword',
-          email: '6437820221@student.chula.ac.th',
-        }
-      }
-    }
-  })
+          salutation: "บัก",
+          firstname: "นอร์ธ",
+          lastname: "ข้นอีสาน",
+          hashedPassword: "thisishashespassword",
+          email: "6437820221@student.chula.ac.th",
+        },
+      },
+    },
+  });
 
   const e1 = await prisma.employer.create({
     data: {
@@ -128,7 +128,6 @@ async function main() {
       },
       jobs: {
         create: [
-
           {
             title: "เขียนเว็บให้ SoeiCorp.",
             status: "NOT_STARTED",
@@ -145,13 +144,15 @@ async function main() {
                   applicationDocumentFiles: {
                     create: [
                       {
-                        fileName: '8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e'
+                        fileName:
+                          "8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e",
                       },
                       {
-                        fileName: 'bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46'
+                        fileName:
+                          "bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46",
                       },
-                    ]
-                  }
+                    ],
+                  },
                 },
                 {
                   userId: s2.userId,
@@ -159,10 +160,11 @@ async function main() {
                   applicationDocumentFiles: {
                     create: [
                       {
-                        fileName: 'bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68'
+                        fileName:
+                          "bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68",
                       },
-                    ]
-                  }
+                    ],
+                  },
                 },
               ],
             },
@@ -186,9 +188,10 @@ async function main() {
                   applicationDocumentFiles: {
                     create: [
                       {
-                        fileName: '8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e'
+                        fileName:
+                          "8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e",
                       },
-                    ]
+                    ],
                   },
                   status: "ACCEPTED",
                 },
@@ -198,9 +201,10 @@ async function main() {
                   applicationDocumentFiles: {
                     create: [
                       {
-                        fileName: 'bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46'
+                        fileName:
+                          "bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46",
                       },
-                    ]
+                    ],
                   },
                   status: "ACCEPTED",
                 },
@@ -225,12 +229,14 @@ async function main() {
                   applicationDocumentFiles: {
                     create: [
                       {
-                        fileName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733'
+                        fileName:
+                          "962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733",
                       },
                       {
-                        fileName: 'bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46'
+                        fileName:
+                          "bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46",
                       },
-                    ]
+                    ],
                   },
                 },
               ],
@@ -257,12 +263,14 @@ async function main() {
                   applicationDocumentFiles: {
                     create: [
                       {
-                        fileName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733'
+                        fileName:
+                          "962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733",
                       },
                       {
-                        fileName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296'
+                        fileName:
+                          "6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296",
                       },
-                    ]
+                    ],
                   },
                   status: "ACCEPTED",
                 },
@@ -272,12 +280,14 @@ async function main() {
                   applicationDocumentFiles: {
                     create: [
                       {
-                        fileName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733'
+                        fileName:
+                          "962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733",
                       },
                       {
-                        fileName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9'
+                        fileName:
+                          "584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9",
                       },
-                    ]
+                    ],
                   },
                   status: "REJECTED",
                 },
@@ -287,9 +297,10 @@ async function main() {
                   applicationDocumentFiles: {
                     create: [
                       {
-                        fileName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9'
+                        fileName:
+                          "584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9",
                       },
-                    ]
+                    ],
                   },
                   status: "ACCEPTED",
                 },
@@ -331,12 +342,14 @@ async function main() {
                   applicationDocumentFiles: {
                     create: [
                       {
-                        fileName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733'
+                        fileName:
+                          "962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733",
                       },
                       {
-                        fileName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296'
+                        fileName:
+                          "6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296",
                       },
-                    ]
+                    ],
                   },
                   status: "REJECTED",
                 },
@@ -346,9 +359,10 @@ async function main() {
                   applicationDocumentFiles: {
                     create: [
                       {
-                        fileName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9'
+                        fileName:
+                          "584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9",
                       },
-                    ]
+                    ],
                   },
                   status: "ACCEPTED",
                 },
@@ -358,9 +372,10 @@ async function main() {
                   applicationDocumentFiles: {
                     create: [
                       {
-                        fileName: '8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e'
+                        fileName:
+                          "8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e",
                       },
-                    ]
+                    ],
                   },
                   status: "REJECTED",
                 },
@@ -401,9 +416,10 @@ Proficiency ใน Excel หรือ Google Sheets เป็น essential, \n \
                   applicationDocumentFiles: {
                     create: [
                       {
-                        fileName: '3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609'
+                        fileName:
+                          "3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609",
                       },
-                    ]
+                    ],
                   },
                 },
               ],
@@ -411,11 +427,13 @@ Proficiency ใน Excel หรือ Google Sheets เป็น essential, \n \
           },
 
           {
-            title: 'Social Media Content Manager / ผู้จัดการเนื้อหาโซเชียลมีเดีย',
-            status: 'NOT_STARTED',
-            description: 'Looking for a dynamic individual with ทักษะในการสร้าง \n \
+            title:
+              "Social Media Content Manager / ผู้จัดการเนื้อหาโซเชียลมีเดีย",
+            status: "NOT_STARTED",
+            description:
+              "Looking for a dynamic individual with ทักษะในการสร้าง \n \
 engaging content สำหรับ social media platforms. Responsibilities include \n \
-content creation, strategic planning, and performance analysis.',
+content creation, strategic planning, and performance analysis.",
             budget: 14000,
             numWorker: 2,
             estimateStartDate: new Date("2024-01-22"),
@@ -429,12 +447,14 @@ content creation, strategic planning, and performance analysis.',
                   applicationDocumentFiles: {
                     create: [
                       {
-                        fileName: '3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609'
+                        fileName:
+                          "3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609",
                       },
                       {
-                        fileName: 'bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68'
+                        fileName:
+                          "bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68",
                       },
-                    ]
+                    ],
                   },
                   status: "ACCEPTED",
                 },
@@ -444,12 +464,14 @@ content creation, strategic planning, and performance analysis.',
                   applicationDocumentFiles: {
                     create: [
                       {
-                        fileName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9'
+                        fileName:
+                          "584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9",
                       },
                       {
-                        fileName: 'bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46'
+                        fileName:
+                          "bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46",
                       },
-                    ]
+                    ],
                   },
                   status: "ACCEPTED",
                 },
@@ -495,9 +517,10 @@ generate insights, และ provide data-driven recommendations. \n \
                   applicationDocumentFiles: {
                     create: [
                       {
-                        fileName: 'bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46'
+                        fileName:
+                          "bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46",
                       },
-                    ]
+                    ],
                   },
                 },
                 {
@@ -506,12 +529,14 @@ generate insights, และ provide data-driven recommendations. \n \
                   applicationDocumentFiles: {
                     create: [
                       {
-                        fileName: '24467125aeb077e4cdf8705d08e6e0ed5f4e7c303cb1656f3b9afe46f7346644'
+                        fileName:
+                          "24467125aeb077e4cdf8705d08e6e0ed5f4e7c303cb1656f3b9afe46f7346644",
                       },
                       {
-                        fileName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733'
+                        fileName:
+                          "962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733",
                       },
-                    ]
+                    ],
                   },
                 },
               ],
@@ -538,9 +563,10 @@ generate insights, และ provide data-driven recommendations. \n \
                   applicationDocumentFiles: {
                     create: [
                       {
-                        fileName: '24467125aeb077e4cdf8705d08e6e0ed5f4e7c303cb1656f3b9afe46f7346644'
+                        fileName:
+                          "24467125aeb077e4cdf8705d08e6e0ed5f4e7c303cb1656f3b9afe46f7346644",
                       },
-                    ]
+                    ],
                   },
                 },
                 {
@@ -549,19 +575,20 @@ generate insights, และ provide data-driven recommendations. \n \
                   applicationDocumentFiles: {
                     create: [
                       {
-                        fileName: '8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e'
+                        fileName:
+                          "8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e",
                       },
-                    ]
+                    ],
                   },
                 },
               ],
             },
           },
           // Add more job objects as needed
-        ]
-      }
-    }
-  })
+        ],
+      },
+    },
+  });
 
   const e2 = await prisma.employer.create({
     data: {
@@ -818,10 +845,10 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
             },
           },
           // Add more job objects as needed
-        ]
-      }
-    }
-  })
+        ],
+      },
+    },
+  });
 
   const e3 = await prisma.employer.create({
     data: {
@@ -852,10 +879,12 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
             jobDocumentFiles: {
               create: [
                 {
-                  fileName: "bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68",
+                  fileName:
+                    "bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68",
                 },
                 {
-                  fileName: "584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9",
+                  fileName:
+                    "584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9",
                 },
               ],
             },
@@ -885,10 +914,12 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
             jobDocumentFiles: {
               create: [
                 {
-                  fileName: "962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733",
+                  fileName:
+                    "962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733",
                 },
                 {
-                  fileName: "1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef",
+                  fileName:
+                    "1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef",
                 },
               ],
             },
@@ -921,10 +952,12 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
             jobDocumentFiles: {
               create: [
                 {
-                  fileName: "584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9",
+                  fileName:
+                    "584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9",
                 },
                 {
-                  fileName: "3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609",
+                  fileName:
+                    "3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609",
                 },
               ],
             },
@@ -954,7 +987,8 @@ gather insights, และ identify trends. Responsibilities รวมถึง�
             jobDocumentFiles: {
               create: [
                 {
-                  fileName: "1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef",
+                  fileName:
+                    "1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef",
                 },
               ],
             },
@@ -1007,7 +1041,8 @@ The standout quality was their impeccable attention to detail and problem-solvin
             jobDocumentFiles: {
               create: [
                 {
-                  fileName: "3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609",
+                  fileName:
+                    "3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609",
                 },
               ],
             },
@@ -1033,10 +1068,12 @@ The standout quality was their impeccable attention to detail and problem-solvin
             jobDocumentFiles: {
               create: [
                 {
-                  fileName: "6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296",
+                  fileName:
+                    "6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296",
                 },
                 {
-                  fileName: "1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef",
+                  fileName:
+                    "1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef",
                 },
               ],
             },
@@ -1070,7 +1107,8 @@ The standout quality was their impeccable attention to detail and problem-solvin
             jobDocumentFiles: {
               create: [
                 {
-                  fileName: "6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296",
+                  fileName:
+                    "6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296",
                 },
               ],
             },
@@ -1104,10 +1142,12 @@ The standout quality was their impeccable attention to detail and problem-solvin
             jobDocumentFiles: {
               create: [
                 {
-                  fileName: "bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68",
+                  fileName:
+                    "bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68",
                 },
                 {
-                  fileName: "584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9",
+                  fileName:
+                    "584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9",
                 },
               ],
             },
@@ -1166,7 +1206,8 @@ engaging และ เนื้อหาสร้างสรรค์สำห�
             jobDocumentFiles: {
               create: [
                 {
-                  fileName: "584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9",
+                  fileName:
+                    "584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9",
                 },
               ],
             },
@@ -1199,10 +1240,12 @@ engaging และ เนื้อหาสร้างสรรค์สำห�
             jobDocumentFiles: {
               create: [
                 {
-                  fileName: "bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68",
+                  fileName:
+                    "bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68",
                 },
                 {
-                  fileName: "962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733",
+                  fileName:
+                    "962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733",
                 },
               ],
             },
@@ -1231,10 +1274,12 @@ produce compelling video content. Proficiency ใน video editing tools เป�
             jobDocumentFiles: {
               create: [
                 {
-                  fileName: "6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296",
+                  fileName:
+                    "6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296",
                 },
                 {
-                  fileName: "8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e",
+                  fileName:
+                    "8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e",
                 },
               ],
             },
@@ -1255,10 +1300,12 @@ recruitment, employee onboarding, และ HR processes. \n \
             jobDocumentFiles: {
               create: [
                 {
-                  fileName: "3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609",
+                  fileName:
+                    "3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609",
                 },
                 {
-                  fileName: "6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296",
+                  fileName:
+                    "6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296",
                 },
               ],
             },
@@ -1279,7 +1326,8 @@ Strong communication skills และ customer service mindset จำเป็�
             jobDocumentFiles: {
               create: [
                 {
-                  fileName: "3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609",
+                  fileName:
+                    "3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609",
                 },
               ],
             },

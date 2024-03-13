@@ -8,14 +8,14 @@ type Option = {
 type Props = {
   label: string;
   value?: string;
-  options: Option[];
-  name: string;
-  title: string;
+  options?: Option[];
+  name?: string;
+  title?: string;
   placeholder?: string;
   errorMessage?: string;
-  onChange: ChangeEventHandler<HTMLSelectElement>;
+  onChange?: ChangeEventHandler<HTMLSelectElement>;
   isDisabled?: boolean;
-  defaultOption?: Option;
+  className?: string;
 };
 
 export default function SelectInput(props: Props) {
@@ -29,11 +29,11 @@ export default function SelectInput(props: Props) {
     errorMessage,
     onChange,
     isDisabled,
-    defaultOption,
+    className,
   } = props;
 
   return (
-    <div className="flex flex-col gap-1 flex-grow">
+    <div className={`flex flex-col gap-1 flex-grow ${className}`}>
       <label htmlFor={name} className="text-[14px] font-medium text-slate-900">
         {label}
       </label>
@@ -49,11 +49,11 @@ export default function SelectInput(props: Props) {
         <option className="text-slate-400" value="" disabled>
           {placeholder || "Select an option"}
         </option>
-        {(defaultOption ? [defaultOption] : []).concat(options).map((option: Option, index) => (
-          <option key={index} value={option.value}>
-            {option.title}
-          </option>
-        ))}
+        {options?.map((option: Option, index) => (
+            <option key={index} value={option.value}>
+              {option.title}
+            </option>
+          ))}
       </select>
       <span className="h-[14px] text-[14px] text-red-600">
         {errorMessage && errorMessage}
