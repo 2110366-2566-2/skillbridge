@@ -48,7 +48,7 @@ export default function OfferingForm({ jobId, application }: Props) {
         file: null,
         jobId: jobId
     })
-    console.log(bid, applicationStatus, url, budget, jobStatus)
+    // console.log(bid, applicationStatus, url, budget, jobStatus)
 
     const handleChange = (evt: ChangeEvent) => {
         const changedInput = evt.target as HTMLInputElement; // Type assertion to HTMLInputElement
@@ -79,8 +79,8 @@ export default function OfferingForm({ jobId, application }: Props) {
             // console.log(res);
             setPrimaryLoading((prev) => !prev);
             // setDisabled(false);
-            toast.success("ข้อเสนอของคุณถูกส่งไปยังผู้ว่าจ้างแล้ว");
             location.reload()
+            toast.success("ข้อเสนอของคุณถูกส่งไปยังผู้ว่าจ้างแล้ว");
         } catch (error) {
             console.error("Error submitting student offer:", error);
         }
