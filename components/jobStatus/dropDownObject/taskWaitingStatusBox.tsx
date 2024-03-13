@@ -1,3 +1,7 @@
+"use client";
+
+import Router from "next/router"
+
 export default function TaskWaitingStatusBox({
     userId,
     jobId
@@ -7,7 +11,7 @@ export default function TaskWaitingStatusBox({
 }) {
     return (
         <div className="absolute bottom-[15px] w-[295px] flex justify-between">
-            <button className="h-[35px] bg-[#ef4444] text-sm text-white rounded-md w-[100%] hover:opacity-80 active:opacity-60">
+            <button className="h-[35px] bg-[#ef4444] text-sm text-white rounded-md w-[100%] hover:opacity-80 active:opacity-60" onClick={() => {Router.reload();}}>
                 สละสิทธิ์
             </button>
         </div>
