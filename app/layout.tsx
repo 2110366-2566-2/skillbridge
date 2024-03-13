@@ -38,7 +38,7 @@ export default function RootLayout({
           <Toaster
             position="bottom-right"
             toastOptions={{
-              className: "font-semibold text-slate-800 md:text-xl",
+              className: "font-semibold text-slate-800",
               success: {
                 style: {
                   background: "#f0fdf4",

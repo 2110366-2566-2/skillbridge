@@ -33,7 +33,9 @@ const JobCard = ({
         <div className="w-[85%]">
           <div className="h-[60px]">
             <Link href={`/jobs/manage/${jobId}`}>
-              <p className="font-semibold text-2xl line-clamp-2 hover:underline">{name}</p>
+              <p className="font-semibold text-2xl line-clamp-2 hover:underline">
+                {name}
+              </p>
             </Link>
           </div>
           <div className="font-medium my-2">
