@@ -4,6 +4,8 @@ import { prisma } from "../../lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import { getApplication, getStudentUserId } from "./utils";
+import { title } from "process";
+import { sendEmail } from "./sendEmail";
 
 /*
 Application states : 
@@ -42,6 +44,35 @@ async function pendingToDisclaimed(jobId: string) {
             status: ApplicationStatus.DISCLAIMED
         }
     });
+
+    const emailApp = await prisma.application.findUniqueOrThrow({
+        where : {
+            userId_jobId: {
+                userId: studentUserId,
+                jobId: jobId
+            }
+        },
+        select: {
+            job: {
+                select: {
+                    title : true,
+                    employerId: true
+                }
+            },
+            user: {
+                select: {
+                    salutation: true,
+                    firstname: true,
+                    lastname: true
+                }
+            }
+        }
+    })
+
+    const subject = `มีนิสิตยกเลิกการสมัครงาน ${emailApp.job.title}`;
+    const text = `นิสิต ${emailApp.user.salutation} ${emailApp.user.firstname} ${emailApp.user.lastname} ได้ยกเลิกการสมัครงาน ${emailApp.job.title}`
+
+    sendEmail(emailApp.job.employerId, subject, text);
 }
 
 async function acceptedToDepositPending(jobId: string) {
@@ -67,6 +98,35 @@ async function acceptedToDepositPending(jobId: string) {
             status: ApplicationStatus.DEPOSIT_PENDING
         }
     });
+
+    const emailApp = await prisma.application.findUniqueOrThrow({
+        where : {
+            userId_jobId: {
+                userId: studentUserId,
+                jobId: jobId
+            }
+        },
+        select: {
+            job: {
+                select: {
+                    title : true,
+                    employerId: true
+                }
+            },
+            user: {
+                select: {
+                    salutation: true,
+                    firstname: true,
+                    lastname: true
+                }
+            }
+        }
+    })
+
+    const subject = `มีนิสิตยอมรับที่จะทำงาน ${emailApp.job.title} แล้ว`;
+    const text = `นิสิต ${emailApp.user.salutation} ${emailApp.user.firstname} ${emailApp.user.lastname} ได้ยอมรับที่จะทำงาน ${emailApp.job.title} กรุณาชำระค่ามัจจำเพื่อให้นิสิตเริ่มทำงาน`;
+
+    sendEmail(emailApp.job.employerId, subject, text);
 }
 
 async function acceptedToDisclaimed(jobId: string) {
@@ -92,6 +152,35 @@ async function acceptedToDisclaimed(jobId: string) {
             status: ApplicationStatus.DISCLAIMED
         }
     });
+
+    const emailApp = await prisma.application.findUniqueOrThrow({
+        where : {
+            userId_jobId: {
+                userId: studentUserId,
+                jobId: jobId
+            }
+        },
+        select: {
+            job: {
+                select: {
+                    title : true,
+                    employerId: true
+                }
+            },
+            user: {
+                select: {
+                    salutation: true,
+                    firstname: true,
+                    lastname: true
+                }
+            }
+        }
+    })
+
+    const subject = `มีนิสิตปฏิเสธที่จะทำงาน ${emailApp.job.title}`;
+    const text = `นิสิต ${emailApp.user.salutation} ${emailApp.user.firstname} ${emailApp.user.lastname} ปฏิเสธที่จะทำงาน ${emailApp.job.title}`;
+
+    sendEmail(emailApp.job.employerId, subject, text);
 }
 
 async function inProgressToDelivered(jobId: string) {
@@ -117,6 +206,35 @@ async function inProgressToDelivered(jobId: string) {
             status: ApplicationStatus.DELIVERED
         }
     });
+
+    const emailApp = await prisma.application.findUniqueOrThrow({
+        where : {
+            userId_jobId: {
+                userId: studentUserId,
+                jobId: jobId
+            }
+        },
+        select: {
+            job: {
+                select: {
+                    title : true,
+                    employerId: true
+                }
+            },
+            user: {
+                select: {
+                    salutation: true,
+                    firstname: true,
+                    lastname: true
+                }
+            }
+        }
+    })
+
+    const subject = `นิสิตส่งมอบงาน ${emailApp.job.title}`;
+    const text = `นิสิต ${emailApp.user.salutation} ${emailApp.user.firstname} ${emailApp.user.lastname} ส่งมอบงาน ${emailApp.job.title} แล้ว`;
+
+    sendEmail(emailApp.job.employerId, subject, text);
 }
 
 

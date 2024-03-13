@@ -1,6 +1,6 @@
 "use server";
 import { JobStatus, ApplicationStatus } from "@prisma/client";
-import { prisma } from "../../lib/prisma"
+import { prisma } from "../../lib/prisma";
 import { Client } from "@elastic/elasticsearch";
 
 const elasticClient = new Client({
