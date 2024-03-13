@@ -36,27 +36,27 @@ const getApplicationByUserId = async (jobId: string, userId?: string) => {
       jobStatus = query.status;
     }
 
-    let signUrl: string | any = null
+    let signUrl: string | any = null;
     if (application?.applicationDocumentFile) {
-      signUrl = await getS3URL(
-        application.applicationDocumentFile.fileName
-      );
+      signUrl = await getS3URL(application.applicationDocumentFile.fileName);
     }
 
     // if (signUrl.message) {
     //   signUrl = null;
     // }
     let output = {
-      bid: application?.bid ? application.bid as number : null,
-      applicationStatus: application?.status ? application.status as string : null,
-      url: signUrl ? signUrl as string : null,
+      bid: application?.bid ? (application.bid as number) : null,
+      applicationStatus: application?.status
+        ? (application.status as string)
+        : null,
+      url: signUrl ? (signUrl as string) : null,
       budget: jobBudget as number,
-      jobStatus: jobStatus ? jobStatus as string : null,
+      jobStatus: jobStatus ? (jobStatus as string) : null,
     };
     return output;
   } catch (error: any) {
     console.log(error);
-    return null
+    return null;
     // return {
     //   message: error.message || "Internal Server Error",
     //   status: error.status || 500,

@@ -40,7 +40,7 @@ const updateJob = async (formData: FormData) => {
       budget,
       jobTagId,
       numWorker,
-      files
+      files,
     );
 
     const session = await getServerSession(authOptions);
@@ -74,7 +74,6 @@ const updateJob = async (formData: FormData) => {
         status: 404,
       };
     } else if (job?.applications.length > 0) {
-      console.log(job);
       throw {
         message: "Can't edit this job",
         status: 423,

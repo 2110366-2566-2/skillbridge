@@ -6,7 +6,7 @@ import s3 from "../../lib/bucket";
 
 const getS3URL = async (fileName: string) => {
   try {
-    console.log("BUCKET_NAME", process.env.BUCKET_NAME)
+    console.log("BUCKET_NAME", process.env.BUCKET_NAME);
     const getObjectParams = {
       Bucket: process.env.BUCKET_NAME,
       Key: fileName,

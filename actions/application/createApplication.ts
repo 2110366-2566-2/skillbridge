@@ -58,7 +58,7 @@ const createApplication = async (formData: FormData) => {
         buffer,
         file.type,
         file.size,
-        "applicationFiles"
+        "applicationFiles",
       );
 
       if (fileName?.message) {

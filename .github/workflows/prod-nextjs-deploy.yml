@@ -28,7 +28,7 @@ jobs:
           touch .env
           echo DATABASE_URL=${{ secrets.DATABASE_URL }} >> .env
           cat .env
-          
+
       - name: GCP Authentication
         uses: google-github-actions/setup-gcloud@v0
         with:
