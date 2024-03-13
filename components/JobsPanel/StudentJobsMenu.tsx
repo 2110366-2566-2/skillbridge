@@ -1,16 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import JobToggler from "./JobToggler";
 import Sorter from "./Sorter";
 import StudentJobsPanel from "./StudentJobsPanel";
 import filterStudentJobs from "@/lib/Jobs/filterJobToggler";
 import StudentDoneJobsPanel from "./StudentDoneJobsPanel";
+import { studentFetchApplications } from "@/actions/jobCards/fetchJobCards";
 
 
 // 1st and 2nd tab
 // ignore userId
-const data = [
+const oldData = [
 	{
 		userId: "001",
 		jobId: "001",
@@ -106,11 +107,20 @@ type Props = {};
 const jobTypeList = ["งานที่กำลังสมัคร", "งานปัจจุบัน", "งานที่เสร็จสิ้น"];
 
 const StudentJobsMenu = (props: Props) => {
+
 	const [jobType, setJobType] = useState("งานที่กำลังสมัคร");
 	const [isOpeningSideBar, setIsOpeningSideBar] = useState(false);
 	const [startDateSortOption, setStartDateSortOption] = useState("-");
 	const [endDateSortOption, setEndDateSortOption] = useState("-");
 	const [statusSortOption, setStatusSortOption] = useState("-");
+	const [data, setData] = useState<Array<any>>(oldData);
+
+	// useEffect(() => {
+	// 	async function fetchData(){
+	// 		setData(await studentFetchApplications());
+	// 	}
+	// 	fetchData();
+	// }, [])
 
 	const sortOptions = [
 		{ name: "วันที่เริ่มต้น", value: startDateSortOption, set: setStartDateSortOption },

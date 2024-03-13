@@ -61,7 +61,7 @@ function StudentJobsPanel({ data }: Props) {
                 </main>
             ) : (
                 <div className="flex justify-center items-center">
-                    <SearchNotFound />
+                    <SearchNotFound text={"ไม่พบงาน"} />
                 </div>
             )}
         </main>
