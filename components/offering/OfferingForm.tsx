@@ -49,7 +49,7 @@ export default function OfferingForm({ jobId, application }: Props) {
         file: null,
         jobId: jobId
     })
-    console.log(bid, applicationStatus, url, budget, jobStatus)
+    // console.log(bid, applicationStatus, url, budget, jobStatus)
 
     const handleChange = (evt: ChangeEvent) => {
         const changedInput = evt.target as HTMLInputElement; // Type assertion to HTMLInputElement
