@@ -33,6 +33,7 @@ interface FormErrors {
 
 const questionMarkCircle = require("@/public/icons/questionMarkCircle.svg") as string;
 const noFile = require("@/public/icons/noFile.svg") as string;
+const paperClip = require("@/public/icons/paperClip.svg") as string;
 
 export default function OfferingForm({ jobId, application }: Props) {
     const [primaryLoading, setPrimaryLoading] = useState(false);
@@ -140,26 +141,30 @@ export default function OfferingForm({ jobId, application }: Props) {
                             height={16}
                             className="translate-y-[2px]"
                         />
-                        <div className="text-[16] text-[#838383] mt-[10px]">
+                        <div className="text-[16px] text-[#838383] mt-[10px]">
                             ไม่ได้แนบไฟล์สัญญา
                         </div>
                     </div>
 
                 )}
-                {/* {bid && url && (
+                {bid && url && (
                     <div
-                    className="w-full flex justify-between p-2 bg-slate-100 rounded-md"
-                  >
-                    <div className="flex gap-3 justify-center items-center">
-                      <p className="text-[12px] text-slate-500 font-semibold">
-                        {truncateFileName(file.name, 25, 3)}
-                      </p>
-                      <p className="text-[12px] text-slate-400">
-                        {(file.size / 1024 / 1024).toFixed(1)} MB
-                      </p>
+                        className="w-full flex p-3 bg-slate-200 text-slate-500 rounded-md mt-[7px] hover:bg-slate-400 hover:cursor-pointer hover:shadow-md hover:text-slate-100"
+                        onClick={() => window.open(url, "_blank", "noopener,noreferrer")}
+                    >
+                        <div className="flex gap-3 items-center">
+                            <Image
+                                src={paperClip}
+                                alt="paperClip"
+                                width={16}
+                                height={16}
+                            />
+                            <p className="text-[14px] font-semibold">
+                                ไฟล์สัญญาที่แนบไว้
+                            </p>
+                        </div>
                     </div>
-                    </div>
-                )} */}
+                )}
                 {bid === null && (
                     <div className="w-full">
                         <FilesInput
