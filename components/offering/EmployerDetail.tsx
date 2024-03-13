@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import Image from "next/image";
 import noavatar from "@/public/icons/noavatar.svg";
@@ -14,7 +14,7 @@ type Props = {
 };
 
 export default async function EmployerDetail({ employerData }: Props) {
-    const avatar = noavatar
+    const avatar = noavatar;
 
     return (
         <>

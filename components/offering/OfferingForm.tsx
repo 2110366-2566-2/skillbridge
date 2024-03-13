@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import { useState, FormEvent, ChangeEvent } from "react";
@@ -11,24 +11,24 @@ import toast from "react-hot-toast";
 import createApplication from "@/actions/application/createApplication";
 
 type Props = {
-    jobId: string,
+    jobId: string;
     application: {
-        bid: number | null,
-        applicationStatus: string | null,
-        url: string | null,
-        budget: number,
-        jobStatus: string | null
-    }
+        bid: number | null;
+        applicationStatus: string | null;
+        url: string | null;
+        budget: number;
+        jobStatus: string | null;
+    };
 };
 
 interface FormData {
-    file: File | null,
-    bid: number,
-    jobId: string
+    file: File | null;
+    bid: number;
+    jobId: string;
 }
 
 interface FormErrors {
-    bid?: number
+    bid?: number;
 }
 
 const questionMarkCircle = require("@/public/icons/questionMarkCircle.svg") as string;
@@ -267,6 +267,3 @@ export default function OfferingForm({ jobId, application }: Props) {
         </>
     )
 }
-
-
-

@@ -1,11 +1,11 @@
-"use server"
+"use server";
 
-import getJobById from "@/actions/getJobByID"
+import getJobById from "@/actions/getJobByID";
 import EmployerDetail from "./EmployerDetail";
 
 type Props = {
-    jobId: string,
-    isStudentView: boolean
+    jobId: string;
+    isStudentView: boolean;
 };
 
 export default async function JobDetail({ jobId, isStudentView }: Props) {
@@ -28,8 +28,8 @@ export default async function JobDetail({ jobId, isStudentView }: Props) {
         middleName: job.userName.middlename ? job.userName.middlename : "",
         lastName: job.userName.lastname,
         position: job.position,
-        organization: job.organization
-    }
+        organization: job.organization,
+    };
 
     const FormattedDate = (inputDateString: string) => {
         const [day, month, year] = inputDateString.split("/");

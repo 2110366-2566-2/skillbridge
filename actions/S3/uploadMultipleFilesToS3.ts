@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import uploadFileToS3 from "./uploadFileToS3";
 
@@ -39,7 +39,7 @@ const uploadMultipleFilesToS3 = async (files: File[]) => {
         buffers[i],
         types[i],
         size_list[i],
-        "jobFiles"
+        "jobFiles",
       );
       if (result.message) {
         throw result;
