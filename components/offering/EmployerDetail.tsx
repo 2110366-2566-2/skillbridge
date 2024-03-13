@@ -28,7 +28,7 @@ export default async function EmployerDetail({ employerData }: Props) {
                         width={40}
                         height={40}
                     />
-                    <div className="flex flex-col ml-5 lg:ml-6 hover:underline hover:cursor-pointer">
+                    <div className="flex flex-col ml-5 lg:ml-6">
                         <div className="font-medium text-[14px] text-slate-800 lg:text-[16px]">{employerData.firstName} {employerData.middleName} {employerData.lastName}</div>
                         <div className="text-[11px] text-slate-800 line-clamp-1 lg:text-[13px]">{employerData.position} {employerData.organization}</div>
                     </div>
