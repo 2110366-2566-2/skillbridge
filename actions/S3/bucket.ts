@@ -3,11 +3,13 @@
 import { S3Client } from "@aws-sdk/client-s3";
 
 const s3 = new S3Client({
-  region: process.env.BUCKET_REGION!,
+  region: "us-east-1",
   credentials: {
-    accessKeyId: process.env.S3_ACCESS_KEY!,
-    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
+    accessKeyId: "AKIAVRUVUMB3ZFAZRNTX",
+    secretAccessKey: "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",
   },
 });
+
+// s3.config.region = provess.env.
 
 export default s3;
