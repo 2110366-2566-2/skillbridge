@@ -71,25 +71,24 @@ export default function OfferingForm({ jobId, application }: Props) {
             const formDataObject = new FormData();
             Object.entries(formData).forEach(([key, value]) => {
                 formDataObject.append(key, value);
-                console.log("test: ", key, value);
+                // console.log("test: ", key, value);
             });
-            console.log("ping: ", formDataObject)
+            // console.log("ping: ", formDataObject)
             const res = await createApplication(formDataObject);
-            console.log(res);
+            // console.log(res);
             setPrimaryLoading((prev) => !prev);
-            setDisabled(false);
+            // setDisabled(false);
             toast.success("ข้อเสนอของคุณถูกส่งไปยังผู้ว่าจ้างแล้ว");
         } catch (error) {
             console.error("Error submitting student offer:", error);
         }
-        console.log("SUBMIT JA EDOK", formData.bid)
     }
 
     return (
         <>
             <form
                 onSubmit={handleSubmit}
-                className="mt-[30px] md:mt-0 flex flex-col w-full md:w-[30vw]">
+                className="mt-[30px] md:mt-0 flex flex-col w-full md:w-[30vw] xl:w-[20vw]">
                 <div className="relative mb-[2px]">
                     <div className="inline-block font-medium text-slate-800">
                         สัญญาจ้างงาน

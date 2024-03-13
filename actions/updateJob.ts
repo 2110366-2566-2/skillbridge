@@ -2,7 +2,7 @@
 
 import { prisma } from "../lib/prisma";
 import { revalidatePath } from "next/cache";
-import uploadMultipleFilesToS3 from "../lib/S3/uploadMultipleFilesToS3";
+import uploadMultipleFilesToS3 from "./S3/uploadMultipleFilesToS3";
 import { string } from "zod";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
