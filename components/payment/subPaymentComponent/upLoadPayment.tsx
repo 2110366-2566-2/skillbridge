@@ -76,7 +76,7 @@ export default function FilesInput(props: Props) {
                 formData.append('image', selectedFile);
 
                 try {
-                    const response = await fetch(`/`, { // same
+                    const response = await fetch(`/`, { //เปลี่ยน route ที่มึงจะส่ง
                         method: 'POST',
                         body: formData,
                     });
@@ -192,19 +192,19 @@ export default function FilesInput(props: Props) {
                         onClick={() => {
                             setPrimaryLoading((prev) => !prev);
                             setDisabled(true);
-                            // Simulate an asynchronous job with a 2-second delay
+                            // Simulate an asynchronous job with a 1.5-second delay
                             setTimeout(function () {
-                                // Code to be executed after the 2-second delay
+                                // Code to be executed after the 1.5-second delay
                                 handleFileUpload()
                                 setPrimaryLoading((prev) => !prev);
-                                setDisabled(false); // Assuming you want to enable the button again
 
 
-                                if (!isWarnUpLoadFile && false) { //if (!isWarnUpLoadFile && upload หลังบ้านสำเร็จ){toast.success("ระบบกำลังตรวจสอบ");}
-                                    //else if(upload server หลังบ้านไม่สำเร็จ) { toast.error("อัพโหลดไม่สำเร็จ โปรดลองอีกครั้ง"); setDisabled(false);}
-                                    //else ไม่ต้องทำไร
-                                    toast.success("ระบบกำลังตรวจสอบ");
-                                }
+
+                                //if (!isWarnUpLoadFile && upload หลังบ้านสำเร็จ){toast.success("ระบบกำลังตรวจสอบ");}
+                                //else if(upload server หลังบ้านไม่สำเร็จ) { toast.error("อัพโหลดไม่สำเร็จ โปรดลองอีกครั้ง"); setDisabled(false);}
+                                //else ไม่ต้องทำไร
+
+
 
 
                             }, 1500);
