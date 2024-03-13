@@ -5,6 +5,7 @@ import { Student } from "@/types/StudentType";
 import React, { useEffect, useState } from "react";
 import StudentOffer from "../studentOffer/studentOffer";
 import SearchNotFound from "../searchJob/SearchNotFound";
+import { convertStateNameToThai } from "@/lib/Jobs/adapter";
 
 type Props = {
     jobId: string;
@@ -67,7 +68,7 @@ function JobManagePanel({ jobId }: Props) {
                                     studentName={name}
                                     applicationDate={`${student.createdAt.getDate()}/${student.createdAt.getMonth()}/${student.createdAt.getFullYear()}`}
                                     applicationTime={`${student.createdAt.getHours()}:${student.createdAt.getMinutes()} น.`}
-                                    status={student.status}
+                                    status={convertStateNameToThai('employer', student.status)}
                                     price={`฿${student.bid.toLocaleString()}`}
                                 />
                             </div>

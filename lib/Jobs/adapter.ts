@@ -16,3 +16,46 @@ export function getStudentByJobAdapter(student: any){
 
     return result;
 }
+
+export function convertStateNameToThai(userType: string, state: string): string
+{
+    // in the employer's view
+    if(userType === 'employer'){
+        switch(state){
+            case 'PENDING':
+                return 'สมัคร';
+            case 'DISCLAIMED':
+                return 'สละสิทธิ์';
+            case 'DEPOSIT_PENDING':
+                return 'รอจ่ายมัดจำ';
+            case 'IN_PROGRESS':
+                return 'รอส่งมอบงาน';
+            case 'DELIVERED':
+                return 'ส่งมอบงานแล้ว';
+            case 'WAGE_PAYMENT_PENDING':
+                return 'รอจ่ายค่าจ้าง';
+        }
+    }
+    // in the student's view
+    else if(userType === 'student'){
+        switch(state){
+            case 'PENDING':
+                return 'กำลังรอ';
+            case 'ACCEPTED':
+                return 'ผ่านการคัดเลือก';
+            case 'REJECTED':
+                return 'ไม่ผ่านการคัดเลือก';
+            case 'DEPOSIT_PENDING':
+                return 'รอผู้จ้างจ่ายมัดจำ';
+            case 'IN_PROGRESS':
+                return 'รอส่งมอบงาน';
+            case 'WAGE_PAYMENT_PENDING':
+                return 'รอผู้จ้างจ่ายค่าจ้าง';
+            case 'DONE':
+                return 'เสร็จสิ้น';
+            case 'CANCELED':
+                return 'ยกเลิก';
+        }
+    }
+    return '';
+}
