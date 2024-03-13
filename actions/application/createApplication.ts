@@ -24,7 +24,7 @@ const createApplication = async (formData: FormData) => {
     }
 
     const file = formData.get("file") as File;
-    const bid = formData.get("bid") as unknown as float;
+    const bid = formData.get("bid") as unknown as number;
     const jobID = formData.get("jobID") as string;
 
     if (file.size > 1024 * 1024 * 5) {

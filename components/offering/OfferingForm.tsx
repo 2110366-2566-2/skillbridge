@@ -20,7 +20,9 @@ type Props = {
 };
 
 interface FormData {
-    bid: number
+    file: File,
+    bid: number,
+    jobId: string
 }
 
 interface FormErrors {
