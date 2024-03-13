@@ -1,7 +1,6 @@
 import JobCard from "./JobCard";
 import sortArray from "../../lib/Jobs/sortArray";
 import JobCardType from "../../types/JobCardType";
-import { LoadingOutlined } from "@ant-design/icons";
 
 type Props = {
   startDateSortOption: string;

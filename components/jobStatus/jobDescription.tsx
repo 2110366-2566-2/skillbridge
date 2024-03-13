@@ -1,23 +1,21 @@
 export default function jobDescription({
-    userId,
     jobId,
+    title,
+    price,
     jobDescription,
+    tag,
     nubmerOfAcceptedApplication,
     numberOfMaximumAccepted,
-    title,
     period,
-    tag,
-    price
 }: {
-    userId: string,
     jobId: string,
+    title: string,
+    price: string
     jobDescription: string,
+    tag: string,
     nubmerOfAcceptedApplication: string,
     numberOfMaximumAccepted: string,
-    title: string,
     period: string,
-    tag: string,
-    price: string
 }) {
     return (
         <div className="flex flex-col items-end w-[335px]">
