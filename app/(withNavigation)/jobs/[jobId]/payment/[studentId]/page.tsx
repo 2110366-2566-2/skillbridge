@@ -1,6 +1,5 @@
-import { getPaymentInfo } from "@/actions/payment/paymentinfo"
+import { getAllPaymentInfo, getPaymentInfo } from "@/actions/payment/paymentinfo"
 import Payment from "@/components/payment/payment"
-
 
 export default async function PaymentPage({
   params,
@@ -21,9 +20,9 @@ export default async function PaymentPage({
         }
         price={data ? data.bid : 0}
         jobId={params.jobId}
+        studentId={params.studentId}
+        isDeposit={data ? data.status === "DEPOSIT_PENDING" : false}
       />
-
-
     </div>
   )
 }

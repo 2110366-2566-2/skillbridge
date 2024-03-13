@@ -7,8 +7,8 @@ const getPaymentInfo = async (jobId: string, userId: string) => {
     const result = await prisma.application.findUnique({
       where: {
         userId_jobId: {
-          jobId: jobId,
-          userId: userId,
+          jobId,
+          userId,
         },
         isDeleted: false,
         OR: [
@@ -32,6 +32,7 @@ const getPaymentInfo = async (jobId: string, userId: string) => {
         },
       },
     })
+
     return result
   } catch (error) {
     console.error("Error in getPaymentInfo:", error)
@@ -41,9 +42,9 @@ const getPaymentInfo = async (jobId: string, userId: string) => {
 
 const getAllPaymentInfo = async (jobId: string) => {
   try {
-    const result = await prisma.application.findMany({
+    const results = await prisma.application.findMany({
       where: {
-        jobId: jobId,
+        jobId,
         isDeleted: false,
         OR: [
           {
@@ -66,7 +67,8 @@ const getAllPaymentInfo = async (jobId: string) => {
         },
       },
     })
-    return result
+
+    return results
   } catch (error) {
     console.error("Error in getAllPaymentInfo:", error)
     return null
