@@ -102,7 +102,7 @@ export default function OfferingForm({ jobId, application }: Props) {
                             // onBlur={() => setIsUrlInfoVisible(false)}
                             onBlur={() => setTimeout(() => {
                                 setIsUrlInfoVisible(false)
-                            }, 500)}
+                            }, 350)}
                         >
                             <Image
                                 src={questionMarkCircle}
