@@ -192,7 +192,6 @@ async function main() {
       description: "รวยทางลัดกับธุรกิจสีเทา",
       budget: 500,
       numWorker: 10,
-      startDate: new Date("2023-09-21"),
       estimateStartDate: new Date("2023-09-15"),
       estimateEndDate: new Date("2024-03-31"),
       jobTagId: jobTagList["พัฒนาเว็ปไซต์"],
@@ -336,7 +335,7 @@ generate insights, และ provide data-driven recommendations. \n \
     data: {
       employerId: e2.userId,
       title: "ตัดต่อคลิปลง TikTok",
-      status: "NOT_STARTED",
+      status: "IN_PROGRESS",
       description: "โอ้เบบี้เกิร์ลยูเรียนมาแตร์เดอี",
       budget: 2000,
       numWorker: 3,
@@ -774,7 +773,73 @@ prepare reports, และ provide insights for decision-making. \n \
         ],
       },
     },
-  });
+  })
+
+  const j31 = await prisma.job.create({
+    data: {
+      employerId: e3.userId,
+      title: "Pokemon Trainer",
+      status: "NOT_STARTED",
+      description:
+        "Gotta catch 'em all!",
+      budget: 15000,
+      numWorker: 4,
+      estimateStartDate: new Date("2024-04-11"),
+      estimateEndDate: new Date("2024-07-31"),
+      jobTagId: jobTagList["ไลฟ์สไตล์"],
+      jobDocumentFiles: {
+        create: [
+          {
+            fileName: "3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609",
+          },
+        ],
+      },
+    },
+  })
+
+  const j32 = await prisma.job.create({
+    data: {
+      employerId: e3.userId,
+      title: "Legendary Badminton Player",
+      status: "NOT_STARTED",
+      description:
+        "Strike them in the face (with badminton)",
+      budget: 7000,
+      numWorker: 2,
+      estimateStartDate: new Date("2024-04-11"),
+      estimateEndDate: new Date("2024-07-31"),
+      jobTagId: jobTagList["แต่งหน้า"],
+      jobDocumentFiles: {
+        create: [
+          {
+            fileName: "bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46",
+          },
+        ],
+      },
+    },
+  })
+
+  const j33 = await prisma.job.create({
+    data: {
+      employerId: e3.userId,
+      title: "Legendary ROV Player",
+      status: "NOT_STARTED",
+      description:
+        "Recruit for the team: Me & 4 stupids",
+      budget: 2000,
+      numWorker: 4,
+      estimateStartDate: new Date("2024-05-12"),
+      estimateEndDate: new Date("2024-06-31"),
+      jobTagId: jobTagList["พัฒนาตัวเอง"],
+      jobDocumentFiles: {
+        create: [
+          {
+            fileName: "8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e",
+          },
+        ],
+      },
+    },
+  })
 
   const a1 = await prisma.application.create({
     data: {
@@ -801,6 +866,7 @@ prepare reports, และ provide insights for decision-making. \n \
       jobId: j1.id,
       userId: s2.userId,
       bid: 800,
+      status: "ACCEPTED",
       applicationDocumentFiles: {
         create: [
           {
@@ -851,6 +917,7 @@ prepare reports, และ provide insights for decision-making. \n \
       jobId: j3.id,
       userId: s2.userId,
       bid: 10000,
+      status: "ACCEPTED",
       applicationDocumentFiles: {
         create: [
           {
@@ -1059,6 +1126,7 @@ prepare reports, และ provide insights for decision-making. \n \
       jobId: j8.id,
       userId: s2.userId,
       bid: 17000,
+      status: "REJECTED",
       applicationDocumentFiles: {
         create: [
           {
@@ -1079,6 +1147,7 @@ prepare reports, และ provide insights for decision-making. \n \
       jobId: j9.id,
       userId: s2.userId,
       bid: 20000,
+      status: "REJECTED",
       applicationDocumentFiles: {
         create: [
           {
@@ -1129,8 +1198,18 @@ prepare reports, และ provide insights for decision-making. \n \
       jobId: j11.id,
       userId: s2.userId,
       bid: 3000,
+      status: "DELIVERED",
     },
-  });
+  })
+
+  const a215 = await prisma.application.create({
+    data: {
+      jobId: j11.id,
+      userId: s1.userId,
+      bid: 3300,
+      status: "DISCLAIMED",
+    },
+  })
 
   const a22 = await prisma.application.create({
     data: {
@@ -1225,7 +1304,7 @@ prepare reports, และ provide insights for decision-making. \n \
       jobId: j17.id,
       userId: s2.userId,
       bid: 10000,
-      status: "IN_PROGRESS",
+      status: "DISCLAIMED",
     },
   });
 
@@ -1409,6 +1488,7 @@ prepare reports, และ provide insights for decision-making. \n \
       jobId: j26.id,
       userId: s2.userId,
       bid: 12000,
+      status: "REJECTED",
     },
   });
 
@@ -1426,7 +1506,7 @@ prepare reports, และ provide insights for decision-making. \n \
       jobId: j27.id,
       userId: s2.userId,
       bid: 6000,
-      status: "WAGE_PAYMENT_PENDING",
+      status: "DELIVERED",
     },
   });
 
@@ -1579,59 +1659,83 @@ and fresh perspective, exceeding our expectations.",
       jobId: j2.id,
       studentId: s3.userId,
       employerUserId: e1.userId,
-      amount: 100,
+      amount: 250,
       isDeposit: true,
-      receiptImageName:
-        "8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e",
-    },
-  });
+      createdAt: new Date("2023-09-11T22:15:03"),
+      receiptImageName: '8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e',
+    }
+  })
+
+  const t111 = await prisma.transaction.create({
+    data: {
+      jobId: j4.id,
+      studentId: s1.userId,
+      employerUserId: e1.userId,
+      amount: 4000,
+      status: 'ACCEPTED',
+      isDeposit: true,
+      receiptImageName: '8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e',
+    }
+  })
+
+  const t112 = await prisma.transaction.create({
+    data: {
+      jobId: j4.id,
+      studentId: s1.userId,
+      employerUserId: e1.userId,
+      amount: 4000,
+      status: 'ACCEPTED',
+      isDeposit: false,
+      receiptImageName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733',
+    }
+  })
 
   const t2 = await prisma.transaction.create({
     data: {
       jobId: j4.id,
       studentId: s2.userId,
       employerUserId: e1.userId,
-      amount: 2000,
-      status: "ACCEPTED",
+      amount: 7500,
+      status: 'ACCEPTED',
       isDeposit: true,
-      receiptImageName:
-        "bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46",
-    },
-  });
+      createdAt: new Date("2022-02-08T17:40:00"),
+      receiptImageName: 'bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46',
+    }
+  })
 
   const t3 = await prisma.transaction.create({
     data: {
       jobId: j4.id,
-      studentId: s1.userId,
+      studentId: s3.userId,
       employerUserId: e1.userId,
-      amount: 2000,
-      status: "REJECTED",
+      amount: 5000,
+      status: 'REJECTED',
       isDeposit: true,
-      receiptImageName:
-        "bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46",
-    },
-  });
+      createdAt: new Date("2022-04-15T09:25:00"),
+      receiptImageName: 'bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46',
+    }
+  })
 
   const t4 = await prisma.transaction.create({
     data: {
       jobId: j4.id,
-      studentId: s1.userId,
+      studentId: s3.userId,
       employerUserId: e1.userId,
-      amount: 2000,
-      status: "ACCEPTED",
+      amount: 5000,
+      status: 'ACCEPTED',
       isDeposit: true,
-      receiptImageName:
-        "bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68",
-    },
-  });
+      createdAt: new Date("2022-06-20T14:10:00"),
+      receiptImageName: 'bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68',
+    }
+  })
 
   const t5 = await prisma.transaction.create({
     data: {
       jobId: j4.id,
-      studentId: s1.userId,
+      studentId: s3.userId,
       employerUserId: e1.userId,
-      amount: 8000,
-      status: "ACCEPTED",
+      amount: 5000,
+      status: 'ACCEPTED',
       isDeposit: false,
       receiptImageName:
         "8b21380cf45f3eb2b8fddb8ad1d9404f2c51bb9c0989efe69ac4906e92df009e",
@@ -1643,463 +1747,516 @@ and fresh perspective, exceeding our expectations.",
       jobId: j5.id,
       studentId: s2.userId,
       employerUserId: e1.userId,
-      amount: 1000,
-      status: "ACCEPTED",
+      amount: 2500,
+      status: 'ACCEPTED',
       isDeposit: true,
-      receiptImageName:
-        "bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68",
-    },
-  });
+      createdAt: new Date("2022-09-02T11:55:00"),
+      receiptImageName: 'bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68',
+    }
+  })
 
   const t7 = await prisma.transaction.create({
     data: {
       jobId: j5.id,
       studentId: s2.userId,
       employerUserId: e1.userId,
-      amount: 4000,
-      status: "ACCEPTED",
+      amount: 2500,
+      status: 'ACCEPTED',
       isDeposit: false,
-      receiptImageName:
-        "962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733",
-    },
-  });
+      createdAt: new Date("2022-10-28T08:30:00"),
+      receiptImageName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733',
+    }
+  })
 
   const t8 = await prisma.transaction.create({
     data: {
       jobId: j7.id,
       studentId: s1.userId,
       employerUserId: e1.userId,
-      amount: 1500,
-      status: "REJECTED",
+      amount: 5000,
+      status: 'REJECTED',
       isDeposit: true,
-      receiptImageName:
-        "962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733",
-    },
-  });
+      createdAt: new Date("2023-01-12T16:20:00"),
+      receiptImageName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733',
+    }
+  })
 
   const t9 = await prisma.transaction.create({
     data: {
       jobId: j7.id,
       studentId: s1.userId,
       employerUserId: e1.userId,
-      amount: 1500,
-      status: "ACCEPTED",
+      amount: 5000,
+      status: 'ACCEPTED',
       isDeposit: true,
-      receiptImageName:
-        "6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296",
-    },
-  });
+      createdAt: new Date("2023-03-08T10:45:00"),
+      receiptImageName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296',
+    }
+  })
 
   const t10 = await prisma.transaction.create({
     data: {
       jobId: j7.id,
       studentId: s1.userId,
       employerUserId: e1.userId,
-      amount: 8500,
+      amount: 5000,
       isDeposit: false,
-      receiptImageName:
-        "584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9",
-    },
-  });
+      createdAt: new Date("2023-05-19T13:35:00"),
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
 
   const t11 = await prisma.transaction.create({
     data: {
       jobId: j7.id,
       studentId: s3.userId,
       employerUserId: e1.userId,
-      amount: 1500,
-      status: "ACCEPTED",
+      amount: 6000,
+      status: 'ACCEPTED',
       isDeposit: true,
-      receiptImageName:
-        "584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9",
-    },
-  });
+      createdAt: new Date("2023-07-24T09:10:00"),
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
 
   const t12 = await prisma.transaction.create({
     data: {
       jobId: j7.id,
       studentId: s3.userId,
       employerUserId: e1.userId,
-      amount: 8500,
-      status: "ACCEPTED",
+      amount: 6000,
+      status: 'ACCEPTED',
       isDeposit: false,
-      receiptImageName:
-        "6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296",
-    },
-  });
+      createdAt: new Date("2023-10-05T15:00:00"),
+      receiptImageName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296',
+    }
+  })
 
   const t13 = await prisma.transaction.create({
     data: {
       jobId: j10.id,
       studentId: s1.userId,
       employerUserId: e2.userId,
-      amount: 500,
-      status: "ACCEPTED",
+      amount: 1500,
+      status: 'ACCEPTED',
       isDeposit: true,
-      receiptImageName:
-        "1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef",
-    },
-  });
+      createdAt: new Date("2023-11-29T12:20:00"),
+      receiptImageName: '1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef',
+    }
+  })
 
   const t14 = await prisma.transaction.create({
     data: {
       jobId: j10.id,
       studentId: s1.userId,
       employerUserId: e2.userId,
-      amount: 2500,
-      status: "REJECTED",
+      amount: 1500,
+      status: 'REJECTED',
       isDeposit: false,
-      receiptImageName:
-        "584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9",
-    },
-  });
+      createdAt: new Date("2024-02-07T08:50:00"),
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
+
+  const t142 = await prisma.transaction.create({
+    data: {
+      jobId: j11.id,
+      studentId: s1.userId,
+      employerUserId: e2.userId,
+      amount: 1500,
+      status: 'REJECTED',
+      isDeposit: false,
+      createdAt: new Date("2024-02-07T08:50:00"),
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
+
+  const t144 = await prisma.transaction.create({
+    data: {
+      jobId: j11.id,
+      studentId: s1.userId,
+      employerUserId: e2.userId,
+      amount: 1500,
+      status: 'ACCEPTED',
+      isDeposit: false,
+      createdAt: new Date("2024-02-07T09:10:00"),
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
+
+  const t147 = await prisma.transaction.create({
+    data: {
+      jobId: j11.id,
+      studentId: s2.userId,
+      employerUserId: e2.userId,
+      amount: 1650,
+      status: 'ACCEPTED',
+      isDeposit: false,
+      createdAt: new Date("2024-02-07T08:50:00"),
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
 
   const t15 = await prisma.transaction.create({
     data: {
       jobId: j15.id,
       studentId: s1.userId,
       employerUserId: e2.userId,
-      amount: 2000,
-      status: "REJECTED",
+      amount: 5000,
+      status: 'REJECTED',
       isDeposit: true,
-      receiptImageName:
-        "24467125aeb077e4cdf8705d08e6e0ed5f4e7c303cb1656f3b9afe46f7346644",
-    },
-  });
+      createdAt: new Date("2022-02-10T14:15:00"),
+      receiptImageName: '24467125aeb077e4cdf8705d08e6e0ed5f4e7c303cb1656f3b9afe46f7346644',
+    }
+  })
 
   const t16 = await prisma.transaction.create({
     data: {
       jobId: j15.id,
       studentId: s1.userId,
       employerUserId: e2.userId,
-      amount: 2000,
-      status: "ACCEPTED",
+      amount: 5000,
+      status: 'ACCEPTED',
       isDeposit: true,
-      receiptImageName:
-        "1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef",
-    },
-  });
+      createdAt: new Date("2022-04-20T08:40:00"),
+      receiptImageName: '1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef',
+    }
+  })
 
   const t17 = await prisma.transaction.create({
     data: {
       jobId: j15.id,
       studentId: s1.userId,
       employerUserId: e2.userId,
-      amount: 8000,
+      amount: 5000,
       isDeposit: false,
-      receiptImageName:
-        "584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9",
-    },
-  });
+      createdAt: new Date("2022-06-22T11:30:00"),
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
 
   const t18 = await prisma.transaction.create({
     data: {
       jobId: j15.id,
       studentId: s2.userId,
       employerUserId: e2.userId,
-      amount: 3000,
-      status: "ACCEPTED",
+      amount: 6000,
+      status: 'ACCEPTED',
       isDeposit: true,
-      receiptImageName:
-        "584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9",
-    },
-  });
+      createdAt: new Date("2022-09-06T16:05:00"),
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
 
   const t19 = await prisma.transaction.create({
     data: {
       jobId: j15.id,
       studentId: s3.userId,
       employerUserId: e2.userId,
-      amount: 2000,
-      status: "ACCEPTED",
+      amount: 4500,
+      status: 'ACCEPTED',
       isDeposit: true,
-      receiptImageName:
-        "24467125aeb077e4cdf8705d08e6e0ed5f4e7c303cb1656f3b9afe46f7346644",
-    },
-  });
+      createdAt: new Date("2022-10-31T13:50:00"),
+      receiptImageName: '24467125aeb077e4cdf8705d08e6e0ed5f4e7c303cb1656f3b9afe46f7346644',
+    }
+  })
 
   const t20 = await prisma.transaction.create({
     data: {
       jobId: j15.id,
       studentId: s3.userId,
       employerUserId: e2.userId,
-      amount: 7000,
-      status: "ACCEPTED",
+      amount: 4500,
+      status: 'ACCEPTED',
       isDeposit: false,
-      receiptImageName:
-        "584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9",
-    },
-  });
+      createdAt: new Date("2023-01-15T09:30:00"),
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
 
   const t21 = await prisma.transaction.create({
     data: {
       jobId: j17.id,
       studentId: s2.userId,
       employerUserId: e2.userId,
-      amount: 1200,
-      status: "ACCEPTED",
+      amount: 5000,
+      status: 'ACCEPTED',
       isDeposit: true,
-      receiptImageName:
-        "6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296",
-    },
-  });
+      createdAt: new Date("2023-03-12T12:25:00"),
+      receiptImageName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296',
+    }
+  })
 
   const t22 = await prisma.transaction.create({
     data: {
       jobId: j17.id,
       studentId: s3.userId,
       employerUserId: e2.userId,
-      amount: 2000,
-      status: "ACCEPTED",
+      amount: 6000,
+      status: 'ACCEPTED',
       isDeposit: true,
-      receiptImageName:
-        "6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296",
-    },
-  });
+      createdAt: new Date("2023-05-24T15:15:00"),
+      receiptImageName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296',
+    }
+  })
 
   const t23 = await prisma.transaction.create({
     data: {
       jobId: j19.id,
       studentId: s1.userId,
       employerUserId: e3.userId,
-      amount: 300,
-      status: "ACCEPTED",
+      amount: 600,
+      status: 'ACCEPTED',
       isDeposit: true,
-      receiptImageName:
-        "584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9",
-    },
-  });
+      createdAt: new Date("2023-05-28T16:10:54"),
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
 
   const t24 = await prisma.transaction.create({
     data: {
       jobId: j19.id,
       studentId: s2.userId,
       employerUserId: e3.userId,
-      amount: 500,
-      status: "ACCEPTED",
+      amount: 1000,
+      status: 'ACCEPTED',
       isDeposit: true,
-      receiptImageName:
-        "584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9",
-    },
-  });
+      createdAt: new Date("2022-07-12T16:00:33"),
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
 
   const t25 = await prisma.transaction.create({
     data: {
       jobId: j21.id,
       studentId: s1.userId,
       employerUserId: e3.userId,
-      amount: 400,
-      status: "ACCEPTED",
+      amount: 1100,
+      status: 'ACCEPTED',
       isDeposit: true,
-      receiptImageName:
-        "584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9",
-    },
-  });
+      createdAt: new Date("2023-07-01T08:00:00"),
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
 
   const t26 = await prisma.transaction.create({
     data: {
       jobId: j21.id,
       studentId: s1.userId,
       employerUserId: e3.userId,
-      amount: 1800,
-      status: "ACCEPTED",
+      amount: 1100,
+      status: 'ACCEPTED',
       isDeposit: false,
-      receiptImageName:
-        "584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9",
-    },
-  });
+      createdAt: new Date("2022-11-25T10:15:00"),
+      receiptImageName: '584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9',
+    }
+  })
+
+  const t265 = await prisma.transaction.create({
+    data: {
+      jobId: j21.id,
+      studentId: s2.userId,
+      employerUserId: e3.userId,
+      amount: 1000,
+      status: 'REJECTED',
+      isDeposit: true,
+      createdAt: new Date("2022-05-10T12:20:00"),
+      receiptImageName: '1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef',
+    }
+  })
 
   const t27 = await prisma.transaction.create({
     data: {
       jobId: j21.id,
       studentId: s2.userId,
       employerUserId: e3.userId,
-      amount: 400,
-      status: "ACCEPTED",
+      amount: 1000,
+      status: 'ACCEPTED',
       isDeposit: true,
-      receiptImageName:
-        "1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef",
-    },
-  });
+      createdAt: new Date("2022-05-10T13:30:00"),
+      receiptImageName: '1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef',
+    }
+  })
 
   const t28 = await prisma.transaction.create({
     data: {
       jobId: j21.id,
       studentId: s2.userId,
       employerUserId: e3.userId,
-      amount: 1600,
-      status: "ACCEPTED",
+      amount: 1000,
+      status: 'ACCEPTED',
       isDeposit: false,
-      receiptImageName:
-        "bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68",
-    },
-  });
+      createdAt: new Date("2023-03-18T16:45:00"),
+      receiptImageName: 'bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68',
+    }
+  })
 
   const t29 = await prisma.transaction.create({
     data: {
       jobId: j24.id,
       studentId: s2.userId,
       employerUserId: e3.userId,
-      amount: 1500,
-      status: "REJECTED",
+      amount: 6000,
+      status: 'REJECTED',
       isDeposit: true,
-      receiptImageName:
-        "1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef",
-    },
-  });
+      createdAt: new Date("2022-01-28T09:20:00"),
+      receiptImageName: '1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef',
+    }
+  })
 
   const t30 = await prisma.transaction.create({
     data: {
       jobId: j24.id,
       studentId: s2.userId,
       employerUserId: e3.userId,
-      amount: 1500,
+      amount: 6000,
       isDeposit: true,
-      receiptImageName:
-        "1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef",
-    },
-  });
+      createdAt: new Date("2023-08-10T11:00:00"),
+      receiptImageName: '1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef',
+    }
+  })
 
   const t31 = await prisma.transaction.create({
     data: {
       jobId: j25.id,
       studentId: s3.userId,
       employerUserId: e3.userId,
-      amount: 500,
-      status: "REJECTED",
+      amount: 1500,
+      status: 'REJECTED',
       isDeposit: true,
-      receiptImageName:
-        "6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296",
-    },
-  });
+      createdAt: new Date("2022-10-15T14:25:00"),
+      receiptImageName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296',
+    }
+  })
 
   const t32 = await prisma.transaction.create({
     data: {
       jobId: j25.id,
       studentId: s3.userId,
       employerUserId: e3.userId,
-      amount: 500,
-      status: "ACCEPTED",
+      amount: 1500,
+      status: 'ACCEPTED',
       isDeposit: true,
-      receiptImageName:
-        "24467125aeb077e4cdf8705d08e6e0ed5f4e7c303cb1656f3b9afe46f7346644",
-    },
-  });
+      createdAt: new Date("2023-02-20T17:40:00"),
+      receiptImageName: '24467125aeb077e4cdf8705d08e6e0ed5f4e7c303cb1656f3b9afe46f7346644',
+    }
+  })
 
   const t33 = await prisma.transaction.create({
     data: {
       jobId: j25.id,
       studentId: s3.userId,
       employerUserId: e3.userId,
-      amount: 2500,
-      status: "ACCEPTED",
+      amount: 1500,
+      status: 'ACCEPTED',
       isDeposit: false,
-      receiptImageName:
-        "1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef",
-    },
-  });
+      createdAt: new Date("2022-06-05T12:05:00"),
+      receiptImageName: '1a1acabecbabd48c9e3d0020729753a526c8bb4921d39d41781ff1e1d44c11ef',
+    }
+  })
 
   const t34 = await prisma.transaction.create({
     data: {
       jobId: j25.id,
       studentId: s2.userId,
       employerUserId: e3.userId,
-      amount: 400,
-      status: "ACCEPTED",
+      amount: 1000,
+      status: 'ACCEPTED',
       isDeposit: true,
-      receiptImageName:
-        "bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46",
-    },
-  });
+      createdAt: new Date("2023-01-01T08:30:00"),
+      receiptImageName: 'bde37d8cb3947552b65d82e5355a30090ec3c361722034d5b53615b5dbc3cb46',
+    }
+  })
 
   const t35 = await prisma.transaction.create({
     data: {
       jobId: j25.id,
       studentId: s2.userId,
       employerUserId: e3.userId,
-      amount: 1600,
-      status: "ACCEPTED",
+      amount: 1000,
+      status: 'ACCEPTED',
       isDeposit: false,
-      receiptImageName:
-        "3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609",
-    },
-  });
+      createdAt: new Date("2022-04-12T10:55:00"),
+      receiptImageName: '3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609',
+    }
+  })
 
   const t36 = await prisma.transaction.create({
     data: {
       jobId: j27.id,
       studentId: s1.userId,
       employerUserId: e3.userId,
-      amount: 800,
-      status: "ACCEPTED",
+      amount: 2500,
+      status: 'ACCEPTED',
       isDeposit: true,
-      receiptImageName:
-        "3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609",
-    },
-  });
+      createdAt: new Date("2023-05-28T13:15:00"),
+      receiptImageName: '3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609',
+    }
+  })
 
   const t37 = await prisma.transaction.create({
     data: {
       jobId: j27.id,
       studentId: s2.userId,
       employerUserId: e3.userId,
-      amount: 1000,
-      status: "ACCEPTED",
+      amount: 3000,
+      status: 'ACCEPTED',
       isDeposit: true,
-      receiptImageName:
-        "6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296",
-    },
-  });
+      createdAt: new Date("2022-09-02T16:30:00"),
+      receiptImageName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296',
+    }
+  })
 
   const t38 = await prisma.transaction.create({
     data: {
       jobId: j27.id,
       studentId: s2.userId,
       employerUserId: e3.userId,
-      amount: 5000,
+      amount: 3000,
       isDeposit: false,
-      receiptImageName:
-        "3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609",
-    },
-  });
+      createdAt: new Date("2023-11-11T09:10:00"),
+      receiptImageName: '3f28b41dc9d034dadf6fb7784fcc5ec6b1cbc40ab0bc8aab7280e7726ab46609',
+    }
+  })
 
   const t39 = await prisma.transaction.create({
     data: {
       jobId: j27.id,
       studentId: s3.userId,
       employerUserId: e3.userId,
-      amount: 700,
-      status: "ACCEPTED",
+      amount: 2250,
+      status: 'ACCEPTED',
       isDeposit: true,
-      receiptImageName:
-        "962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733",
-    },
-  });
+      createdAt: new Date("2022-03-22T11:45:00"),
+      receiptImageName: '962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733',
+    }
+  })
 
   const t40 = await prisma.transaction.create({
     data: {
       jobId: j27.id,
       studentId: s3.userId,
       employerUserId: e3.userId,
-      amount: 4800,
-      status: "REJECTED",
+      amount: 2250,
+      status: 'REJECTED',
       isDeposit: false,
-      receiptImageName:
-        "6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296",
-    },
-  });
+      createdAt: new Date("2023-06-15T14:20:00"),
+      receiptImageName: '6ddffa1bb20aeeaf9dfd76580ac4bdb7e6c4d0bfc318e7c1f82224603d6a6296',
+    }
+  })
 
   const t41 = await prisma.transaction.create({
     data: {
       jobId: j27.id,
       studentId: s3.userId,
       employerUserId: e3.userId,
-      amount: 4800,
+      amount: 2250,
       isDeposit: false,
-      receiptImageName:
-        "bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68",
-    },
-  });
+      createdAt: new Date("2022-12-30T17:35:00"),
+      receiptImageName: 'bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68',
+    }
+  })
+
 }
 
 main()
