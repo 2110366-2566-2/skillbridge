@@ -224,6 +224,7 @@ model TransactionDetail {
   receiverAccountValue String
   amount               Float
   qrcodeData           String
+  createdAt            DateTime @default(now())
 
   transaction Transaction @relation(fields: [transactionId], references: [id])
 }
