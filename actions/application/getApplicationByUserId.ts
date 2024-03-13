@@ -1,5 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
-import getS3URL from "@/lib/S3/getS3URL";
+import getS3URL from "../S3/getS3URL";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 
@@ -47,19 +47,20 @@ const getApplicationByUserId = async (jobId: string, userId?: string) => {
     //   signUrl = null;
     // }
     let output = {
-      bid: application?.bid ? application.bid : null,
-      applicationStatus: application?.status ? application.status : null,
-      url: signUrl ? signUrl : null,
-      budget: application?.job.budget ? application.job.budget : null,
-      jobStatus: jobStatus ? jobStatus : null,
+      bid: application?.bid ? application.bid as number : null,
+      applicationStatus: application?.status ? application.status as string : null,
+      url: signUrl ? signUrl as string : null,
+      budget: jobBudget as number,
+      jobStatus: jobStatus ? jobStatus as string : null,
     };
     return output;
   } catch (error: any) {
     console.log(error);
-    return {
-      message: error.message || "Internal Server Error",
-      status: error.status || 500,
-    };
+    return null
+    // return {
+    //   message: error.message || "Internal Server Error",
+    //   status: error.status || 500,
+    // };
   }
 };
 
