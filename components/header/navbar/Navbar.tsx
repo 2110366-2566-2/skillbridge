@@ -98,9 +98,7 @@ export default function Navbar(props: Props) {
               className={`flex justify-center items-center pr-3 ${isActive && "md:bg-slate-50 md:rounded-full"}`}
             >
               {/* Desktop : Avatar */}
-              <div
-                className="hidden md:flex px-2 py-1 items-center gap-3 pl-2 md:hover:opacity-80 md:duration-300"
-              >
+              <div className="hidden md:flex px-2 py-1 items-center gap-3 pl-2 md:hover:opacity-80 md:duration-300">
                 <Image
                   className="rounded-full"
                   src={avatar}
@@ -110,11 +108,7 @@ export default function Navbar(props: Props) {
                 />
               </div>
               {/* Both : Hamberger Button + Sidebar */}
-              <Sidebar
-                name="นิสิต สุรพีร์ สุวรรณ์"
-                userInfo="นิสิตจุฬาลงกรณ์มหาวิทยาลัย"
-                isDark={isActive}
-              >
+              <Sidebar name={name} userInfo={userInfo} isDark={isActive}>
                 <div className="h-full w-full flex flex-col justify-between">
                   <div className="w-full flex flex-col gap-3 md:hidden">
                     {/* Mobile : Main NavButton */}

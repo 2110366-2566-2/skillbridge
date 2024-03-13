@@ -177,6 +177,7 @@
 # v1.23
 
 ### TransactionDetail
+
 - This table is added and it will be served for storing transaction details in the case where that transaction is successfully verified by api
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

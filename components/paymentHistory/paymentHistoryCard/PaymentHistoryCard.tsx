@@ -51,7 +51,9 @@ export default function PaymentHistoryCard(props: Transaction) {
   function formatAmount(amount: number, isStudent: boolean): string {
     const currencySymbol = "฿";
     const studentSign = isStudent ? "+" : "-";
-    const result = `${studentSign} ${currencySymbol}${amount.toLocaleString()}`;
+    let netAmount = amount;
+    if (isStudent) netAmount *= 0.85;
+    const result = `${studentSign} ${currencySymbol}${netAmount.toLocaleString()}`;
     return result;
   }
 
@@ -120,14 +122,18 @@ export default function PaymentHistoryCard(props: Transaction) {
           </p>
           <p>{props.amount * 0.85} บาท</p>
         </div>
-        <div className="flex justify-between font-normal text-[14px] md:text-[16px] text-slate-500">
-          <p>ค่าบริการ 15 %</p>
-          <p>{props.amount * 0.15} บาท</p>
-        </div>
-        <div className="flex justify-between font-normal text-[14px] md:text-[16px] text-slate-700">
-          <p>ยอดชำระทั้งหมด</p>
-          <p>{props.amount} บาท</p>
-        </div>
+        {!props.isStudent && (
+          <>
+            <div className="flex justify-between font-normal text-[14px] md:text-[16px] text-slate-500">
+              <p>ค่าบริการ 15 %</p>
+              <p>{props.amount * 0.15} บาท</p>
+            </div>
+            <div className="flex justify-between font-normal text-[14px] md:text-[16px] text-slate-700">
+              <p>ยอดชำระทั้งหมด</p>
+              <p>{props.amount} บาท</p>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
