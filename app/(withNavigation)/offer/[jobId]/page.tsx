@@ -12,12 +12,14 @@ export default async function OfferingPage({
     const application = await getApplicationByUserId(jobId);
 
     return (
-        <>
-            <div className="flex flex-col">
-                <div className="font-medium text-slate-800 mb-[10px] lg:text-[20px]">รายละเอียดงาน</div>
-                <JobDetail jobId={jobId} isStudentView={true} />
+        <div className="flex justify-center">
+            <div className="flex flex-col md:flex-row md:gap-8">
+                <div className="flex flex-col">
+                    <div className="font-medium text-slate-800 mb-[10px] lg:text-[20px]">รายละเอียดงาน</div>
+                    <JobDetail jobId={jobId} isStudentView={true} />
+                </div>
                 <OfferingForm jobId={jobId} application={application} />
             </div>
-        </>
+        </div>
     );
 }

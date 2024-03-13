@@ -89,8 +89,8 @@ export default function OfferingForm({ jobId, application }: Props) {
         <>
             <form
                 onSubmit={handleSubmit}
-                className="mt-[30px] md:mt-0 flex flex-col">
-                <div className="relative mb-[10px]">
+                className="mt-[30px] md:mt-0 flex flex-col w-full md:w-[30vw]">
+                <div className="relative mb-[2px]">
                     <div className="inline-block font-medium text-slate-800">
                         สัญญาจ้างงาน
                     </div>
