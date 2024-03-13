@@ -9,7 +9,7 @@ const getApplicationByUserId = async (jobId: string, userId?: string) => {
     if (!session) {
       throw { message: "Not authenticated", status: 401 };
     }
-    const id = userId ? userId : session.user.userId;
+    const id = userId ? userId : session.user.id;
     let application: any = await prisma.application.findFirst({
       where: {
         jobId: jobId,
