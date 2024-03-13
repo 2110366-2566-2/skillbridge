@@ -64,7 +64,7 @@ export default function StudentOffer({
             statusColor = '#ffe4e6'
             heightOfDropDownCard = windowSize.width >= 1280 ? "142px" : '170px'
             break;
-        case 'รอจ่ายมัดจำ':
+        case 'รอจ่ายมัดจำ': // go call little's function in WaitedForDepositStatus component
             dropDownObject = <WaitedForDepositStatus studentId={studentId} jobId={jobId} />
             statusColor = '#fef9c3'
             break;
@@ -72,10 +72,10 @@ export default function StudentOffer({
             dropDownObject = <WaitedForSubmissionStatus studentId={studentId} jobId={jobId} />
             statusColor = '#fef9c3'
             break;
-        case 'ส่งมอบงานแล้ว':
+        case 'ส่งมอบงานแล้ว': 
             dropDownObject = <SubmittedStatus studentId={studentId} jobId={jobId} />
             break;
-        case 'รอจ่ายค่าจ้าง':
+        case 'รอจ่ายค่าจ้าง': // go call little's function to pay remaining wage
             dropDownObject = <WaitedForWageStatus studentId={studentId} jobId={jobId} />
             statusColor = '#fef9c3'
             break;
