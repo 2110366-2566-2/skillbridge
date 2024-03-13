@@ -83,6 +83,7 @@ export default function FilesInput(props: Props) {
       setIsWarnUpLoadFile(true)
       setPrimaryLoading((prev) => !prev)
       setDisabled(false)
+      toast.error("อัพโหลดไม่สำเร็จ โปรดลองอีกครั้ง")
       console.error("No file selected")
       return
     }
@@ -111,7 +112,7 @@ export default function FilesInput(props: Props) {
 
     const result = await createTransaction(formDataObject)
     console.log("result", result)
-
+    toast.success("ระบบกำลังตรวจสอบ")
     setPrimaryLoading((prev) => !prev)
     setDisabled(false)
   }
