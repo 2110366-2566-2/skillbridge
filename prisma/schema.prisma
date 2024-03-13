@@ -190,22 +190,42 @@ model Image {
 }
 
 model Transaction {
-  id               String            @id @default(uuid())
-  jobId            String
-  studentId        String
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @updatedAt
-  isDeleted        Boolean           @default(false)
-  employerUserId   String
-  amount           Float?
-  receiptImageName String
-  isDeposit        Boolean
-  status           TransactionStatus @default(PENDING)
-  employer         Employer          @relation(fields: [employerUserId], references: [userId])
-  job              Job               @relation(fields: [jobId], references: [id])
-  student          Student           @relation(fields: [studentId], references: [userId])
+  id                String             @id @default(uuid())
+  jobId             String
+  studentId         String
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  isDeleted         Boolean            @default(false)
+  employerUserId    String
+  amount            Float?
+  receiptImageName  String
+  isDeposit         Boolean
+  status            TransactionStatus  @default(PENDING)
+  employer          Employer           @relation(fields: [employerUserId], references: [userId])
+  job               Job                @relation(fields: [jobId], references: [id])
+  student           Student            @relation(fields: [studentId], references: [userId])
+  transactionDetail TransactionDetail?
 
   @@map("transaction")
+}
+
+model TransactionDetail {
+  transactionId        String   @id @unique
+  transRef             String
+  sendingBank          String
+  transTimestamp       DateTime
+  senderTHName         String
+  senderENName         String
+  senderAccountType    String
+  senderAccountValue   String
+  receiverTHName       String
+  receiverENName       String
+  receiverAccountType  String
+  receiverAccountValue String
+  amount               Float
+  qrcodeData           String
+
+  transaction Transaction @relation(fields: [transactionId], references: [id])
 }
 
 model Review {
