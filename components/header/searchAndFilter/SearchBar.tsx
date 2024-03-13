@@ -54,7 +54,7 @@ export default function SearchBar() {
           />
           <button
             type="submit"
-            className="hidden lg:block lg:min-w-[84px] lg:min-h-[40px] lg:text-white lg:text-[14px] lg:rounded lg:absolute lg:end-[4px] lg:bottom-[4px] lg:bg-slate-800 lg:hover:bg-slate-700 lg:focus:ring-4 lg:focus:outline-none lg:focus:ring-slate-400 duration-500"
+            className="hidden lg:block lg:min-w-[84px] lg:min-h-[40px] lg:text-white lg:text-[14px] lg:rounded lg:absolute lg:end-[4px] lg:bottom-[4px] lg:bg-slate-800 lg:hover:bg-slate-700 lg:focus:ring-4 lg:focus:outline-none lg:focus:ring-slate-400"
           >
             ค้นหา
           </button>

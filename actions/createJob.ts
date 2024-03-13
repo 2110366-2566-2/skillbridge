@@ -3,7 +3,7 @@ import { prisma } from "../lib/prisma";
 import { JobStatus } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
-import uploadMultipleFilesToS3 from "@/lib/S3/uploadMultipleFilesToS3";
+import uploadMultipleFilesToS3 from "./S3/uploadMultipleFilesToS3";
 
 const createJob = async (formData: FormData) => {
   try {
@@ -30,7 +30,7 @@ const createJob = async (formData: FormData) => {
       budget,
       jobTagId,
       numWorker,
-      files
+      files,
     );
 
     const session: any = await getServerSession(authOptions);

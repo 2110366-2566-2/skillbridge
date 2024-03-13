@@ -79,7 +79,7 @@ export default function SearchJobItemList() {
         jobs.map((job, index) => <SearchJobItem key={index} job={job} />)
       ) : (
         <div className="col-span-full">
-          <SearchNotFound />
+          <SearchNotFound text="ขออภัย ไม่พบงานที่ค้นหา" />
         </div>
       )}
     </div>

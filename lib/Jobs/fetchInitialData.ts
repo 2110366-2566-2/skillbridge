@@ -1,5 +1,8 @@
 import { getEmployerJobs } from "@/actions/lookup/employee/jobs";
 import TaskCardType from "../../types/JobCardType";
+import getStudentByJob from "@/actions/getStudentByJob";
+import { getStudentByJobAdapter } from "./adapter";
+import getJobById from "@/actions/getJobByID";
 
 const fetchInitialData = async () => {
   const result = await getEmployerJobs();
@@ -23,10 +26,10 @@ const fetchInitialData = async () => {
 
     console.log(tasks);
     const pendingTasks: Array<TaskCardType> = tasks.filter(
-      (task) => task.isPending === true
+      (task) => task.isPending === true,
     );
     const doneTasks: Array<TaskCardType> = tasks.filter(
-      (task) => task.isPending === false
+      (task) => task.isPending === false,
     );
 
     return [pendingTasks, doneTasks];
@@ -34,5 +37,22 @@ const fetchInitialData = async () => {
     return [[], []];
   }
 };
-
 export default fetchInitialData;
+
+export const fetchGetStudentByJob = async (
+  jobId: string,
+  filter: string = "",
+) => {
+  const studentListResponse = await getStudentByJob(jobId);
+  const studentList = (
+    studentListResponse === undefined ? [] : studentListResponse
+  ).map((student) => getStudentByJobAdapter(student));
+  // console.log(`fetched data using filter: ${filter}, we got: ${studentList}`);
+
+  const jobResponse = (await getJobById(jobId)) || {};
+  // console.log("This is jobById from 'getJobById' action : ", jobResponse);
+
+  const result = [studentList, jobResponse];
+
+  return result;
+};

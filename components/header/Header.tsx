@@ -3,17 +3,19 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "./navbar/Navbar";
 import SearchAndFilter from "./searchAndFilter/SearchAndFilter";
-import TaskHeader from "../JobsPanel/JobHeader";
+import TaskHeader from "./jobHeader/JobHeader";
 import CreateJobHeader from "./createJobHeader/CreateJobHeader";
 import EditJobHeader from "./editJobHeader/EditJobHeader";
 import LandingHeader from "./landingHeader/LandingHeader";
 import PaymentHeader from "./paymentHeader/PaymentHeader";
 import OfferingHeader from "./offeringHeader/OfferingHeader";
+import PaymentHistoryHeader from "./paymentHistoryHeader/PaymentHistoryHeader";
 import getJobTags from "@/actions/getJobTags";
 import whiteLogo from "@/public/logos/logo-white.svg";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
-import getEmployerInfoById from "@/actions/getUserInfo";
+import { getEmployerInfoById } from "@/actions/getUserInfo";
+import StudentJobHeader from "../JobsPanel/StudentJobHeader";
 
 export default async function Header() {
   // Fetch Job tags
@@ -31,7 +33,7 @@ export default async function Header() {
   return (
     <div>
       <div>
-        <div className="flex justify-between items-center py-5 pl-5 pr-8 md:pr-10">
+        <div className="flex justify-between items-center py-5 pl-5 pr-3 md:pr-5">
           <Link href="/landing">
             <Image
               className="w-auto h-auto md:w-36 md:hover:scale-105 md:duration-500 active:opacity-40"
@@ -49,10 +51,10 @@ export default async function Header() {
           </div>
           <Navbar session={session} isStudent={isStudent} userInfo={userInfo} />
         </div>
+        <LandingHeader isStudent={isStudent} jobTags={jobTags} />
         <CreateJobHeader />
         <EditJobHeader />
-        <LandingHeader isStudent={isStudent} jobTags={jobTags} />
-
+        <PaymentHistoryHeader />
         <OfferingHeader />
       </div>
       {/* Mobile and Tablet */}
@@ -60,7 +62,7 @@ export default async function Header() {
         {/* Only shows at "/search" */}
         <SearchAndFilter />
       </div>
-      {/* Only shows at "/works" */}
+      {/* Only shows at "/jobs" */}
       <TaskHeader />
       {/* Only shows at "/jobs/:Jid/payment/:Sid" */}
       <PaymentHeader />

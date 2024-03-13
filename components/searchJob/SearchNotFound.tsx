@@ -2,7 +2,11 @@ import Image from "next/image";
 
 const notFound = require("@/public/icons/notFound.svg") as string;
 
-export default function SearchNotFound() {
+type Props = {
+  text: string;
+};
+
+export default function SearchNotFound({ text }: Props) {
   return (
     <>
       {/* Mobile */}
@@ -22,7 +26,7 @@ export default function SearchNotFound() {
           className="hidden md:block md:mt-36 md:mx-auto lg:mt-28"
         />
         <div className="font-medium text-lg text-slate-500 mt-4 mx-auto md:text-2xl md:my-6 lg:font-normal">
-          ขออภัย ไม่พบงานที่ค้นหา
+          {text}
         </div>
       </div>
     </>
