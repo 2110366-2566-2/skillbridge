@@ -1,6 +1,5 @@
 "use client";
 
-import { revalidatePath } from "next/cache";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { customTrim } from "@/lib/utils";
@@ -67,7 +66,7 @@ export default function JobForm(props: Props) {
   });
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -144,7 +143,7 @@ export default function JobForm(props: Props) {
           } else if (res.status === 404) {
             toast.error("ไม่พบงานในระบบ");
           } else if (res.status === 423) {
-            toast.error("ไม่สามารถลบงานที่ดำเนินการแล้วได้");
+            toast.error("ไม่สามารถแก้ไขงานที่ดำเนินการแล้ว");
           } else {
             toast.error(res.message);
           }
@@ -167,7 +166,7 @@ export default function JobForm(props: Props) {
       } else if (res.status === 404) {
         toast.error("ไม่พบงานในระบบ");
       } else if (res.status === 423) {
-        toast.error("ไม่สามารถลบงานที่ดำเนินการแล้วได้");
+        toast.error("ลบงานที่ดำเนินการแล้วไม่ได้");
       } else {
         toast.error(res.message);
       }

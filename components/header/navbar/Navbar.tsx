@@ -72,7 +72,6 @@ type Props = {
 };
 
 export default function Navbar(props: Props) {
-  const [isAvatarOpen, setAvatarOpen] = useState(false);
   const pathName = usePathname();
   const isActive = additionalLink.some((link) => link.path === pathName);
 
@@ -89,46 +88,50 @@ export default function Navbar(props: Props) {
     <>
       {!!session ? (
         <>
-          {/* DeskTop With Session */}
-          {/* Desktop Main NavLink */}
+          {/* With Session */}
+          {/* Desktop : Main NavLink */}
           <div className="font-ibm md:flex md:items-center md:text-sm md:gap-1">
             {(isStudent ? studentLinks : employerLinks).map((link) => (
               <NavLink key={"desktop : " + link.title} link={link} />
             ))}
-            <div className={`flex justify-center items-center pr-3 ${isActive && ("md:bg-slate-50 md:rounded-full")}`}>
-            {/* Avartar */}
-            <div className={`hidden md:flex px-2 py-1 items-center gap-3 pl-2 md:hover:opacity-80 md:duration-300 ${isAvatarOpen && "bg-white rounded-full"}`}  >
-              <Image
-                className="rounded-full"
-                src={avatar}
-                alt="avatar"
-                width={40}
-                height={40}
-              />
-            </div>
-            {/* Hamberger Button + Sidebar */}
-            <Sidebar
-              name="นิสิต สุรพีร์ สุวรรณ์"
-              userInfo="นิสิตจุฬาลงกรณ์มหาวิทยาลัย"
-              isDark = {isActive}
+            <div
+              className={`flex justify-center items-center pr-3 ${isActive && "md:bg-slate-50 md:rounded-full"}`}
             >
-              <div className="h-full w-full flex flex-col justify-between">
-                <div className="w-full flex flex-col gap-3 md:hidden">
-                    {/* Mobile Main NavButton */}
+              {/* Desktop : Avatar */}
+              <div
+                className="hidden md:flex px-2 py-1 items-center gap-3 pl-2 md:hover:opacity-80 md:duration-300"
+              >
+                <Image
+                  className="rounded-full"
+                  src={avatar}
+                  alt="avatar"
+                  width={40}
+                  height={40}
+                />
+              </div>
+              {/* Both : Hamberger Button + Sidebar */}
+              <Sidebar
+                name="นิสิต สุรพีร์ สุวรรณ์"
+                userInfo="นิสิตจุฬาลงกรณ์มหาวิทยาลัย"
+                isDark={isActive}
+              >
+                <div className="h-full w-full flex flex-col justify-between">
+                  <div className="w-full flex flex-col gap-3 md:hidden">
+                    {/* Mobile : Main NavButton */}
                     {(isStudent ? studentLinks : employerLinks).map((link) => (
                       <NavButton key={"mobile : " + link.title} link={link} />
                     ))}
+                  </div>
+                  <div className="w-full flex flex-col gap-3">
+                    {/* Both : Additional NavButton */}
+                    {additionalLink.map((link) => (
+                      <NavButton key={"all : " + link.title} link={link} />
+                    ))}
+                    <LogoutLink />
+                  </div>
                 </div>
-                <div className="w-full flex flex-col gap-3">
-                  {/* Both Additional NavButton */}
-                  {additionalLink.map((link) => (
-                    <NavButton key={"all : " + link.title} link={link} />
-                  ))}
-                  <LogoutLink/>
-                </div>
-              </div>
-            </Sidebar>
-          </div>
+              </Sidebar>
+            </div>
           </div>
         </>
       ) : (

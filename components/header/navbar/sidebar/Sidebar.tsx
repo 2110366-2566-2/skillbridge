@@ -1,7 +1,7 @@
 import React, { useState, ReactNode } from "react";
 import Image from "next/image";
 import hamburger from "@/public/icons/hamburger.svg";
-import hamburgerDark from "@/public/icons/hamburgerDark.svg"
+import hamburgerDark from "@/public/icons/hamburgerDark.svg";
 import noavatar from "@/public/icons/noavatar.svg";
 import closeIcon from "@/public/icons/close.svg";
 
@@ -12,7 +12,12 @@ interface SidebarProps {
   isDark?: boolean;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ name, userInfo, children, isDark }) => {
+const Sidebar: React.FC<SidebarProps> = ({
+  name,
+  userInfo,
+  children,
+  isDark,
+}) => {
   const [isHamburgerOpen, setHamburgerOpen] = useState(false);
 
   return (
@@ -25,7 +30,7 @@ const Sidebar: React.FC<SidebarProps> = ({ name, userInfo, children, isDark }) =
         {/* Desktop (include white bg) */}
         <Image
           className="hidden md:block active:opacity-40"
-          src={isDark ? (hamburgerDark) : (hamburger)}
+          src={isDark ? hamburgerDark : hamburger}
           alt="hamburger"
           width={30}
           height={30}

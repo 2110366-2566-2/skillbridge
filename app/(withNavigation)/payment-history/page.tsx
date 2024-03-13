@@ -1,28 +1,19 @@
 "use client";
 
-import React, {
-  ChangeEvent,
-  useEffect,
-  useState,
-} from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import SelectInput from "@/components/input/selectInput/SelectInput";
 import PaymentHistoryCard from "@/components/paymentHistory/paymentHistoryCard/PaymentHistoryCard";
 import PaymentHistoryLoadingCard from "@/components/paymentHistory/paymentHistoryLoadingCard/PaymentHistoryLoadingCard";
+import { useSession } from "next-auth/react";
+import SearchNotFound from "@/components/searchJob/SearchNotFound";
 import {
   getUserPaymentHistory,
   getUserTransactionMonthsAndYears,
 } from "@/actions/getPaymentHistory";
-import { useSession } from "next-auth/react";
 
 interface MonthYear {
   month: number;
   year: number;
-}
-
-interface PaymentHistoryInput {
-  userId: string;
-  year?: number;
-  month?: number;
 }
 
 type Transaction = {
@@ -36,7 +27,7 @@ type Transaction = {
   amount: number;
   receiptImageName: string;
   isDeposit: boolean;
-  status: "ACCEPTED" | "PENDING" | "REJECTED" | "OTHER_STATUS"; // Adjust this union type based on actual possible values
+  status: "ACCEPTED" | "PENDING" | "REJECTED" | "OTHER_STATUS";
   job: {
     title: string;
   };
@@ -49,7 +40,7 @@ type Transaction = {
 };
 
 export default function Page() {
-  // SESSION
+  // Session
   const { data: session, status } = useSession();
   const userId = session?.user?.id;
 
@@ -58,6 +49,7 @@ export default function Page() {
   const currentMonth = currentDate.getMonth() + 1;
   const currentYear = currentDate.getFullYear();
 
+  // State Manipulation
   const [allMonthYear, setAllMonthYear] = useState<MonthYear[]>([
     { month: currentMonth, year: currentYear },
   ]);
@@ -70,10 +62,11 @@ export default function Page() {
   const [isLoading, setLoading] = useState(true);
   const [isFirstLoad, setFirstLoad] = useState(true);
 
+  // Fetch all MonthYear data
   useEffect(() => {
     const getInitialMonthYearData = async () => {
-      if(!userId) {
-        console.error("No session in PaymentHistory Page")
+      if (!userId) {
+        console.error("No session in PaymentHistory Page");
         return;
       }
       const timeIntervals = (await getUserTransactionMonthsAndYears(
@@ -86,11 +79,12 @@ export default function Page() {
     getInitialMonthYearData();
   }, []);
 
+  // Fetch payment data according to month-year
   useEffect(() => {
     const getDynamicPaymentData = async () => {
-      if(isMonthYearLoad) return;
-      if(!userId) {
-        console.error("No session in PaymentHistory Page")
+      if (isMonthYearLoad) return;
+      if (!userId) {
+        console.error("No session in PaymentHistory Page");
         return;
       }
       setLoading(true);
@@ -124,7 +118,7 @@ export default function Page() {
 
   function formatThaiDate(dateObject: MonthYear): string {
     const monthName = monthsInThai[dateObject.month - 1] || "";
-    const year = dateObject.year || "";
+    const year = dateObject.year + 543 || "";
     return `${monthName} ${year}`;
   }
 
@@ -132,45 +126,41 @@ export default function Page() {
     const [monthName, yearString] = thaiDateString.split(" ");
     const monthIndex = monthsInThai.indexOf(monthName);
     const year = parseInt(yearString, 10);
-    return { month: monthIndex + 1, year };
+    return { month: monthIndex + 1, year: year - 543 };
   }
 
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleMonthYearChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.target;
     setMonthYear(parseThaiDate(value) as MonthYear);
   };
-
 
   return (
     <div className="w-full flex justify-center">
       <>
         {paymentData?.length === 0 ? (
-          <div>ไม่พบจ้า</div>
+          <SearchNotFound text="ไม่พบการทำธุรกรรม" />
         ) : (
           <div className="w-full max-w-screen-sm">
             <div className="md:w-1/2">
               {(isLoading || isMonthYearLoad) && isFirstLoad ? (
-              <SelectInput
-                label="ช่วงเวลา"
-               className="animate-pulse"
-              /> 
+                <SelectInput label="ช่วงเวลา" className="animate-pulse" />
               ) : (
-              <SelectInput
-                label="ช่วงเวลา"
-                options={allMonthYear?.map((monthYear) => ({
-                  value: formatThaiDate(monthYear),
-                  title: formatThaiDate(monthYear),
-                }))}
-                name="monthYear"
-                title="monthYear"
-                placeholder="เลือกช่วงเวลา"
-                onChange={handleChange}
-                isDisabled={isLoading || isMonthYearLoad}
-              />
+                <SelectInput
+                  label="ช่วงเวลา"
+                  options={allMonthYear?.map((monthYear) => ({
+                    value: formatThaiDate(monthYear),
+                    title: formatThaiDate(monthYear),
+                  }))}
+                  name="monthYear"
+                  title="monthYear"
+                  placeholder="เลือกช่วงเวลา"
+                  onChange={handleMonthYearChange}
+                  isDisabled={isLoading || isMonthYearLoad}
+                />
               )}
             </div>
             <div className="flex flex-col">
-              {(isLoading || isMonthYearLoad)
+              {isLoading || isMonthYearLoad
                 ? [...Array(9)].map((_, index) => (
                     <PaymentHistoryLoadingCard key={index} />
                   ))

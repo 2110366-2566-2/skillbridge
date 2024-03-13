@@ -151,12 +151,15 @@
 # v1.21
 
 ### Transaction
+
 - `isDeposit` is added
 
 ### MailLog
+
 - This table is added for keeping track of emails sended from the system
 
 ### ApplicationStatus
+
 - `DISCLAIMED` is added
 - `DELIVERED` is deleted
 
@@ -165,6 +168,7 @@
 # v1.22
 
 ### ApplicationStatus
+
 - `DELIVERED` is added back due to the code dependency, maybe revert back later
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

@@ -20,33 +20,33 @@ export default function NavButton(props: Props) {
   const isActive = pathName === link.path;
 
   return (
-      <Link
+    <Link
+      className={
+        "w-full flex gap-8 p-2 active:opacity-40 " +
+        (isActive && "bg-slate-50 rounded-md")
+      }
+      href={link.path}
+      onClick={link.onClick}
+      key={"mobile : " + link.title}
+    >
+      <Image
         className={
-          "w-full flex gap-8 p-2 active:opacity-40 " +
-          (isActive && "bg-slate-50 rounded-md")
+          "w-auto h-auto " +
+          (isActive && "stroke-slate-800 text-slate-800 fill-slate-800")
         }
-        href={link.path}
-        onClick={link.onClick}
-        key={"mobile : " + link.title}
+        src={isActive ? link.activeIcon : link.icon}
+        alt="icon"
+        width={25}
+        height={25}
+      />
+      <p
+        className={
+          "text-lg text-slate-50 font-semibold " +
+          (isActive && "text-slate-800 font-bold")
+        }
       >
-        <Image
-          className={
-            "w-auto h-auto " +
-            (isActive && "stroke-slate-800 text-slate-800 fill-slate-800")
-          }
-          src={isActive ? link.activeIcon : link.icon}
-          alt="icon"
-          width={25}
-          height={25}
-        />
-        <p
-          className={
-            "text-lg text-slate-50 font-semibold " +
-            (isActive && "text-slate-800 font-bold")
-          }
-        >
-          {link.title}
-        </p>
-      </Link>
+        {link.title}
+      </p>
+    </Link>
   );
 }

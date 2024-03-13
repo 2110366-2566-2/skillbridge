@@ -50,10 +50,10 @@ export default function SelectInput(props: Props) {
           {placeholder || "Select an option"}
         </option>
         {options?.map((option: Option, index) => (
-            <option key={index} value={option.value}>
-              {option.title}
-            </option>
-          ))}
+          <option key={index} value={option.value}>
+            {option.title}
+          </option>
+        ))}
       </select>
       <span className="h-[14px] text-[14px] text-red-600">
         {errorMessage && errorMessage}

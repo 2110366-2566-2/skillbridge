@@ -30,7 +30,7 @@ const createJob = async (formData: FormData) => {
       budget,
       jobTagId,
       numWorker,
-      files
+      files,
     );
 
     const session: any = await getServerSession(authOptions);

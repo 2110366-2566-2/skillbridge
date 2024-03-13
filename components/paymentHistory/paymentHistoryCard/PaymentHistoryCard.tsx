@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { useState } from "react";
 import Image from "next/image";
 import downArrowDark from "@/public/icons/downArrowDark.svg";
@@ -16,7 +15,7 @@ type Transaction = {
   amount: number;
   receiptImageName: string;
   isDeposit: boolean;
-  status: "ACCEPTED" | "PENDING" | "REJECTED" | "OTHER_STATUS"; // Adjust this union type based on actual possible values
+  status: "ACCEPTED" | "PENDING" | "REJECTED" | "OTHER_STATUS";
   job: {
     title: string;
   };
@@ -29,8 +28,10 @@ type Transaction = {
 };
 
 export default function PaymentHistoryCard(props: Transaction) {
+  // Open accordion state
   const [isOpen, setOpen] = useState(false);
 
+  // Status UI
   const successStatus = (
     <p className="border rounded-[6px] border-green-600 text-green-600 text-[11px] md:text-[16px] font-bold px-[8px] py-[3px]">
       สำเร็จ
@@ -83,7 +84,9 @@ export default function PaymentHistoryCard(props: Transaction) {
           <h2 className="font-bold text-slate-700 text-[16px] md:text-[20px]">
             {props.job.title}
           </h2>
-          <h1 className="font-semibold text-red-500 text-[20px] text-nowrap self-start md:text-[24px]">
+          <h1
+            className={`font-semibold text-[20px] text-nowrap self-start md:text-[24px] ${props.isStudent ? "text-green-600" : "text-red-500"}`}
+          >
             {formatAmount(props.amount, props.isStudent)}
           </h1>
         </div>
@@ -112,7 +115,9 @@ export default function PaymentHistoryCard(props: Transaction) {
           นิสิต {props.studentName.firstname} {props.studentName.lastname}
         </h3>
         <div className="flex justify-between font-normal text-[14px] md:text-[16px] text-slate-500">
-          <p>{props.isDeposit ? ("ค่ามัดจำการจ้างงาน") : ("ค่าตอบแทนการจ้างงาน")}</p>
+          <p>
+            {props.isDeposit ? "ค่ามัดจำการจ้างงาน" : "ค่าตอบแทนการจ้างงาน"}
+          </p>
           <p>{props.amount * 0.85} บาท</p>
         </div>
         <div className="flex justify-between font-normal text-[14px] md:text-[16px] text-slate-500">
