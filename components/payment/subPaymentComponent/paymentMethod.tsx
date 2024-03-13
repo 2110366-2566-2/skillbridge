@@ -9,7 +9,7 @@ export default function PaymentMethod({ price }: { price: number }) {
     const payload = generatePayload(process.env.RECIPIENT_NUMBER || '', { amount: (price * 0.5) * 0.15 + (price * 0.5) })
 
     return (
-        <div>
+        <div className="mt-[13px]">
             <p className="text-sm font-medium text-[#0F172A]">
                 ช่องทางการชำระเงิน
             </p>
@@ -24,11 +24,13 @@ export default function PaymentMethod({ price }: { price: number }) {
                     ผ่านแอพพลิเคชั่นธนาคาร
                 </p>
 
-                <div className="mt-[8px] bg-black h-[170px] w-[170px]">
-                    <QRCode size={170} style={{ maxWidth: "100%", width: "100%" }} value={payload} viewBox={`0 0 170 170`} id="qr" />
+                <div className="mt-[8px] h-[170px] w-[170px] rounded-md border border-[#CBD5E1] flex justify-center items-center">
+                    <div className="h-[155px] w-[155px]">
+                        <QRCode size={155} style={{ maxWidth: "100%", width: "100%" }} value={payload} viewBox={`0 0 155 155`} id="qr" />
+                    </div>
                 </div>
 
-                <button className="px-[16px] py-[8px] mt-[8px] flex justify-center items-center rounded-md border border-[#64748b]" onClick={() => downloadImage('qr',"PromptpayQR.jpeg")}>
+                <button className="px-[16px] py-[8px] mt-[8px] flex justify-center items-center rounded-md border border-[#64748b] disabled:opacity-80" onClick={() => downloadImage('qr', "PromptpayQR.jpeg")}>
                     <Image src={'/icons/download.svg'} alt="chat" width={18} height={18} className="mr-[5px]" />
                     <p className="text-sm font-bold text-[#1e293b]">
                         บันทึก QR

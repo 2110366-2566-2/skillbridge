@@ -7,7 +7,7 @@ export default function PaymentHeader() {
     const pathName = usePathname();
     return (
         <>
-            {pathName.endsWith("/payment") && (
+            {pathName.includes("payment") && (
                 <div className="px-[24px]">
                     <h1 className="text-[30px] font-semibold text-slate-50 mb-4">
                         ชำระเงิน

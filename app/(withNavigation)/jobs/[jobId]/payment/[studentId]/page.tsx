@@ -1,6 +1,6 @@
 import { getPaymentInfo } from "@/actions/payment/paymentinfo"
 import Payment from "@/components/payment/payment"
-import PaymentMethod from "@/components/payment/subPaymentComponent/paymentMethod"
+
 
 export default async function PaymentPage({
   params,
@@ -19,8 +19,8 @@ export default async function PaymentPage({
             : ""
         }
         price={data ? data.bid : 0}
+        jobId={params.jobId}
       />
-      <PaymentMethod price={data ? data.bid : 0} />
     </div>
   )
 }

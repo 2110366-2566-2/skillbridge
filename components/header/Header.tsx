@@ -62,7 +62,7 @@ export default async function Header() {
       </div>
       {/* Only shows at "/works" */}
       <TaskHeader />
-      {/* Only shows at "/jobs/:id/payment" */}
+      {/* Only shows at "/jobs/:Jid/payment/:Sid" */}
       <PaymentHeader />
     </div>
   );
