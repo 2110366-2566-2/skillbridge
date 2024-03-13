@@ -1,3 +1,5 @@
+"use server"
+
 import uploadFileToS3 from "./uploadFileToS3";
 
 const acceptedTypes = [
