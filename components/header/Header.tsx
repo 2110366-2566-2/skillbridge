@@ -1,33 +1,33 @@
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import Navbar from "./navbar/Navbar";
-import SearchAndFilter from "./searchAndFilter/SearchAndFilter";
-import TaskHeader from "./jobHeader/JobHeader";
-import CreateJobHeader from "./createJobHeader/CreateJobHeader";
-import EditJobHeader from "./editJobHeader/EditJobHeader";
-import LandingHeader from "./landingHeader/LandingHeader";
-import PaymentHeader from "./paymentHeader/PaymentHeader";
-import OfferingHeader from "./offeringHeader/OfferingHeader";
-import PaymentHistoryHeader from "./paymentHistoryHeader/PaymentHistoryHeader";
-import getJobTags from "@/actions/getJobTags";
-import whiteLogo from "@/public/logos/logo-white.svg";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
-import { getEmployerInfoById } from "@/actions/getUserInfo";
-import StudentJobHeader from "../JobsPanel/StudentJobHeader";
+import React from "react"
+import Link from "next/link"
+import Image from "next/image"
+import Navbar from "./navbar/Navbar"
+import SearchAndFilter from "./searchAndFilter/SearchAndFilter"
+import TaskHeader from "./jobHeader/JobHeader"
+import CreateJobHeader from "./createJobHeader/CreateJobHeader"
+import EditJobHeader from "./editJobHeader/EditJobHeader"
+import LandingHeader from "./landingHeader/LandingHeader"
+import PaymentHeader from "./paymentHeader/PaymentHeader"
+import OfferingHeader from "./offeringHeader/OfferingHeader"
+import PaymentHistoryHeader from "./paymentHistoryHeader/PaymentHistoryHeader"
+import getJobTags from "@/actions/getJobTags"
+import whiteLogo from "@/public/logos/logo-white.svg"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/app/api/auth/[...nextauth]/auth"
+import { getEmployerInfoById } from "@/actions/getUserInfo"
+import StudentJobHeader from "../JobsPanel/StudentJobHeader"
 
 export default async function Header() {
   // Fetch Job tags
-  const jobTags = await getJobTags();
+  const jobTags = await getJobTags()
 
   // Sesion with info
-  const session = await getServerSession(authOptions);
-  const isStudent = session?.email.split("@")[1] === "student.chula.ac.th";
-  let userInfo = "นิสิตจุฬาลงกรณ๋์มหาวิทยาลัย";
+  const session = await getServerSession(authOptions)
+  const isStudent = session?.email.split("@")[1] === "student.chula.ac.th"
+  let userInfo = "นิสิตจุฬาลงกรณ์มหาวิทยาลัย"
   if (session && !isStudent) {
-    const employerInfo = await getEmployerInfoById(session?.user.id);
-    userInfo = employerInfo?.position + " " + employerInfo?.organization;
+    const employerInfo = await getEmployerInfoById(session?.user.id)
+    userInfo = employerInfo?.position + " " + employerInfo?.organization
   }
 
   return (
@@ -67,5 +67,5 @@ export default async function Header() {
       {/* Only shows at "/jobs/:Jid/payment/:Sid" */}
       <PaymentHeader />
     </div>
-  );
+  )
 }

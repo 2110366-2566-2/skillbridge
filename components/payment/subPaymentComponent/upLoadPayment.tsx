@@ -188,10 +188,10 @@ export default function FilesInput(props: Props) {
           </p>
         </div>
 
-        <div className="mt-[13px] flex w-full justify-between lg:justify-end lg:mt-[18px]">
+        <div className="mt-[13px] flex w-full justify-between lg:justify-end lg:mt-[18px] gap-x-5">
           <SecondaryButton
             isDisabled={isDisabled}
-            className="w-[48%] lg:w-[20%]"
+            className=" w-full"
             onClick={() => router.push(cancelPath)}>
             ยกเลิก
           </SecondaryButton>
@@ -199,7 +199,7 @@ export default function FilesInput(props: Props) {
           <PrimaryButton
             type="submit"
             isDisabled={isDisabled}
-            className="w-[48%] lg:w-[40%] lg:ml-[2%]"
+            className="  w-full"
             isLoading={primaryLoading}
             loadingMessage="กำลังอัพโหลด">
             ยืนยันการชำระเงิน
