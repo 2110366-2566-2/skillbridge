@@ -43,7 +43,7 @@ export default async function JobDetail({ jobId, isStudentView }: Props) {
 
     return (
         <>
-            <div className="w-full rounded-t-[9.54px] border-slate-300 border-[0.5px] border-b-0 flex flex-col px-6 py-4 md:w-[50vw] lg:w-[45vw]">
+            <div className="w-full rounded-t-[9.54px] border-slate-300 border-[0.5px] border-b-0 flex flex-col px-6 py-4 max-w-[600px] md:w-[50vw] lg:w-[45vw]">
                 <div className="font-bold text-[24px] text-[#313866] lg:text-[30px]">{jobData.title}</div>
                 <div className="text-[14px] text-slate-800 mt-3 lg:text-[16px]">
                     <span className="font-semibold">หมวดหมู่</span>

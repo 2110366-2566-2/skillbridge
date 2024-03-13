@@ -32,7 +32,7 @@ interface FormErrors {
 }
 
 const questionMarkCircle = require("@/public/icons/questionMarkCircle.svg") as string;
-
+const noFile = require("@/public/icons/noFile.svg") as string;
 
 export default function OfferingForm({ jobId, application }: Props) {
     const [primaryLoading, setPrimaryLoading] = useState(false);
@@ -48,6 +48,7 @@ export default function OfferingForm({ jobId, application }: Props) {
         file: null,
         jobId: jobId
     })
+    console.log(bid, applicationStatus, url, budget, jobStatus)
 
     const handleChange = (evt: ChangeEvent) => {
         const changedInput = evt.target as HTMLInputElement; // Type assertion to HTMLInputElement
@@ -58,7 +59,7 @@ export default function OfferingForm({ jobId, application }: Props) {
             ...currData,
             [changedField]: newValue,
         }));
-        // console.log(changedField, newValue, typeof (newValue))
+        console.log(changedField, newValue, typeof (newValue))
     };
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -79,6 +80,7 @@ export default function OfferingForm({ jobId, application }: Props) {
             setPrimaryLoading((prev) => !prev);
             // setDisabled(false);
             toast.success("ข้อเสนอของคุณถูกส่งไปยังผู้ว่าจ้างแล้ว");
+            location.reload()
         } catch (error) {
             console.error("Error submitting student offer:", error);
         }
@@ -115,8 +117,7 @@ export default function OfferingForm({ jobId, application }: Props) {
                                 onFocus={() => setIsUrlInfoVisible(true)}
                                 onBlur={() => setIsUrlInfoVisible(false)}
                                 className="max-w-[262.39px] z-10 absolute ml-[28px] mt-[-20px] p-2 text-slate-800 bg-white border-slate-300 border-[0.5px] rounded-md shadow-md">
-                                เอกสารที่ระบุเนื้อหาเกี่ยวกับ<br></br>
-                                การจ้างงานระหว่างผู้ว่าจ้างและนิสิต<br></br>
+                                เอกสารที่ระบุเนื้อหาเกี่ยวกับการจ้างงานระหว่างผู้ว่าจ้างและนิสิต<br></br>
                                 รายละเอียดเพิ่มเติม : <a
                                     href="https://blog.fastwork.co/%E0%B8%9F%E0%B8%A3%E0%B8%B5%E0%B9%81%E0%B8%A5%E0%B8%99%E0%B8%8B%E0%B9%8C-%E0%B8%AA%E0%B8%B1%E0%B8%8D%E0%B8%8D%E0%B8%B2%E0%B8%88%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B8%87%E0%B8%B2%E0%B8%99/"
                                     className="hover:underline active:opacity-60"
@@ -130,15 +131,45 @@ export default function OfferingForm({ jobId, application }: Props) {
                         )}
                     </div>
                 </div>
-                <div className="w-full">
-                    <FilesInput
-                        label=""
-                        files={files}
-                        setFiles={setFiles}
-                        isDisabled={disabled}
-                        maxSizeInMegaByte={5}
-                    />
-                </div>
+                {bid && !url && (
+                    <div className="flex flex-row gap-1">
+                        <Image
+                            src={noFile}
+                            alt="noFile"
+                            width={16}
+                            height={16}
+                            className="translate-y-[2px]"
+                        />
+                        <div className="text-[16] text-[#838383] mt-[10px]">
+                            ไม่ได้แนบไฟล์สัญญา
+                        </div>
+                    </div>
+
+                )}
+                {/* {bid && url && (
+                    <div
+                    className="w-full flex justify-between p-2 bg-slate-100 rounded-md"
+                  >
+                    <div className="flex gap-3 justify-center items-center">
+                      <p className="text-[12px] text-slate-500 font-semibold">
+                        {truncateFileName(file.name, 25, 3)}
+                      </p>
+                      <p className="text-[12px] text-slate-400">
+                        {(file.size / 1024 / 1024).toFixed(1)} MB
+                      </p>
+                    </div>
+                    </div>
+                )} */}
+                {bid === null && (
+                    <div className="w-full">
+                        <FilesInput
+                            label=""
+                            files={files}
+                            setFiles={setFiles}
+                            isDisabled={disabled}
+                            maxSizeInMegaByte={5}
+                        />
+                    </div>)}
                 <div className="relative mt-[30px] mb-[10px]">
                     <div className="inline-block font-medium text-slate-800">
                         ค่าจ้างที่ตั้งไว้
@@ -190,25 +221,28 @@ export default function OfferingForm({ jobId, application }: Props) {
                         {isBidInfoVisible && (
                             <div className="max-w-[272.06px] z-10 absolute ml-[28px] mt-[-20px] p-2 text-slate-800 bg-white border-slate-300 border-[0.5px] rounded-md shadow-md">
                                 ค่าตอบแทนที่นิสิตต้องการในการทำงาน
-                                โดยอาจจะมากกว่าหรือน้อยกว่าค่าจ้างที่ตั้งไว้ <br></br>
+                                โดยอาจจะมากกว่าหรือน้อยกว่าค่าจ้างที่ตั้งไว้<br></br>
                                 (ค่าจ้างที่เสนอมีผลต่อการพิจารณาจ้างงานของผู้ว่าจ้าง)
                             </div>
                         )}
                     </div>
                 </div>
-                <NumberInput value={formData.bid} name="bid" placeholder="0" onChange={handleChange} />
-                <div className="flex flex-row justify-between gap-[20px] mt-[30px]">
-                    <SecondaryButton className="w-full" isDisabled={disabled} onClick={() => setShowModal(true)}>ยกเลิก</SecondaryButton>
-                    <PrimaryButton
-                        className="w-full"
-                        type="submit"
-                        isDisabled={disabled}
-                        isLoading={primaryLoading}
-                        loadingMessage="กำลังดำเนินการ"
-                    >
-                        ยืนยัน
-                    </PrimaryButton>
-                </div>
+                {bid && <NumberInput value={bid} name="bid" isDisabled={!!bid} />}
+                {bid === null && <NumberInput value={formData.bid} name="bid" placeholder="0" onChange={handleChange} />}
+                {bid === null && (
+                    <div className="flex flex-row justify-between gap-[20px] mt-[30px]">
+                        <SecondaryButton className="w-full" isDisabled={disabled} onClick={() => setShowModal(true)}>ยกเลิก</SecondaryButton>
+                        <PrimaryButton
+                            className="w-full"
+                            type="submit"
+                            isDisabled={disabled}
+                            isLoading={primaryLoading}
+                            loadingMessage="กำลังดำเนินการ"
+                        >
+                            ยืนยัน
+                        </PrimaryButton>
+                    </div>
+                )}
             </form >
             <DangerModal
                 message="กดตกลงเพื่อปิดแท็บนี้"

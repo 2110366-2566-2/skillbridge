@@ -2,9 +2,10 @@ import React, { ChangeEventHandler } from "react";
 
 type Props = {
     value: any;
-    name: string;
-    placeholder: string;
-    onChange: ChangeEventHandler<HTMLInputElement>;
+    name?: string;
+    placeholder?: string;
+    onChange?: ChangeEventHandler<HTMLInputElement>;
+    isDisabled?: boolean;
 };
 
 export default function NumberInput(props: Props) {
@@ -13,6 +14,7 @@ export default function NumberInput(props: Props) {
         name,
         placeholder,
         onChange,
+        isDisabled
     } = props;
 
     return (
@@ -27,6 +29,7 @@ export default function NumberInput(props: Props) {
                     value === 0 ? "" : value
                 }
                 onChange={onChange}
+                disabled={isDisabled}
             />
             <div className="absolute text-slate-400 inset-y-0 end-3 flex items-center pointer-events-none">
                 บาท
