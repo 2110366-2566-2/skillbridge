@@ -13,7 +13,7 @@ const createApplication = async (formData: FormData, userId?: string) => {
     // let session = undefined
     const session: any = await getServerSession(authOptions);
     const userId = session?.user.id;
-    console.log(userId)
+    // console.log(userId)
     const student = await prisma.student.findFirst({
       where: { userId: userId },
       select: { userId: true },

@@ -71,11 +71,11 @@ export default function OfferingForm({ jobId, application }: Props) {
             const formDataObject = new FormData();
             Object.entries(formData).forEach(([key, value]) => {
                 formDataObject.append(key, value);
-                console.log("test: ", key, value);
+                // console.log("test: ", key, value);
             });
-            console.log("ping: ", formDataObject)
+            // console.log("ping: ", formDataObject)
             const res = await createApplication(formDataObject);
-            console.log(res);
+            // console.log(res);
             setPrimaryLoading((prev) => !prev);
             // setDisabled(false);
             toast.success("ข้อเสนอของคุณถูกส่งไปยังผู้ว่าจ้างแล้ว");
