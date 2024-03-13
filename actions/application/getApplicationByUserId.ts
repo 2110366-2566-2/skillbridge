@@ -1,5 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
-import getS3URL from "@/lib/S3/getS3URL";
+import getS3URL from "../S3/getS3URL";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 
@@ -50,7 +50,7 @@ const getApplicationByUserId = async (jobId: string, userId?: string) => {
       bid: application?.bid ? application.bid : null,
       applicationStatus: application?.status ? application.status : null,
       url: signUrl ? signUrl : null,
-      budget: application?.job.budget ? application.job.budget : null,
+      budget: jobBudget ? jobBudget : null,
       jobStatus: jobStatus ? jobStatus : null,
     };
     return output;
