@@ -99,7 +99,10 @@ export default function OfferingForm({ jobId, application }: Props) {
                             type="button"
                             className="inline-block ml-1 cursor-pointer translate-y-[3px]"
                             onFocus={() => setIsUrlInfoVisible(true)}
-                            onBlur={() => setIsUrlInfoVisible(false)}
+                            // onBlur={() => setIsUrlInfoVisible(false)}
+                            onBlur={() => setTimeout(() => {
+                                setIsUrlInfoVisible(false)
+                            }, 500)}
                         >
                             <Image
                                 src={questionMarkCircle}
@@ -109,17 +112,21 @@ export default function OfferingForm({ jobId, application }: Props) {
                             />
                         </button>
                         {isUrlInfoVisible && (
-                            <div className="max-w-[262.39px] z-10 absolute ml-[28px] mt-[-20px] p-2 text-slate-800 bg-white border-slate-300 border-[0.5px] rounded-md shadow-md">
+                            <div
+                                onFocus={() => setIsUrlInfoVisible(true)}
+                                onBlur={() => setIsUrlInfoVisible(false)}
+                                className="max-w-[262.39px] z-10 absolute ml-[28px] mt-[-20px] p-2 text-slate-800 bg-white border-slate-300 border-[0.5px] rounded-md shadow-md">
                                 เอกสารที่ระบุเนื้อหาเกี่ยวกับ<br></br>
                                 การจ้างงานระหว่างผู้ว่าจ้างและนิสิต<br></br>
                                 รายละเอียดเพิ่มเติม : <a
-                                    className="hover:underline active:opacity-60"
                                     href="https://blog.fastwork.co/%E0%B8%9F%E0%B8%A3%E0%B8%B5%E0%B9%81%E0%B8%A5%E0%B8%99%E0%B8%8B%E0%B9%8C-%E0%B8%AA%E0%B8%B1%E0%B8%8D%E0%B8%8D%E0%B8%B2%E0%B8%88%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B8%87%E0%B8%B2%E0%B8%99/"
-                                    target="_blank" // Opens link in a new tab
-                                    rel="noopener noreferrer" // Recommended for security reasons
+                                    className="hover:underline active:opacity-60"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     สัญญาจ้างงาน
                                 </a>
+
                             </div>
                         )}
                     </div>
@@ -152,7 +159,8 @@ export default function OfferingForm({ jobId, application }: Props) {
                             />
                         </button>
                         {isBudgetInfoVisible && (
-                            <div className="max-w-[194.98px] z-10 absolute ml-[28px] mt-[-20px] p-2 text-slate-800 bg-white border-slate-300 border-[0.5px] rounded-md shadow-md">
+                            <div
+                                className="max-w-[194.98px] z-10 absolute ml-[28px] mt-[-20px] p-2 text-slate-800 bg-white border-slate-300 border-[0.5px] rounded-md shadow-md">
                                 ค่าตอบแทนที่ผู้ว่าจ้างระบุไว้<br></br>
                                 สำหรับการจ้างนิสิต 1 คน
                             </div>
@@ -202,7 +210,7 @@ export default function OfferingForm({ jobId, application }: Props) {
                         ยืนยัน
                     </PrimaryButton>
                 </div>
-            </form>
+            </form >
             <DangerModal
                 message="กดตกลงเพื่อปิดแท็บนี้"
                 dangerButtonMessage="ตกลง"
