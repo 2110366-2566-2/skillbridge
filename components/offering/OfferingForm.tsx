@@ -59,7 +59,7 @@ export default function OfferingForm({ jobId, application }: Props) {
             ...currData,
             [changedField]: newValue,
         }));
-        console.log(changedField, newValue, typeof (newValue))
+        // console.log(changedField, newValue, typeof (newValue))
     };
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
