@@ -32,7 +32,7 @@ export default function jobDescription({
 
                     {/* Period Component */}
                     <div className="mt-[10px]">
-                        <p className="font-medium text-[11px] text-slate-500">
+                        <p className="font-medium text-[15.5px] text-slate-500 text-wrap line-clamp-1">
                             {period}
                         </p>
                     </div>
@@ -69,7 +69,7 @@ export default function jobDescription({
                         </div>
                         {/* Price Component */}
                         <p className="text-md text-[#313866] font-semibold">
-                            {price}
+                            ฿{price}
                         </p>
 
                     </div>

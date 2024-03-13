@@ -1,7 +1,6 @@
 import React from "react";
 import JobCardType from "@/types/JobCardType";
 import JobDescription from "../jobStatus/jobDescription";
-import NewJobDescription from "../jobStatus/NewJobDescription";
 import SearchNotFound from "../searchJob/SearchNotFound";
 
 type Props = {
@@ -16,54 +15,6 @@ function StudentJobsPanel({ data }: Props) {
                     {data.map((data, index) => {
                         return (
                             <>
-                                <NewJobDescription
-                                    jobId={data.jobId}
-                                    name={data.name}
-                                    budget={data.budget}
-                                    description={data.description}
-                                    category={data.category}
-                                    applicants={data.applicants}
-                                    maxApplicants={data.maxApplicants}
-                                    startDate={data.startDate}
-                                    endDate={data.endDate}
-                                    isPending={data.isPending}
-                                />
-                                <NewJobDescription
-                                    jobId={data.jobId}
-                                    name={data.name}
-                                    budget={data.budget}
-                                    description={data.description}
-                                    category={data.category}
-                                    applicants={data.applicants}
-                                    maxApplicants={data.maxApplicants}
-                                    startDate={data.startDate}
-                                    endDate={data.endDate}
-                                    isPending={data.isPending}
-                                />
-                                <NewJobDescription
-                                    jobId={data.jobId}
-                                    name={data.name}
-                                    budget={data.budget}
-                                    description={data.description}
-                                    category={data.category}
-                                    applicants={data.applicants}
-                                    maxApplicants={data.maxApplicants}
-                                    startDate={data.startDate}
-                                    endDate={data.endDate}
-                                    isPending={data.isPending}
-                                />
-                                <NewJobDescription
-                                    jobId={data.jobId}
-                                    name={data.name}
-                                    budget={data.budget}
-                                    description={data.description}
-                                    category={data.category}
-                                    applicants={data.applicants}
-                                    maxApplicants={data.maxApplicants}
-                                    startDate={data.startDate}
-                                    endDate={data.endDate}
-                                    isPending={data.isPending}
-                                />
                                 <JobDescription
                                     jobId={data.jobId}
                                     title={data.name}
