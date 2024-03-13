@@ -4,6 +4,7 @@ import { fetchGetStudentByJob } from "@/lib/Jobs/fetchInitialData";
 import { Student } from "@/types/StudentType";
 import React, { useEffect, useState } from "react";
 import StudentOffer from "../studentOffer/studentOffer";
+import SearchNotFound from "../searchJob/SearchNotFound";
 
 type Props = {
     jobId: string;
@@ -53,9 +54,7 @@ function JobManagePanel({ jobId }: Props) {
             <aside className="flex flex-col gap-3">
                 {fetchedData.length === 0 ? (
                     <div className="flex justify-center items-center">
-                        <div className="font-medium text-lg text-slate-500 mt-4 mx-auto md:text-2xl md:my-6 lg:font-normal">
-                            ขออภัย ไม่พบงานที่ค้นหา
-                        </div>
+                        <SearchNotFound />
                     </div>
                 ) : (
                     fetchedData?.map((student, index) => {

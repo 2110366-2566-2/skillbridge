@@ -165,7 +165,7 @@ const StudentJobsMenu = (props: Props) => {
 						data={data.filter((arg) => filterStudentJobs(arg, jobType))}
 					/>
 				) : (
-					<StudentDoneJobsPanel data={doneData} />
+					<StudentDoneJobsPanel data={[]} />
 				)}
 			</div>
 		</>
