@@ -137,8 +137,8 @@ async function depositPendingToInProgress(
     },
   });
 
-  const subject = `ผู้จ้างได้จ่ายค่ามัจจำสำหรับงาน ${job.title} แล้ว`;
-  const text = `ผู้จ้างได้จ่ายค่ามัจจำสำหรับงาน ${job.title} แล้ว สามารถเริ่มทำงานได้`;
+  const subject = `ผู้จ้างได้จ่ายค่ามัดจำสำหรับงาน ${job.title} แล้ว`;
+  const text = `ผู้จ้างได้จ่ายค่ามัดจำสำหรับงาน ${job.title} แล้ว สามารถเริ่มทำงานได้`;
 
   sendEmail(studentUserId, subject, text);
 }

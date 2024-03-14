@@ -124,7 +124,7 @@ async function acceptedToDepositPending(jobId: string) {
   });
 
   const subject = `มีนิสิตยอมรับที่จะทำงาน ${emailApp.job.title} แล้ว`;
-  const text = `นิสิต ${emailApp.user.salutation} ${emailApp.user.firstname} ${emailApp.user.lastname} ได้ยอมรับที่จะทำงาน ${emailApp.job.title} กรุณาชำระค่ามัจจำเพื่อให้นิสิตเริ่มทำงาน`;
+  const text = `นิสิต ${emailApp.user.salutation} ${emailApp.user.firstname} ${emailApp.user.lastname} ได้ยอมรับที่จะทำงาน ${emailApp.job.title} กรุณาชำระค่ามัดจำเพื่อให้นิสิตเริ่มทำงาน`;
 
   sendEmail(emailApp.job.employerId, subject, text);
 }
