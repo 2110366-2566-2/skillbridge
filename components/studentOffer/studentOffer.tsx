@@ -83,7 +83,7 @@ export default function StudentOffer({
     }
 
     return (
-        <div className={`flex flex-col w-full ${status === '' ? 'hidden' : ''}`}>
+        <div className={`flex flex-col w-full`}>
             <div style={{ height: isDropDownOpen ? heightOfDropDownCard : heightCard }} className="relative w-full px-[20px] pt-[20px] bg-white rounded-xl shadow-md">
                 <div className="w-full">
                     <div className="relative">

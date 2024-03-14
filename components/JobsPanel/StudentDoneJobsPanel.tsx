@@ -21,41 +21,11 @@ function StudentJobsPanel({ data }: Props) {
                                     title={data.title}
                                     price={data.bid.toString()}
                                     jobDescription={data.description}
-                                    tag={data.description}
+                                    tag={data.tag}
                                     nubmerOfAcceptedApplication={data.numberOfApplication.toString()}
                                     numberOfMaximumAccepted={data.maxNumberOfApplication.toString()}
                                     period={`${data.startDate} - ${data.endDate}`}
                                 />
-                                {/* <JobDescription
-                                    jobId={data.jobId}
-                                    title={data.name}
-                                    price={data.budget.toLocaleString()}
-                                    jobDescription={data.description}
-                                    tag={data.description}
-                                    nubmerOfAcceptedApplication={data.applicants.toLocaleString()}
-                                    numberOfMaximumAccepted={data.maxApplicants.toLocaleString()}
-                                    period={`${data.startDate} - ${data.endDate}`}
-                                />
-                                <JobDescription
-                                    jobId={data.jobId}
-                                    title={data.name}
-                                    price={data.budget.toLocaleString()}
-                                    jobDescription={data.description}
-                                    tag={data.description}
-                                    nubmerOfAcceptedApplication={data.applicants.toLocaleString()}
-                                    numberOfMaximumAccepted={data.maxApplicants.toLocaleString()}
-                                    period={`${data.startDate} - ${data.endDate}`}
-                                />
-                                <JobDescription
-                                    jobId={data.jobId}
-                                    title={data.name}
-                                    price={data.budget.toLocaleString()}
-                                    jobDescription={data.description}
-                                    tag={data.description}
-                                    nubmerOfAcceptedApplication={data.applicants.toLocaleString()}
-                                    numberOfMaximumAccepted={data.maxApplicants.toLocaleString()}
-                                    period={`${data.startDate} - ${data.endDate}`}
-                                /> */}
                             </>
                         );
                     })}
