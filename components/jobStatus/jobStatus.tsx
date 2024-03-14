@@ -1,5 +1,5 @@
-'use client'
-import { useState } from "react"
+"use client";
+import { useState } from "react";
 import Image from "next/image";
 import TaskPassStatusBox from "./dropDownObject/taskPassStatusBox";
 import TaskWaitingStatusBox from "./dropDownObject/taskWaitingStatusBox";
@@ -26,24 +26,23 @@ export default function JobStatus({
     category: string,
     status: string,
 }) {
+  const [isDropDownOpen, setisDropDownOpen] = useState(false);
+  const [dropDownAbove, setDropDownAbove] = useState("27px");
 
-    const [isDropDownOpen, setisDropDownOpen] = useState(false);
-    const [dropDownAbove, setDropDownAbove] = useState('27px');
+  const handleDropDownClicked = () => {
+    setisDropDownOpen((prev) => !prev);
+    setDropDownAbove(() => {
+      if (isDropDownOpen) {
+        return "27px";
+      } else {
+        return "72px";
+      }
+    });
+  };
 
-    const handleDropDownClicked = () => {
-        setisDropDownOpen((prev) => !prev);
-        setDropDownAbove(() => {
-            if (isDropDownOpen) {
-                return '27px'
-            } else {
-                return '72px'
-            }
-        })
-    }
-
-    let dropDownObject = <div></div>;
-    let statusColor = '#dcfce7';
-    let statusWidth = '185px';
+  let dropDownObject = <div></div>;
+  let statusColor = "#dcfce7";
+  let statusWidth = "185px";
 
     switch (status) {
         case 'กำลังรอ':
@@ -88,58 +87,64 @@ export default function JobStatus({
             break;
     }
 
-    return (
-        <div className="flex flex-col items-end w-[335px]">
-            <div style={{ height: isDropDownOpen ? "220px" : "175px" }} className="relative w-[335px] px-[20px] pt-[25px] bg-white rounded-xl shadow-lg">
-                <div className="w-full">
-                    <div className="relative">
-
-                        {/* Status Component */}
-                        <div style={{ backgroundColor: statusColor }} className="absolute right-0 top-0 h-[24px] rounded-full flex justify-center items-center px-[10px] py-[5px]">
-                            <p className="text-xs">
-                                {status}
-                            </p>
-                        </div>
-
-                        {/* Title Component */}
-                        <div style={{ width: statusWidth }} className="h-[56px]">
-                            <p className="font-bold text-[#313866] text-xl line-clamp-2">
-                                {title}
-                            </p>
-                        </div>
-
-                    </div>
-
-                    {/* Period Component */}
-                    <div className="mt-[10px]">
-                        <p className="font-medium text-[15.5px] text-slate-500 text-wrap line-clamp-1">
-                            {`${startDate} - ${endDate}`}
-                        </p>
-                    </div>
-
-                    <div className="flex mt-[10px]">
-
-                        {/* Tag Component */}
-                        <div className="flex justify-center items-center bg-[#e2e8f0] px-[10px] py-[5px] mr-[5px] rounded-[4px]">
-                            <p className="text-sm">
-                                {category}
-                            </p>
-                        </div>
-
-                        {/* DropDown Button */}
-                        <div style={{ bottom: dropDownAbove }} className="absolute right-[16px] cursor-pointer">
-                            <Image src={isDropDownOpen ? '/icons/dropup.svg' : '/icons/dropdown.svg'} width={20} height={20} alt={isDropDownOpen ? 'dropup' : 'dropdown'} onClick={handleDropDownClicked}></Image>
-                        </div>
-
-                    </div>
-
-                    {/* DropDownObject Of Each Status */}
-                    {
-                        isDropDownOpen &&
-                        dropDownObject
-                    }
-                </div>
+  return (
+    <div className="flex flex-col items-end w-[335px]">
+      <div
+        style={{ height: isDropDownOpen ? "220px" : "175px" }}
+        className="relative w-[335px] px-[20px] pt-[25px] bg-white rounded-xl shadow-lg"
+      >
+        <div className="w-full">
+          <div className="relative">
+            {/* Status Component */}
+            <div
+              style={{ backgroundColor: statusColor }}
+              className="absolute right-0 top-0 h-[24px] rounded-full flex justify-center items-center px-[10px] py-[5px]"
+            >
+              <p className="text-xs">{status}</p>
             </div>
+
+            {/* Title Component */}
+            <div style={{ width: statusWidth }} className="h-[56px]">
+              <p className="font-bold text-[#313866] text-xl line-clamp-2">
+                {title}
+              </p>
+            </div>
+          </div>
+
+          {/* Period Component */}
+          <div className="mt-[10px]">
+            <p className="font-medium text-[15.5px] text-slate-500 text-wrap line-clamp-1">
+              {`${startDate} - ${endDate}`}
+            </p>
+          </div>
+
+          <div className="flex mt-[10px]">
+            {/* Tag Component */}
+            <div className="flex justify-center items-center bg-[#e2e8f0] px-[10px] py-[5px] mr-[5px] rounded-[4px]">
+              <p className="text-sm">{category}</p>
+            </div>
+
+            {/* DropDown Button */}
+            <div
+              style={{ bottom: dropDownAbove }}
+              className="absolute right-[16px] cursor-pointer"
+            >
+              <Image
+                src={
+                  isDropDownOpen ? "/icons/dropup.svg" : "/icons/dropdown.svg"
+                }
+                width={20}
+                height={20}
+                alt={isDropDownOpen ? "dropup" : "dropdown"}
+                onClick={handleDropDownClicked}
+              ></Image>
+            </div>
+          </div>
+
+          {/* DropDownObject Of Each Status */}
+          {isDropDownOpen && dropDownObject}
         </div>
-    )
+      </div>
+    </div>
+  );
 }

@@ -67,40 +67,43 @@ const oldData = [
 		status: "รอผู้จ้างจ่ายค่าจ้าง",
 	},
 
-	{
-		userId: "001",
-		jobId: "001",
-		title: "รับสมัคร TA วิชา Comp Prog",
-		startDate: "18/10/2545",
-		endDate: "21/10/2545",
-		category: "การสอน",
-		status: "เสร็จสิ้น",
-	},
-	{
-		userId: "001",
-		jobId: "001",
-		title: "รับสมัคร TA วิชา Comp Prog sdfasdfasdfsdsdafasdfsdfasdfasdfasdfasdfasdfasdfasfasfasdfsdfsdfsadfasdfasdfasdf",
-		startDate: "18/10/2545",
-		endDate: "21/10/2545",
-		category: "การสอน",
-		status: "ถูกยกเลิกงาน",
-	},
+  {
+    userId: "001",
+    jobId: "001",
+    title: "รับสมัคร TA วิชา Comp Prog",
+    startDate: "18/10/2545",
+    endDate: "21/10/2545",
+    category: "การสอน",
+    status: "เสร็จสิ้น",
+  },
+  {
+    userId: "001",
+    jobId: "001",
+    title:
+      "รับสมัคร TA วิชา Comp Prog sdfasdfasdfsdsdafasdfsdfasdfasdfasdfasdfasdfasdfasfasfasdfsdfsdfsadfasdfasdfasdf",
+    startDate: "18/10/2545",
+    endDate: "21/10/2545",
+    category: "การสอน",
+    status: "ถูกยกเลิกงาน",
+  },
 ];
 
 // 3rd tab
-const doneData = [{
-jobId: '234324',
-isDeleted: false,
-  name: 'Comp Progdcsfe',
-  budget: 50000,
-  description: 'tewtstes',
-  category: 'Dick',
-  applicants: 50,
-  maxApplicants: 100,
-  startDate: "2/2/3",
-  endDate: "5/2/3",
-  isPending: false,
-}]
+const doneData = [
+  {
+    jobId: "234324",
+    isDeleted: false,
+    name: "Comp Progdcsfe",
+    budget: 50000,
+    description: "tewtstes",
+    category: "Dick",
+    applicants: 50,
+    maxApplicants: 100,
+    startDate: "2/2/3",
+    endDate: "5/2/3",
+    isPending: false,
+  },
+];
 
 type Props = {};
 
@@ -129,40 +132,50 @@ const StudentJobsMenu = (props: Props) => {
 		fetchData();
 	}, [])
 
-	const sortOptions = [
-		{ name: "วันที่เริ่มต้น", value: startDateSortOption, set: setStartDateSortOption },
-		{ name: "วันที่สิ้นสุด", value: endDateSortOption, set: setEndDateSortOption },
-		{ name: "สถานะ", value: statusSortOption, set: setStatusSortOption },
-	];
+  const sortOptions = [
+    {
+      name: "วันที่เริ่มต้น",
+      value: startDateSortOption,
+      set: setStartDateSortOption,
+    },
+    {
+      name: "วันที่สิ้นสุด",
+      value: endDateSortOption,
+      set: setEndDateSortOption,
+    },
+    { name: "สถานะ", value: statusSortOption, set: setStatusSortOption },
+  ];
 
-	return (
-		<>
-			{/* Toggle between PendingJobsPanel and DoneJobsPanel based on the value of isPending. */}
-			<JobToggler
-				status={jobType}
-				setStatus={setJobType}
-				statusList={jobTypeList}
-			/>
+  return (
+    <>
+      {/* Toggle between PendingJobsPanel and DoneJobsPanel based on the value of isPending. */}
+      <JobToggler
+        status={jobType}
+        setStatus={setJobType}
+        statusList={jobTypeList}
+      />
 
-			{/* Sort button */}
-			<section className="my-3">
-				<div className="flex flex-row gap-2 justify-end">
-					{/* This is made to contain height consistency */}
-					<div className="bg-transparent text-transparent py-2">
-						|
-					</div>
+      {/* Sort button */}
+      <section className="my-3">
+        <div className="flex flex-row gap-2 justify-end">
+          {/* This is made to contain height consistency */}
+          <div className="bg-transparent text-transparent py-2">|</div>
 
-					{/* Sort button */}
-					{jobType !== "งานที่เสร็จสิ้น" ? <Sorter
-						sideBarState={{
-							name: "sidebar",
-							value: isOpeningSideBar,
-							set: setIsOpeningSideBar,
-						}}
-						sortOptions={sortOptions}
-					/> : ''}
-				</div>
-			</section>
+          {/* Sort button */}
+          {jobType !== "งานที่เสร็จสิ้น" ? (
+            <Sorter
+              sideBarState={{
+                name: "sidebar",
+                value: isOpeningSideBar,
+                set: setIsOpeningSideBar,
+              }}
+              sortOptions={sortOptions}
+            />
+          ) : (
+            ""
+          )}
+        </div>
+      </section>
 
 			{/* show jobs */}
 			<div>

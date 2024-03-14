@@ -1,18 +1,16 @@
 import { applicationInfo } from "@/actions/jobCards/fetchJobCards";
 import StudentJobCardType from "@/types/StudentJobCardType";
 
-const mapper: Map<string, number> = new Map<string, number>(
-  [
-    ["กำลังรอ", 1],
-    ["ผ่านการคัดเลือก", 2],
-    ["ไม่ผ่านการคัดเลือก", 3],
-    ["รอผู้จ้างจ่ายมัดจำ", 4],
-    ["รอส่งมอบงาน", 5],
-    ["รอผู้จ้างจ่ายค่าจ้าง", 6],
-    ["เสร็จสิ้น", 7],
-    ["ถูกยกเลิกงาน", 8],
-  ]
-);
+const mapper: Map<string, number> = new Map<string, number>([
+  ["กำลังรอ", 1],
+  ["ผ่านการคัดเลือก", 2],
+  ["ไม่ผ่านการคัดเลือก", 3],
+  ["รอผู้จ้างจ่ายมัดจำ", 4],
+  ["รอส่งมอบงาน", 5],
+  ["รอผู้จ้างจ่ายค่าจ้าง", 6],
+  ["เสร็จสิ้น", 7],
+  ["ถูกยกเลิกงาน", 8],
+]);
 
 function adapt(status: string): number {
   return mapper.get(status) || 0;

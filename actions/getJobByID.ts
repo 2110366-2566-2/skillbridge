@@ -35,7 +35,7 @@ const getJobById = async (jobId: string) => {
     jobTags: job.jobTag.title,
     description: job.description ? job.description : "",
     acceptNum: job.applications.filter(
-      (app: any) => app.status == ApplicationStatus.ACCEPTED
+      (app: any) => app.status == ApplicationStatus.ACCEPTED,
     ).length, //TODO : Filter for accepted application
     maxAcceptNum: job.numWorker,
     budget: job.budget,

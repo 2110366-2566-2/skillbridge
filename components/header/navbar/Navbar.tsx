@@ -6,15 +6,19 @@ import Image from "next/image";
 import homeIcon from "@/public/icons/home.svg";
 import searchIcon from "@/public/icons/search.svg";
 import workIcon from "@/public/icons/work.svg";
-import logoutIcon from "@/public/icons/logout.svg";
-import closeIcon from "@/public/icons/close.svg";
 import NavLink from "./navLink/NavLink";
-import hamburgerIcon from "@/public/icons/hamburger-button.svg";
+import NavButton from "./navButton/NavButton";
 import homeDarkIcon from "@/public/icons/homeDark.svg";
 import searchDarkIcon from "@/public/icons/searchDark.svg";
 import workDarkIcon from "@/public/icons/workDark.svg";
 import noavatar from "@/public/icons/noavatar.svg";
-import { signOut } from "next-auth/react";
+import person from "@/public/icons/person.svg";
+import personDark from "@/public/icons/personDark.svg";
+import history from "@/public/icons/history.svg";
+import historyDark from "@/public/icons/historyDark.svg";
+import Sidebar from "./sidebar/Sidebar";
+import LogoutLink from "./logoutButton/LogoutButton";
+import { usePathname } from "next/navigation";
 
 const studentLinks = [
   {
@@ -52,6 +56,21 @@ const employerLinks = [
   },
 ];
 
+const additionalLink = [
+  {
+    title: "บัญชีของฉัน",
+    path: "/",
+    icon: person,
+    activeIcon: personDark,
+  },
+  {
+    title: "ประวัติการเงิน",
+    path: "/payment-history",
+    icon: history,
+    activeIcon: historyDark,
+  },
+];
+
 type Props = {
   session: any;
   isStudent: boolean;
@@ -59,7 +78,8 @@ type Props = {
 };
 
 export default function Navbar(props: Props) {
-  const [open, setOpen] = useState(false);
+  const pathName = usePathname();
+  const isActive = additionalLink.some((link) => link.path === pathName);
 
   // Authenticated User Info
   const { session, isStudent, userInfo } = props;
@@ -74,98 +94,48 @@ export default function Navbar(props: Props) {
     <>
       {!!session ? (
         <>
-          <div className="hidden font-ibm md:flex md:items-center md:text-sm">
+          {/* With Session */}
+          {/* Desktop : Main NavLink */}
+          <div className="font-ibm md:flex md:items-center md:text-sm md:gap-1">
             {(isStudent ? studentLinks : employerLinks).map((link) => (
               <NavLink key={"desktop : " + link.title} link={link} />
             ))}
-            <button
-              className="hidden md:block px-5 py-2 rounded-full duration-300 active:opacity-40"
-              onClick={() => signOut({ callbackUrl: process.env.NEXTAUTH_URL })}
+            <div
+              className={`flex justify-center items-center pr-3 ${isActive && "md:bg-slate-50 md:rounded-full"}`}
             >
-              <p className="hidden text-sm text-slate-50 hover:text-red-400 duration-300 md:block font-bold">
-                ออกจากระบบ
-              </p>
-            </button>
-            <div className="flex items-center gap-3 pl-2 md:hover:opacity-80 md:duration-300">
-              <p className="text-slate-50">{name}</p>
-              <Image
-                className="rounded-full"
-                src={avatar}
-                alt="avatar"
-                width={40}
-                height={40}
-              />
-            </div>
-          </div>
-
-          <button
-            className="md:hidden active:opacity-40"
-            onClick={() => setOpen((prevOpen) => !prevOpen)}
-          >
-            <Image
-              className="w-auto h-auto active:opacity-40"
-              src={hamburgerIcon}
-              alt="hamberger"
-              width={35}
-              height={35}
-            />
-          </button>
-
-          <div
-            className={`z-10 bg-neutral-800 fixed top-0 right-0 left-0 bottom-0 md:hidden duration-500 
-                ${open ? "opacity-60" : "opacity-0 invisible"}`}
-          ></div>
-          <div
-            className={`font-ibm z-20 bg-slate-800 text-slate-50 fixed top-0 right-0 w-2/3 h-screen flex flex-col items-center p-7 justify-between md:hidden ease-in-out duration-500 
-                ${open ? "translate-x-0 " : "translate-x-full"}`}
-          >
-            <div className="flex flex-col gap-8 justify-start w-full">
-              <div className="flex flex-col gap-5">
-                <div className="flex justify-between items-start">
-                  <Image
-                    className="rounded-full"
-                    src={avatar}
-                    alt="avatar"
-                    width={70}
-                    height={70}
-                  />
-                  <button
-                    className="md:hidden active:opacity-40"
-                    onClick={() => setOpen((prevOpen) => !prevOpen)}
-                  >
-                    <Image
-                      className="w-auto h-auto"
-                      src={closeIcon}
-                      alt="close"
-                      width={35}
-                      height={35}
-                    />
-                  </button>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <p>
-                    <b className="font-medium">{name}</b>
-                  </p>
-                  <p className="text-xs">{userInfo}</p>
-                </div>
+              {/* Desktop : Avatar */}
+              <div className="hidden md:flex px-2 py-1 items-center gap-3 pl-2 md:hover:opacity-80 md:duration-300">
+                <Image
+                  className="rounded-full"
+                  src={avatar}
+                  alt="avatar"
+                  width={40}
+                  height={40}
+                />
               </div>
-              <div className="w-full flex flex-col gap-2">
-                {(isStudent ? studentLinks : employerLinks).map((link) => (
-                  <NavLink key={"mobile : " + link.title} link={link} />
-                ))}
-              </div>
+              {/* Both : Hamberger Button + Sidebar */}
+              <Sidebar name={name} userInfo={userInfo} isDark={isActive}>
+                <div className="h-full w-full flex flex-col justify-between">
+                  <div className="w-full flex flex-col gap-3 md:hidden">
+                    {/* Mobile : Main NavButton */}
+                    {(isStudent ? studentLinks : employerLinks).map((link) => (
+                      <NavButton key={"mobile : " + link.title} link={link} />
+                    ))}
+                  </div>
+                  <div className="w-full flex flex-col gap-3">
+                    {/* Both : Additional NavButton */}
+                    {additionalLink.map((link) => (
+                      <NavButton key={"all : " + link.title} link={link} />
+                    ))}
+                    <LogoutLink />
+                  </div>
+                </div>
+              </Sidebar>
             </div>
-            <button
-              className="w-full flex gap-8 justify-start active:opacity-40"
-              onClick={() => signOut({ callbackUrl: process.env.NEXTAUTH_URL })}
-              key="mobile : ออกจากระบบ"
-            >
-              <Image src={logoutIcon} alt="icon" width={30} height={30} />
-              <h2 className="text-lg font-semibold text-red-500">ออกจากระบบ</h2>
-            </button>
           </div>
         </>
       ) : (
+        // Both With no session
         <div className="flex items-center gap-4 text-xs font-ibm md:gap-7 md:text-sm">
           <button className="bg-slate-50 px-3 py-2 rounded-md active:opacity-40">
             <Link href="/login" className="text-slate-800 font-bold">

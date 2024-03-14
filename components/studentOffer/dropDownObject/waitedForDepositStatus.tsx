@@ -1,11 +1,11 @@
 import Router from "next/router";
 
 export default function WaitedForDepositStatus({
-    studentId,
-    jobId
+  studentId,
+  jobId,
 }: {
-    studentId: string,
-    jobId: string
+  studentId: string;
+  jobId: string;
 }) {
     return (
         <div className="w-[330px] flex justify-between mt-[10px] xl:mt-0">

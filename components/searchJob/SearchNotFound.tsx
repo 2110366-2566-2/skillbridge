@@ -3,7 +3,7 @@ import Image from "next/image";
 const notFound = require("@/public/icons/notFound.svg") as string;
 
 type Props = {
-  text: string
+  text: string;
 };
 
 export default function SearchNotFound({ text }: Props) {

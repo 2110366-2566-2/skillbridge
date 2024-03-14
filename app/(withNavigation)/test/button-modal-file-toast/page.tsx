@@ -24,13 +24,14 @@ export default function LoggedIn() {
           onClick={() => {
             setPrimaryLoading((prev) => !prev);
             setDisabled(true);
+            toast.success("Hello");
             // Simulate an asynchronous job with a 2-second delay
-            setTimeout(function () {
-              // Code to be executed after the 2-second delay
-              setPrimaryLoading((prev) => !prev);
-              setDisabled(false); // Assuming you want to enable the button again
-              toast.success("Completed!");
-            }, 2000);
+            // setTimeout(function () {
+            //   // Code to be executed after the 2-second delay
+            //   setPrimaryLoading((prev) => !prev);
+            //   setDisabled(false); // Assuming you want to enable the button again
+            //   toast.success("Completed!");
+            // }, 2000);
           }}
           isLoading={primaryLoading}
           loadingMessage="loading"

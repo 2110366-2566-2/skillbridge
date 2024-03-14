@@ -15,7 +15,9 @@ export default async function OfferingPage({
         <div className="flex justify-center">
             <div className="flex flex-col md:flex-row md:gap-8">
                 <div className="flex flex-col">
-                    <div className="font-medium text-slate-800 mb-[10px]">รายละเอียดงาน</div>
+                    <div className="font-medium text-slate-800 mb-[10px]">
+                        รายละเอียดงาน
+                    </div>
                     <JobDetail jobId={jobId} isStudentView={true} />
                 </div>
                 <OfferingForm jobId={jobId} application={application} />

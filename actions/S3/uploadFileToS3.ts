@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import { PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
@@ -11,9 +11,9 @@ const uploadFileToS3 = async (
   buffer: Uint8Array,
   type: string,
   size: number,
-  path: string
+  path: string,
 ) => {
-  const validPath = ["jobFiles", "applicationFiles"];
+  const validPath = ["jobFiles", "applicationFiles", "transactionFiles"];
 
   if (!validPath.includes(path)) {
     return {

@@ -9,7 +9,7 @@ const getApplicationByUserId = async (jobId: string, userId?: string) => {
     if (!session) {
       throw { message: "Not authenticated", status: 401 };
     }
-    const id = userId ? userId : session.user.userId;
+    const id = userId ? userId : session.user.id;
     let application: any = await prisma.application.findFirst({
       where: {
         jobId: jobId,
@@ -37,9 +37,9 @@ const getApplicationByUserId = async (jobId: string, userId?: string) => {
     }
 
     let signUrl: string | any = null
-    if (application?.applicationDocumentFile) {
+    if (application?.applicationDocumentFiles[0]) {
       signUrl = await getS3URL(
-        application.applicationDocumentFile.fileName
+        application.applicationDocumentFiles[0].fileName
       );
     }
 
@@ -47,16 +47,18 @@ const getApplicationByUserId = async (jobId: string, userId?: string) => {
     //   signUrl = null;
     // }
     let output = {
-      bid: application?.bid ? application.bid as number : null,
-      applicationStatus: application?.status ? application.status as string : null,
-      url: signUrl ? signUrl as string : null,
+      bid: application?.bid ? (application.bid as number) : null,
+      applicationStatus: application?.status
+        ? (application.status as string)
+        : null,
+      url: signUrl ? (signUrl as string) : null,
       budget: jobBudget as number,
-      jobStatus: jobStatus ? jobStatus as string : null,
+      jobStatus: jobStatus ? (jobStatus as string) : null,
     };
     return output;
   } catch (error: any) {
     console.log(error);
-    return null
+    return null;
     // return {
     //   message: error.message || "Internal Server Error",
     //   status: error.status || 500,

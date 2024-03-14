@@ -1,11 +1,11 @@
-"use server"
+"use server";
 
-import getJobById from "@/actions/getJobByID"
+import getJobById from "@/actions/getJobByID";
 import EmployerDetail from "./EmployerDetail";
 
 type Props = {
-    jobId: string,
-    isStudentView: boolean
+    jobId: string;
+    isStudentView: boolean;
 };
 
 export default async function JobDetail({ jobId, isStudentView }: Props) {
@@ -28,8 +28,8 @@ export default async function JobDetail({ jobId, isStudentView }: Props) {
         middleName: job.userName.middlename ? job.userName.middlename : "",
         lastName: job.userName.lastname,
         position: job.position,
-        organization: job.organization
-    }
+        organization: job.organization,
+    };
 
     const FormattedDate = (inputDateString: string) => {
         const [day, month, year] = inputDateString.split("/");
@@ -43,7 +43,7 @@ export default async function JobDetail({ jobId, isStudentView }: Props) {
 
     return (
         <>
-            <div className="w-full rounded-t-[9.54px] border-slate-300 border-[0.5px] border-b-0 flex flex-col px-6 py-4 md:w-[50vw] lg:w-[45vw]">
+            <div className="w-full rounded-t-[9.54px] border-slate-300 border-[0.5px] border-b-0 flex flex-col px-6 py-4 max-w-[600px] md:w-[50vw] lg:w-[45vw]">
                 <div className="font-bold text-[24px] text-[#313866] lg:text-[30px]">{jobData.title}</div>
                 <div className="text-[14px] text-slate-800 mt-3 lg:text-[16px]">
                     <span className="font-semibold">หมวดหมู่</span>
