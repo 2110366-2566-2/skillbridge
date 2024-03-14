@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import getJobTags from "@/actions/getJobTags";
-import Marquee from "@/components/maquee/Maquee";
-import CommentCards from "@/components/commentCards/CommentCards";
+import getJobTags from "@/actions/landing/getJobTags";
+import Marquee from "@/components/landing/maquee/Maquee";
+import CommentCards from "@/components/landing/commentCards/CommentCards";
 import studentMobileImg from "@/public/images/student-mobile.png";
 import studentDesktopImg from "@/public/images/student-desktop.png";
 import guaranteeLogo from "@/public/logos/guatantee-logo.svg";
 import { Suspense } from "react";
-import CommentCardsLoading from "@/components/commentCards/commentCardsLoading/CommentCardsLoading";
+import CommentCardsLoading from "@/components/landing/commentCards/commentCardsLoading/CommentCardsLoading";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 

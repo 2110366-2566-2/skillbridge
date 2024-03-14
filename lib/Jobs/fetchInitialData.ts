@@ -1,8 +1,8 @@
 import { getEmployerJobs } from "@/actions/lookup/employee/jobs";
 import TaskCardType from "../../types/JobCardType";
-import getStudentByJob from "@/actions/getStudentByJob";
+import getStudentByJob from "@/actions/jobs/getStudentByJob";
 import { getStudentByJobAdapter } from "./adapter";
-import getJobById from "@/actions/getJobByID";
+import getJobById from "@/actions/jobs/getJobByID";
 
 const fetchInitialData = async () => {
   const result = await getEmployerJobs();

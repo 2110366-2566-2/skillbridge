@@ -3,7 +3,7 @@
 import { fetchGetStudentByJob } from "@/lib/Jobs/fetchInitialData";
 import { Student } from "@/types/StudentType";
 import React, { useEffect, useState } from "react";
-import StudentOffer from "../studentOffer/studentOffer";
+import StudentOffer from "../jobs/studentJobs/studentOffer/studentOffer";
 
 type Props = {
   jobId: string;
