@@ -32,7 +32,7 @@ async function pendingToAccepted(studentUserId: string, jobId: string) {
         }
     }
 
-    prisma.application.update({
+    await prisma.application.update({
         where: {
             userId_jobId: {
                 userId: studentUserId,
@@ -72,7 +72,7 @@ async function pendingToRejected(studentUserId: string, jobId: string) {
         }
     }
 
-    prisma.application.update({
+    await prisma.application.update({
         where: {
             userId_jobId: {
                 userId: studentUserId,
@@ -113,7 +113,7 @@ async function depositPendingToInProgress(studentUserId: string, jobId: string) 
         }
     }
 
-    prisma.application.update({
+    await prisma.application.update({
         where: {
             userId_jobId: {
                 userId: studentUserId,
@@ -153,7 +153,7 @@ async function inProgressToCanceled(studentUserId: string, jobId: string) {
         }
     }
 
-    prisma.application.update({
+    await prisma.application.update({
         where: {
             userId_jobId: {
                 userId: studentUserId,
@@ -193,7 +193,7 @@ async function deliveredToInProgress(studentUserId: string, jobId: string) {
         }
     }
 
-    prisma.application.update({
+    await prisma.application.update({
         where: {
             userId_jobId: {
                 userId: studentUserId,
@@ -233,7 +233,7 @@ async function deliveredToCanceled(studentUserId: string, jobId: string) {
         }
     }
 
-    prisma.application.update({
+    await prisma.application.update({
         where: {
             userId_jobId: {
                 userId: studentUserId,
@@ -273,7 +273,7 @@ async function deliveredToWagePaymentPending(studentUserId: string, jobId: strin
         }
     }
 
-    prisma.application.update({
+    await prisma.application.update({
         where: {
             userId_jobId: {
                 userId: studentUserId,
@@ -313,7 +313,7 @@ async function wagePaymentPendingToDone(studentUserId: string, jobId: string) {
         }
     }
 
-    prisma.application.update({
+    await prisma.application.update({
         where: {
             userId_jobId: {
                 userId: studentUserId,

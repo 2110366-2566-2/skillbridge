@@ -33,7 +33,7 @@ async function pendingToDisclaimed(jobId: string) {
         }
     }
 
-    prisma.application.update({
+    await prisma.application.update({
         where: {
             userId_jobId: {
                 userId: studentUserId,
@@ -87,7 +87,7 @@ async function acceptedToDepositPending(jobId: string) {
         }
     }
 
-    prisma.application.update({
+    await prisma.application.update({
         where: {
             userId_jobId: {
                 userId: studentUserId,
@@ -141,7 +141,7 @@ async function acceptedToDisclaimed(jobId: string) {
         }
     }
 
-    prisma.application.update({
+    await prisma.application.update({
         where: {
             userId_jobId: {
                 userId: studentUserId,
@@ -195,7 +195,7 @@ async function inProgressToDelivered(jobId: string) {
         }
     }
 
-    prisma.application.update({
+    await prisma.application.update({
         where: {
             userId_jobId: {
                 userId: studentUserId,
