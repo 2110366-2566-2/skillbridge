@@ -2,12 +2,14 @@ import React from "react";
 import JobStatus from "../jobStatus/jobStatus";
 import StudentJobCardType from "@/types/StudentJobCardType";
 import sortArray from "@/lib/Jobs/sortStudentArray";
+import { convertStateNameToThai } from "@/lib/Jobs/adapter";
+import { applicationInfo } from "@/actions/jobCards/fetchJobCards";
 
 type Props = {
     startDateSortOption: string;
     endDateSortOption: string;
     statusSortOption: string;
-    data: Array<StudentJobCardType>;
+    data: Array<applicationInfo>;
 };
 
 function StudentJobsPanel({
@@ -30,13 +32,12 @@ function StudentJobsPanel({
                         return (
                             <JobStatus
                                 key={index}
-                                userId={data.userId}
                                 jobId={data.jobId}
                                 title={data.title}
                                 startDate={data.startDate}
                                 endDate={data.endDate}
-                                category={data.category}
-                                status={data.status}
+                                category={data.tag}
+                                status={convertStateNameToThai("student", data.status)}
                             />
                         );
                     })

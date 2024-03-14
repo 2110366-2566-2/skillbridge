@@ -4,10 +4,8 @@ import { inProgressToDelivered } from "@/actions/jobCards/studentChangeApplicati
 import Image from "next/image";
 import { useRouter } from "next/router";
 export default function TaskInProgressStatusBox({
-    userId,
     jobId,
 }: {
-    userId: string;
     jobId: string;
 }) {
 

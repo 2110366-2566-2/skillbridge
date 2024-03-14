@@ -1,9 +1,7 @@
 import Image from "next/image"
 export default function TaskPaymentStatusBox({
-    userId,
     jobId
 }: {
-    userId: string,
     jobId: string
 }) {
     return (

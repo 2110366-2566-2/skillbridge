@@ -4,7 +4,7 @@ type StudentJobCardType = {
     title: string;
     startDate: string;
     endDate: string;
-    category: string;
+    tag: string;
     status: string;
   };
   

@@ -55,6 +55,8 @@ export function convertStateNameToThai(userType: string, state: string): string
                 return 'เสร็จสิ้น';
             case 'CANCELED':
                 return 'ยกเลิก';
+            case 'DELIVERED':
+                return 'ส่งมอบงานแล้ว'
         }
     }
     return '';

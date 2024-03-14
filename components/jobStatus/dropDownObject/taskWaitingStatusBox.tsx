@@ -4,10 +4,8 @@ import { pendingToDisclaimed } from "@/actions/jobCards/studentChangeApplication
 import { useRouter } from "next/router";
 
 export default function TaskWaitingStatusBox({
-    userId,
     jobId,
 }: {
-    userId: string;
     jobId: string;
 }) {
     return (

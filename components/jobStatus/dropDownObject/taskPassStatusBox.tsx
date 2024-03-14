@@ -4,10 +4,8 @@ import { acceptedToDepositPending, acceptedToDisclaimed } from "@/actions/jobCar
 import { useRouter } from "next/router";
 
 export default function TaskPassStatusBox({
-    userId,
     jobId,
 }: {
-    userId: string;
     jobId: string;
 }) {
     return (

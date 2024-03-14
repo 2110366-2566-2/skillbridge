@@ -6,7 +6,7 @@ import Sorter from "./Sorter";
 import StudentJobsPanel from "./StudentJobsPanel";
 import filterStudentJobs from "@/lib/Jobs/filterJobToggler";
 import StudentDoneJobsPanel from "./StudentDoneJobsPanel";
-import { studentFetchApplications } from "@/actions/jobCards/fetchJobCards";
+import { applicationInfo, finalApplicationInfo, studentFetchApplications } from "@/actions/jobCards/fetchJobCards";
 
 
 // 1st and 2nd tab
@@ -113,14 +113,19 @@ const StudentJobsMenu = (props: Props) => {
 	const [startDateSortOption, setStartDateSortOption] = useState("-");
 	const [endDateSortOption, setEndDateSortOption] = useState("-");
 	const [statusSortOption, setStatusSortOption] = useState("-");
-	const [data, setData] = useState<Array<any>>(oldData);
+	const [firstPageData, setFirstPageData] = useState<Array<applicationInfo>>([]);
+	const [secondPageData, setSecondPageData] = useState<Array<applicationInfo>>([]);
+	const [thirdPageData, setThirdPageData] = useState<Array<finalApplicationInfo>>([]);
 
-	// useEffect(() => {
-	// 	async function fetchData(){
-	// 		setData(await studentFetchApplications());
-	// 	}
-	// 	fetchData();
-	// }, [])
+	useEffect(() => {
+		async function fetchData(){
+			const fetchedRawData = await studentFetchApplications();
+			setFirstPageData(fetchedRawData[0] as applicationInfo[]);
+			setSecondPageData(fetchedRawData[1] as applicationInfo[]);
+			setThirdPageData(fetchedRawData[2] as finalApplicationInfo[]);
+		}
+		fetchData();
+	}, [])
 
 	const sortOptions = [
 		{ name: "วันที่เริ่มต้น", value: startDateSortOption, set: setStartDateSortOption },
@@ -165,17 +170,17 @@ const StudentJobsMenu = (props: Props) => {
 						startDateSortOption={startDateSortOption}
 						endDateSortOption={endDateSortOption}
 						statusSortOption={statusSortOption}
-						data={data.filter((arg) => filterStudentJobs(arg, jobType))}
+						data={firstPageData}
 					/>
 				) : jobType === "งานปัจจุบัน" ? (
 					<StudentJobsPanel
 						startDateSortOption={startDateSortOption}
 						endDateSortOption={endDateSortOption}
 						statusSortOption={statusSortOption}
-						data={data.filter((arg) => filterStudentJobs(arg, jobType))}
+						data={secondPageData}
 					/>
 				) : (
-					<StudentDoneJobsPanel data={doneData} />
+					<StudentDoneJobsPanel data={thirdPageData} />
 				)}
 			</div>
 		</>

@@ -2,9 +2,10 @@ import React from "react";
 import JobCardType from "@/types/JobCardType";
 import JobDescription from "../jobStatus/jobDescription";
 import SearchNotFound from "../searchJob/SearchNotFound";
+import { finalApplicationInfo } from "@/actions/jobCards/fetchJobCards";
 
 type Props = {
-    data: Array<JobCardType>;
+    data: Array<finalApplicationInfo>;
 };
 
 function StudentJobsPanel({ data }: Props) {
@@ -17,15 +18,15 @@ function StudentJobsPanel({ data }: Props) {
                             <>
                                 <JobDescription
                                     jobId={data.jobId}
-                                    title={data.name}
-                                    price={data.budget.toLocaleString()}
+                                    title={data.title}
+                                    price={data.bid.toString()}
                                     jobDescription={data.description}
                                     tag={data.description}
-                                    nubmerOfAcceptedApplication={data.applicants.toLocaleString()}
-                                    numberOfMaximumAccepted={data.maxApplicants.toLocaleString()}
+                                    nubmerOfAcceptedApplication={data.numberOfApplication.toString()}
+                                    numberOfMaximumAccepted={data.maxNumberOfApplication.toString()}
                                     period={`${data.startDate} - ${data.endDate}`}
                                 />
-                                <JobDescription
+                                {/* <JobDescription
                                     jobId={data.jobId}
                                     title={data.name}
                                     price={data.budget.toLocaleString()}
@@ -54,7 +55,7 @@ function StudentJobsPanel({ data }: Props) {
                                     nubmerOfAcceptedApplication={data.applicants.toLocaleString()}
                                     numberOfMaximumAccepted={data.maxApplicants.toLocaleString()}
                                     period={`${data.startDate} - ${data.endDate}`}
-                                />
+                                /> */}
                             </>
                         );
                     })}

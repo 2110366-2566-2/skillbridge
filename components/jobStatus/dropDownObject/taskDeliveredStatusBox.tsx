@@ -1,5 +1,5 @@
 import Image from "next/image"
-export default function TaskPledgeStatusBox({
+export default function TaskDeliveredStatusBox({
     jobId
 }: {
     jobId: string

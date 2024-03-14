@@ -237,5 +237,31 @@ async function inProgressToDelivered(jobId: string) {
     sendEmail(emailApp.job.employerId, subject, text);
 }
 
+async function acknowledgeApplication(jobId: string) {
+    const studentUserId = await getStudentUserId();
 
-export { pendingToDisclaimed, acceptedToDepositPending, acceptedToDisclaimed, inProgressToDelivered };
+    const application = await getApplication(studentUserId, jobId);
+    
+    const isValidStatus = application.status === ApplicationStatus.CANCELED || application.status === ApplicationStatus.DONE || application.status === ApplicationStatus.REJECTED;
+    if (!isValidStatus) {
+        throw {
+            message: "Application status is not valid",
+            status: 400
+        }
+    }
+
+    await prisma.application.update({
+        where: {
+            userId_jobId: {
+                userId: studentUserId,
+                jobId: jobId
+            },
+        },
+        data: {
+            isAcknowledged: true
+        }
+    });
+}
+
+
+export { pendingToDisclaimed, acceptedToDepositPending, acceptedToDisclaimed, inProgressToDelivered, acknowledgeApplication };
