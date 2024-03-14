@@ -87,7 +87,7 @@ export default function PaymentHistoryCard(props: Transaction) {
             {props.job.title}
           </h2>
           <h1
-            className={`font-semibold text-[20px] text-nowrap max-h-[24px] self-start md:text-[24px] ${props.isStudent ? "text-green-600" : "text-red-500"}`}
+            className={`font-semibold text-[20px] text-nowrap shrink-0 self-start md:text-[24px] ${props.isStudent ? "text-green-600" : "text-red-500"}`}
           >
             {formatAmount(props.amount, props.isStudent)}
           </h1>
