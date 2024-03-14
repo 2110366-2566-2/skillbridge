@@ -52,7 +52,7 @@ function JobManagePanel({ jobId }: Props) {
             <aside className="flex flex-col gap-3">
                 {fetchedData.length === 0 ? (
                     <div className="flex justify-center items-center">
-                        <SearchNotFound />
+                        <SearchNotFound text="ไม่พบการสมัครงานของนิสิต"/>
                     </div>
                 ) : (
                     fetchedData?.map((student, index) => {
