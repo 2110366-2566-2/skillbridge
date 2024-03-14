@@ -116,6 +116,7 @@ const StudentJobsMenu = (props: Props) => {
 	const [firstPageData, setFirstPageData] = useState<Array<applicationInfo>>([]);
 	const [secondPageData, setSecondPageData] = useState<Array<applicationInfo>>([]);
 	const [thirdPageData, setThirdPageData] = useState<Array<finalApplicationInfo>>([]);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 
 	useEffect(() => {
 		async function fetchData(){
@@ -123,6 +124,7 @@ const StudentJobsMenu = (props: Props) => {
 			setFirstPageData(fetchedRawData[0] as applicationInfo[]);
 			setSecondPageData(fetchedRawData[1] as applicationInfo[]);
 			setThirdPageData(fetchedRawData[2] as finalApplicationInfo[]);
+			setIsLoading(false);
 		}
 		fetchData();
 	}, [])
@@ -167,6 +169,7 @@ const StudentJobsMenu = (props: Props) => {
 				{/* applied, current, done jobs */}
 				{jobType === "งานที่กำลังสมัคร" ? (
 					<StudentJobsPanel
+						isLoading={isLoading}
 						startDateSortOption={startDateSortOption}
 						endDateSortOption={endDateSortOption}
 						statusSortOption={statusSortOption}
@@ -174,6 +177,7 @@ const StudentJobsMenu = (props: Props) => {
 					/>
 				) : jobType === "งานปัจจุบัน" ? (
 					<StudentJobsPanel
+						isLoading={isLoading}
 						startDateSortOption={startDateSortOption}
 						endDateSortOption={endDateSortOption}
 						statusSortOption={statusSortOption}

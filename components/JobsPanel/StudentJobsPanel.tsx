@@ -6,6 +6,7 @@ import { convertStateNameToThai } from "@/lib/Jobs/adapter";
 import { applicationInfo } from "@/actions/jobCards/fetchJobCards";
 
 type Props = {
+    isLoading: boolean;
     startDateSortOption: string;
     endDateSortOption: string;
     statusSortOption: string;
@@ -13,6 +14,7 @@ type Props = {
 };
 
 function StudentJobsPanel({
+    isLoading,
     startDateSortOption,
     endDateSortOption,
     statusSortOption,
@@ -27,7 +29,13 @@ function StudentJobsPanel({
     return (
         <main className="flex flex-col">
             <main className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 grid-flow-row gap-10">
-                {sortedData.length !== 0 ? (
+                {isLoading? (
+                    <div className="flex justify-center items-center">
+                        <div className="font-medium text-lg text-slate-500 mt-4 mx-auto md:text-2xl md:my-6 lg:font-normal">
+                            กำลังโหลดข้อมูล
+                        </div>
+                    </div>
+                ) : sortedData.length !== 0 ? (
                     sortedData.map((data, index) => {
                         return (
                             <JobStatus
