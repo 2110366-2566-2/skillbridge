@@ -53,7 +53,7 @@ const DoneJobsPanel = ({
                 </main>
             ) : (
                 <div className="flex justify-center items-center">
-                    <SearchNotFound />
+                    <SearchNotFound text="ไม่พบการสมัครงานของนิสิต"/>
                 </div>
             )}
         </main>
