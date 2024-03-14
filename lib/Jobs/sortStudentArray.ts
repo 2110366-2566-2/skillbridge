@@ -1,3 +1,4 @@
+import { applicationInfo } from "@/actions/jobCards/fetchJobCards";
 import StudentJobCardType from "@/types/StudentJobCardType";
 
 const mapper: Map<string, number> = new Map<string, number>([
@@ -16,46 +17,38 @@ function adapt(status: string): number {
 }
 
 const sortArray = (
-  array: Array<StudentJobCardType> = [],
+  array: Array<applicationInfo> = [],
   startDateSortOption: string = "",
   endDateSortOption: string = "",
   statusSortOption: string = "",
 ) => {
   if (startDateSortOption === "asc") {
-    array.sort((a: StudentJobCardType, b: StudentJobCardType) => {
+    array.sort((a: applicationInfo, b: applicationInfo) => {
       return a.startDate < b.startDate ? -1 : a.startDate > b.startDate ? 1 : 0;
     });
   } else if (startDateSortOption === "desc") {
-    array.sort((a: StudentJobCardType, b: StudentJobCardType) => {
+    array.sort((a: applicationInfo, b: applicationInfo) => {
       return b.startDate < a.startDate ? -1 : b.startDate > a.startDate ? 1 : 0;
     });
   }
 
   if (endDateSortOption === "asc") {
-    array.sort((a: StudentJobCardType, b: StudentJobCardType) => {
+    array.sort((a: applicationInfo, b: applicationInfo) => {
       return a.endDate < b.endDate ? -1 : a.endDate > b.endDate ? 1 : 0;
     });
   } else if (endDateSortOption === "desc") {
-    array.sort((a: StudentJobCardType, b: StudentJobCardType) => {
+    array.sort((a: applicationInfo, b: applicationInfo) => {
       return b.endDate < a.endDate ? -1 : b.endDate > a.endDate ? 1 : 0;
     });
   }
 
   if (statusSortOption === "asc") {
-    array.sort((a: StudentJobCardType, b: StudentJobCardType) => {
-      return adapt(a.status) < adapt(b.status)
-        ? -1
-        : adapt(a.status) > adapt(b.status)
-          ? 1
-          : 0;
+    array.sort((a: applicationInfo, b: applicationInfo) => {
+      return adapt(a.status) < adapt(b.status) ? -1 : adapt(a.status) > adapt(b.status) ? 1 : 0;
     });
   } else if (statusSortOption === "desc") {
-    array.sort((a: StudentJobCardType, b: StudentJobCardType) => {
-      return adapt(b.status) < adapt(a.status)
-        ? -1
-        : adapt(b.status) > adapt(a.status)
-          ? 1
-          : 0;
+    array.sort((a: applicationInfo, b: applicationInfo) => {
+      return adapt(b.status) < adapt(a.status) ? -1 : adapt(b.status) > adapt(a.status) ? 1 : 0;
     });
   }
 

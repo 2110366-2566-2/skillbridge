@@ -1,118 +1,39 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import JobToggler from "./JobToggler";
 import Sorter from "./Sorter";
 import StudentJobsPanel from "./StudentJobsPanel";
 import filterStudentJobs from "@/lib/Jobs/filterJobToggler";
 import StudentDoneJobsPanel from "./StudentDoneJobsPanel";
-
-// 1st and 2nd tab
-// ignore userId
-const data = [
-  {
-    userId: "001",
-    jobId: "001",
-    title: "รับสมัคร TA วิชา Comp Prog",
-    startDate: "18/10/2545",
-    endDate: "21/10/2545",
-    category: "การสอน",
-    status: "กำลังรอ",
-  },
-  {
-    userId: "001",
-    jobId: "001",
-    title: "รับสมัคร TA วิชา Comp Prog",
-    startDate: "18/10/2545",
-    endDate: "21/10/2545",
-    category: "การสอน",
-    status: "ผ่านการคัดเลือก",
-  },
-  {
-    userId: "001",
-    jobId: "001",
-    title: "รับสมัคร TA วิชา Comp Prog",
-    startDate: "18/10/2545",
-    endDate: "21/10/2545",
-    category: "การสอน",
-    status: "ไม่ผ่านการคัดเลือก",
-  },
-  {
-    userId: "001",
-    jobId: "001",
-    title: "รับสมัคร TA วิชา Comp Prog",
-    startDate: "18/10/2545",
-    endDate: "21/10/2545",
-    category: "การสอน",
-    status: "รอส่งมอบงาน",
-  },
-  {
-    userId: "001",
-    jobId: "001",
-    title: "รับสมัคร TA วิชา Comp Prog",
-    startDate: "18/10/2545",
-    endDate: "21/10/2545",
-    category: "การสอน",
-    status: "รอผู้จ้างจ่ายมัดจำ",
-  },
-  {
-    userId: "001",
-    jobId: "001",
-    title: "รับสมัคร TA วิชา Comp Prog",
-    startDate: "18/10/2545",
-    endDate: "21/10/2545",
-    category: "การสอน",
-    status: "รอผู้จ้างจ่ายค่าจ้าง",
-  },
-
-  {
-    userId: "001",
-    jobId: "001",
-    title: "รับสมัคร TA วิชา Comp Prog",
-    startDate: "18/10/2545",
-    endDate: "21/10/2545",
-    category: "การสอน",
-    status: "เสร็จสิ้น",
-  },
-  {
-    userId: "001",
-    jobId: "001",
-    title:
-      "รับสมัคร TA วิชา Comp Prog sdfasdfasdfsdsdafasdfsdfasdfasdfasdfasdfasdfasdfasfasfasdfsdfsdfsadfasdfasdfasdf",
-    startDate: "18/10/2545",
-    endDate: "21/10/2545",
-    category: "การสอน",
-    status: "ถูกยกเลิกงาน",
-  },
-];
-
-// 3rd tab
-const doneData = [
-  {
-    jobId: "234324",
-    isDeleted: false,
-    name: "Comp Progdcsfe",
-    budget: 50000,
-    description: "tewtstes",
-    category: "Dick",
-    applicants: 50,
-    maxApplicants: 100,
-    startDate: "2/2/3",
-    endDate: "5/2/3",
-    isPending: false,
-  },
-];
+import { applicationInfo, finalApplicationInfo, studentFetchApplications } from "@/actions/jobCards/fetchJobCards";
 
 type Props = {};
 
 const jobTypeList = ["งานที่กำลังสมัคร", "งานปัจจุบัน", "งานที่เสร็จสิ้น"];
 
 const StudentJobsMenu = (props: Props) => {
-  const [jobType, setJobType] = useState("งานที่กำลังสมัคร");
-  const [isOpeningSideBar, setIsOpeningSideBar] = useState(false);
-  const [startDateSortOption, setStartDateSortOption] = useState("-");
-  const [endDateSortOption, setEndDateSortOption] = useState("-");
-  const [statusSortOption, setStatusSortOption] = useState("-");
+
+	const [jobType, setJobType] = useState("งานที่กำลังสมัคร");
+	const [isOpeningSideBar, setIsOpeningSideBar] = useState(false);
+	const [startDateSortOption, setStartDateSortOption] = useState("-");
+	const [endDateSortOption, setEndDateSortOption] = useState("-");
+	const [statusSortOption, setStatusSortOption] = useState("-");
+	const [firstPageData, setFirstPageData] = useState<Array<applicationInfo>>([]);
+	const [secondPageData, setSecondPageData] = useState<Array<applicationInfo>>([]);
+	const [thirdPageData, setThirdPageData] = useState<Array<finalApplicationInfo>>([]);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
+
+	useEffect(() => {
+		async function fetchData(){
+			const fetchedRawData = await studentFetchApplications();
+			setFirstPageData(fetchedRawData[0] as applicationInfo[]);
+			setSecondPageData(fetchedRawData[1] as applicationInfo[]);
+			setThirdPageData(fetchedRawData[2] as finalApplicationInfo[]);
+			setIsLoading(false);
+		}
+		fetchData();
+	}, [])
 
   const sortOptions = [
     {
@@ -159,29 +80,31 @@ const StudentJobsMenu = (props: Props) => {
         </div>
       </section>
 
-      {/* show jobs */}
-      <div>
-        {/* applied, current, done jobs */}
-        {jobType === "งานที่กำลังสมัคร" ? (
-          <StudentJobsPanel
-            startDateSortOption={startDateSortOption}
-            endDateSortOption={endDateSortOption}
-            statusSortOption={statusSortOption}
-            data={data.filter((arg) => filterStudentJobs(arg, jobType))}
-          />
-        ) : jobType === "งานปัจจุบัน" ? (
-          <StudentJobsPanel
-            startDateSortOption={startDateSortOption}
-            endDateSortOption={endDateSortOption}
-            statusSortOption={statusSortOption}
-            data={data.filter((arg) => filterStudentJobs(arg, jobType))}
-          />
-        ) : (
-          <StudentDoneJobsPanel data={doneData} />
-        )}
-      </div>
-    </>
-  );
+			{/* show jobs */}
+			<div>
+				{/* applied, current, done jobs */}
+				{jobType === "งานที่กำลังสมัคร" ? (
+					<StudentJobsPanel
+						isLoading={isLoading}
+						startDateSortOption={startDateSortOption}
+						endDateSortOption={endDateSortOption}
+						statusSortOption={statusSortOption}
+						data={firstPageData}
+					/>
+				) : jobType === "งานปัจจุบัน" ? (
+					<StudentJobsPanel
+						isLoading={isLoading}
+						startDateSortOption={startDateSortOption}
+						endDateSortOption={endDateSortOption}
+						statusSortOption={statusSortOption}
+						data={secondPageData}
+					/>
+				) : (
+					<StudentDoneJobsPanel data={thirdPageData} />
+				)}
+			</div>
+		</>
+	);
 };
 
 export default StudentJobsMenu;

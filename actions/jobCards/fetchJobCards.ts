@@ -5,25 +5,25 @@ import { getEmployerJobs } from "../lookup/employee/jobs";
 import { getEmployerUserId, getStudentUserId, validateJobOwner } from "./utils";
 import { integer } from "@elastic/elasticsearch/lib/api/types";
 
-interface applicationInfo {
-  jobId: string;
-  title: string;
-  startDate: Date;
-  endDate: Date;
-  tag: string;
-  status: string;
+export interface applicationInfo {
+    jobId: string,
+    title: string,
+    startDate: string,
+    endDate: string,
+    tag: string,
+    status: string
 }
 
-interface finalApplicationInfo {
-  jobId: string;
-  title: string;
-  description: string;
-  startDate: Date;
-  endDate: Date;
-  tag: string;
-  numberOfApplication: integer;
-  maxNumberOfApplication: integer;
-  bid: integer;
+export interface finalApplicationInfo {
+    jobId: string,
+    title: string,
+    description: string,
+    startDate: string,
+    endDate: string,
+    tag: string,
+    numberOfApplication: number,
+    maxNumberOfApplication: number
+    bid: number
 }
 
 async function studentFetchApplications() {
@@ -86,14 +86,14 @@ async function fetchFirstTab(studentUserId: string) {
     // 4. tag
     // 5. application status
 
-    const applicationInfo: applicationInfo = {
-      jobId: app.jobId,
-      title: app.job.title,
-      startDate: app.job.estimateStartDate,
-      endDate: app.job.estimateStartDate,
-      tag: app.job.jobTag.title,
-      status: app.status,
-    };
+        const applicationInfo: applicationInfo = {
+            jobId: app.jobId,
+            title: app.job.title,
+            startDate: app.job.estimateStartDate.toLocaleDateString(),
+            endDate: app.job.estimateStartDate.toLocaleDateString(),
+            tag: app.job.jobTag.title,
+            status: app.status
+        }
 
     output.push(applicationInfo);
   }
@@ -136,14 +136,14 @@ async function fetchSecondTab(studentUserId: string) {
     // 4. tag
     // 5. application status
 
-    const applicationInfo: applicationInfo = {
-      jobId: app.jobId,
-      title: app.job.title,
-      startDate: app.job.estimateStartDate,
-      endDate: app.job.estimateStartDate,
-      tag: app.job.jobTag.title,
-      status: app.status,
-    };
+        const applicationInfo: applicationInfo = {
+            jobId: app.jobId,
+            title: app.job.title,
+            startDate: app.job.estimateStartDate.toLocaleDateString(),
+            endDate: app.job.estimateStartDate.toLocaleDateString(),
+            tag: app.job.jobTag.title,
+            status: app.status
+        }
 
     output.push(applicationInfo);
   }
@@ -182,30 +182,20 @@ async function fetchThirdTab(studentUserId: string) {
   for (let i = 0; i < applications.length; i++) {
     const app = applications[i];
 
-    const finalApp: finalApplicationInfo = {
-      jobId: app.jobId,
-      title: app.job.title,
-      description: app.job.description ? app.job.description : "",
-      startDate: app.job.estimateStartDate,
-      endDate: app.job.estimateEndDate,
-      tag: app.job.jobTag.title,
-      numberOfApplication: app.job.applications.filter(
-        (app) =>
-          !(
-            app.status in
-            [
-              ApplicationStatus.CANCELED,
-              ApplicationStatus.DISCLAIMED,
-              ApplicationStatus.REJECTED,
-            ]
-          ),
-      ).length,
-      maxNumberOfApplication: app.job.numWorker,
-      bid: app.bid,
-    };
-
-    output.push(finalApp);
-  }
+        const finalApp: finalApplicationInfo = {
+            jobId: app.jobId,
+            title: app.job.title,
+            description: app.job.description ? app.job.description : "",
+            startDate: app.job.estimateStartDate.toLocaleDateString(),
+            endDate: app.job.estimateEndDate.toLocaleDateString(),
+            tag: app.job.jobTag.title,
+            numberOfApplication: app.job.applications.filter((app) => !(app.status in [ApplicationStatus.CANCELED, ApplicationStatus.DISCLAIMED, ApplicationStatus.REJECTED])).length,
+            maxNumberOfApplication: app.job.numWorker,
+            bid: app.bid
+        }
+        
+        output.push(finalApp);
+    }
 
   return output;
 }

@@ -9,23 +9,22 @@ import TaskPledgeStatusBox from "./dropDownObject/taskPledgeStatusBox";
 import TaskPaymentStatusBox from "./dropDownObject/taskPaymentStatusBox";
 import TaskDoneStatusBox from "./dropDownObject/taskDoneStatusBox";
 import TaskCancelStatusBox from "./dropDownObject/taskCancelStatusBox";
+import TaskDeliveredStatusBox from "./dropDownObject/taskDeliveredStatusBox";
 
 export default function JobStatus({
-  userId,
-  jobId,
-  title,
-  startDate,
-  endDate,
-  category,
-  status,
+    jobId,
+    title,
+    startDate,
+    endDate,
+    category,
+    status,
 }: {
-  userId: string;
-  jobId: string;
-  title: string;
-  startDate: string;
-  endDate: string;
-  category: string;
-  status: string;
+    jobId: string,
+    title: string,
+    startDate: string,
+    endDate: string,
+    category: string,
+    status: string,
 }) {
   const [isDropDownOpen, setisDropDownOpen] = useState(false);
   const [dropDownAbove, setDropDownAbove] = useState("27px");
@@ -45,46 +44,48 @@ export default function JobStatus({
   let statusColor = "#dcfce7";
   let statusWidth = "185px";
 
-  switch (status) {
-    case "กำลังรอ":
-      dropDownObject = <TaskWaitingStatusBox userId={userId} jobId={jobId} />;
-      statusColor = "#fef9c3";
-      statusWidth = "215px";
-      break;
-    case "ผ่านการคัดเลือก":
-      dropDownObject = <TaskPassStatusBox userId={userId} jobId={jobId} />;
-      break;
-    case "ไม่ผ่านการคัดเลือก":
-      dropDownObject = <TaskFailStatusBox userId={userId} jobId={jobId} />;
-      statusColor = "#ffe4e6";
-      break;
-    case "รอส่งมอบงาน":
-      dropDownObject = (
-        <TaskInProgressStatusBox userId={userId} jobId={jobId} />
-      );
-      statusColor = "#fef9c3";
-      statusWidth = "195px";
-      break;
-    case "รอผู้จ้างจ่ายมัดจำ":
-      dropDownObject = <TaskPledgeStatusBox userId={userId} jobId={jobId} />;
-      statusColor = "#fef9c3";
-      break;
-    case "รอผู้จ้างจ่ายค่าจ้าง":
-      dropDownObject = <TaskPaymentStatusBox userId={userId} jobId={jobId} />;
-      statusColor = "#fef9c3";
-      break;
-    case "เสร็จสิ้น":
-      dropDownObject = <TaskDoneStatusBox userId={userId} jobId={jobId} />;
-      statusWidth = "215px";
-      break;
-    case "ถูกยกเลิกงาน":
-      dropDownObject = <TaskCancelStatusBox userId={userId} jobId={jobId} />;
-      statusColor = "#ffe4e6";
-      statusWidth = "195px";
-      break;
-    default:
-      break;
-  }
+    switch (status) {
+        case 'กำลังรอ':
+            dropDownObject = <TaskWaitingStatusBox jobId={jobId} />
+            statusColor = '#fef9c3'
+            statusWidth = '215px'
+            break;
+        case 'ผ่านการคัดเลือก':
+            dropDownObject = <TaskPassStatusBox jobId={jobId} />
+            break;
+        case 'ไม่ผ่านการคัดเลือก':
+            dropDownObject = <TaskFailStatusBox jobId={jobId} />
+            statusColor = '#ffe4e6'
+            break;
+        case 'รอส่งมอบงาน':
+            dropDownObject = <TaskInProgressStatusBox jobId={jobId} />
+            statusColor = '#fef9c3'
+            statusWidth = '195px'
+            break;
+        case 'รอผู้จ้างจ่ายมัดจำ':
+            dropDownObject = <TaskPledgeStatusBox jobId={jobId} />
+            statusColor = '#fef9c3'
+            break;
+        case 'รอผู้จ้างจ่ายค่าจ้าง':
+            dropDownObject = <TaskPaymentStatusBox jobId={jobId} />
+            statusColor = '#fef9c3'
+            break;
+        case 'เสร็จสิ้น':
+            dropDownObject = <TaskDoneStatusBox jobId={jobId} />
+            statusWidth = '215px'
+            break;
+        case 'ถูกยกเลิกงาน':
+            dropDownObject = <TaskCancelStatusBox jobId={jobId} />
+            statusColor = '#ffe4e6'
+            statusWidth = '195px'
+            break;
+        case 'ส่งมอบงานแล้ว':
+            dropDownObject = <TaskDeliveredStatusBox jobId={jobId} />
+            statusWidth = '215px'
+            break;
+        default:
+            break;
+    }
 
   return (
     <div className="flex flex-col items-end w-[335px]">
