@@ -1,5 +1,5 @@
-import Image from "next/image";
-export default function TaskPaymentStatusBox({
+import Image from "next/image"
+export default function TaskDeliveredStatusBox({
     jobId
 }: {
     jobId: string

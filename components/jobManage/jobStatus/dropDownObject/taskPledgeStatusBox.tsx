@@ -1,10 +1,8 @@
 import Image from "next/image";
 export default function TaskPledgeStatusBox({
-  userId,
-  jobId,
+    jobId
 }: {
-  userId: string;
-  jobId: string;
+    jobId: string
 }) {
   return (
     <div className="absolute bottom-[15px] w-[295px] flex justify-between">

@@ -28,10 +28,12 @@ export default function jobDescription({
             </p>
           </div>
 
-          {/* Period Component */}
-          <div className="mt-[10px]">
-            <p className="font-medium text-[11px] text-slate-500">{period}</p>
-          </div>
+                    {/* Period Component */}
+                    <div className="mt-[10px]">
+                        <p className="font-medium text-[15.5px] text-slate-500 text-wrap line-clamp-1">
+                            {period}
+                        </p>
+                    </div>
 
           <div className="flex mt-[10px]">
             {/* Tag Component */}
@@ -52,19 +54,22 @@ export default function jobDescription({
             </div>
           </div>
 
-          <div className="absolute w-[295px] flex justify-between bottom-[10px]">
-            {/* AcceptedApplication Number Component */}
-            <div className="flex items-center">
-              <p className="text-xs text-[#64748b]">
-                สมัครแล้ว {nubmerOfAcceptedApplication}/
-                {numberOfMaximumAccepted} คน
-              </p>
+                    <div className="absolute w-[295px] flex justify-between bottom-[10px]">
+                        {/* AcceptedApplication Number Component */}
+                        <div className="flex items-center">
+                            <p className="text-xs text-[#64748b]">
+                                สมัครแล้ว {nubmerOfAcceptedApplication}/{numberOfMaximumAccepted} คน
+                            </p>
+                        </div>
+                        {/* Price Component */}
+                        <p className="text-md text-[#313866] font-semibold">
+                            ฿{price}
+                        </p>
+
+                    </div>
+
+                </div>
             </div>
-            {/* Price Component */}
-            <p className="text-md text-[#313866] font-semibold">{price}</p>
-          </div>
         </div>
-      </div>
-    </div>
-  );
+    )
 }

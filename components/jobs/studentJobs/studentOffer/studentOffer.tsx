@@ -51,55 +51,49 @@ export default function StudentOffer({
   let titleLineClamp =
     windowSize.width >= 1280 ? "line-clamp-1" : "line-clamp-2";
 
-  switch (status) {
-    case "สมัคร":
-      dropDownObject = <AppliedStatus studentId={studentId} jobId={jobId} />;
-      break;
-    case "สละสิทธิ์":
-      statusColor = "#ffe4e6";
-      heightOfDropDownCard = windowSize.width >= 1280 ? "142px" : "170px";
-      break;
-    case "ปฏิเสธ":
-      statusColor = "#ffe4e6";
-      heightOfDropDownCard = windowSize.width >= 1280 ? "142px" : "170px";
-      break;
-    case "รอจ่ายมัดจำ":
-      dropDownObject = (
-        <WaitedForDepositStatus studentId={studentId} jobId={jobId} />
-      );
-      statusColor = "#fef9c3";
-      break;
-    case "รอส่งมอบงาน":
-      dropDownObject = (
-        <WaitedForSubmissionStatus studentId={studentId} jobId={jobId} />
-      );
-      statusColor = "#fef9c3";
-      break;
-    case "ส่งมอบงานแล้ว":
-      dropDownObject = <SubmittedStatus studentId={studentId} jobId={jobId} />;
-      break;
-    case "รอจ่ายค่าจ้าง":
-      dropDownObject = (
-        <WaitedForWageStatus studentId={studentId} jobId={jobId} />
-      );
-      statusColor = "#fef9c3";
-      break;
-    default:
-      break;
-  }
+    switch (status) {
+        case 'สมัคร':
+            dropDownObject = <AppliedStatus studentId={studentId} jobId={jobId} />
+            break;
+        case 'สละสิทธิ์':
+            statusColor = '#ffe4e6'
+            heightOfDropDownCard = windowSize.width >= 1280 ? "142px" : '170px'
+            break;
+        case 'ปฏิเสธ':
+            statusColor = '#ffe4e6'
+            heightOfDropDownCard = windowSize.width >= 1280 ? "142px" : '170px'
+            break;
+        case 'รอจ่ายมัดจำ': // go call little's function in WaitedForDepositStatus component
+            dropDownObject = <WaitedForDepositStatus studentId={studentId} jobId={jobId} />
+            statusColor = '#fef9c3'
+            break;
+        case 'รอส่งมอบงาน':
+            dropDownObject = <WaitedForSubmissionStatus studentId={studentId} jobId={jobId} />
+            statusColor = '#fef9c3'
+            break;
+        case 'ส่งมอบงานแล้ว': 
+            dropDownObject = <SubmittedStatus studentId={studentId} jobId={jobId} />
+            break;
+        case 'รอจ่ายค่าจ้าง': // go call little's function to pay remaining wage
+            dropDownObject = <WaitedForWageStatus studentId={studentId} jobId={jobId} />
+            statusColor = '#fef9c3'
+            break;
+        default:
+            break;
+    }
 
-  return (
-    <div className="flex flex-col w-full">
-      <div
-        style={{ height: isDropDownOpen ? heightOfDropDownCard : heightCard }}
-        className="relative w-full px-[20px] pt-[20px] bg-white rounded-xl shadow-md"
-      >
-        <div className="w-full">
-          <div className="relative">
-            {/* Price Component */}
-            <div className="absolute right-0 top-0 h-[24px] flex justify-center items-center">
-              <p className="text-2xl text-[#313866] font-semibold">{price}</p>
-            </div>
+    return (
+        <div className={`flex flex-col w-full`}>
+            <div style={{ height: isDropDownOpen ? heightOfDropDownCard : heightCard }} className="relative w-full px-[20px] pt-[20px] bg-white rounded-xl shadow-md">
+                <div className="w-full">
+                    <div className="relative">
+
+                        {/* Price Component */}
+                        <div className="absolute right-0 top-0 h-[24px] flex justify-center items-center">
+                            <p className="text-2xl text-[#313866] font-semibold">
+                                {price}
+                            </p>
+                        </div>
 
             {/* Title Component */}
             <div style={{ width: titleWidth }}>

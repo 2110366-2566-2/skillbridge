@@ -35,11 +35,11 @@ async function ManagePage({ params }: Props) {
         </CloseJobButton>
       </section>
 
-      <section className="flex lg:flex-row gap-8 flex-col justify-around">
-        <article className="">
-          {/* job detail */}
-          <JobDetail jobId={jobId} isStudentView={false} />
-        </article>
+            <section className="flex lg:flex-row gap-8 flex-col justify-around">
+                <article className="mx-auto">
+                    {/* job detail */}
+                    <JobDetail jobId={jobId} isStudentView={false} />
+                </article>
 
         <JobManagePanel jobId={jobId} />
       </section>

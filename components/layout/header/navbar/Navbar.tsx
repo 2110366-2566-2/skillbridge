@@ -33,6 +33,12 @@ const studentLinks = [
     icon: searchIcon,
     activeIcon: searchDarkIcon,
   },
+  {
+    title: "งานของฉัน",
+    path: "/studentjobs",
+    icon: workIcon,
+    activeIcon: workDarkIcon,
+  },
 ];
 
 const employerLinks = [

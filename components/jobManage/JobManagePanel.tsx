@@ -3,7 +3,9 @@
 import { fetchGetStudentByJob } from "@/lib/Jobs/fetchInitialData";
 import { Student } from "@/types/StudentType";
 import React, { useEffect, useState } from "react";
-import StudentOffer from "../jobs/studentJobs/studentOffer/studentOffer";
+import StudentOffer from "../studentOffer/studentOffer";
+import SearchNotFound from "../searchJob/SearchNotFound";
+import { convertStateNameToThai } from "@/lib/Jobs/adapter";
 
 type Props = {
   jobId: string;
@@ -47,34 +49,32 @@ function JobManagePanel({ jobId }: Props) {
         </select>
       </div>
 
-      <aside className="flex flex-col gap-3">
-        {fetchedData.length === 0 ? (
-          <div className="flex justify-center items-center">
-            <div className="font-medium text-lg text-slate-500 mt-4 mx-auto md:text-2xl md:my-6 lg:font-normal">
-              ขออภัย ไม่พบงานที่ค้นหา
-            </div>
-          </div>
-        ) : (
-          fetchedData?.map((student, index) => {
-            const name = `${student.salutation}${student.firstname}${student.middlename ? ` ${student.middlename} ` : " "}${student.lastname}`;
-            return (
-              <div key={index}>
-                <StudentOffer
-                  studentId={student.userId}
-                  jobId={student.jobId}
-                  studentName={name}
-                  applicationDate={`${student.createdAt.getDate()}/${student.createdAt.getMonth()}/${student.createdAt.getFullYear()}`}
-                  applicationTime={`${student.createdAt.getHours()}:${student.createdAt.getMinutes()} น.`}
-                  status={student.status}
-                  price={`฿${student.bid.toLocaleString()}`}
-                />
-              </div>
-            );
-          })
-        )}
-      </aside>
-    </aside>
-  );
+            <aside className="flex flex-col gap-3">
+                {fetchedData.length === 0 ? (
+                    <div className="flex justify-center items-center">
+                        <SearchNotFound text="ไม่พบการสมัครงานของนิสิต"/>
+                    </div>
+                ) : (
+                    fetchedData?.map((student, index) => {
+                        const name = `${student.salutation}${student.firstname}${student.middlename ? ` ${student.middlename} ` : " "}${student.lastname}`;
+                        return (
+                            <div key={index}>
+                                <StudentOffer
+                                    studentId={student.userId}
+                                    jobId={student.jobId}
+                                    studentName={name}
+                                    applicationDate={`${student.createdAt.getDate()}/${student.createdAt.getMonth()}/${student.createdAt.getFullYear()}`}
+                                    applicationTime={`${student.createdAt.getHours()}:${student.createdAt.getMinutes()} น.`}
+                                    status={convertStateNameToThai('employer', student.status)}
+                                    price={`฿${student.bid.toLocaleString()}`}
+                                />
+                            </div>
+                        );
+                    })
+                )}
+            </aside>
+        </aside>
+    );
 }
 
 export default JobManagePanel;
