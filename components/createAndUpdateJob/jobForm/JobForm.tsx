@@ -324,7 +324,7 @@ export default function JobForm(props: Props) {
                 <LoadingButton
                   bgColor="bg-slate-700"
                   textColor="text-slate-50"
-                  text="กำลังสร้าง..."
+                  text="กำลังดำเนินการ..."
                 />
               ) : (
                 <button
