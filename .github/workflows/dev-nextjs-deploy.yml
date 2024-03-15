@@ -47,9 +47,7 @@ jobs:
       - name: Build and Push to Artifact Registry
         run: |
           docker image prune -a
-          docker build -t ${{ secrets.GCP_DEV_NEXTJS_AR_LOCATION }} \
-            --build-arg DATABASE_URL="${{ secrets.DATABASE_URL }}" \
-            .
+          docker build -t ${{ secrets.GCP_DEV_NEXTJS_AR_LOCATION }} .
           docker push ${{ secrets.GCP_DEV_NEXTJS_AR_LOCATION }}
 
       - name: Deploy to Cloud Run
@@ -60,14 +58,3 @@ jobs:
           region: ${{ env.REGION }}
           platform: managed
           allow-unauthenticated: true
-          env_vars: |
-            GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} 
-            GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }} 
-            NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL_DEV }} 
-            NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} 
-            NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=${{ secrets.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME }} 
-            CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }} 
-            CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }} 
-            ELASTIC_NODE_URL=${{ secrets.ELASTIC_NODE_URL }} 
-            ELASTIC_API_ID=${{ secrets.ELASTIC_API_ID }} 
-            ELASTIC_API_KEY=${{ secrets.ELASTIC_API_KEY }}

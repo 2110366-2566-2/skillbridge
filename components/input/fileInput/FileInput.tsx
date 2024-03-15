@@ -112,7 +112,7 @@ export default function FilesInput(props: Props) {
               <span className="text-slate-500">วางไฟล์ที่นี่</span>
             </div>
             <p className="mb-2 px-[20px] py-[12px] rounded-[6px] text-sm text-slate-50 bg-slate-400 flex flex-wrap gap-1 justify-center items-center">
-              <span className="font-normal">กดเพื่ออัพโหลดไฟล์</span> 
+              <span className="font-normal">กดเพื่ออัพโหลดไฟล์</span>
             </p>
             <p className="text-[12px] text-slate-400">
               (ขนาดรวมไม่เกิน {maxSizeInMegaByte} MB)

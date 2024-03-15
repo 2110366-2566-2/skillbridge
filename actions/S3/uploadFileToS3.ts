@@ -1,6 +1,8 @@
+"use server";
+
 import { PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import s3 from "@/lib/S3/bucket";
+import s3 from "../../lib/bucket";
 import crypto from "crypto";
 const generateFileName = (bytes = 32) =>
   crypto.randomBytes(bytes).toString("hex");
@@ -9,9 +11,9 @@ const uploadFileToS3 = async (
   buffer: Uint8Array,
   type: string,
   size: number,
-  path: string
+  path: string,
 ) => {
-  const validPath = ["jobFiles", "applicationFiles"];
+  const validPath = ["jobFiles", "applicationFiles", "transactionFiles"];
 
   if (!validPath.includes(path)) {
     return {

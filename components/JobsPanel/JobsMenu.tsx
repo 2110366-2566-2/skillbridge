@@ -5,7 +5,6 @@ import JobsPanel from "./JobsPanel";
 import Link from "next/link";
 import JobCardType from "../../types/JobCardType";
 import fetchInitialData from "../../lib/Jobs/fetchInitialData";
-import { useSession } from "next-auth/react";
 import JobToggler from "./JobToggler";
 import Sorter from "./Sorter";
 
@@ -23,6 +22,31 @@ function JobsMenu(props: Props) {
   const [isOpeningSideBar, setIsOpeningSideBar] = useState(false);
   const [pendingJobs, setPendingJobs] = useState<JobCardType[]>([]);
   const [doneJobs, setDoneJobs] = useState<JobCardType[]>([]);
+
+  // args for sorter and sidebar
+  const sideBarState = {
+    name: "sidebar",
+    value: isOpeningSideBar,
+    set: setIsOpeningSideBar,
+  };
+  const sortOptions = [
+    {
+      name: "วันที่เริ่มต้น",
+      value: startDateSortOption,
+      set: setStartDateSortOption,
+    },
+    {
+      name: "วันที่สิ้นสุด",
+      value: endDateSortOption,
+      set: setEndDateSortOption,
+    },
+    { name: "ราคา", value: priceSortOption, set: setPriceSortOption },
+    {
+      name: "จำนวนผู้สมัคร",
+      value: applicantsSortOption,
+      set: setApplicantsSortOption,
+    },
+  ];
 
   useEffect(() => {
     async function fetchData() {
@@ -54,18 +78,7 @@ function JobsMenu(props: Props) {
           <div className="bg-transparent text-transparent py-2">|</div>
 
           {/* Sort button */}
-          <Sorter
-            isOpeningSideBar={isOpeningSideBar}
-            setIsOpeningSideBar={setIsOpeningSideBar}
-            startDateSortOption={startDateSortOption}
-            setStartDateSortOption={setStartDateSortOption}
-            endDateSortOption={endDateSortOption}
-            setEndDateSortOption={setEndDateSortOption}
-            priceSortOption={priceSortOption}
-            setPriceSortOption={setPriceSortOption}
-            applicantsSortOption={applicantsSortOption}
-            setApplicantsSortOption={setApplicantsSortOption}
-          />
+          <Sorter sideBarState={sideBarState} sortOptions={sortOptions} />
 
           {/* Create Work button */}
           <Link href={"/jobs/create"} key={"createJob"}>
@@ -79,28 +92,27 @@ function JobsMenu(props: Props) {
       </section>
 
       {/* Show jobs */}
-      <div className="lg:flex lg:flex-row lg:justify-between gap-2">
-        {/* PendingJobsPanel and DoneJobsPanel */}
-        {jobType === "งานปัจจุบัน" ? (
-          <JobsPanel
-            startDateSortOption={startDateSortOption}
-            endDateSortOption={endDateSortOption}
-            priceSortOption={priceSortOption}
-            applicantsSortOption={applicantsSortOption}
-            data={pendingJobs}
-            isPending={jobType === "งานปัจจุบัน"}
-          ></JobsPanel>
-        ) : (
-          <JobsPanel
-            startDateSortOption={startDateSortOption}
-            endDateSortOption={endDateSortOption}
-            priceSortOption={priceSortOption}
-            applicantsSortOption={applicantsSortOption}
-            data={doneJobs}
-            isPending={jobType === "งานปัจจุบัน"}
-          ></JobsPanel>
-        )}
-      </div>
+
+      {/* PendingJobsPanel and DoneJobsPanel */}
+      {jobType === "งานปัจจุบัน" ? (
+        <JobsPanel
+          startDateSortOption={startDateSortOption}
+          endDateSortOption={endDateSortOption}
+          priceSortOption={priceSortOption}
+          applicantsSortOption={applicantsSortOption}
+          data={pendingJobs}
+          isPending={jobType === "งานปัจจุบัน"}
+        ></JobsPanel>
+      ) : (
+        <JobsPanel
+          startDateSortOption={startDateSortOption}
+          endDateSortOption={endDateSortOption}
+          priceSortOption={priceSortOption}
+          applicantsSortOption={applicantsSortOption}
+          data={doneJobs}
+          isPending={jobType === "งานปัจจุบัน"}
+        ></JobsPanel>
+      )}
     </>
   );
 }

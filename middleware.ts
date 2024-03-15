@@ -18,7 +18,11 @@ export default withAuth(
       }
     } else {
       // As Employer
-      if (path.startsWith("/search") || path.startsWith("/offer")) {
+      if (
+        path.startsWith("/search") ||
+        path.startsWith("/offer") ||
+        path.startsWith("/studentjobs")
+      ) {
         return NextResponse.redirect(new URL("/landing", req.url));
       }
     }
@@ -33,4 +37,12 @@ export default withAuth(
   },
 );
 
-export const config = { matcher: ["/search/:path*", "/jobs/:path*", "/offer/:path*"] };
+export const config = {
+  matcher: [
+    "/search/:path*",
+    "/jobs/:path*",
+    "/offer/:path*",
+    "/studentjobs/:path*",
+    "/payment-history",
+  ],
+};

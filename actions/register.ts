@@ -1,4 +1,5 @@
 "use server"
+
 import { prisma } from "@/lib/prisma"
 import { splitSalutation } from "@/lib/utils"
 import { EmailRegisterSchema } from "@/schemas/EmailRegisterSchema"
