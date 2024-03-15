@@ -5,7 +5,7 @@ import Navbar from "./navbar/Navbar"
 import SearchAndFilter from "./searchAndFilter/SearchAndFilter"
 import TaskHeader from "./jobHeader/JobHeader"
 import CreateJobHeader from "./createJobHeader/CreateJobHeader"
-import EditJobHeader from "./editJobHeader/EditJobHeader"
+import UpdateJobHeader from "./updateJobHeader/UpdateJobHeader"
 import LandingHeader from "./landingHeader/LandingHeader"
 import PaymentHeader from "./paymentHeader/PaymentHeader"
 import OfferingHeader from "./offeringHeader/OfferingHeader"
@@ -53,7 +53,7 @@ export default async function Header() {
         </div>
         <LandingHeader isStudent={isStudent} jobTags={jobTags} />
         <CreateJobHeader />
-        <EditJobHeader />
+        <UpdateJobHeader />
         <PaymentHistoryHeader />
         <OfferingHeader />
       </div>

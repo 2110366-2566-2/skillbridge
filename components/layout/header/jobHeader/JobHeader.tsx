@@ -7,8 +7,8 @@ type Props = {}
 
 const JobHeader = (props: Props) => {
   const pathName = usePathname()
-  const isJobPage = pathName.startsWith("/jobs")
-  const isStudentJobPage = pathName.startsWith("/studentjobs")
+  const isJobPage = pathName === "/jobs";
+  const isStudentJobPage = pathName === "/studentjobs";
   const isNotPaymentPage = !pathName.includes("/payment")
 
   return (
