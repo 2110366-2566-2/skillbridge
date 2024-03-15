@@ -1,6 +1,6 @@
 "use server";
 
-import getJobById from "@/actions/getJobByID";
+import getJobById from "@/actions/jobs/getJobByID";
 import EmployerDetail from "./EmployerDetail";
 
 type Props = {

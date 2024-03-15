@@ -1,6 +1,6 @@
 import React from "react";
-import JobForm from "@/components/jobForm/JobForm";
-import getJobTags from "@/actions/getJobTags";
+import JobForm from "@/components/createAndUpdateJob/jobForm/JobForm";
+import getJobTags from "@/actions/jobs/getJobTags";
 
 export default async function CreateJobPage() {
   const jobTags = await getJobTags();

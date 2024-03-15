@@ -1,11 +1,11 @@
 "use client";
 
 import { ChangeEvent, useEffect, useState } from "react";
-import SelectInput from "@/components/input/selectInput/SelectInput";
+import SelectInput from "@/components/public/input/selectInput/SelectInput";
 import PaymentHistoryCard from "@/components/paymentHistory/paymentHistoryCard/PaymentHistoryCard";
 import PaymentHistoryLoadingCard from "@/components/paymentHistory/paymentHistoryLoadingCard/PaymentHistoryLoadingCard";
 import SearchNotFound from "@/components/searchJob/SearchNotFound";
-import { getUserPaymentHistory } from "@/actions/getPaymentHistory";
+import { getUserPaymentHistory } from "@/actions/paymentHistory/getPaymentHistory";
 
 interface MonthYear {
   month: number;

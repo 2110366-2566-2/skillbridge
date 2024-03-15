@@ -3,7 +3,7 @@ import PasswordInput from "./PasswordInput";
 import Link from "next/link";
 import ConfirmPasswordInput from "./ConfirmPasswordInput";
 import { useState } from "react";
-import { registerWithCredentials } from "@/actions/register";
+import { registerWithCredentials } from "@/actions/register/register";
 import { useRouter } from "next/navigation";
 
 type Props = {

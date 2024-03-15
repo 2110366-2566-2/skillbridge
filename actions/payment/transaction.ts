@@ -1,12 +1,12 @@
 "use server"
 
-import uploadFileToS3 from "@/actions/S3/uploadFileToS3"
+import uploadFileToS3 from "../public/S3/uploadFileToS3"
 import { prisma } from "../../lib/prisma"
 import { TransactionStatus } from "@prisma/client"
 import {
   depositPendingToInProgress,
   wagePaymentPendingToDone,
-} from "../jobCards/employerChangeApplicationState"
+} from "../jobs/jobCards/employerChangeApplicationState"
 
 const createTransaction = async (formData: FormData) => {
   const jobId = formData.get("jobId") as string

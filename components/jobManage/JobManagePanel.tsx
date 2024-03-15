@@ -3,7 +3,7 @@
 import { fetchGetStudentByJob } from "@/lib/Jobs/fetchInitialData";
 import { Student } from "@/types/StudentType";
 import React, { useEffect, useState } from "react";
-import StudentOffer from "../studentOffer/studentOffer";
+import StudentOffer from "../jobs/employerJobs/studentOffer/studentOffer";
 import SearchNotFound from "../searchJob/SearchNotFound";
 import { convertStateNameToThai } from "@/lib/Jobs/adapter";
 
