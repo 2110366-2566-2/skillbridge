@@ -3,12 +3,10 @@ import EmployerRegister from "./EmployerRegister"
 import StudentRegister from "./StudentRegister"
 import { useEffect, useState } from "react"
 import { useSession } from "next-auth/react"
-import { useRouter } from "next/navigation"
 
 export default function Register() {
   const { data: session, update } = useSession()
   const [isEmployerPage, setIsEmployerPage] = useState(true)
-  const router = useRouter()
 
   const handleEmployerPage = () => {
     setIsEmployerPage(true)
@@ -19,7 +17,7 @@ export default function Register() {
   }
 
   useEffect(() => {
-    if (session?.user) {
+    if (session?.email) {
       setIsEmployerPage(session.email.split("@")[1] !== "student.chula.ac.th")
     }
   }, [session])

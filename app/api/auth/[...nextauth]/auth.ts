@@ -6,6 +6,15 @@ import bcrypt from "bcrypt"
 import { prisma } from "@/lib/prisma"
 
 export const authOptions: AuthOptions = {
+  session: {
+    strategy: "jwt",
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: "/login",
+    signOut: "/login",
+    error: "/login",
+  },
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID ?? "",
@@ -36,65 +45,72 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
-  session: {
-    strategy: "jwt",
-  },
-  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async signIn({ account, profile, user, credentials }) {
       if (account?.provider === "credentials" && user) return true
-      console.log(
-        "signIn Callback\n",
-        "account\n",
-        account,
-        "profile\n",
-        profile,
-        "user\n",
-        user,
-        "credentials\n",
-        credentials
-      )
+      // console.log(
+      //   "signIn Callback\n",
+      //   "account\n",
+      //   account,
+      //   "profile\n",
+      //   profile,
+      //   "user\n",
+      //   user,
+      //   "credentials\n",
+      //   credentials
+      // )
       if (account?.provider !== "google" || !profile || !user) return "/landing"
-
-      const queriedUser = await prisma.user.findUnique({
-        where: {
-          email: profile.email,
-        },
-      })
 
       const isStudent = profile.email?.endsWith("@student.chula.ac.th")
 
-      if (!queriedUser) {
-        const defaultUserData = {
-          salutation: "-",
-          firstname: profile.given_name || "-",
-          middlename: "",
-          lastname: profile.family_name || "-",
-          hashedPassword: "incomplete",
-          email: profile.email || "",
-          profileImageUrl: profile.picture,
-          isGmail: true,
-        }
-        if (isStudent) {
-          const student = await prisma.student.create({
-            data: {
-              user: {
-                create: defaultUserData,
+      const defaultUserData = {
+        salutation: "คุณ",
+        firstname: profile.given_name || "-",
+        middlename: "",
+        lastname: profile.family_name || "-",
+        hashedPassword: "incomplete",
+        email: profile.email || "",
+        profileImageUrl: profile.picture,
+        isGmail: true,
+      }
+
+      const defaultUpdateData = {
+        firstname: profile.given_name || "-",
+        lastname: profile.family_name || "-",
+        profileImageUrl: profile.picture,
+        updatedAt: new Date(),
+      }
+
+      if (isStudent) {
+        const student = await prisma.user.upsert({
+          where: {
+            email: profile.email || "",
+          },
+          update: defaultUpdateData,
+          create: {
+            ...defaultUserData,
+            student: {
+              create: {},
+            },
+          },
+        })
+      } else {
+        const employer = await prisma.user.upsert({
+          where: {
+            email: profile.email || "",
+          },
+          update: defaultUpdateData,
+          create: {
+            ...defaultUserData,
+            employer: {
+              create: {
+                position: "-",
+                organization: "-",
+                publicEmail: profile.email || "",
               },
             },
-          })
-        } else {
-          const employer = await prisma.employer.create({
-            data: {
-              position: "-",
-              organization: "-",
-              publicEmail: profile.email || "",
-              user: {
-                create: defaultUserData,
-              },
-            },
-          })
-        }
+          },
+        })
       }
 
       return true
