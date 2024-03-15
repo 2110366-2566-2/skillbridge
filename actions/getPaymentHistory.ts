@@ -9,38 +9,6 @@ interface PaymentHistoryInput {
   month?: number;
 }
 
-const getUserTransactionMonthsAndYears = async (userId: string) => {
-  try {
-    const result = await prisma.transaction.findMany({
-      where: {
-        OR: [{ employerUserId: userId }, { studentId: userId }],
-      },
-      distinct: ["createdAt"],
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-
-    // Extract unique months and years from createdAt timestamps
-    const uniqueMonthsAndYears = result.map((transaction) => {
-      const createdAtDate = new Date(transaction.createdAt);
-      return {
-        year: createdAtDate.getFullYear(),
-        month: createdAtDate.getMonth() + 1, // Months are zero-indexed in JavaScript
-      };
-    });
-
-    // Deduplicate the array of months and years
-    const deduplicatedMonthsAndYears = Array.from(
-      new Set(uniqueMonthsAndYears.map((item) => JSON.stringify(item))),
-    ).map((str) => JSON.parse(str));
-
-    return deduplicatedMonthsAndYears;
-  } catch (error: any) {
-    console.error(error);
-  }
-};
-
 const getUserPaymentHistory = async ({
   userId,
   year,
@@ -90,7 +58,7 @@ const getUserPaymentHistory = async ({
   }
 };
 
-export { getUserPaymentHistory, getUserTransactionMonthsAndYears };
+export { getUserPaymentHistory };
 
 // const main = async () => {
 //   // Example usage without specifying year and month

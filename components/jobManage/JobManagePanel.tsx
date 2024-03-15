@@ -32,6 +32,7 @@ function JobManagePanel({ jobId }: Props) {
         <select
           className="rounded-md text-sm py-1 px-2 border-2 border-slate-300 bg-slate-50"
           name="filter"
+          title="filter"
           value={filter}
           onChange={(e) => {
             setFilter(e.target.value);
