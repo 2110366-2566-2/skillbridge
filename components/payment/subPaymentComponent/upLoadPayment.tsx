@@ -2,8 +2,8 @@
 import Image from "next/image"
 import React, { useState } from "react"
 import closeDarkIcon from "@/public/icons/closeDark.svg"
-import SecondaryButton from "@/components/buttons/secondaryButton/SecondaryButton"
-import PrimaryButton from "@/components/buttons/primaryButton/PrimaryButton"
+import SecondaryButton from "@/components/public/buttons/secondaryButton/SecondaryButton"
+import PrimaryButton from "@/components/public/buttons/primaryButton/PrimaryButton"
 import toast from "react-hot-toast"
 import { useRouter } from "next/navigation"
 import createTransaction from "@/actions/payment/transaction"
@@ -27,7 +27,7 @@ export default function FilesInput(props: Props) {
 
   const router = useRouter()
   const { data: session } = useSession()
-  const cancelPath = `jobs/manage/${jobId}`
+  // const cancelPath = `jobs/${jobId}/manage`
 
   const handleRemoveFile = (fileNameToRemove: string) => {
     if (!files) return
@@ -193,7 +193,7 @@ export default function FilesInput(props: Props) {
           <SecondaryButton
             isDisabled={isDisabled}
             className=" w-full"
-            onClick={() => router.push(cancelPath)}>
+            onClick={() => router.back()}>
             ยกเลิก
           </SecondaryButton>
 

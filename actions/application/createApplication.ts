@@ -2,7 +2,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../app/api/auth/[...nextauth]/auth";
 import { prisma } from "../../lib/prisma";
-import uploadFileToS3 from "../S3/uploadFileToS3";
+import uploadFileToS3 from "../public/S3/uploadFileToS3";
 import { boolean } from "zod";
 import { File } from "@web-std/file";
 

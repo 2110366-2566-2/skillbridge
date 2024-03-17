@@ -1,5 +1,5 @@
 import React from "react";
-import JobsMenu from "@/components/JobsPanel/JobsMenu";
+import JobsMenu from "@/components/jobs/employerJobs/JobsMenu";
 
 export default function WorkPage() {
   return (

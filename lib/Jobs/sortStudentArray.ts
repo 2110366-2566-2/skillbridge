@@ -1,4 +1,4 @@
-import { applicationInfo } from "@/actions/jobCards/fetchJobCards";
+import { applicationInfo } from "@/actions/jobs/jobCards/fetchJobCards";
 import StudentJobCardType from "@/types/StudentJobCardType";
 
 const mapper: Map<string, number> = new Map<string, number>([
