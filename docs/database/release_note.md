@@ -181,7 +181,7 @@
 
 - This table is added and it will be served for storing transaction details in the case where that transaction is successfully verified by api
 
-<p align="right">(<a href="#readme-top">back to top</a>)</ p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 # v1.24
 
@@ -193,4 +193,20 @@
 ### MailLog
 - Add mapping to `mail_log`
 
-<p align="right">(<a href="#readme-top">back to top</a>)</ p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+# v1.30
+
+### Student
+- `resumeUrl` is changed to `resumeName`
+- `transcriptUrl` is changed to `transcriptName`
+
+### Message
+- `unsentAt` and `updatedAt` are deleted as it is optional features
+- `content` and `isImage` are added for storing the content of the message instead of using other tables (Text, Image)
+
+### Text
+- This table is deleted as it is not nessessary
+
+### Image
+- This table is deleted as it is not nessessary

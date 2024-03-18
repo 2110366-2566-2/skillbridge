@@ -39,7 +39,7 @@ model User {
 
 model Student {
   userId        String        @id @unique
-  resumeUrl     String?
+  resumeName    String?
   transcriptUrl String?
   bankAccountNo String?
   avgStar       Float?
@@ -157,36 +157,18 @@ model Chatroom {
 }
 
 model Message {
-  id         String    @id @default(uuid())
+  id         String   @id @default(uuid())
   chatroomId String
   userId     String
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
-  unsentAt   DateTime?
-  texts      Text?
-  images     Image?
-  chatroom   Chatroom  @relation(fields: [chatroomId], references: [id])
-  user       User      @relation(fields: [userId], references: [id])
+  createdAt  DateTime @default(now())
+  //updatedAt  DateTime @updatedAt NOTE: optional
+  // unsentAt   DateTime?  NOTE: optional
+  content    String
+  isImage    Boolean
+  chatroom   Chatroom @relation(fields: [chatroomId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
 
   @@map("message")
-}
-
-model Text {
-  messageId String   @id
-  text      String
-  createdAt DateTime @default(now())
-  message   Message  @relation(fields: [messageId], references: [id])
-
-  @@map("_text")
-}
-
-model Image {
-  messageId String   @id
-  imageUrl  String
-  createdAt DateTime @default(now())
-  message   Message  @relation(fields: [messageId], references: [id])
-
-  @@map("image")
 }
 
 model Transaction {
