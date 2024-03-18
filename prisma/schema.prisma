@@ -38,16 +38,16 @@ model User {
 }
 
 model Student {
-  userId        String        @id @unique
-  resumeName    String?
-  transcriptUrl String?
-  bankAccountNo String?
-  avgStar       Float?
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-  reviews       Review[]
-  user          User          @relation(fields: [userId], references: [id])
-  transactions  Transaction[]
+  userId         String        @id @unique
+  resumeName     String?
+  transcriptName String?
+  bankAccountNo  String?
+  avgStar        Float?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  reviews        Review[]
+  user           User          @relation(fields: [userId], references: [id])
+  transactions   Transaction[]
 
   @@map("student")
 }
