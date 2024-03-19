@@ -80,16 +80,21 @@ type Props = {
 export default function Navbar(props: Props) {
   const pathName = usePathname();
   const isActive = additionalLink.some((link) => link.path === pathName);
+  const avatar = noavatar;
 
   // Authenticated User Info
   const { session, isStudent, userInfo } = props;
-  const name =
+  let name;
+  // If authenticated via google
+  if(session?.user.name) {
+    name = session.user.name;
+  } else { // If authenticated via email and password
+    name =
     session?.user.salutation +
     session?.user.firstname +
-    " " +
-    session?.user.lastname;
-  const avatar = noavatar;
-
+    " " + session?.user.lastname;
+  }
+  
   return (
     <>
       {!!session ? (
