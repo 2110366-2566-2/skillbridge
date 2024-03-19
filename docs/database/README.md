@@ -38,7 +38,7 @@
 
 - init version as copied from the existed docs
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#database">back to top</a>)</p>
 
 ## v1.10
 
@@ -97,7 +97,7 @@
 - Refactor the seeding file to be `Student` and `Employer` based instead of `User` based
 - Fix the `npx prisma generate`
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#database">back to top</a>)</p>
 
 ## v1.12
 
@@ -106,7 +106,7 @@
 - `description` is set to not required
 - `descriptionUrl` is added and not required
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#database">back to top</a>)</p>
 
 ## v1.13
 
@@ -118,7 +118,7 @@
 
 - This table is added for storing multiple files in a single job
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#database">back to top</a>)</p>
 
 ## v1.20
 
@@ -152,7 +152,7 @@
 
 - consists of `PENDING`, `ACCEPTED`, and `REJECTED`
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#database">back to top</a>)</p>
 
 ## v1.21
 
@@ -169,7 +169,7 @@
 - `DISCLAIMED` is added
 - `DELIVERED` is deleted
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#database">back to top</a>)</p>
 
 ## v1.22
 
@@ -177,7 +177,7 @@
 
 - `DELIVERED` is added back due to the code dependency, maybe revert back later
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#database">back to top</a>)</p>
 
 ## v1.23
 
@@ -185,7 +185,7 @@
 
 - This table is added and it will be served for storing transaction details in the case where that transaction is successfully verified by api
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#database">back to top</a>)</p>
 
 ## v1.24
 
@@ -197,7 +197,7 @@
 ### MailLog
 - Add mapping to `mail_log`
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#database">back to top</a>)</p>
 
 ## v1.30
 
@@ -218,11 +218,11 @@
 ### Image
 - This table is deleted as it is not nessessary
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#database">back to top</a>)</p>
 
 ## v1.31
 
 ### Student
 - `description` is added
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#database">back to top</a>)</p>
