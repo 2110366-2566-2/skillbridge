@@ -83,7 +83,6 @@ model Job {
   jobTagId          String
   employerId        String
   applications      Application[]
-  chatrooms         Chatroom[]
   employer          Employer          @relation(fields: [employerId], references: [userId])
   jobTag            JobTag            @relation(fields: [jobTagId], references: [id])
   jobDocumentFiles  JobDocumentFile[]
@@ -128,6 +127,7 @@ model Application {
   job                      Job                       @relation(fields: [jobId], references: [id])
   user                     User                      @relation(fields: [userId], references: [id])
   applicationDocumentFiles ApplicationDocumentFile[]
+  chatroom                 Chatroom?
 
   @@id([userId, jobId])
   @@map("application")
@@ -146,13 +146,15 @@ model ApplicationDocumentFile {
 }
 
 model Chatroom {
-  id        String    @id @default(uuid())
-  jobId     String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  job       Job       @relation(fields: [jobId], references: [id])
-  messages  Message[]
+  id                String      @id @default(uuid())
+  applicationUserId String
+  applicationJobId  String
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  messages          Message[]
+  application       Application @relation(fields: [applicationUserId, applicationJobId], references: [userId, jobId])
 
+  @@unique([applicationUserId, applicationJobId])
   @@map("chatroom")
 }
 

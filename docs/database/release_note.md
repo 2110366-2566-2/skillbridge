@@ -201,6 +201,9 @@
 - `resumeUrl` is changed to `resumeName`
 - `transcriptUrl` is changed to `transcriptName`
 
+### Chatroom
+- Removed the relation to `Job` table, and changed to `Application` table instead.
+
 ### Message
 - `unsentAt` and `updatedAt` are deleted as it is optional features
 - `content` and `isImage` are added for storing the content of the message instead of using other tables (Text, Image)
@@ -210,3 +213,5 @@
 
 ### Image
 - This table is deleted as it is not nessessary
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
