@@ -20,10 +20,6 @@ export default function RegisterViaGoogle({
   session,
   updateSession,
 }: RegisterProps) {
-  const handleGoogleComplete = () => {
-    // ถ้ากดปุ่ม Google หน้าแรกสำเร็จ
-    handleToggleForm()
-  }
 
   const [data, setForm] = useState<Form>(structuredClone(defaultForm))
 
