@@ -4,20 +4,24 @@
   <summary>Table of Contents</summary>
   <ul>
     <li>
-      <a href="#version-10">v1</a>
+      <a href="#v100">v1.00</a>
       <ul>
-        <li><a href="#version-11">v1.1</a></li>
+        <li><a href="#v110">v1.10</a></li>
         <ul>
-          <li><a href="#version-111">v1.11</a></li>
-          <li><a href="#version-112">v1.12</a></li>
-          <li><a href="#version-113">v1.13</a></li>
+          <li><a href="#v111">v1.11</a></li>
+          <li><a href="#v112">v1.12</a></li>
+          <li><a href="#v113">v1.13</a></li>
         </ul>
-        <li><a href="#version-12">v1.2</a></li>
+        <li><a href="#v120">v1.20</a></li>
         <ul>
-          <li><a href="#version-121">v1.21</a></li>
-          <li><a href="#version-122">v1.22</a></li>
-          <li><a href="#version-123">v1.23</a></li>
-          <li><a href="#version-124">v1.24</a></li>
+          <li><a href="#v121">v1.21</a></li>
+          <li><a href="#v122">v1.22</a></li>
+          <li><a href="#v123">v1.23</a></li>
+          <li><a href="#v124">v1.24</a></li>
+        </ul>
+        <li><a href="#v130">v1.30</a></li>
+        <ul>
+          <li><a href="#v131">v1.31</a></li>
         </ul>
       </ul>
     </li>
@@ -30,13 +34,13 @@
 
 <img src="./ERD.svg">
 
-## Version 1.00
+## v1.00
 
 - init version as copied from the existed docs
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Version 1.10
+## v1.10
 
 ### User
 
@@ -95,7 +99,7 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-# v1.12
+## v1.12
 
 ### Job
 
@@ -104,7 +108,7 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-# v1.13
+## v1.13
 
 ### Job
 
@@ -116,7 +120,7 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-# v1.20
+## v1.20
 
 ### JobDocumentFile
 
@@ -150,7 +154,7 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-# v1.21
+## v1.21
 
 ### Transaction
 
@@ -167,7 +171,7 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-# v1.22
+## v1.22
 
 ### ApplicationStatus
 
@@ -175,7 +179,7 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-# v1.23
+## v1.23
 
 ### TransactionDetail
 
@@ -183,7 +187,7 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-# v1.24
+## v1.24
 
 ### TransactionDetail
 - `receiverAccountType` is deleted as the api response contains only an empty string
@@ -195,7 +199,7 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-# v1.30
+## v1.30
 
 ### Student
 - `resumeUrl` is changed to `resumeName`
@@ -213,5 +217,12 @@
 
 ### Image
 - This table is deleted as it is not nessessary
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## v1.31
+
+### Student
+- `description` is added
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
