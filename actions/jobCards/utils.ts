@@ -4,6 +4,24 @@ import { prisma } from "../../lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 
+interface emailDetail {
+  job: {
+    title: string;
+    employerId: string;
+  };
+  user: {
+    salutation: string;
+    firstname: string;
+    lastname: string;
+  };
+}
+
+const studentCanTransitFrom = new Map<ApplicationStatus, ApplicationStatus[]>([
+  [ApplicationStatus.DISCLAIMED, [ApplicationStatus.PENDING, ApplicationStatus.ACCEPTED]],
+  [ApplicationStatus.DEPOSIT_PENDING, [ApplicationStatus.ACCEPTED]],
+  [ApplicationStatus.DELIVERED, [ApplicationStatus.IN_PROGRESS]]
+]);
+
 async function getStudentUserId(): Promise<string> {
   const session = await getServerSession(authOptions);
 
@@ -82,7 +100,28 @@ async function getApplication(
   });
 }
 
-async function validateJobOwner(employerUserId: string, jobId: string) {
+async function getApplicationStatus(
+  studentUserId: string,
+  jobId: string,
+): Promise<ApplicationStatus> {
+  const { status } = await prisma.application.findUniqueOrThrow({
+    where: {
+      userId_jobId: {
+        userId: studentUserId,
+        jobId: jobId,
+      },
+    },
+    select: {
+      status: true
+    }
+  });
+
+  return status;
+}
+
+async function validateJobOwner(jobId: string) {
+  const employerUserId = await getEmployerUserId();
+
   const job = await prisma.job.findUniqueOrThrow({
     where: {
       id: jobId,
@@ -111,10 +150,69 @@ async function getEmail(userId: string): Promise<string> {
   return res.email;
 }
 
+async function isValidInitialStatus(jobId: string, toState: ApplicationStatus, canTransitFrom:Map<ApplicationStatus, ApplicationStatus[]>): Promise<boolean> {
+  const initialStatus = await getApplicationStatus(await getStudentUserId(), jobId);
+  const validInitialStatuses = canTransitFrom.get(toState)!;
+
+  return validInitialStatuses.includes(initialStatus);
+}
+
+async function studentChangeApplicationStatus(jobId: string, toStatus: ApplicationStatus) {
+  // check if initial application status can be transit to such state
+  if (!await isValidInitialStatus(jobId, toStatus, studentCanTransitFrom)) {
+    throw {
+      message: "Application initial status is not valid",
+      status: 400,
+    };
+  }
+
+  // update status in db
+  await prisma.application.update({
+    where: {
+      userId_jobId: {
+        userId: await getStudentUserId(),
+        jobId: jobId
+      },
+    },
+    data: {
+      status: toStatus
+    }
+  });
+}
+
+async function getEmailDetail(jobId: string): Promise<emailDetail> {
+  return await prisma.application.findUniqueOrThrow({
+    where: {
+      userId_jobId: {
+        userId: await getStudentUserId(),
+        jobId: jobId,
+      },
+    },
+    select: {
+      job: {
+        select: {
+          title: true,
+          employerId: true,
+        },
+      },
+      user: {
+        select: {
+          salutation: true,
+          firstname: true,
+          lastname: true,
+        },
+      },
+    },
+  });
+}
+
 export {
   getStudentUserId,
   getEmployerUserId,
   getApplication,
+  getApplicationStatus,
   validateJobOwner,
   getEmail,
+  studentChangeApplicationStatus,
+  getEmailDetail
 };
