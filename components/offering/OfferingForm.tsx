@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import { useState, FormEvent, ChangeEvent } from "react";
-import FilesInput from "../input/fileInput/FileInput";
-import NumberInput from "../input/numberInput/NumberInput";
-import PrimaryButton from "../buttons/primaryButton/PrimaryButton";
-import SecondaryButton from "../buttons/secondaryButton/SecondaryButton";
-import DangerModal from "@/components/modal/dangerModal/DangerModal";
+import FilesInput from "../public/input/fileInput/FileInput";
+import NumberInput from "../public/input/numberInput/NumberInput";
+import PrimaryButton from "../public/buttons/primaryButton/PrimaryButton";
+import SecondaryButton from "../public/buttons/secondaryButton/SecondaryButton";
+import DangerModal from "@/components/public/modal/dangerModal/DangerModal";
 import toast from "react-hot-toast";
 import createApplication from "@/actions/application/createApplication";
 
