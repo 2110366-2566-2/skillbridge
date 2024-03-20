@@ -22,13 +22,14 @@ jobs:
         uses: actions/checkout@v4
 
       - id: auth
+        name: Auth with GCP
         uses: google-github-actions/auth@v2
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
 
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v2'
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
 
       - name: Create env File 
         run: |
@@ -48,6 +49,7 @@ jobs:
           docker push ${{ secrets.GCP_DEV_NEXTJS_AR_LOCATION }}
 
       - id: deploy
+        name: Deploy to Cloud Run
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           image: ${{ secrets.GCP_DEV_NEXTJS_AR_LOCATION }}
