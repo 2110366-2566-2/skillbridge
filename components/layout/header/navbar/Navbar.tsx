@@ -86,15 +86,17 @@ export default function Navbar(props: Props) {
   const { session, isStudent, userInfo } = props;
   let name;
   // If authenticated via google
-  if(session?.user.name) {
+  if (session?.user.name) {
     name = session.user.name;
-  } else { // If authenticated via email and password
+  } else {
+    // If authenticated via email and password
     name =
-    session?.user.salutation +
-    session?.user.firstname +
-    " " + session?.user.lastname;
+      session?.user.salutation +
+      session?.user.firstname +
+      " " +
+      session?.user.lastname;
   }
-  
+
   return (
     <>
       {!!session ? (

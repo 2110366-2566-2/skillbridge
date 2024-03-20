@@ -1,6 +1,6 @@
-"use server"
+"use server";
 
-import { prisma } from "../../lib/prisma"
+import { prisma } from "../../lib/prisma";
 
 const getPaymentInfo = async (jobId: string, userId: string) => {
   try {
@@ -31,14 +31,14 @@ const getPaymentInfo = async (jobId: string, userId: string) => {
           },
         },
       },
-    })
+    });
 
-    return result
+    return result;
   } catch (error) {
-    console.error("Error in getPaymentInfo:", error)
-    return null
+    console.error("Error in getPaymentInfo:", error);
+    return null;
   }
-}
+};
 
 const getAllPaymentInfo = async (jobId: string) => {
   try {
@@ -66,13 +66,13 @@ const getAllPaymentInfo = async (jobId: string) => {
           },
         },
       },
-    })
+    });
 
-    return results
+    return results;
   } catch (error) {
-    console.error("Error in getAllPaymentInfo:", error)
-    return null
+    console.error("Error in getAllPaymentInfo:", error);
+    return null;
   }
-}
+};
 
-export { getAllPaymentInfo, getPaymentInfo }
+export { getAllPaymentInfo, getPaymentInfo };
