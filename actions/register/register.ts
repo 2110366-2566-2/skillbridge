@@ -1,14 +1,16 @@
-"use server";
-import { EmailRegisterSchema } from "@/schemas/EmailRegisterSchema";
-import { prisma } from "../../lib/prisma";
-import bcrypt from "bcrypt";
+"use server"
 
-async function registerWithCredentials(data: {
-  email: string;
-  password: string;
-  cPassword: string;
-  fname: string;
-  lname: string;
+import { prisma } from "@/lib/prisma"
+import { splitSalutation } from "@/lib/utils"
+import { EmailRegisterSchema } from "@/schemas/EmailRegisterSchema"
+import bcrypt from "bcrypt"
+
+export async function registerWithCredentials(data: {
+  email: string
+  password: string
+  cPassword: string
+  fname: string
+  lname: string
 }) {
   console.log(data);
 
