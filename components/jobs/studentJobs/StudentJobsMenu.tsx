@@ -6,34 +6,43 @@ import Sorter from "../Sorter";
 import StudentJobsPanel from "./StudentJobsPanel";
 import filterStudentJobs from "@/lib/Jobs/filterJobToggler";
 import StudentDoneJobsPanel from "./StudentDoneJobsPanel";
-import { applicationInfo, finalApplicationInfo, studentFetchApplications } from "@/actions/jobs/jobCards/fetchJobCards";
+import {
+  applicationInfo,
+  finalApplicationInfo,
+  studentFetchApplications,
+} from "@/actions/jobs/jobCards/fetchJobCards";
 
 type Props = {};
 
 const jobTypeList = ["งานที่กำลังสมัคร", "งานปัจจุบัน", "งานที่เสร็จสิ้น"];
 
 const StudentJobsMenu = (props: Props) => {
+  const [jobType, setJobType] = useState("งานที่กำลังสมัคร");
+  const [isOpeningSideBar, setIsOpeningSideBar] = useState(false);
+  const [startDateSortOption, setStartDateSortOption] = useState("-");
+  const [endDateSortOption, setEndDateSortOption] = useState("-");
+  const [statusSortOption, setStatusSortOption] = useState("-");
+  const [firstPageData, setFirstPageData] = useState<Array<applicationInfo>>(
+    [],
+  );
+  const [secondPageData, setSecondPageData] = useState<Array<applicationInfo>>(
+    [],
+  );
+  const [thirdPageData, setThirdPageData] = useState<
+    Array<finalApplicationInfo>
+  >([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-	const [jobType, setJobType] = useState("งานที่กำลังสมัคร");
-	const [isOpeningSideBar, setIsOpeningSideBar] = useState(false);
-	const [startDateSortOption, setStartDateSortOption] = useState("-");
-	const [endDateSortOption, setEndDateSortOption] = useState("-");
-	const [statusSortOption, setStatusSortOption] = useState("-");
-	const [firstPageData, setFirstPageData] = useState<Array<applicationInfo>>([]);
-	const [secondPageData, setSecondPageData] = useState<Array<applicationInfo>>([]);
-	const [thirdPageData, setThirdPageData] = useState<Array<finalApplicationInfo>>([]);
-	const [isLoading, setIsLoading] = useState<boolean>(true);
-
-	useEffect(() => {
-		async function fetchData(){
-			const fetchedRawData = await studentFetchApplications();
-			setFirstPageData(fetchedRawData[0] as applicationInfo[]);
-			setSecondPageData(fetchedRawData[1] as applicationInfo[]);
-			setThirdPageData(fetchedRawData[2] as finalApplicationInfo[]);
-			setIsLoading(false);
-		}
-		fetchData();
-	}, [])
+  useEffect(() => {
+    async function fetchData() {
+      const fetchedRawData = await studentFetchApplications();
+      setFirstPageData(fetchedRawData[0] as applicationInfo[]);
+      setSecondPageData(fetchedRawData[1] as applicationInfo[]);
+      setThirdPageData(fetchedRawData[2] as finalApplicationInfo[]);
+      setIsLoading(false);
+    }
+    fetchData();
+  }, []);
 
   const sortOptions = [
     {
@@ -80,31 +89,31 @@ const StudentJobsMenu = (props: Props) => {
         </div>
       </section>
 
-			{/* show jobs */}
-			<div>
-				{/* applied, current, done jobs */}
-				{jobType === "งานที่กำลังสมัคร" ? (
-					<StudentJobsPanel
-						isLoading={isLoading}
-						startDateSortOption={startDateSortOption}
-						endDateSortOption={endDateSortOption}
-						statusSortOption={statusSortOption}
-						data={firstPageData}
-					/>
-				) : jobType === "งานปัจจุบัน" ? (
-					<StudentJobsPanel
-						isLoading={isLoading}
-						startDateSortOption={startDateSortOption}
-						endDateSortOption={endDateSortOption}
-						statusSortOption={statusSortOption}
-						data={secondPageData}
-					/>
-				) : (
-					<StudentDoneJobsPanel data={thirdPageData} />
-				)}
-			</div>
-		</>
-	);
+      {/* show jobs */}
+      <div>
+        {/* applied, current, done jobs */}
+        {jobType === "งานที่กำลังสมัคร" ? (
+          <StudentJobsPanel
+            isLoading={isLoading}
+            startDateSortOption={startDateSortOption}
+            endDateSortOption={endDateSortOption}
+            statusSortOption={statusSortOption}
+            data={firstPageData}
+          />
+        ) : jobType === "งานปัจจุบัน" ? (
+          <StudentJobsPanel
+            isLoading={isLoading}
+            startDateSortOption={startDateSortOption}
+            endDateSortOption={endDateSortOption}
+            statusSortOption={statusSortOption}
+            data={secondPageData}
+          />
+        ) : (
+          <StudentDoneJobsPanel data={thirdPageData} />
+        )}
+      </div>
+    </>
+  );
 };
 
 export default StudentJobsMenu;
