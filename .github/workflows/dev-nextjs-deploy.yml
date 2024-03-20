@@ -42,7 +42,9 @@ jobs:
       - name: Build and Push to Artifact Registry
         run: |
           docker image prune -a
-          docker build -t ${{ secrets.GCP_DEV_NEXTJS_AR_LOCATION }} .
+          docker build \
+            --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} \
+            -t ${{ secrets.GCP_DEV_NEXTJS_AR_LOCATION }} .
           docker push ${{ secrets.GCP_DEV_NEXTJS_AR_LOCATION }}
 
       - id: deploy
