@@ -19,35 +19,31 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
-        
+        uses: actions/checkout@v4
+
       - name: Create env File
         run: |
           touch .env
           echo DATABASE_URL=${{ secrets.DATABASE_URL }} >> .env
           cat .env
 
-      - name: Cache Dependencies
-        uses: actions/cache@v2
+      - id: auth
+        uses: google-github-actions/auth@v2
         with:
-          path: node_modules
-          key: ${{ runner.os }}-build-${{ hashFiles('**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: GCP Authentication
-        uses: google-github-actions/setup-gcloud@v0
-        with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-          export_default_credentials: true
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+      
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
 
       - name: Configure Docker
         run: |
           gcloud auth configure-docker us-central1-docker.pkg.dev
+
+      - name: Debug Information
+        run: |
+          echo "Artifact Registry Location: ${{ secrets.GCP_DEV_NEXTJS_AR_LOCATION }}"
+          gcloud auth list
+          docker info
 
       - name: Build and Push to Artifact Registry
         run: |
