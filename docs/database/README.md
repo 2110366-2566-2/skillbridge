@@ -4,20 +4,24 @@
   <summary>Table of Contents</summary>
   <ul>
     <li>
-      <a href="#version-10">v1</a>
+      <a href="#v100">v1.00</a>
       <ul>
-        <li><a href="#version-11">v1.1</a></li>
+        <li><a href="#v110">v1.10</a></li>
         <ul>
-          <li><a href="#version-111">v1.11</a></li>
-          <li><a href="#version-112">v1.12</a></li>
-          <li><a href="#version-113">v1.13</a></li>
+          <li><a href="#v111">v1.11</a></li>
+          <li><a href="#v112">v1.12</a></li>
+          <li><a href="#v113">v1.13</a></li>
         </ul>
-        <li><a href="#version-12">v1.2</a></li>
+        <li><a href="#v120">v1.20</a></li>
         <ul>
-          <li><a href="#version-121">v1.21</a></li>
-          <li><a href="#version-122">v1.22</a></li>
-          <li><a href="#version-123">v1.23</a></li>
-          <li><a href="#version-124">v1.24</a></li>
+          <li><a href="#v121">v1.21</a></li>
+          <li><a href="#v122">v1.22</a></li>
+          <li><a href="#v123">v1.23</a></li>
+          <li><a href="#v124">v1.24</a></li>
+        </ul>
+        <li><a href="#v130">v1.30</a></li>
+        <ul>
+          <li><a href="#v131">v1.31</a></li>
         </ul>
       </ul>
     </li>
@@ -30,13 +34,13 @@
 
 <img src="./ERD.svg">
 
-## Version 1.00
+## v1.00
 
 - init version as copied from the existed docs
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#database">back to top</a>)</p>
 
-## Version 1.10
+## v1.10
 
 ### User
 
@@ -79,7 +83,7 @@
 - `isDeleted` is added for the deletion in `User, Job, JobTag, Applied, Transaction, Review` for referential integrity contraint
 - Change table name from `Applied` to `Application`
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#database">back to top</a>)</p>
 
 ## v1.11
 
@@ -93,18 +97,18 @@
 - Refactor the seeding file to be `Student` and `Employer` based instead of `User` based
 - Fix the `npx prisma generate`
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#database">back to top</a>)</p>
 
-# v1.12
+## v1.12
 
 ### Job
 
 - `description` is set to not required
 - `descriptionUrl` is added and not required
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#database">back to top</a>)</p>
 
-# v1.13
+## v1.13
 
 ### Job
 
@@ -114,9 +118,9 @@
 
 - This table is added for storing multiple files in a single job
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#database">back to top</a>)</p>
 
-# v1.20
+## v1.20
 
 ### JobDocumentFile
 
@@ -148,9 +152,9 @@
 
 - consists of `PENDING`, `ACCEPTED`, and `REJECTED`
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#database">back to top</a>)</p>
 
-# v1.21
+## v1.21
 
 ### Transaction
 
@@ -165,37 +169,39 @@
 - `DISCLAIMED` is added
 - `DELIVERED` is deleted
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#database">back to top</a>)</p>
 
-# v1.22
+## v1.22
 
 ### ApplicationStatus
 
 - `DELIVERED` is added back due to the code dependency, maybe revert back later
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#database">back to top</a>)</p>
 
-# v1.23
+## v1.23
 
 ### TransactionDetail
 
 - This table is added and it will be served for storing transaction details in the case where that transaction is successfully verified by api
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#database">back to top</a>)</p>
 
-# v1.24
+## v1.24
 
 ### TransactionDetail
+
 - `receiverAccountType` is deleted as the api response contains only an empty string
 - `receiverAccountValue` is deleted as the api response contains only an empty string
 - Add mapping to `transaction_detail`
 
 ### MailLog
+
 - Add mapping to `mail_log`
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#database">back to top</a>)</p>
 
-# v1.30
+## v1.30
 
 ### Student
 - `resumeUrl` is changed to `resumeName`
@@ -214,4 +220,11 @@
 ### Image
 - This table is deleted as it is not nessessary
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#database">back to top</a>)</p>
+
+## v1.31
+
+### Student
+- `description` is added
+
+<p align="right">(<a href="#database">back to top</a>)</p>

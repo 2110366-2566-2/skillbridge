@@ -95,30 +95,38 @@ async function inProgressToDelivered(jobId: string) {
 }
 
 async function acknowledgeApplication(jobId: string) {
-    const studentUserId = await getStudentUserId();
+  const studentUserId = await getStudentUserId();
 
-    const application = await getApplication(studentUserId, jobId);
-    
-    const isValidStatus = application.status === ApplicationStatus.CANCELED || application.status === ApplicationStatus.DONE || application.status === ApplicationStatus.REJECTED;
-    if (!isValidStatus) {
-        throw {
-            message: "Application status is not valid",
-            status: 400
-        }
-    }
+  const application = await getApplication(studentUserId, jobId);
 
-    await prisma.application.update({
-        where: {
-            userId_jobId: {
-                userId: studentUserId,
-                jobId: jobId
-            },
-        },
-        data: {
-            isAcknowledged: true
-        }
-    });
+  const isValidStatus =
+    application.status === ApplicationStatus.CANCELED ||
+    application.status === ApplicationStatus.DONE ||
+    application.status === ApplicationStatus.REJECTED;
+  if (!isValidStatus) {
+    throw {
+      message: "Application status is not valid",
+      status: 400,
+    };
+  }
+
+  await prisma.application.update({
+    where: {
+      userId_jobId: {
+        userId: studentUserId,
+        jobId: jobId,
+      },
+    },
+    data: {
+      isAcknowledged: true,
+    },
+  });
 }
 
-
-export { pendingToDisclaimed, acceptedToDepositPending, acceptedToDisclaimed, inProgressToDelivered, acknowledgeApplication };
+export {
+  pendingToDisclaimed,
+  acceptedToDepositPending,
+  acceptedToDisclaimed,
+  inProgressToDelivered,
+  acknowledgeApplication,
+};

@@ -1,2 +1,6 @@
+.github
 .next
+docs
 node_modules
+logstash
+README.md

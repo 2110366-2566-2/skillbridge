@@ -44,11 +44,19 @@ const sortArray = (
 
   if (statusSortOption === "asc") {
     array.sort((a: applicationInfo, b: applicationInfo) => {
-      return adapt(a.status) < adapt(b.status) ? -1 : adapt(a.status) > adapt(b.status) ? 1 : 0;
+      return adapt(a.status) < adapt(b.status)
+        ? -1
+        : adapt(a.status) > adapt(b.status)
+          ? 1
+          : 0;
     });
   } else if (statusSortOption === "desc") {
     array.sort((a: applicationInfo, b: applicationInfo) => {
-      return adapt(b.status) < adapt(a.status) ? -1 : adapt(b.status) > adapt(a.status) ? 1 : 0;
+      return adapt(b.status) < adapt(a.status)
+        ? -1
+        : adapt(b.status) > adapt(a.status)
+          ? 1
+          : 0;
     });
   }
 

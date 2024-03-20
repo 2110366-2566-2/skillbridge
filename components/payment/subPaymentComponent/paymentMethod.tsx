@@ -1,19 +1,21 @@
-"use client"
+"use client";
 
-import { downloadImage } from "@/lib/utils"
-import Image from "next/image"
-import generatePayload from "promptpay-qr"
-import QRCode from "react-qr-code"
+import { downloadImage } from "@/lib/utils";
+import Image from "next/image";
+import generatePayload from "promptpay-qr";
+import QRCode from "react-qr-code";
 
 export default function PaymentMethod({ totalPrice }: { totalPrice: number }) {
   const payload = generatePayload(process.env.RECIPIENT_NUMBER || "", {
     amount: totalPrice,
-  })
+  });
 
   return (
     <div className="mt-[13px] lg:order-1 lg:mt-0 lg:row-span-5">
       <div className="flex">
-        <p className="text-sm font-medium text-[#0F172A] lg:text-xl">ช่องทางการชำระเงิน</p>
+        <p className="text-sm font-medium text-[#0F172A] lg:text-xl">
+          ช่องทางการชำระเงิน
+        </p>
       </div>
 
       <div className="mt-[6px] border border-[#cbd5e1] py-[8px] px-[12px] rounded-md flex flex-col items-center lg:py-[20px] lg:px-[20px]">
@@ -39,7 +41,8 @@ export default function PaymentMethod({ totalPrice }: { totalPrice: number }) {
 
         <button
           className="px-[16px] py-[8px] mt-[8px] flex justify-center items-center rounded-md border border-[#64748b] lg:mt-[20px]"
-          onClick={() => downloadImage("qr", "PromptpayQR.jpeg")}>
+          onClick={() => downloadImage("qr", "PromptpayQR.jpeg")}
+        >
           <Image
             src={"/icons/download.svg"}
             alt="chat"
@@ -55,5 +58,5 @@ export default function PaymentMethod({ totalPrice }: { totalPrice: number }) {
         </p>
       </div>
     </div>
-  )
+  );
 }
