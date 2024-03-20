@@ -1,8 +1,6 @@
 "use server";
-import { ApplicationStatus, Application } from "@prisma/client";
+import { ApplicationStatus } from "@prisma/client";
 import { prisma } from "../../../lib/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import { getApplication, getEmployerUserId, validateJobOwner } from "./utils";
 import { sendEmail } from "./sendEmail";
 
@@ -21,7 +19,7 @@ CANCELED // final state
 
 async function pendingToAccepted(studentUserId: string, jobId: string) {
   const employerUserId = await getEmployerUserId(); // get employer id from session
-  await validateJobOwner(employerUserId, jobId); // check if employer is the owner of the job. if not just throw an error
+  await validateJobOwner(jobId); // check if employer is the owner of the job. if not just throw an error
 
   const application = await getApplication(studentUserId, jobId);
 
@@ -32,17 +30,17 @@ async function pendingToAccepted(studentUserId: string, jobId: string) {
     };
   }
 
-    await prisma.application.update({
-        where: {
-            userId_jobId: {
-                userId: studentUserId,
-                jobId: jobId
-            },
-        },
-        data: {
-            status: ApplicationStatus.ACCEPTED
-        }
-    });
+  await prisma.application.update({
+    where: {
+      userId_jobId: {
+        userId: studentUserId,
+        jobId: jobId,
+      },
+    },
+    data: {
+      status: ApplicationStatus.ACCEPTED,
+    },
+  });
 
   const job = await prisma.job.findUniqueOrThrow({
     where: {
@@ -61,7 +59,7 @@ async function pendingToAccepted(studentUserId: string, jobId: string) {
 
 async function pendingToRejected(studentUserId: string, jobId: string) {
   const employerUserId = await getEmployerUserId(); // get employer id from session
-  await validateJobOwner(employerUserId, jobId); // check if employer is the owner of the job. if not just throw an error
+  await validateJobOwner(jobId); // check if employer is the owner of the job. if not just throw an error
 
   const application = await getApplication(studentUserId, jobId);
 
@@ -72,17 +70,17 @@ async function pendingToRejected(studentUserId: string, jobId: string) {
     };
   }
 
-    await prisma.application.update({
-        where: {
-            userId_jobId: {
-                userId: studentUserId,
-                jobId: jobId
-            },
-        },
-        data: {
-            status: ApplicationStatus.REJECTED
-        }
-    });
+  await prisma.application.update({
+    where: {
+      userId_jobId: {
+        userId: studentUserId,
+        jobId: jobId,
+      },
+    },
+    data: {
+      status: ApplicationStatus.REJECTED,
+    },
+  });
 
   const job = await prisma.job.findUniqueOrThrow({
     where: {
@@ -105,7 +103,7 @@ async function depositPendingToInProgress(
 ) {
   //called when employer pay deposit
   const employerUserId = await getEmployerUserId(); // get employer id from session
-  await validateJobOwner(employerUserId, jobId); // check if employer is the owner of the job. if not just throw an error
+  await validateJobOwner(jobId); // check if employer is the owner of the job. if not just throw an error
 
   const application = await getApplication(studentUserId, jobId);
 
@@ -116,17 +114,17 @@ async function depositPendingToInProgress(
     };
   }
 
-    await prisma.application.update({
-        where: {
-            userId_jobId: {
-                userId: studentUserId,
-                jobId: jobId
-            },
-        },
-        data: {
-            status: ApplicationStatus.IN_PROGRESS
-        }
-    });
+  await prisma.application.update({
+    where: {
+      userId_jobId: {
+        userId: studentUserId,
+        jobId: jobId,
+      },
+    },
+    data: {
+      status: ApplicationStatus.IN_PROGRESS,
+    },
+  });
 
   const job = await prisma.job.findUniqueOrThrow({
     where: {
@@ -145,47 +143,47 @@ async function depositPendingToInProgress(
 
 async function inProgressToCanceled(studentUserId: string, jobId: string) {
     const employerUserId = await getEmployerUserId(); // get employer id from session
-    await validateJobOwner(employerUserId, jobId); // check if employer is the owner of the job. if not just throw an error
+    await validateJobOwner(jobId); // check if employer is the owner of the job. if not just throw an error
 
-    const application = await getApplication(studentUserId, jobId);
+  const application = await getApplication(studentUserId, jobId);
 
-    if (application.status !== ApplicationStatus.IN_PROGRESS) {
-        throw {
-            message: "Application status is not valid",
-            status: 400
-        }
-    }
+  if (application.status !== ApplicationStatus.IN_PROGRESS) {
+    throw {
+      message: "Application status is not valid",
+      status: 400,
+    };
+  }
 
-    await prisma.application.update({
-        where: {
-            userId_jobId: {
-                userId: studentUserId,
-                jobId: jobId
-            },
-        },
-        data: {
-            status: ApplicationStatus.CANCELED
-        }
-    });
+  await prisma.application.update({
+    where: {
+      userId_jobId: {
+        userId: studentUserId,
+        jobId: jobId,
+      },
+    },
+    data: {
+      status: ApplicationStatus.CANCELED,
+    },
+  });
 
-    const job = await prisma.job.findUniqueOrThrow({
-        where: {
-            id: jobId
-        },
-        select: {
-            title: true
-        }
-    })
+  const job = await prisma.job.findUniqueOrThrow({
+    where: {
+      id: jobId,
+    },
+    select: {
+      title: true,
+    },
+  });
 
-    const subject = `ผู้จ้างยกเลิกงาน ${job.title} ของคุณ`;
-    const text = `ผู้จ้างยกเลิกงาน ${job.title} ของคุณ`;
+  const subject = `ผู้จ้างยกเลิกงาน ${job.title} ของคุณ`;
+  const text = `ผู้จ้างยกเลิกงาน ${job.title} ของคุณ`;
 
-    sendEmail(studentUserId, subject, text);
+  sendEmail(studentUserId, subject, text);
 }
- 
+
 async function deliveredToInProgress(studentUserId: string, jobId: string) {
   const employerUserId = await getEmployerUserId(); // get employer id from session
-  await validateJobOwner(employerUserId, jobId); // check if employer is the owner of the job. if not just throw an error
+  await validateJobOwner(jobId); // check if employer is the owner of the job. if not just throw an error
 
   const application = await getApplication(studentUserId, jobId);
 
@@ -196,17 +194,17 @@ async function deliveredToInProgress(studentUserId: string, jobId: string) {
     };
   }
 
-    await prisma.application.update({
-        where: {
-            userId_jobId: {
-                userId: studentUserId,
-                jobId: jobId
-            },
-        },
-        data: {
-            status: ApplicationStatus.IN_PROGRESS
-        }
-    });
+  await prisma.application.update({
+    where: {
+      userId_jobId: {
+        userId: studentUserId,
+        jobId: jobId,
+      },
+    },
+    data: {
+      status: ApplicationStatus.IN_PROGRESS,
+    },
+  });
 
   const job = await prisma.job.findUniqueOrThrow({
     where: {
@@ -225,7 +223,7 @@ async function deliveredToInProgress(studentUserId: string, jobId: string) {
 
 async function deliveredToCanceled(studentUserId: string, jobId: string) {
   const employerUserId = await getEmployerUserId(); // get employer id from session
-  await validateJobOwner(employerUserId, jobId); // check if employer is the owner of the job. if not just throw an error
+  await validateJobOwner(jobId); // check if employer is the owner of the job. if not just throw an error
 
   const application = await getApplication(studentUserId, jobId);
 
@@ -236,17 +234,17 @@ async function deliveredToCanceled(studentUserId: string, jobId: string) {
     };
   }
 
-    await prisma.application.update({
-        where: {
-            userId_jobId: {
-                userId: studentUserId,
-                jobId: jobId
-            },
-        },
-        data: {
-            status: ApplicationStatus.CANCELED
-        }
-    });
+  await prisma.application.update({
+    where: {
+      userId_jobId: {
+        userId: studentUserId,
+        jobId: jobId,
+      },
+    },
+    data: {
+      status: ApplicationStatus.CANCELED,
+    },
+  });
 
   const job = await prisma.job.findUniqueOrThrow({
     where: {
@@ -268,7 +266,7 @@ async function deliveredToWagePaymentPending(
   jobId: string,
 ) {
   const employerUserId = await getEmployerUserId(); // get employer id from session
-  await validateJobOwner(employerUserId, jobId); // check if employer is the owner of the job. if not just throw an error
+  await validateJobOwner(jobId); // check if employer is the owner of the job. if not just throw an error
 
   const application = await getApplication(studentUserId, jobId);
 
@@ -279,17 +277,17 @@ async function deliveredToWagePaymentPending(
     };
   }
 
-    await prisma.application.update({
-        where: {
-            userId_jobId: {
-                userId: studentUserId,
-                jobId: jobId
-            },
-        },
-        data: {
-            status: ApplicationStatus.WAGE_PAYMENT_PENDING
-        }
-    });
+  await prisma.application.update({
+    where: {
+      userId_jobId: {
+        userId: studentUserId,
+        jobId: jobId,
+      },
+    },
+    data: {
+      status: ApplicationStatus.WAGE_PAYMENT_PENDING,
+    },
+  });
 
   const job = await prisma.job.findUniqueOrThrow({
     where: {
@@ -308,7 +306,7 @@ async function deliveredToWagePaymentPending(
 
 async function wagePaymentPendingToDone(studentUserId: string, jobId: string) {
   const employerUserId = await getEmployerUserId(); // get employer id from session
-  await validateJobOwner(employerUserId, jobId); // check if employer is the owner of the job. if not just throw an error
+  await validateJobOwner(jobId); // check if employer is the owner of the job. if not just throw an error
 
   const application = await getApplication(studentUserId, jobId);
 
@@ -319,17 +317,17 @@ async function wagePaymentPendingToDone(studentUserId: string, jobId: string) {
     };
   }
 
-    await prisma.application.update({
-        where: {
-            userId_jobId: {
-                userId: studentUserId,
-                jobId: jobId
-            },
-        },
-        data: {
-            status: ApplicationStatus.DONE
-        }
-    });
+  await prisma.application.update({
+    where: {
+      userId_jobId: {
+        userId: studentUserId,
+        jobId: jobId,
+      },
+    },
+    data: {
+      status: ApplicationStatus.DONE,
+    },
+  });
 
   const job = await prisma.job.findUniqueOrThrow({
     where: {
@@ -346,4 +344,13 @@ async function wagePaymentPendingToDone(studentUserId: string, jobId: string) {
   sendEmail(studentUserId, subject, text);
 }
 
-export { pendingToAccepted, pendingToRejected, depositPendingToInProgress, deliveredToInProgress, deliveredToCanceled, deliveredToWagePaymentPending, wagePaymentPendingToDone, inProgressToCanceled };
+export {
+  pendingToAccepted,
+  pendingToRejected,
+  depositPendingToInProgress,
+  deliveredToInProgress,
+  deliveredToCanceled,
+  deliveredToWagePaymentPending,
+  wagePaymentPendingToDone,
+  inProgressToCanceled,
+};
