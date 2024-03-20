@@ -1,5 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
-import getS3URL from "../S3/getS3URL";
+import getS3URL from "../public/S3/getS3URL";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 
@@ -36,10 +36,10 @@ const getApplicationByUserId = async (jobId: string, userId?: string) => {
       jobStatus = query.status;
     }
 
-    let signUrl: string | any = null
+    let signUrl: string | any = null;
     if (application?.applicationDocumentFiles[0]) {
       signUrl = await getS3URL(
-        application.applicationDocumentFiles[0].fileName
+        application.applicationDocumentFiles[0].fileName,
       );
     }
 

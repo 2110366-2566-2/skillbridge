@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import DangerButton from "../buttons/dangerButton/DangerButton";
-import DangerModal from "../modal/dangerModal/DangerModal";
+import DangerButton from "../public/buttons/dangerButton/DangerButton";
+import DangerModal from "../public/modal/dangerModal/DangerModal";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
