@@ -33,17 +33,17 @@ async function pendingToDisclaimed(jobId: string) {
     };
   }
 
-    await prisma.application.update({
-        where: {
-            userId_jobId: {
-                userId: studentUserId,
-                jobId: jobId
-            },
-        },
-        data: {
-            status: ApplicationStatus.DISCLAIMED
-        }
-    });
+  await prisma.application.update({
+    where: {
+      userId_jobId: {
+        userId: studentUserId,
+        jobId: jobId,
+      },
+    },
+    data: {
+      status: ApplicationStatus.DISCLAIMED,
+    },
+  });
 
   const emailApp = await prisma.application.findUniqueOrThrow({
     where: {
@@ -87,17 +87,17 @@ async function acceptedToDepositPending(jobId: string) {
     };
   }
 
-    await prisma.application.update({
-        where: {
-            userId_jobId: {
-                userId: studentUserId,
-                jobId: jobId
-            },
-        },
-        data: {
-            status: ApplicationStatus.DEPOSIT_PENDING
-        }
-    });
+  await prisma.application.update({
+    where: {
+      userId_jobId: {
+        userId: studentUserId,
+        jobId: jobId,
+      },
+    },
+    data: {
+      status: ApplicationStatus.DEPOSIT_PENDING,
+    },
+  });
 
   const emailApp = await prisma.application.findUniqueOrThrow({
     where: {
@@ -141,17 +141,17 @@ async function acceptedToDisclaimed(jobId: string) {
     };
   }
 
-    await prisma.application.update({
-        where: {
-            userId_jobId: {
-                userId: studentUserId,
-                jobId: jobId
-            },
-        },
-        data: {
-            status: ApplicationStatus.DISCLAIMED
-        }
-    });
+  await prisma.application.update({
+    where: {
+      userId_jobId: {
+        userId: studentUserId,
+        jobId: jobId,
+      },
+    },
+    data: {
+      status: ApplicationStatus.DISCLAIMED,
+    },
+  });
 
   const emailApp = await prisma.application.findUniqueOrThrow({
     where: {
@@ -195,17 +195,17 @@ async function inProgressToDelivered(jobId: string) {
     };
   }
 
-    await prisma.application.update({
-        where: {
-            userId_jobId: {
-                userId: studentUserId,
-                jobId: jobId
-            },
-        },
-        data: {
-            status: ApplicationStatus.DELIVERED
-        }
-    });
+  await prisma.application.update({
+    where: {
+      userId_jobId: {
+        userId: studentUserId,
+        jobId: jobId,
+      },
+    },
+    data: {
+      status: ApplicationStatus.DELIVERED,
+    },
+  });
 
   const emailApp = await prisma.application.findUniqueOrThrow({
     where: {
@@ -238,30 +238,38 @@ async function inProgressToDelivered(jobId: string) {
 }
 
 async function acknowledgeApplication(jobId: string) {
-    const studentUserId = await getStudentUserId();
+  const studentUserId = await getStudentUserId();
 
-    const application = await getApplication(studentUserId, jobId);
-    
-    const isValidStatus = application.status === ApplicationStatus.CANCELED || application.status === ApplicationStatus.DONE || application.status === ApplicationStatus.REJECTED;
-    if (!isValidStatus) {
-        throw {
-            message: "Application status is not valid",
-            status: 400
-        }
-    }
+  const application = await getApplication(studentUserId, jobId);
 
-    await prisma.application.update({
-        where: {
-            userId_jobId: {
-                userId: studentUserId,
-                jobId: jobId
-            },
-        },
-        data: {
-            isAcknowledged: true
-        }
-    });
+  const isValidStatus =
+    application.status === ApplicationStatus.CANCELED ||
+    application.status === ApplicationStatus.DONE ||
+    application.status === ApplicationStatus.REJECTED;
+  if (!isValidStatus) {
+    throw {
+      message: "Application status is not valid",
+      status: 400,
+    };
+  }
+
+  await prisma.application.update({
+    where: {
+      userId_jobId: {
+        userId: studentUserId,
+        jobId: jobId,
+      },
+    },
+    data: {
+      isAcknowledged: true,
+    },
+  });
 }
 
-
-export { pendingToDisclaimed, acceptedToDepositPending, acceptedToDisclaimed, inProgressToDelivered, acknowledgeApplication };
+export {
+  pendingToDisclaimed,
+  acceptedToDepositPending,
+  acceptedToDisclaimed,
+  inProgressToDelivered,
+  acknowledgeApplication,
+};

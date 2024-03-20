@@ -50,32 +50,32 @@ function JobManagePanel({ jobId }: Props) {
         </select>
       </div>
 
-            <aside className="flex flex-col gap-3">
-                {fetchedData.length === 0 ? (
-                    <div className="flex justify-center items-center">
-                        <SearchNotFound text="ไม่พบการสมัครงานของนิสิต"/>
-                    </div>
-                ) : (
-                    fetchedData?.map((student, index) => {
-                        const name = `${student.salutation}${student.firstname}${student.middlename ? ` ${student.middlename} ` : " "}${student.lastname}`;
-                        return (
-                            <div key={index}>
-                                <StudentOffer
-                                    studentId={student.userId}
-                                    jobId={student.jobId}
-                                    studentName={name}
-                                    applicationDate={`${student.createdAt.getDate()}/${student.createdAt.getMonth()}/${student.createdAt.getFullYear()}`}
-                                    applicationTime={`${student.createdAt.getHours()}:${student.createdAt.getMinutes()} น.`}
-                                    status={convertStateNameToThai('employer', student.status)}
-                                    price={`฿${student.bid.toLocaleString()}`}
-                                />
-                            </div>
-                        );
-                    })
-                )}
-            </aside>
-        </aside>
-    );
+      <aside className="flex flex-col gap-3">
+        {fetchedData.length === 0 ? (
+          <div className="flex justify-center items-center">
+            <SearchNotFound text="ไม่พบการสมัครงานของนิสิต" />
+          </div>
+        ) : (
+          fetchedData?.map((student, index) => {
+            const name = `${student.salutation}${student.firstname}${student.middlename ? ` ${student.middlename} ` : " "}${student.lastname}`;
+            return (
+              <div key={index}>
+                <StudentOffer
+                  studentId={student.userId}
+                  jobId={student.jobId}
+                  studentName={name}
+                  applicationDate={`${student.createdAt.getDate()}/${student.createdAt.getMonth()}/${student.createdAt.getFullYear()}`}
+                  applicationTime={`${student.createdAt.getHours()}:${student.createdAt.getMinutes()} น.`}
+                  status={convertStateNameToThai("employer", student.status)}
+                  price={`฿${student.bid.toLocaleString()}`}
+                />
+              </div>
+            );
+          })
+        )}
+      </aside>
+    </aside>
+  );
 }
 
 export default JobManagePanel;

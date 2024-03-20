@@ -1,17 +1,32 @@
+"use client";
+
 import Image from "next/image";
-import React, { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import closeDarkIcon from "@/public/icons/closeDark.svg";
 
 type Props = {
   label: string;
   files: FileList | null;
   setFiles: Dispatch<SetStateAction<FileList | null>>;
-  isDisabled: boolean;
-  maxSizeInMegaByte: number;
+  isDisabled?: boolean;
+  isPdfAllow?: boolean;
+  isImageAllow?: boolean;
+  isMultipleFilesAllow?: boolean;
+  maxSizeInMegaByte?: number;
 };
 
 export default function FilesInput(props: Props) {
-  const { label, files, setFiles, isDisabled, maxSizeInMegaByte } = props;
+  const {
+    label,
+    files,
+    setFiles,
+    isDisabled,
+    isPdfAllow,
+    isImageAllow,
+    isMultipleFilesAllow,
+    maxSizeInMegaByte,
+  } = props;
+  const [isInvalid, setInvalid] = useState(false);
 
   const handleRemoveFile = (fileNameToRemove: string) => {
     if (!files) return;
@@ -32,21 +47,17 @@ export default function FilesInput(props: Props) {
     backLength: number,
   ) => {
     const maxLength = frontLength + backLength + 3; // 3 for the ellipsis and dot in the middle
-
     if (fileName.length > maxLength) {
       const fileNameWithoutExtension = fileName
         .split(".")
         .slice(0, -1)
         .join(".");
-
       const truncatedFront = fileNameWithoutExtension.slice(0, frontLength);
       const truncatedBack = fileNameWithoutExtension.slice(-backLength);
       const truncatedFileName = truncatedFront + "..." + truncatedBack;
-
       const fileExtension = fileName.split(".").pop();
       return truncatedFileName + "." + fileExtension;
     }
-
     return fileName;
   };
 
@@ -78,6 +89,24 @@ export default function FilesInput(props: Props) {
     ));
   }
 
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInvalid(false);
+    const selectedFiles = event.target.files;
+    if (!selectedFiles) return;
+    let totalSize = 0;
+    for (let i = 0; i < selectedFiles.length; i++) {
+      totalSize += selectedFiles[i].size;
+    }
+    const totalSizeInMB = totalSize / (1024 * 1024); // Convert to MB
+    if (maxSizeInMegaByte && totalSizeInMB > maxSizeInMegaByte) {
+      setInvalid(true);
+      event.target.value = "";
+      return;
+    }
+    // Set the selected files
+    setFiles(selectedFiles);
+  };
+
   return (
     <div className="flex flex-col gap-1 flex-grow">
       <label
@@ -87,10 +116,10 @@ export default function FilesInput(props: Props) {
         {label}
       </label>
       <div className="flex flex-col gap-1">{currentFiles}</div>
-      <div className="flex items-center justify-center w-full">
+      <div className="flex flex-col gap-2 items-start justify-center w-full">
         <label
           htmlFor="dropzone-file"
-          className={`flex flex-col items-center justify-center w-full border-[1px] border-slate-400 border-dashed rounded-lg bg-transparent ${isDisabled ? "opacity-60 cursor-default" : "active:opacity-60 cursor-pointer hover:opacity-80"}`}
+          className={`flex flex-col items-center justify-center w-full border-[1px] ${isInvalid ? "border-red-600" : "border-slate-400"} border-dashed rounded-lg bg-transparent ${isDisabled ? "opacity-60 cursor-default" : "active:opacity-60 cursor-pointer hover:opacity-80"}`}
         >
           <div className="flex flex-col gap-1 items-center justify-center p-3">
             <div className="flex gap-3 items-center justify-center">
@@ -115,17 +144,32 @@ export default function FilesInput(props: Props) {
               <span className="font-normal">กดเพื่ออัพโหลดไฟล์</span>
             </p>
             <p className="text-[12px] text-slate-400">
-              (ขนาดรวมไม่เกิน {maxSizeInMegaByte} MB)
+              (ไฟล์
+              {isPdfAllow && isImageAllow
+                ? " .pdf, .jpg, .png "
+                : isPdfAllow
+                  ? " .pdf "
+                  : isImageAllow
+                    ? " .jpg, .png "
+                    : ""}
+              ขนาดรวมไม่เกิน {maxSizeInMegaByte} MB)
             </p>
           </div>
           <input
             id="dropzone-file"
             type="file"
-            multiple
-            onChange={(e) => {
-              const inputFiles = e.target.files;
-              setFiles(inputFiles);
-            }}
+            name="dropzone-file"
+            accept={
+              isPdfAllow && isImageAllow
+                ? ".pdf, .jpg, .png"
+                : isPdfAllow
+                  ? ".pdf"
+                  : isImageAllow
+                    ? ".jpg, .png"
+                    : "*"
+            }
+            multiple={isMultipleFilesAllow}
+            onChange={handleFileChange}
             onClick={(e) => {
               const target = e.target as HTMLInputElement;
               target.value = "";
@@ -134,6 +178,11 @@ export default function FilesInput(props: Props) {
             disabled={isDisabled}
           />
         </label>
+        <p
+          className={`text-[14px] text-red-600 ${!isInvalid ? "opacity-0" : ""}`}
+        >
+          ไฟล์เกินขนาด
+        </p>
       </div>
     </div>
   );

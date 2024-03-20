@@ -190,11 +190,13 @@
 ## v1.24
 
 ### TransactionDetail
+
 - `receiverAccountType` is deleted as the api response contains only an empty string
 - `receiverAccountValue` is deleted as the api response contains only an empty string
 - Add mapping to `transaction_detail`
 
 ### MailLog
+
 - Add mapping to `mail_log`
 
 <p align="right">(<a href="#database">back to top</a>)</p>

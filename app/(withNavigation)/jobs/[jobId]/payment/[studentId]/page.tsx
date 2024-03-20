@@ -1,12 +1,15 @@
-import { getAllPaymentInfo, getPaymentInfo } from "@/actions/payment/paymentinfo"
-import Payment from "@/components/payment/payment"
+import {
+  getAllPaymentInfo,
+  getPaymentInfo,
+} from "@/actions/payment/paymentinfo";
+import Payment from "@/components/payment/payment";
 
 export default async function PaymentPage({
   params,
 }: {
-  params: { jobId: string; studentId: string }
+  params: { jobId: string; studentId: string };
 }) {
-  const data = await getPaymentInfo(params.jobId, params.studentId)
+  const data = await getPaymentInfo(params.jobId, params.studentId);
 
   return (
     <div className="w-full h-full">
@@ -24,5 +27,5 @@ export default async function PaymentPage({
         isDeposit={data ? data.status === "DEPOSIT_PENDING" : false}
       />
     </div>
-  )
+  );
 }
