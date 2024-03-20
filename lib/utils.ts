@@ -16,6 +16,19 @@ export function customTrim(inputString: string): string {
   return trimmedString;
 }
 
+export function splitSalutation(input: string): [string, string] {
+  const salutationRegex = /^(Mr\.|Mrs\.|Ms\.|Miss|Dr\.|คุณ|นาย|นางสาว|นาง)/i
+  const match = input.match(salutationRegex)
+
+  if (match) {
+    const salutation = match[0].trim()
+    const name = input.slice(match[0].length).trim()
+    if (name !== "") return [salutation, name]
+  }
+
+  return ["-", input.trim()]
+}
+
 async function convertImage(element: HTMLElement) {
   let dataUrl = "";
   const minDataLength = 150000;

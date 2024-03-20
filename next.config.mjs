@@ -8,6 +8,7 @@ const nextConfig = {
     config.externals = [...config.externals, "bcrypt"];
     return config;
   },
+  output: "standalone"
 };
 
 export default nextConfig;

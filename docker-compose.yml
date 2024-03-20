@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  app:
+    image: nextjs-app
+    platform: "linux/amd64"
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        DATABASE_URL: <your_database_url>
+    working_dir: /app
+    ports:
+      - "3000:3000"
+  db:
+  # TODO
+  logstash:
+  # TODO
+  elasticsearch:
+  # TODO
