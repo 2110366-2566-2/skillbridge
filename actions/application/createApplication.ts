@@ -3,17 +3,35 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../app/api/auth/[...nextauth]/auth";
 import { prisma } from "../../lib/prisma";
 import uploadFileToS3 from "../public/S3/uploadFileToS3";
-import { boolean } from "zod";
-import { File } from "@web-std/file";
+import { ZodError, z } from "zod";
+import type { Session } from "next-auth";
 
 const acceptedType = "application/pdf";
 
+const ApplicationShema = z.object({
+  file: z.instanceof(File).nullish(),
+  bid: z.coerce.number().gte(0),
+  jobId: z.string(),
+});
+
+type ApplicationForm = z.infer<typeof ApplicationShema>;
+
+type ZodResponse =
+  | { success: true; data: ApplicationForm }
+  | { success: false; error: ZodError };
+
 const createApplication = async (formData: FormData) => {
   try {
-    // let session = undefined;
-    const session: any = await getServerSession(authOptions);
+    const response: ZodResponse = ApplicationShema.safeParse(
+      Object.fromEntries(formData)
+    );
+    if (!response.success) {
+      throw response.error;
+    }
+
+    const session: Session | null = await getServerSession(authOptions);
     const userId = session?.user.id;
-    // console.log(userId)
+
     const student = await prisma.student.findFirst({
       where: { userId: userId },
       select: { userId: true },
@@ -26,10 +44,10 @@ const createApplication = async (formData: FormData) => {
       };
     }
 
-    let file = formData.get("file") as File | null;
+    let file = response.data.file;
     // console.log('print file', file)
-    const bid = formData.get("bid") as string;
-    const jobID = formData.get("jobId") as string;
+    const bid: number = response.data.bid;
+    const jobId: string = response.data.jobId;
 
     if (file && file?.size > 1024 * 1024 * 5) {
       throw {
@@ -47,8 +65,8 @@ const createApplication = async (formData: FormData) => {
     const application = await prisma.application.create({
       data: {
         userId: session.user.id,
-        jobId: jobID,
-        bid: parseFloat(bid),
+        jobId: jobId,
+        bid: bid,
       },
     });
 
@@ -58,7 +76,7 @@ const createApplication = async (formData: FormData) => {
         buffer,
         file.type,
         file.size,
-        "applicationFiles",
+        "applicationFiles"
       );
 
       if (fileName?.message) {
@@ -67,7 +85,7 @@ const createApplication = async (formData: FormData) => {
       appDocs = await prisma.applicationDocumentFile.create({
         data: {
           applicationUserId: session.user.id,
-          applicationJobId: jobID,
+          applicationJobId: jobId,
           fileName: fileName,
         },
       });
@@ -98,10 +116,7 @@ export default createApplication;
 //   for (let key in data) {
 //     formData.append(key, data[key as keyof typeof data]);
 //   }
-//   const result = await createApplication(
-//     formData,
-//     "9160ebd3-8df5-46a3-ba9b-9152b0ff5c0c"
-//   );
+//   const result = await createApplication(formData);
 //   console.log(result);
 // };
 
