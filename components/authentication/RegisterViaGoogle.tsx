@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { signIn } from "next-auth/react"
 import Image from "next/image"
-import { updateName } from "@/actions/register"
+import { updateName } from "@/actions/register/register"
 import { RegisterProps } from "./RegisterViaEmail"
 
 type Form = {
@@ -20,7 +20,6 @@ export default function RegisterViaGoogle({
   session,
   updateSession,
 }: RegisterProps) {
-
   const [data, setForm] = useState<Form>(structuredClone(defaultForm))
 
   const [checkBoxError, setCheckBoxError] = useState({
