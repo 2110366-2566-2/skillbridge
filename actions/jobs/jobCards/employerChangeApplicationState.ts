@@ -1,8 +1,6 @@
 "use server";
-import { ApplicationStatus, Application } from "@prisma/client";
+import { ApplicationStatus } from "@prisma/client";
 import { prisma } from "../../../lib/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import { getApplication, getEmployerUserId, validateJobOwner } from "./utils";
 import { sendEmail } from "./sendEmail";
 
@@ -21,7 +19,7 @@ CANCELED // final state
 
 async function pendingToAccepted(studentUserId: string, jobId: string) {
   const employerUserId = await getEmployerUserId(); // get employer id from session
-  await validateJobOwner(employerUserId, jobId); // check if employer is the owner of the job. if not just throw an error
+  await validateJobOwner(jobId); // check if employer is the owner of the job. if not just throw an error
 
   const application = await getApplication(studentUserId, jobId);
 
@@ -61,7 +59,7 @@ async function pendingToAccepted(studentUserId: string, jobId: string) {
 
 async function pendingToRejected(studentUserId: string, jobId: string) {
   const employerUserId = await getEmployerUserId(); // get employer id from session
-  await validateJobOwner(employerUserId, jobId); // check if employer is the owner of the job. if not just throw an error
+  await validateJobOwner(jobId); // check if employer is the owner of the job. if not just throw an error
 
   const application = await getApplication(studentUserId, jobId);
 
@@ -105,7 +103,7 @@ async function depositPendingToInProgress(
 ) {
   //called when employer pay deposit
   const employerUserId = await getEmployerUserId(); // get employer id from session
-  await validateJobOwner(employerUserId, jobId); // check if employer is the owner of the job. if not just throw an error
+  await validateJobOwner(jobId); // check if employer is the owner of the job. if not just throw an error
 
   const application = await getApplication(studentUserId, jobId);
 
@@ -144,8 +142,8 @@ async function depositPendingToInProgress(
 }
 
 async function inProgressToCanceled(studentUserId: string, jobId: string) {
-  const employerUserId = await getEmployerUserId(); // get employer id from session
-  await validateJobOwner(employerUserId, jobId); // check if employer is the owner of the job. if not just throw an error
+    const employerUserId = await getEmployerUserId(); // get employer id from session
+    await validateJobOwner(jobId); // check if employer is the owner of the job. if not just throw an error
 
   const application = await getApplication(studentUserId, jobId);
 
@@ -185,7 +183,7 @@ async function inProgressToCanceled(studentUserId: string, jobId: string) {
 
 async function deliveredToInProgress(studentUserId: string, jobId: string) {
   const employerUserId = await getEmployerUserId(); // get employer id from session
-  await validateJobOwner(employerUserId, jobId); // check if employer is the owner of the job. if not just throw an error
+  await validateJobOwner(jobId); // check if employer is the owner of the job. if not just throw an error
 
   const application = await getApplication(studentUserId, jobId);
 
@@ -225,7 +223,7 @@ async function deliveredToInProgress(studentUserId: string, jobId: string) {
 
 async function deliveredToCanceled(studentUserId: string, jobId: string) {
   const employerUserId = await getEmployerUserId(); // get employer id from session
-  await validateJobOwner(employerUserId, jobId); // check if employer is the owner of the job. if not just throw an error
+  await validateJobOwner(jobId); // check if employer is the owner of the job. if not just throw an error
 
   const application = await getApplication(studentUserId, jobId);
 
@@ -268,7 +266,7 @@ async function deliveredToWagePaymentPending(
   jobId: string,
 ) {
   const employerUserId = await getEmployerUserId(); // get employer id from session
-  await validateJobOwner(employerUserId, jobId); // check if employer is the owner of the job. if not just throw an error
+  await validateJobOwner(jobId); // check if employer is the owner of the job. if not just throw an error
 
   const application = await getApplication(studentUserId, jobId);
 
@@ -308,7 +306,7 @@ async function deliveredToWagePaymentPending(
 
 async function wagePaymentPendingToDone(studentUserId: string, jobId: string) {
   const employerUserId = await getEmployerUserId(); // get employer id from session
-  await validateJobOwner(employerUserId, jobId); // check if employer is the owner of the job. if not just throw an error
+  await validateJobOwner(jobId); // check if employer is the owner of the job. if not just throw an error
 
   const application = await getApplication(studentUserId, jobId);
 
