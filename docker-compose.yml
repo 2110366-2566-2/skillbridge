@@ -1,16 +1,19 @@
-version: '3.8'
+version: "3.9"
 services:
   app:
-    image: openai-demo-app
-    env_file:
-      - ./.env
+    image: nextjs-app
+    platform: "linux/amd64"
     build:
-      context: ./
-      target: production
+      context: .
       dockerfile: Dockerfile
-    volumes:
-        - .:/app
-        - /app/node_modules
-        - /app/.next
+      args:
+        DATABASE_URL: <your_database_url>
+    working_dir: /app
     ports:
       - "3000:3000"
+  db:
+  # TODO
+  logstash:
+  # TODO
+  elasticsearch:
+  # TODO
