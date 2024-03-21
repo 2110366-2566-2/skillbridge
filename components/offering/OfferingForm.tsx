@@ -153,7 +153,9 @@ export default function OfferingForm({ jobId, application }: Props) {
           </div>
         )}
         {bid && url && (
-          <FileBox url={url} text="ไฟล์สัญญาที่แนบไว้" />
+          <div className="mt-[7px]">
+            <FileBox url={url} text="ไฟล์สัญญาที่แนบไว้" />
+          </div>
         )}
         {bid === null && (
           <div className="w-full">

@@ -13,7 +13,7 @@ export default function FileBox({ url, text }: Props) {
 
     return (
         <div
-            className="w-full flex p-3 bg-slate-200 text-slate-500 rounded-md mt-[7px] hover:bg-slate-400 hover:cursor-pointer hover:shadow-md hover:text-slate-100"
+            className="w-full flex p-3 bg-slate-200 text-slate-500 rounded-md hover:bg-slate-400 hover:cursor-pointer hover:shadow-md hover:text-slate-100"
             onClick={() => window.open(url, "_blank", "noopener,noreferrer")}
         >
             <div className="flex gap-3 items-center">
