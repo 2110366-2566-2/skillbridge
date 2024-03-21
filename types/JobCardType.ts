@@ -7,8 +7,8 @@ type JobCardType = {
   category: string;
   applicants: Number;
   maxApplicants: Number;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
   isPending: Boolean;
 };
 

@@ -8,22 +8,10 @@ import { integer } from "@elastic/elasticsearch/lib/api/types";
 export interface applicationInfo {
   jobId: string;
   title: string;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
   tag: string;
   status: string;
-}
-
-export interface finalApplicationInfo {
-  jobId: string;
-  title: string;
-  description: string;
-  startDate: string;
-  endDate: string;
-  tag: string;
-  numberOfApplication: number;
-  maxNumberOfApplication: number;
-  bid: number;
 }
 
 async function studentFetchApplications() {
@@ -89,8 +77,8 @@ async function fetchFirstTab(studentUserId: string) {
     const applicationInfo: applicationInfo = {
       jobId: app.jobId,
       title: app.job.title,
-      startDate: app.job.estimateStartDate.toLocaleDateString(),
-      endDate: app.job.estimateStartDate.toLocaleDateString(),
+      startDate: app.job.estimateStartDate,
+      endDate: app.job.estimateStartDate,
       tag: app.job.jobTag.title,
       status: app.status,
     };
@@ -139,8 +127,8 @@ async function fetchSecondTab(studentUserId: string) {
     const applicationInfo: applicationInfo = {
       jobId: app.jobId,
       title: app.job.title,
-      startDate: app.job.estimateStartDate.toLocaleDateString(),
-      endDate: app.job.estimateStartDate.toLocaleDateString(),
+      startDate: app.job.estimateStartDate,
+      endDate: app.job.estimateStartDate,
       tag: app.job.jobTag.title,
       status: app.status,
     };
@@ -177,31 +165,18 @@ async function fetchThirdTab(studentUserId: string) {
   // maxNumberOfApplication: integer
   // price: integer
 
-  const output: finalApplicationInfo[] = [];
+  const output: applicationInfo[] = [];
 
   for (let i = 0; i < applications.length; i++) {
     const app = applications[i];
 
-    const finalApp: finalApplicationInfo = {
+    const finalApp: applicationInfo = {
       jobId: app.jobId,
       title: app.job.title,
-      description: app.job.description ? app.job.description : "",
-      startDate: app.job.estimateStartDate.toLocaleDateString(),
-      endDate: app.job.estimateEndDate.toLocaleDateString(),
+      startDate: app.job.estimateStartDate,
+      endDate: app.job.estimateEndDate,
       tag: app.job.jobTag.title,
-      numberOfApplication: app.job.applications.filter(
-        (app) =>
-          !(
-            app.status in
-            [
-              ApplicationStatus.CANCELED,
-              ApplicationStatus.DISCLAIMED,
-              ApplicationStatus.REJECTED,
-            ]
-          ),
-      ).length,
-      maxNumberOfApplication: app.job.numWorker,
-      bid: app.bid,
+      status: "DONE",
     };
 
     output.push(finalApp);
