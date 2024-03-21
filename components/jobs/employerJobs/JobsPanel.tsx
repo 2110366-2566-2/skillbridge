@@ -13,7 +13,7 @@ type Props = {
 };
 
 // export function
-const DoneJobsPanel = ({
+const JobsPanel = ({
   startDateSortOption,
   endDateSortOption,
   priceSortOption,
@@ -21,6 +21,7 @@ const DoneJobsPanel = ({
   data,
   isPending,
 }: Props) => {
+  console.log(data);
   const jobCardList = sortArray(
     data,
     startDateSortOption,
@@ -60,4 +61,4 @@ const DoneJobsPanel = ({
   );
 };
 
-export default DoneJobsPanel;
+export default JobsPanel;

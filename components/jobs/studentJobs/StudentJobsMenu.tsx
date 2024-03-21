@@ -45,7 +45,12 @@ const StudentJobsMenu = (props: Props) => {
         fetchData();
     }, []);
 
-    // Sort the data based on the options provided
+    // args for sorter and sidebar
+    const sideBarState = {
+        name: "sidebar",
+        value: isOpeningSideBar,
+        set: setIsOpeningSideBar,
+    };
     const sortOptions = [
         {
             name: "วันที่เริ่มต้น",
@@ -78,14 +83,7 @@ const StudentJobsMenu = (props: Props) => {
                     </div>
 
                     {/* Sort button */}
-                    <Sorter
-                        sideBarState={{
-                            name: "sidebar",
-                            value: isOpeningSideBar,
-                            set: setIsOpeningSideBar,
-                        }}
-                        sortOptions={sortOptions}
-                    />
+                    <Sorter sideBarState={sideBarState} sortOptions={sortOptions} />
                 </div>
             </section>
 

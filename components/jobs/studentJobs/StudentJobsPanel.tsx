@@ -24,6 +24,7 @@ function StudentJobsPanel({
     data,
     isDone = true,
 }: Props) {
+  console.log(data);
     const sortedData = sortArray(
         data,
         startDateSortOption,
@@ -49,12 +50,8 @@ function StudentJobsPanel({
                                     key={index}
                                     jobId={data.jobId}
                                     title={data.title}
-                                    startDate={data.startDate.toLocaleDateString(
-                                        "en-GB"
-                                    )}
-                                    endDate={data.endDate.toLocaleDateString(
-                                        "en-GB"
-                                    )}
+                                    startDate={data.startDate}
+                                    endDate={data.endDate}
                                     category={data.tag}
                                     status={convertStateNameToThai(
                                         "student",

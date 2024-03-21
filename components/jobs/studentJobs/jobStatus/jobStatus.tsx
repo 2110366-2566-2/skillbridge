@@ -21,8 +21,8 @@ export default function JobStatus({
 }: {
   jobId: string;
   title: string;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
   category: string;
   status: string;
 }) {
@@ -114,7 +114,7 @@ export default function JobStatus({
           {/* Period Component */}
           <div className="mt-[10px]">
             <p className="font-medium text-[15.5px] text-slate-500 text-wrap line-clamp-1">
-              {`${startDate} - ${endDate}`}
+              {`${startDate.toLocaleDateString('en-GB')} - ${endDate.toLocaleDateString('en-GB')}`}
             </p>
           </div>
 

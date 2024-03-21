@@ -77,8 +77,8 @@ async function fetchFirstTab(studentUserId: string) {
     const applicationInfo: applicationInfo = {
       jobId: app.jobId,
       title: app.job.title,
-      startDate: app.job.estimateStartDate,
-      endDate: app.job.estimateStartDate,
+      startDate: app.job.estimateStartDate as Date,
+      endDate: app.job.estimateStartDate as Date,
       tag: app.job.jobTag.title,
       status: app.status,
     };
@@ -127,8 +127,8 @@ async function fetchSecondTab(studentUserId: string) {
     const applicationInfo: applicationInfo = {
       jobId: app.jobId,
       title: app.job.title,
-      startDate: app.job.estimateStartDate,
-      endDate: app.job.estimateStartDate,
+      startDate: app.job.estimateStartDate as Date,
+      endDate: app.job.estimateStartDate as Date,
       tag: app.job.jobTag.title,
       status: app.status,
     };
@@ -173,8 +173,8 @@ async function fetchThirdTab(studentUserId: string) {
     const finalApp: applicationInfo = {
       jobId: app.jobId,
       title: app.job.title,
-      startDate: app.job.estimateStartDate,
-      endDate: app.job.estimateEndDate,
+      startDate: app.job.estimateStartDate as Date,
+      endDate: app.job.estimateEndDate as Date,
       tag: app.job.jobTag.title,
       status: "DONE",
     };
