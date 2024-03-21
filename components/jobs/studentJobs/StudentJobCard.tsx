@@ -41,30 +41,31 @@ const StudentJobCard = ({
     const [isDropDownOpen, setDropDownOpen] = useState(false);
 
     return (
-        <div className="bg-gradient-to-r from-slate-100 px-5 py-7 rounded-3xl shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-slate-200 max-w-[500px] transition duration-300 ease-in-out">
+        <div className="bg-gradient-to-r from-slate-100 px-5 py-7 rounded-3xl shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-slate-200 max-w-[500px] h-fit transition duration-300 ease-in-out">
             <div className="flex flex-row justify-between">
-                <div className="w-[85%]">
+                <div className="max-w-[85%]">
                     <div className="h-[60px]">
                         <p className="font-semibold text-2xl line-clamp-2 hover:underline">
                             {name}
                         </p>
                     </div>
-                    <div className="font-medium my-2">
-                        {startDate.toLocaleDateString("en-GB")} -{" "}
-                        {endDate.toLocaleDateString("en-GB")}
-                    </div>
                 </div>
                 <div
-                    className={`${colorMatcher.get(status)} rounded-full flex align-center w-fit h-fit py-2 px-3 mx-2 text-nowrap`}
+                    className={`${colorMatcher.get(status)} rounded-full flex align-center w-fit h-fit py-2 px-3 mx-2`}
                 >
-                    <p className="text-xs">
+                    <p className="text-xs font-medium sm:text-nowrap text-wrap">
                         {convertStateNameToThai("student", status)}
                     </p>
                 </div>
             </div>
 
+            <div className="font-medium my-2">
+                {startDate.toLocaleDateString("en-GB")} -{" "}
+                {endDate.toLocaleDateString("en-GB")}
+            </div>
+
             <div className="flex flex-row justify-between">
-                <div className="bg-slate-200 rounded-sm p-2 w-fit">
+                <div className="bg-slate-200 rounded p-2 w-fit">
                     {category}
                 </div>
 
