@@ -10,6 +10,8 @@ type Props = {
   isHistory?: boolean;
 };
 
+const fileText = require("@/public/icons/fileText.svg") as string;
+
 export default async function JobDetail({ jobId, isStudentView, isHistory }: Props) {
   // Hard code
   const url = "https://skillbridge-s3.s3.us-east-1.amazonaws.com/962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAVRUVUMB3ZFAZRNTX%2F20240321%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240321T191517Z&X-Amz-Expires=3600&X-Amz-Signature=6397ebb58729020be8f27461ee16477b303c5b1bf56c792fb0b6491c0cb9e1c5&X-Amz-SignedHeaders=host&x-id=GetObject"
@@ -71,7 +73,7 @@ export default async function JobDetail({ jobId, isStudentView, isHistory }: Pro
               รายละเอียดเพิ่มเติม:
             </div>
             <div className="w-fit">
-              <FileBox url={url} text="รายละเอียดงาน" />
+              <FileBox url={url} src={fileText} text="รายละเอียดงาน" />
             </div>
           </div>
 

@@ -35,6 +35,7 @@ interface FormErrors {
 const questionMarkCircle =
   require("@/public/icons/questionMarkCircle.svg") as string;
 const noFile = require("@/public/icons/noFile.svg") as string;
+const paperClip = require("@/public/icons/paperClip.svg") as string;
 
 export default function OfferingForm({ jobId, application }: Props) {
   const [primaryLoading, setPrimaryLoading] = useState(false);
@@ -154,7 +155,7 @@ export default function OfferingForm({ jobId, application }: Props) {
         )}
         {bid && url && (
           <div className="mt-[7px]">
-            <FileBox url={url} text="ไฟล์สัญญาที่แนบไว้" />
+            <FileBox url={url} src={paperClip} text="ไฟล์สัญญาที่แนบไว้" />
           </div>
         )}
         {bid === null && (
