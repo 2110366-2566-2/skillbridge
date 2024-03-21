@@ -8,6 +8,7 @@ interface jobTagList {
 
 async function main() {
   await prisma.review.deleteMany({});
+  await prisma.transactionDetail.deleteMany({});
   await prisma.transaction.deleteMany({});
   await prisma.applicationDocumentFile.deleteMany({});
   await prisma.application.deleteMany({});
@@ -2341,18 +2342,18 @@ and fresh perspective, exceeding our expectations.",
     },
   });
 
-  const c1 = await prisma.chatroom.create({
-    data: {
-      jobId: j27.id,
-      studentId: s3.userId,
-      employerUserId: e3.userId,
-      amount: 2250,
-      isDeposit: false,
-      createdAt: new Date("2022-12-30T17:35:00"),
-      receiptImageName:
-        "bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68",
-    },
-  });
+  // const c1 = await prisma.chatroom.create({
+  //   data: {
+  //     jobId: j27.id,
+  //     studentId: s3.userId,
+  //     employerUserId: e3.userId,
+  //     amount: 2250,
+  //     isDeposit: false,
+  //     createdAt: new Date("2022-12-30T17:35:00"),
+  //     receiptImageName:
+  //       "bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68",
+  //   },
+  // });
 
 }
 
