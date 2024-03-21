@@ -3,14 +3,13 @@
 import getJobById from "@/actions/jobs/getJobByID";
 import EmployerDetail from "./EmployerDetail";
 import FileBox from "./FileBox";
+import fileText from '@/public/icons/fileText.svg';
 
 type Props = {
   jobId: string;
   isStudentView: boolean;
   isHistory?: boolean;
 };
-
-const fileText = require("@/public/icons/fileText.svg") as string;
 
 export default async function JobDetail({ jobId, isStudentView, isHistory }: Props) {
   // Hard code

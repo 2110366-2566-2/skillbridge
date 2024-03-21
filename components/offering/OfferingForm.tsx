@@ -32,8 +32,7 @@ interface FormErrors {
   bid?: number;
 }
 
-const questionMarkCircle =
-  require("@/public/icons/questionMarkCircle.svg") as string;
+const questionMarkCircle = require("@/public/icons/questionMarkCircle.svg") as string;
 const noFile = require("@/public/icons/noFile.svg") as string;
 const paperClip = require("@/public/icons/paperClip.svg") as string;
 
