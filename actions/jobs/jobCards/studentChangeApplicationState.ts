@@ -47,7 +47,7 @@ async function acceptedToDepositPending(jobId: string) {
   //this function change application status from ACCEPTED to PENDING and send email to notify employer
 
   // change application status from ACCEPTED to PENDING
-  await studentChangeApplicationStatus(jobId, ApplicationStatus.PENDING);
+  await studentChangeApplicationStatus(jobId, ApplicationStatus.DEPOSIT_PENDING);
 
   // get detail necessary to send email
   const { job, user } = await getEmailDetail(jobId);
