@@ -1,4 +1,4 @@
-import JobCard from "../JobCard";
+import JobCard from "./JobCard";
 import sortArray from "../../../lib/Jobs/sortArray";
 import JobCardType from "../../../types/JobCardType";
 import SearchNotFound from "../../searchJob/SearchNotFound";

@@ -4,8 +4,6 @@ import React, { useEffect, useState } from "react";
 import JobToggler from "../JobToggler";
 import Sorter from "../Sorter";
 import StudentJobsPanel from "./StudentJobsPanel";
-import filterStudentJobs from "@/lib/Jobs/filterJobToggler";
-import StudentDoneJobsPanel from "./StudentDoneJobsPanel";
 import {
     applicationInfo,
     studentFetchApplications,

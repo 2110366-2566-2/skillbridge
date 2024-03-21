@@ -1,8 +1,5 @@
 import React from "react";
-import JobStatus from "./jobStatus/jobStatus";
-import StudentJobCardType from "@/types/StudentJobCardType";
 import sortArray from "@/lib/Jobs/sortStudentArray";
-import { convertStateNameToThai } from "@/lib/Jobs/adapter";
 import { applicationInfo } from "@/actions/jobs/jobCards/fetchJobCards";
 import SearchNotFound from "@/components/searchJob/SearchNotFound";
 import StudentJobCard from "./StudentJobCard";
@@ -24,7 +21,7 @@ function StudentJobsPanel({
     data,
     isDone = true,
 }: Props) {
-  console.log(data);
+    console.log(data);
     const sortedData = sortArray(
         data,
         startDateSortOption,
@@ -46,17 +43,15 @@ function StudentJobsPanel({
                     isDone === false ? (
                         sortedData.map((data, index) => {
                             return (
-                                <JobStatus
+                                <StudentJobCard
                                     key={index}
                                     jobId={data.jobId}
-                                    title={data.title}
+                                    name={data.title}
                                     startDate={data.startDate}
                                     endDate={data.endDate}
                                     category={data.tag}
-                                    status={convertStateNameToThai(
-                                        "student",
-                                        data.status
-                                    )}
+                                    status={data.status}
+                                    isDone={isDone}
                                 />
                             );
                         })
@@ -70,7 +65,8 @@ function StudentJobsPanel({
                                     category={data.tag}
                                     startDate={data.startDate}
                                     endDate={data.endDate}
-                                    status={convertStateNameToThai("student", data.status)}
+                                    status={data.status}
+                                    isDone={isDone}
                                 />
                             );
                         })
