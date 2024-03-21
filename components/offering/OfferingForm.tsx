@@ -186,7 +186,7 @@ export default function OfferingForm({ jobId, application }: Props) {
             </button>
             {isBudgetInfoVisible && (
               <div className="max-w-[194.98px] z-10 absolute ml-[28px] mt-[-20px] p-2 text-slate-800 bg-white border-slate-300 border-[0.5px] rounded-md shadow-md">
-                ค่าตอบแทนที่ผู้ว่าจ้างระบุไว้<br></br>
+                ค่าตอบแทนที่ผู้ว่าจ้างระบุไว้
                 สำหรับการจ้างนิสิต 1 คน
               </div>
             )}
