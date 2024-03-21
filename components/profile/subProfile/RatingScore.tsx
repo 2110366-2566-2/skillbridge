@@ -2,7 +2,6 @@ import Image from "next/image";
 export default function RatingScore({ averageScore }: { averageScore: number }) {
 
     let widthOfRating = 22 * averageScore + 5 * Math.floor(averageScore)
-    console.log(Math.floor(averageScore))
 
 
     return (

@@ -5,7 +5,7 @@ import { splitSalutation } from "@/lib/utils"
 import { EmailRegisterSchema } from "@/schemas/EmailRegisterSchema"
 import bcrypt from "bcrypt"
 
-export async function registerWithCredentials(data: {
+async function registerWithCredentials(data: {
   email: string
   password: string
   cPassword: string
