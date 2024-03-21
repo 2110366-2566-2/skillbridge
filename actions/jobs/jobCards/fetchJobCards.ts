@@ -1,9 +1,7 @@
 "use server";
 import { ApplicationStatus } from "@prisma/client";
 import { prisma } from "../../../lib/prisma";
-import { getEmployerJobs } from "../getEmployerJobs";
 import { getEmployerUserId, getStudentUserId, validateJobOwner } from "./utils";
-import { integer } from "@elastic/elasticsearch/lib/api/types";
 
 export interface applicationInfo {
   jobId: string;
