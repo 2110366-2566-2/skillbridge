@@ -14,7 +14,7 @@ export default function JobHistory({
     return (
         <div className="mt-[13px] w-full flex pb-[13px] border-b border-[#cbd5e1] md:mt-[15px] md:pb-[15px]">
             <div className="w-full flex flex-col mr-[20px] ">
-                <p className="font-bold text-[18px] text-[#334155] line-clamp-1">
+                <p className="font-bold text-[18px] text-[#334155] line-clamp-2 h-[3em]">
                     {jobTitle}
                 </p>
                 <div className="flex w-full">
@@ -27,7 +27,7 @@ export default function JobHistory({
                 </div>
             </div>
             <div className="flex items-center ">
-                <div className="rounded-full border border-[#E2E8F0] bg-white p-[8px] hover:opacity-80 active:opacity-60 cursor-pointer">
+                <div className="rounded-full border border-[#E2E8F0] bg-white p-[8px] hover:opacity-80 active:opacity-60 cursor-pointer w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] flex items-center justify-center mr-[7px] md:mr-[12px] lg:mr-[18px]">
                     <Image src={'/icons/right.svg'} width={20} height={20} alt="right" />
                 </div>
             </div>
