@@ -18,6 +18,8 @@ import history from "@/public/icons/history.svg";
 import historyDark from "@/public/icons/historyDark.svg";
 import Sidebar from "./sidebar/Sidebar";
 import LogoutLink from "./logoutButton/LogoutButton";
+import ChatNavIcon from "@/public/icons/chatNav.svg"
+import ChatNavDarkIcon from "@/public/icons/chatNavDark.svg"
 import { usePathname } from "next/navigation";
 
 const studentLinks = [
@@ -39,6 +41,12 @@ const studentLinks = [
     icon: workIcon,
     activeIcon: workDarkIcon,
   },
+  {
+    title: "แชท",
+    path: "/chat",
+    icon: ChatNavIcon,
+    activeIcon: ChatNavDarkIcon,
+  },
 ];
 
 const employerLinks = [
@@ -53,6 +61,12 @@ const employerLinks = [
     path: "/jobs",
     icon: workIcon,
     activeIcon: workDarkIcon,
+  },
+  {
+    title: "แชท",
+    path: "/chat",
+    icon: ChatNavIcon,
+    activeIcon: ChatNavDarkIcon,
   },
 ];
 
