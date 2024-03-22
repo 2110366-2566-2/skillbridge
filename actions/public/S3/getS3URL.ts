@@ -1,5 +1,5 @@
 "use server";
-
+require("dotenv").config(); // For Testing
 import { GetObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import s3 from "../../../lib/bucket";
@@ -26,3 +26,9 @@ const getS3URL = async (fileName: string) => {
 };
 
 export default getS3URL;
+
+// const main = async () => {
+//   const result = await getS3URL("jobFiles/filename");
+//   console.log(result);
+// };
+// main();

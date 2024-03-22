@@ -4,7 +4,7 @@ import { JobStatus } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import { ZodError, z } from "zod";
-import JobSchema from "./JobType";
+import JobSchema from "../../types/JobType";
 import type { Session } from "next-auth";
 import createFileBuffer from "../public/S3/createFileBuffer";
 import { Response } from "@/types/ResponseType";
