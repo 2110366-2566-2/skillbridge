@@ -30,13 +30,13 @@ export default function ProfileInfo({
     return (
         <div className="p-[20px] border border-1 border-[#cbd5e1] rounded-md md:px-[25px] md:py-[30px]">
             <div className="flex items-center mb-[15px] md:mb-[25px]">
-                <div className="mr-[15px] md:mr-[20px]">
+                <div className="mr-[15px] md:mr-[20px] w-[94px] h-[94px] lg:w-[130px] lg:h-[130px] rounded-full border border-[#778499] overflow-hidden">
                     <Image
                         src={profileImageURL ? profileImageURL : "/images/defaultProfile.svg"}
                         width={0}
                         height={0}
                         alt="profile"
-                        className="w-[94px] h-[94px] lg:w-[130px] lg:h-[130px]"
+                        className="w-[110px] h-[110px] lg:w-[146px] lg:h-[146px] object-cover"
                     />
                 </div>
                 <div className="flex flex-col">
