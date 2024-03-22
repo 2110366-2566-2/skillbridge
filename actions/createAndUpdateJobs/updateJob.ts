@@ -41,7 +41,7 @@ const updateJob = async (formData: FormData) => {
     const budget: number | undefined = response.data.budget;
     const jobTagId: string | undefined = response.data.jobTagId;
     const numWorker: number | undefined = response.data.numWorker;
-    const file: File | undefined = response.data.file;
+    const file: File | undefined = response.data["files[]"];
 
     // console.log(
     //   jobId,

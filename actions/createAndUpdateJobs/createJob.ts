@@ -38,7 +38,7 @@ const createJob = async (formData: FormData) => {
     const budget: number = response.data.budget;
     const jobTagId: string = response.data.jobTagId;
     const numWorker: number = response.data.numWorker;
-    const file: File | undefined = response.data.file;
+    const file: File | undefined = response.data["files[]"];
     const status: JobStatus = response.data.status;
 
     // Test log

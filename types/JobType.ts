@@ -9,7 +9,7 @@ const JobSchema = z.object({
   budget: z.coerce.number().int().gte(0),
   jobTagId: z.string(),
   numWorker: z.coerce.number().int().gte(1),
-  file: z.instanceof(File).optional(),
+  "files[]": z.instanceof(File).optional(),
   status: z.nativeEnum(JobStatus).default("NOT_STARTED"),
 });
 
