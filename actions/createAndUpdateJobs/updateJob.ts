@@ -2,7 +2,6 @@
 
 import { prisma } from "../../lib/prisma";
 import { revalidatePath } from "next/cache";
-import uploadMultipleFilesToS3 from "../public/S3/uploadMultipleFilesToS3";
 import { string } from "zod";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
@@ -40,7 +39,7 @@ const updateJob = async (formData: FormData) => {
       budget,
       jobTagId,
       numWorker,
-      files,
+      files
     );
 
     const session = await getServerSession(authOptions);
@@ -80,33 +79,33 @@ const updateJob = async (formData: FormData) => {
       };
     }
     let jobDocumentFile = null;
-    if (files) {
-      const results: string | any = await uploadMultipleFilesToS3(files);
-      if (results.message) {
-        throw results;
-      }
-      if (job.jobDocumentFiles) {
-        job.jobDocumentFiles.forEach(async (doc: any) => {
-          await prisma.jobDocumentFile.update({
-            where: {
-              id: doc.id,
-            },
-            data: {
-              isDeleted: true,
-            },
-          });
-        });
-      }
+    // if (files) {
+    //   const results: string | any = await uploadMultipleFilesToS3(files);
+    //   if (results.message) {
+    //     throw results;
+    //   }
+    //   if (job.jobDocumentFiles) {
+    //     job.jobDocumentFiles.forEach(async (doc: any) => {
+    //       await prisma.jobDocumentFile.update({
+    //         where: {
+    //           id: doc.id,
+    //         },
+    //         data: {
+    //           isDeleted: true,
+    //         },
+    //       });
+    //     });
+    //   }
 
-      results.forEach(async (fileName: string) => {
-        await prisma.jobDocumentFile.create({
-          data: {
-            jobId: jobId,
-            fileName: fileName,
-          },
-        });
-      });
-    }
+    //   results.forEach(async (fileName: string) => {
+    //     await prisma.jobDocumentFile.create({
+    //       data: {
+    //         jobId: jobId,
+    //         fileName: fileName,
+    //       },
+    //     });
+    //   });
+    // }
 
     await prisma.job.update({
       where: {

@@ -23,16 +23,18 @@ const acceptedTypes = [
 ];
 const createJob = async (formData: FormData) => {
   try {
+    console.log(Object.fromEntries(formData));
     const response: ZodResponse = JobSchema.safeParse(
       Object.fromEntries(formData)
     );
     if (!response.success) {
       throw response.error;
     }
+
     const title: string = response.data.title;
     const description: string = response.data.description;
     const estimateStartDate: Date = response.data.estimateStartDate;
-    const estimateEndDate: Date = response.data.esimateEndDate;
+    const estimateEndDate: Date = response.data.estimateEndDate;
     const budget: number = response.data.budget;
     const jobTagId: string = response.data.jobTagId;
     const numWorker: number = response.data.numWorker;
@@ -51,7 +53,7 @@ const createJob = async (formData: FormData) => {
     //   numWorker,
     //   files
     // );
-
+    console.log(file?.name);
     const session: Session | null = await getServerSession(authOptions);
     const userId = session?.user.id;
     const employer = await prisma.employer.findFirst({

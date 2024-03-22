@@ -5,7 +5,7 @@ const JobSchema = z.object({
   title: z.string(),
   description: z.string(),
   estimateStartDate: z.coerce.date(),
-  esimateEndDate: z.coerce.date(),
+  estimateEndDate: z.coerce.date(),
   budget: z.coerce.number().int().gte(0),
   jobTagId: z.string(),
   numWorker: z.coerce.number().int().gte(1),
