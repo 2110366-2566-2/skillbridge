@@ -28,23 +28,24 @@ export default function ProfileInfo({
     // const isEditAble = ถ้าเป็นหน้าของตนเองก็ true ไม่ก้ false               check session ดู id ของคนที่เข้ามาดู profile ตรงกับ studentId บ่
 
     return (
-        <div className="p-[20px] w-full border border-1 border-[#cbd5e1] rounded-md">
-            <div className="flex items-center mb-[10px] ">
-                <div className="mr-[15px]">
+        <div className="p-[20px] border border-1 border-[#cbd5e1] rounded-md md:px-[25px] md:py-[30px]">
+            <div className="flex items-center mb-[15px] md:mb-[25px]">
+                <div className="mr-[15px] md:mr-[20px]">
                     <Image
                         src={profileImageURL ? profileImageURL : "/images/defaultProfile.svg"}
-                        width={94}
-                        height={94}
+                        width={0}
+                        height={0}
                         alt="profile"
+                        className="w-[94px] h-[94px] lg:w-[130px] lg:h-[130px]"
                     />
                 </div>
-                <div className="flex flex-col mr-[10px]">
+                <div className="flex flex-col">
 
-                    <p className="font-bold text-xl text-[#334155] line-clamp-1 ">
+                    <p className="font-bold text-[21px] text-[#334155] line-clamp-1 lg:text-[28px]">
                         {studentName}
                     </p>
 
-                    <p className="text-[13px] text-slate-600 mb-[7px]">
+                    <p className="text-[13px] text-slate-600 mb-[7px] md:text-[14px] lg:text-[17px] lg:mb-[4px]">
                         นิสิตจุฬาลงกรณ์มหาวิทยาลัย
                     </p>
 
@@ -55,11 +56,11 @@ export default function ProfileInfo({
 
             {
                 portfolioURL &&
-                <div className="w-full px-[16px] flex items-center py-[8px] bg-[#cbd5e1] rounded-lg hover:underline hover:underline-offset-2 cursor-pointer pt-[10px]"
+                <div className="w-full px-[16px] flex items-center pb-[8px] pt-[10px] bg-[#cbd5e1] rounded-lg hover:underline hover:underline-offset-2 cursor-pointer mb-[15px] md:mb-[25px]"
                     onClick={() => router.push(portfolioURL)}
                 >
-                    <Image src={'/icons/file.svg'} width={15} height={15} alt="file" className="mr-[15px]" />
-                    <p className="text-[16px] font-medium text-slate-600 text-center">
+                    <Image src={'/icons/file.svg'} width={0} height={0} alt="file" className="w-[15px] h-[15px] md:w-[20px] md:h-[20px] mr-[15px]" />
+                    <p className="text-[16px] font-medium text-slate-600 text-center md:text-[20px]">
                         แฟ้มสะสมผลงาน
                     </p>
                 </div>
@@ -67,14 +68,14 @@ export default function ProfileInfo({
 
             {
                 studentDetail &&
-                <div className="pt-[10px] mt-[10px] border-t border-[#cbd5e1]">
-                    <p className="line-clamp-5 text-[13px] text-[#64748B]">
+                <div className="pt-[15px] border-t border-[#cbd5e1] mb-[15px]">
+                    <p className="line-clamp-5 text-[13px] text-[#64748B] md:text-[18px]">
                         {studentDetail}
                     </p>
                 </div>
             }
 
-            <div className="flex items-center justify-center border-t border-[#cbd5e1] pt-[10px] mt-[10px]">
+            <div className="flex items-center justify-center border-t border-[#cbd5e1] pt-[15px] md:pt-[25px]">
                 <div className="flex items-center mr-[35px]">
                     <Image src={'/icons/bag.svg'} width={45} height={42} alt="bag" className="mr-[10px]" />
                     <div className="flex flex-col pt-[5px]">
@@ -100,9 +101,10 @@ export default function ProfileInfo({
             </div>
 
             {
-                isEditAble &&
-                <div className="w-full h-[40px] flex items-center justify-center rounded-[6px] border border-1 border-slate-300 cursor-pointer hover:underline hover:underline-offset-2 mt-[10px]">
-                    <p className="text-[14px] font-medium text-slate-600">
+                true &&
+                <div className="w-full h-[40px] flex items-center justify-center rounded-[6px] border border-1 border-slate-300 cursor-pointer mt-[15px] md:mt-[25px] md:h-[50px]
+                hover:underline hover:underline-offset-2">
+                    <p className="text-[14px] font-medium text-slate-600 md:text-[18px]">
                         แก้ไขโปรไฟล์
                     </p>
                 </div>
