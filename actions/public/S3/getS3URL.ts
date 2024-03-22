@@ -19,7 +19,7 @@ const getS3URL = async (fileName: string) => {
   } catch (error) {
     console.log(error);
     return {
-      sucess: false,
+      success: false,
       message: "getting URL failed",
     } as const;
   }

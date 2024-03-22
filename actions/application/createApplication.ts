@@ -7,15 +7,9 @@ import { ZodError, z } from "zod";
 import type { Session } from "next-auth";
 import createFileBuffer from "../public/S3/createFileBuffer";
 import { Response } from "@/types/ResponseType";
+import ApplicationSchema from "@/types/ApplicationType";
 
 const acceptedType = ["application/pdf"];
-
-const ApplicationSchema = z.object({
-  file: z.instanceof(File).nullish(),
-  bid: z.coerce.number().gte(0),
-  jobId: z.string(),
-});
-
 type ApplicationForm = z.infer<typeof ApplicationSchema>;
 
 type ZodResponse =
