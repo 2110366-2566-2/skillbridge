@@ -39,7 +39,7 @@ const getApplicationByUserId = async (jobId: string, userId?: string) => {
     let signUrl: string | any = null;
     if (application?.applicationDocumentFiles[0]) {
       signUrl = await getS3URL(
-        application.applicationDocumentFiles[0].fileName
+        application.applicationDocumentFiles[0].fileName,
       );
     }
 

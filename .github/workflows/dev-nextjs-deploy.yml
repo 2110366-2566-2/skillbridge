@@ -19,42 +19,42 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Create env File
+      - id: auth
+        name: Auth with GCP
+        uses: google-github-actions/auth@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Create env File 
         run: |
           touch .env
           echo DATABASE_URL=${{ secrets.DATABASE_URL }} >> .env
-          cat .env
-
-      - name: GCP Authentication
-        uses: google-github-actions/setup-gcloud@v0
-        with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-          export_default_credentials: true
 
       - name: Configure Docker
         run: |
           gcloud auth configure-docker us-central1-docker.pkg.dev
 
-      - name: Debug Information
-        run: |
-          echo "Artifact Registry Location: ${{ secrets.GCP_DEV_NEXTJS_AR_LOCATION }}"
-          gcloud auth list
-          docker info
-
       - name: Build and Push to Artifact Registry
         run: |
           docker image prune -a
-          docker build -t ${{ secrets.GCP_DEV_NEXTJS_AR_LOCATION }} .
+          docker build \
+            --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} \
+            -t ${{ secrets.GCP_DEV_NEXTJS_AR_LOCATION }} .
           docker push ${{ secrets.GCP_DEV_NEXTJS_AR_LOCATION }}
 
-      - name: Deploy to Cloud Run
-        uses: google-github-actions/deploy-cloudrun@main
+      - id: deploy
+        name: Deploy to Cloud Run
+        uses: google-github-actions/deploy-cloudrun@v2
         with:
           image: ${{ secrets.GCP_DEV_NEXTJS_AR_LOCATION }}
           service: ${{ secrets.GCP_DEV_NEXTJS_CR_NAME }}
           region: ${{ env.REGION }}
-          platform: managed
-          allow-unauthenticated: true
+
+      - name: Use output
+        run: curl ${{ steps.deploy.outputs.url }}

@@ -41,6 +41,7 @@ model Student {
   userId         String        @id @unique
   bankAccountNo  String?
   avgStar        Float?
+  description    String?
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
   resumeName     String?
@@ -49,6 +50,7 @@ model Student {
   reviews        Review[]
   user           User          @relation(fields: [userId], references: [id])
   transactions   Transaction[]
+  Chatroom       Chatroom[]
 
   @@map("student")
 }
@@ -63,6 +65,7 @@ model Employer {
   user         User          @relation(fields: [userId], references: [id])
   jobs         Job[]
   transactions Transaction[]
+  Chatroom     Chatroom[]
 
   @@map("employer")
 }
@@ -148,12 +151,15 @@ model ApplicationDocumentFile {
 
 model Chatroom {
   id                String      @id @default(uuid())
+  applicationUserId String
+  applicationJobId  String
+  employerId        String
   createdAt         DateTime    @default(now())
   updatedAt         DateTime    @updatedAt
-  applicationJobId  String
-  applicationUserId String
-  application       Application @relation(fields: [applicationUserId, applicationJobId], references: [userId, jobId])
   messages          Message[]
+  student           Student     @relation(fields: [applicationUserId], references: [userId])
+  employer          Employer    @relation(fields: [employerId], references: [userId])
+  application       Application @relation(fields: [applicationUserId, applicationJobId], references: [userId, jobId])
 
   @@unique([applicationUserId, applicationJobId])
   @@map("chatroom")
@@ -194,7 +200,7 @@ model Transaction {
 
 model TransactionDetail {
   transactionId      String      @id @unique
-  transRef           String
+  transRef           String      @unique
   sendingBank        String
   transTimestamp     DateTime
   senderTHName       String

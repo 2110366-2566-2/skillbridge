@@ -1,10 +1,7 @@
 "use server";
-import { ApplicationStatus, Application } from "@prisma/client";
+import { ApplicationStatus } from "@prisma/client";
 import { prisma } from "../../../lib/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
-import { getApplication, getStudentUserId } from "./utils";
-import { title } from "process";
+import { getApplication, getEmailDetail, getStudentUserId, studentChangeApplicationStatus } from "./utils";
 import { sendEmail } from "./sendEmail";
 
 /*
@@ -20,248 +17,116 @@ DONE // final state
 CANCELED // final state
 */
 
+/*
+Status transitions possibly made by student:
+
+pending => Disclaimed
+accepted => DepositPending
+accepted => Disclaimed
+inProgress => Delivered
+*/
+
 async function pendingToDisclaimed(jobId: string) {
-  //TODO : change application's status with such ids from pending to disclaim
-  const studentUserId = await getStudentUserId();
+  //this function change application status from PENDING to DISCLAIMED and send email to notify employer
 
-  const application = await getApplication(studentUserId, jobId);
+  // change application status from PENDING to DISCLAIMED
+  await studentChangeApplicationStatus(jobId, ApplicationStatus.DISCLAIMED);
 
-  if (application.status != ApplicationStatus.PENDING) {
-    throw {
-      message: "Application status is not valid",
-      status: 400,
-    };
-  }
+  // get detail necessary to send email
+  const { job, user } = await getEmailDetail(jobId);
 
-    await prisma.application.update({
-        where: {
-            userId_jobId: {
-                userId: studentUserId,
-                jobId: jobId
-            },
-        },
-        data: {
-            status: ApplicationStatus.DISCLAIMED
-        }
-    });
+  // setup subject and text for email
+  const subject = `มีนิสิตยกเลิกการสมัครงาน ${job.title}`;
+  const text = `นิสิต ${user.salutation} ${user.firstname} ${user.lastname} ได้ยกเลิกการสมัครงาน ${job.title}`;
 
-  const emailApp = await prisma.application.findUniqueOrThrow({
-    where: {
-      userId_jobId: {
-        userId: studentUserId,
-        jobId: jobId,
-      },
-    },
-    select: {
-      job: {
-        select: {
-          title: true,
-          employerId: true,
-        },
-      },
-      user: {
-        select: {
-          salutation: true,
-          firstname: true,
-          lastname: true,
-        },
-      },
-    },
-  });
-
-  const subject = `มีนิสิตยกเลิกการสมัครงาน ${emailApp.job.title}`;
-  const text = `นิสิต ${emailApp.user.salutation} ${emailApp.user.firstname} ${emailApp.user.lastname} ได้ยกเลิกการสมัครงาน ${emailApp.job.title}`;
-
-  sendEmail(emailApp.job.employerId, subject, text);
+  // send email
+  sendEmail(job.employerId, subject, text);
 }
 
 async function acceptedToDepositPending(jobId: string) {
-  const studentUserId = await getStudentUserId();
+  //this function change application status from ACCEPTED to PENDING and send email to notify employer
 
-  const application = await getApplication(studentUserId, jobId);
+  // change application status from ACCEPTED to PENDING
+  await studentChangeApplicationStatus(jobId, ApplicationStatus.PENDING);
 
-  if (application.status != ApplicationStatus.ACCEPTED) {
-    throw {
-      message: "Application status is not valid",
-      status: 400,
-    };
-  }
+  // get detail necessary to send email
+  const { job, user } = await getEmailDetail(jobId);
 
-    await prisma.application.update({
-        where: {
-            userId_jobId: {
-                userId: studentUserId,
-                jobId: jobId
-            },
-        },
-        data: {
-            status: ApplicationStatus.DEPOSIT_PENDING
-        }
-    });
+  // setup subject and text for email
+  const subject = `มีนิสิตยอมรับที่จะทำงาน ${job.title} แล้ว`;
+  const text = `นิสิต ${user.salutation} ${user.firstname} ${user.lastname} ได้ยอมรับที่จะทำงาน ${job.title} กรุณาชำระค่ามัดจำเพื่อให้นิสิตเริ่มทำงาน`;
 
-  const emailApp = await prisma.application.findUniqueOrThrow({
-    where: {
-      userId_jobId: {
-        userId: studentUserId,
-        jobId: jobId,
-      },
-    },
-    select: {
-      job: {
-        select: {
-          title: true,
-          employerId: true,
-        },
-      },
-      user: {
-        select: {
-          salutation: true,
-          firstname: true,
-          lastname: true,
-        },
-      },
-    },
-  });
-
-  const subject = `มีนิสิตยอมรับที่จะทำงาน ${emailApp.job.title} แล้ว`;
-  const text = `นิสิต ${emailApp.user.salutation} ${emailApp.user.firstname} ${emailApp.user.lastname} ได้ยอมรับที่จะทำงาน ${emailApp.job.title} กรุณาชำระค่ามัดจำเพื่อให้นิสิตเริ่มทำงาน`;
-
-  sendEmail(emailApp.job.employerId, subject, text);
+  // send email
+  sendEmail(job.employerId, subject, text);
 }
 
 async function acceptedToDisclaimed(jobId: string) {
-  const studentUserId = await getStudentUserId();
+  //this function change application status from ACCEPTED to DISCLAIMED and send email to notify employer
 
-  const application = await getApplication(studentUserId, jobId);
+  // change application status from ACCEPTED to DISCLAIMED
+  await studentChangeApplicationStatus(jobId, ApplicationStatus.DISCLAIMED);
 
-  if (application.status != ApplicationStatus.ACCEPTED) {
-    throw {
-      message: "Application status is not valid",
-      status: 400,
-    };
-  }
+  // get detail necessary to send email
+  const { job, user } = await getEmailDetail(jobId);
 
-    await prisma.application.update({
-        where: {
-            userId_jobId: {
-                userId: studentUserId,
-                jobId: jobId
-            },
-        },
-        data: {
-            status: ApplicationStatus.DISCLAIMED
-        }
-    });
+  // setup subject and text for email
+  const subject = `มีนิสิตปฏิเสธที่จะทำงาน ${job.title}`;
+  const text = `นิสิต ${user.salutation} ${user.firstname} ${user.lastname} ปฏิเสธที่จะทำงาน ${job.title}`;
 
-  const emailApp = await prisma.application.findUniqueOrThrow({
-    where: {
-      userId_jobId: {
-        userId: studentUserId,
-        jobId: jobId,
-      },
-    },
-    select: {
-      job: {
-        select: {
-          title: true,
-          employerId: true,
-        },
-      },
-      user: {
-        select: {
-          salutation: true,
-          firstname: true,
-          lastname: true,
-        },
-      },
-    },
-  });
-
-  const subject = `มีนิสิตปฏิเสธที่จะทำงาน ${emailApp.job.title}`;
-  const text = `นิสิต ${emailApp.user.salutation} ${emailApp.user.firstname} ${emailApp.user.lastname} ปฏิเสธที่จะทำงาน ${emailApp.job.title}`;
-
-  sendEmail(emailApp.job.employerId, subject, text);
+  // send email
+  sendEmail(job.employerId, subject, text);
 }
 
 async function inProgressToDelivered(jobId: string) {
+  //this function change application status from IN_PROGRESS to DELIVERED and send email to notify employer
+
+  // change application status from IN_PROGRESS to DELIVERED
+  await studentChangeApplicationStatus(jobId, ApplicationStatus.DELIVERED);
+
+  // get detail necessary to send email
+  const { job, user } = await getEmailDetail(jobId);
+
+  // setup subject and text for email
+  const subject = `นิสิตส่งมอบงาน ${job.title}`;
+  const text = `นิสิต ${user.salutation} ${user.firstname} ${user.lastname} ส่งมอบงาน ${job.title} แล้ว`;
+
+  // send email
+  sendEmail(job.employerId, subject, text);
+}
+
+async function acknowledgeApplication(jobId: string) {
   const studentUserId = await getStudentUserId();
 
   const application = await getApplication(studentUserId, jobId);
 
-  if (application.status != ApplicationStatus.IN_PROGRESS) {
+  const isValidStatus =
+    application.status === ApplicationStatus.CANCELED ||
+    application.status === ApplicationStatus.DONE ||
+    application.status === ApplicationStatus.REJECTED;
+  if (!isValidStatus) {
     throw {
       message: "Application status is not valid",
       status: 400,
     };
   }
 
-    await prisma.application.update({
-        where: {
-            userId_jobId: {
-                userId: studentUserId,
-                jobId: jobId
-            },
-        },
-        data: {
-            status: ApplicationStatus.DELIVERED
-        }
-    });
-
-  const emailApp = await prisma.application.findUniqueOrThrow({
+  await prisma.application.update({
     where: {
       userId_jobId: {
         userId: studentUserId,
         jobId: jobId,
       },
     },
-    select: {
-      job: {
-        select: {
-          title: true,
-          employerId: true,
-        },
-      },
-      user: {
-        select: {
-          salutation: true,
-          firstname: true,
-          lastname: true,
-        },
-      },
+    data: {
+      isAcknowledged: true,
     },
   });
-
-  const subject = `นิสิตส่งมอบงาน ${emailApp.job.title}`;
-  const text = `นิสิต ${emailApp.user.salutation} ${emailApp.user.firstname} ${emailApp.user.lastname} ส่งมอบงาน ${emailApp.job.title} แล้ว`;
-
-  sendEmail(emailApp.job.employerId, subject, text);
 }
 
-async function acknowledgeApplication(jobId: string) {
-    const studentUserId = await getStudentUserId();
-
-    const application = await getApplication(studentUserId, jobId);
-    
-    const isValidStatus = application.status === ApplicationStatus.CANCELED || application.status === ApplicationStatus.DONE || application.status === ApplicationStatus.REJECTED;
-    if (!isValidStatus) {
-        throw {
-            message: "Application status is not valid",
-            status: 400
-        }
-    }
-
-    await prisma.application.update({
-        where: {
-            userId_jobId: {
-                userId: studentUserId,
-                jobId: jobId
-            },
-        },
-        data: {
-            isAcknowledged: true
-        }
-    });
-}
-
-
-export { pendingToDisclaimed, acceptedToDepositPending, acceptedToDisclaimed, inProgressToDelivered, acknowledgeApplication };
+export {
+  pendingToDisclaimed,
+  acceptedToDepositPending,
+  acceptedToDisclaimed,
+  inProgressToDelivered,
+  acknowledgeApplication,
+};
