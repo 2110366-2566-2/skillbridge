@@ -12,8 +12,6 @@ type Props = {
 };
 
 export default async function JobDetail({ jobId, isStudentView, isHistory }: Props) {
-  // Hard code
-  const url = "https://skillbridge-s3.s3.us-east-1.amazonaws.com/962a92f777f202f9879d18cd445d630c41fd4f80dd80dd561757463fa1d29733?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAVRUVUMB3ZFAZRNTX%2F20240321%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240321T191517Z&X-Amz-Expires=3600&X-Amz-Signature=6397ebb58729020be8f27461ee16477b303c5b1bf56c792fb0b6491c0cb9e1c5&X-Amz-SignedHeaders=host&x-id=GetObject"
   const job = await getJobById(jobId);
   if (!job) return;
 
@@ -37,6 +35,7 @@ export default async function JobDetail({ jobId, isStudentView, isHistory }: Pro
     ...
   ]
   */
+  const url = jobData.jobDocumentFiles[0]?.fileLink;
 
   const employerData = {
     firstName: job.userName.firstname,
@@ -77,16 +76,17 @@ export default async function JobDetail({ jobId, isStudentView, isHistory }: Pro
             {jobData.description}
           </div>
           {/* {!isHistory && <hr className="border-slate-300 mb-3" />} */}
-          <div className="flex flex-row items-center">
-            <div className="text-[14px] text-slate-800 lg:text-[16px] mr-2">
-              รายละเอียดเพิ่มเติม:
+          {url && (
+            <div className="flex flex-row items-center mb-3">
+              <div className="text-[14px] text-slate-800 lg:text-[16px] mr-2">
+                รายละเอียดเพิ่มเติม:
+              </div>
+              <div className="w-fit">
+                <FileBox url={url} src={fileText} text="รายละเอียดงาน" />
+              </div>
             </div>
-            <div className="w-fit">
-              <FileBox url={url} src={fileText} text="รายละเอียดงาน" />
-            </div>
-          </div>
-
-          {!isHistory && <hr className="border-slate-300 mt-3" />}
+          )}
+          {!isHistory && <hr className="border-slate-300" />}
         </div>
         {!isHistory && (
           <div>
