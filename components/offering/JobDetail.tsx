@@ -27,14 +27,6 @@ export default async function JobDetail({ jobId, isStudentView, isHistory }: Pro
     jobDocumentFiles: job.jobDocumentFiles,
   };
 
-  /* EXAMPLE OF NEW KEY-VALUE (only jobDocumentFiles[0] is used)
-  jobDocumentFiles: [
-    {
-      fileLink: 'https://skillbridge-s3.s3.us-east-1.amazonaws.com/bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAVRUVUMB3ZFAZRNTX%2F20240322%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240322T031209Z&X-Amz-Expires=3600&X-Amz-Signature=facce3aae5cf0b9dc3bbcc74d13338bbf557c525e0b5fafc9293fb6b07e02824&X-Amz-SignedHeaders=host&x-id=GetObject'
-    },
-    ...
-  ]
-  */
   const url = jobData.jobDocumentFiles[0]?.fileLink;
 
   const employerData = {
