@@ -12,10 +12,16 @@ const getS3URL = async (fileName: string) => {
     };
     const command = new GetObjectCommand(getObjectParams);
     const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
-    return url;
+    return {
+      success: true,
+      data: url,
+    } as const;
   } catch (error) {
     console.log(error);
-    return { message: "getting URL failed" };
+    return {
+      sucess: false,
+      message: "getting URL failed",
+    } as const;
   }
 };
 

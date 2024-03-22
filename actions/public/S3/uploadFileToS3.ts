@@ -4,8 +4,6 @@ import { PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import s3 from "../../../lib/bucket";
 import crypto from "crypto";
-const generateFileName = (bytes = 32) =>
-  crypto.randomBytes(bytes).toString("hex");
 
 interface Error {
   message: string;
@@ -15,33 +13,39 @@ const uploadFileToS3 = async (
   buffer: Uint8Array,
   type: string,
   size: number,
-  path: string
+  path: string,
+  fileName: string
 ) => {
-  const validPath = ["jobFiles", "applicationFiles", "transactionFiles"];
-
-  if (!validPath.includes(path)) {
-    return {
-      message: "Invalid upload arguments",
-    };
-  }
-  const fileName = generateFileName();
-  const URL = `${path}/${fileName}`;
-
-  const putObjectCommand = new PutObjectCommand({
-    Bucket: process.env.BUCKET_NAME,
-    Key: URL,
-    Body: buffer,
-    ContentType: type,
-    ContentLength: size,
-  });
-
   try {
+    const validPath = ["jobFiles", "applicationFiles", "transactionFiles"];
+
+    if (!validPath.includes(path)) {
+      throw {
+        message: "Invalid upload arguments",
+      };
+    }
+    const name = `${path}/${fileName}`;
+
+    const putObjectCommand = new PutObjectCommand({
+      Bucket: process.env.BUCKET_NAME,
+      Key: name,
+      Body: buffer,
+      ContentType: type,
+      ContentLength: size,
+    });
     const response = await s3.send(putObjectCommand);
     // console.log(response);
-    return URL;
-  } catch (error) {
+    return {
+      success: true,
+      data: name,
+    } as const;
+  } catch (error: any) {
     console.log(error);
-    throw { message: "Upload Failed" } as Error;
+    const message: string = error.message ? error.message : "Upload Failed";
+    return {
+      success: false,
+      message,
+    } as const;
   }
 };
 

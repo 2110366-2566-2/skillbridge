@@ -46,7 +46,6 @@ model Student {
   updatedAt      DateTime      @updatedAt
   resumeName     String?
   transcriptName String?
-  description    String?
   reviews        Review[]
   user           User          @relation(fields: [userId], references: [id])
   transactions   Transaction[]
