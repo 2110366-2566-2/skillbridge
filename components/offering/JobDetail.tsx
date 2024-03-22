@@ -26,7 +26,19 @@ export default async function JobDetail({ jobId, isStudentView, isHistory }: Pro
     estimateStartDate: job.estimateStartDate,
     estimateEndDate: job.estimateEndDate,
     jobTagTitle: job.jobTags,
+    jobDocumentFiles: job.jobDocumentFiles,
   };
+
+  /* EXAMPLE OF NEW ATTRIBUTE
+  jobDocumentFiles: [
+    {
+      fileLink: 'https://skillbridge-s3.s3.us-east-1.amazonaws.com/bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAVRUVUMB3ZFAZRNTX%2F20240322%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240322T031209Z&X-Amz-Expires=3600&X-Amz-Signature=facce3aae5cf0b9dc3bbcc74d13338bbf557c525e0b5fafc9293fb6b07e02824&X-Amz-SignedHeaders=host&x-id=GetObject'
+    },
+    {
+      fileLink: 'https://skillbridge-s3.s3.us-east-1.amazonaws.com/584f0adcaf71a1608a930c343f3da839011324bef170b9722309b7fcadea48d9?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAVRUVUMB3ZFAZRNTX%2F20240322%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240322T031209Z&X-Amz-Expires=3600&X-Amz-Signature=cbe83d071fc02d4a20d7b6080290642f03d091972d8d279b9cdb2053a43b48ed&X-Amz-SignedHeaders=host&x-id=GetObject'
+    }
+  ]
+  */
 
   const employerData = {
     firstName: job.userName.firstname,
