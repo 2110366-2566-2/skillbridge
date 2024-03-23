@@ -2,9 +2,9 @@
 
 import { prisma } from "../../lib/prisma";
 
-const deleteJob = async (job_id: string) => {
+const deleteJob = async (jobId: string) => {
   try {
-    console.log(job_id);
+    console.log(jobId);
     //const session = await getServerSession(options);
     //const userId = session?.userId
     // const employer = await prisma.employer.findFirst({
@@ -18,9 +18,9 @@ const deleteJob = async (job_id: string) => {
     //     status: 401
     //   }
     // }
-    const job_info = await prisma.job.findFirst({
+    const jobInfo = await prisma.job.findFirst({
       where: {
-        id: job_id,
+        id: jobId,
       },
       select: {
         applications: true,
@@ -28,23 +28,23 @@ const deleteJob = async (job_id: string) => {
         jobDocumentFiles: true,
       },
     });
-    // console.log(job_info);
-    // console.log(!job_info);
-    // console.log(job_info?.status != "NOT_STARTED");
-    // console.log(job_info?.Applied);
-    if (!job_info || job_info.isDeleted) {
+    // console.log(jobInfo);
+    // console.log(!jobInfo);
+    // console.log(jobInfo?.status != "NOT_STARTED");
+    // console.log(jobInfo?.Applied);
+    if (!jobInfo || jobInfo.isDeleted) {
       throw {
         message: "Job not found",
         status: 404,
       };
-    } else if (job_info?.applications.length > 0) {
+    } else if (jobInfo?.applications.length > 0) {
       throw {
-        message: "Can't edit this job",
+        message: "Can't delete this job",
         status: 423,
       };
     }
 
-    for (const doc of job_info.jobDocumentFiles) {
+    for (const doc of jobInfo.jobDocumentFiles) {
       await prisma.jobDocumentFile.update({
         where: {
           id: doc.id,
@@ -56,7 +56,7 @@ const deleteJob = async (job_id: string) => {
     }
     await prisma.job.update({
       where: {
-        id: job_id,
+        id: jobId,
       },
       data: {
         isDeleted: true,
@@ -77,3 +77,10 @@ const deleteJob = async (job_id: string) => {
 };
 
 export default deleteJob;
+
+// const main = async () => {
+//   const result = await deleteJob("5525a176-ea04-4395-8906-38155d99e401");
+//   console.log(result);
+// };
+
+// main();
