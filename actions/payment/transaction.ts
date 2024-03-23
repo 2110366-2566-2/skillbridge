@@ -24,8 +24,7 @@ const createTransaction = async (formData: FormData) => {
       byteArray,
       receipt.type,
       receipt.size,
-      "transactionFiles",
-      receipt.name
+      "transactionFiles"
     );
     console.log("receiptImageName", receiptImageName);
     if (typeof receiptImageName !== "string")

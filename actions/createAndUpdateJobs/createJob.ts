@@ -94,8 +94,7 @@ const createJob = async (formData: FormData) => {
         bufferResponse.data,
         file.type,
         file.size,
-        "jobFiles",
-        file.name
+        "jobFiles"
       );
 
       if (!fileResponse.success) {
