@@ -7,7 +7,7 @@ export default async function ChatRoomPage({
 }: {
   params: { userId: string };
 }) {
-  const userId = params.userId;
+  const chatroomId = params.userId;
 
   // Session
   const session = await getServerSession(authOptions);
@@ -18,14 +18,12 @@ export default async function ChatRoomPage({
       {isStudent ? (
         // TODO : Desktop & Mobile Student Chat room
         <div>
-          Desktop & Mobile Student Chat room of myUserId:({session?.user.id})
-          and userId:({userId})
+          ChatroomId : {chatroomId}
         </div>
       ) : (
         // TODO : Desktop & Mobile Employer Chat room
         <div>
-          Desktop & Mobile Employer Chat room of myUserId:({session?.user.id})
-          and userId:({userId})
+          ChatroomId : {chatroomId}
         </div>
       )}
     </>
