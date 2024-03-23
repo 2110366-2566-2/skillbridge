@@ -17,7 +17,7 @@ const uploadFileToS3 = async (
   fileName: string
 ) => {
   try {
-    const validPath = ["jobFiles", "applicationFiles", "transactionFiles"];
+    const validPath = ["jobFiles", "applicationFiles", "transactionFiles", "messageImageFiles"];
 
     if (!validPath.includes(path)) {
       throw {
