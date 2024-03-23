@@ -19,8 +19,8 @@ export default function ProfileInfo({
     averageScore: number,
     portfolioURL: string
     studentDetail: string,
-    workingNumber: string,
-    workingComplete: string
+    workingNumber: number,
+    workingComplete: number
 }) {
 
     const router = useRouter();
