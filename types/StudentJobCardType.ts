@@ -2,8 +2,8 @@ type StudentJobCardType = {
   userId: string;
   jobId: string;
   title: string;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
   tag: string;
   status: string;
 };

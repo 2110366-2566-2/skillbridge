@@ -8,8 +8,8 @@ export interface job {
   id: string;
   isDeleted: boolean;
   title: string;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
   jobTags: string;
   description: string;
   acceptNum: number;
@@ -52,8 +52,8 @@ async function getEmployerJobs() {
         id: job.id,
         isDeleted: job.isDeleted,
         title: job.title,
-        startDate: job.estimateStartDate.toLocaleDateString("en-GB"),
-        endDate: job.estimateEndDate.toLocaleDateString("en-GB"),
+        startDate: job.estimateStartDate,
+        endDate: job.estimateEndDate,
         jobTags: job.jobTag.title,
         description: job.description ? job.description : "",
         acceptNum: job.applications.filter(

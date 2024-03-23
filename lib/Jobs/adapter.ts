@@ -36,6 +36,8 @@ export function convertStateNameToThai(
         return "ส่งมอบงานแล้ว";
       case "WAGE_PAYMENT_PENDING":
         return "รอจ่ายค่าจ้าง";
+      case "DONE":
+        return "เสร็จสิ้น";
     }
   }
   // in the student's view

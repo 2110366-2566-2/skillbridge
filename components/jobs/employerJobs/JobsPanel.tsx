@@ -1,4 +1,4 @@
-import JobCard from "../JobCard";
+import JobCard from "./JobCard";
 import sortArray from "../../../lib/Jobs/sortArray";
 import JobCardType from "../../../types/JobCardType";
 import SearchNotFound from "../../searchJob/SearchNotFound";
@@ -13,7 +13,7 @@ type Props = {
 };
 
 // export function
-const DoneJobsPanel = ({
+const JobsPanel = ({
   startDateSortOption,
   endDateSortOption,
   priceSortOption,
@@ -21,6 +21,7 @@ const DoneJobsPanel = ({
   data,
   isPending,
 }: Props) => {
+  console.log(data);
   const jobCardList = sortArray(
     data,
     startDateSortOption,
@@ -60,4 +61,4 @@ const DoneJobsPanel = ({
   );
 };
 
-export default DoneJobsPanel;
+export default JobsPanel;
