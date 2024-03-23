@@ -38,8 +38,7 @@ function StudentJobsPanel({
                         </div>
                     </div>
                 ) : // check if it is empty
-                sortedData.length !== 0 ? (
-                    // check if it is done tasks
+                
                     isDone === false ? (
                         sortedData.map((data, index) => {
                             return (
@@ -71,12 +70,16 @@ function StudentJobsPanel({
                             );
                         })
                     )
-                ) : (
-                    <div className="flex justify-center items-center">
-                        <SearchNotFound text={"ไม่พบงาน"} />
-                    </div>
-                )}
+                }
             </main>
+            {
+            sortedData.length === 0 && 
+            (
+                <div className="flex justify-center items-center">
+                    <SearchNotFound text={"ไม่พบงาน"} />
+                </div>
+            )
+            }
         </main>
     );
 }
