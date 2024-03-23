@@ -44,7 +44,7 @@ export default function page({
     // Listen for incoming messages
     socket.on('chat message', (message: toClientMessage) => {
       console.log(message);
-      console.log(message.text);
+      console.log(message.content);
       setMessages((prev)=>[...prev, message]);
     });
   }, []);
@@ -88,7 +88,7 @@ export default function page({
       <h1>Real-Time Chat</h1>
       <div>
         {messages.map((message, index) => (
-          <div key={index}>{`${message.senderId} said: ${message.text}`}</div>
+          <div key={index}>{`${message.senderId} said: ${message.content}`}</div>
         ))}
       </div>
       <input

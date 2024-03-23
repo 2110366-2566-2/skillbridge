@@ -60,8 +60,7 @@ io.on('connection', async (socket) => {
             senderId: userId,
             timeStamp: new Date(),
             isImage: message.isImage,
-            text: message.text,
-            imageURL: "" 
+            content: message.isImage ? "This supposed to be an image" : message.text
         };
 
         if (message.isImage) {
@@ -70,6 +69,8 @@ io.on('connection', async (socket) => {
             //2. put the imageURL in messageToClient.imageURL
             console.log(message);
         }
+
+        
 
         // console.log(messageToClient);
 

@@ -8,6 +8,5 @@ export type toClientMessage = {
   senderId: string,
   timeStamp: Date,
   isImage: boolean,
-  text: string,
-  imageURL: string
+  content: string,
 };
