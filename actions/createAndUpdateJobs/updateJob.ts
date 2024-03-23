@@ -104,8 +104,7 @@ const updateJob = async (formData: FormData) => {
         bufferResponse.data,
         file.type,
         file.size,
-        "jobFiles",
-        file.name
+        "jobFiles"
       );
       if (!fileResponse.success) {
         throw fileResponse.message;
