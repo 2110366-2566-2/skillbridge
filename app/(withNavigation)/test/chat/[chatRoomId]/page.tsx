@@ -87,9 +87,18 @@ export default function page({
     <div>
       <h1>Real-Time Chat</h1>
       <div>
-        {messages.map((message, index) => (
-          <div key={index}>{`${message.senderId} said: ${message.content}`}</div>
-        ))}
+        {messages.map((message, index) => {
+          if (!message.isImage) {
+            return <div key={index}>{`${message.senderId} said: ${message.content}`}</div>
+          }
+
+          return (
+            <div>
+              <p>{`${message.senderId} sendImage:`}</p>
+              <img src={message.content} alt={message.content}/>
+            </div>
+          )
+        })}
       </div>
       <input
         type="text"
@@ -112,6 +121,7 @@ export default function page({
               return;
             }
             setImageFile(e.target.files[0]);
+            console.log( await e.target.files[0].arrayBuffer());
           }}
         />
         <button
