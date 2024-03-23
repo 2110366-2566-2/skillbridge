@@ -30,21 +30,22 @@ model User {
   isGmail         Boolean       @default(false)
   applications    Application[]
   employer        Employer?
+  mailLogs        MailLog[]
   messages        Message[]
   student         Student?
-  mailLogs        MailLog[]
 
   @@map("_user")
 }
 
 model Student {
   userId         String        @id @unique
-  resumeName     String?
-  transcriptName String?
   bankAccountNo  String?
+  avgStar        Float?
   description    String?
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
+  resumeName     String?
+  transcriptName String?
   reviews        Review[]
   user           User          @relation(fields: [userId], references: [id])
   transactions   Transaction[]
@@ -168,8 +169,6 @@ model Message {
   chatroomId String
   userId     String
   createdAt  DateTime @default(now())
-  //updatedAt  DateTime @updatedAt NOTE: optional
-  // unsentAt   DateTime?  NOTE: optional
   content    String
   isImage    Boolean
   chatroom   Chatroom @relation(fields: [chatroomId], references: [id])
@@ -188,8 +187,8 @@ model Transaction {
   employerUserId    String
   amount            Float?
   receiptImageName  String
-  isDeposit         Boolean
   status            TransactionStatus  @default(PENDING)
+  isDeposit         Boolean
   employer          Employer           @relation(fields: [employerUserId], references: [userId])
   job               Job                @relation(fields: [jobId], references: [id])
   student           Student            @relation(fields: [studentId], references: [userId])
