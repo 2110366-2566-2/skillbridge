@@ -9,6 +9,7 @@ import SecondaryButton from "../public/buttons/secondaryButton/SecondaryButton";
 import DangerModal from "@/components/public/modal/dangerModal/DangerModal";
 import toast from "react-hot-toast";
 import createApplication from "@/actions/application/createApplication";
+import FileBox from "./FileBox";
 
 type Props = {
   jobId: string;
@@ -31,8 +32,7 @@ interface FormErrors {
   bid?: number;
 }
 
-const questionMarkCircle =
-  require("@/public/icons/questionMarkCircle.svg") as string;
+const questionMarkCircle = require("@/public/icons/questionMarkCircle.svg") as string;
 const noFile = require("@/public/icons/noFile.svg") as string;
 const paperClip = require("@/public/icons/paperClip.svg") as string;
 
@@ -153,14 +153,8 @@ export default function OfferingForm({ jobId, application }: Props) {
           </div>
         )}
         {bid && url && (
-          <div
-            className="w-full flex p-3 bg-slate-200 text-slate-500 rounded-md mt-[7px] hover:bg-slate-400 hover:cursor-pointer hover:shadow-md hover:text-slate-100"
-            onClick={() => window.open(url, "_blank", "noopener,noreferrer")}
-          >
-            <div className="flex gap-3 items-center">
-              <Image src={paperClip} alt="paperClip" width={16} height={16} />
-              <p className="text-[14px] font-semibold">ไฟล์สัญญาที่แนบไว้</p>
-            </div>
+          <div className="mt-[7px]">
+            <FileBox url={url} src={paperClip} text="ไฟล์สัญญาที่แนบไว้" />
           </div>
         )}
         {bid === null && (
@@ -194,7 +188,7 @@ export default function OfferingForm({ jobId, application }: Props) {
             </button>
             {isBudgetInfoVisible && (
               <div className="max-w-[194.98px] z-10 absolute ml-[28px] mt-[-20px] p-2 text-slate-800 bg-white border-slate-300 border-[0.5px] rounded-md shadow-md">
-                ค่าตอบแทนที่ผู้ว่าจ้างระบุไว้<br></br>
+                ค่าตอบแทนที่ผู้ว่าจ้างระบุไว้
                 สำหรับการจ้างนิสิต 1 คน
               </div>
             )}
