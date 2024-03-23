@@ -231,8 +231,11 @@ export default function JobForm(props: Props) {
             files={files}
             setFiles={setFiles}
             isDisabled={isLoading}
-            maxSizeInMegaByte={5}
-          />
+            isPdfAllow={true}
+            isImageAllow={true}
+            isMultipleFilesAllow={false}
+            maxSizeInMegaByte={10}
+          />    
 
           <Input
             type="number"

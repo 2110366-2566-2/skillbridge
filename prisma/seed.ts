@@ -62,7 +62,6 @@ async function main() {
       transcriptName:
         "https://www.greatschoolspartnership.org/wp-content/uploads/2022/02/GSP_Exemplar_Transcript_pg1_watermark.png",
       bankAccountNo: "0832705890",
-      avgStar: 4.99,
       user: {
         create: {
           salutation: "นาย",
@@ -83,7 +82,6 @@ async function main() {
       transcriptName:
         "https://admissionsandutme.com/wp-content/uploads/2020/12/sample-of-transcript-2.jpg",
       bankAccountNo: "0955195010",
-      avgStar: 3.33,
       user: {
         create: {
           salutation: "นาย",
@@ -103,7 +101,6 @@ async function main() {
       transcriptName:
         "https://worldwidetranscripts.com/wp-content/uploads/2021/04/Transcripts-Sample-1-622x1024.jpg",
       bankAccountNo: "0876789125",
-      avgStar: 4.69,
       user: {
         create: {
           salutation: "บัก",

@@ -42,13 +42,13 @@ model Student {
   resumeName     String?
   transcriptName String?
   bankAccountNo  String?
-  avgStar        Float?
   description    String?
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
   reviews        Review[]
   user           User          @relation(fields: [userId], references: [id])
   transactions   Transaction[]
+  Chatroom       Chatroom[]
 
   @@map("student")
 }
@@ -63,6 +63,7 @@ model Employer {
   user         User          @relation(fields: [userId], references: [id])
   jobs         Job[]
   transactions Transaction[]
+  Chatroom     Chatroom[]
 
   @@map("employer")
 }
@@ -150,9 +151,12 @@ model Chatroom {
   id                String      @id @default(uuid())
   applicationUserId String
   applicationJobId  String
+  employerId        String
   createdAt         DateTime    @default(now())
   updatedAt         DateTime    @updatedAt
   messages          Message[]
+  student           Student     @relation(fields: [applicationUserId], references: [userId])
+  employer          Employer    @relation(fields: [employerId], references: [userId])
   application       Application @relation(fields: [applicationUserId, applicationJobId], references: [userId, jobId])
 
   @@unique([applicationUserId, applicationJobId])
@@ -195,8 +199,8 @@ model Transaction {
 }
 
 model TransactionDetail {
-  transactionId      String   @id @unique
-  transRef           String
+  transactionId      String      @id @unique
+  transRef           String      @unique
   sendingBank        String
   transTimestamp     DateTime
   senderTHName       String
@@ -207,9 +211,8 @@ model TransactionDetail {
   receiverENName     String
   amount             Float
   qrcodeData         String
-  createdAt          DateTime @default(now())
-
-  transaction Transaction @relation(fields: [transactionId], references: [id])
+  createdAt          DateTime    @default(now())
+  transaction        Transaction @relation(fields: [transactionId], references: [id])
 
   @@map("transaction_detail")
 }
