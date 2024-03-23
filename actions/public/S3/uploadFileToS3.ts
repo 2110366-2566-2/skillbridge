@@ -4,6 +4,8 @@ import { PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import s3 from "../../../lib/bucket";
 import crypto from "crypto";
+const generateFileName = (bytes = 32) =>
+  crypto.randomBytes(bytes).toString("hex");
 
 interface Error {
   message: string;
@@ -13,17 +15,23 @@ const uploadFileToS3 = async (
   buffer: Uint8Array,
   type: string,
   size: number,
-  path: string,
-  fileName: string
+  path: string
 ) => {
   try {
-    const validPath = ["jobFiles", "applicationFiles", "transactionFiles"];
+    const validPath = [
+      "jobFiles",
+      "applicationFiles",
+      "transactionFiles",
+      "usersProfile",
+      "resumes",
+    ];
 
     if (!validPath.includes(path)) {
       throw {
         message: "Invalid upload arguments",
       };
     }
+    const fileName = generateFileName();
     const name = `${path}/${fileName}`;
 
     const putObjectCommand = new PutObjectCommand({
