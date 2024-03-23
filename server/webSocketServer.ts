@@ -1,6 +1,7 @@
 import http from 'http';
 import { Server } from 'socket.io';
 import { prisma } from '../lib/prisma';
+import { toClientMessage, toServerMessage } from '../types/chat';
 
 const server = http.createServer((req, res) => { });
 
@@ -8,23 +9,31 @@ const io = new Server(server, {
     cors: {
         origin: "http://localhost:3000",
         methods: ["GET", "POST"],
-        allowedHeaders: ["chat-room-id"],
+        allowedHeaders: ["chat-room-id", "user-id"],
         credentials: true
     }
 });
 
 /*
 TODO : 
-create a map mapping from chatRoomId => socketId[] to use for emitting to the right socket
+DONE : create a map mapping from chatRoomId => socketId[] to use for emitting to the right socket
 create a function to put message into database
 */
 
+const chatRoomIdToArrayOfSocketId = new Map<string, string[]>();
 
 io.on('connection', async (socket) => {
-    console.log('A user connected', socket.id);
-
+    
+    const socketId = socket.id;
     const chatRoomId = socket.handshake.headers['chat-room-id'] as string;
-    console.log(chatRoomId);
+    const userId = socket.handshake.headers['user-id'] as string;
+    console.log('A user connected', chatRoomId, socketId, userId);
+
+    if (!chatRoomIdToArrayOfSocketId.has(chatRoomId)) {
+        chatRoomIdToArrayOfSocketId.set(chatRoomId, []);
+    }
+
+    chatRoomIdToArrayOfSocketId.get(chatRoomId)?.push(socketId);
 
     /*
     this commented code is use to check if such chatRoomId exists
@@ -43,10 +52,26 @@ io.on('connection', async (socket) => {
     */
 
     // Handle chat messages
-    socket.on('chat message', (message) => {
+    socket.on('chat message', (message: toServerMessage) => {
         /* Handle chat message */
-        io.emit('chat message', message);
-        console.log(socket.id, chatRoomId, message);
+        const messageToClient: toClientMessage = {
+            senderId: userId,
+            timeStamp: new Date(),
+            isImage: message.isImage,
+            text: message.text,
+            imageURL: "" 
+        };
+
+        if (message.isImage) {
+            //TODO : 
+            //1. store image in S3
+            //2. put the imageURL in messageToClient.imageURL
+        }
+
+        // console.log(messageToClient);
+
+        const socketsInTheRoom = chatRoomIdToArrayOfSocketId.get(chatRoomId) as string[];
+        io.to(socketsInTheRoom).emit('chat message', messageToClient);
     });
 
     socket.on('disconnect', () => {
