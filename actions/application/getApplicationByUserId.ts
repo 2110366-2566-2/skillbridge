@@ -2,15 +2,17 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import getS3URL from "../public/S3/getS3URL";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
+import type { Session } from "next-auth";
+import { Response } from "@/types/ResponseType";
 
 const getApplicationByUserId = async (jobId: string, userId?: string) => {
   try {
-    const session: any = await getServerSession(authOptions);
+    const session: Session | null = await getServerSession(authOptions);
     if (!session) {
       throw { message: "Not authenticated", status: 401 };
     }
     const id = userId ? userId : session.user.id;
-    let application: any = await prisma.application.findFirst({
+    let application = await prisma.application.findFirst({
       where: {
         jobId: jobId,
         userId: id,
@@ -38,11 +40,14 @@ const getApplicationByUserId = async (jobId: string, userId?: string) => {
 
     let signUrl: string | any = null;
     if (application?.applicationDocumentFiles[0]) {
-      signUrl = await getS3URL(
-        application.applicationDocumentFiles[0].fileName,
+      const fileResponse: Response<string> = await getS3URL(
+        application.applicationDocumentFiles[0].fileName
       );
+      if (!fileResponse.success) {
+        throw fileResponse.message;
+      }
+      signUrl = fileResponse.data;
     }
-
     // if (signUrl.message) {
     //   signUrl = null;
     // }
