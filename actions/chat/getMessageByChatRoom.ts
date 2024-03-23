@@ -36,7 +36,6 @@ const getMessageByChatRoom = async (chatroomId: string) => {
 };
 
 export { getMessageByChatRoom };
-export { getMessageByChatRoom };
 
 // const main = async () => {
 //     const chatroomId = "bc099058-3b77-4e72-a365-0a4c201e6e51";
