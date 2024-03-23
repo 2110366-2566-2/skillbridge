@@ -9,6 +9,10 @@ let socket: Socket;
 
 let firstLoad: boolean = true;
 
+function isFileImage(file: File | undefined) {
+  return file && file['type'].split('/')[0] === 'image';
+}
+
 export default function page({
   params,
 }: {
@@ -34,6 +38,7 @@ export default function page({
   
   const [messages, setMessages] = useState<toClientMessage[]>([]);
   const [newTextMessage, setNewTextMessage] = useState('');
+  const [imageFile, setImageFile] = useState<File | undefined>();
 
   useEffect(() => {
     // Listen for incoming messages
@@ -48,10 +53,34 @@ export default function page({
     const messageToServer: toServerMessage = {
       isImage: false,
       text: newTextMessage,
-      image: undefined
+      image: imageFile
     };
     socket.emit('chat message', messageToServer);
     setNewTextMessage('');
+  };
+
+  const sendImage = () => {
+    console.log(imageFile);
+    if (!isFileImage(imageFile)) {
+      alert("The file supposed to be an image.");
+      setImageFile(undefined);
+      return;
+    }
+
+    const messageToServer: toServerMessage = {
+      isImage: true,
+      text: "This supposed to be an image.",
+      image: imageFile
+    };
+
+    console.log(messageToServer);
+
+    socket.emit('chat message', messageToServer, (status:string) => {
+      console.log(status);
+    });
+
+    setImageFile(undefined);
+    console.log("2", imageFile);
   };
   
   return (
@@ -73,6 +102,29 @@ export default function page({
         }}
       />
       <button onClick={sendMessage}>Send</button>
+      <br></br>
+      <div>
+      <form>
+        <input 
+          type="file"
+          onChange={async (e) => {
+            if (e.target.files == null) {
+              return;
+            }
+            setImageFile(e.target.files[0]);
+          }}
+        />
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            console.log(imageFile);
+            sendImage();
+          }}
+        >
+          Submit
+        </button>
+      </form>
+    </div>
     </div>
   );
 }

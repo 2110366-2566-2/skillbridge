@@ -11,7 +11,9 @@ const io = new Server(server, {
         methods: ["GET", "POST"],
         allowedHeaders: ["chat-room-id", "user-id"],
         credentials: true
-    }
+    },
+    maxHttpBufferSize: 1e8, 
+    pingTimeout: 60000
 });
 
 /*
@@ -66,6 +68,7 @@ io.on('connection', async (socket) => {
             //TODO : 
             //1. store image in S3
             //2. put the imageURL in messageToClient.imageURL
+            console.log(message);
         }
 
         // console.log(messageToClient);
@@ -77,6 +80,15 @@ io.on('connection', async (socket) => {
     socket.on('disconnect', () => {
         console.log('A user disconnected');
     });
+
+    socket.on('error', function (err) {
+        console.log(err);
+    });
+
+    socket.onAny((eventName, ...args) => {
+        console.log(eventName);
+        console.log(args);
+      });
 });
 
 server.listen(3001, () => {
