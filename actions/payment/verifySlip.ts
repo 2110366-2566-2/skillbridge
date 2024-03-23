@@ -26,7 +26,10 @@ async function verifySlip(transactionId: string, fileName: string, amount: numbe
 
     /* Get signed url and extract the data from qrcode */
     const url = await getS3URL(fileName)
-    const QRdata = await qrReader(url as string)
+    if (!url.success) {
+      throw url.message
+    }
+    const QRdata = await qrReader(url.data as string)
 
     /* qrcode not found */
     if (QRdata.status === 404) {

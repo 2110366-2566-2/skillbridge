@@ -1,11 +1,16 @@
 "use server";
-
+// require("dotenv").config(); // For Testing
 import { prisma } from "../../lib/prisma";
 import { revalidatePath } from "next/cache";
-import uploadMultipleFilesToS3 from "../public/S3/uploadMultipleFilesToS3";
 import { string } from "zod";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
+import { authOptions } from "../../app/api/auth/[...nextauth]/auth";
+import JobSchema from "../../types/JobType";
+import { ZodError, z } from "zod";
+import { Response } from "../../types/ResponseType";
+import createFileBuffer from "../public/S3/createFileBuffer";
+import uploadFileToS3 from "../public/S3/uploadFileToS3";
+import type { Session } from "next-auth";
 
 const acceptedTypes = [
   "image/jpeg",
@@ -13,37 +18,44 @@ const acceptedTypes = [
   "image/webp",
   "application/pdf",
 ];
-
+const UpdateJobSchema = JobSchema.partial().extend({
+  jobId: z.string(),
+});
+type JobUpdateForm = z.infer<typeof UpdateJobSchema>;
+type ZodResponse =
+  | { success: true; data: JobUpdateForm }
+  | { success: false; error: ZodError };
 const updateJob = async (formData: FormData) => {
   try {
-    const jobId = formData.get("jobId") as string;
-    const title = formData.get("title") as string;
-    const description = formData.get("description") as string;
-
-    const estimateStartDate = formData.get("estimateStartDate") as string;
-    const parsedStartDate = new Date(estimateStartDate);
-
-    const estimateEndDate = formData.get("estimateEndDate") as string;
-    const parsedEndDate = new Date(estimateEndDate);
-
-    const budget = parseInt(formData.get("budget") as string, 10);
-    const jobTagId = formData.get("jobTagId") as string;
-    const numWorker = parseInt(formData.get("numWorker") as string, 10);
-    const files = formData.getAll("files[]") as File[];
-
-    console.log(
-      jobId,
-      title,
-      description,
-      parsedStartDate,
-      parsedEndDate,
-      budget,
-      jobTagId,
-      numWorker,
-      files,
+    const response: ZodResponse = UpdateJobSchema.safeParse(
+      Object.fromEntries(formData)
     );
+    if (!response.success) {
+      throw response.error;
+    }
+    const jobId: string = response.data.jobId;
+    const title: string | undefined = response.data.title;
+    const description: string | undefined = response.data.description;
+    const estimateStartDate: Date | undefined = response.data.estimateStartDate;
+    const estimateEndDate: Date | undefined = response.data.estimateEndDate;
+    const budget: number | undefined = response.data.budget;
+    const jobTagId: string | undefined = response.data.jobTagId;
+    const numWorker: number | undefined = response.data.numWorker;
+    const file: File | undefined = response.data["files[]"];
 
-    const session = await getServerSession(authOptions);
+    // console.log(
+    //   jobId,
+    //   title,
+    //   description,
+    //   parsedStartDate,
+    //   parsedEndDate,
+    //   budget,
+    //   jobTagId,
+    //   numWorker,
+    //   files
+    // );
+
+    const session: Session | null = await getServerSession(authOptions);
     const userId = session?.user.id;
     const employer = await prisma.employer.findFirst({
       where: { userId: userId },
@@ -80,10 +92,22 @@ const updateJob = async (formData: FormData) => {
       };
     }
     let jobDocumentFile = null;
-    if (files) {
-      const results: string | any = await uploadMultipleFilesToS3(files);
-      if (results.message) {
-        throw results;
+    if (file) {
+      const bufferResponse: Response<Uint8Array> = await createFileBuffer(
+        file,
+        acceptedTypes
+      );
+      if (!bufferResponse.success) {
+        throw bufferResponse.message;
+      }
+      const fileResponse: Response<string> = await uploadFileToS3(
+        bufferResponse.data,
+        file.type,
+        file.size,
+        "jobFiles"
+      );
+      if (!fileResponse.success) {
+        throw fileResponse.message;
       }
       if (job.jobDocumentFiles) {
         job.jobDocumentFiles.forEach(async (doc: any) => {
@@ -97,14 +121,11 @@ const updateJob = async (formData: FormData) => {
           });
         });
       }
-
-      results.forEach(async (fileName: string) => {
-        await prisma.jobDocumentFile.create({
-          data: {
-            jobId: jobId,
-            fileName: fileName,
-          },
-        });
+      await prisma.jobDocumentFile.create({
+        data: {
+          jobId: jobId,
+          fileName: fileResponse.data,
+        },
       });
     }
 
@@ -115,8 +136,8 @@ const updateJob = async (formData: FormData) => {
       data: {
         title,
         description,
-        estimateStartDate: parsedStartDate,
-        estimateEndDate: parsedEndDate,
+        estimateStartDate,
+        estimateEndDate,
         budget,
         jobTagId,
         numWorker,
@@ -131,7 +152,6 @@ const updateJob = async (formData: FormData) => {
       status: 201,
     };
 
-    console.log(successResponse);
     return successResponse;
   } catch (error: any) {
     console.log(error);
@@ -145,12 +165,19 @@ const updateJob = async (formData: FormData) => {
 export default updateJob;
 
 // const main = async () => {
+//   const file: File = new File(["1234"], "filename", {
+//     type: "application/pdf",
+//   });
 //   const data = {
-//     jobId: "bdf21ad2-c998-4e38-85af-e888df8c6759",
+//     jobId: "5525a176-ea04-4395-8906-38155d99e401",
 //     title: "Test update work",
-//     startDate: new Date().toISOString(),
-//   } as unknown as FormData;
-//   const result = await updateJob(data);
+//     file: file,
+//   };
+//   let formData = new FormData();
+//   for (let key in data) {
+//     formData.append(key, data[key as keyof typeof data]);
+//   }
+//   const result = await updateJob(formData);
 //   console.log(result);
 // };
 
