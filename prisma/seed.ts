@@ -7,6 +7,8 @@ interface jobTagList {
 }
 
 async function main() {
+  await prisma.message.deleteMany({});
+  await prisma.chatroom.deleteMany({});
   await prisma.review.deleteMany({});
   await prisma.transactionDetail.deleteMany({});
   await prisma.transaction.deleteMany({});
@@ -59,9 +61,9 @@ async function main() {
   const s1 = await prisma.student.create({
     data: {
       resumeName:
-        "https://i.pinimg.com/736x/87/91/53/87915397fcb2d0b04899cd90420f4acc.jpg",
+        "fafbec97a24cf9bf3e80ca9784ca3f6b28adb1da36b88769d81eca3e5d08d032",
       transcriptName:
-        "https://www.greatschoolspartnership.org/wp-content/uploads/2022/02/GSP_Exemplar_Transcript_pg1_watermark.png",
+        "5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
       bankAccountNo: "0832705890",
       description: 
         "พร้อมบุก ผมเนี่ยโคตรจะพร้อมสุด\n\
@@ -94,9 +96,9 @@ async function main() {
   const s2 = await prisma.student.create({
     data: {
       resumeName:
-        "https://s3-us-west-2.amazonaws.com/hiration/ghost/2021/02/resume-meme-10.jpg",
+        "b84cc78e6b3263366d6c85f435dfb48460df6b5fe27dad14ee60c215806e0f3e",
       transcriptName:
-        "https://admissionsandutme.com/wp-content/uploads/2020/12/sample-of-transcript-2.jpg",
+        "cffc7481c0abacc579ae6035dac9e63b199a6128d13da736dba9454bfaf59db3",
       bankAccountNo: "0955195010",
       description: 
         "ทุกวัน ทุกวัน เห็นเขารีบออกไป แต่งตัวทันสมัย ขับรถซิ่ง\n\
@@ -123,9 +125,9 @@ async function main() {
 
   const s3 = await prisma.student.create({
     data: {
-      resumeName: "https://cdn-images.zety.com/pages/resume_meme_2.png",
+      resumeName: "47a50ef3fcb16268eaea70cb38d73998a5e8a247fcede360704e10e5baa4da7d",
       transcriptName:
-        "https://worldwidetranscripts.com/wp-content/uploads/2021/04/Transcripts-Sample-1-622x1024.jpg",
+        "5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
       bankAccountNo: "0876789125",
       description: 
         "พี่จ้างเหอะ ผมเนี่ยเล่นมาตั้งแต่เด็ก\n\
@@ -2342,18 +2344,311 @@ and fresh perspective, exceeding our expectations.",
     },
   });
 
-  // const c1 = await prisma.chatroom.create({
-  //   data: {
-  //     jobId: j27.id,
-  //     studentId: s3.userId,
-  //     employerUserId: e3.userId,
-  //     amount: 2250,
-  //     isDeposit: false,
-  //     createdAt: new Date("2022-12-30T17:35:00"),
-  //     receiptImageName:
-  //       "bc365d05811ff88fb22536dc7a402c65156425ecb15fd6874c0bf5941b6b5a68",
-  //   },
-  // });
+  const c7 = await prisma.chatroom.create({
+    data: {
+      applicationUserId: s2.userId,
+      applicationJobId: j19.id,
+      employerId: e3.userId,
+      messages: {
+        create: [
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-03-21T17:35:00"),
+            isImage: false,
+            content: 'ต้นๆ',
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-03-21T17:35:30"),
+            isImage: false,
+            content: 'รถเป็นอะไรอะ'
+          },
+          {
+            userId: e3.userId,
+            createdAt: new Date("2024-03-21T17:35:37"),
+            isImage: false,
+            content: 'รถเสียอะ'
+          },
+          {
+            userId: e3.userId,
+            createdAt: new Date("2024-03-21T17:35:42"),
+            isImage: false,
+            content: 'สตาร์ทไม่ติดเลย'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-03-21T17:36:12"),
+            isImage: false,
+            content: 'ทำไมไม่ใช้น้ำมันไดเกียวล่ะ'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-03-21T17:36:33"),
+            isImage: true,
+            content: '7b6695a8e17a5484405fac47b55815a6ed93d19d38287e26e90250b87180ed1a'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-03-21T17:36:44"),
+            isImage: false,
+            content: 'เพราะใช้แล้วเครื่องฟิต'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-03-21T17:36:45"),
+            isImage: false,
+            content: 'สตาร์ทติดง่าย'
+          },
+          {
+            userId: e3.userId,
+            createdAt: new Date("2024-03-22T09:27:45"),
+            isImage: true,
+            content: '601598e2fdc083775e23c3418afed4cdfda984c4f846d89c02517ebc1a4f3811'
+          },
+        ],
+      },
+    },
+  });
+
+  const c8 = await prisma.chatroom.create({
+    data: {
+      applicationUserId: s2.userId,
+      applicationJobId: j20.id,
+      employerId: e3.userId,
+      messages: {
+        create: [
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-21T10:11:15"),
+            isImage: true,
+            content: '5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3'
+          },
+          {
+            userId: e3.userId,
+            createdAt: new Date("2024-02-21T10:11:20"),
+            isImage: false,
+            content: 'พี่แอ๊ด'
+          },
+          {
+            userId: e3.userId,
+            createdAt: new Date("2024-02-21T10:11:22"),
+            isImage: false,
+            content: 'พี่จะไปไหนเนี่ย'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-22T12:09:30"),
+            isImage: false,
+            content: 'อ๋อ'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-22T12:09:33"),
+            isImage: false,
+            content: 'ว่าจะไปเรียนแต่งหน้า'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-22T12:09:37"),
+            isImage: true,
+            content: '4ecc1119c9f7c96c3b67e39c9bebe48a600264365d6450b54940726b72f498f6'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-22T12:09:48"),
+            isImage: false,
+            content: 'นั่งสมาธิ ดำน้ำ ปลูกปะการัง'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-22T12:09:55"),
+            isImage: true,
+            content: 'e1ef14079efc5e1bd1e7cfe1c4a732e3438a1b8443e47d994f7b9f9f436b79aa'
+          },
+          {
+            userId: e3.userId,
+            createdAt: new Date("2024-02-23T21:22:55"),
+            isImage: false,
+            content: 'ทำอาหาร นวดสปา ปลูกป่า ดำนา'
+          },
+          {
+            userId: e3.userId,
+            createdAt: new Date("2024-02-23T21:23:12"),
+            isImage: true,
+            content: 'c4d2dfe58e28379271c8ea6a9874b7124252153113474861fb8560ec10970964'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-23T22:44:12"),
+            isImage: false,
+            content: 'ดูดิสนีย์ออนไอซ์ แรลลี่ ตีกอล์ฟ'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-23T22:44:44"),
+            isImage: true,
+            content: '47a50ef3fcb16268eaea70cb38d73998a5e8a247fcede360704e10e5baa4da7d'
+          },
+          {
+            userId: e3.userId,
+            createdAt: new Date("2024-02-24T08:30:33"),
+            isImage: false,
+            content: 'ล่องเรือ ส่องสัตว์'
+          },
+          {
+            userId: e3.userId,
+            createdAt: new Date("2024-02-24T08:30:37"),
+            isImage: true,
+            content: 'cffc7481c0abacc579ae6035dac9e63b199a6128d13da736dba9454bfaf59db3'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-24T13:27:36"),
+            isImage: false,
+            content: 'ชอปปิ้ง ดูงิ้ว ดูละครเวที ดูคอนเสิร์ต'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-24T13:27:39"),
+            isImage: true,
+            content: 'b4e0f46efc58551a0cb7843b1b088f66e802c569d6f1e7bf9e63d69a35807659'
+          },
+          {
+            userId: e3.userId,
+            createdAt: new Date("2024-02-24T14:45:44"),
+            isImage: false,
+            content: 'เยอะเนอะ'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-24T15:03:17"),
+            isImage: false,
+            content: 'เยอะ'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-24T15:03:21"),
+            isImage: false,
+            content: 'ไปก่อนนะ'
+          },
+        ],
+      },
+    },
+  });
+
+  const c10 = await prisma.chatroom.create({
+    data: {
+      applicationUserId: s2.userId,
+      applicationJobId: j24.id,
+      employerId: e3.userId,
+      messages: {
+        create: [
+          {
+            userId: e3.userId,
+            createdAt: new Date("2024-02-17T15:07:27"),
+            isImage: false,
+            content: 'น้อง'
+          },
+          {
+            userId: e3.userId,
+            createdAt: new Date("2024-02-17T15:07:31"),
+            isImage: false,
+            content: 'มีปืนขายมั้ย'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-19T11:11:11"),
+            isImage: false,
+            content: 'มี'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-19T11:11:12"),
+            isImage: false,
+            content: 'จะเอาแบบไหน'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-19T11:11:17"),
+            isImage: false,
+            content: 'แบบดีหรือแบบธรรมดา'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-19T11:11:21"),
+            isImage: true,
+            content: '645ec85b3ff4c4834e30b61ff00d8aae8d075e5ffdbbc5b844c2ced893c79074'
+          },
+          {
+            userId: e3.userId,
+            createdAt: new Date("2024-02-19T12:12:21"),
+            isImage: false,
+            content: 'เอาแบบดีมาเลย'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-19T12:34:56"),
+            isImage: false,
+            content: 'แบบสั้นหรือแบบยาว'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-19T12:34:59"),
+            isImage: true,
+            content: '12236e042b06ddf51def15dd8a2c56cfc568e8f3f316c43d6904026e2c917704'
+          },
+          {
+            userId: e3.userId,
+            createdAt: new Date("2024-02-19T17:36:21"),
+            isImage: false,
+            content: 'สั้นก็ได้'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-20T09:09:09"),
+            isImage: false,
+            content: 'ดำเงาหรือดำด้าน'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-20T09:09:15"),
+            isImage: true,
+            content: '88f437c42c7f5afba8fa123429481395ad074647f85936c08e564e2dc7b1194f'
+          },
+          {
+            userId: e3.userId,
+            createdAt: new Date("2024-02-20T14:09:42"),
+            isImage: false,
+            content: 'ดำด้าน'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-20T16:05:43"),
+            isImage: false,
+            content: 'รอแป๊ป'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-20T16:05:45"),
+            isImage: false,
+            content: '...'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-20T17:03:30"),
+            isImage: false,
+            content: 'หมด'
+          },
+          {
+            userId: s2.userId,
+            createdAt: new Date("2024-02-20T17:03:33"),
+            isImage: true,
+            content: 'b84cc78e6b3263366d6c85f435dfb48460df6b5fe27dad14ee60c215806e0f3e'
+          },
+        ],
+      },
+    },
+  });
 
 }
 
