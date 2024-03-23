@@ -61,9 +61,9 @@ async function main() {
   const s1 = await prisma.student.create({
     data: {
       resumeName:
-        "fafbec97a24cf9bf3e80ca9784ca3f6b28adb1da36b88769d81eca3e5d08d032",
+        "88f437c42c7f5afba8fa123429481395ad074647f85936c08e564e2dc7b1194f",
       transcriptName:
-        "5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
+        "jobFiles/5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
       bankAccountNo: "0832705890",
       description: 
         "พร้อมบุก ผมเนี่ยโคตรจะพร้อมสุด\n\
@@ -127,7 +127,7 @@ async function main() {
     data: {
       resumeName: "47a50ef3fcb16268eaea70cb38d73998a5e8a247fcede360704e10e5baa4da7d",
       transcriptName:
-        "5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
+        "jobFiles/5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
       bankAccountNo: "0876789125",
       description: 
         "พี่จ้างเหอะ ผมเนี่ยเล่นมาตั้งแต่เด็ก\n\
@@ -2421,7 +2421,7 @@ and fresh perspective, exceeding our expectations.",
             userId: s2.userId,
             createdAt: new Date("2024-02-21T10:11:15"),
             isImage: true,
-            content: '5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3'
+            content: 'jobFiles/5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3'
           },
           {
             userId: e3.userId,
