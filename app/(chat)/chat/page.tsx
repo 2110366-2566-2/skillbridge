@@ -1,8 +1,9 @@
 import React from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
-import ChatCardListStudent from "@/components/chat/student/ChatCardListStudent";
-import ChatGroupListEmployer from "@/components/chat/employer/ChatGroupListEmployer";
+import ChatCardListStudent from "@/components/chat/chatCardList/student/ChatCardListStudent";
+import ChatGroupListEmployer from "@/components/chat/chatCardList/employer/ChatGroupListEmployer";
+import DefaultChatRoom from "@/components/chat/chatRoom/DefaultChatRoom";
 
 export default async function Page() {
   // Session
@@ -14,13 +15,15 @@ export default async function Page() {
     <>
       {/* Desktop */}
       {/* TODO : Desktop Empty Chat room */}
-      <div className="hidden lg:block">Desktop Empty Chat room</div>
+      <div className="hidden lg:block">
+        <DefaultChatRoom />
+      </div>
 
       {/* Mobile */}
       {isStudent ? (
         // TODO : Mobile Student Chat list
         userId !== null && (
-          <div className="pb-28 lg:hidden" >
+          <div className="pb-28 lg:hidden">
             <ChatCardListStudent studentId={userId} />
           </div >
         )
