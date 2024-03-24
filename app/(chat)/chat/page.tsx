@@ -4,6 +4,8 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import ChatCardListStudent from "@/components/chat/chatCardList/student/ChatCardListStudent";
 import ChatGroupListEmployer from "@/components/chat/chatCardList/employer/ChatGroupListEmployer";
 import DefaultChatRoom from "@/components/chat/chatRoom/DefaultChatRoom";
+import Header from "@/components/layout/header/Header";
+import Footer from "@/components/layout/footer/Footer";
 
 export default async function Page() {
   // Session
@@ -13,6 +15,9 @@ export default async function Page() {
 
   return (
     <>
+      <div className="lg:hidden">
+        <Header />
+      </div>
       {/* Desktop */}
       {/* TODO : Desktop Empty Chat room */}
       <div className="hidden lg:block">
@@ -35,6 +40,9 @@ export default async function Page() {
           </div>
         )
       )}
+      <div className="lg:hidden">
+        <Footer />
+      </div>
     </>
   );
 }
