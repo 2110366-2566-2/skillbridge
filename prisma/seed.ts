@@ -13,6 +13,7 @@ async function main() {
   await prisma.transactionDetail.deleteMany({});
   await prisma.transaction.deleteMany({});
   await prisma.applicationDocumentFile.deleteMany({});
+  await prisma.applicationStatusLog.deleteMany({});
   await prisma.application.deleteMany({});
   await prisma.jobDocumentFile.deleteMany({});
   await prisma.job.deleteMany({});
@@ -65,7 +66,7 @@ async function main() {
       transcriptName:
         "jobFiles/5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
       bankAccountNo: "0832705890",
-      description: 
+      description:
         "พร้อมบุก ผมเนี่ยโคตรจะพร้อมสุด\n\
         โคตรจะร้อนสุด ยังไม่พร้อมหยุด\n\
         ไฟในปากก็พร้อมจุด\n\
@@ -100,7 +101,7 @@ async function main() {
       transcriptName:
         "cffc7481c0abacc579ae6035dac9e63b199a6128d13da736dba9454bfaf59db3",
       bankAccountNo: "0955195010",
-      description: 
+      description:
         "ทุกวัน ทุกวัน เห็นเขารีบออกไป แต่งตัวทันสมัย ขับรถซิ่ง\n\
         อือฮื้อ อาฮ้า เทวดาฟ้าดิน กุ๊กกิ๊ก ดุ๊กดิ๊ก สะดิ้งมาเต็มคัน\n\
         ชาวบ้านยืนมอง แล้วอดใจไม่ไหว เอ่ยถามขึ้นทันใด ว่าไอ้หนุ่มเอ้ย\n\
@@ -129,7 +130,7 @@ async function main() {
       transcriptName:
         "jobFiles/5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
       bankAccountNo: "0876789125",
-      description: 
+      description:
         "พี่จ้างเหอะ ผมเนี่ยเล่นมาตั้งแต่เด็ก\n\
         อยู่ในห้องนั่งท่อง ลิ้นพันเสียงก้อง\n\
         เดี๋ยวก็ ซูเพล็กส์ เดี๋ยวก็ ดูเร็กซ์\n\
