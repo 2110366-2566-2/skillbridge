@@ -1,6 +1,5 @@
 "use client"
 
-import { EmployerChatListData } from "@/actions/chat/getChatListDataByUser"
 import Image from "next/image"
 import noavatar from "@/public/icons/noavatar.svg";
 import { Message } from "@/actions/chat/getMessageByChatRoom";
@@ -22,7 +21,6 @@ type Props = {
 
 export default function ChatCardEmployer({ chatroom }: Props) {
     const avatar = noavatar;
-    console.log(chatroom)
 
     return (
         <div className="flex flex-row items-center h-[90px] px-[16px] py-[21px] rounded-[16px] hover:bg-neutral-200 hover:cursor-pointer lg:h-[94px] lg:py-[20px]">
