@@ -8,6 +8,7 @@ const getRating = async (jobId: string, studentId: string) => {
       where: {
         jobId: jobId,
         studentId: studentId,
+        isDeleted: false,
       },
       select: {
         stars: true,
@@ -19,10 +20,34 @@ const getRating = async (jobId: string, studentId: string) => {
     } as const;
   } catch (error: any) {
     return {
+      success: false,
       message: error,
-      status: 500,
     } as const;
   }
 };
 
-export { getRating };
+const getComment = async (jobId: string, studentId: string) => {
+  try {
+    const comment = await prisma.review.findFirstOrThrow({
+      where: {
+        jobId: jobId,
+        studentId: studentId,
+        isDeleted: false,
+      },
+      select: {
+        description: true,
+      },
+    });
+    return {
+      success: true,
+      data: comment.description,
+    } as const;
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error,
+    } as const;
+  }
+};
+
+export { getRating, getComment };
