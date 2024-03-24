@@ -24,6 +24,7 @@
           <li><a href="#v131">v1.31</a></li>
           <li><a href="#v132">v1.32</a></li>
           <li><a href="#v133">v1.33</a></li>
+          <li><a href="#v134">v1.34</a></li>
         </ul>
       </ul>
     </li>
@@ -246,5 +247,12 @@
 
 ### TransactionDetail
 - `transRef` is set to unique to prevent duplication of payment slip 
+
+<p align="right">(<a href="#database">back to top</a>)</p>
+
+## v1.34
+
+### ApplicationStatusLog
+- This table is added for keeping track of `ApplicationStatus` of the particular `Application`
 
 <p align="right">(<a href="#database">back to top</a>)</p>
