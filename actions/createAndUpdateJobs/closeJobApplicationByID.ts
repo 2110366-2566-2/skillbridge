@@ -45,8 +45,16 @@ const closeJobApplicationByID = async (jobId: string) => {
         if (job.employerId !== userId) {
             return {
                 success: false,
-                message: "Not authorized",
-                status: 401
+                message: "Not Authorized",
+                status: 403
+            }
+        }
+
+        if (job.status !== JobStatus.NOT_STARTED) {
+            return {
+                success: false,
+                message: "Failed to change the current job status",
+                status: 409
             }
         }
 
