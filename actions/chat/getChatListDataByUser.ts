@@ -74,7 +74,7 @@ const getStudentChatListData = async (studentId: string) => {
         },
       },
       orderBy: {
-        createdAt: "desc",
+        createdAt: "asc",
       },
     });
 
@@ -159,7 +159,7 @@ const getEmployerChatListData = async (employerId: string) => {
         },
       },
       orderBy: {
-        createdAt: "desc",
+        createdAt: "asc",
       },
     });
 
