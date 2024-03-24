@@ -4,7 +4,7 @@ import { prisma } from '../lib/prisma';
 import { toClientMessage, toServerTextMessage } from '../types/chat';
 import getS3URL from '../actions/public/S3/getS3URL';
 import { uploadImageToS3 } from './uploadImageToS3';
-import { saveTextMessage, validChatRoom } from './database';
+import { saveImageMessage, saveTextMessage, validChatRoom } from './database';
 
 const server = http.createServer((req, res) => { });
 
@@ -62,32 +62,14 @@ io.on('connection', async (socket) => {
         io.to(socketsInTheRoom).emit('chat text message', messageToClient);
     });
 
+    // Handle chat image messages
     socket.on('chat image message', async (message) => {
         console.log(message);
         try {
-            // save image file into S3
-            const imageName = await uploadImageToS3(message);
+            // save image to S3 and database
+            const messageToClient: toClientMessage = await saveImageMessage(chatRoomId, userId, message);
 
-            // save message into db
-
-            // construct a message to emits back to clients
-            const getS3URLResponse = await getS3URL(imageName)
-
-            if (!getS3URLResponse.success) {
-                console.log(getS3URLResponse.message);
-                return;
-            }
-
-            console.log(getS3URLResponse);
-
-            const messageToClient: toClientMessage = {
-                id: '',
-                userId: userId,
-                createdAt: new Date(),
-                isImage: true,
-                content: getS3URLResponse.data,
-            };
-
+            // emits image back
             const socketsInTheRoom = chatRoomIdToArrayOfSocketId.get(chatRoomId) as string[];
             io.to(socketsInTheRoom).emit('chat image message', messageToClient);
         } catch (err) {
