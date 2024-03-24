@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ProgressButton from "../ProgressButton";
 
 export default function PayButton({
   studentId,
@@ -9,12 +10,7 @@ export default function PayButton({
 }) {
   return (
       <div className="flex flex-row justify-between">
-          <Link
-              href={`jobs/${jobId}/progress/${studentId}`}
-              className="flex justify-center items-center h-[35px] w-[24%] bg-slate-50 text-sm text-slate-900 border border-slate-700 rounded-md hover:shadow-md hover:border-slate-800 active:border-slate-900 transition duration-200 ease-in-out"
-          >
-              ความคืบหน้า
-          </Link>
+          <ProgressButton jobId={jobId} studentId={studentId} />
           <div className="w-1/2 flex justify-end">
               <Link
                   href={`/jobs/${jobId}/payment/${studentId}`}

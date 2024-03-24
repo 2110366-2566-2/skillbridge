@@ -88,7 +88,19 @@ const getEmploymentTracking = async (jobId: string, studentId: string) => {
   }
 };
 
-export { getRating, getComment, getEmploymentTracking };
+const getJobTag = async (jobId: string) => {
+    const tag = await prisma.job.findFirst({
+        where: {
+            id: jobId,
+        },
+        include: {
+            jobTag: true,
+        },
+    });
+    return tag ? tag.jobTag.title : "";
+};
+
+export { getRating, getComment, getEmploymentTracking, getJobTag };
 
 // const main = async () => {
 //   const studentId = "1dabcb91-32fd-41ea-a8f1-684e2c830090";

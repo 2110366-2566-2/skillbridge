@@ -1,5 +1,6 @@
 import { inProgressToCanceled } from "@/actions/jobs/jobCards/employerChangeApplicationState";
 import Image from "next/image";
+import ProgressButton from "../ProgressButton";
 
 export default function CancelButton({
     studentId,
@@ -9,8 +10,9 @@ export default function CancelButton({
     jobId: string;
 }) {
     return (
-        <div className="flex justify-end">
-            <div className="w-1/2 flex justify-between mt-[10px] xl:mt-0">
+        <div className="flex flex-row justify-between">
+            <ProgressButton jobId={jobId} studentId={studentId} />
+            <div className="w-1/2 flex justify-between">
                 <button
                     className="h-[35px] bg-red-500 text-sm text-white rounded-md w-[48%] hover:opacity-80 active:opacity-60"
                     onClick={async () => {
