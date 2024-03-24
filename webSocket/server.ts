@@ -4,6 +4,7 @@ import { prisma } from '../lib/prisma';
 import { toClientMessage, toServerTextMessage } from '../types/chat';
 import getS3URL from '../actions/public/S3/getS3URL';
 import { uploadImageToS3 } from './uploadImageToS3';
+import { saveTextMessage, validChatRoom } from './database';
 
 const server = http.createServer((req, res) => { });
 
@@ -21,7 +22,7 @@ const io = new Server(server, {
 /*
 TODO : 
 DONE : create a map mapping from chatRoomId => socketId[] to use for emitting to the right socket
-implement function to upload image to S3
+DONE : implement function to upload image to S3
 create a function to put message into database
 
 Note : 
@@ -43,21 +44,10 @@ io.on('connection', async (socket) => {
 
     chatRoomIdToArrayOfSocketId.get(chatRoomId)?.push(socketId);
 
-    /*
-    this commented code is use to check if such chatRoomId exists
-    omits for now as I am using made up chatRoomId which doesn't exists in database
-
-    const chatRoom = await prisma.chatroom.findFirst({
-        where: {
-            id: chatRoomId
-        }
-    });
-
-    if (chatRoom === null) {
-        console.log("Chatroom does not exists");
+    if (! await validChatRoom(chatRoomId, userId) ) {
+        console.log("Chat room or user id is not valid");
         socket.disconnect();
     }
-    */
 
     // Handle chat text messages
     socket.on('chat text message', async (message: toServerTextMessage) => {
@@ -65,16 +55,9 @@ io.on('connection', async (socket) => {
         console.log(message);
 
         // save message into db
+        const messageToClient: toClientMessage = await saveTextMessage(chatRoomId, userId, message);
 
-        // construct a message to emits back to clients
-        const messageToClient: toClientMessage = {
-            id: "",
-            userId: userId,
-            createdAt: new Date(),
-            isImage: false,
-            content: message.text
-        };
-
+        // emits message back
         const socketsInTheRoom = chatRoomIdToArrayOfSocketId.get(chatRoomId) as string[];
         io.to(socketsInTheRoom).emit('chat text message', messageToClient);
     });

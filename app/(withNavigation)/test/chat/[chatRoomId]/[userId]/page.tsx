@@ -16,7 +16,10 @@ function isFileImage(file: File | undefined) {
 export default function page({
   params,
 }: {
-  params: { chatRoomId: string };
+  params: { 
+    chatRoomId: string,
+    userId: string
+  };
 }) {
   
   const chatRoomId = params.chatRoomId;
@@ -27,7 +30,7 @@ export default function page({
     socket = io('http://localhost:3001', {
       extraHeaders: {
         "chat-room-id": chatRoomId,
-        "user-id" : userId
+        "user-id" : params.userId
       }
     });
     firstLoad = false;
@@ -92,7 +95,7 @@ export default function page({
       <div>
         {messages.map((message, index) => {
           if (!message.isImage) {
-            return <div key={index}>{`${message.userId} said: ${message.content}`}</div>
+            return <div key={message.id}>{`${message.userId} said: ${message.content}`}</div>
           }
 
           return (
