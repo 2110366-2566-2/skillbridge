@@ -1,5 +1,7 @@
+"use client";
+
 import { CloseOutlined, SortAscendingOutlined } from "@ant-design/icons";
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 
 type UseStatePair<T> = {
   name: string;
@@ -7,12 +9,28 @@ type UseStatePair<T> = {
   set: Dispatch<SetStateAction<T>>;
 };
 
+type SortQueue = {
+  set: Dispatch<SetStateAction<string>>;
+  value: string;
+}
+
 type Props = {
   sideBarState: UseStatePair<boolean>;
-  sortOptions: UseStatePair<string>[];
+  sortOptions: Array<UseStatePair<string>>;
 };
 
+
+// sort the cards based on the sort options in queue
+const performSort = (sortQueue: Array<SortQueue>) => {
+  sortQueue.forEach((queue) => {
+    queue.set(queue.value);
+  })
+}
+
 const Sorter = ({ sideBarState, sortOptions }: Props) => {
+
+  const [sortQueue, setSortQueue] = useState<Array<SortQueue>>([]);
+
   return (
     <>
       <button
@@ -39,6 +57,7 @@ const Sorter = ({ sideBarState, sortOptions }: Props) => {
                 </div>
                 <CloseOutlined
                   onClick={() => {
+                    setSortQueue([]);
                     sideBarState.set(false);
                   }}
                 />
@@ -55,9 +74,8 @@ const Sorter = ({ sideBarState, sortOptions }: Props) => {
                       <select
                         key={option.name}
                         title={option.name}
-                        value={option.value}
                         onChange={(e) => {
-                          option.set(e.target.value);
+                          setSortQueue([...sortQueue, { set: option.set, value: e.target.value }]);
                         }}
                         className="bg-slate-50 border border-slate-300 text-slate-800 text-[16px] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 w-full p-2"
                       >
@@ -76,6 +94,7 @@ const Sorter = ({ sideBarState, sortOptions }: Props) => {
               {/* clear sort options */}
               <button
                 onClick={() => {
+                  setSortQueue([]);
                   sortOptions.forEach((option) => {
                     option.set("");
                   });
@@ -89,6 +108,8 @@ const Sorter = ({ sideBarState, sortOptions }: Props) => {
               <button
                 className="w-1/2 min-h-[40px] text-white text-[16px] rounded-md bg-slate-700 hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-slate-300"
                 onClick={() => {
+                  performSort(sortQueue);
+                  setSortQueue([]);
                   sideBarState.set(false);
                 }}
               >

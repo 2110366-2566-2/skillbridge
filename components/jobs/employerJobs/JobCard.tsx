@@ -10,8 +10,8 @@ type Props = {
   category: string;
   applicants: Number;
   maxApplicants: Number;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
   isPending: Boolean;
 };
 
@@ -41,7 +41,7 @@ const JobCard = ({
             </Link>
           </div>
           <div className="font-medium my-2">
-            {startDate} - {endDate}
+            {startDate.toLocaleDateString('en-GB')} - {endDate.toLocaleDateString('en-GB')}
           </div>
         </div>
 

@@ -16,7 +16,7 @@ import whiteLogo from "@/public/logos/logo-white.svg";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import { getEmployerInfoById } from "@/actions/public/getUserInfo";
-import StudentJobHeader from "../../jobs/studentJobs/StudentJobHeader";
+import StudentJobHeader from "./jobHeader/StudentJobHeader";
 
 export default async function Header() {
   // Fetch Job tags
