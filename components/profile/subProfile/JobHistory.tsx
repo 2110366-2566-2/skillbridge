@@ -18,10 +18,10 @@ export default function JobHistory({
                     {jobTitle}
                 </p>
                 <div className="flex w-full">
-                    <p className="text-[14px] text-[#64748b] font-medium mr-[10px] lg:text-[16px]">
+                    <p className="text-[14px] text-[#64748b] font-medium mr-[10px]">
                         {jobPeriod}
                     </p>
-                    <div className="text-[14px] text-[#334155] text-center bg-[#E8E2F0] py-[1px] px-[6px] rounded-[4px] ">
+                    <div className="text-[14px] text-[#334155] text-center bg-[#E8E2F0] py-[1px] px-[6px] rounded-[4px]">
                         {jobTag}
                     </div>
                 </div>

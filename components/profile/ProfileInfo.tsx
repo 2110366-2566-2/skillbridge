@@ -24,8 +24,8 @@ export default function ProfileInfo({
   workingComplete: number
   session: Session | null
 }) {
+
   const isEditAble = session?.user?.id === studentId
-  // const isEditAble = ถ้าเป็นหน้าของตนเองก็ true ไม่ก้ false               check session ดู id ของคนที่เข้ามาดู profile ตรงกับ studentId บ่
 
   return (
     <div className="p-[20px] border border-1 border-[#cbd5e1] rounded-md md:px-[25px] md:py-[30px]">
