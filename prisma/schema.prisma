@@ -233,16 +233,18 @@ model Review {
 }
 
 model ApplicationStatusLog {
-  id                String            @id
+  id                String            @id @default(uuid())
   applicationUserId String
   applicationJobId  String
   status            ApplicationStatus
   updatedAt         DateTime          @default(now())
   application       Application       @relation(fields: [applicationUserId, applicationJobId], references: [userId, jobId])
+
+  @@map("application_status_log")
 }
 
 model MailLog {
-  id        String   @id
+  id        String   @id @default(uuid())
   userId    String
   isSuccess Boolean
   createdAt DateTime @default(now())

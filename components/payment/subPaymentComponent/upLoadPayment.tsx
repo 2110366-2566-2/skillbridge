@@ -97,20 +97,6 @@ export default function FilesInput(props: Props) {
       return;
     }
 
-    console.log(
-      "Client jobId:",
-      jobId,
-      "studentId:",
-      studentId,
-      "employerUserId:",
-      session.user.id,
-      "amount:",
-      totalPrice,
-      "isDeposit:",
-      isDeposit,
-      "receipt:",
-      selectedFile,
-    );
     const formDataObject = new FormData();
     formDataObject.append("jobId", jobId);
     formDataObject.append("studentId", studentId);

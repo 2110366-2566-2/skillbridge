@@ -31,3 +31,22 @@ DROP TABLE "_text";
 
 -- DropTable
 DROP TABLE "image";
+
+-- AlterTable
+ALTER TABLE "student" DROP COLUMN "transcriptUrl",
+ADD COLUMN     "transcriptName" TEXT;
+
+-- DropForeignKey
+ALTER TABLE "chatroom" DROP CONSTRAINT "chatroom_jobId_fkey";
+
+-- AlterTable
+ALTER TABLE "chatroom" DROP COLUMN "jobId",
+ADD COLUMN     "applicationJobId" TEXT NOT NULL,
+ADD COLUMN     "applicationUserId" TEXT NOT NULL;
+
+-- CreateIndex
+CREATE UNIQUE INDEX "chatroom_applicationUserId_applicationJobId_key" ON "chatroom"("applicationUserId", "applicationJobId");
+
+-- AddForeignKey
+ALTER TABLE "chatroom" ADD CONSTRAINT "chatroom_applicationUserId_applicationJobId_fkey" FOREIGN KEY ("applicationUserId", "applicationJobId") REFERENCES "application"("userId", "jobId") ON DELETE RESTRICT ON UPDATE CASCADE;
+
