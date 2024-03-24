@@ -270,4 +270,7 @@
 ### Application
 - The trigger is added for log in `ApplicationStatusLog` when there is an update of `status` on `Application`
 
+### Other
+- Manually squash old migrations for cleaner migrations history files 
+
 <p align="right">(<a href="#database">back to top</a>)</p>
