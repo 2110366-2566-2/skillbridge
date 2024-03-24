@@ -5,7 +5,7 @@ import {
     pendingToRejected,
 } from "@/actions/jobs/jobCards/employerChangeApplicationState";
 
-export default function AppliedStatus({
+export default function QualifyCandidateButton({
     studentId,
     jobId,
 }: {

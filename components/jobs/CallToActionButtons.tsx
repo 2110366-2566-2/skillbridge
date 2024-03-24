@@ -5,11 +5,10 @@ import AnswerOfferButton from './studentJobs/studentCallToAction/AnswerOfferButt
 import AckButton from './studentJobs/studentCallToAction/AckButton';
 import SubmitTaskButton from './studentJobs/studentCallToAction/SubmitTaskButton';
 import ChatButton from './studentJobs/studentCallToAction/ChatButton';
-import WaitedForDepositStatus from './employerJobs/employerCallToAction/waitedForDepositStatus';
-import AppliedStatus from './employerJobs/employerCallToAction/appliedStatus';
-import WaitedForSubmissionStatus from './employerJobs/employerCallToAction/waitedForSubmissionStatus';
-import SubmittedStatus from './employerJobs/employerCallToAction/submittedStatus';
-import WaitedForWageStatus from './employerJobs/employerCallToAction/waitedForWageStatus';
+import PayButton from './employerJobs/employerCallToAction/PayButton';
+import QualifyCandidateButton from './employerJobs/employerCallToAction/QualifyCandidateButton';
+import CancelButton from './employerJobs/employerCallToAction/CancelButton';
+import ApproveButton from './employerJobs/employerCallToAction/ApproveButton';
 
 type Props = {
     jobId: string;
@@ -56,17 +55,17 @@ function CallToActionButtons({jobId, studentId = "", status, role}: Props) {
     {
         switch (convertStateNameToThai(role, status)) {
             case "สมัคร":
-                return <AppliedStatus studentId={studentId} jobId={jobId} />;
+                return <QualifyCandidateButton studentId={studentId} jobId={jobId} />;
             case "สละสิทธิ์":
                 return <></>;
             case "รอจ่ายมัดจำ":
-                return <WaitedForDepositStatus studentId={studentId} jobId={jobId} />
+                return <PayButton studentId={studentId} jobId={jobId} />
             case "รอส่งมอบงาน":
-                return <WaitedForSubmissionStatus studentId={studentId} jobId={jobId} />
+                return <CancelButton studentId={studentId} jobId={jobId} />
             case "ส่งมอบงานแล้ว":
-                return <SubmittedStatus studentId={studentId} jobId={jobId} />;
+                return <ApproveButton studentId={studentId} jobId={jobId} />;
             case "รอจ่ายค่าจ้าง":
-                return <WaitedForWageStatus studentId={studentId} jobId={jobId} />
+                return <PayButton studentId={studentId} jobId={jobId} />;
             case "เสร็จสิ้น":
                 return <></>;
             default:
