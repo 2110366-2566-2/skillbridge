@@ -21,8 +21,8 @@ const acceptedTypes = [
 ];
 const UpdateJobSchema = JobSchema.partial().extend({
   jobId: z.string(),
-  startDate: z.coerce.date(),
-  endDate: z.coerce.date(),
+  startDate: z.coerce.date().optional(),
+  endDate: z.coerce.date().optional(),
 });
 type JobUpdateForm = z.infer<typeof UpdateJobSchema>;
 type ZodResponse =
