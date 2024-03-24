@@ -3,6 +3,7 @@
 import { prisma } from "../../lib/prisma";
 import { ApplicationStatus } from "@prisma/client";
 import getS3URL from "../public/S3/getS3URL";
+import { Response } from "@/types/ResponseType";
 
 const getJobById = async (jobId: string) => {
   const job: any = await prisma.job.findFirst({
@@ -15,17 +16,20 @@ const getJobById = async (jobId: string) => {
       applications: true,
       jobDocumentFiles: {
         select: {
-          fileName: true
-        }
+          fileName: true,
+          isDeleted: true,
+        },
       },
     },
   });
-
   // Iterate through each jobDocumentFile and replace fileName with fileLink
   for (const file of job.jobDocumentFiles) {
-    file.fileLink = await getS3URL(file.fileName);
-    // Remove the original fileName
-    delete file.fileName;
+    const fileResponse: Response<string> = await getS3URL(file.fileName);
+    if (fileResponse.success) {
+      file.fileLink = fileResponse.data;
+      // Remove the original fileName
+      delete file.fileName;
+    }
   }
 
   const userName: any = await prisma.user.findFirst({
@@ -47,7 +51,7 @@ const getJobById = async (jobId: string) => {
     jobTags: job.jobTag.title,
     description: job.description ? job.description : "",
     acceptNum: job.applications.filter(
-      (app: any) => app.status == ApplicationStatus.ACCEPTED,
+      (app: any) => app.status == ApplicationStatus.ACCEPTED
     ).length, //TODO : Filter for accepted application
     maxAcceptNum: job.numWorker,
     budget: job.budget,
