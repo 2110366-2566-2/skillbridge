@@ -131,6 +131,7 @@ model Application {
   user                     User                      @relation(fields: [userId], references: [id])
   applicationDocumentFiles ApplicationDocumentFile[]
   chatroom                 Chatroom?
+  applicationStatusLogs    ApplicationStatusLog[]
 
   @@id([userId, jobId])
   @@map("application")
@@ -229,6 +230,15 @@ model Review {
   student     Student  @relation(fields: [studentId], references: [userId])
 
   @@map("review")
+}
+
+model ApplicationStatusLog {
+  id                String            @id
+  applicationUserId String
+  applicationJobId  String
+  status            ApplicationStatus
+  updatedAt         DateTime          @default(now())
+  application       Application       @relation(fields: [applicationUserId, applicationJobId], references: [userId, jobId])
 }
 
 model MailLog {
