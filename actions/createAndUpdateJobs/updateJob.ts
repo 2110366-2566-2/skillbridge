@@ -150,7 +150,7 @@ const updateJob = async (formData: FormData) => {
         startDate,
         endDate,
         status,
-        updatedAt: new Date().toLocaleDateString("en-GB"),
+        updatedAt: new Date().toISOString(),
       },
     });
 
