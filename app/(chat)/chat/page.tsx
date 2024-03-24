@@ -24,18 +24,18 @@ export default async function Page() {
       {/* Mobile */}
       <div className="min-h-full bg-slate-800 flex flex-col justify-between lg:hidden">
         <Header />
-        <div className="rounded-3xl bg-slate-50 min-h-[80vh] p-5">
+        <div className="rounded-3xl bg-slate-50 min-h-[80vh] py-5">
           {isStudent ? (
             // TODO : Mobile Student Chat list
             userId !== null && (
-              <div className="pb-28">
+              <div>
                 <ChatCardListStudent studentId={userId} />
               </div >
             )
           ) : (
             // TODO : Mobile Employer Chat list
             userId !== null && (
-              <div className="pb-28">
+              <div>
                 <ChatGroupListEmployer employerId={userId} />
               </div>
             )
