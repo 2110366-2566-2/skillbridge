@@ -48,7 +48,7 @@ export default function ChatCardEmployer({ chatroom }: Props) {
                     </div>
                 </div>
                 <div className="text-[14px] text-[#838383] w-full truncate max-w-[33ch] lg:text-[16px]">
-                    {chatroom.latestMessage?.content}
+                    {chatroom.latestMessage?.isImage ? "ส่งรูป" : chatroom.latestMessage?.content}
                 </div>
             </div>
         </div>
