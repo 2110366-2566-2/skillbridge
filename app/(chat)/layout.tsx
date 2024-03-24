@@ -3,6 +3,7 @@ import Footer from "@/components/layout/footer/Footer";
 import React from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
+import ChatCardListStudent from "@/components/chat/student/ChatCardListStudent";
 
 export default async function NavigationLayout({
   children,
@@ -12,18 +13,23 @@ export default async function NavigationLayout({
   // Session
   const session = await getServerSession(authOptions);
   const isStudent = session?.email.split("@")[1] === "student.chula.ac.th";
+  const userId = session?.user.id ? session.user.id : null;
 
   return (
     <>
       {/* Desktop */}
-      <div className="hidden md:flex flex-col justify-between min-h-full bg-slate-800">
+      <div className="hidden lg:flex flex-col justify-between min-h-full bg-slate-800">
         <Header />
         <div className="rounded-3xl bg-slate-50 min-h-[80vh] p-5">
           {/* TODO : Container */}
           <div className="flex gap-20">
             {isStudent ? (
               // TODO : Desktop Student Chat list
-              <div>Desktop Student Chat list</div>
+              userId !== null ? (
+                <div className="hidden lg:block w-[30vw]" >
+                  <ChatCardListStudent studentId={userId} />
+                </div >
+              ) : <div>No ID</div>
             ) : (
               // TODO : Desktop Employer Chat list
               <div>Desktop Employer Chat list</div>
@@ -36,7 +42,7 @@ export default async function NavigationLayout({
       </div>
 
       {/* Mobile */}
-      <div className="md:hidden">{children}</div>
+      <div className="lg:hidden">{children}</div>
     </>
   );
 }
