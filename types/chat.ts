@@ -9,8 +9,9 @@ export type toServerImageMessage = {
 }
 
 export type toClientMessage = {
-  senderId: string,
-  timeStamp: Date,
-  isImage: boolean,
-  content: string,
+  id: string;
+  userId: string;
+  createdAt: Date;
+  content: string;
+  isImage: boolean;
 };

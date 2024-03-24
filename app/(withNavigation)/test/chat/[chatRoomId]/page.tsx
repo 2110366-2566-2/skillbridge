@@ -92,12 +92,12 @@ export default function page({
       <div>
         {messages.map((message, index) => {
           if (!message.isImage) {
-            return <div key={index}>{`${message.senderId} said: ${message.content}`}</div>
+            return <div key={index}>{`${message.userId} said: ${message.content}`}</div>
           }
 
           return (
             <div>
-              <p>{`${message.senderId} sendImage:`}</p>
+              <p>{`${message.userId} sendImage:`}</p>
               <img src={message.content} alt={message.content}/>
             </div>
           )

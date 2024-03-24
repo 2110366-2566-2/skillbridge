@@ -68,8 +68,9 @@ io.on('connection', async (socket) => {
 
         // construct a message to emits back to clients
         const messageToClient: toClientMessage = {
-            senderId: userId,
-            timeStamp: new Date(),
+            id: "",
+            userId: userId,
+            createdAt: new Date(),
             isImage: false,
             content: message.text
         };
@@ -97,10 +98,11 @@ io.on('connection', async (socket) => {
             console.log(getS3URLResponse);
 
             const messageToClient: toClientMessage = {
-                senderId: userId,
-                timeStamp: new Date(),
+                id: '',
+                userId: userId,
+                createdAt: new Date(),
                 isImage: true,
-                content: getS3URLResponse.data
+                content: getS3URLResponse.data,
             };
 
             const socketsInTheRoom = chatRoomIdToArrayOfSocketId.get(chatRoomId) as string[];
