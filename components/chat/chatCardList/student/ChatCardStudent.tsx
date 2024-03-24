@@ -3,6 +3,7 @@
 import { StudentChatListData } from "@/actions/chat/getChatListDataByUser"
 import Image from "next/image"
 import noavatar from "@/public/icons/noavatar.svg";
+import Link from "next/link";
 
 type Props = {
     employer: StudentChatListData
@@ -12,7 +13,10 @@ export default function ChatCardStudent({ employer }: Props) {
     const avatar = noavatar;
 
     return (
-        <div className="flex flex-row items-center h-[90px] px-[16px] py-[21px] rounded-[16px] hover:bg-neutral-200 hover:cursor-pointer lg:h-[94px] lg:py-[20px]">
+        <Link
+            className="flex flex-row items-center h-[90px] px-[16px] py-[21px] rounded-[16px] hover:bg-neutral-200 hover:cursor-pointer lg:h-[94px] lg:py-[20px]"
+            href={`/chat/${employer.chatrooms[0].chatroomId}`}
+        >
             <Image
                 className="rounded-full mr-4 lg:hidden"
                 src={avatar}
@@ -40,7 +44,7 @@ export default function ChatCardStudent({ employer }: Props) {
                     {employer.chatrooms[0]?.latestMessage?.isImage ? `ส่งรูป` : employer.chatrooms[0]?.latestMessage?.content}
                 </div>
             </div>
-        </div>
+        </Link>
 
     )
 }

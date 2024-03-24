@@ -3,6 +3,7 @@
 import Image from "next/image"
 import noavatar from "@/public/icons/noavatar.svg";
 import { Message } from "@/actions/chat/getMessageByChatRoom";
+import Link from "next/link";
 
 type Props = {
     chatroom: {
@@ -23,7 +24,10 @@ export default function ChatCardEmployer({ chatroom }: Props) {
     const avatar = noavatar;
 
     return (
-        <div className="flex flex-row items-center h-[90px] px-[16px] py-[21px] rounded-[16px] hover:bg-neutral-200 hover:cursor-pointer lg:h-[94px] lg:py-[20px]">
+        <Link
+            className="flex flex-row items-center h-[90px] px-[16px] py-[21px] rounded-[16px] hover:bg-neutral-200 hover:cursor-pointer lg:h-[94px] lg:py-[20px]"
+            href={`/chat/${chatroom.chatroomId}`}
+        >
             <Image
                 className="rounded-full mr-4 lg:hidden"
                 src={avatar}
@@ -51,7 +55,7 @@ export default function ChatCardEmployer({ chatroom }: Props) {
                     {chatroom.latestMessage?.isImage ? "ส่งรูป" : chatroom.latestMessage?.content}
                 </div>
             </div>
-        </div>
+        </Link>
 
     )
 }

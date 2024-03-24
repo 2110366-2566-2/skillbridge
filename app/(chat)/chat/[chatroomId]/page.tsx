@@ -5,9 +5,9 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 export default async function ChatRoomPage({
   params,
 }: {
-  params: { userId: string };
+  params: { chatroomId: string };
 }) {
-  const chatroomId = params.userId;
+  const chatroomId = params.chatroomId;
 
   // Session
   const session = await getServerSession(authOptions);
