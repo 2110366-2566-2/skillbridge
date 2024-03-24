@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import io, { Socket } from 'socket.io-client';
-import { toClientMessage, toServerMessage } from "@/types/chat";
+import { toClientMessage, toServerImageMessage, toServerTextMessage } from "@/types/chat";
 import { v4 as uuidv4 } from 'uuid';
 
 let socket: Socket;
@@ -42,7 +42,13 @@ export default function page({
 
   useEffect(() => {
     // Listen for incoming messages
-    socket.on('chat message', (message: toClientMessage) => {
+    socket.on('chat text message', (message: toClientMessage) => {
+      console.log(message);
+      console.log(message.content);
+      setMessages((prev)=>[...prev, message]);
+    });
+
+    socket.on('chat image message', (message: toClientMessage) => {
       console.log(message);
       console.log(message.content);
       setMessages((prev)=>[...prev, message]);
@@ -50,37 +56,34 @@ export default function page({
   }, []);
 
   const sendMessage = () => {
-    const messageToServer: toServerMessage = {
-      isImage: false,
-      text: newTextMessage,
-      image: imageFile
+    const messageToServer: toServerTextMessage = {
+      text: newTextMessage
     };
-    socket.emit('chat message', messageToServer);
+    socket.emit('chat text message', messageToServer);
     setNewTextMessage('');
   };
 
-  const sendImage = () => {
+  const sendImage = async () => {
     console.log(imageFile);
-    if (!isFileImage(imageFile)) {
+    if (!isFileImage(imageFile) || !imageFile) {
       alert("The file supposed to be an image.");
       setImageFile(undefined);
       return;
     }
 
-    const messageToServer: toServerMessage = {
-      isImage: true,
-      text: "This supposed to be an image.",
-      image: imageFile
-    };
+    const arrayBuffer = await imageFile.arrayBuffer();
+    const uiInt8Array = new Uint8Array(arrayBuffer);
+    const buffer = Buffer.from(uiInt8Array);
 
-    console.log(messageToServer);
+    const messageToServer: toServerImageMessage = {
+      type: imageFile.type,
+      size: imageFile.size,
+      buffer: buffer
+    }
 
-    socket.emit('chat message', messageToServer, (status:string) => {
-      console.log(status);
-    });
+    socket.emit('chat image message', messageToServer);
 
     setImageFile(undefined);
-    console.log("2", imageFile);
   };
   
   return (

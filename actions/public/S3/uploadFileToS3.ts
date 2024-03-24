@@ -24,6 +24,7 @@ const uploadFileToS3 = async (
       "transactionFiles",
       "usersProfile",
       "resumes",
+      "imageMessageFiles"
     ];
 
     if (!validPath.includes(path)) {

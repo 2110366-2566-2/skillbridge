@@ -1,7 +1,11 @@
-export type toServerMessage = {
-  isImage: boolean,
-  text: string,
-  image: File | undefined,
+export type toServerTextMessage = {
+  text: string
+}
+
+export type toServerImageMessage = {
+  type: string,
+  size: number,
+  buffer: Buffer
 }
 
 export type toClientMessage = {
