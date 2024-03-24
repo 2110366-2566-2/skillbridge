@@ -1,5 +1,4 @@
-import { getServerSession } from "next-auth";
-import { AuthOptions } from "next-auth";
+"use server";
 import { prisma } from "@/lib/prisma";
 
 const getRating = async (jobId: string, studentId: string) => {
@@ -52,10 +51,10 @@ const getComment = async (jobId: string, studentId: string) => {
 
 const getJobId = async (jobId: string, studentId: string) => {
   try {
-    const job = await prisma.review.findFirstOrThrow({
+    const job = await prisma.application.findFirstOrThrow({
       where: {
         jobId: jobId,
-        studentId: studentId,
+        userId: studentId,
         isDeleted: false,
       },
       select: {
