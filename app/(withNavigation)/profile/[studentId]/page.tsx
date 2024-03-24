@@ -23,7 +23,6 @@ export default async function ProfilePage({ params }: { params: { studentId: str
   const success = allJobsHistory.reduce((acc, job) => (job.status === "DONE" ? acc + 1 : acc), 0)
   const successRate = Math.round((success * 100) / allJobsHistory.length)
 
-
   return (
     <div className="w-full md:flex md:justify-center md:px-[4px] md:py-[16px]">
       <div className="flex flex-col w-full md:max-w-[500px] md:mr-[30px] lg:mr-[50px]">

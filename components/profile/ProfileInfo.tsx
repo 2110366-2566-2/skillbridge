@@ -1,9 +1,7 @@
-'use client'
 import Image from "next/image"
 import RatingScore from "./subProfile/RatingScore"
 import Link from "next/link"
 import { Session } from "next-auth"
-import { useState } from "react"
 
 export default function ProfileInfo({
   studentId,
@@ -26,20 +24,8 @@ export default function ProfileInfo({
   workingComplete: number
   session: Session | null
 }) {
-
   const isEditAble = session?.user?.id === studentId
-
-  const [modal, setModal] = useState(false);
-
-  const toggleModal = () => {
-    setModal(!modal)
-  }
-
-  if (modal) {
-    document.body.classList.add('overflow-y-hidden')
-  } else {
-    document.body.classList.remove('overflow-y-hidden')
-  }
+  // const isEditAble = ถ้าเป็นหน้าของตนเองก็ true ไม่ก้ false               check session ดู id ของคนที่เข้ามาดู profile ตรงกับ studentId บ่
 
   return (
     <div className="p-[20px] border border-1 border-[#cbd5e1] rounded-md md:px-[25px] md:py-[30px]">
@@ -68,7 +54,7 @@ export default function ProfileInfo({
 
       {portfolioURL && (
         <Link href={portfolioURL}>
-          <div className="w-full px-[16px] flex items-center pb-[8px] pt-[10px] bg-[#cbd5e1] rounded-lg hover:opacity-[80%] active:opacity-[60%] cursor-pointer mb-[15px] md:mb-[25px]">
+          <div className="w-full px-[16px] flex items-center pb-[8px] pt-[10px] bg-[#cbd5e1] rounded-lg hover:underline hover:underline-offset-2 cursor-pointer mb-[15px] md:mb-[25px]">
             <Image
               src={"/icons/file.svg"}
               width={0}
@@ -112,12 +98,10 @@ export default function ProfileInfo({
         </div>
       </div>
 
-      {true && (
+      {isEditAble && (
         <div
           className="w-full h-[40px] flex items-center justify-center rounded-[6px] border border-1 border-slate-300 cursor-pointer mt-[15px] md:mt-[25px] md:h-[50px]
-                hover:opacity-[80%] active:opacity-[60%]"
-          onClick={toggleModal}
-        >
+                hover:underline hover:underline-offset-2">
           <p className="text-[14px] font-medium text-slate-600 md:text-[18px]">แก้ไขโปรไฟล์</p>
         </div>
       )}
