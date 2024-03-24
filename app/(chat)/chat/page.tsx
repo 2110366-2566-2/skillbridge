@@ -15,9 +15,6 @@ export default async function Page() {
 
   return (
     <>
-      <div className="lg:hidden">
-        <Header />
-      </div>
       {/* Desktop */}
       {/* TODO : Desktop Empty Chat room */}
       <div className="hidden lg:block">
@@ -25,22 +22,25 @@ export default async function Page() {
       </div>
 
       {/* Mobile */}
-      {isStudent ? (
-        // TODO : Mobile Student Chat list
-        userId !== null && (
-          <div className="pb-28 lg:hidden">
-            <ChatCardListStudent studentId={userId} />
-          </div >
-        )
-      ) : (
-        // TODO : Mobile Employer Chat list
-        userId !== null && (
-          <div className="pb-28 lg:hidden">
-            <ChatGroupListEmployer employerId={userId} />
-          </div>
-        )
-      )}
-      <div className="lg:hidden">
+      <div className="min-h-full bg-slate-800 flex flex-col justify-between lg:hidden">
+        <Header />
+        <div className="rounded-3xl bg-slate-50 min-h-[80vh] p-5">
+          {isStudent ? (
+            // TODO : Mobile Student Chat list
+            userId !== null && (
+              <div className="pb-28">
+                <ChatCardListStudent studentId={userId} />
+              </div >
+            )
+          ) : (
+            // TODO : Mobile Employer Chat list
+            userId !== null && (
+              <div className="pb-28">
+                <ChatGroupListEmployer employerId={userId} />
+              </div>
+            )
+          )}
+        </div>
         <Footer />
       </div>
     </>
