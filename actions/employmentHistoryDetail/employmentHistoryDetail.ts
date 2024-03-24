@@ -64,7 +64,7 @@ const getEmploymentTracking = async (jobId: string, studentId: string) => {
       },
     });
     let data: Array<EmploymentTrack> = [];
-    let before: string | undefined = undefined;
+    let before: string | null = null;
     for (const applicationStatus of application.applicationStatusLogs) {
       const track: EmploymentTrack = {
         status: {
@@ -88,7 +88,7 @@ const getEmploymentTracking = async (jobId: string, studentId: string) => {
   }
 };
 
-export { getRating, getComment, getJobId };
+export { getRating, getComment, getEmploymentTracking };
 
 // const main = async () => {
 //   const studentId = "1dabcb91-32fd-41ea-a8f1-684e2c830090";
