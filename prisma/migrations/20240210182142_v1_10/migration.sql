@@ -231,3 +231,99 @@ ALTER TABLE "_job_tags_relation" ADD CONSTRAINT "_job_tags_relation_A_fkey" FORE
 
 -- AddForeignKey
 ALTER TABLE "_job_tags_relation" ADD CONSTRAINT "_job_tags_relation_B_fkey" FOREIGN KEY ("B") REFERENCES "job_tag"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- CreateEnum
+CREATE TYPE "ApplicationStatus" AS ENUM ('PENDING', 'ACCEPTED', 'REJECTED');
+
+-- DropForeignKey
+ALTER TABLE "_job_tags_relation" DROP CONSTRAINT "_job_tags_relation_A_fkey";
+
+-- DropForeignKey
+ALTER TABLE "_job_tags_relation" DROP CONSTRAINT "_job_tags_relation_B_fkey";
+
+-- DropForeignKey
+ALTER TABLE "applied" DROP CONSTRAINT "applied_jobId_fkey";
+
+-- DropForeignKey
+ALTER TABLE "applied" DROP CONSTRAINT "applied_userId_fkey";
+
+-- AlterTable
+ALTER TABLE "_user" ADD COLUMN     "hashedPassword" VARCHAR(512) NOT NULL,
+ADD COLUMN     "isDeleted" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "isGmail" BOOLEAN NOT NULL DEFAULT false,
+ALTER COLUMN "email" SET NOT NULL;
+
+-- AlterTable
+ALTER TABLE "job" ADD COLUMN     "isDeleted" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "jobTagId" TEXT NOT NULL;
+
+-- AlterTable
+ALTER TABLE "job_tag" ADD COLUMN     "isDeleted" BOOLEAN NOT NULL DEFAULT false;
+
+-- AlterTable
+ALTER TABLE "message" DROP COLUMN "timestamp";
+
+-- AlterTable
+ALTER TABLE "review" ADD COLUMN     "isDeleted" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "studentId" TEXT NOT NULL;
+
+-- AlterTable
+ALTER TABLE "transaction" ADD COLUMN     "isDeleted" BOOLEAN NOT NULL DEFAULT false;
+
+-- DropTable
+DROP TABLE "_job_tags_relation";
+
+-- DropTable
+DROP TABLE "applied";
+
+-- DropEnum
+DROP TYPE "AppliedStatus";
+
+-- CreateTable
+CREATE TABLE "application" (
+    "userId" TEXT NOT NULL,
+    "jobId" TEXT NOT NULL,
+    "bid" DOUBLE PRECISION NOT NULL,
+    "documentUrl" TEXT,
+    "status" "ApplicationStatus" NOT NULL DEFAULT 'PENDING',
+    "isDeleted" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "application_pkey" PRIMARY KEY ("userId","jobId")
+);
+
+-- AddForeignKey
+ALTER TABLE "job" ADD CONSTRAINT "job_jobTagId_fkey" FOREIGN KEY ("jobTagId") REFERENCES "job_tag"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "application" ADD CONSTRAINT "application_userId_fkey" FOREIGN KEY ("userId") REFERENCES "_user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "application" ADD CONSTRAINT "application_jobId_fkey" FOREIGN KEY ("jobId") REFERENCES "job"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "review" ADD CONSTRAINT "review_studentId_fkey" FOREIGN KEY ("studentId") REFERENCES "student"("userId") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- DropForeignKey
+ALTER TABLE "job" DROP CONSTRAINT "job_userId_fkey";
+
+-- DropForeignKey
+ALTER TABLE "transaction" DROP CONSTRAINT "transaction_employerId_fkey";
+
+-- AlterTable
+ALTER TABLE "job" DROP COLUMN "userId",
+ADD COLUMN     "employerId" TEXT NOT NULL;
+
+-- AlterTable
+ALTER TABLE "transaction" DROP COLUMN "employerId",
+ADD COLUMN     "employerUserId" TEXT;
+
+-- AddForeignKey
+ALTER TABLE "job" ADD CONSTRAINT "job_employerId_fkey" FOREIGN KEY ("employerId") REFERENCES "employer"("userId") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "transaction" ADD CONSTRAINT "transaction_employerUserId_fkey" FOREIGN KEY ("employerUserId") REFERENCES "employer"("userId") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AlterTable
+ALTER TABLE "job_tag" ALTER COLUMN "title" SET NOT NULL;
