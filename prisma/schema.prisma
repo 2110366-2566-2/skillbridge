@@ -131,7 +131,7 @@ model Application {
   user                     User                      @relation(fields: [userId], references: [id])
   applicationDocumentFiles ApplicationDocumentFile[]
   chatroom                 Chatroom?
-  ApplicationStatusLog     ApplicationStatusLog[]
+  applicationStatusLogs    ApplicationStatusLog[]
 
   @@id([userId, jobId])
   @@map("application")
