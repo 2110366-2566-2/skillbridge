@@ -23,8 +23,8 @@ export default function ChatMessage({ message }: Props) {
             {isImage ? (
                 // Case: IMAGE  
                 <div className={`flex flex-col ${isSender ? "items-end" : ""}`}>
-                    <div className={`flex flex-row gap-2 items-end `}>
-                        {isSender && <div className={`text-slate-500 text-[12px] -translate-y-[6px] lg:text-[12px]`}>{time}</div>}
+                    <div className={`flex flex-row gap-2 items-end`}>
+                        <div className={`text-slate-500 text-[12px] -translate-y-[6px] lg:text-[12px] ${!isSender && "order-last"}`}>{time}</div>
                         <Image
                             className={`mb-2 rounded-[16px] max-w-[64vw] shadow lg:max-w-[24vw]`}
                             src={content.data}
@@ -32,18 +32,16 @@ export default function ChatMessage({ message }: Props) {
                             width={268}
                             height={357}
                         />
-                        {!isSender && <div className="text-slate-500 text-[12px] -translate-y-[6px] lg:text-[12px]">{time}</div>}
                     </div>
                 </div>
             ) : (
                 // Case: TEXT
                 <div className={`flex flex-col ${isSender ? "items-end" : ""}`}>
                     <div className={`flex flex-row gap-2 items-end `}>
-                        {isSender && <div className={`text-slate-500 text-[12px] -translate-y-[6px] lg:text-[12px]`}>{time}</div>}
+                        <div className={`text-slate-500 text-[12px] -translate-y-[6px] lg:text-[12px] ${!isSender && "order-last"}`}>{time}</div>
                         <div className={`${isSender ? "bg-emerald-200" : "bg-slate-200"} text-slate-900 px-[10px] pt-[8px] pb-[4px] mb-2 rounded-[16px] max-w-[64vw] shadow lg:px-[12px] lg:max-w-[24vw]`}>
                             {content}
                         </div>
-                        {!isSender && <div className="text-slate-500 text-[12px] -translate-y-[6px] lg:text-[12px]">{time}</div>}
                     </div>
                 </div>
 
