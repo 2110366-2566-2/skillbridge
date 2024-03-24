@@ -27,7 +27,7 @@ export default function ChatCardStudent({ employer }: Props) {
                 width={54}
                 height={54}
             />
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col w-full gap-1">
                 <div className="flex flex-row justify-between w-full items-center lg:text-[18px]">
                     <div className="font-medium text-[16px] text-slate-800 truncate max-w-[20ch]">
                         {employer.jobTitle}
