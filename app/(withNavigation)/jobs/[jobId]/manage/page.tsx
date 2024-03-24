@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import CloseJobButton from "@/components/jobManage/CloseJobButton";
 import JobDetail from "@/components/offering/JobDetail";
 import getJobById from "@/actions/jobs/getJobByID";
-import JobManagePanel from "@/components/jobManage/JobManagePanel";
+import JobManagementPanel from "@/components/jobManage/JobManagementPanel";
 
 type Props = {
   params: {
@@ -41,7 +41,7 @@ async function ManagePage({ params }: Props) {
           <JobDetail jobId={jobId} isStudentView={false} />
         </article>
 
-        <JobManagePanel jobId={jobId} />
+        <JobManagementPanel jobId={jobId} />
       </section>
     </main>
   );

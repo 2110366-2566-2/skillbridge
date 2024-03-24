@@ -5,6 +5,7 @@ import DangerButton from "../public/buttons/dangerButton/DangerButton";
 import DangerModal from "../public/modal/dangerModal/DangerModal";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import closeJobApplicationByID from "@/actions/createAndUpdateJobs/closeJobApplicationByID";
 
 type Props = {
   children: React.ReactNode;
@@ -35,17 +36,14 @@ function CloseJobButton({ children, jobId, jobName }: Props) {
         secondaryButtonMessage={"ยกเลิก"}
         isShowModal={isShowModal}
         setShowModal={setShowModal}
-        onDangerClick={() => {
+        onDangerClick={async () => {
           setLoading((prev) => !prev);
           setDisabled(true);
-          // Simulate an asynchronous job with a 2-second delay
-          setTimeout(function () {
-            // Code to be executed after the 2-second delay
-            setLoading((prev) => !prev);
-            setDisabled(false); // Assuming you want to enable the button again
-            toast.success(`ปิดรับสมัครงาน ${jobName} สำเร็จ!`);
-            router.push("/jobs");
-          }, 2000);
+          await closeJobApplicationByID(jobId);
+          setLoading((prev) => !prev);
+          setDisabled(false); // Assuming you want to enable the button again
+          toast.success(`ปิดรับสมัครงาน ${jobName} สำเร็จ!`);
+          router.push("/jobs");
         }}
       />
     </div>
