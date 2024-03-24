@@ -73,7 +73,7 @@ function StudentJobsPanel({
                 }
             </main>
             {
-            sortedData.length === 0 && 
+            (sortedData.length === 0 && !isLoading) &&
             (
                 <div className="flex justify-center items-center">
                     <SearchNotFound text={"ไม่พบงาน"} />
