@@ -50,4 +50,30 @@ const getComment = async (jobId: string, studentId: string) => {
   }
 };
 
-export { getRating, getComment };
+const getJobId = async (jobId: string, studentId: string) => {
+  try {
+    const job = await prisma.review.findFirstOrThrow({
+      where: {
+        jobId: jobId,
+        studentId: studentId,
+        isDeleted: false,
+      },
+      select: {
+        jobId: true,
+      },
+    });
+    return {
+      success: true,
+      message: job.jobId,
+    } as const;
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error,
+    };
+  }
+};
+
+const getEmploymentTracking = async (jobId: string, studentId: string) => {};
+
+export { getRating, getComment, getJobId };

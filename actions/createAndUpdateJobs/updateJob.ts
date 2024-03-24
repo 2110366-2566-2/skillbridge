@@ -11,6 +11,7 @@ import { Response } from "../../types/ResponseType";
 import createFileBuffer from "../public/S3/createFileBuffer";
 import uploadFileToS3 from "../public/S3/uploadFileToS3";
 import type { Session } from "next-auth";
+import { JobStatus } from "@prisma/client";
 
 const acceptedTypes = [
   "image/jpeg",
@@ -20,6 +21,8 @@ const acceptedTypes = [
 ];
 const UpdateJobSchema = JobSchema.partial().extend({
   jobId: z.string(),
+  startDate: z.coerce.date(),
+  endDate: z.coerce.date(),
 });
 type JobUpdateForm = z.infer<typeof UpdateJobSchema>;
 type ZodResponse =
@@ -42,6 +45,9 @@ const updateJob = async (formData: FormData) => {
     const jobTagId: string | undefined = response.data.jobTagId;
     const numWorker: number | undefined = response.data.numWorker;
     const file: File | undefined = response.data["files[]"];
+    const startDate: Date | undefined = response.data.startDate;
+    const endDate: Date | undefined = response.data.endDate;
+    const status = response.data.status;
 
     // console.log(
     //   jobId,
@@ -141,6 +147,10 @@ const updateJob = async (formData: FormData) => {
         budget,
         jobTagId,
         numWorker,
+        startDate,
+        endDate,
+        status,
+        updatedAt: new Date().toLocaleDateString("en-GB"),
       },
     });
 
