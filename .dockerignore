@@ -1,2 +1,10 @@
-.next
+.env
+Dockerfile
+.dockerignore
+docs
+logstash
 node_modules
+npm-debug.log
+README.md
+.next
+.git

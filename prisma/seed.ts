@@ -57,12 +57,11 @@ async function main() {
 
   const s1 = await prisma.student.create({
     data: {
-      resumeUrl:
+      resumeName:
         "https://i.pinimg.com/736x/87/91/53/87915397fcb2d0b04899cd90420f4acc.jpg",
-      transcriptUrl:
+      transcriptName:
         "https://www.greatschoolspartnership.org/wp-content/uploads/2022/02/GSP_Exemplar_Transcript_pg1_watermark.png",
       bankAccountNo: "0832705890",
-      avgStar: 4.99,
       user: {
         create: {
           salutation: "นาย",
@@ -78,12 +77,11 @@ async function main() {
 
   const s2 = await prisma.student.create({
     data: {
-      resumeUrl:
+      resumeName:
         "https://s3-us-west-2.amazonaws.com/hiration/ghost/2021/02/resume-meme-10.jpg",
-      transcriptUrl:
+      transcriptName:
         "https://admissionsandutme.com/wp-content/uploads/2020/12/sample-of-transcript-2.jpg",
       bankAccountNo: "0955195010",
-      avgStar: 3.33,
       user: {
         create: {
           salutation: "นาย",
@@ -99,11 +97,10 @@ async function main() {
 
   const s3 = await prisma.student.create({
     data: {
-      resumeUrl: "https://cdn-images.zety.com/pages/resume_meme_2.png",
-      transcriptUrl:
+      resumeName: "https://cdn-images.zety.com/pages/resume_meme_2.png",
+      transcriptName:
         "https://worldwidetranscripts.com/wp-content/uploads/2021/04/Transcripts-Sample-1-622x1024.jpg",
       bankAccountNo: "0876789125",
-      avgStar: 4.69,
       user: {
         create: {
           salutation: "บัก",
