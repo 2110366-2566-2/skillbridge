@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { convertStateNameToThai } from "@/lib/Jobs/adapter";
 import CallToActionButtons from "../CallToActionButtons";
@@ -55,7 +55,9 @@ function studentOfferCard({
                     </div>
 
                     <div
-                        className={`${colorMatcher.get(status)} rounded-full flex align-center w-fit h-fit py-2 px-3 mx-2`}
+                        className={`${colorMatcher.get(
+                            status
+                        )} rounded-full flex align-center w-fit h-fit py-2 px-3 mx-2`}
                     >
                         <p className="text-xs font-medium sm:text-nowrap text-wrap">
                             {convertStateNameToThai("employer", status)}
@@ -65,7 +67,9 @@ function studentOfferCard({
 
                 {/* DropDownObject is a component that is shown when the card is clicked */}
                 <Image
-                    className={`${isDropDownOpen ? "rotate-180" : ""} transition duration-300 ease-out hover:cursor-pointer`}
+                    className={`${
+                        isDropDownOpen ? "rotate-180" : ""
+                    } transition duration-300 ease-out hover:cursor-pointer`}
                     src={"/icons/dropdown.svg"}
                     width={20}
                     height={20}

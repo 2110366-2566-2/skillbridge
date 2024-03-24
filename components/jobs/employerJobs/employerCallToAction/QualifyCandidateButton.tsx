@@ -4,6 +4,7 @@ import {
     pendingToAccepted,
     pendingToRejected,
 } from "@/actions/jobs/jobCards/employerChangeApplicationState";
+import Link from "next/link";
 
 export default function QualifyCandidateButton({
     studentId,
@@ -13,7 +14,13 @@ export default function QualifyCandidateButton({
     jobId: string;
 }) {
     return (
-        <div className="flex justify-end">
+        <div className="flex flex-row justify-between">
+            <Link
+                href={`jobs/${jobId}/progress/${studentId}`}
+                className="py-2 px-6 bg-slate-50 text-sm text-slate-900 border border-slate-700 rounded-md hover:shadow-md hover:border-slate-800 active:border-slate-900 transition duration-200 ease-in-out"
+            >
+                ความคืบหน้า
+            </Link>
             <div className="w-1/2 flex justify-between mt-[10px] xl:mt-0">
                 <button
                     className="h-[35px] bg-red-500 text-sm text-white rounded-md w-[48%] hover:opacity-80 active:opacity-60"

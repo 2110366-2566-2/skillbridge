@@ -1,3 +1,4 @@
+import { getComment, getRating } from "@/actions/employmentHistoryDetail/employmentHistoryDetail";
 import CommentCard from "@/components/landing/commentCards/commentCard/CommentCard";
 import JobDetail from "@/components/offering/JobDetail";
 import React from "react";
@@ -8,6 +9,8 @@ function HistoryPage({ params, }: {
     params: { jobId: string; studentId: string };
 }) {
     const [jobId, studentId] = [params.jobId, params.studentId];
+    const rating = getRating(jobId, studentId);
+    const comment = getComment(jobId, studentId);
     return (
         <div className="px-10 flex flex-col lg:flex-row">
             <section className="flex flex-col">
