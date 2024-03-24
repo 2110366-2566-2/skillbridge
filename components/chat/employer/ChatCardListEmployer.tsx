@@ -1,14 +1,15 @@
-import ChatCardStudent from "../student/ChatCardStudent"
+import ChatCardEmployer from "./ChatCardEmployer"
+import { EmployerChatListData } from "@/actions/chat/getChatListDataByUser"
 
 type Props = {
-    employerId: string
+    students: EmployerChatListData
 }
 
-export default async function ChatCardListEmployer({ employerId }: Props) {
+export default function ChatCardListEmployer({ students }: Props) {
 
     return (
         <>
-            {/* {employers.map((employer, index) => <ChatCardStudent key={index} employer={employer} />)} */}
+            {students.chatrooms.map((chatroom, index) => <ChatCardEmployer key={index} chatroom={chatroom} />)}
         </>
     )
 }

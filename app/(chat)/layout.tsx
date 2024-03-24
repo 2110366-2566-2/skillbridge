@@ -4,6 +4,7 @@ import React from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import ChatCardListStudent from "@/components/chat/student/ChatCardListStudent";
+import ChatGroupListEmployer from "@/components/chat/employer/ChatGroupListEmployer";
 
 export default async function NavigationLayout({
   children,
@@ -32,7 +33,11 @@ export default async function NavigationLayout({
               ) : <div>No ID</div>
             ) : (
               // TODO : Desktop Employer Chat list
-              <div>Desktop Employer Chat list</div>
+              userId !== null && (
+                <div className="hidden lg:block w-[30vw]">
+                  <ChatGroupListEmployer employerId={userId} />
+                </div>
+              )
             )}
             {/* TODO : Container of Chat room (chat/page.tsx & [userId]/page.tsx) */}
             <div>{children}</div>
