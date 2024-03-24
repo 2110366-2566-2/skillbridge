@@ -20,14 +20,14 @@ export default async function Page() {
       {isStudent ? (
         // TODO : Mobile Student Chat list
         userId !== null && (
-          <div className="lg:hidden" >
+          <div className="pb-28 lg:hidden" >
             <ChatCardListStudent studentId={userId} />
           </div >
         )
       ) : (
         // TODO : Mobile Employer Chat list
         userId !== null && (
-          <div className="lg:hidden">
+          <div className="pb-28 lg:hidden">
             <ChatGroupListEmployer employerId={userId} />
           </div>
         )
