@@ -13,7 +13,7 @@ export default function ApproveButton({
 }) {
     return (
         <div className="flex justify-end">
-            <div className="w-1/2 flex justify-end mt-[10px] xl:mt-0">
+            <div className="w-1/2 flex justify-between mt-[10px] xl:mt-0">
                 <button
                     className="h-[35px] bg-red-500 text-sm text-white rounded-md w-[32%] hover:opacity-80 active:opacity-60"
                     onClick={async () => {

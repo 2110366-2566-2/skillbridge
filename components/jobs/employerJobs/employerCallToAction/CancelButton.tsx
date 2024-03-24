@@ -12,7 +12,7 @@ export default function CancelButton({
         <div className="flex justify-end">
             <div className="w-1/2 flex justify-between mt-[10px] xl:mt-0">
                 <button
-                    className="h-[35px] bg-red-500 text-sm rounded-md w-[48%] hover:opacity-80 active:opacity-60"
+                    className="h-[35px] bg-red-500 text-sm text-white rounded-md w-[48%] hover:opacity-80 active:opacity-60"
                     onClick={async () => {
                         await inProgressToCanceled(studentId, jobId);
                         location.reload();

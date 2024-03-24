@@ -51,29 +51,6 @@ const getComment = async (jobId: string, studentId: string) => {
   }
 };
 
-const getJobId = async (jobId: string, studentId: string) => {
-  try {
-    const job = await prisma.application.findFirstOrThrow({
-      where: {
-        jobId: jobId,
-        userId: studentId,
-        isDeleted: { equals: false },
-      },
-      select: {
-        jobId: true,
-      },
-    });
-    return {
-      success: true,
-      message: job.jobId,
-    } as const;
-  } catch (error: any) {
-    return {
-      success: false,
-      message: error,
-    };
-  }
-};
 
 const getEmploymentTracking = async (jobId: string, studentId: string) => {
   try {
