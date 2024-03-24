@@ -23,7 +23,7 @@ const io = new Server(server, {
 TODO : 
 DONE : create a map mapping from chatRoomId => socketId[] to use for emitting to the right socket
 DONE : implement function to upload image to S3
-create a function to put message into database
+DONE : create a function to put message into database
 
 Note : 
 <Buffer ff d8 ...>'s type is Buffer and can be transform into Uint8Array which will be use to upload to S3
