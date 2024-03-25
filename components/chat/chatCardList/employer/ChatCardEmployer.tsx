@@ -4,6 +4,7 @@ import Image from "next/image"
 import noavatar from "@/public/icons/noavatar.svg";
 import { Message } from "@/actions/chat/getMessageByChatRoom";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type Props = {
     chatroom: {
@@ -21,11 +22,13 @@ type Props = {
 }
 
 export default function ChatCardEmployer({ chatroom }: Props) {
+    const pathName = usePathname();
+    const isChatRoom = pathName.endsWith(chatroom.chatroomId)
     const avatar = noavatar;
 
     return (
         <Link
-            className="flex flex-row items-center h-[90px] px-[16px] py-[21px] rounded-[16px] hover:bg-neutral-200 hover:cursor-pointer lg:h-[94px] lg:py-[20px]"
+            className={`${isChatRoom ? "bg-neutral-200" : "hover:bg-neutral-100"} flex flex-row items-center h-[90px] px-[16px] py-[21px] rounded-[16px] hover:cursor-pointer lg:h-[94px] lg:py-[20px]`}
             href={`/chat/${chatroom.chatroomId}`}
         >
             <Image
