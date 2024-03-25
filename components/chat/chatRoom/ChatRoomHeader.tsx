@@ -15,6 +15,16 @@ export default function ChatRoomHeader({ isStudent, chatRoomInfo }: Props) {
     const subtitle_1 = isStudent ? `${chatRoomInfo.employer.firstname || ""} ${chatRoomInfo.employer.middlename || ""} ${chatRoomInfo.employer.lastname || ""}` : ""
     const subtitle_2 = isStudent ? `, ${chatRoomInfo.employer.position || ""}${chatRoomInfo.employer.position ? ", " : ""} ${chatRoomInfo.employer.position}` : chatRoomInfo.job.title
 
+    const handleTitleClicked = () => {
+        if (isStudent) {
+            // TO Nut's page in Sprint 3
+            console.log("clicked as student")
+        } else {
+            // TO Studen profile in Sprint 3
+            console.log("clicked as employer")
+        }
+    }
+
     return (
         <div className="h-[90px] w-full flex flex-row items-center bg-slate-50 border-b border-[#CBD5E1] px-3 lg:h-[94px]">
             <Link
@@ -30,7 +40,10 @@ export default function ChatRoomHeader({ isStudent, chatRoomInfo }: Props) {
                 />
             </Link>
             <div className="flex flex-col justify-between gap-1">
-                <div className="font-medium text-[20px] text-slate-800 truncate line-clamp-1">
+                <div
+                    className="font-medium text-[20px] text-slate-800 truncate line-clamp-1 hover:underline"
+                    onClick={handleTitleClicked}
+                >
                     {title}
                 </div>
                 <div className="flex flex-row text-[14px] text-slate-800 truncate line-clamp-1">
