@@ -1,5 +1,4 @@
 import {
-  getAllPaymentInfo,
   getPaymentInfo,
 } from "@/actions/payment/paymentinfo";
 import Payment from "@/components/payment/payment";
