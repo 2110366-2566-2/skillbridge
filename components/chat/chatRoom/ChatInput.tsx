@@ -39,7 +39,7 @@ export default function ChatInput({ isStudent, chatroomId }: Props) {
         }
     }
 
-    const handleImageInput = async (e: FormEvent<HTMLFormElement>) => {
+    const handleImageInput = () => {
         console.log("CLICKED AT IMAGE INPUT ><")
     }
 
