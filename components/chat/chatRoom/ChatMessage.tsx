@@ -2,6 +2,8 @@
 
 import { Message } from "@/actions/chat/getMessageByChatRoom"
 import Image from "next/image"
+import { useState } from "react"
+import close from "@/public/icons/close.svg"
 
 type Props = {
     message: Message,
@@ -15,6 +17,12 @@ export default function ChatMessage({ message, senderId }: Props) {
     const minutes = createdAt.getMinutes().toString().padStart(2, "0");
     const time = `${hours}:${minutes}`
 
+    const [isFullscreen, setIsFullscreen] = useState(false);
+
+    const toggleFullscreen = () => {
+        setIsFullscreen(!isFullscreen);
+    };
+
     return (
         <>
             {isImage ? (
@@ -22,13 +30,41 @@ export default function ChatMessage({ message, senderId }: Props) {
                 <div className={`flex flex-col ${isSender ? "items-end" : ""}`}>
                     <div className={`flex flex-row gap-2 items-end`}>
                         <div className={`text-slate-500 text-[12px] -translate-y-[6px] lg:text-[12px] ${!isSender && "order-last"}`}>{time}</div>
-                        <Image
-                            className={`mb-2 rounded-[16px] max-w-[64vw] shadow lg:max-w-[24vw]`}
-                            src={content}
-                            alt="chatImage"
-                            width={268}
-                            height={357}
-                        />
+                        <div>
+                            {isFullscreen && (
+                                <button
+                                    onClick={toggleFullscreen}
+                                    className="fixed z-50 top-0 right-0 m-6 p-1 text-white rounded-full hover:bg-slate-500"
+                                >
+                                    <Image
+                                        src={close}
+                                        alt="closeImageButton"
+                                        width={32}
+                                        height={32}
+                                    />
+                                </button>
+                            )}
+                            <div
+                                className={`fixed z-40 inset-0 flex justify-center items-center bg-black bg-opacity-80 ${isFullscreen ? '' : 'hidden'}`}
+                            // onClick={toggleFullscreen}
+                            >
+                                <Image
+                                    src={content}
+                                    alt="chatImage"
+                                    layout="fill"
+                                    objectFit="contain"
+                                    className=""
+                                />
+                            </div>
+                            <Image
+                                src={content}
+                                alt="chatImage"
+                                width={268}
+                                height={357}
+                                className={`mb-2 rounded-[16px] max-w-[64vw] shadow lg:max-w-[24vw] cursor-pointer`}
+                                onClick={toggleFullscreen}
+                            />
+                        </div>
                     </div>
                 </div>
             ) : (
