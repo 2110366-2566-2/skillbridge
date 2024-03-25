@@ -51,8 +51,10 @@ export default function ChatMessage({ message, senderId }: Props) {
                                 <Image
                                     src={content}
                                     alt="chatImage"
-                                    layout="fill"
-                                    objectFit="contain"
+                                    fill
+                                    style={{
+                                        objectFit: 'contain',
+                                    }}
                                     className=""
                                 />
                             </div>

@@ -4,13 +4,17 @@ import { EmployerChatListData } from "@/actions/chat/getChatListDataByUser"
 import { useState } from "react"
 import Image from "next/image"
 import downArrowDark from "@/public/icons/downArrowDark.svg";
+import { usePathname } from "next/navigation"
 
 type Props = {
     studentsInfo: EmployerChatListData
 }
 
 export default function ChatGroupEmployer({ studentsInfo }: Props) {
-    const [isOpen, setOpen] = useState(false);
+    const pathName = usePathname();
+    const pathId = pathName.split("/")[2]
+    const isInChatGroup = studentsInfo.chatrooms.some(chatroom => chatroom.chatroomId === pathId)
+    const [isOpen, setOpen] = useState(isInChatGroup);
 
     return (
         <div>
