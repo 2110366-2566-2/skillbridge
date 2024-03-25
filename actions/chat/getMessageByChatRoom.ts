@@ -20,7 +20,6 @@ const getMessageByChatRoom = async (chatroomId: string) => {
         content: true,
         isImage: true,
       },
-      orderBy: { createdAt: 'desc' }, // Order by createdAt in descending order
     });
 
     // Iterate through each message and update content property if isImage is true
@@ -29,8 +28,7 @@ const getMessageByChatRoom = async (chatroomId: string) => {
       content: message.isImage ? await getS3URL(message.content) : message.content,
     })));
 
-    // Reverse the order of messages array to display latest messages first
-    return updatedResults.reverse();
+    return updatedResults;
   } catch (error) {
     console.error("Error in getMessageByChatroom:", error);
     return [];

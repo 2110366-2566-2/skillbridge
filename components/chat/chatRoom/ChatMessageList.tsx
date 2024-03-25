@@ -25,8 +25,8 @@ export default function ChatMessageList({ isStudent, chatroomId, messageList, se
         <>
             {messages.length ? (
                 <div className="h-full w-full px-3 pb-[6px] overflow-y-auto pt-4 lg:px-3 lg:pb-2">
-                    <div>
-                        {messages.map((message, index) => <ChatMessage key={index} message={message} senderId={senderId} />)}
+                    <div className="flex flex-col-reverse">
+                        {messages.slice().reverse().map((message, index) => <ChatMessage key={index} message={message} senderId={senderId} />)}
                     </div>
                     <div ref={bottomOfPanelRef}></div>
                 </div>
