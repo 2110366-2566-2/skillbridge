@@ -44,7 +44,7 @@ export default function ChatMessageListByDate({ messageByDate, senderId }: Props
 
     return (
         <div className="flex flex-col">
-            <div className="self-center text-slate-500 text-[12px] my-[14px] lg:text-[14px] lg:my-[16px] py-1 px-[10px] rounded-xl bg-neutral-200">{formattedDate(Date)}</div>
+            <div className="self-center text-slate-500 text-[12px] my-[14px] lg:text-[14px] lg:my-[16px] py-[2px] px-[8px] lg:px-[10px] rounded-xl bg-neutral-200">{formattedDate(Date)}</div>
             <div className="flex flex-col-reverse">
                 {Messages.slice().reverse().map((message, index) => <ChatMessage key={index} message={message} senderId={senderId} />)}
             </div>

@@ -41,7 +41,7 @@ export default function ChatRoomHeader({ isStudent, chatRoomInfo }: Props) {
             </Link>
             <div className="flex flex-col justify-between gap-1">
                 <div
-                    className="font-medium text-[20px] text-slate-800 truncate line-clamp-1 hover:underline"
+                    className="font-medium text-[20px] text-slate-800 truncate-[30ch] line-clamp-1 hover:underline"
                     onClick={handleTitleClicked}
                 >
                     {title}
