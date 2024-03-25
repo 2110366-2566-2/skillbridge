@@ -2,16 +2,22 @@
 
 import {
     getComment,
+    getEmployerFromJobId,
     getJobTag,
     getRating,
 } from "@/actions/employmentHistoryDetail/employmentHistoryDetail";
+import {
+    getEmployerInfoById,
+    getStudentName,
+} from "@/actions/public/getUserInfo";
 import CommentCard from "@/components/landing/commentCards/commentCard/CommentCard";
 import JobDetail from "@/components/offering/JobDetail";
+import RatingScore from "@/components/profile/subProfile/RatingScore";
 import React from "react";
 
 type Props = {};
 
-async function HistoryPage({
+async function ProgressPage({
     params,
 }: {
     params: { jobId: string; studentId: string };
@@ -21,36 +27,46 @@ async function HistoryPage({
     const commentObject = await getComment(jobId, studentId);
     const comment = commentObject.success ? commentObject.data : "ไม่มีรีวิว";
     const tag = await getJobTag(jobId);
+    const employerId = await getEmployerFromJobId(jobId);
+    const employerInfo = await getEmployerInfoById(employerId);
+    const employerName = await getStudentName(employerId);
+
+    console.log(
+        `jobId: ${jobId}\nstudentId: ${studentId}\ncomment: ${comment}\ntag: ${tag}\nemployerId: ${employerId}\nemployerInfo: ${employerInfo}\nemployerName: ${employerName}`
+    );
+
     return (
-        <div className="flex justify-center">
-            <div className="px-10 flex flex-col xl:flex-row gap-20">
-                <section className="flex flex-col">
-                    <p className="text-xl font-medium">รายละเอียดงาน</p>
-                    <JobDetail
-                        jobId={jobId}
-                        isStudentView={true}
-                        isHistory={true}
-                    ></JobDetail>
-                </section>
-                <section className="flex flex-col">
-                    <p className="text-xl font-medium">ประวัติการทำงาน</p>
-                    <div>History</div>
-                </section>
-                <section className="flex flex-col">
-                    <p className="text-xl font-medium">คะแนนรีวิว</p>
-                    <div>คะแนนรีวิว {rating.data}</div>
-                    <p className="text-xl font-medium">รีวิวจากผู้ว่าจ้าง</p>
-                    <CommentCard
-                        name={""}
-                        position={""}
-                        organization={""}
-                        jobTag={tag}
-                        description={comment as string}
-                    />
-                </section>
-            </div>
+        <div className="flex flex-col xl:flex-row justify-center mx-auto gap-10">
+            <article className="flex flex-col mx-10">
+                <p className="text-2xl font-medium mb-2">รายละเอียดงาน</p>
+                <JobDetail
+                    jobId={jobId}
+                    isStudentView={true}
+                    isHistory={true}
+                ></JobDetail>
+            </article>
+
+            <article className="flex flex-col mx-10">
+                <p className="text-2xl font-medium mb-2">ประวัติการทำงาน</p>
+                <div>History</div>
+            </article>
+
+            <article className="flex flex-col mx-10">
+                <p className="text-2xl font-medium mb-2">คะแนนรีวิว</p>
+                <RatingScore averageScore={rating.data || 0} />
+                <p className="text-2xl font-medium mt-10 mb-2">
+                    รีวิวจากผู้ว่าจ้าง
+                </p>
+                <CommentCard
+                    name={`${employerName?.salutation}${employerName?.firstname} ${employerName?.lastname}`}
+                    position={employerInfo?.position || ""}
+                    organization={employerInfo?.organization || ""}
+                    jobTag={tag}
+                    description={comment as string}
+                />
+            </article>
         </div>
     );
 }
 
-export default HistoryPage;
+export default ProgressPage;

@@ -16,6 +16,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import { getEmployerInfoById } from "@/actions/public/getUserInfo";
 import StudentJobHeader from "./jobHeader/StudentJobHeader";
+import ProgressHeader from "./progressHeader/ProgressHeader";
 
 export default async function Header() {
   // Fetch Job tags
@@ -66,6 +67,8 @@ export default async function Header() {
       <TaskHeader />
       {/* Only shows at "/jobs/:Jid/payment/:Sid" */}
       <PaymentHeader />
+      {/* Only shows at "/progress/:Jid/:Sid" */}
+      <ProgressHeader />
     </div>
   );
 }

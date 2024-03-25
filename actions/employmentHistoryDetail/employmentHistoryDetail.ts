@@ -100,7 +100,19 @@ const getJobTag = async (jobId: string) => {
     return tag ? tag.jobTag.title : "";
 };
 
-export { getRating, getComment, getEmploymentTracking, getJobTag };
+const getEmployerFromJobId = async (jobId: string) => {
+  const employerId = await prisma.job.findFirst({
+    where: {
+      id: jobId,
+    },
+    select: {
+      employerId: true,
+    },
+    });
+    return employerId ? employerId.employerId : "";
+}
+
+export { getRating, getComment, getEmploymentTracking, getJobTag, getEmployerFromJobId };
 
 // const main = async () => {
 //   const studentId = "1dabcb91-32fd-41ea-a8f1-684e2c830090";
