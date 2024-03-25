@@ -24,7 +24,7 @@ export default function ChatMessage({ message, senderId }: Props) {
                         <div className={`text-slate-500 text-[12px] -translate-y-[6px] lg:text-[12px] ${!isSender && "order-last"}`}>{time}</div>
                         <Image
                             className={`mb-2 rounded-[16px] max-w-[64vw] shadow lg:max-w-[24vw]`}
-                            src={content.data}
+                            src={content}
                             alt="chatImage"
                             width={268}
                             height={357}

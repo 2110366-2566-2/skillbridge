@@ -13,14 +13,16 @@ type Props = {
 
 export default async function ChatRoom({ isStudent, chatroomId }: Props) {
     const session = await getServerSession(authOptions)
+    if (!session) return;
+
     const chatRoomInfo = await getChatRoomInfo(chatroomId)
-    const messageList = await getMessageByChatRoom(chatroomId)
+    const messagesGroupByDate = await getMessageByChatRoom(chatroomId)
     const senderId = session?.user.id
 
     return (
         <div className="h-[100dvh] w-full flex flex-col bg-neutral-100 border border-[#CBD5E1] lg:h-[80vh]">
             <ChatRoomHeader isStudent={isStudent} chatRoomInfo={chatRoomInfo} />
-            <ChatMessageList isStudent={isStudent} chatroomId={chatroomId} messageList={messageList} senderId={senderId} />
+            <ChatMessageList isStudent={isStudent} chatroomId={chatroomId} messagesGroupByDate={messagesGroupByDate} senderId={senderId} />
             <ChatInput isStudent={isStudent} chatroomId={chatroomId} />
         </div>
     )

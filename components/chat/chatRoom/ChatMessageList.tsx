@@ -1,32 +1,32 @@
 "use client"
 
-import ChatMessage from "./ChatMessage"
+import ChatMessageListByDate from "./ChatMessageListByDate"
 import { useRef, useEffect, useState } from "react"
-import { Message } from "@/actions/chat/getMessageByChatRoom"
+import { MessagesGroupByDate } from "@/actions/chat/getMessageByChatRoom"
 
 type Props = {
     isStudent: boolean,
     chatroomId: string,
-    messageList: Message[],
+    messagesGroupByDate: MessagesGroupByDate[],
     senderId: string
 }
 
-export default function ChatMessageList({ isStudent, chatroomId, messageList, senderId }: Props) {
-    const [messages, setMessages] = useState<Message[]>(messageList)
+export default function ChatMessageList({ isStudent, chatroomId, messagesGroupByDate, senderId }: Props) {
+    const [messagesByDate, setMessagesByDate] = useState<MessagesGroupByDate[]>(messagesGroupByDate)
     const bottomOfPanelRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         if (bottomOfPanelRef.current) {
             bottomOfPanelRef.current.scrollIntoView({ block: 'end' })
         }
-    }, [messages])
+    }, [messagesByDate])
 
     return (
         <>
-            {messages.length ? (
+            {messagesByDate.length ? (
                 <div className="h-full w-full px-3 pb-[6px] overflow-y-auto pt-4 lg:px-3 lg:pb-2">
                     <div className="flex flex-col-reverse">
-                        {messages.slice().reverse().map((message, index) => <ChatMessage key={index} message={message} senderId={senderId} />)}
+                        {messagesByDate.slice().reverse().map((messageByDate, index) => <ChatMessageListByDate key={index} messageByDate={messageByDate} senderId={senderId} />)}
                     </div>
                     <div ref={bottomOfPanelRef}></div>
                 </div>
