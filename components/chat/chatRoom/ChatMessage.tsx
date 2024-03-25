@@ -34,7 +34,7 @@ export default function ChatMessage({ message, senderId }: Props) {
                             {isFullscreen && (
                                 <button
                                     onClick={toggleFullscreen}
-                                    className="fixed z-50 top-0 right-0 m-6 p-1 text-white rounded-full hover:bg-slate-500 md:m-[30px]"
+                                    className="fixed z-50 top-0 right-0 m-6 p-1 text-white rounded-full hover:bg-slate-500 md:m-[24px]"
                                 >
                                     <Image
                                         src={close}
