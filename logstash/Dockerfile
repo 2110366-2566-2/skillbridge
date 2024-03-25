@@ -1,11 +1,10 @@
+# To run an image: docker run --env-file logstash.env <image_name>
 FROM docker.elastic.co/logstash/logstash:8.12.2
 
 RUN mkdir -p /usr/share/logstash/pipeline/
-COPY .env /usr/share/logstash/.env
+COPY logstash.env /etc/default/logstash/
 
 # RUN chmod 644 /usr/share/logstash/.env
-
-ENV JDBC_CONNECTION_STRING=jdbc:postgresql://34.135.220.2:5432/skillbridge_db
 
 RUN rm -f /usr/share/logstash/pipeline/logstash.conf
 
