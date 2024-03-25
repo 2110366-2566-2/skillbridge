@@ -19,6 +19,7 @@ function JobManagePanel({ jobId }: Props) {
     async function fetchData(filter: string) {
       const fetchedData = await fetchGetStudentByJob(jobId, filter);
       setFetchedData(fetchedData);
+    //   console.log(fetchedData)
     }
     setLoading(true);
     fetchData(filter);
@@ -42,11 +43,13 @@ function JobManagePanel({ jobId }: Props) {
                   <option value="">ทั้งหมด</option>
                   <option value="PENDING">สมัคร</option>
                   <option value="DISCLAIMED">สละสิทธิ์</option>
+                  <option value="ACCEPTED">กำลังรอ</option>
                   <option value="DEPOSIT_PENDING">รอจ่ายมัดจำ</option>
                   <option value="IN_PROGRESS">รอส่งมอบงาน</option>
                   <option value="DELIVERED">ส่งมอบงานแล้ว</option>
                   <option value="WAGE_PAYMENT_PENDING">รอจ่ายค่าจ้าง</option>
                   <option value="DONE">เสร็จสิ้น</option>
+                  <option value="CANCELED">ยกเลิก</option>
               </select>
           </div>
 

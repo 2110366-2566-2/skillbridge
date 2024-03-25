@@ -9,6 +9,7 @@ import PayButton from './employerJobs/employerCallToAction/PayButton';
 import QualifyCandidateButton from './employerJobs/employerCallToAction/QualifyCandidateButton';
 import CancelButton from './employerJobs/employerCallToAction/CancelButton';
 import ApproveButton from './employerJobs/employerCallToAction/ApproveButton';
+import DefaultButton from './employerJobs/employerCallToAction/DefaultButton';
 
 type Props = {
     jobId: string;
@@ -56,8 +57,6 @@ function CallToActionButtons({jobId, studentId = "", status, role}: Props) {
         switch (convertStateNameToThai(role, status)) {
             case "สมัคร":
                 return <QualifyCandidateButton studentId={studentId} jobId={jobId} />;
-            case "สละสิทธิ์":
-                return <></>;
             case "รอจ่ายมัดจำ":
                 return <PayButton studentId={studentId} jobId={jobId} />
             case "รอส่งมอบงาน":
@@ -66,10 +65,8 @@ function CallToActionButtons({jobId, studentId = "", status, role}: Props) {
                 return <ApproveButton studentId={studentId} jobId={jobId} />;
             case "รอจ่ายค่าจ้าง":
                 return <PayButton studentId={studentId} jobId={jobId} />;
-            case "เสร็จสิ้น":
-                return <></>;
             default:
-                return <></>;
+                return <DefaultButton studentId={studentId} jobId={jobId} />;
         }
     }
 }

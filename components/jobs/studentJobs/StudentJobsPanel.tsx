@@ -3,6 +3,7 @@ import sortArray from "@/lib/Jobs/sortStudentArray";
 import { applicationInfo } from "@/actions/jobs/jobCards/fetchJobCards";
 import SearchNotFound from "@/components/searchJob/SearchNotFound";
 import StudentJobCard from "./StudentJobCard";
+import { getStudentUserId } from "@/actions/jobs/jobCards/utils";
 
 type Props = {
     isLoading: boolean;
@@ -11,6 +12,7 @@ type Props = {
     statusSortOption: string;
     data: Array<applicationInfo>;
     isDone: boolean;
+    studentId: string;
 };
 
 function StudentJobsPanel({
@@ -20,14 +22,16 @@ function StudentJobsPanel({
     statusSortOption,
     data,
     isDone = true,
+    studentId,
 }: Props) {
-    console.log(data);
+    // console.log(data);
     const sortedData = sortArray(
         data,
         startDateSortOption,
         endDateSortOption,
         statusSortOption
     );
+
     return (
         <main className="flex flex-col">
             <main className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 grid-flow-row gap-10">
@@ -45,6 +49,7 @@ function StudentJobsPanel({
                                 <StudentJobCard
                                     key={index}
                                     jobId={data.jobId}
+                                    studentId={studentId}
                                     name={data.title}
                                     startDate={data.startDate}
                                     endDate={data.endDate}
@@ -60,6 +65,7 @@ function StudentJobsPanel({
                                 <StudentJobCard
                                     key={index}
                                     jobId={data.jobId}
+                                    studentId={studentId}
                                     name={data.title}
                                     category={data.tag}
                                     startDate={data.startDate}

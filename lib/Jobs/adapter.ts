@@ -26,6 +26,8 @@ export function convertStateNameToThai(
     switch (state) {
       case "PENDING":
         return "สมัคร";
+      case "ACCEPTED":
+        return "กำลังรอ";
       case "DISCLAIMED":
         return "สละสิทธิ์";
       case "DEPOSIT_PENDING":
@@ -38,6 +40,10 @@ export function convertStateNameToThai(
         return "รอจ่ายค่าจ้าง";
       case "DONE":
         return "เสร็จสิ้น";
+      case "CANCELED":
+        return "ยกเลิก";
+      default:
+        return "";
     }
   }
   // in the student's view
