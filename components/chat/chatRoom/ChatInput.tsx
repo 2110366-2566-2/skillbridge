@@ -39,6 +39,10 @@ export default function ChatInput({ isStudent, chatroomId }: Props) {
         }
     }
 
+    const handleImageInput = async (e: FormEvent<HTMLFormElement>) => {
+        console.log("CLICKED AT IMAGE INPUT ><")
+    }
+
     return (
         <form
             onSubmit={handleSubmit}
@@ -56,6 +60,7 @@ export default function ChatInput({ isStudent, chatroomId }: Props) {
             <button
                 type="button"
                 className="h-fit p-2 ml-3 mr-[2px] rounded-full hover:bg-neutral-200 md:ml-4"
+                onClick={handleImageInput}
             >
                 <Image
                     className={""}
