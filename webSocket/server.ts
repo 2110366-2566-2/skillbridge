@@ -1,9 +1,6 @@
 import http from 'http';
 import { Server } from 'socket.io';
-import { prisma } from '../lib/prisma';
 import { toClientMessage, toServerTextMessage } from '../types/chat';
-import getS3URL from '../actions/public/S3/getS3URL';
-import { uploadImageToS3 } from './uploadImageToS3';
 import { saveImageMessage, saveTextMessage, validChatRoom } from './database';
 
 const server = http.createServer((req, res) => { });
@@ -20,11 +17,6 @@ const io = new Server(server, {
 });
 
 /*
-TODO : 
-DONE : create a map mapping from chatRoomId => socketId[] to use for emitting to the right socket
-DONE : implement function to upload image to S3
-DONE : create a function to put message into database
-
 Note : 
 <Buffer ff d8 ...>'s type is Buffer and can be transform into Uint8Array which will be use to upload to S3
 */
@@ -80,29 +72,8 @@ io.on('connection', async (socket) => {
     socket.on('disconnect', () => {
         console.log('A user disconnected');
     });
-
-    socket.on('error', function (err) {
-        console.log(err);
-    });
-
-    socket.onAny((eventName, ...args) => {
-        console.log(eventName);
-        console.log(args);
-      });
 });
 
 server.listen(3001, () => {
     console.log('WebSocket server listening on port 3001');
 });
-
-async function test() {
-    const test = await prisma.application.findFirst({
-        where: {
-            jobId: ""
-        }
-    });
-
-    console.log("test", test);
-}
-
-test();
