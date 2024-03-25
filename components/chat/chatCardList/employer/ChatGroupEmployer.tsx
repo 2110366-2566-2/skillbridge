@@ -38,7 +38,7 @@ export default function ChatGroupEmployer({ studentsInfo }: Props) {
 
             </div>
             <div
-                className={`flex flex-col border-b border-slate-300 pl-[14px] transition-all duration-150 overflow-hidden ${isOpen ? "max-h-100 mb-[20px] opacity-100" : "max-h-0 opacity-0"}`}
+                className={`flex flex-col border-b border-slate-300 pl-[14px] transition-all duration-150 overflow-hidden ${isOpen ? "max-h-100 opacity-100" : "max-h-0 opacity-0"}`}
             >
                 <ChatCardListEmployer students={studentsInfo} />
             </div>
