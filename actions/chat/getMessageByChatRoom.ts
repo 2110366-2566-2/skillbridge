@@ -9,7 +9,12 @@ export interface Message {
   isImage: boolean;
 }
 
-const getMessageByChatRoom = async (chatroomId: string) => {
+export interface MessagesGroupByDate {
+  Date: string;
+  Messages: Message[];
+}
+
+const getMessageByChatRoom = async (chatroomId: string): Promise<MessagesGroupByDate[]> => {
   try {
     const results = await prisma.message.findMany({
       where: { chatroomId },
@@ -23,12 +28,32 @@ const getMessageByChatRoom = async (chatroomId: string) => {
     });
 
     // Iterate through each message and update content property if isImage is true
-    const updatedResults = await Promise.all(results.map(async (message) => ({
-      ...message,
-      content: message.isImage ? await getS3URL(message.content) : message.content,
-    })));
+    let updatedResults = await Promise.all(results.map(async (message) => {
+      if (message.isImage) {
+        const result = await getS3URL(message.content);
+        return {
+          ...message,
+          content: result.success ? result.data : result.message
+        };
+      } else {
+        return message;
+      }
+    }));
 
-    return updatedResults;
+    // Group messages by createdAt date
+    const groupedMessages: { [key: string]: { Date: string; Messages: typeof updatedResults } } = {};
+    updatedResults.forEach((message) => {
+      const createdAtDate = message.createdAt.toDateString();
+      if (!groupedMessages[createdAtDate]) {
+        groupedMessages[createdAtDate] = { Date: createdAtDate, Messages: [] };
+      }
+      groupedMessages[createdAtDate].Messages.push(message);
+    });
+
+    // Convert the groupedMessages object into an array of objects
+    const result = Object.values(groupedMessages);
+
+    return result;
   } catch (error) {
     console.error("Error in getMessageByChatroom:", error);
     return [];
@@ -38,7 +63,7 @@ const getMessageByChatRoom = async (chatroomId: string) => {
 export { getMessageByChatRoom };
 
 // const main = async () => {
-//     const chatroomId = "bc099058-3b77-4e72-a365-0a4c201e6e51";
+//     const chatroomId = "ff43d9ac-6abf-407c-ae96-df572e8800f6";
 //     try {
 //       const messages = await getMessageByChatRoom(chatroomId);
 //       if (messages !== null) {
