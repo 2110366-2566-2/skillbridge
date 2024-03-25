@@ -1,19 +1,16 @@
 "use client"
 
 import { Message } from "@/actions/chat/getMessageByChatRoom"
-import { useSession } from "next-auth/react"
 import Image from "next/image"
 
 type Props = {
     message: Message,
+    senderId: string
 }
 
-export default function ChatMessage({ message }: Props) {
+export default function ChatMessage({ message, senderId }: Props) {
     const { id, userId, createdAt, content, isImage } = message
-    const { data: session } = useSession();
-    // const isSender = session?.user.id === userId
-    // console.log(session)
-    const isSender = true // Hard code
+    const isSender = senderId === userId
     const hours = createdAt.getHours().toString().padStart(2, "0")
     const minutes = createdAt.getMinutes().toString().padStart(2, "0");
     const time = `${hours}:${minutes}`

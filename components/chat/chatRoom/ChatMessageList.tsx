@@ -1,6 +1,5 @@
 "use client"
 
-import { getMessageByChatRoom } from "@/actions/chat/getMessageByChatRoom"
 import ChatMessage from "./ChatMessage"
 import { useRef, useEffect, useState } from "react"
 import { Message } from "@/actions/chat/getMessageByChatRoom"
@@ -8,10 +7,11 @@ import { Message } from "@/actions/chat/getMessageByChatRoom"
 type Props = {
     isStudent: boolean,
     chatroomId: string,
-    messageList: Message[]
+    messageList: Message[],
+    senderId: string
 }
 
-export default function ChatMessageList({ isStudent, chatroomId, messageList }: Props) {
+export default function ChatMessageList({ isStudent, chatroomId, messageList, senderId }: Props) {
     const [messages, setMessages] = useState<Message[]>(messageList)
     const bottomOfPanelRef = useRef<HTMLDivElement>(null)
 
@@ -26,7 +26,7 @@ export default function ChatMessageList({ isStudent, chatroomId, messageList }: 
             {messages.length ? (
                 <div className="h-full w-full px-3 pb-[6px] overflow-y-auto pt-4 lg:px-3 lg:pb-2">
                     <div>
-                        {messages.map((message, index) => <ChatMessage key={index} message={message} />)}
+                        {messages.map((message, index) => <ChatMessage key={index} message={message} senderId={senderId} />)}
                     </div>
                     <div ref={bottomOfPanelRef}></div>
                 </div>
