@@ -26,6 +26,17 @@ export default function ChatCardEmployer({ chatroom }: Props) {
     const isChatRoom = pathName.endsWith(chatroom.chatroomId)
     const avatar = noavatar;
 
+    const formattedDate = () => {
+        let formattedDate = ""
+        if (chatroom.latestMessage?.createdAt.toLocaleDateString("en-GB")) {
+            const oldDate = chatroom.latestMessage?.createdAt.toLocaleDateString("en-GB")
+            const [d, m, yy] = oldDate.split("/")
+            formattedDate = `${parseInt(d)}/${parseInt(m)}/${yy.slice(-2)}`
+        }
+
+        return formattedDate
+    }
+
     return (
         <Link
             className={`${isChatRoom ? "bg-neutral-200" : "hover:bg-neutral-100"} flex flex-row items-center h-[90px] px-[16px] py-[21px] rounded-[16px] hover:cursor-pointer lg:h-[94px] lg:py-[20px]`}
@@ -47,14 +58,14 @@ export default function ChatCardEmployer({ chatroom }: Props) {
             />
             <div className="flex flex-col w-full gap-1">
                 <div className="flex flex-row justify-between w-full items-center lg:text-[18px]">
-                    <div className="font-medium text-[16px] text-slate-800 truncate max-w-[20ch]">
+                    <div className="font-medium text-[16px] text-slate-800 truncate max-w-[22ch] lg:max-w-[25ch]">
                         {chatroom.student.firstname} {chatroom.student.middlename} {chatroom.student.lastname}
                     </div>
                     <div className="text-[14px] text-[#838383] lg:text-[16px]">
-                        {chatroom.latestMessage?.createdAt.toLocaleDateString("en-GB")}
+                        {formattedDate()}
                     </div>
                 </div>
-                <div className="text-[14px] text-[#838383] w-full truncate max-w-[33ch] lg:text-[16px]">
+                <div className="text-[14px] text-[#838383] w-full truncate max-w-[31ch] lg:text-[16px]">
                     {chatroom.latestMessage?.isImage ? "ส่งรูป" : chatroom.latestMessage?.content}
                 </div>
             </div>
