@@ -66,6 +66,8 @@ const getChatRoomInfo = async (chatroomId: string) => {
       }
     });
 
+    if(!results) return {} as ChatRoomInfo;
+
     const updatedResults = 
     {
       student: {
@@ -88,12 +90,12 @@ const getChatRoomInfo = async (chatroomId: string) => {
         id: results?.applicationJobId,
         title: results?.application.job.title,
       }
-    }
+    } as ChatRoomInfo;
 
-    return updatedResults as ChatRoomInfo;
+    return updatedResults;
   } catch (error) {
     console.error("Error in getChatRoomInfo:", error);
-    return {};
+    return {} as ChatRoomInfo;
   }
 };
 

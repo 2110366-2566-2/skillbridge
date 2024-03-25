@@ -119,7 +119,7 @@ const getStudentChatListData = async (studentId: string) => {
     return modifiedResults;
   } catch (error) {
     console.error("Error in getStudentChatListData:", error);
-    return [];
+    return [] as StudentChatListData[];
   }
 };
 
@@ -202,7 +202,7 @@ const getEmployerChatListData = async (employerId: string) => {
     return modifiedResults;
   } catch (error) {
     console.error("Error in getEmployerChatListData:", error);
-    return [];
+    return [] as EmployerChatListData[];
   }
 };
 

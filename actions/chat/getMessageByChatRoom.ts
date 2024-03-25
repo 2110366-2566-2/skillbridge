@@ -51,12 +51,12 @@ const getMessageByChatRoom = async (chatroomId: string): Promise<MessagesGroupBy
     });
 
     // Convert the groupedMessages object into an array of objects
-    const result = Object.values(groupedMessages);
+    const result = Object.values(groupedMessages) as MessagesGroupByDate[];
 
-    return result;
+    return result ;
   } catch (error) {
     console.error("Error in getMessageByChatroom:", error);
-    return [];
+    return [] as MessagesGroupByDate[];
   }
 };
 
