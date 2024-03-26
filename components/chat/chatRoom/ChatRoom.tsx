@@ -18,7 +18,6 @@ type Props = {
     senderId: string
 }
 
-let firstLoad: boolean = true;
 let socket: Socket;
 let curChatRoomId: string;
 
@@ -29,20 +28,12 @@ function isImageFile(file: File | undefined) {
 export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
     // curChatRoomId = chatroomId;
 
-    let messagesGroupByDate: MessagesGroupByDate[]
-
-    const [messagesByDate, setMessagesByDate] = useState<MessagesGroupByDate[]>([]);
     const [chatRoomInfo, setChatRoomInfo] = useState<ChatRoomInfo>();
 
     useEffect(() => {
         async function getInitialData() {
             try {
                 setChatRoomInfo(await getChatRoomInfo(chatroomId));
-                messagesGroupByDate = await getMessageByChatRoom(chatroomId)
-
-                // console.log(messagesGroupByDate);
-
-                setMessagesByDate(messagesGroupByDate);
             } catch (err) {
                 console.log(err)
                 return;
@@ -52,16 +43,15 @@ export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
         getInitialData();
     }, [])
 
-    if (firstLoad || curChatRoomId !== chatroomId) {
-        // TODO: Hard code for debugging purpose only
-        // if (!process.env.NEXT_PUBLIC_WEBSOCKET_URL) {
-        //     return (<div>
-        //             <h1>{process.env.NEXT_PUBLIC_WEBSOCKET_URL}</h1>
-        //         </div>
-        //     );
-        // }
+    if (curChatRoomId !== chatroomId) {
+        if (!process.env.NEXT_PUBLIC_WEBSOCKET_URL) {
+            return (<div>
+                    <h1>{process.env.NEXT_PUBLIC_WEBSOCKET_URL}</h1>
+                </div>
+            );
+        }
 
-        socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL || "http://34.170.83.37:3001/", {
+        socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL, {
             extraHeaders: {
                 "chat-room-id": chatroomId,
                 "user-id": senderId!
@@ -69,8 +59,6 @@ export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
         });
         // console.log("connecting socket");
         curChatRoomId = chatroomId;
-
-        firstLoad = false;
     }
 
 
@@ -105,7 +93,7 @@ export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
     return (
         <div className="h-[100dvh] w-full flex flex-col bg-neutral-100 border border-[#CBD5E1] lg:h-[80vh]">
             <ChatRoomHeader isStudent={isStudent} chatRoomInfo={chatRoomInfo} />
-            <ChatMessageList isStudent={isStudent} chatroomId={chatroomId} initialMessagesByDate={messagesByDate} senderId={senderId!} socket={socket} />
+            <ChatMessageList isStudent={isStudent} chatroomId={chatroomId} senderId={senderId!} socket={socket} />
             <ChatInput isStudent={isStudent} chatroomId={chatroomId} sendMessage={sendMessage} sendImage={sendImage} />
         </div>
     )

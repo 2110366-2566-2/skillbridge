@@ -9,7 +9,6 @@ import { toClientMessage } from "@/types/chat"
 type Props = {
     isStudent: boolean,
     chatroomId: string,
-    initialMessagesByDate: MessagesGroupByDate[],
     senderId: string,
     socket: Socket
 }
@@ -59,11 +58,16 @@ export default function ChatMessageList({ isStudent, chatroomId, senderId, socke
         });
     }
 
-    if (firstLoad) {
+    useEffect(() => {
         socket.on('chat text message', inComingMessageHandler);
         socket.on('chat image message', inComingMessageHandler);
-        firstLoad = false;
-    }
+    }, [])
+
+    // if (firstLoad) {
+    //     socket.on('chat text message', inComingMessageHandler);
+    //     socket.on('chat image message', inComingMessageHandler);
+    //     firstLoad = false;
+    // }
 
     const bottomOfPanelRef = useRef<HTMLDivElement>(null)
 
