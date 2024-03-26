@@ -60,7 +60,7 @@ export default function ChatInput({ isStudent, chatroomId, sendMessage, sendImag
     }
 
 
-    const hiddenFileInput = useRef(null);
+    const hiddenFileInput = useRef<HTMLInputElement>(null);
 
     const handleClick = () => {
         if (hiddenFileInput.current === null) {
