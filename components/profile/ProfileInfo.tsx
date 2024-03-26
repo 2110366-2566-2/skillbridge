@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import Image from "next/image"
 import RatingScore from "./subProfile/RatingScore"
 import Link from "next/link"
@@ -6,7 +6,7 @@ import { Session } from "next-auth"
 import { useState } from "react"
 import EditProfile from "./EditProfile"
 import DeleteModal from "../createAndUpdateJob/deleteModal/DeleteModal"
-import FileBox from "../offering/FileBox";
+import FileBox from "../offering/FileBox"
 
 export default function ProfileInfo({
   studentId,
@@ -29,20 +29,19 @@ export default function ProfileInfo({
   workingComplete: number
   session: Session | null
 }) {
-
   const isEditAble = session?.user?.id === studentId
 
-  const [showEditProfile, setShowEditProfile] = useState(false);
+  const [showEditProfile, setShowEditProfile] = useState(false)
 
   const toggleEditProfile = () => {
-    setShowEditProfile(!showEditProfile);
+    setShowEditProfile(!showEditProfile)
   }
 
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     if (showEditProfile) {
-      document.body.classList.add('overflow-y-hidden');
+      document.body.classList.add("overflow-y-hidden")
     } else {
-      document.body.classList.remove('overflow-y-hidden');
+      document.body.classList.remove("overflow-y-hidden")
     }
   }
 
@@ -51,8 +50,8 @@ export default function ProfileInfo({
       <div className="flex items-center mb-[15px] md:mb-[25px]">
         <Image
           src={profileImageURL ? profileImageURL : "/images/defaultProfile.svg"}
-          width={0}
-          height={0}
+          width={130}
+          height={130}
           alt="profile"
           className="mr-[15px] md:mr-[20px] w-[94px] h-[94px] lg:w-[130px] lg:h-[130px] rounded-full border border-[#778499]"
         />
@@ -107,16 +106,19 @@ export default function ProfileInfo({
         <div
           className="w-full h-[40px] flex items-center justify-center rounded-[6px] border border-1 border-slate-300 cursor-pointer mt-[15px] md:mt-[25px] md:h-[50px]
                 hover:opacity-[80%] active:opacity-[60%]"
-          onClick={toggleEditProfile}
-        >
+          onClick={toggleEditProfile}>
           <p className="text-[14px] font-medium text-slate-600 md:text-[18px]">แก้ไขโปรไฟล์</p>
         </div>
-      )
-      }
+      )}
 
-      <EditProfile showEditProfile={showEditProfile} toggleEditProfile={toggleEditProfile} oldDescription={studentDetail ? studentDetail : ''} />
+      <EditProfile
+        showEditProfile={showEditProfile}
+        toggleEditProfile={toggleEditProfile}
+        oldDescription={studentDetail ? studentDetail : ""}
+        session={session}
+        studentId={studentId}
+      />
       {/* <DeleteModal isDisabled={false} deleteAction={null} /> */}
-
-    </div >
+    </div>
   )
 }

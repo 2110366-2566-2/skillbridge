@@ -20,11 +20,11 @@ export default function JobsHistoryList({ allJobsHistory }: { allJobsHistory: an
                 jobTag={job.job.jobTag.title}
               />
             ))}
-            <JobHistory
+            {/* <JobHistory
               jobTitle="งานที่อยากทำมันมีด้;ยหรอฟร่ะ ยากมากมายเอ้าก่ายกอง"
               jobPeriod="26/02/67 - 30/02/67"
               jobTag="การเรียน"
-            />
+            /> */}
           </div>
         ) : (
           <div className="mt-[40px] md:mt-[100px]">

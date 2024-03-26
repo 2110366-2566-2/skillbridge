@@ -15,7 +15,15 @@ export default async function ProfilePage({ params }: { params: { studentId: str
     getServerSession(authOptions),
   ])
 
-  const portfolioURL = user?.student?.resumeName ? await getS3URL(user?.student?.resumeName) : null
+  const urlRegex =
+    /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/
+
+  const [portfolio, profileImage] = await Promise.all([
+    user?.student?.resumeName ? getS3URL(user?.student?.resumeName) : null,
+    user?.profileImageUrl && !urlRegex.test(user?.profileImageUrl)
+      ? getS3URL(user?.profileImageUrl)
+      : null,
+  ])
 
   const averageScore = reviews
     ? reviews.reduce((acc, review) => acc + review.stars, 0) / reviews.length
@@ -28,10 +36,10 @@ export default async function ProfilePage({ params }: { params: { studentId: str
       <div className="flex flex-col w-full md:max-w-[500px] md:mr-[30px] lg:mr-[50px]">
         <ProfileInfo
           studentId={params.studentId}
-          profileImageURL={user?.profileImageUrl || ""}
+          profileImageURL={profileImage?.data || user?.profileImageUrl || ""}
           studentName={`${user?.salutation} ${user?.firstname} ${user?.lastname}` || ""}
           averageScore={averageScore || 0}
-          portfolioURL={portfolioURL?.data || ""}
+          portfolioURL={portfolio?.data || ""}
           studentDetail={user?.student?.description || ""}
           workingNumber={allJobsHistory.length}
           workingComplete={isNaN(successRate) ? 0 : successRate}
