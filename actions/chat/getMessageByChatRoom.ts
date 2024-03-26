@@ -1,3 +1,4 @@
+"use server"
 import { prisma } from "../../lib/prisma";
 import getS3URL from "../public/S3/getS3URL";
 

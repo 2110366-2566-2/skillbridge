@@ -1,3 +1,4 @@
+"use server"
 import { prisma } from "../../lib/prisma";
 import { getEmployerInfoById } from "../public/getUserInfo";
 import { Message } from "./getMessageByChatRoom";

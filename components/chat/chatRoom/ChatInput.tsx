@@ -1,6 +1,5 @@
 "use client"
-
-import { FormEvent, ChangeEvent, useState } from "react"
+import { FormEvent, ChangeEvent, useState, useRef } from "react"
 import Image from "next/image";
 import sendButton from "@/public/icons/sendButton.svg";
 import imageButton from "@/public/icons/imageButton.svg";
@@ -8,9 +7,11 @@ import imageButton from "@/public/icons/imageButton.svg";
 type Props = {
     isStudent: boolean,
     chatroomId: string,
+    sendMessage: Function,
+    sendImage: Function
 }
 
-export default function ChatInput({ isStudent, chatroomId }: Props) {
+export default function ChatInput({ isStudent, chatroomId, sendMessage, sendImage }: Props) {
     const [input, setInput] = useState({
         text: "",
     });
@@ -32,6 +33,9 @@ export default function ChatInput({ isStudent, chatroomId }: Props) {
         e.preventDefault()
         if (input.text !== "") {
             console.log(input.text)
+
+            sendMessage(input.text);
+
             setInput(currData => ({
                 ...currData,
                 text: ""
@@ -39,9 +43,28 @@ export default function ChatInput({ isStudent, chatroomId }: Props) {
         }
     }
 
-    const handleImageInput = () => {
+    const handleImageInput = (e) => {
         console.log("CLICKED AT IMAGE INPUT ><")
+        const imageFile = e.target.files[0];
+        
+        console.log(e.target.files);
+        console.log(imageFile);
+
+        if (!imageFile) {
+            return;
+        }
+        sendImage(imageFile);
     }
+
+
+    const hiddenFileInput = useRef(null); 
+
+    const handleClick = () => {
+        if (hiddenFileInput.current === null) {
+            return;
+        }
+        hiddenFileInput.current.click();   
+    };
 
     return (
         <form
@@ -60,7 +83,7 @@ export default function ChatInput({ isStudent, chatroomId }: Props) {
             <button
                 type="button"
                 className="h-fit p-2 ml-3 mr-[2px] rounded-full hover:bg-neutral-200 md:ml-4"
-                onClick={handleImageInput}
+                onClick={handleClick}
             >
                 <Image
                     className={""}
@@ -70,6 +93,12 @@ export default function ChatInput({ isStudent, chatroomId }: Props) {
                     height={32}
                 />
             </button>
+            <input 
+                type="file"
+                onChange={handleImageInput}     // ADDED
+                ref={hiddenFileInput}
+                style={{display:'none'}}
+            />
             <button
                 type="submit"
                 className="h-fit py-[2px] pl-[0px] pr-[4px] rounded-full hover:bg-neutral-200"

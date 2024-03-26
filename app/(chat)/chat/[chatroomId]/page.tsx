@@ -12,13 +12,18 @@ export default async function ChatRoomPage({
 
   // Session
   const session = await getServerSession(authOptions);
+  if (session === null) {
+    return;
+  }
+
   const isStudent = session?.email.split("@")[1] === "student.chula.ac.th";
+  const senderId = session?.user.id;
 
   return (
     <>
       {/* TODO : Desktop & Mobile Student/Employer Chat room */}
       <div>
-        <ChatRoom isStudent={isStudent} chatroomId={chatroomId} />
+        <ChatRoom isStudent={isStudent} chatroomId={chatroomId} senderId={senderId} />
       </div>
     </>
   );

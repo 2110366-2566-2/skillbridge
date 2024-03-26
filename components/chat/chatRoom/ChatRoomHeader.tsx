@@ -7,13 +7,13 @@ import Link from "next/link";
 
 type Props = {
     isStudent: boolean,
-    chatRoomInfo: ChatRoomInfo,
+    chatRoomInfo: ChatRoomInfo | undefined,
 }
 
 export default function ChatRoomHeader({ isStudent, chatRoomInfo }: Props) {
-    const title = isStudent ? chatRoomInfo.job.title : `${chatRoomInfo.student.firstname || ""} ${chatRoomInfo.student.middlename || ""} ${chatRoomInfo.student.lastname || ""}`
-    const subtitle_1 = isStudent ? `${chatRoomInfo.employer.firstname || ""} ${chatRoomInfo.employer.middlename || ""} ${chatRoomInfo.employer.lastname || ""}` : ""
-    const subtitle_2 = isStudent ? `, ${chatRoomInfo.employer.position || ""}${chatRoomInfo.employer.position ? ", " : ""} ${chatRoomInfo.employer.position}` : chatRoomInfo.job.title
+    const title = isStudent ? chatRoomInfo?.job?.title : `${chatRoomInfo?.student?.firstname || ""} ${chatRoomInfo?.student?.middlename || ""} ${chatRoomInfo?.student?.lastname || ""}`
+    const subtitle_1 = isStudent ? `${chatRoomInfo?.employer?.firstname || ""} ${chatRoomInfo?.employer?.middlename || ""} ${chatRoomInfo?.employer?.lastname || ""}` : ""
+    const subtitle_2 = isStudent ? `, ${chatRoomInfo?.employer?.position || ""}${chatRoomInfo?.employer?.position ? ", " : ""} ${chatRoomInfo?.employer?.position}` : chatRoomInfo?.job?.title
 
     return (
         <div className="h-[90px] w-full flex flex-row items-center bg-slate-50 border-b border-[#CBD5E1] px-3 lg:h-[94px]">

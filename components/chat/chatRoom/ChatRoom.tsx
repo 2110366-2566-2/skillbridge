@@ -1,29 +1,140 @@
+"use client"
 import ChatRoomHeader from "./ChatRoomHeader"
 import ChatMessageList from "./ChatMessageList"
 import ChatInput from "./ChatInput"
-import { getChatRoomInfo } from "@/actions/chat/getChatRoomInfo"
-import { getMessageByChatRoom } from "@/actions/chat/getMessageByChatRoom"
-import { getServerSession } from "next-auth"
+import { ChatRoomInfo, getChatRoomInfo } from "@/actions/chat/getChatRoomInfo"
+import { Message, MessagesGroupByDate, getMessageByChatRoom } from "@/actions/chat/getMessageByChatRoom"
+import { Session, getServerSession } from "next-auth"
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth"
+import io from 'socket.io-client';
+import { send } from "process"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import { toClientMessage, toServerImageMessage, toServerTextMessage } from "@/types/chat"
+import { Socket } from "socket.io-client"
 
 type Props = {
     isStudent: boolean,
     chatroomId: string,
+    senderId: string
 }
 
-export default async function ChatRoom({ isStudent, chatroomId }: Props) {
-    const session = await getServerSession(authOptions)
-    if (!session) return;
+let firstLoad: boolean = true;
+let socket: Socket;
 
-    const chatRoomInfo = await getChatRoomInfo(chatroomId)
-    const messagesGroupByDate = await getMessageByChatRoom(chatroomId)
-    const senderId = session?.user.id
+function isImageFile(file: File | undefined) {
+    return file && file['type'].split('/')[0] === 'image';
+}
+
+export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
+    let messagesGroupByDate: MessagesGroupByDate[]
+
+    const [messagesByDate, setMessagesByDate] = useState<MessagesGroupByDate[]>([]);
+    const [chatRoomInfo, setChatRoomInfo] = useState<ChatRoomInfo>();
+    const [chatListKey, setChatListKey] = useState<number>(0);
+
+    function inComingMessageHandler(message: toClientMessage) {
+        setMessagesByDate((messagesByDate) => {
+            console.log(messagesByDate);
+
+            console.log(message);
+            console.log(message.content);
+            
+            const newMessageDate: Date = new Date(message.createdAt);
+            const newMessage: Message =  {
+                id: message.id,
+                userId: message.userId,
+                createdAt: newMessageDate,
+                content: message.content,
+                isImage: false
+            };
+            
+            const latestMessageByDate = messagesByDate.length !== 0 ? messagesByDate[messagesByDate.length - 1] : undefined;
+            
+            if (!latestMessageByDate || latestMessageByDate.Date !== newMessageDate.toDateString()) {
+                const newMessageByDate: MessagesGroupByDate = {
+                    Date: newMessageDate.toDateString(),
+                    Messages: [newMessage]
+                }
+
+                // setChatListKey((prev) => prev+1);    
+                return [...messagesByDate, newMessageByDate];
+            }
+
+            const newMessagesByDate = messagesByDate;
+            newMessagesByDate[messagesByDate.length - 1].Messages.push(newMessage);
+
+            console.log("fi", newMessagesByDate);
+            
+            // setChatListKey((prev) => prev+1);
+            return newMessagesByDate;
+        });
+    }
+
+    if (firstLoad) {
+        socket = io('http://localhost:3001', {
+            extraHeaders: {
+                "chat-room-id": chatroomId,
+                "user-id" : senderId!
+            }
+        });
+
+        socket.on('chat text message', inComingMessageHandler);
+        
+        socket.on('chat image message', inComingMessageHandler);
+
+        firstLoad = false;
+    }
+
+    useEffect(() => {
+        async function getInitialData() {
+            try {
+                setChatRoomInfo(await getChatRoomInfo(chatroomId));
+                messagesGroupByDate = await getMessageByChatRoom(chatroomId)
+
+                console.log(messagesGroupByDate);
+
+                setMessagesByDate(messagesGroupByDate);
+            } catch (err) {
+                console.log(err)
+                return;
+            }
+        }
+
+        getInitialData();
+    }, [])
+    
+
+    function sendMessage(newTextMessage: string) {
+        const messageToServer: toServerTextMessage = {
+          text: newTextMessage
+        };
+        socket.emit('chat text message', messageToServer);
+    };
+
+    async function sendImage(imageFile: File) {
+        if (!isImageFile(imageFile) || !imageFile) {
+            alert("The file supposed to be an image.");
+            return;
+        }
+    
+        const arrayBuffer = await imageFile.arrayBuffer();
+        const uiInt8Array = new Uint8Array(arrayBuffer);
+        const buffer = Buffer.from(uiInt8Array);
+    
+        const messageToServer: toServerImageMessage = {
+          type: imageFile.type,
+          size: imageFile.size,
+          buffer: buffer
+        }
+    
+        socket.emit('chat image message', messageToServer);
+      };
 
     return (
         <div className="h-[100dvh] w-full flex flex-col bg-neutral-100 border border-[#CBD5E1] lg:h-[80vh]">
             <ChatRoomHeader isStudent={isStudent} chatRoomInfo={chatRoomInfo} />
-            <ChatMessageList isStudent={isStudent} chatroomId={chatroomId} messagesGroupByDate={messagesGroupByDate} senderId={senderId} />
-            <ChatInput isStudent={isStudent} chatroomId={chatroomId} />
+            <ChatMessageList key={chatListKey} isStudent={isStudent} chatroomId={chatroomId} messagesByDate={messagesByDate} senderId={senderId!} />
+            <ChatInput isStudent={isStudent} chatroomId={chatroomId} sendMessage={sendMessage} sendImage={sendImage} />
         </div>
     )
 }

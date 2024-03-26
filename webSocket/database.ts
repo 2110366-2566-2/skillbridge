@@ -1,4 +1,3 @@
-import exp from 'constants';
 import { prisma } from '../lib/prisma';
 import { toClientMessage, toServerImageMessage, toServerTextMessage } from '../types/chat';
 import { uploadImageToS3 } from './uploadImageToS3';
@@ -36,7 +35,7 @@ export async function saveTextMessage(chatRoomId: string, userId: string, messag
     const messageToClient: toClientMessage = {
         id: savedMessage.id,
         userId: savedMessage.userId,
-        createdAt: savedMessage.createdAt,
+        createdAt: savedMessage.createdAt.toISOString(),
         content: savedMessage.content,
         isImage: false
     }
@@ -76,7 +75,7 @@ export async function saveImageMessage(chatRoomId: string, userId: string, messa
     const messageToClient: toClientMessage = {
         id: savedMessage.id,
         userId: savedMessage.userId,
-        createdAt: savedMessage.createdAt,
+        createdAt: savedMessage.createdAt.toISOString(),
         content: imageURL,
         isImage: savedMessage.isImage
     }

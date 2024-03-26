@@ -2,17 +2,19 @@
 
 import ChatMessageListByDate from "./ChatMessageListByDate"
 import { useRef, useEffect, useState } from "react"
-import { MessagesGroupByDate } from "@/actions/chat/getMessageByChatRoom"
+import { Message, MessagesGroupByDate } from "@/actions/chat/getMessageByChatRoom"
+import { Socket } from "socket.io-client"
 
 type Props = {
     isStudent: boolean,
     chatroomId: string,
-    messagesGroupByDate: MessagesGroupByDate[],
+    messagesByDate: MessagesGroupByDate[],
     senderId: string
 }
 
-export default function ChatMessageList({ isStudent, chatroomId, messagesGroupByDate, senderId }: Props) {
-    const [messagesByDate, setMessagesByDate] = useState<MessagesGroupByDate[]>(messagesGroupByDate)
+export default function ChatMessageList({ isStudent, chatroomId, messagesByDate, senderId }: Props) {
+    console.log(messagesByDate);
+
     const bottomOfPanelRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {

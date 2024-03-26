@@ -56,6 +56,8 @@ export default function page({
       console.log(message.content);
       setMessages((prev)=>[...prev, message]);
     });
+
+    console.log("hhh");
   }, []);
 
   const sendMessage = () => {
