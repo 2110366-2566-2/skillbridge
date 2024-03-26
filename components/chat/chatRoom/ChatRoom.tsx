@@ -53,14 +53,15 @@ export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
     }, [])
 
     if (firstLoad || curChatRoomId !== chatroomId) {
-        if (!process.env.NEXT_PUBLIC_WEBSOCKET_URL) {
-            return (<div>
-                    <h1>{process.env.NEXT_PUBLIC_WEBSOCKET_URL}</h1>
-                </div>
-            );
-        }
+        // TODO: Hard code for debugging purpose only
+        // if (!process.env.NEXT_PUBLIC_WEBSOCKET_URL) {
+        //     return (<div>
+        //             <h1>{process.env.NEXT_PUBLIC_WEBSOCKET_URL}</h1>
+        //         </div>
+        //     );
+        // }
 
-        socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL, {
+        socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL || "https://34.170.83.37:3001/", {
             extraHeaders: {
                 "chat-room-id": chatroomId,
                 "user-id": senderId!
