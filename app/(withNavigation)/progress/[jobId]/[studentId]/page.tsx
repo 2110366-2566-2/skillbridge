@@ -20,7 +20,7 @@ async function ProgressPage({
     return (
         <div className="flex flex-row justify-center mx-auto">
 
-        <div className="flex flex-col 2xl:flex-row justify-center gap-10 2xl:gap-40">
+        <div className="flex flex-col 2xl:flex-row justify-center gap-10 2xl:gap-20">
             <article className="flex flex-col">
                 <p className="text-2xl font-medium mb-2">รายละเอียดงาน</p>
                 <div className="bg-white w-fit">

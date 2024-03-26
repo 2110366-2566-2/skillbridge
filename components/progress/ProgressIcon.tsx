@@ -115,10 +115,10 @@ export function getIconColor(status: string) {
 }
 
 export default function ProgressIcon({ status }: Props) {
-    const color = `bg-${getIconColor(status)}`;
+    const color = getIconColor(status);
     return (
         <div
-            className={`${color} rounded-full w-[45px] h-[45px] flex justify-center items-center`}
+            className={`${color === "red-400" ? "bg-red-400" : (color === "green-600" ? "bg-green-600" : "bg-slate-600")} rounded-full w-[45px] h-[45px] flex justify-center items-center`}
         >
             {getStatusIcon(status)}
         </div>

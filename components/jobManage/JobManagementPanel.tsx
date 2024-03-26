@@ -5,10 +5,13 @@ import { Student } from "@/types/StudentType";
 import React, { useEffect, useState } from "react";
 import SearchNotFound from "../searchJob/SearchNotFound";
 import StudentOfferCard from "../jobs/employerJobs/studentOfferCard";
+import { convertStateNameToThai } from "@/lib/Jobs/adapter";
 
 type Props = {
   jobId: string;
 };
+
+const jobTypes: Array<string> = ["PENDING", "DISCLAIMED", "ACCEPTED", "DEPOSIT_PENDING", "IN_PROGRESS", "DELIVERED", "WAGE_PAYMENT_PENDING", "DONE", "CANCELED"];
 
 function JobManagePanel({ jobId }: Props) {
   const [isLoading, setLoading] = useState<boolean>(true);
@@ -18,8 +21,9 @@ function JobManagePanel({ jobId }: Props) {
   useEffect(() => {
     async function fetchData(filter: string) {
       const fetchedData = await fetchGetStudentByJob(jobId, filter);
+      fetchedData.sort((a, b) => {return jobTypes.indexOf(a.status) - jobTypes.indexOf(b.status)});
       setFetchedData(fetchedData);
-    //   console.log(fetchedData)
+      console.log(fetchedData)
     }
     setLoading(true);
     fetchData(filter);
@@ -41,19 +45,16 @@ function JobManagePanel({ jobId }: Props) {
                   }}
               >
                   <option value="">ทั้งหมด</option>
-                  <option value="PENDING">สมัคร</option>
-                  <option value="DISCLAIMED">สละสิทธิ์</option>
-                  <option value="ACCEPTED">กำลังรอ</option>
-                  <option value="DEPOSIT_PENDING">รอจ่ายมัดจำ</option>
-                  <option value="IN_PROGRESS">รอส่งมอบงาน</option>
-                  <option value="DELIVERED">ส่งมอบงานแล้ว</option>
-                  <option value="WAGE_PAYMENT_PENDING">รอจ่ายค่าจ้าง</option>
-                  <option value="DONE">เสร็จสิ้น</option>
-                  <option value="CANCELED">ยกเลิก</option>
+                  {jobTypes.map((type, index) => (
+                        <option key={index} value={type}>
+                            {convertStateNameToThai("employer", type)}
+                        </option>
+                    
+                  ))}
               </select>
           </div>
 
-          <aside className={`${isLoading ? "hidden" : ""} flex flex-col gap-3`}>
+          <aside className={`${isLoading ? "hidden" : ""} flex flex-col gap-3 xl:h-[70vh] xl:overflow-y-auto`}>
               {fetchedData.length === 0 ? (
                   <div className="flex justify-center items-center">
                       <SearchNotFound text="ไม่พบการสมัครงานของนิสิต" />
