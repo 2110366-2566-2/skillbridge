@@ -33,7 +33,7 @@ export default function ChatRoomHeader({ isStudent, chatRoomInfo }: Props) {
                 <div className="flex flex-col justify-between gap-1">
                     <Link
                         className="font-medium text-[20px] text-slate-800 truncate-[30ch] line-clamp-1 cursor-pointer hover:underline"
-                        href={isStudent ? "/" : "/"} // TO Nut's page in Sprint 3 : TO Student profile in Sprint 3
+                        href={isStudent ? `/progress/${chatRoomInfo.job.id}/${chatRoomInfo.student.id}` : `/profile/${chatRoomInfo.student.id}`} // TO Nut's page in Sprint 3, progress/[jobId]/[studentId] : TO Student profile in Sprint 3, profile/[studentId]
                     >
                         {title}
                     </Link>
