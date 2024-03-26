@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { convertStateNameToThai } from "@/lib/Jobs/adapter";
 import CallToActionButtons from "../CallToActionButtons";
+import Link from "next/link";
 
 type Props = {
     studentId: string;
@@ -39,9 +40,9 @@ function StudentOfferCard({
     return (
         <div className="bg-gradient-to-r from-slate-100 px-5 pt-7 pb-5 rounded-3xl shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-slate-200 h-fit transition duration-300 ease-in-out">
             <section className="flex flex-row justify-between items-center">
-                <p className="font-semibold text-lg md:text-xl lg:text-2xl line-clamp-2 hover:underline min-h-[40px] h-fit flex items-center">
+                <Link className="font-semibold text-lg md:text-xl lg:text-2xl line-clamp-2 hover:underline min-h-[40px] h-fit flex items-center" href={`/profile/${studentId}`}>
                     {studentName}
-                </p>
+                </Link>
 
                 <p className="font-semibold text-lg md:text-xl lg:text-2xl line-clamp-2">
                     ฿{price.toLocaleString()}
