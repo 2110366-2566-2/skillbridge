@@ -18,27 +18,27 @@ let firstLoad: boolean = true;
 
 export default function ChatMessageList({ isStudent, chatroomId, senderId, socket }: Props) {
     const [messagesByDate, setMessagesByDate] = useState<MessagesGroupByDate[]>([]);
-    console.log(messagesByDate);
-    console.log(socket);
+    // console.log(messagesByDate);
+    // console.log(socket);
 
     function inComingMessageHandler(message: toClientMessage) {
         setMessagesByDate((messagesByDate) => {
-            console.log(messagesByDate);
+            // console.log(messagesByDate);
 
-            console.log(message);
-            console.log(message.content);
-            
+            // console.log(message);
+            // console.log(message.content);
+
             const newMessageDate: Date = new Date(message.createdAt);
-            const newMessage: Message =  {
+            const newMessage: Message = {
                 id: message.id,
                 userId: message.userId,
                 createdAt: newMessageDate,
                 content: message.content,
                 isImage: message.isImage
             };
-            
+
             const latestMessageByDate = messagesByDate.length !== 0 ? messagesByDate[messagesByDate.length - 1] : undefined;
-            
+
             if (!latestMessageByDate || latestMessageByDate.Date !== newMessageDate.toDateString()) {
                 const newMessageByDate: MessagesGroupByDate = {
                     Date: newMessageDate.toDateString(),
@@ -52,8 +52,8 @@ export default function ChatMessageList({ isStudent, chatroomId, senderId, socke
             messagesByDate[messagesByDate.length - 1].Messages.push(newMessage);
             const newMessagesByDate = [...messagesByDate];
 
-            console.log("fi", newMessagesByDate===messagesByDate);
-            
+            // console.log("fi", newMessagesByDate===messagesByDate);
+
             // setChatListKey((prev) => prev+1);
             return newMessagesByDate;
         });
@@ -71,7 +71,7 @@ export default function ChatMessageList({ isStudent, chatroomId, senderId, socke
         async function getInitialData() {
             try {
                 setMessagesByDate(await getMessageByChatRoom(chatroomId));
-                console.log(await getMessageByChatRoom(chatroomId));
+                // console.log(await getMessageByChatRoom(chatroomId));
             } catch (err) {
                 console.log(err)
                 return;
@@ -87,7 +87,7 @@ export default function ChatMessageList({ isStudent, chatroomId, senderId, socke
         }
     }, [messagesByDate])
 
-    console.log("chat list reloading")
+    // console.log("chat list reloading")
 
     return (
         <>

@@ -32,7 +32,7 @@ export default function ChatInput({ isStudent, chatroomId, sendMessage, sendImag
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (input.text !== "") {
-            console.log(input.text)
+            // console.log(input.text)
 
             sendMessage(input.text);
 
@@ -44,14 +44,14 @@ export default function ChatInput({ isStudent, chatroomId, sendMessage, sendImag
     }
 
     const handleImageInput = (e: ChangeEvent<HTMLInputElement>) => {
-        console.log("CLICKED AT IMAGE INPUT ><")
+        // console.log("CLICKED AT IMAGE INPUT ><")
         if (e.target.files === null) {
             return;
         }
         const imageFile = e.target.files[0];
 
-        console.log(e.target.files);
-        console.log(imageFile);
+        // console.log(e.target.files);
+        // console.log(imageFile);
 
         if (!imageFile) {
             return;

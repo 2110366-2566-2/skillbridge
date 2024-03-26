@@ -37,7 +37,7 @@ export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
                 setChatRoomInfo(await getChatRoomInfo(chatroomId));
                 messagesGroupByDate = await getMessageByChatRoom(chatroomId)
 
-                console.log(messagesGroupByDate);
+                // console.log(messagesGroupByDate);
 
                 setMessagesByDate(messagesGroupByDate);
             } catch (err) {
@@ -58,16 +58,16 @@ export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
         socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL, {
             extraHeaders: {
                 "chat-room-id": chatroomId,
-                "user-id" : senderId!
+                "user-id": senderId!
             }
         });
         firstLoad = false;
     }
-    
+
 
     function sendMessage(newTextMessage: string) {
         const messageToServer: toServerTextMessage = {
-          text: newTextMessage
+            text: newTextMessage
         };
         socket.emit('chat text message', messageToServer);
     };
@@ -77,21 +77,21 @@ export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
             alert("The file supposed to be an image.");
             return;
         }
-    
+
         const arrayBuffer = await imageFile.arrayBuffer();
         const uiInt8Array = new Uint8Array(arrayBuffer);
         const buffer = Buffer.from(uiInt8Array);
-    
-        const messageToServer: toServerImageMessage = {
-          type: imageFile.type,
-          size: imageFile.size,
-          buffer: buffer
-        }
-    
-        socket.emit('chat image message', messageToServer);
-      };
 
-    console.log("chat room reloading");
+        const messageToServer: toServerImageMessage = {
+            type: imageFile.type,
+            size: imageFile.size,
+            buffer: buffer
+        }
+
+        socket.emit('chat image message', messageToServer);
+    };
+
+    // console.log("chat room reloading");
 
     return (
         <div className="h-[100dvh] w-full flex flex-col bg-neutral-100 border border-[#CBD5E1] lg:h-[80vh]">
