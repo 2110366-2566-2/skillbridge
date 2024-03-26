@@ -20,12 +20,15 @@ type Props = {
 
 let firstLoad: boolean = true;
 let socket: Socket;
+let curChatRoomId: string;
 
 function isImageFile(file: File | undefined) {
     return file && file['type'].split('/')[0] === 'image';
 }
 
 export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
+    // curChatRoomId = chatroomId;
+
     let messagesGroupByDate: MessagesGroupByDate[]
 
     const [messagesByDate, setMessagesByDate] = useState<MessagesGroupByDate[]>([]);
@@ -49,7 +52,7 @@ export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
         getInitialData();
     }, [])
 
-    if (firstLoad) {
+    if (firstLoad || curChatRoomId !== chatroomId) {
         if (!process.env.NEXT_PUBLIC_WEBSOCKET_URL) {
             alert()
             return;
@@ -61,6 +64,9 @@ export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
                 "user-id": senderId!
             }
         });
+        console.log("connecting socket");
+        curChatRoomId = chatroomId;
+
         firstLoad = false;
     }
 
