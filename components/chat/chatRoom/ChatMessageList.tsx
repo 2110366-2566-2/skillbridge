@@ -82,10 +82,23 @@ export default function ChatMessageList({ isStudent, chatroomId, senderId, socke
     }, [])
 
     useEffect(() => {
-        if (bottomOfPanelRef.current) {
-            bottomOfPanelRef.current.scrollIntoView({ block: 'end' })
-        }
-    }, [messagesByDate])
+        const handleResize = () => {
+            if (bottomOfPanelRef.current) {
+                bottomOfPanelRef.current.scrollIntoView({ block: 'end' });
+            }
+        };
+
+        // Add event listener for resize event
+        window.addEventListener('resize', handleResize);
+
+        // Call the handleResize function on initial render
+        handleResize();
+
+        // Cleanup: remove event listener
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [messagesByDate]);
 
     // console.log("chat list reloading")
 
