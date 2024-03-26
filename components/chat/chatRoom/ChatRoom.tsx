@@ -64,7 +64,7 @@ export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
                 "user-id": senderId!
             }
         });
-        console.log("connecting socket");
+        // console.log("connecting socket");
         curChatRoomId = chatroomId;
 
         firstLoad = false;
