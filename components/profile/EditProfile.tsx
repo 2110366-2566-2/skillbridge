@@ -56,7 +56,7 @@ export default function EditProfile({
         <div className="w-full h-full duration-300 overflow-x-hidden fixed inset-0 z-50 bg-[#262626] bg-opacity-[60%] px-[20px]"
             onClick={() => { setDescription(''); toggleEditProfile() }}>
             <div className="flex justify-center">
-                <div className=" bg-[#f8fafc] p-[20px] lg:px-[30px] lg:pb-[30px] rounded-[15px] w-full mt-[163px] lg:mt-[185px] max-w-[500px]" onClick={(e) => { e.preventDefault(); e.stopPropagation() }}>
+                <div className=" bg-[#f8fafc] p-[20px] lg:px-[30px] lg:pb-[30px] rounded-[15px] w-full mt-[163px] lg:mt-[185px] max-w-[500px]" onClick={(e) => { e.stopPropagation(); }}>
                     <p className="font-bold text-[24px] text-slate-600 mb-[7px]">
                         แก้ไขโปรไฟล์
                     </p>
