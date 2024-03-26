@@ -13,7 +13,7 @@ function isFileImage(file: File | undefined) {
   return file && file['type'].split('/')[0] === 'image';
 }
 
-export default function page({
+export default function Page({
   params,
 }: {
   params: { 
@@ -101,7 +101,7 @@ export default function page({
           }
 
           return (
-            <div>
+            <div key={message.id}>
               <p>{`${message.userId} sendImage:`}</p>
               <img src={message.content} alt={message.content}/>
             </div>

@@ -31,21 +31,6 @@ export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
     const [messagesByDate, setMessagesByDate] = useState<MessagesGroupByDate[]>([]);
     const [chatRoomInfo, setChatRoomInfo] = useState<ChatRoomInfo>();
 
-    if (firstLoad) {
-        if (!process.env.NEXT_PUBLIC_WEBSOCKET_URL) {
-            alert()
-            return;
-        }
-
-        socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL, {
-            extraHeaders: {
-                "chat-room-id": chatroomId,
-                "user-id" : senderId!
-            }
-        });
-        firstLoad = false;
-    }
-
     useEffect(() => {
         async function getInitialData() {
             try {
@@ -63,6 +48,21 @@ export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
 
         getInitialData();
     }, [])
+
+    if (firstLoad) {
+        if (!process.env.NEXT_PUBLIC_WEBSOCKET_URL) {
+            alert()
+            return;
+        }
+
+        socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL, {
+            extraHeaders: {
+                "chat-room-id": chatroomId,
+                "user-id" : senderId!
+            }
+        });
+        firstLoad = false;
+    }
     
 
     function sendMessage(newTextMessage: string) {

@@ -9,7 +9,7 @@ const socket = io('http://localhost:3001', {
   }
 });
 
-export default function page() {
+export default function Page() {
   const [messages, setMessages] = useState<string[]>([]);
   const [newMessage, setNewMessage] = useState('');
 
