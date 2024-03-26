@@ -59,11 +59,20 @@ const testList = [
     },
 ];
 
+function condenseBeforeAfterStates(data: Array<EmploymentTrack>) {
+    return data.map((item) => {
+        return {
+            status: `${item.status.before || ""}-${item.status.after}`,
+            date: item.date,
+        }
+    })
+}
+
 async function ProgressTracker({ jobId, studentId }: Props) {
     const data: Array<EmploymentTrack> =
         (await getEmploymentTracking(jobId, studentId)).data || [];
-    console.log(data);
-    return testList.map((item, index) => {
+    const condensedData = condenseBeforeAfterStates(data);
+    return condensedData.map((item, index) => {
         if (index === 0) {
             return (
                 <main key={index} className="flex flex-col min-w-[300px] xl:min-w-[400px]">
@@ -74,13 +83,13 @@ async function ProgressTracker({ jobId, studentId }: Props) {
                                 {getThaiProgressText(item.status)}
                             </p>
                         </div>
-                        <p className="font-light text-md">{item.date}</p>
+                        <p className="font-light text-md">{item.date.toLocaleDateString("en-GB")}</p>
                     </section>
                 </main>
             );
         } else {
             const color = getIconColor(item.status);
-            const prevColor = getIconColor(testList[index - 1].status);
+            const prevColor = getIconColor(condensedData[index - 1].status);
             return (
                 <main key={index} className="flex flex-col min-w-[300px] xl:min-w-[400px]">
                     {/* vertical line */}
@@ -106,7 +115,7 @@ async function ProgressTracker({ jobId, studentId }: Props) {
                                 {getThaiProgressText(item.status)}
                             </p>
                         </div>
-                        <p className="font-light text-md">{item.date}</p>
+                        <p className="font-light text-md">{item.date.toLocaleDateString("en-GB")}</p>
                     </section>
                 </main>
             );
