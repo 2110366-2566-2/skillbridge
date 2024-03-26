@@ -26,7 +26,7 @@ const colorMatcher: Map<string, string> = new Map<string, string>([
     ["CANCELED", "bg-rose-100"],
 ]);
 
-function studentOfferCard({
+function StudentOfferCard({
     studentId,
     jobId,
     studentName,
@@ -90,4 +90,4 @@ function studentOfferCard({
     );
 }
 
-export default studentOfferCard;
+export default StudentOfferCard;
