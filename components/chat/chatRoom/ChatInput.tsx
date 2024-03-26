@@ -101,6 +101,7 @@ export default function ChatInput({ isStudent, chatroomId, sendMessage, sendImag
                 onChange={handleImageInput}     // ADDED
                 ref={hiddenFileInput}
                 style={{ display: 'none' }}
+                accept="image/jpeg, image/png"
             />
             <button
                 type="submit"

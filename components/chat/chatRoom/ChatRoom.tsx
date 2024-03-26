@@ -32,7 +32,12 @@ export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
     const [chatRoomInfo, setChatRoomInfo] = useState<ChatRoomInfo>();
 
     if (firstLoad) {
-        socket = io('http://localhost:3001', {
+        if (!process.env.NEXT_PUBLIC_WEBSOCKET_URL) {
+            alert()
+            return;
+        }
+
+        socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL, {
             extraHeaders: {
                 "chat-room-id": chatroomId,
                 "user-id" : senderId!
