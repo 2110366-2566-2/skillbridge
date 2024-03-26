@@ -38,8 +38,8 @@ export default function EditProfile({
     setDisabled(true)
 
     // authorize ก่อน
-    if (!session) {
-      console.log("No session")
+    if (!session || session.user.id !== studentId) {
+      console.log("Unauthorized user")
 
       router.push("/login")
       return

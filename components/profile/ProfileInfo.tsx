@@ -29,7 +29,7 @@ export default function ProfileInfo({
   workingComplete: number
   session: Session | null
 }) {
-  const isEditAble = session?.user?.id === studentId
+  const isEditable = session?.user?.id === studentId
 
   const [showEditProfile, setShowEditProfile] = useState(false)
 
@@ -102,7 +102,7 @@ export default function ProfileInfo({
         </div>
       </div>
 
-      {true && (
+      {isEditable && (
         <div
           className="w-full h-[40px] flex items-center justify-center rounded-[6px] border border-1 border-slate-300 cursor-pointer mt-[15px] md:mt-[25px] md:h-[50px]
                 hover:opacity-[80%] active:opacity-[60%]"
