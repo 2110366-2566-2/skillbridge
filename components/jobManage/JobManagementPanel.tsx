@@ -5,7 +5,7 @@ import { Student } from "@/types/StudentType";
 import React, { useEffect, useState } from "react";
 import SearchNotFound from "../searchJob/SearchNotFound";
 import { convertStateNameToThai } from "@/lib/Jobs/adapter";
-import StudentOfferCard from "../jobs/employerJobs/StudentOfferCard";
+import StudentOfferCard from "../jobs/employerJobs/employerCallToAction/StudentOfferCard";
 
 type Props = {
     jobId: string;
