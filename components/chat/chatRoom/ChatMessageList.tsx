@@ -49,8 +49,8 @@ export default function ChatMessageList({ isStudent, chatroomId, senderId, socke
                 return [...messagesByDate, newMessageByDate];
             }
 
+            messagesByDate[messagesByDate.length - 1].Messages.push(newMessage);
             const newMessagesByDate = [...messagesByDate];
-            newMessagesByDate[messagesByDate.length - 1].Messages.push(newMessage);
 
             console.log("fi", newMessagesByDate===messagesByDate);
             
