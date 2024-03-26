@@ -1354,10 +1354,10 @@ prepare reports, และ provide insights for decision-making. \n \
   const j33 = await prisma.job.create({
     data: {
       employerId: e3.userId,
-      title: "Legendary ROV Player",
-      status: "NOT_STARTED",
-      description: "Recruit for the team: Me & 4 stupids",
-      budget: 2000,
+      title: "รับสมัครนักรบมังกร",
+      status: "IN_PROGRESS",
+      description: "จิตปล่อยวาง สกาดูช",
+      budget: 8000,
       numWorker: 4,
       estimateStartDate: new Date("2024-05-12"),
       estimateEndDate: new Date("2024-06-31"),
@@ -2201,6 +2201,15 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s17.userId,
       bid: 15000,
       status: "DONE",
+    },
+  });
+
+  const a74 = await prisma.application.create({
+    data: {
+      jobId: j33.id,
+      userId: s2.userId,
+      bid: 9000,
+      status: "IN_PROGRESS",
     },
   });
 
@@ -3292,6 +3301,30 @@ and fresh perspective, exceeding our expectations.",
         ],
       },
     },
+  });
+
+  const c11 = await prisma.chatroom.create({
+    data: {
+      applicationUserId: s2.userId,
+      applicationJobId: j27.id,
+      employerId: e3.userId,
+    }
+  });
+
+  const c12 = await prisma.chatroom.create({
+    data: {
+      applicationUserId: s2.userId,
+      applicationJobId: j31.id,
+      employerId: e3.userId,
+    }
+  });
+
+  const c13 = await prisma.chatroom.create({
+    data: {
+      applicationUserId: s2.userId,
+      applicationJobId: j33.id,
+      employerId: e3.userId,
+    }
   });
 
 }
