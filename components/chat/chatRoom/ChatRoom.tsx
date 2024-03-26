@@ -3,13 +3,9 @@ import ChatRoomHeader from "./ChatRoomHeader"
 import ChatMessageList from "./ChatMessageList"
 import ChatInput from "./ChatInput"
 import { ChatRoomInfo, getChatRoomInfo } from "@/actions/chat/getChatRoomInfo"
-import { Message, MessagesGroupByDate, getMessageByChatRoom } from "@/actions/chat/getMessageByChatRoom"
-import { Session, getServerSession } from "next-auth"
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth"
 import io from 'socket.io-client';
-import { send } from "process"
-import { Dispatch, SetStateAction, useEffect, useState } from "react"
-import { toClientMessage, toServerImageMessage, toServerTextMessage } from "@/types/chat"
+import { useEffect, useState } from "react"
+import { toServerImageMessage, toServerTextMessage } from "@/types/chat"
 import { Socket } from "socket.io-client"
 
 type Props = {

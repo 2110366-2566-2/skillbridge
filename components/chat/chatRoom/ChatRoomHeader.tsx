@@ -47,7 +47,10 @@ export default function ChatRoomHeader({ isStudent, chatRoomInfo }: Props) {
                     </div>
                 </div>
             ) : (
-                <div>กำลังดาวน์โหลด...</div>
+                <div className="animate-pulse w-full flex flex-col justify-between gap-1">
+                    <div className="min-h-[30px] bg-slate-200 rounded"></div>
+                    <div className="min-h-[21px] bg-slate-200 rounded"></div>
+                </div>
             )}
 
         </div>
