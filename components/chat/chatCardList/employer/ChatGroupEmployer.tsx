@@ -12,7 +12,7 @@ type Props = {
 
 export default function ChatGroupEmployer({ studentsInfo }: Props) {
     const pathName = usePathname();
-    const pathId = pathName.split("/")[2]
+    const pathId = pathName.split("/").slice(-1)[0]
     const isInChatGroup = studentsInfo.chatrooms.some(chatroom => chatroom.chatroomId === pathId)
     const [isOpen, setOpen] = useState(isInChatGroup);
 
