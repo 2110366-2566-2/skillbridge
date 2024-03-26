@@ -125,11 +125,9 @@ export default function FilesInput(props: Props) {
 
     const result = await createTransaction(formDataObject);
     console.log("result", result);
-    setTimeout(() => {
-      toast.success("ระบบกำลังตรวจสอบ");
-      setPrimaryLoading((prev) => !prev);
-      setDisabled(false);
-    }, 2000);
+    toast.success("ระบบกำลังตรวจสอบ");
+    setPrimaryLoading((prev) => !prev);
+    setDisabled(false);
   };
 
   let currentFiles = null;
