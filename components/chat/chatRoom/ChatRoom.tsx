@@ -30,45 +30,6 @@ export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
 
     const [messagesByDate, setMessagesByDate] = useState<MessagesGroupByDate[]>([]);
     const [chatRoomInfo, setChatRoomInfo] = useState<ChatRoomInfo>();
-    const [chatListKey, setChatListKey] = useState<number>(0);
-
-    function inComingMessageHandler(message: toClientMessage) {
-        setMessagesByDate((messagesByDate) => {
-            console.log(messagesByDate);
-
-            console.log(message);
-            console.log(message.content);
-            
-            const newMessageDate: Date = new Date(message.createdAt);
-            const newMessage: Message =  {
-                id: message.id,
-                userId: message.userId,
-                createdAt: newMessageDate,
-                content: message.content,
-                isImage: false
-            };
-            
-            const latestMessageByDate = messagesByDate.length !== 0 ? messagesByDate[messagesByDate.length - 1] : undefined;
-            
-            if (!latestMessageByDate || latestMessageByDate.Date !== newMessageDate.toDateString()) {
-                const newMessageByDate: MessagesGroupByDate = {
-                    Date: newMessageDate.toDateString(),
-                    Messages: [newMessage]
-                }
-
-                // setChatListKey((prev) => prev+1);    
-                return [...messagesByDate, newMessageByDate];
-            }
-
-            const newMessagesByDate = messagesByDate;
-            newMessagesByDate[messagesByDate.length - 1].Messages.push(newMessage);
-
-            console.log("fi", newMessagesByDate);
-            
-            // setChatListKey((prev) => prev+1);
-            return newMessagesByDate;
-        });
-    }
 
     if (firstLoad) {
         socket = io('http://localhost:3001', {
@@ -77,11 +38,6 @@ export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
                 "user-id" : senderId!
             }
         });
-
-        socket.on('chat text message', inComingMessageHandler);
-        
-        socket.on('chat image message', inComingMessageHandler);
-
         firstLoad = false;
     }
 
@@ -130,10 +86,12 @@ export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
         socket.emit('chat image message', messageToServer);
       };
 
+    console.log("chat room reloading");
+
     return (
         <div className="h-[100dvh] w-full flex flex-col bg-neutral-100 border border-[#CBD5E1] lg:h-[80vh]">
             <ChatRoomHeader isStudent={isStudent} chatRoomInfo={chatRoomInfo} />
-            <ChatMessageList key={chatListKey} isStudent={isStudent} chatroomId={chatroomId} messagesByDate={messagesByDate} senderId={senderId!} />
+            <ChatMessageList isStudent={isStudent} chatroomId={chatroomId} initialMessagesByDate={messagesByDate} senderId={senderId!} socket={socket} />
             <ChatInput isStudent={isStudent} chatroomId={chatroomId} sendMessage={sendMessage} sendImage={sendImage} />
         </div>
     )

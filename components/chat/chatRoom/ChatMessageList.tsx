@@ -2,26 +2,92 @@
 
 import ChatMessageListByDate from "./ChatMessageListByDate"
 import { useRef, useEffect, useState } from "react"
-import { Message, MessagesGroupByDate } from "@/actions/chat/getMessageByChatRoom"
+import { Message, MessagesGroupByDate, getMessageByChatRoom } from "@/actions/chat/getMessageByChatRoom"
 import { Socket } from "socket.io-client"
+import { toClientMessage } from "@/types/chat"
 
 type Props = {
     isStudent: boolean,
     chatroomId: string,
-    messagesByDate: MessagesGroupByDate[],
-    senderId: string
+    initialMessagesByDate: MessagesGroupByDate[],
+    senderId: string,
+    socket: Socket
 }
 
-export default function ChatMessageList({ isStudent, chatroomId, messagesByDate, senderId }: Props) {
+let firstLoad: boolean = true;
+
+export default function ChatMessageList({ isStudent, chatroomId, senderId, socket }: Props) {
+    const [messagesByDate, setMessagesByDate] = useState<MessagesGroupByDate[]>([]);
     console.log(messagesByDate);
+    console.log(socket);
+
+    function inComingMessageHandler(message: toClientMessage) {
+        setMessagesByDate((messagesByDate) => {
+            console.log(messagesByDate);
+
+            console.log(message);
+            console.log(message.content);
+            
+            const newMessageDate: Date = new Date(message.createdAt);
+            const newMessage: Message =  {
+                id: message.id,
+                userId: message.userId,
+                createdAt: newMessageDate,
+                content: message.content,
+                isImage: false
+            };
+            
+            const latestMessageByDate = messagesByDate.length !== 0 ? messagesByDate[messagesByDate.length - 1] : undefined;
+            
+            if (!latestMessageByDate || latestMessageByDate.Date !== newMessageDate.toDateString()) {
+                const newMessageByDate: MessagesGroupByDate = {
+                    Date: newMessageDate.toDateString(),
+                    Messages: [newMessage]
+                }
+
+                // setChatListKey((prev) => prev+1);    
+                return [...messagesByDate, newMessageByDate];
+            }
+
+            const newMessagesByDate = [...messagesByDate];
+            newMessagesByDate[messagesByDate.length - 1].Messages.push(newMessage);
+
+            console.log("fi", newMessagesByDate===messagesByDate);
+            
+            // setChatListKey((prev) => prev+1);
+            return newMessagesByDate;
+        });
+    }
+
+    if (firstLoad) {
+        socket.on('chat text message', inComingMessageHandler);
+        socket.on('chat image message', inComingMessageHandler);
+        firstLoad = false;
+    }
 
     const bottomOfPanelRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        async function getInitialData() {
+            try {
+                setMessagesByDate(await getMessageByChatRoom(chatroomId));
+                console.log(await getMessageByChatRoom(chatroomId));
+            } catch (err) {
+                console.log(err)
+                return;
+            }
+        }
+
+        getInitialData();
+    }, [])
 
     useEffect(() => {
         if (bottomOfPanelRef.current) {
             bottomOfPanelRef.current.scrollIntoView({ block: 'end' })
         }
     }, [messagesByDate])
+
+    console.log("chat list reloading")
 
     return (
         <>
