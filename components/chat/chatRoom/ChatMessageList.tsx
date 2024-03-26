@@ -34,7 +34,7 @@ export default function ChatMessageList({ isStudent, chatroomId, senderId, socke
                 userId: message.userId,
                 createdAt: newMessageDate,
                 content: message.content,
-                isImage: false
+                isImage: message.isImage
             };
             
             const latestMessageByDate = messagesByDate.length !== 0 ? messagesByDate[messagesByDate.length - 1] : undefined;
