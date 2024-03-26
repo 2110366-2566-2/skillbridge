@@ -54,8 +54,10 @@ export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
 
     if (firstLoad || curChatRoomId !== chatroomId) {
         if (!process.env.NEXT_PUBLIC_WEBSOCKET_URL) {
-            alert()
-            return;
+            return (<div>
+                    <h1>{process.env.NEXT_PUBLIC_WEBSOCKET_URL}</h1>
+                </div>
+            );
         }
 
         socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL, {
