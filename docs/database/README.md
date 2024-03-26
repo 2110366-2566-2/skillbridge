@@ -26,6 +26,7 @@
           <li><a href="#v133">v1.33</a></li>
           <li><a href="#v134">v1.34</a></li>
           <li><a href="#v135">v1.35</a></li>
+          <li><a href="#v136">v1.36</a></li>
         </ul>
       </ul>
     </li>
@@ -268,9 +269,16 @@
 - `id` is set to use uuid() for default value
 
 ### Application
-- The trigger is added for log in `ApplicationStatusLog` when there is an update of `status` on `Application`
+- The trigger is added to log in `ApplicationStatusLog` when there is an update of `status` on `Application`
 
 ### Other
 - Manually squash old migrations for cleaner migrations history files 
+
+<p align="right">(<a href="#database">back to top</a>)</p>
+
+## v1.36
+
+### Application
+- The trigger is added to log in `ApplicationStatusLog` when there is an insert on `Application`
 
 <p align="right">(<a href="#database">back to top</a>)</p>
