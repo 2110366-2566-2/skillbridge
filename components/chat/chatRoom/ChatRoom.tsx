@@ -51,7 +51,7 @@ export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
         //     );
         // }
 
-        socket = io("https://34.170.83.37:3001/", {
+        socket = io("http://34.170.83.37:3001/", {
             extraHeaders: {
                 "chat-room-id": chatroomId,
                 "user-id": senderId!
