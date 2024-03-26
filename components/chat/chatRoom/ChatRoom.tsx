@@ -44,14 +44,14 @@ export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
     }, [])
 
     if (curChatRoomId !== chatroomId) {
-        if (!process.env.NEXT_PUBLIC_WEBSOCKET_URL || "https://34.170.83.37:3001/") {
-            return (<div>
-                    <h1>{process.env.NEXT_PUBLIC_WEBSOCKET_URL}</h1>
-                </div>
-            );
-        }
+        // if (!process.env.NEXT_PUBLIC_WEBSOCKET_URL) {
+        //     return (<div>
+        //             <h1>{process.env.NEXT_PUBLIC_WEBSOCKET_URL}</h1>
+        //         </div>
+        //     );
+        // }
 
-        socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL || "https://34.170.83.37:3001/", {
+        socket = io("https://34.170.83.37:3001/", {
             extraHeaders: {
                 "chat-room-id": chatroomId,
                 "user-id": senderId!
