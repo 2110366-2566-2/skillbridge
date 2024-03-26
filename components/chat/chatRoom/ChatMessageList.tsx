@@ -92,7 +92,7 @@ export default function ChatMessageList({ isStudent, chatroomId, senderId, socke
     return (
         <>
             {messagesByDate.length ? (
-                <div className="h-full w-full px-3 pb-[6px] overflow-y-auto pt-4 lg:px-3 lg:pb-2">
+                <div className="h-full w-full px-3 overflow-y-auto pt-4 lg:px-3">
                     <div className="flex flex-col-reverse">
                         {messagesByDate.slice().reverse().map((messageByDate, index) => <ChatMessageListByDate key={index} messageByDate={messageByDate} senderId={senderId} />)}
                     </div>
