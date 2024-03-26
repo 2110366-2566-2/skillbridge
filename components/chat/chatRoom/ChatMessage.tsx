@@ -37,6 +37,7 @@ export default function ChatMessage({ message, senderId }: Props) {
                                     className="fixed z-50 top-0 right-0 m-6 p-1 text-white rounded-full cursor-pointer hover:bg-slate-500 md:m-[24px]"
                                 >
                                     <Image
+                                        className="w-auto h-auto"
                                         src={close}
                                         alt="closeImageButton"
                                         width={32}
@@ -55,7 +56,8 @@ export default function ChatMessage({ message, senderId }: Props) {
                                     style={{
                                         objectFit: 'contain',
                                     }}
-                                    className=""
+                                    sizes="w-auto h-auto"
+                                    className="w-auto h-auto"
                                 />
                             </div>
                             <Image
@@ -63,8 +65,9 @@ export default function ChatMessage({ message, senderId }: Props) {
                                 alt="chatImage"
                                 width={268}
                                 height={357}
-                                className={`mb-2 rounded-[16px] max-w-[64vw] shadow lg:max-w-[24vw] cursor-pointer`}
+                                className={`w-auto h-auto mb-2 rounded-[16px] max-w-[64vw] shadow lg:max-w-[24vw] cursor-pointer`}
                                 onClick={toggleFullscreen}
+                                priority
                             />
                         </div>
                     </div>
