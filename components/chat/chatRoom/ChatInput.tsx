@@ -43,10 +43,13 @@ export default function ChatInput({ isStudent, chatroomId, sendMessage, sendImag
         }
     }
 
-    const handleImageInput = (e) => {
+    const handleImageInput = (e: ChangeEvent<HTMLInputElement>) => {
         console.log("CLICKED AT IMAGE INPUT ><")
+        if (e.target.files === null) {
+            return;
+        }
         const imageFile = e.target.files[0];
-        
+
         console.log(e.target.files);
         console.log(imageFile);
 
@@ -57,13 +60,13 @@ export default function ChatInput({ isStudent, chatroomId, sendMessage, sendImag
     }
 
 
-    const hiddenFileInput = useRef(null); 
+    const hiddenFileInput = useRef(null);
 
     const handleClick = () => {
         if (hiddenFileInput.current === null) {
             return;
         }
-        hiddenFileInput.current.click();   
+        hiddenFileInput.current.click();
     };
 
     return (
@@ -93,11 +96,11 @@ export default function ChatInput({ isStudent, chatroomId, sendMessage, sendImag
                     height={32}
                 />
             </button>
-            <input 
+            <input
                 type="file"
                 onChange={handleImageInput}     // ADDED
                 ref={hiddenFileInput}
-                style={{display:'none'}}
+                style={{ display: 'none' }}
             />
             <button
                 type="submit"
