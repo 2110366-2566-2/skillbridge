@@ -57,7 +57,11 @@ async function getEmployerJobs() {
         jobTags: job.jobTag.title,
         description: job.description ? job.description : "",
         acceptNum: job.applications.filter(
-          (app) => app.status == ApplicationStatus.ACCEPTED,
+          (app) => app.status == ApplicationStatus.DEPOSIT_PENDING ||
+            app.status == ApplicationStatus.IN_PROGRESS ||
+            app.status == ApplicationStatus.DELIVERED ||
+            app.status == ApplicationStatus.WAGE_PAYMENT_PENDING ||
+            app.status == ApplicationStatus.DONE
         ).length,
         maxAcceptNum: job.numWorker,
         budget: job.budget,
