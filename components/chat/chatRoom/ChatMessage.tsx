@@ -65,7 +65,7 @@ export default function ChatMessage({ message, senderId }: Props) {
                                 alt="chatImage"
                                 width={268}
                                 height={357}
-                                className={`w-auto h-auto mb-2 rounded-[16px] max-w-[64vw] shadow lg:max-w-[24vw] cursor-pointer`}
+                                className={`mb-2 rounded-[16px] max-w-[64vw] shadow lg:max-w-[24vw] cursor-pointer`}
                                 onClick={toggleFullscreen}
                                 priority
                             />
