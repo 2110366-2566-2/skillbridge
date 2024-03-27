@@ -1,9 +1,11 @@
 export default function PaymentInformation({
   studentName,
   price,
+  isWage
 }: {
   studentName: string;
   price: number;
+  isWage: boolean
 }) {
   return (
     <div className="lg:order-2 lg:row-span-2 lg:mt-[13px]">
@@ -22,7 +24,7 @@ export default function PaymentInformation({
 
         <div className="w-full h-[24px] flex justify-between lg:h-[26px]">
           <p className="text-[#64748b] text-sm lg:text-[18px]">
-            ค่ามัดจำการจ้างงาน
+            {isWage ? "ค่าตอบแทนคงเหลือ" : "ค่ามัดจำการจ้างงาน"}
           </p>
 
           <p className="text-[#64748b] text-sm lg:text-[18px]">

@@ -24,6 +24,7 @@ export default async function PaymentPage({
         jobId={params.jobId}
         studentId={params.studentId}
         isDeposit={data ? data.status === "DEPOSIT_PENDING" : false}
+        isWage={data ? data.status === "WAGE_PAYMENT_PENDING" : false}
       />
     </div>
   );
