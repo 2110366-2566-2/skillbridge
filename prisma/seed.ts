@@ -1315,6 +1315,8 @@ prepare reports, และ provide insights for decision-making. \n \
       description: "Gotta catch 'em all!",
       budget: 15000,
       numWorker: 10,
+      createdAt: new Date("2024-01-16T10:15:33"),
+      updatedAt: new Date("2024-01-16T10:15:33"),
       estimateStartDate: new Date("2024-04-11"),
       estimateEndDate: new Date("2024-07-31"),
       jobTagId: jobTagList["ไลฟ์สไตล์"],
@@ -2057,6 +2059,16 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s1.userId,
       bid: 14000,
       status: "PENDING",
+      createdAt: new Date("2024-01-21T17:35:00"),
+      updatedAt: new Date("2024-01-21T17:35:00"),
+      applicationStatusLogs: {
+        create: [
+          {
+            status: "PENDING",
+            updatedAt: new Date("2024-01-21T17:35:00")
+          },
+        ]
+      }
     },
   });
 
@@ -2066,6 +2078,16 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s2.userId,
       bid: 15000,
       status: "PENDING",
+      createdAt: new Date("2024-01-21T17:35:00"),
+      updatedAt: new Date("2024-01-21T17:35:00"),
+      applicationStatusLogs: {
+        create: [
+          {
+            status: "PENDING",
+            updatedAt: new Date("2024-01-21T17:35:00")
+          },
+        ]
+      }
     },
   });
 
@@ -2074,7 +2096,25 @@ prepare reports, และ provide insights for decision-making. \n \
       jobId: j31.id,
       userId: s3.userId,
       bid: 16000,
-      status: "PENDING",
+      status: "DISCLAIMED",
+      createdAt: new Date("2024-01-21T17:35:00"),
+      updatedAt: new Date("2024-01-26T09:22:22"),
+      applicationStatusLogs: {
+        create: [
+          {
+            status: "PENDING",
+            updatedAt: new Date("2024-01-21T17:35:00")
+          },
+          {
+            status: "ACCEPTED",
+            updatedAt: new Date("2024-01-24T12:30:45")
+          },
+          {
+            status: "DISCLAIMED",
+            updatedAt: new Date("2024-01-26T09:22:22")
+          },
+        ]
+      }
     },
   });
 
@@ -2084,6 +2124,20 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s4.userId,
       bid: 12000,
       status: "DISCLAIMED",
+      createdAt: new Date("2024-01-21T17:35:00"),
+      updatedAt: new Date("2024-01-26T09:22:22"),
+      applicationStatusLogs: {
+        create: [
+          {
+            status: "PENDING",
+            updatedAt: new Date("2024-01-21T17:35:00")
+          },
+          {
+            status: "DISCLAIMED",
+            updatedAt: new Date("2024-01-26T09:22:22")
+          },
+        ]
+      }
     },
   });
 
@@ -2093,6 +2147,24 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s5.userId,
       bid: 15000,
       status: "DISCLAIMED",
+      createdAt: new Date("2024-01-21T17:35:00"),
+      updatedAt: new Date("2024-01-26T09:22:22"),
+      applicationStatusLogs: {
+        create: [
+          {
+            status: "PENDING",
+            updatedAt: new Date("2024-01-21T17:35:00")
+          },
+          {
+            status: "ACCEPTED",
+            updatedAt: new Date("2024-01-24T12:30:45")
+          },
+          {
+            status: "DISCLAIMED",
+            updatedAt: new Date("2024-01-26T09:22:22")
+          },
+        ]
+      }
     },
   });
 
@@ -2102,6 +2174,24 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s6.userId,
       bid: 14400,
       status: "DEPOSIT_PENDING",
+      createdAt: new Date("2024-01-21T17:35:00"),
+      updatedAt: new Date("2024-01-26T09:22:22"),
+      applicationStatusLogs: {
+        create: [
+          {
+            status: "PENDING",
+            updatedAt: new Date("2024-01-21T17:35:00")
+          },
+          {
+            status: "ACCEPTED",
+            updatedAt: new Date("2024-01-24T12:30:45")
+          },
+          {
+            status: "DEPOSIT_PENDING",
+            updatedAt: new Date("2024-01-26T09:22:22")
+          },
+        ]
+      }
     },
   });
 
@@ -2111,6 +2201,24 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s7.userId,
       bid: 15500,
       status: "DEPOSIT_PENDING",
+      createdAt: new Date("2024-01-21T17:35:00"),
+      updatedAt: new Date("2024-01-26T09:22:22"),
+      applicationStatusLogs: {
+        create: [
+          {
+            status: "PENDING",
+            updatedAt: new Date("2024-01-21T17:35:00")
+          },
+          {
+            status: "ACCEPTED",
+            updatedAt: new Date("2024-01-24T12:30:45")
+          },
+          {
+            status: "DEPOSIT_PENDING",
+            updatedAt: new Date("2024-01-26T09:22:22")
+          },
+        ]
+      }
     },
   });
 
@@ -2120,6 +2228,28 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s8.userId,
       bid: 16100,
       status: "IN_PROGRESS",
+      createdAt: new Date("2024-01-21T17:35:00"),
+      updatedAt: new Date("2024-01-31T10:15:33"),
+      applicationStatusLogs: {
+        create: [
+          {
+            status: "PENDING",
+            updatedAt: new Date("2024-01-21T17:35:00")
+          },
+          {
+            status: "ACCEPTED",
+            updatedAt: new Date("2024-01-24T12:30:45")
+          },
+          {
+            status: "DEPOSIT_PENDING",
+            updatedAt: new Date("2024-01-26T09:22:22")
+          },
+          {
+            status: "IN_PROGRESS",
+            updatedAt: new Date("2024-01-31T10:15:33")
+          },
+        ]
+      }
     },
   });
 
@@ -2129,6 +2259,36 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s9.userId,
       bid: 145000,
       status: "IN_PROGRESS",
+      createdAt: new Date("2024-01-21T17:35:00"),
+      updatedAt: new Date("2024-03-05T09:12:33"),
+      applicationStatusLogs: {
+        create: [
+          {
+            status: "PENDING",
+            updatedAt: new Date("2024-01-21T17:35:00")
+          },
+          {
+            status: "ACCEPTED",
+            updatedAt: new Date("2024-01-24T12:30:45")
+          },
+          {
+            status: "DEPOSIT_PENDING",
+            updatedAt: new Date("2024-01-26T09:22:22")
+          },
+          {
+            status: "IN_PROGRESS",
+            updatedAt: new Date("2024-01-31T10:15:33")
+          },
+          {
+            status: "DELIVERED",
+            updatedAt: new Date("2024-02-27T15:45:38")
+          },
+          {
+            status: "IN_PROGRESS",
+            updatedAt: new Date("2024-03-05T09:12:33")
+          },
+        ]
+      }
     },
   });
 
@@ -2138,6 +2298,36 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s10.userId,
       bid: 13300,
       status: "IN_PROGRESS",
+      createdAt: new Date("2024-01-21T17:35:00"),
+      updatedAt: new Date("2024-03-05T09:12:33"),
+      applicationStatusLogs: {
+        create: [
+          {
+            status: "PENDING",
+            updatedAt: new Date("2024-01-21T17:35:00")
+          },
+          {
+            status: "ACCEPTED",
+            updatedAt: new Date("2024-01-24T12:30:45")
+          },
+          {
+            status: "DEPOSIT_PENDING",
+            updatedAt: new Date("2024-01-26T09:22:22")
+          },
+          {
+            status: "IN_PROGRESS",
+            updatedAt: new Date("2024-01-31T10:15:33")
+          },
+          {
+            status: "DELIVERED",
+            updatedAt: new Date("2024-02-27T15:45:38")
+          },
+          {
+            status: "IN_PROGRESS",
+            updatedAt: new Date("2024-03-05T09:12:33")
+          },
+        ]
+      }
     },
   });
 
@@ -2147,6 +2337,32 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s11.userId,
       bid: 12500,
       status: "DELIVERED",
+      createdAt: new Date("2024-01-21T17:35:00"),
+      updatedAt: new Date("2024-02-27T15:45:38"),
+      applicationStatusLogs: {
+        create: [
+          {
+            status: "PENDING",
+            updatedAt: new Date("2024-01-21T17:35:00")
+          },
+          {
+            status: "ACCEPTED",
+            updatedAt: new Date("2024-01-24T12:30:45")
+          },
+          {
+            status: "DEPOSIT_PENDING",
+            updatedAt: new Date("2024-01-26T09:22:22")
+          },
+          {
+            status: "IN_PROGRESS",
+            updatedAt: new Date("2024-01-31T10:15:33")
+          },
+          {
+            status: "DELIVERED",
+            updatedAt: new Date("2024-02-27T15:45:38")
+          },
+        ]
+      }
     },
   });
 
@@ -2156,6 +2372,40 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s12.userId,
       bid: 17000,
       status: "DELIVERED",
+      createdAt: new Date("2024-01-21T17:35:00"),
+      updatedAt: new Date("2024-03-03T15:45:38"),
+      applicationStatusLogs: {
+        create: [
+          {
+            status: "PENDING",
+            updatedAt: new Date("2024-01-21T17:35:00")
+          },
+          {
+            status: "ACCEPTED",
+            updatedAt: new Date("2024-01-24T12:30:45")
+          },
+          {
+            status: "DEPOSIT_PENDING",
+            updatedAt: new Date("2024-01-26T09:22:22")
+          },
+          {
+            status: "IN_PROGRESS",
+            updatedAt: new Date("2024-01-31T10:15:33")
+          },
+          {
+            status: "DELIVERED",
+            updatedAt: new Date("2024-02-27T15:45:38")
+          },
+          {
+            status: "IN_PROGRESS",
+            updatedAt: new Date("2024-02-28T10:15:33")
+          },
+          {
+            status: "DELIVERED",
+            updatedAt: new Date("2024-03-03T15:45:38")
+          },
+        ]
+      }
     },
   });
 
@@ -2165,6 +2415,44 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s13.userId,
       bid: 17000,
       status: "WAGE_PAYMENT_PENDING",
+      createdAt: new Date("2024-01-21T17:35:00"),
+      updatedAt: new Date("2024-03-07T11:37:47"),
+      applicationStatusLogs: {
+        create: [
+          {
+            status: "PENDING",
+            updatedAt: new Date("2024-01-21T17:35:00")
+          },
+          {
+            status: "ACCEPTED",
+            updatedAt: new Date("2024-01-24T12:30:45")
+          },
+          {
+            status: "DEPOSIT_PENDING",
+            updatedAt: new Date("2024-01-26T09:22:22")
+          },
+          {
+            status: "IN_PROGRESS",
+            updatedAt: new Date("2024-01-31T10:15:33")
+          },
+          {
+            status: "DELIVERED",
+            updatedAt: new Date("2024-02-27T15:45:38")
+          },
+          {
+            status: "IN_PROGRESS",
+            updatedAt: new Date("2024-02-28T10:15:33")
+          },
+          {
+            status: "DELIVERED",
+            updatedAt: new Date("2024-03-03T15:45:38")
+          },
+          {
+            status: "WAGE_PAYMENT_PENDING",
+            updatedAt: new Date("2024-03-07T11:37:47")
+          },
+        ]
+      }
     },
   });
 
@@ -2174,6 +2462,36 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s14.userId,
       bid: 16000,
       status: "WAGE_PAYMENT_PENDING",
+      createdAt: new Date("2024-01-21T17:35:00"),
+      updatedAt: new Date("2024-03-03T11:37:47"),
+      applicationStatusLogs: {
+        create: [
+          {
+            status: "PENDING",
+            updatedAt: new Date("2024-01-21T17:35:00")
+          },
+          {
+            status: "ACCEPTED",
+            updatedAt: new Date("2024-01-24T12:30:45")
+          },
+          {
+            status: "DEPOSIT_PENDING",
+            updatedAt: new Date("2024-01-26T09:22:22")
+          },
+          {
+            status: "IN_PROGRESS",
+            updatedAt: new Date("2024-01-31T10:15:33")
+          },
+          {
+            status: "DELIVERED",
+            updatedAt: new Date("2024-02-27T15:45:38")
+          },
+          {
+            status: "WAGE_PAYMENT_PENDING",
+            updatedAt: new Date("2024-03-03T11:37:47")
+          },
+        ]
+      }
     },
   });
 
@@ -2183,6 +2501,40 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s15.userId,
       bid: 18000,
       status: "DONE",
+      createdAt: new Date("2024-01-21T17:35:00"),
+      updatedAt: new Date("2024-03-07T10:47:44"),
+      applicationStatusLogs: {
+        create: [
+          {
+            status: "PENDING",
+            updatedAt: new Date("2024-01-21T17:35:00")
+          },
+          {
+            status: "ACCEPTED",
+            updatedAt: new Date("2024-01-24T12:30:45")
+          },
+          {
+            status: "DEPOSIT_PENDING",
+            updatedAt: new Date("2024-01-26T09:22:22")
+          },
+          {
+            status: "IN_PROGRESS",
+            updatedAt: new Date("2024-01-31T10:15:33")
+          },
+          {
+            status: "DELIVERED",
+            updatedAt: new Date("2024-02-27T15:45:38")
+          },
+          {
+            status: "WAGE_PAYMENT_PENDING",
+            updatedAt: new Date("2024-03-03T11:37:47")
+          },
+          {
+            status: "DONE",
+            updatedAt: new Date("2024-03-07T10:47:44")
+          },
+        ]
+      }
     },
   });
 
@@ -2192,6 +2544,40 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s16.userId,
       bid: 13500,
       status: "DONE",
+      createdAt: new Date("2024-01-21T17:35:00"),
+      updatedAt: new Date("2024-03-07T10:47:44"),
+      applicationStatusLogs: {
+        create: [
+          {
+            status: "PENDING",
+            updatedAt: new Date("2024-01-21T17:35:00")
+          },
+          {
+            status: "ACCEPTED",
+            updatedAt: new Date("2024-01-24T12:30:45")
+          },
+          {
+            status: "DEPOSIT_PENDING",
+            updatedAt: new Date("2024-01-26T09:22:22")
+          },
+          {
+            status: "IN_PROGRESS",
+            updatedAt: new Date("2024-01-31T10:15:33")
+          },
+          {
+            status: "DELIVERED",
+            updatedAt: new Date("2024-02-27T15:45:38")
+          },
+          {
+            status: "WAGE_PAYMENT_PENDING",
+            updatedAt: new Date("2024-03-03T11:37:47")
+          },
+          {
+            status: "DONE",
+            updatedAt: new Date("2024-03-07T10:47:44")
+          },
+        ]
+      }
     },
   });
 
@@ -2201,6 +2587,48 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s17.userId,
       bid: 15000,
       status: "DONE",
+      createdAt: new Date("2024-01-21T17:35:00"),
+      updatedAt: new Date("2024-03-07T10:47:44"),
+      applicationStatusLogs: {
+        create: [
+          {
+            status: "PENDING",
+            updatedAt: new Date("2024-01-21T17:35:00")
+          },
+          {
+            status: "ACCEPTED",
+            updatedAt: new Date("2024-01-24T12:30:45")
+          },
+          {
+            status: "DEPOSIT_PENDING",
+            updatedAt: new Date("2024-01-26T09:22:22")
+          },
+          {
+            status: "IN_PROGRESS",
+            updatedAt: new Date("2024-01-31T10:15:33")
+          },
+          {
+            status: "DELIVERED",
+            updatedAt: new Date("2024-02-22T15:45:38")
+          },
+          {
+            status: "IN_PROGRESS",
+            updatedAt: new Date("2024-03-25T12:33:27")
+          },
+          {
+            status: "DELIVERED",
+            updatedAt: new Date("2024-03-28T17:52:12")
+          },
+          {
+            status: "WAGE_PAYMENT_PENDING",
+            updatedAt: new Date("2024-03-03T11:37:47")
+          },
+          {
+            status: "DONE",
+            updatedAt: new Date("2024-03-07T10:47:44")
+          },
+        ]
+      }
     },
   });
 
