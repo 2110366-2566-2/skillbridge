@@ -133,7 +133,7 @@ export default function Navbar(props: Props) {
                   <div className="w-full flex flex-col gap-3">
                     {/* Both : Additional NavButton */}
                     {additionalLink.map((link) => (
-                      <NavButton key={"all : " + link.title} link={link} />
+                      (link.title === "โปรไฟล์" && !isStudent) ? null : <NavButton key={"all : " + link.title} link={link} />
                     ))}
                     <LogoutLink />
                   </div>
