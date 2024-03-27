@@ -13,7 +13,7 @@ type Props = {
 export default function ChatCardStudent({ employer }: Props) {
     const pathName = usePathname();
     const isChatRoom = pathName.endsWith(employer.chatrooms[0].chatroomId)
-    const avatar = noavatar;
+    const avatar = employer.chatrooms[0].employer.profileImageUrl ? employer.chatrooms[0].employer.profileImageUrl : noavatar;
 
     const formattedDate = () => {
         let formattedDate = ""
