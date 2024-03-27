@@ -1,8 +1,8 @@
 import getChatroomId from "@/actions/chat/getChatRoomId";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import getUserId from "@/actions/authentication/getUserId";
 
 type Props = {
     studentId?: string;
@@ -18,26 +18,24 @@ function ChatLink({
     className = "",
 }: Props) {
     const [chatroomId, setChatroomId] = useState<string>("");
-    const userId = useSession().data?.user?.id ?? "";
-
+    
     useEffect(() => {
         if (studentId === "") {
             const getChatroom = async () => {
-                console.log(
-                    `userId: ${userId}, employerId: ${employerId}, jobId: ${jobId}`
-                );
+                const userId = await getUserId();
                 const chatroom = await getChatroomId(userId, employerId, jobId);
                 setChatroomId(chatroom);
             };
             getChatroom();
         } else if (employerId === "") {
             const getChatroom = async () => {
+                const userId = await getUserId();
                 const chatroom = await getChatroomId(studentId, userId, jobId);
                 setChatroomId(chatroom);
             };
             getChatroom();
         }
-    }, [userId]);
+    }, [employerId, jobId, studentId]);
 
     return (
         <Link className={className} href={`/chat/${chatroomId}`}>
