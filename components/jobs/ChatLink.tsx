@@ -1,8 +1,8 @@
 import getChatroomId from "@/actions/chat/getChatRoomId";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import getUserId from "@/actions/authentication/getUserId";
 
 type Props = {
     studentId?: string;
@@ -18,39 +18,50 @@ function ChatLink({
     className = "",
 }: Props) {
     const [chatroomId, setChatroomId] = useState<string>("");
-    const userId = useSession().data?.user?.id ?? "";
-
+    
     useEffect(() => {
         if (studentId === "") {
             const getChatroom = async () => {
-                console.log(
-                    `userId: ${userId}, employerId: ${employerId}, jobId: ${jobId}`
-                );
+                const userId = await getUserId();
                 const chatroom = await getChatroomId(userId, employerId, jobId);
                 setChatroomId(chatroom);
             };
             getChatroom();
         } else if (employerId === "") {
             const getChatroom = async () => {
+                const userId = await getUserId();
                 const chatroom = await getChatroomId(studentId, userId, jobId);
                 setChatroomId(chatroom);
             };
             getChatroom();
         }
-    }, [userId]);
+    }, [employerId, jobId, studentId]);
 
-    return (
+    return chatroomId ? (
+        // Render clickable link if chatroomId exists
         <Link className={className} href={`/chat/${chatroomId}`}>
-            <Image
-                src={"/icons/chat.svg"}
-                alt="chat"
-                width={13}
-                height={13}
-                className="mr-[3px]"
-            />
-            <p className="text-[#334155]">แชท</p>
+          <Image
+            src="/icons/chat.svg"
+            alt="chat"
+            width={13}
+            height={13}
+            className="mr-[3px]"
+          />
+          <p className="text-[#334155] ml-1">แชท</p>
         </Link>
-    );
+      ) : (
+        // Render non-clickable link element if chatroomId is null
+        <div className={className}>
+          <Image
+            src="/icons/chat.svg"
+            alt="chat"
+            width={13}
+            height={13}
+            className="mr-[3px]"
+          />
+          <p className="text-[#334155] ml-1">กำลังโหลดแชท...</p>
+        </div>
+      );
 }
 
 export default ChatLink;
