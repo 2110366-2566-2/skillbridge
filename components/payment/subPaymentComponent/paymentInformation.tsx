@@ -26,7 +26,7 @@ export default function PaymentInformation({
           </p>
 
           <p className="text-[#64748b] text-sm lg:text-[18px]">
-            {price * 0.5} บาท
+            {(price * 0.5).toFixed(2)} บาท
           </p>
         </div>
 
@@ -36,7 +36,7 @@ export default function PaymentInformation({
           </p>
 
           <p className="text-[#64748b] text-sm lg:text-[18px]">
-            {price * 0.5 * 0.15} บาท
+            {(price * 0.5 * 0.15).toFixed(2)} บาท
           </p>
         </div>
 
@@ -46,7 +46,7 @@ export default function PaymentInformation({
           </p>
 
           <p className="text-[#1E293B] text-sm lg:text-[18px]">
-            {price * 0.5 * 0.15 + price * 0.5} บาท
+            {(price * 0.5 * 0.15 + price * 0.5).toFixed(2)} บาท
           </p>
         </div>
       </div>
