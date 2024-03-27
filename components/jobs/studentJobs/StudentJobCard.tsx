@@ -4,9 +4,11 @@ import { convertStateNameToThai } from "@/lib/Jobs/adapter";
 import Image from "next/image";
 import React, { useState } from "react";
 import CallToActionButtons from "../CallToActionButtons";
+import Link from "next/link";
 
 type Props = {
     jobId: string;
+    studentId: string;
     name: string;
     category: string;
     startDate: Date;
@@ -31,6 +33,7 @@ const colorMatcher: Map<string, string> = new Map<string, string>([
 // This is a card component for the student's job list
 const StudentJobCard = ({
     jobId,
+    studentId,
     name,
     category,
     startDate,
@@ -45,9 +48,9 @@ const StudentJobCard = ({
             <div className="flex flex-row justify-between">
                 <div className="max-w-[85%]">
                     <div className="h-[60px]">
-                        <p className="font-semibold text-2xl line-clamp-2 hover:underline">
+                        <Link className="font-semibold text-2xl line-clamp-2 hover:underline" href={`progress/${jobId}/${studentId}`}>
                             {name}
-                        </p>
+                        </Link>
                     </div>
                 </div>
                 <div
