@@ -7,6 +7,7 @@ import TaskHeader from "./jobHeader/JobHeader";
 import CreateJobHeader from "./createJobHeader/CreateJobHeader";
 import UpdateJobHeader from "./updateJobHeader/UpdateJobHeader";
 import LandingHeader from "./landingHeader/LandingHeader";
+import ProfileHeader from "./profileHeader/ProfileHeader"
 import PaymentHeader from "./paymentHeader/PaymentHeader";
 import OfferingHeader from "./offeringHeader/OfferingHeader";
 import PaymentHistoryHeader from "./paymentHistoryHeader/PaymentHistoryHeader";
@@ -64,8 +65,10 @@ export default async function Header() {
       </div>
       {/* Only shows at "/jobs" */}
       <TaskHeader />
-      {/* Only shows at "/jobs/:Jid/payment/:Sid" */}
+      {/* Only shows at "/jobs/:jobId/payment/:studentId" */}
       <PaymentHeader />
+      {/* Only shows at "/profile/studentId" */}
+      <ProfileHeader />
     </div>
   );
 }
