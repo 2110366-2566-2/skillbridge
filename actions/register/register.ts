@@ -5,18 +5,19 @@ import { splitSalutation } from "@/lib/utils"
 import { EmailRegisterSchema } from "@/schemas/EmailRegisterSchema"
 import bcrypt from "bcrypt"
 
-export async function registerWithCredentials(data: {
+async function registerWithCredentials(data: {
   email: string
   password: string
   cPassword: string
   fname: string
   lname: string
 }) {
+  console.log(data)
+
   try {
     const res = EmailRegisterSchema.parse(data)
   } catch (error) {
     console.log(error)
-    return null
   }
 
   const exist = await prisma.user.findUnique({
@@ -27,14 +28,12 @@ export async function registerWithCredentials(data: {
 
   if (exist) {
     console.log("Email already exists")
-    return null
+    return
   }
 
   const hashedPassword = await bcrypt.hash(data.password, 10)
-
-  const [salutation, firstname] = splitSalutation(data.fname)
-  const lname = data.lname.split(/\s+/)
-
+  console.log(hashedPassword)
+  // Extract middlename, salutation
   const employer = await prisma.employer.create({
     data: {
       position: "-",
@@ -42,10 +41,10 @@ export async function registerWithCredentials(data: {
       publicEmail: data.email,
       user: {
         create: {
-          salutation,
-          firstname,
-          lastname: lname.pop() || data.lname,
-          middlename: lname.join(" ") || "",
+          salutation: "นาย",
+          firstname: data.fname,
+          middlename: "",
+          lastname: data.lname,
           hashedPassword: hashedPassword,
           email: data.email,
         },
@@ -55,7 +54,7 @@ export async function registerWithCredentials(data: {
   return employer
 }
 
-export async function updateName(email: string, fname: string, lname: string) {
+async function updateName(email: string, fname: string, lname: string) {
   const [salutation, firstname] = splitSalutation(fname)
   const lnameArr = lname.split(/\s+/)
 
@@ -73,3 +72,5 @@ export async function updateName(email: string, fname: string, lname: string) {
   })
   return user
 }
+
+export { registerWithCredentials, updateName }
