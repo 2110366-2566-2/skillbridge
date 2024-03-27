@@ -1,12 +1,9 @@
 "use client"
 import Image from "next/image"
 import RatingScore from "./subProfile/RatingScore"
-import Link from "next/link"
 import { Session } from "next-auth"
 import { useState } from "react"
 import EditProfile from "./EditProfile"
-import DeleteModal from "../createAndUpdateJob/deleteModal/DeleteModal"
-import FileBox from "../offering/FileBox"
 
 export default function ProfileInfo({
   studentId,
@@ -70,7 +67,15 @@ export default function ProfileInfo({
       </div>
 
       {portfolioURL && (
-        <FileBox url={portfolioURL} src={"/icons/file.svg"} text={"แฟ้มสะสมผลงาน"} />
+        <div
+          className="w-full flex p-3 bg-slate-200 text-slate-500 rounded-md hover:bg-slate-400 hover:cursor-pointer hover:shadow-md hover:text-slate-100 mb-[15px] md:mb-[25px]"
+          onClick={() => window.open(portfolioURL, "_blank", "noopener,noreferrer")}
+        >
+          <div className="flex gap-3 items-center">
+            <Image src={"/icons/file.svg"} alt={"/icons/file.svg"} width={16} height={16} />
+            <p className="text-[14px] font-semibold">{"แฟ้มสะสมผลงาน"}</p>
+          </div>
+        </div>
       )}
 
       {studentDetail && (
@@ -84,7 +89,7 @@ export default function ProfileInfo({
           <Image src={"/icons/bag.svg"} width={45} height={42} alt="bag" className="mr-[10px]" />
           <div className="flex flex-col pt-[5px]">
             <p className="text-[12px] text-[#475569]">รับงานแล้ว</p>
-            <p className="text-[16px] text-[#475569] font-bold">{workingNumber} คน</p>
+            <p className="text-[16px] text-[#475569] font-bold">{workingNumber} งาน</p>
           </div>
         </div>
         <div className="flex items-center">
