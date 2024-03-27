@@ -2096,9 +2096,9 @@ prepare reports, และ provide insights for decision-making. \n \
       jobId: j31.id,
       userId: s3.userId,
       bid: 16000,
-      status: "DISCLAIMED",
+      status: "ACCEPTED",
       createdAt: new Date("2024-01-21T17:35:00"),
-      updatedAt: new Date("2024-01-26T09:22:22"),
+      updatedAt: new Date("2024-01-24T12:30:45"),
       applicationStatusLogs: {
         create: [
           {
@@ -2108,10 +2108,6 @@ prepare reports, และ provide insights for decision-making. \n \
           {
             status: "ACCEPTED",
             updatedAt: new Date("2024-01-24T12:30:45")
-          },
-          {
-            status: "DISCLAIMED",
-            updatedAt: new Date("2024-01-26T09:22:22")
           },
         ]
       }
@@ -2257,7 +2253,7 @@ prepare reports, และ provide insights for decision-making. \n \
     data: {
       jobId: j31.id,
       userId: s9.userId,
-      bid: 145000,
+      bid: 14500,
       status: "IN_PROGRESS",
       createdAt: new Date("2024-01-21T17:35:00"),
       updatedAt: new Date("2024-03-05T09:12:33"),
@@ -2769,6 +2765,42 @@ ensured a smooth and successful collaboration.",
       jobId: j25.id,
       studentId: s3.userId,
       stars: 4,
+      description:
+        "This nisit brought a level of creativity and innovation that greatly enhanced the project. \n\
+Their ability to think outside the box and present solutions was truly commendable. The final deliverables reflected a unique \n\
+and fresh perspective, exceeding our expectations.",
+    },
+  });
+
+  const r13 = await prisma.review.create({
+    data: {
+      jobId: j31.id,
+      studentId: s15.userId,
+      stars: 4,
+      description:
+        "This nisit brought a level of creativity and innovation that greatly enhanced the project. \n\
+Their ability to think outside the box and present solutions was truly commendable. The final deliverables reflected a unique \n\
+and fresh perspective, exceeding our expectations.",
+    },
+  });
+
+  const r14 = await prisma.review.create({
+    data: {
+      jobId: j31.id,
+      studentId: s16.userId,
+      stars: 5,
+      description:
+        "This nisit brought a level of creativity and innovation that greatly enhanced the project. \n\
+Their ability to think outside the box and present solutions was truly commendable. The final deliverables reflected a unique \n\
+and fresh perspective, exceeding our expectations.",
+    },
+  });
+
+  const r15 = await prisma.review.create({
+    data: {
+      jobId: j31.id,
+      studentId: s17.userId,
+      stars: 4.5,
       description:
         "This nisit brought a level of creativity and innovation that greatly enhanced the project. \n\
 Their ability to think outside the box and present solutions was truly commendable. The final deliverables reflected a unique \n\
