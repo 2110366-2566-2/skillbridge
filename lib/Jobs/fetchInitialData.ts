@@ -1,7 +1,7 @@
 import { getEmployerJobs } from "@/actions/jobs/getEmployerJobs";
 import TaskCardType from "../../types/JobCardType";
 import getStudentByJob from "@/actions/jobs/getStudentByJob";
-import { getStudentByJobAdapter } from "./adapter";
+import { convertStateNameToThai, getStudentByJobAdapter } from "./adapter";
 import getJobById from "@/actions/jobs/getJobByID";
 
 const fetchInitialData = async () => {
@@ -44,15 +44,13 @@ export const fetchGetStudentByJob = async (
   filter: string = "",
 ) => {
   const studentListResponse = await getStudentByJob(jobId);
-  const studentList = (
+  let studentList = (
     studentListResponse === undefined ? [] : studentListResponse
   ).map((student) => getStudentByJobAdapter(student));
   // console.log(`fetched data using filter: ${filter}, we got: ${studentList}`);
 
-  const jobResponse = (await getJobById(jobId)) || {};
-  // console.log("This is jobById from 'getJobById' action : ", jobResponse);
-
-  const result = [studentList, jobResponse];
+  studentList = studentList.filter((student) => convertStateNameToThai("employer", student.status));
+  const result = studentList.filter((student) => {return (student.status === filter) || (filter === "")});
 
   return result;
 };

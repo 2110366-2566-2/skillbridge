@@ -82,7 +82,10 @@ export default function JobForm(props: Props) {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const errors: FormErrors = {};
+
     // Validate the form data
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
     if (!formData.title) {
       errors.title = "กรุณากรอกชื่องาน";
     }
@@ -98,7 +101,7 @@ export default function JobForm(props: Props) {
     if (!formData.estimateEndDate) {
       errors.estimateEndDate = "กรุณากรอกวันที่สิ้นสุดงาน";
     }
-    if (!isUpdate && new Date(formData.estimateStartDate) < new Date()) {
+    if (!isUpdate && (new Date(formData.estimateStartDate) < today)) {
       errors.estimateStartDate = "วันที่เริ่มงานไม่เป็นปัจจุบัน";
     }
     if (
