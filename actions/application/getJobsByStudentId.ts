@@ -5,6 +5,9 @@ const getJobsByStudentId = async (studentId: string) => {
     const jobs = await prisma.application.findMany({
       where: {
         userId: studentId,
+        status: {
+          in: ["IN_PROGRESS", "DELIVERED", "WAGE_PAYMENT_PENDING", "DEPOSIT_PENDING", "DONE"],
+        },
       },
       include: {
         job: {
