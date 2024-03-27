@@ -165,6 +165,7 @@ export default function OfferingForm({ jobId, application }: Props) {
               setFiles={setFiles}
               isDisabled={disabled}
               maxSizeInMegaByte={5}
+              isPdfAllow
             />
           </div>
         )}

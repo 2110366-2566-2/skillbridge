@@ -20,14 +20,14 @@ const createTransaction = async (formData: FormData) => {
     const buffer = await receipt.arrayBuffer()
     const byteArray = new Uint8Array(buffer)
 
-    const receiptImageName = await uploadFileToS3(
+    const receiptImage = await uploadFileToS3(
       byteArray,
       receipt.type,
       receipt.size,
       "transactionFiles"
     )
 
-    if (typeof receiptImageName !== "string") throw new Error("Error in uploading receipt")
+    if (receiptImage && !receiptImage.success) throw new Error("Error in uploading receipt")
 
     const newTransaction = await prisma.transaction.create({
       data: {
@@ -35,13 +35,13 @@ const createTransaction = async (formData: FormData) => {
         studentId,
         employerUserId,
         amount,
-        receiptImageName,
+        receiptImageName: receiptImage.data,
         isDeposit,
       },
     })
 
     // Validate receipt
-    const validatedResult = await verifySlip(newTransaction.id, receiptImageName, amount)
+    const validatedResult = await verifySlip(newTransaction.id, receiptImage.data, amount)
     console.log("validatedResult", validatedResult)
 
     const results = await Promise.all([

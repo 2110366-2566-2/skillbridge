@@ -51,29 +51,6 @@ const getComment = async (jobId: string, studentId: string) => {
   }
 };
 
-const getJobId = async (jobId: string, studentId: string) => {
-  try {
-    const job = await prisma.application.findFirstOrThrow({
-      where: {
-        jobId: jobId,
-        userId: studentId,
-        isDeleted: { equals: false },
-      },
-      select: {
-        jobId: true,
-      },
-    });
-    return {
-      success: true,
-      message: job.jobId,
-    } as const;
-  } catch (error: any) {
-    return {
-      success: false,
-      message: error,
-    };
-  }
-};
 
 const getEmploymentTracking = async (jobId: string, studentId: string) => {
   try {
@@ -87,7 +64,7 @@ const getEmploymentTracking = async (jobId: string, studentId: string) => {
       },
     });
     let data: Array<EmploymentTrack> = [];
-    let before: string | undefined = undefined;
+    let before: string | null = null;
     for (const applicationStatus of application.applicationStatusLogs) {
       const track: EmploymentTrack = {
         status: {
@@ -111,7 +88,38 @@ const getEmploymentTracking = async (jobId: string, studentId: string) => {
   }
 };
 
-export { getRating, getComment, getJobId };
+const getJobTag = async (jobId: string) => {
+    const tag = await prisma.job.findFirst({
+        where: {
+            id: jobId,
+        },
+        include: {
+            jobTag: true,
+        },
+    });
+    return tag ? tag.jobTag.title : "";
+};
+
+const getEmployerFromJobId = async (jobId: string) => {
+  try{
+  const employerId = await prisma.job.findFirst({
+    where: {
+      id: jobId,
+    },
+    select: {
+      employerId: true,
+    },
+    });
+
+    return employerId ? employerId.employerId : "";
+  }
+  catch (error)
+  {
+    console.error(error);
+  }
+}
+
+export { getRating, getComment, getEmploymentTracking, getJobTag, getEmployerFromJobId };
 
 // const main = async () => {
 //   const studentId = "1dabcb91-32fd-41ea-a8f1-684e2c830090";

@@ -1,19 +1,152 @@
 version: "3.9"
 services:
+  # Execute directly from Dockerfile as it is required the database to be up and running in the build stage
+  # Or use the service as defined below and then go into container and exec npm run build && npm start
   app:
+    container_name: nextjs-app
     image: nextjs-app
-    platform: "linux/amd64"
+    platform: linux/amd64
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: dev.Dockerfile
       args:
-        DATABASE_URL: <your_database_url>
+        DATABASE_URL: postgres://admin:root@postgres:5432/skillbridge
     working_dir: /app
+    depends_on:
+      - postgres
+      - websocket
     ports:
       - "3000:3000"
-  db:
-  # TODO
-  logstash:
-  # TODO
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD", "curl", "--silent", "--fail", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - application
+    restart: unless-stopped
+
+  postgres:
+    container_name: postgres
+    image: postgres:14-alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=skillbridge
+    networks:
+      - db
+      - application
+    restart: always
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    depends_on:
+      - postgres
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=root@root.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    networks:
+      - db
+    restart: unless-stopped
+
+  websocket:
+    container_name: websocket
+    build:
+      context: .
+      dockerfile: websocket.Dockerfile
+    ports:
+      - "3001:3001"
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD", "curl", "--silent", "--fail", "http://localhost:3001/socket.io/?EIO=4&transport=polling"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - application
+      - db
+    restart: unless-stopped
+
+  # Highly recommended to deploy on the Elastic Cloud, please modify the config and index mapping properly
+  # Note: not sure about the config as this project uses ELK stack on the Elastic Cloud which already provisioned
   elasticsearch:
-  # TODO
+    container_name: elasticsearch
+    build:
+      context: elasticsearch/
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,Z
+      - elasticsearch:/usr/share/elasticsearch/data:Z
+    environment:
+      node.name: elasticsearch
+      discovery.type: single-node
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+      ELASTIC_PASSWORD: root
+    healthcheck:
+      test: ["CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+    networks:
+      - elastic
+    restart: unless-stopped
+
+  # For local development, please modify the logstash.config output section as well as logstash.env
+  # In this project, we use the Elastic Cloud for ELK hosting, including elasticsearch index description
+  logstash:
+    image: logstash
+    container_name: log
+    build:
+      context: logstash/
+    env_file:
+      - ./logstash/logstash.env
+    ports:
+      - "5000:5000/tcp"
+      - "5000:5000/udp"
+      - "5044:5044"
+      - "9600:9600"
+    depends_on:
+      - elasticsearch
+      - postgres
+    networks:
+      - elastic
+      - db
+    restart: unless-stopped
+
+  # Note: not sure about the config as this project uses ELK stack on the Elastic Cloud which already provisioned
+  kibana:
+    image: kibana:7.16.1
+    container_name: kib
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    networks:
+      - elastic
+      
+networks:
+  elastic:
+    driver: bridge
+  db:
+    driver: bridge
+  application:
+    driver: bridge
+
+volumes:
+  pg-data:
+  pgadmin-data:
+  elasticsearch:
