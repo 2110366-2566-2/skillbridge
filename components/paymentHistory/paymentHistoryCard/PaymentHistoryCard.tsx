@@ -51,7 +51,7 @@ export default function PaymentHistoryCard(props: Transaction) {
   );
 
   function getCom(amount: number) {
-    return (amount / (1+comRate)) * comRate;
+    return (getReal(amount)) * comRate;
   }
 
   function getReal(amount: number) {
