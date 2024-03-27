@@ -23,7 +23,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-RUN npm run build
+RUN SKIP_ENV_VALIDATION=1 npm run build
 
 ##### RUNNER
 
