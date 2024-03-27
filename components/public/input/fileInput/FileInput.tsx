@@ -13,6 +13,7 @@ type Props = {
   isImageAllow?: boolean;
   isMultipleFilesAllow?: boolean;
   maxSizeInMegaByte?: number;
+  id?: number;
 };
 
 export default function FilesInput(props: Props) {
@@ -25,6 +26,7 @@ export default function FilesInput(props: Props) {
     isImageAllow,
     isMultipleFilesAllow,
     maxSizeInMegaByte,
+    id = 0
   } = props;
   const [isInvalid, setInvalid] = useState(false);
 
@@ -110,7 +112,7 @@ export default function FilesInput(props: Props) {
   return (
     <div className="flex flex-col gap-1 flex-grow">
       <label
-        htmlFor="dropzone-file"
+        htmlFor={`dropzone-file-${id}`}
         className="text-[14px] font-medium text-slate-900"
       >
         {label}
@@ -118,7 +120,7 @@ export default function FilesInput(props: Props) {
       <div className="flex flex-col gap-1">{currentFiles}</div>
       <div className="flex flex-col gap-2 items-start justify-center w-full">
         <label
-          htmlFor="dropzone-file"
+          htmlFor={`dropzone-file-${id}`}
           className={`flex flex-col items-center justify-center w-full border-[1px] ${isInvalid ? "border-red-600" : "border-slate-400"} border-dashed rounded-lg bg-transparent ${isDisabled ? "opacity-60 cursor-default" : "active:opacity-60 cursor-pointer hover:opacity-80"}`}
         >
           <div className="flex flex-col gap-1 items-center justify-center p-3">
@@ -156,9 +158,9 @@ export default function FilesInput(props: Props) {
             </p>
           </div>
           <input
-            id="dropzone-file"
+            id={`dropzone-file-${id}`}
             type="file"
-            name="dropzone-file"
+            name={`dropzone-file-${id}`}
             accept={
               isPdfAllow && isImageAllow
                 ? ".pdf, .jpg, .png"

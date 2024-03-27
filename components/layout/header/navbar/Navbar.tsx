@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import homeIcon from "@/public/icons/home.svg";
@@ -22,69 +21,6 @@ import ChatNavIcon from "@/public/icons/chatNav.svg"
 import ChatNavDarkIcon from "@/public/icons/chatNavDark.svg"
 import { usePathname } from "next/navigation";
 
-const studentLinks = [
-  {
-    title: "หน้าแรก",
-    path: "/landing",
-    icon: homeIcon,
-    activeIcon: homeDarkIcon,
-  },
-  {
-    title: "ค้นหางาน",
-    path: "/search",
-    icon: searchIcon,
-    activeIcon: searchDarkIcon,
-  },
-  {
-    title: "งานของฉัน",
-    path: "/studentjobs",
-    icon: workIcon,
-    activeIcon: workDarkIcon,
-  },
-  {
-    title: "แชท",
-    path: "/chat",
-    icon: ChatNavIcon,
-    activeIcon: ChatNavDarkIcon,
-  },
-];
-
-const employerLinks = [
-  {
-    title: "หน้าแรก",
-    path: "/landing",
-    icon: homeIcon,
-    activeIcon: homeDarkIcon,
-  },
-  {
-    title: "งานของฉัน",
-    path: "/jobs",
-    icon: workIcon,
-    activeIcon: workDarkIcon,
-  },
-  {
-    title: "แชท",
-    path: "/chat",
-    icon: ChatNavIcon,
-    activeIcon: ChatNavDarkIcon,
-  },
-];
-
-const additionalLink = [
-  {
-    title: "บัญชีของฉัน",
-    path: "/",
-    icon: person,
-    activeIcon: personDark,
-  },
-  {
-    title: "ประวัติการเงิน",
-    path: "/payment-history",
-    icon: history,
-    activeIcon: historyDark,
-  },
-];
-
 type Props = {
   session: any;
   isStudent: boolean;
@@ -92,10 +28,6 @@ type Props = {
 };
 
 export default function Navbar(props: Props) {
-  const pathName = usePathname();
-  const isActive = additionalLink.some((link) => link.path === pathName);
-  const avatar = noavatar;
-
   // Authenticated User Info
   const { session, isStudent, userInfo } = props;
   let name;
@@ -110,6 +42,75 @@ export default function Navbar(props: Props) {
       " " +
       session?.user.lastname;
   }
+
+  // All Links
+  const studentLinks = [
+    {
+      title: "หน้าแรก",
+      path: "/landing",
+      icon: homeIcon,
+      activeIcon: homeDarkIcon,
+    },
+    {
+      title: "ค้นหางาน",
+      path: "/search",
+      icon: searchIcon,
+      activeIcon: searchDarkIcon,
+    },
+    {
+      title: "งานของฉัน",
+      path: "/studentjobs",
+      icon: workIcon,
+      activeIcon: workDarkIcon,
+    },
+    {
+      title: "แชท",
+      path: "/chat",
+      icon: ChatNavIcon,
+      activeIcon: ChatNavDarkIcon,
+    },
+  ];
+
+  const employerLinks = [
+    {
+      title: "หน้าแรก",
+      path: "/landing",
+      icon: homeIcon,
+      activeIcon: homeDarkIcon,
+    },
+    {
+      title: "งานของฉัน",
+      path: "/jobs",
+      icon: workIcon,
+      activeIcon: workDarkIcon,
+    },
+    {
+      title: "แชท",
+      path: "/chat",
+      icon: ChatNavIcon,
+      activeIcon: ChatNavDarkIcon,
+    },
+  ];
+
+  const additionalLink = [
+    {
+      title: "โปรไฟล์",
+      path: `/profile/${session?.user.id}`,
+      icon: person,
+      activeIcon: personDark,
+    },
+    {
+      title: "ประวัติการเงิน",
+      path: "/payment-history",
+      icon: history,
+      activeIcon: historyDark,
+    },
+  ];
+
+  // UI Logic
+  const pathName = usePathname();
+  const isActive = additionalLink.some((link) => link.path === pathName);
+  const avatar = noavatar;
 
   return (
     <>
