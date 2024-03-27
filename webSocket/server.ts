@@ -70,6 +70,18 @@ io.on('connection', async (socket) => {
     });
 
     socket.on('disconnect', () => {
+        const socketsInTheRoom = chatRoomIdToArrayOfSocketId.get(chatRoomId);
+        if (socketsInTheRoom) {
+            const socketIdToRemove = socketId;
+            const indexToRemove = socketsInTheRoom.indexOf(socketIdToRemove);
+            if (indexToRemove >= 0) {
+                socketsInTheRoom.splice(indexToRemove, 1);
+            }
+            if (socketsInTheRoom.length === 0) {
+                chatRoomIdToArrayOfSocketId.delete(chatRoomId);
+            }
+        }
+
         console.log('A user disconnected');
     });
 });
