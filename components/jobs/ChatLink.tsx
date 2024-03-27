@@ -47,7 +47,7 @@ function ChatLink({
             height={13}
             className="mr-[3px]"
           />
-          <p className="text-[#334155]">แชท</p>
+          <p className="text-[#334155] ml-1">แชท</p>
         </Link>
       ) : (
         // Render non-clickable link element if chatroomId is null
@@ -59,7 +59,7 @@ function ChatLink({
             height={13}
             className="mr-[3px]"
           />
-          <p className="text-[#334155]">กำลังโหลดแชท...</p>
+          <p className="text-[#334155] ml-1">กำลังโหลดแชท...</p>
         </div>
       );
 }
