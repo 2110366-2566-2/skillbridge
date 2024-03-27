@@ -24,6 +24,11 @@ export default function FilesInput(props: Props) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [primaryLoading, setPrimaryLoading] = useState(false);
   const [isWarnUpLoadFile, setIsWarnUpLoadFile] = useState(false);
+  let isPdfAllow = false;
+  let isImageAllow = true;
+  let isMultipleFilesAllow = false;
+  let maxSizeInMegaByte = 5;
+  const [isInvalid, setInvalid] = useState(false);
 
   const router = useRouter();
   const { data: session } = useSession();
@@ -48,25 +53,37 @@ export default function FilesInput(props: Props) {
     backLength: number,
   ) => {
     const maxLength = frontLength + backLength + 3; // 3 for the ellipsis and dot in the middle
-
     if (fileName.length > maxLength) {
       const fileNameWithoutExtension = fileName
         .split(".")
         .slice(0, -1)
         .join(".");
-
       const truncatedFront = fileNameWithoutExtension.slice(0, frontLength);
       const truncatedBack = fileNameWithoutExtension.slice(-backLength);
       const truncatedFileName = truncatedFront + "..." + truncatedBack;
-
       const fileExtension = fileName.split(".").pop();
       return truncatedFileName + "." + fileExtension;
     }
-
     return fileName;
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInvalid(false);
+    const selectedFiles = event.target.files;
+    if (!selectedFiles) return;
+    let totalSize = 0;
+    for (let i = 0; i < selectedFiles.length; i++) {
+      totalSize += selectedFiles[i].size;
+    }
+    const totalSizeInMB = totalSize / (1024 * 1024); // Convert to MB
+    if (maxSizeInMegaByte && totalSizeInMB > maxSizeInMegaByte) {
+      setInvalid(true);
+      event.target.value = "";
+      return;
+    }
+    // Set the selected files
+    setFiles(selectedFiles);
+
     const file = event.target.files && event.target.files[0];
     if (file) {
       setSelectedFile(file);
@@ -88,12 +105,13 @@ export default function FilesInput(props: Props) {
 
     if (!selectedFile) {
       console.log("No file selected");
-
-      setIsWarnUpLoadFile(true);
-      setPrimaryLoading((prev) => !prev);
-      setDisabled(false);
-      toast.error("อัพโหลดไม่สำเร็จ โปรดลองอีกครั้ง");
-      console.error("No file selected");
+      setTimeout(() => {
+        setIsWarnUpLoadFile(true);
+        setPrimaryLoading((prev) => !prev);
+        setDisabled(false);
+        toast.error("อัพโหลดไม่สำเร็จ โปรดลองอีกครั้ง");
+        console.error("No file selected");
+      }, 2000);
       return;
     }
 
@@ -175,11 +193,32 @@ export default function FilesInput(props: Props) {
             <p className="mb-3 px-[15px] h-[32px] rounded-lg text-sm text-slate-50 bg-slate-400 flex flex-wrap gap-1 justify-center items-center lg:h-[40px]">
               <span className="text-sm lg:text-[16px]">กดเพื่ออัพโหลดไฟล์</span>
             </p>
+            <p className="text-[12px] text-slate-400">
+              (ไฟล์
+              {isPdfAllow && isImageAllow
+                ? " .pdf, .jpg, .png "
+                : isPdfAllow
+                  ? " .pdf "
+                  : isImageAllow
+                    ? " .jpg, .png "
+                    : ""}
+              ขนาดรวมไม่เกิน {maxSizeInMegaByte} MB)
+            </p>
           </div>
           <input
             id="dropzone-file"
             type="file"
-            // multiple
+            name="dropzone-file"
+            accept={
+              isPdfAllow && isImageAllow
+                ? ".pdf, .jpg, .png"
+                : isPdfAllow
+                  ? ".pdf"
+                  : isImageAllow
+                    ? ".jpg, .png"
+                    : "*"
+            }
+            multiple={isMultipleFilesAllow}
             onChange={(e) => {
               handleFileChange(e);
               const inputFiles = e.target.files;
@@ -194,12 +233,18 @@ export default function FilesInput(props: Props) {
           />
         </label>
         <div className="flex w-full">
-          <p
-            style={{ visibility: isWarnUpLoadFile ? "visible" : "hidden" }}
-            className="text-red-600 text-sm font-medium mt-[13px] lg:text-[16px]"
-          >
-            กรุณาอัพโหลดสลิปโอนเงิน
-          </p>
+          {
+            isInvalid &&
+            <p className="text-red-600 text-sm font-medium mt-[13px] lg:text-[16px]">
+              ไฟล์เกินขนาด
+            </p>
+          }
+          {
+            isWarnUpLoadFile &&
+            <p className="text-red-600 text-sm font-medium mt-[13px] lg:text-[16px]" >
+              กรุณาอัพโหลดสลิปโอนเงิน
+            </p>
+          }
         </div>
 
         <div className="mt-[13px] flex w-full justify-between lg:justify-end lg:mt-[18px] gap-x-5">
@@ -214,7 +259,7 @@ export default function FilesInput(props: Props) {
           <PrimaryButton
             type="submit"
             isDisabled={isDisabled}
-            className="  w-full"
+            className="w-full"
             isLoading={primaryLoading}
             loadingMessage="กำลังอัพโหลด"
           >
