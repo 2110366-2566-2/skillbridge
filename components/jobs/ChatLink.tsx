@@ -37,18 +37,31 @@ function ChatLink({
         }
     }, [employerId, jobId, studentId]);
 
-    return (
+    return chatroomId ? (
+        // Render clickable link if chatroomId exists
         <Link className={className} href={`/chat/${chatroomId}`}>
-            <Image
-                src={"/icons/chat.svg"}
-                alt="chat"
-                width={13}
-                height={13}
-                className="mr-[3px]"
-            />
-            <p className="text-[#334155]">แชท</p>
+          <Image
+            src="/icons/chat.svg"
+            alt="chat"
+            width={13}
+            height={13}
+            className="mr-[3px]"
+          />
+          <p className="text-[#334155]">แชท</p>
         </Link>
-    );
+      ) : (
+        // Render non-clickable link element if chatroomId is null
+        <div className={className}>
+          <Image
+            src="/icons/chat.svg"
+            alt="chat"
+            width={13}
+            height={13}
+            className="mr-[3px]"
+          />
+          <p className="text-[#334155]">กำลังโหลดแชท...</p>
+        </div>
+      );
 }
 
 export default ChatLink;
