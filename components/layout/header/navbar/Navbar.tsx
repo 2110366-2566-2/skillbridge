@@ -110,7 +110,7 @@ export default function Navbar(props: Props) {
   // UI Logic
   const pathName = usePathname();
   const isActive = additionalLink.some((link) => link.path === pathName);
-  const avatar = noavatar;
+  const avatar = session?.user.profileImageUrl ? (session.user.profileImageUrl) : (noavatar);
 
   return (
     <>
@@ -136,7 +136,7 @@ export default function Navbar(props: Props) {
                 />
               </div>
               {/* Both : Hamberger Button + Sidebar */}
-              <Sidebar name={name} userInfo={userInfo} isDark={isActive}>
+              <Sidebar name={name} userInfo={userInfo} isDark={isActive} session={session}>
                 <div className="h-full w-full flex flex-col justify-between">
                   <div className="w-full flex flex-col gap-3 md:hidden">
                     {/* Mobile : Main NavButton */}

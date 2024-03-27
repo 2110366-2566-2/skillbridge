@@ -10,6 +10,7 @@ interface SidebarProps {
   userInfo: string;
   children?: ReactNode;
   isDark?: boolean;
+  session?: any;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -17,8 +18,10 @@ const Sidebar: React.FC<SidebarProps> = ({
   userInfo,
   children,
   isDark,
+  session,
 }) => {
   const [isHamburgerOpen, setHamburgerOpen] = useState(false);
+  const avatar = session?.user.profileImageUrl ? (session.user.profileImageUrl) : (noavatar);
 
   return (
     <>
@@ -60,7 +63,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             <div className="flex justify-between items-start">
               <Image
                 className="rounded-full"
-                src={noavatar}
+                src={avatar}
                 alt="avatar"
                 width={70}
                 height={70}
