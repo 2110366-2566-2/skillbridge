@@ -10,6 +10,7 @@ export interface applicationInfo {
   endDate: Date;
   tag: string;
   status: string;
+  employerId?: string;
 }
 
 async function studentFetchApplications() {
@@ -107,11 +108,11 @@ async function fetchSecondTab(studentUserId: string) {
       job: {
         include: {
           jobTag: true,
+      
         },
       },
     },
   });
-
   const output: applicationInfo[] = [];
 
   for (let i = 0; i < applications.length; i++) {
@@ -129,6 +130,7 @@ async function fetchSecondTab(studentUserId: string) {
       endDate: app.job.estimateStartDate as Date,
       tag: app.job.jobTag.title,
       status: app.status,
+      employerId: app.job.employerId,
     };
 
     output.push(applicationInfo);

@@ -13,7 +13,7 @@ type Props = {
 export default function ChatCardStudent({ employer }: Props) {
     const pathName = usePathname();
     const isChatRoom = pathName.endsWith(employer.chatrooms[0].chatroomId)
-    const avatar = noavatar;
+    const avatar = employer.chatrooms[0].employer.profileImageUrl ? employer.chatrooms[0].employer.profileImageUrl : noavatar;
 
     const formattedDate = () => {
         let formattedDate = ""
@@ -32,18 +32,24 @@ export default function ChatCardStudent({ employer }: Props) {
             href={`/chat/${employer.chatrooms[0].chatroomId}`}
         >
             <Image
-                className="rounded-full mr-4 lg:hidden"
+                className="w-[48px] h-[48px] rounded-full mr-4 lg:hidden"
                 src={avatar}
                 alt="avatar"
                 width={48}
                 height={48}
+                style={{
+                    objectFit: 'cover',
+                }}
             />
             <Image
-                className="rounded-full hidden lg:block lg:mr-4"
+                className="w-[54px] h-[54px] rounded-full hidden lg:block lg:mr-4"
                 src={avatar}
                 alt="avatar"
                 width={54}
                 height={54}
+                style={{
+                    objectFit: 'cover',
+                }}
             />
             <div className="flex flex-col w-full gap-1">
                 <div className="flex flex-row justify-between w-full items-center lg:text-[18px]">
