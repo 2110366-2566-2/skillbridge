@@ -8,6 +8,7 @@ import {
     applicationInfo,
     studentFetchApplications,
 } from "@/actions/jobs/jobCards/fetchJobCards";
+import { getStudentUserId } from "@/actions/jobs/jobCards/utils";
 
 type Props = {};
 
@@ -30,6 +31,7 @@ const StudentJobsMenu = (props: Props) => {
         []
     );
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [studentId, setStudentId] = useState<string>("");
 
     // Fetch data from the server
     useEffect(() => {
@@ -39,6 +41,8 @@ const StudentJobsMenu = (props: Props) => {
             setSecondPageData(fetchedRawData[1] as applicationInfo[]);
             setThirdPageData(fetchedRawData[2] as applicationInfo[]);
             setIsLoading(false);
+            const studentId = await getStudentUserId();
+            setStudentId(studentId);
         }
         fetchData();
     }, []);
@@ -81,7 +85,10 @@ const StudentJobsMenu = (props: Props) => {
                     </div>
 
                     {/* Sort button */}
-                    <Sorter sideBarState={sideBarState} sortOptions={sortOptions} />
+                    <Sorter
+                        sideBarState={sideBarState}
+                        sortOptions={sortOptions}
+                    />
                 </div>
             </section>
 
@@ -96,6 +103,7 @@ const StudentJobsMenu = (props: Props) => {
                         statusSortOption={statusSortOption}
                         data={firstPageData}
                         isDone={false}
+                        studentId={studentId}
                     />
                 ) : jobType === "งานปัจจุบัน" ? (
                     <StudentJobsPanel
@@ -105,6 +113,7 @@ const StudentJobsMenu = (props: Props) => {
                         statusSortOption={statusSortOption}
                         data={secondPageData}
                         isDone={false}
+                        studentId={studentId}
                     />
                 ) : (
                     <StudentJobsPanel
@@ -114,6 +123,7 @@ const StudentJobsMenu = (props: Props) => {
                         statusSortOption={statusSortOption}
                         data={thirdPageData}
                         isDone={true}
+                        studentId={studentId}
                     />
                 )}
             </div>

@@ -10,7 +10,7 @@ import Sorter from "../Sorter";
 
 type Props = {};
 
-const jobTypeList = ["งานปัจจุบัน", "งานที่เสร็จสิ้น"];
+const jobTypeList = ["งานปัจจุบัน", "ปิดรับสมัครแล้ว"];
 
 // export function
 function JobsMenu(props: Props) {

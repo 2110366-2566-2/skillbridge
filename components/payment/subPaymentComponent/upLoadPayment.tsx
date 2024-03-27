@@ -128,6 +128,7 @@ export default function FilesInput(props: Props) {
     toast.success("ระบบกำลังตรวจสอบ");
     setPrimaryLoading((prev) => !prev);
     setDisabled(false);
+    router.push(`/jobs/${jobId}/manage`);
   };
 
   let currentFiles = null;
