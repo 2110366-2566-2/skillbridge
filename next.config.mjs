@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   images: {
     domains: ["lh3.googleusercontent.com", "skillbridge-s3.s3.us-east-1.amazonaws.com"],
   },
