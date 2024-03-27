@@ -14,3 +14,6 @@ COPY postgresql-42.7.1.jar /usr/share/
 EXPOSE 5044
 
 CMD [ "bin/logstash", "-f", "/usr/share/logstash/pipeline/logstash.conf" ]
+
+# Detect and reload configuration changes automatically (3 seconds interval)
+# CMD [ "bin/logstash", "-f", "/usr/share/logstash/pipeline/logstash.conf", "--config.reload.automatic" ]
