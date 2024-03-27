@@ -32,9 +32,7 @@ const JobCard = ({
       <div className="flex flex-row justify-between">
         <div className="w-[85%]">
           <div className="h-[60px]">
-            {/* note: if it is pending -> show the link to manage the job
-                      note: if it is done -> show the link to view the job history */}
-            <Link href={isPending ? `/jobs/${jobId}/manage` : `/jobs`}>
+            <Link href={`/jobs/${jobId}/manage`}>
               <p className="font-semibold text-2xl line-clamp-2 hover:underline">
                 {name}
               </p>

@@ -7,7 +7,6 @@ import TaskHeader from "./jobHeader/JobHeader";
 import CreateJobHeader from "./createJobHeader/CreateJobHeader";
 import UpdateJobHeader from "./updateJobHeader/UpdateJobHeader";
 import LandingHeader from "./landingHeader/LandingHeader";
-import ProfileHeader from "./profileHeader/ProfileHeader"
 import PaymentHeader from "./paymentHeader/PaymentHeader";
 import OfferingHeader from "./offeringHeader/OfferingHeader";
 import PaymentHistoryHeader from "./paymentHistoryHeader/PaymentHistoryHeader";
@@ -16,7 +15,8 @@ import whiteLogo from "@/public/logos/logo-white.svg";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import { getEmployerInfoById } from "@/actions/public/getUserInfo";
-import StudentJobHeader from "./jobHeader/StudentJobHeader";
+import ProgressHeader from "./progressHeader/ProgressHeader";
+import ProfileHeader from "./profileHeader/ProfileHeader";
 
 export default async function Header() {
   // Fetch Job tags
@@ -67,6 +67,8 @@ export default async function Header() {
       <TaskHeader />
       {/* Only shows at "/jobs/:jobId/payment/:studentId" */}
       <PaymentHeader />
+      {/* Only shows at "/progress/:Jid/:Sid" */}
+      <ProgressHeader />
       {/* Only shows at "/profile/studentId" */}
       <ProfileHeader />
     </div>

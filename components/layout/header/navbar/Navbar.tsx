@@ -17,6 +17,8 @@ import history from "@/public/icons/history.svg";
 import historyDark from "@/public/icons/historyDark.svg";
 import Sidebar from "./sidebar/Sidebar";
 import LogoutLink from "./logoutButton/LogoutButton";
+import ChatNavIcon from "@/public/icons/chatNav.svg"
+import ChatNavDarkIcon from "@/public/icons/chatNavDark.svg"
 import { usePathname } from "next/navigation";
 
 type Props = {
@@ -61,8 +63,14 @@ export default function Navbar(props: Props) {
       icon: workIcon,
       activeIcon: workDarkIcon,
     },
+    {
+      title: "แชท",
+      path: "/chat",
+      icon: ChatNavIcon,
+      activeIcon: ChatNavDarkIcon,
+    },
   ];
-  
+
   const employerLinks = [
     {
       title: "หน้าแรก",
@@ -76,8 +84,14 @@ export default function Navbar(props: Props) {
       icon: workIcon,
       activeIcon: workDarkIcon,
     },
+    {
+      title: "แชท",
+      path: "/chat",
+      icon: ChatNavIcon,
+      activeIcon: ChatNavDarkIcon,
+    },
   ];
-  
+
   const additionalLink = [
     {
       title: "โปรไฟล์",
@@ -133,7 +147,7 @@ export default function Navbar(props: Props) {
                   <div className="w-full flex flex-col gap-3">
                     {/* Both : Additional NavButton */}
                     {additionalLink.map((link) => (
-                      <NavButton key={"all : " + link.title} link={link} />
+                      (link.title === "โปรไฟล์" && !isStudent) ? null : <NavButton key={"all : " + link.title} link={link} />
                     ))}
                     <LogoutLink />
                   </div>

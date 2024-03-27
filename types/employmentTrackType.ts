@@ -1,6 +1,6 @@
 export type EmploymentTrack = {
   status: {
-    before: string | undefined;
+    before: string | null;
     after: string;
   };
   date: Date;
