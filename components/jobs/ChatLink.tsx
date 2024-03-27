@@ -37,7 +37,7 @@ function ChatLink({
             };
             getChatroom();
         }
-    }, []);
+    }, [userId]);
 
     return (
         <Link className={className} href={`/chat/${chatroomId}`}>
