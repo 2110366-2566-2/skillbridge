@@ -19,7 +19,7 @@ async function ManagePage({ params }: Props) {
     if (jobData == null) {
         redirect("/jobs");
     }
-    const isApplicationClosed: boolean = (await isJobClosed(jobId)).isClosed || false;
+    const isApplicationClosed: boolean = (await isJobClosed(jobId)).isClosed??true;
 
     return (
         <main className="flex flex-col px-10 gap-10">
@@ -32,7 +32,7 @@ async function ManagePage({ params }: Props) {
                         {jobData?.jobTags}
                     </div>
                 </div>
-                {isApplicationClosed && (
+                {!isApplicationClosed && (
                     <CloseJobButton jobId={jobId} jobName={jobData?.title}>
                         ปิดรับสมัคร
                     </CloseJobButton>
