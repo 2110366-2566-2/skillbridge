@@ -16,9 +16,10 @@ type Props = {
     studentId? :string
     status: string;
     role: string;
+    employerId?: string;
 }
 
-function CallToActionButtons({jobId, studentId = "", status, role}: Props) {
+function CallToActionButtons({jobId, studentId = "", status, role, employerId= ""}: Props) {
 
     if(role === "student")
     {
@@ -32,13 +33,13 @@ function CallToActionButtons({jobId, studentId = "", status, role}: Props) {
                 return <AckButton jobId={jobId} />;
                 
             case "รอส่งมอบงาน":
-                return <SubmitTaskButton jobId={jobId} />;
+                return <SubmitTaskButton jobId={jobId} employerId={employerId} />;
                 
             case "รอผู้จ้างจ่ายมัดจำ":
-                return <ChatButton jobId={jobId} />;
+                return <ChatButton jobId={jobId} employerId={employerId} />;
                 
             case "รอผู้จ้างจ่ายค่าจ้าง":
-                return <ChatButton jobId={jobId} />;
+                return <ChatButton jobId={jobId} employerId={employerId} />;
                 
             case "เสร็จสิ้น":
                 return <AckButton jobId={jobId} />;
@@ -47,7 +48,7 @@ function CallToActionButtons({jobId, studentId = "", status, role}: Props) {
                 return <AckButton jobId={jobId} />;
                 
             case "ส่งมอบงานแล้ว":
-                return <ChatButton jobId={jobId} />;     
+                return <ChatButton jobId={jobId} employerId={employerId} />;     
             default:
                 return <></>;
         }

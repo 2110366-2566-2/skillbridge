@@ -23,12 +23,13 @@ function ChatLink({
     if (studentId === "") {
         useEffect(() => {
             const getChatroom = async () => {
+                console.log(`userId: ${userId}, employerId: ${employerId}, jobId: ${jobId}`)
                 const chatroom = await getChatroomId(userId, employerId, jobId);
                 setChatroomId(chatroom);
             };
             getChatroom();
         }, []);
-    } else {
+    } else if (employerId === "") {
         useEffect(() => {
             const getChatroom = async () => {
                 const chatroom = await getChatroomId(studentId, userId, jobId);

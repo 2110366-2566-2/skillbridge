@@ -26,7 +26,7 @@ export default function CancelButton({
                 <ChatLink
                     jobId={jobId}
                     studentId={studentId}
-                    className="h-[35px] bg-[#f8fafc] text-sm  rounded-md w-[32%] hover:opacity-80 active:opacity-60 text-black border border-[#334155] flex justify-center items-center"
+                    className="h-[35px] bg-[#f8fafc] text-sm rounded-md w-[48%] hover:opacity-80 active:opacity-60 text-black border border-[#334155] flex justify-center items-center"
                 />
             </div>
         </div>

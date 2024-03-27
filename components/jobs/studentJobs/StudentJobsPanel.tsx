@@ -56,6 +56,7 @@ function StudentJobsPanel({
                                     category={data.tag}
                                     status={data.status}
                                     isDone={isDone}
+                                    employerId={data.employerId}
                                 />
                             );
                         })
@@ -72,6 +73,7 @@ function StudentJobsPanel({
                                     endDate={data.endDate}
                                     status={data.status}
                                     isDone={isDone}
+                                    employerId={data.employerId}
                                 />
                             );
                         })

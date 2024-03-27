@@ -1,15 +1,14 @@
+"use client";
+
 import ChatLink from "../../ChatLink";
-import { getEmployerFromJobId } from "@/actions/employmentHistoryDetail/employmentHistoryDetail";
-import { useEffect, useState } from "react";
-export default function ChatButton({ jobId }: { jobId: string }) {
-    const [employerId, setEmployerId] = useState<string>("");
-    useEffect(() => {
-        const getEmployerId = async () => {
-            const employerId = await getEmployerFromJobId(jobId);
-            setEmployerId(employerId);
-        };
-        getEmployerId();
-    }, []);
+
+export default function ChatButton({
+    jobId,
+    employerId,
+}: {
+    jobId: string;
+    employerId: string;
+}) {
     return (
         <div className="flex flex-row justify-between w-full gap-1">
             <ChatLink
