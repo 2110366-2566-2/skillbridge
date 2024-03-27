@@ -89,7 +89,7 @@ export default function ProfileInfo({
           <Image src={"/icons/bag.svg"} width={45} height={42} alt="bag" className="mr-[10px]" />
           <div className="flex flex-col pt-[5px]">
             <p className="text-[12px] text-[#475569]">รับงานแล้ว</p>
-            <p className="text-[16px] text-[#475569] font-bold">{workingNumber} คน</p>
+            <p className="text-[16px] text-[#475569] font-bold">{workingNumber} งาน</p>
           </div>
         </div>
         <div className="flex items-center">
