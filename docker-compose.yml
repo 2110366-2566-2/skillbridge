@@ -28,7 +28,6 @@ services:
       - application
     restart: unless-stopped
 
-
   postgres:
     container_name: postgres
     image: postgres:14-alpine
@@ -63,16 +62,15 @@ services:
 
   websocket:
     container_name: websocket
-    image: node:18-alpine
+    build:
+      context: .
+      dockerfile: websocket.Dockerfile
     ports:
       - "3001:3001"
-    volumes:
-      - .:/app/websocketServer
-    command: npm i; npx ts-node --skip-project webSocket/server.ts
     env_file:
       - .env
     healthcheck:
-      test: ["CMD", "curl", "--silent", "--fail", "http://localhost:3000/socket.io/?EIO=4&transport=polling"]
+      test: ["CMD", "curl", "--silent", "--fail", "http://localhost:3001/socket.io/?EIO=4&transport=polling"]
       interval: 10s
       timeout: 5s
       retries: 3

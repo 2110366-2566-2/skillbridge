@@ -7,12 +7,12 @@ const server = http.createServer((req, res) => { });
 
 const io = new Server(server, {
     cors: {
-        origin: process.env.FRONTEND_URL,
+        origin: ["https://www.skillbridge.click/", "https://skillbridge.click/", "https://dev.skillbridge.click/"],
         methods: ["GET", "POST"],
         allowedHeaders: ["chat-room-id", "user-id"],
         credentials: true
     },
-    maxHttpBufferSize: 5 * 1e6, 
+    maxHttpBufferSize: 5 * 1e6,
     pingTimeout: 60000
 });
 
@@ -24,7 +24,7 @@ Note :
 const chatRoomIdToArrayOfSocketId = new Map<string, string[]>();
 
 io.on('connection', async (socket) => {
-    
+
     const socketId = socket.id;
     const chatRoomId = socket.handshake.headers['chat-room-id'] as string;
     const userId = socket.handshake.headers['user-id'] as string;
@@ -36,7 +36,7 @@ io.on('connection', async (socket) => {
 
     chatRoomIdToArrayOfSocketId.get(chatRoomId)?.push(socketId);
 
-    if (! await validChatRoom(chatRoomId, userId) ) {
+    if (! await validChatRoom(chatRoomId, userId)) {
         console.log("Chat room or user id is not valid");
         socket.disconnect();
     }
