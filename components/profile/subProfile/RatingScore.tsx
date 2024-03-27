@@ -1,8 +1,10 @@
 import Image from "next/image";
-export default function RatingScore({ averageScore }: { averageScore: number }) {
-
-    let widthOfRating = 22 * averageScore + 5 * Math.floor(averageScore)
-
+export default function RatingScore({
+    averageScore,
+}: {
+    averageScore: number;
+}) {
+    let widthOfRating = 22 * averageScore + 5 * Math.floor(averageScore);
 
     return (
         <div className="flex w-full">
@@ -17,12 +19,10 @@ export default function RatingScore({ averageScore }: { averageScore: number }) 
                     style={{ width: `${widthOfRating}px`, height: "22px" }}
                     className="absolute overflow-hidden top-0 left-0"
                 >
-                    <Image
+                    <img
                         src={"/icons/fiveStarGold.svg"}
                         alt="rating-inner"
-                        width={130}
-                        height={22}
-                        className="object-cover object-left"
+                        className="w-[130px] h-[22px] object-cover object-left"
                     />
                 </div>
             </div>
