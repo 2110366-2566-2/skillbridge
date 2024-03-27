@@ -12,8 +12,8 @@ async function main() {
   await prisma.review.deleteMany({});
   await prisma.transactionDetail.deleteMany({});
   await prisma.transaction.deleteMany({});
-  await prisma.applicationDocumentFile.deleteMany({});
   await prisma.applicationStatusLog.deleteMany({});
+  await prisma.applicationDocumentFile.deleteMany({});
   await prisma.application.deleteMany({});
   await prisma.jobDocumentFile.deleteMany({});
   await prisma.job.deleteMany({});
@@ -66,7 +66,7 @@ async function main() {
       transcriptName:
         "jobFiles/5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
       bankAccountNo: "0832705890",
-      description:
+      description: 
         "พร้อมบุก ผมเนี่ยโคตรจะพร้อมสุด\n\
         โคตรจะร้อนสุด ยังไม่พร้อมหยุด\n\
         ไฟในปากก็พร้อมจุด\n\
@@ -83,9 +83,9 @@ async function main() {
         พี่ จ้างเลย จ้างเลย",
       user: {
         create: {
-          salutation: "นาย",
-          firstname: "ศุภณัฐ",
-          lastname: "ตั้งสินมั่นคง",
+          salutation: "ลุง",
+          firstname: "พี",
+          lastname: "อะโกด้า",
           hashedPassword:
             "$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W",
           email: "6430388021@student.chula.ac.th",
@@ -101,7 +101,7 @@ async function main() {
       transcriptName:
         "cffc7481c0abacc579ae6035dac9e63b199a6128d13da736dba9454bfaf59db3",
       bankAccountNo: "0955195010",
-      description:
+      description: 
         "ทุกวัน ทุกวัน เห็นเขารีบออกไป แต่งตัวทันสมัย ขับรถซิ่ง\n\
         อือฮื้อ อาฮ้า เทวดาฟ้าดิน กุ๊กกิ๊ก ดุ๊กดิ๊ก สะดิ้งมาเต็มคัน\n\
         ชาวบ้านยืนมอง แล้วอดใจไม่ไหว เอ่ยถามขึ้นทันใด ว่าไอ้หนุ่มเอ้ย\n\
@@ -130,7 +130,7 @@ async function main() {
       transcriptName:
         "jobFiles/5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
       bankAccountNo: "0876789125",
-      description:
+      description: 
         "พี่จ้างเหอะ ผมเนี่ยเล่นมาตั้งแต่เด็ก\n\
         อยู่ในห้องนั่งท่อง ลิ้นพันเสียงก้อง\n\
         เดี๋ยวก็ ซูเพล็กส์ เดี๋ยวก็ ดูเร็กซ์\n\
@@ -153,7 +153,497 @@ async function main() {
           lastname: "ข้นอีสาน",
           hashedPassword:
             "$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W",
-          email: "6437820221@student.chula.ac.th",
+          email: "6432193321@student.chula.ac.th",
+        },
+      },
+    },
+  });
+
+  const s4 = await prisma.student.create({
+    data: {
+      resumeName: "47a50ef3fcb16268eaea70cb38d73998a5e8a247fcede360704e10e5baa4da7d",
+      transcriptName:
+        "jobFiles/5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
+      bankAccountNo: "0876789125",
+      description: 
+        "พี่จ้างเหอะ ผมเนี่ยเล่นมาตั้งแต่เด็ก\n\
+        อยู่ในห้องนั่งท่อง ลิ้นพันเสียงก้อง\n\
+        เดี๋ยวก็ ซูเพล็กส์ เดี๋ยวก็ ดูเร็กซ์\n\
+        ทำอย่างงั้นสลับคำ กูเผ็ด ภูเก็ต จบที่ คูเว็ด\n\
+        พากย์เรือเนี่ยมันเป็นความหวัง\n\
+        ผมทำจะทำตามฝัน ผมจะไม่ทำให้ผิดหวัง\n\
+        โอ๊ย เอ้ย เอ้ย เป็นไร แป๊ปนึงนะครับพี่\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก (โอ้โห)\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุก (เช็ดเข้)\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊ก\n\
+        ปัง ปัง เตรียมถังดับเพลิงมา 1 ชุด\n\
+        ไฟมันลุก ไฟมันคุก มันจะคุก คุกคาม\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุกโชน\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊กเลย",
+      user: {
+        create: {
+          salutation: "นาย",
+          firstname: "จ๋อย",
+          lastname: "แง๊นๆ",
+          hashedPassword:
+            "$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W",
+          email: "6430331221@student.chula.ac.th",
+        },
+      },
+    },
+  });
+
+  const s5 = await prisma.student.create({
+    data: {
+      resumeName: "47a50ef3fcb16268eaea70cb38d73998a5e8a247fcede360704e10e5baa4da7d",
+      transcriptName:
+        "jobFiles/5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
+      bankAccountNo: "0876789125",
+      description: 
+        "พี่จ้างเหอะ ผมเนี่ยเล่นมาตั้งแต่เด็ก\n\
+        อยู่ในห้องนั่งท่อง ลิ้นพันเสียงก้อง\n\
+        เดี๋ยวก็ ซูเพล็กส์ เดี๋ยวก็ ดูเร็กซ์\n\
+        ทำอย่างงั้นสลับคำ กูเผ็ด ภูเก็ต จบที่ คูเว็ด\n\
+        พากย์เรือเนี่ยมันเป็นความหวัง\n\
+        ผมทำจะทำตามฝัน ผมจะไม่ทำให้ผิดหวัง\n\
+        โอ๊ย เอ้ย เอ้ย เป็นไร แป๊ปนึงนะครับพี่\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก (โอ้โห)\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุก (เช็ดเข้)\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊ก\n\
+        ปัง ปัง เตรียมถังดับเพลิงมา 1 ชุด\n\
+        ไฟมันลุก ไฟมันคุก มันจะคุก คุกคาม\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุกโชน\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊กเลย",
+      user: {
+        create: {
+          salutation: "นาย",
+          firstname: "แคร์บางคน",
+          lastname: "ที่เป็นคนบางแค",
+          hashedPassword:
+            "$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W",
+          email: "6430442221@student.chula.ac.th",
+        },
+      },
+    },
+  });
+
+  const s6 = await prisma.student.create({
+    data: {
+      resumeName: "47a50ef3fcb16268eaea70cb38d73998a5e8a247fcede360704e10e5baa4da7d",
+      transcriptName:
+        "jobFiles/5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
+      bankAccountNo: "0876789125",
+      description: 
+        "พี่จ้างเหอะ ผมเนี่ยเล่นมาตั้งแต่เด็ก\n\
+        อยู่ในห้องนั่งท่อง ลิ้นพันเสียงก้อง\n\
+        เดี๋ยวก็ ซูเพล็กส์ เดี๋ยวก็ ดูเร็กซ์\n\
+        ทำอย่างงั้นสลับคำ กูเผ็ด ภูเก็ต จบที่ คูเว็ด\n\
+        พากย์เรือเนี่ยมันเป็นความหวัง\n\
+        ผมทำจะทำตามฝัน ผมจะไม่ทำให้ผิดหวัง\n\
+        โอ๊ย เอ้ย เอ้ย เป็นไร แป๊ปนึงนะครับพี่\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก (โอ้โห)\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุก (เช็ดเข้)\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊ก\n\
+        ปัง ปัง เตรียมถังดับเพลิงมา 1 ชุด\n\
+        ไฟมันลุก ไฟมันคุก มันจะคุก คุกคาม\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุกโชน\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊กเลย",
+      user: {
+        create: {
+          salutation: "นาย",
+          firstname: "หอกลาง",
+          lastname: "บ๋อย",
+          hashedPassword:
+            "$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W",
+          email: "6432115421@student.chula.ac.th",
+        },
+      },
+    },
+  });
+
+  const s7 = await prisma.student.create({
+    data: {
+      resumeName: "47a50ef3fcb16268eaea70cb38d73998a5e8a247fcede360704e10e5baa4da7d",
+      transcriptName:
+        "jobFiles/5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
+      bankAccountNo: "0876789125",
+      description: 
+        "พี่จ้างเหอะ ผมเนี่ยเล่นมาตั้งแต่เด็ก\n\
+        อยู่ในห้องนั่งท่อง ลิ้นพันเสียงก้อง\n\
+        เดี๋ยวก็ ซูเพล็กส์ เดี๋ยวก็ ดูเร็กซ์\n\
+        ทำอย่างงั้นสลับคำ กูเผ็ด ภูเก็ต จบที่ คูเว็ด\n\
+        พากย์เรือเนี่ยมันเป็นความหวัง\n\
+        ผมทำจะทำตามฝัน ผมจะไม่ทำให้ผิดหวัง\n\
+        โอ๊ย เอ้ย เอ้ย เป็นไร แป๊ปนึงนะครับพี่\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก (โอ้โห)\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุก (เช็ดเข้)\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊ก\n\
+        ปัง ปัง เตรียมถังดับเพลิงมา 1 ชุด\n\
+        ไฟมันลุก ไฟมันคุก มันจะคุก คุกคาม\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุกโชน\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊กเลย",
+      user: {
+        create: {
+          salutation: "เทพ",
+          firstname: "เติ้ล",
+          lastname: "นาา",
+          hashedPassword:
+            "$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W",
+          email: "6432083021@student.chula.ac.th",
+        },
+      },
+    },
+  });
+
+  const s8 = await prisma.student.create({
+    data: {
+      resumeName: "47a50ef3fcb16268eaea70cb38d73998a5e8a247fcede360704e10e5baa4da7d",
+      transcriptName:
+        "jobFiles/5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
+      bankAccountNo: "0876789125",
+      description: 
+        "พี่จ้างเหอะ ผมเนี่ยเล่นมาตั้งแต่เด็ก\n\
+        อยู่ในห้องนั่งท่อง ลิ้นพันเสียงก้อง\n\
+        เดี๋ยวก็ ซูเพล็กส์ เดี๋ยวก็ ดูเร็กซ์\n\
+        ทำอย่างงั้นสลับคำ กูเผ็ด ภูเก็ต จบที่ คูเว็ด\n\
+        พากย์เรือเนี่ยมันเป็นความหวัง\n\
+        ผมทำจะทำตามฝัน ผมจะไม่ทำให้ผิดหวัง\n\
+        โอ๊ย เอ้ย เอ้ย เป็นไร แป๊ปนึงนะครับพี่\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก (โอ้โห)\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุก (เช็ดเข้)\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊ก\n\
+        ปัง ปัง เตรียมถังดับเพลิงมา 1 ชุด\n\
+        ไฟมันลุก ไฟมันคุก มันจะคุก คุกคาม\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุกโชน\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊กเลย",
+      user: {
+        create: {
+          salutation: "นาย",
+          firstname: "สติลการ์",
+          lastname: "คลองถม",
+          hashedPassword:
+            "$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W",
+          email: "6432163521@student.chula.ac.th",
+        },
+      },
+    },
+  });
+
+  const s9 = await prisma.student.create({
+    data: {
+      resumeName: "47a50ef3fcb16268eaea70cb38d73998a5e8a247fcede360704e10e5baa4da7d",
+      transcriptName:
+        "jobFiles/5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
+      bankAccountNo: "0876789125",
+      description: 
+        "พี่จ้างเหอะ ผมเนี่ยเล่นมาตั้งแต่เด็ก\n\
+        อยู่ในห้องนั่งท่อง ลิ้นพันเสียงก้อง\n\
+        เดี๋ยวก็ ซูเพล็กส์ เดี๋ยวก็ ดูเร็กซ์\n\
+        ทำอย่างงั้นสลับคำ กูเผ็ด ภูเก็ต จบที่ คูเว็ด\n\
+        พากย์เรือเนี่ยมันเป็นความหวัง\n\
+        ผมทำจะทำตามฝัน ผมจะไม่ทำให้ผิดหวัง\n\
+        โอ๊ย เอ้ย เอ้ย เป็นไร แป๊ปนึงนะครับพี่\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก (โอ้โห)\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุก (เช็ดเข้)\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊ก\n\
+        ปัง ปัง เตรียมถังดับเพลิงมา 1 ชุด\n\
+        ไฟมันลุก ไฟมันคุก มันจะคุก คุกคาม\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุกโชน\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊กเลย",
+      user: {
+        create: {
+          salutation: "นาย",
+          firstname: "ธิป",
+          lastname: "บิทคับ",
+          hashedPassword:
+            "$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W",
+          email: "6430197521@student.chula.ac.th",
+        },
+      },
+    },
+  });
+
+  const s10 = await prisma.student.create({
+    data: {
+      resumeName: "47a50ef3fcb16268eaea70cb38d73998a5e8a247fcede360704e10e5baa4da7d",
+      transcriptName:
+        "jobFiles/5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
+      bankAccountNo: "0876789125",
+      description: 
+        "พี่จ้างเหอะ ผมเนี่ยเล่นมาตั้งแต่เด็ก\n\
+        อยู่ในห้องนั่งท่อง ลิ้นพันเสียงก้อง\n\
+        เดี๋ยวก็ ซูเพล็กส์ เดี๋ยวก็ ดูเร็กซ์\n\
+        ทำอย่างงั้นสลับคำ กูเผ็ด ภูเก็ต จบที่ คูเว็ด\n\
+        พากย์เรือเนี่ยมันเป็นความหวัง\n\
+        ผมทำจะทำตามฝัน ผมจะไม่ทำให้ผิดหวัง\n\
+        โอ๊ย เอ้ย เอ้ย เป็นไร แป๊ปนึงนะครับพี่\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก (โอ้โห)\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุก (เช็ดเข้)\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊ก\n\
+        ปัง ปัง เตรียมถังดับเพลิงมา 1 ชุด\n\
+        ไฟมันลุก ไฟมันคุก มันจะคุก คุกคาม\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุกโชน\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊กเลย",
+      user: {
+        create: {
+          salutation: "เทพ",
+          firstname: "เฟย",
+          lastname: "เดจาวู",
+          hashedPassword:
+            "$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W",
+          email: "6430386821@student.chula.ac.th",
+        },
+      },
+    },
+  });
+
+  const s11 = await prisma.student.create({
+    data: {
+      resumeName: "47a50ef3fcb16268eaea70cb38d73998a5e8a247fcede360704e10e5baa4da7d",
+      transcriptName:
+        "jobFiles/5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
+      bankAccountNo: "0876789125",
+      description: 
+        "พี่จ้างเหอะ ผมเนี่ยเล่นมาตั้งแต่เด็ก\n\
+        อยู่ในห้องนั่งท่อง ลิ้นพันเสียงก้อง\n\
+        เดี๋ยวก็ ซูเพล็กส์ เดี๋ยวก็ ดูเร็กซ์\n\
+        ทำอย่างงั้นสลับคำ กูเผ็ด ภูเก็ต จบที่ คูเว็ด\n\
+        พากย์เรือเนี่ยมันเป็นความหวัง\n\
+        ผมทำจะทำตามฝัน ผมจะไม่ทำให้ผิดหวัง\n\
+        โอ๊ย เอ้ย เอ้ย เป็นไร แป๊ปนึงนะครับพี่\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก (โอ้โห)\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุก (เช็ดเข้)\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊ก\n\
+        ปัง ปัง เตรียมถังดับเพลิงมา 1 ชุด\n\
+        ไฟมันลุก ไฟมันคุก มันจะคุก คุกคาม\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุกโชน\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊กเลย",
+      user: {
+        create: {
+          salutation: "อา",
+          firstname: "โป",
+          lastname: "นักรบมังกร",
+          hashedPassword:
+            "$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W",
+          email: "panda@student.chula.ac.th",
+        },
+      },
+    },
+  });
+
+  const s12 = await prisma.student.create({
+    data: {
+      resumeName: "47a50ef3fcb16268eaea70cb38d73998a5e8a247fcede360704e10e5baa4da7d",
+      transcriptName:
+        "jobFiles/5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
+      bankAccountNo: "0876789125",
+      description: 
+        "พี่จ้างเหอะ ผมเนี่ยเล่นมาตั้งแต่เด็ก\n\
+        อยู่ในห้องนั่งท่อง ลิ้นพันเสียงก้อง\n\
+        เดี๋ยวก็ ซูเพล็กส์ เดี๋ยวก็ ดูเร็กซ์\n\
+        ทำอย่างงั้นสลับคำ กูเผ็ด ภูเก็ต จบที่ คูเว็ด\n\
+        พากย์เรือเนี่ยมันเป็นความหวัง\n\
+        ผมทำจะทำตามฝัน ผมจะไม่ทำให้ผิดหวัง\n\
+        โอ๊ย เอ้ย เอ้ย เป็นไร แป๊ปนึงนะครับพี่\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก (โอ้โห)\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุก (เช็ดเข้)\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊ก\n\
+        ปัง ปัง เตรียมถังดับเพลิงมา 1 ชุด\n\
+        ไฟมันลุก ไฟมันคุก มันจะคุก คุกคาม\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุกโชน\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊กเลย",
+      user: {
+        create: {
+          salutation: "นาย",
+          firstname: "ยูกิ",
+          lastname: "จูได",
+          hashedPassword:
+            "$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W",
+          email: "yugioh@student.chula.ac.th",
+        },
+      },
+    },
+  });
+
+  const s13 = await prisma.student.create({
+    data: {
+      resumeName: "47a50ef3fcb16268eaea70cb38d73998a5e8a247fcede360704e10e5baa4da7d",
+      transcriptName:
+        "jobFiles/5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
+      bankAccountNo: "0876789125",
+      description: 
+        "พี่จ้างเหอะ ผมเนี่ยเล่นมาตั้งแต่เด็ก\n\
+        อยู่ในห้องนั่งท่อง ลิ้นพันเสียงก้อง\n\
+        เดี๋ยวก็ ซูเพล็กส์ เดี๋ยวก็ ดูเร็กซ์\n\
+        ทำอย่างงั้นสลับคำ กูเผ็ด ภูเก็ต จบที่ คูเว็ด\n\
+        พากย์เรือเนี่ยมันเป็นความหวัง\n\
+        ผมทำจะทำตามฝัน ผมจะไม่ทำให้ผิดหวัง\n\
+        โอ๊ย เอ้ย เอ้ย เป็นไร แป๊ปนึงนะครับพี่\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก (โอ้โห)\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุก (เช็ดเข้)\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊ก\n\
+        ปัง ปัง เตรียมถังดับเพลิงมา 1 ชุด\n\
+        ไฟมันลุก ไฟมันคุก มันจะคุก คุกคาม\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุกโชน\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊กเลย",
+      user: {
+        create: {
+          salutation: "นางสาว",
+          firstname: "คุริโบ้",
+          lastname: "เลเวลสิบ",
+          hashedPassword:
+            "$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W",
+          email: "kuribo@student.chula.ac.th",
+        },
+      },
+    },
+  });
+
+  const s14 = await prisma.student.create({
+    data: {
+      resumeName: "47a50ef3fcb16268eaea70cb38d73998a5e8a247fcede360704e10e5baa4da7d",
+      transcriptName:
+        "jobFiles/5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
+      bankAccountNo: "0876789125",
+      description: 
+        "พี่จ้างเหอะ ผมเนี่ยเล่นมาตั้งแต่เด็ก\n\
+        อยู่ในห้องนั่งท่อง ลิ้นพันเสียงก้อง\n\
+        เดี๋ยวก็ ซูเพล็กส์ เดี๋ยวก็ ดูเร็กซ์\n\
+        ทำอย่างงั้นสลับคำ กูเผ็ด ภูเก็ต จบที่ คูเว็ด\n\
+        พากย์เรือเนี่ยมันเป็นความหวัง\n\
+        ผมทำจะทำตามฝัน ผมจะไม่ทำให้ผิดหวัง\n\
+        โอ๊ย เอ้ย เอ้ย เป็นไร แป๊ปนึงนะครับพี่\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก (โอ้โห)\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุก (เช็ดเข้)\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊ก\n\
+        ปัง ปัง เตรียมถังดับเพลิงมา 1 ชุด\n\
+        ไฟมันลุก ไฟมันคุก มันจะคุก คุกคาม\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุกโชน\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊กเลย",
+      user: {
+        create: {
+          salutation: "นาย",
+          firstname: "บลูอาย",
+          lastname: "ไวท์ดราก้อน",
+          hashedPassword:
+            "$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W",
+          email: "blueEye@student.chula.ac.th",
+        },
+      },
+    },
+  });
+
+  const s15 = await prisma.student.create({
+    data: {
+      resumeName: "47a50ef3fcb16268eaea70cb38d73998a5e8a247fcede360704e10e5baa4da7d",
+      transcriptName:
+        "jobFiles/5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
+      bankAccountNo: "0876789125",
+      description: 
+        "พี่จ้างเหอะ ผมเนี่ยเล่นมาตั้งแต่เด็ก\n\
+        อยู่ในห้องนั่งท่อง ลิ้นพันเสียงก้อง\n\
+        เดี๋ยวก็ ซูเพล็กส์ เดี๋ยวก็ ดูเร็กซ์\n\
+        ทำอย่างงั้นสลับคำ กูเผ็ด ภูเก็ต จบที่ คูเว็ด\n\
+        พากย์เรือเนี่ยมันเป็นความหวัง\n\
+        ผมทำจะทำตามฝัน ผมจะไม่ทำให้ผิดหวัง\n\
+        โอ๊ย เอ้ย เอ้ย เป็นไร แป๊ปนึงนะครับพี่\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก (โอ้โห)\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุก (เช็ดเข้)\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊ก\n\
+        ปัง ปัง เตรียมถังดับเพลิงมา 1 ชุด\n\
+        ไฟมันลุก ไฟมันคุก มันจะคุก คุกคาม\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุกโชน\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊กเลย",
+      user: {
+        create: {
+          salutation: "นาย",
+          firstname: "เขี้ยวกุด",
+          lastname: "แด๊น",
+          hashedPassword:
+            "$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W",
+          email: "toothless@student.chula.ac.th",
+        },
+      },
+    },
+  });
+
+  const s16 = await prisma.student.create({
+    data: {
+      resumeName: "47a50ef3fcb16268eaea70cb38d73998a5e8a247fcede360704e10e5baa4da7d",
+      transcriptName:
+        "jobFiles/5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
+      bankAccountNo: "0876789125",
+      description: 
+        "พี่จ้างเหอะ ผมเนี่ยเล่นมาตั้งแต่เด็ก\n\
+        อยู่ในห้องนั่งท่อง ลิ้นพันเสียงก้อง\n\
+        เดี๋ยวก็ ซูเพล็กส์ เดี๋ยวก็ ดูเร็กซ์\n\
+        ทำอย่างงั้นสลับคำ กูเผ็ด ภูเก็ต จบที่ คูเว็ด\n\
+        พากย์เรือเนี่ยมันเป็นความหวัง\n\
+        ผมทำจะทำตามฝัน ผมจะไม่ทำให้ผิดหวัง\n\
+        โอ๊ย เอ้ย เอ้ย เป็นไร แป๊ปนึงนะครับพี่\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก (โอ้โห)\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุก (เช็ดเข้)\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊ก\n\
+        ปัง ปัง เตรียมถังดับเพลิงมา 1 ชุด\n\
+        ไฟมันลุก ไฟมันคุก มันจะคุก คุกคาม\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุกโชน\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊กเลย",
+      user: {
+        create: {
+          salutation: "นางสาว",
+          firstname: "มี่เสว",
+          lastname: "ไอติมจีนแดง",
+          hashedPassword:
+            "$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W",
+          email: "misue@student.chula.ac.th",
+        },
+      },
+    },
+  });
+
+  const s17 = await prisma.student.create({
+    data: {
+      resumeName: "47a50ef3fcb16268eaea70cb38d73998a5e8a247fcede360704e10e5baa4da7d",
+      transcriptName:
+        "jobFiles/5203e15c4ab04df8e6884ea4d8952215f5c6bc82a92f4bb8206c0ffe703e38c3",
+      bankAccountNo: "0876789125",
+      description: 
+        "พี่จ้างเหอะ ผมเนี่ยเล่นมาตั้งแต่เด็ก\n\
+        อยู่ในห้องนั่งท่อง ลิ้นพันเสียงก้อง\n\
+        เดี๋ยวก็ ซูเพล็กส์ เดี๋ยวก็ ดูเร็กซ์\n\
+        ทำอย่างงั้นสลับคำ กูเผ็ด ภูเก็ต จบที่ คูเว็ด\n\
+        พากย์เรือเนี่ยมันเป็นความหวัง\n\
+        ผมทำจะทำตามฝัน ผมจะไม่ทำให้ผิดหวัง\n\
+        โอ๊ย เอ้ย เอ้ย เป็นไร แป๊ปนึงนะครับพี่\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก (โอ้โห)\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุก (เช็ดเข้)\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊ก\n\
+        ปัง ปัง เตรียมถังดับเพลิงมา 1 ชุด\n\
+        ไฟมันลุก ไฟมันคุก มันจะคุก คุกคาม\n\
+        พ่นไวไป ลิ้นติดไฟ ไฟมันลุก\n\
+        พูดไวไป ลิ้นติดไฟ ไฟมันชุกโชน\n\
+        พล่ามไวไป ลิ้นนี่ชิ่งเหมือนกับสนุ๊กเลย",
+      user: {
+        create: {
+          salutation: "นาย",
+          firstname: "ศุภณัฐ",
+          lastname: "คีย์บอร์ดต๊อก",
+          hashedPassword:
+            "$2b$10$ne2h7B8VKefPwSeDDPRQ.O3WbeYkOMufwFRa44TCB1i.iOkXPGV4W",
+          email: "supanut@student.chula.ac.th",
         },
       },
     },
@@ -824,7 +1314,7 @@ prepare reports, และ provide insights for decision-making. \n \
       status: "NOT_STARTED",
       description: "Gotta catch 'em all!",
       budget: 15000,
-      numWorker: 4,
+      numWorker: 10,
       estimateStartDate: new Date("2024-04-11"),
       estimateEndDate: new Date("2024-07-31"),
       jobTagId: jobTagList["ไลฟ์สไตล์"],
@@ -1558,6 +2048,159 @@ prepare reports, และ provide insights for decision-making. \n \
       userId: s3.userId,
       bid: 5500,
       status: "WAGE_PAYMENT_PENDING",
+    },
+  });
+
+  const a57 = await prisma.application.create({
+    data: {
+      jobId: j31.id,
+      userId: s1.userId,
+      bid: 14000,
+      status: "PENDING",
+    },
+  });
+
+  const a58 = await prisma.application.create({
+    data: {
+      jobId: j31.id,
+      userId: s2.userId,
+      bid: 15000,
+      status: "PENDING",
+    },
+  });
+
+  const a59 = await prisma.application.create({
+    data: {
+      jobId: j31.id,
+      userId: s3.userId,
+      bid: 16000,
+      status: "PENDING",
+    },
+  });
+
+  const a60 = await prisma.application.create({
+    data: {
+      jobId: j31.id,
+      userId: s4.userId,
+      bid: 12000,
+      status: "DISCLAIMED",
+    },
+  });
+
+  const a61 = await prisma.application.create({
+    data: {
+      jobId: j31.id,
+      userId: s5.userId,
+      bid: 15000,
+      status: "DISCLAIMED",
+    },
+  });
+
+  const a62 = await prisma.application.create({
+    data: {
+      jobId: j31.id,
+      userId: s6.userId,
+      bid: 14400,
+      status: "DEPOSIT_PENDING",
+    },
+  });
+
+  const a63 = await prisma.application.create({
+    data: {
+      jobId: j31.id,
+      userId: s7.userId,
+      bid: 15500,
+      status: "DEPOSIT_PENDING",
+    },
+  });
+
+  const a64 = await prisma.application.create({
+    data: {
+      jobId: j31.id,
+      userId: s8.userId,
+      bid: 16100,
+      status: "IN_PROGRESS",
+    },
+  });
+
+  const a65 = await prisma.application.create({
+    data: {
+      jobId: j31.id,
+      userId: s9.userId,
+      bid: 145000,
+      status: "IN_PROGRESS",
+    },
+  });
+
+  const a66 = await prisma.application.create({
+    data: {
+      jobId: j31.id,
+      userId: s10.userId,
+      bid: 13300,
+      status: "IN_PROGRESS",
+    },
+  });
+
+  const a67 = await prisma.application.create({
+    data: {
+      jobId: j31.id,
+      userId: s11.userId,
+      bid: 12500,
+      status: "DELIVERED",
+    },
+  });
+
+  const a68 = await prisma.application.create({
+    data: {
+      jobId: j31.id,
+      userId: s12.userId,
+      bid: 17000,
+      status: "DELIVERED",
+    },
+  });
+
+  const a69 = await prisma.application.create({
+    data: {
+      jobId: j31.id,
+      userId: s13.userId,
+      bid: 17000,
+      status: "WAGE_PAYMENT_PENDING",
+    },
+  });
+
+  const a70 = await prisma.application.create({
+    data: {
+      jobId: j31.id,
+      userId: s14.userId,
+      bid: 16000,
+      status: "WAGE_PAYMENT_PENDING",
+    },
+  });
+
+  const a71 = await prisma.application.create({
+    data: {
+      jobId: j31.id,
+      userId: s15.userId,
+      bid: 18000,
+      status: "DONE",
+    },
+  });
+
+  const a72 = await prisma.application.create({
+    data: {
+      jobId: j31.id,
+      userId: s16.userId,
+      bid: 13500,
+      status: "DONE",
+    },
+  });
+
+  const a73 = await prisma.application.create({
+    data: {
+      jobId: j31.id,
+      userId: s17.userId,
+      bid: 15000,
+      status: "DONE",
     },
   });
 
