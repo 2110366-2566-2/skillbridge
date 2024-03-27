@@ -87,7 +87,7 @@ function JobManagePanel({ jobId }: Props) {
                                     studentId={student.userId}
                                     jobId={jobId}
                                     studentName={name}
-                                    applicationDate={student.createdAt}
+                                    applicationDate={student.updatedAt}
                                     status={student.status}
                                     price={student.bid}
                                 />
