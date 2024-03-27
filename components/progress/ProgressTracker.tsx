@@ -75,7 +75,11 @@ function condenseBeforeAfterStates(data: Array<EmploymentTrack>) {
 async function ProgressTracker({ jobId, studentId }: Props) {
     const data: Array<EmploymentTrack> =
         (await getEmploymentTracking(jobId, studentId)).data || [];
+    console.log("data")
+    console.log(data);
     const condensedData = condenseBeforeAfterStates(data);
+    console.log("condensedData")
+    console.log(data);
     if (condensedData.length === 0) {
         return (
             <div className="flex justify-center items-center">

@@ -5,7 +5,7 @@ import { prisma } from "../../lib/prisma";
 import { JobStatus } from "@prisma/client";
 
 
-export default async function f(jobId: string) {
+export default async function isJobClosed(jobId: string) {
     try {
         /* Check for authorization as this server only available for employer (owner) */
         const session: any = await getServerSession(authOptions);
