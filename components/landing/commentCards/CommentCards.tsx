@@ -1,6 +1,6 @@
 import CommentCard from "./commentCard/CommentCard";
 import CardSlider from "../cardSlider/CardSlider";
-import getReviews from "@/actions/reviews/getReviews";
+import { getReviews } from "@/actions/reviews/getReviews";
 
 export default async function CommentCards() {
   const reviews = await getReviews();
