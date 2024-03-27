@@ -8,10 +8,9 @@ export default async function NavigationLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession(authOptions);
   return (
     <div className="min-h-full bg-slate-800 flex flex-col justify-between">
-      <Header session={session} />
+      <Header/>
       <div className="rounded-3xl bg-slate-50 min-h-[80vh] p-5">{children}</div>
       <Footer />
     </div>

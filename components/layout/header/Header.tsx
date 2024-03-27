@@ -21,21 +21,14 @@ import ProfileHeader from "./profileHeader/ProfileHeader";
 // TEMPORARY
 import getS3URL from "@/actions/public/S3/getS3URL";
 
-type Props = {
-  session: any;
-};
-
-export default async function Header(props: Props) {
-  
-  // Session via props
-  const { session } = props;
-
+export default async function Header() {
   // Fetch Job tags
   const jobTags = await getJobTags();
 
+  // Sesion with info
+  const session = await getServerSession(authOptions);
   if(session?.user.profileImageUrl) {
     const res = await getS3URL(session.user.profileImageUrl);
-    console.log("profiel!", session?.user.profileImageUrl)
     if(res.data) {
       session.user.profileImageUrl = res.data;
     }
