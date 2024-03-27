@@ -1,7 +1,7 @@
 "use server"
 import { prisma } from "../../lib/prisma";
-import { getEmployerInfoById } from "../public/getUserInfo";
 import { Message } from "./getMessageByChatRoom";
+import getS3URL from "../public/S3/getS3URL";
 
 export interface StudentChatListData {
   jobId: string;
@@ -115,14 +115,29 @@ const getStudentChatListData = async (studentId: string) => {
     });
 
     // Converting the grouped results object into an array
-    const modifiedResults = Object.values(groupedResults);
+    let modifiedResults = Object.values(groupedResults);
+
+    // Using Promise.all to await all promises
+    modifiedResults = await Promise.all(modifiedResults.map(async (obj) => {
+      for (const chatRoom of obj.chatrooms) {
+        if (chatRoom.employer.profileImageUrl !== null) {
+          const s3URL = await getS3URL(chatRoom.employer.profileImageUrl);
+          // Assuming getS3URL returns an object with 'success' and 'data' properties
+          if (s3URL.success) {
+            chatRoom.employer.profileImageUrl = s3URL.data;
+          }
+        }
+      }
+      return obj; // return the modified object
+    }));
 
     return modifiedResults;
   } catch (error) {
     console.error("Error in getStudentChatListData:", error);
-    return [] as StudentChatListData[];
+    return [] as StudentChatListData[]; // Return empty array if error occurs
   }
 };
+
 
 const getEmployerChatListData = async (employerId: string) => {
   try {
@@ -198,7 +213,21 @@ const getEmployerChatListData = async (employerId: string) => {
     });
 
     // Converting the grouped results object into an array
-    const modifiedResults = Object.values(groupedResults);
+    let modifiedResults = Object.values(groupedResults);
+
+    // Using Promise.all to await all promises
+    modifiedResults = await Promise.all(modifiedResults.map(async (obj) => {
+      for (const chatRoom of obj.chatrooms) {
+        if (chatRoom.student.profileImageUrl !== null) {
+          const s3URL = await getS3URL(chatRoom.student.profileImageUrl);
+          // Assuming getS3URL returns an object with 'success' and 'data' properties
+          if (s3URL.success) {
+            chatRoom.student.profileImageUrl = s3URL.data;
+          }
+        }
+      }
+      return obj; // return the modified object
+    }));
 
     return modifiedResults;
   } catch (error) {
@@ -211,7 +240,7 @@ export { getStudentChatListData, getEmployerChatListData };
 
 // // Test getStudentChatList
 // const main = async () => {
-//   const studentId = "1d0bcf15-bd80-4e5a-8d1a-adbd2686d7fb";
+//   const studentId = "129f0ce9-b3b3-49bd-a85a-9e4cf76d4fbc";
 //   const results = await getStudentChatListData(studentId);
 //   console.log(results);
 //   console.log(
@@ -235,7 +264,7 @@ export { getStudentChatListData, getEmployerChatListData };
 
 // // Test getEmployerChatList
 // const main = async () => {
-//   const employerId = "fe9e109d-36ec-476c-91da-7ac3a225daf4";
+//   const employerId = "d46d96d9-2f58-4202-804c-baa27288012a";
 //   const results = await getEmployerChatListData(employerId);
 //   console.log(results);
 //   console.log(
