@@ -68,7 +68,7 @@ export default function ProfileInfo({
 
       {portfolioURL && (
         <div
-          className="w-full flex p-3 bg-slate-200 text-slate-500 rounded-md hover:bg-slate-400 hover:cursor-pointer hover:shadow-md hover:text-slate-100"
+          className="w-full flex p-3 bg-slate-200 text-slate-500 rounded-md hover:bg-slate-400 hover:cursor-pointer hover:shadow-md hover:text-slate-100 mb-[15px] md:mb-[25px]"
           onClick={() => window.open(portfolioURL, "_blank", "noopener,noreferrer")}
         >
           <div className="flex gap-3 items-center">
