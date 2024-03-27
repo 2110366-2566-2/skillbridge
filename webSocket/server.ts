@@ -7,7 +7,7 @@ const server = http.createServer((req, res) => { });
 
 const io = new Server(server, {
     cors: {
-        origin: ["https://www.skillbridge.click/", "https://skillbridge.click/", "https://dev.skillbridge.click/"],
+        origin: process.env.FRONTEND_URL,
         methods: ["GET", "POST"],
         allowedHeaders: ["chat-room-id", "user-id"],
         credentials: true
