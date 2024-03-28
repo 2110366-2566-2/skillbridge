@@ -5,9 +5,9 @@ import Image from "next/image";
 import generatePayload from "promptpay-qr";
 import QRCode from "react-qr-code";
 
-export default function PaymentMethod({ totalPrice }: { totalPrice: number }) {
+export default function PaymentMethod({ totalAmount }: { totalAmount: number }) {
   const payload = generatePayload(process.env.RECIPIENT_NUMBER || "", {
-    amount: totalPrice,
+    amount: totalAmount,
   });
 
   return (

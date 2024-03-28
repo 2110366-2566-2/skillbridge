@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { formatPaymentAmountWithCommas, getRealAmount, getCommission } from "@/lib/payment";
 import downArrowDark from "@/public/icons/downArrowDark.svg";
-
-const comRate = 0.15;
 
 type Transaction = {
   id: string;
@@ -33,6 +32,11 @@ export default function PaymentHistoryCard(props: Transaction) {
   // Open accordion state
   const [isOpen, setOpen] = useState(false);
 
+  // Extract amount
+  const realAmount = getRealAmount(props.amount);
+  const comAmount = getCommission(props.amount);
+  const totalAmount = props.amount;
+
   // Status UI
   const successStatus = (
     <p className="border rounded-[6px] border-green-600 text-green-600 text-[11px] md:text-[16px] font-bold px-[8px] py-[3px]">
@@ -50,20 +54,10 @@ export default function PaymentHistoryCard(props: Transaction) {
     </p>
   );
 
-  function getCom(amount: number) {
-    return (getReal(amount)) * comRate;
-  }
-
-  function getReal(amount: number) {
-    return (amount / (1+comRate));
-  }
-
   function formatAmount(amount: number, isStudent: boolean): string {
     const currencySymbol = "฿";
     const studentSign = isStudent ? "+" : "-";
-    let netAmount = amount;
-    if (isStudent) netAmount = getReal(netAmount);
-    const result = `${studentSign} ${currencySymbol}${netAmount.toFixed(2)}`;
+    const result = `${studentSign} ${currencySymbol}${formatPaymentAmountWithCommas(amount)}`;
     return result;
   }
 
@@ -99,7 +93,7 @@ export default function PaymentHistoryCard(props: Transaction) {
           <h1
             className={`font-semibold text-[20px] text-nowrap shrink-0 self-start md:text-[24px] ${props.isStudent ? "text-green-600" : "text-red-500"}`}
           >
-            {formatAmount(props.amount, props.isStudent)}
+            {formatAmount(props.isStudent? (realAmount) : (totalAmount), props.isStudent)}
           </h1>
         </div>
         <div className="flex justify-between">
@@ -130,17 +124,17 @@ export default function PaymentHistoryCard(props: Transaction) {
           <p>
             {props.isDeposit ? "ค่ามัดจำการจ้างงาน" : "ค่าตอบแทนการจ้างงาน"}
           </p>
-          <p>{getReal(props.amount).toFixed(2)} บาท</p>
+          <p>{formatPaymentAmountWithCommas(realAmount)} บาท</p>
         </div>
         {!props.isStudent && (
           <>
             <div className="flex justify-between font-normal text-[14px] md:text-[16px] text-slate-500">
               <p>ค่าบริการ 15 %</p>
-              <p>{getCom(props.amount).toFixed(2)} บาท</p>
+              <p>{formatPaymentAmountWithCommas(comAmount)} บาท</p>
             </div>
             <div className="flex justify-between font-normal text-[14px] md:text-[16px] text-slate-700">
               <p>ยอดชำระทั้งหมด</p>
-              <p>{(props.amount).toFixed(2)} บาท</p>
+              <p>{formatPaymentAmountWithCommas(totalAmount)} บาท</p>
             </div>
           </>
         )}

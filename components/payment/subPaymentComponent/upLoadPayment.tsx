@@ -14,11 +14,11 @@ type Props = {
   jobId: string;
   studentId: string;
   isDeposit: boolean;
-  totalPrice: number;
+  totalAmount: number;
 };
 
 export default function FilesInput(props: Props) {
-  const { label, jobId, studentId, isDeposit, totalPrice } = props;
+  const { label, jobId, studentId, isDeposit, totalAmount } = props;
   const [isDisabled, setDisabled] = useState(false);
   const [files, setFiles] = useState<FileList | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -119,7 +119,7 @@ export default function FilesInput(props: Props) {
     formDataObject.append("jobId", jobId);
     formDataObject.append("studentId", studentId);
     formDataObject.append("employerUserId", session.user.id);
-    formDataObject.append("amount", totalPrice.toString());
+    formDataObject.append("amount", totalAmount.toString());
     formDataObject.append("isDeposit", isDeposit.toString());
     formDataObject.append("receipt", selectedFile);
 
