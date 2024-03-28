@@ -36,8 +36,6 @@ export default function PaymentHistoryCard(props: Transaction) {
   const realAmount = getRealAmount(props.amount);
   const comAmount = getCommission(props.amount);
   const totalAmount = props.amount;
-  console.log(realAmount, comAmount, totalAmount)
-  console.log(props.amount)
 
   // Status UI
   const successStatus = (
