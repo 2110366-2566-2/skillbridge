@@ -43,7 +43,7 @@ type Props = {
 export default function PaymentHistoryPane(props: Props) {
   const { userId, allMonthYear } = props;
   const [monthYear, setMonthYear] = useState<MonthYear>(
-    allMonthYear[allMonthYear.length - 1],
+    allMonthYear[0],
   );
   const [paymentData, setPaymentData] = useState<Transaction[]>();
   const [isLoading, setLoading] = useState(true);
