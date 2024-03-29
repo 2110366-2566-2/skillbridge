@@ -3,6 +3,7 @@ import ChatMessageListByDate from "./ChatMessageListByDate"
 import { useRef, useEffect, useState } from "react"
 import { MessagesGroupByDate, getMessageByChatRoom } from "@/actions/chat/getMessageByChatRoom"
 import { setIncommingMessageHandler } from "../clientSocket/clientSocket"
+import { constructIncommingMessageHandler } from "../clientSocket/utils"
 
 type Props = {
     isStudent: boolean,
@@ -16,7 +17,8 @@ export default function ChatMessageList({ chatroomId, senderId }: Props) {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     
     useEffect(() => {
-        setIncommingMessageHandler(setMessagesByDate);
+        const incommingMessageHandler = constructIncommingMessageHandler(setMessagesByDate);
+        setIncommingMessageHandler(incommingMessageHandler);
     }, []);
 
     const bottomOfPanelRef = useRef<HTMLDivElement>(null)
