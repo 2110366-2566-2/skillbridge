@@ -3,6 +3,7 @@ import { ApplicationStatus } from "@prisma/client";
 import { prisma } from "../../../lib/prisma";
 import { getStudentUserId } from "./utils";
 import { title } from "process";
+import App from "next/app";
 
 const firstTabStatuses: ApplicationStatus[] = [
   ApplicationStatus.PENDING,
@@ -21,7 +22,7 @@ export interface applicationInfo {
 }
 
 function getApplicationTab(isAcknowledged: boolean, status: ApplicationStatus): number {
-  if (isAcknowledged) {
+  if (isAcknowledged || status === ApplicationStatus.DISCLAIMED) {
     return 2;
   }
 
