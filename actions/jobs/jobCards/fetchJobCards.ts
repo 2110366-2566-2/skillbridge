@@ -2,6 +2,7 @@
 import { ApplicationStatus } from "@prisma/client";
 import { prisma } from "../../../lib/prisma";
 import { getStudentUserId } from "./utils";
+import { title } from "process";
 
 const firstTabStatuses: ApplicationStatus[] = [
   ApplicationStatus.PENDING,
@@ -40,14 +41,24 @@ async function studentFetchApplications(): Promise<[applicationInfo[], applicati
     where: {
       userId: studentUserId,
     },
-    include: {
+    select: {
+      jobId: true,
+      status: true,
+      isAcknowledged: true,
       job: {
-        include: {
-          jobTag: true,
-          applications: true
-        },
+        select: {
+          title: true,
+          employerId: true,
+          estimateStartDate: true,
+          estimateEndDate: true,
+          jobTag: {
+            select: {
+              title: true
+            }
+          }
+        }
       },
-    },
+    }
   });
 
   // construct an ouput array where index is tab number minus one
@@ -59,7 +70,7 @@ async function studentFetchApplications(): Promise<[applicationInfo[], applicati
       jobId: application.jobId,
       title: application.job.title,
       startDate: application.job.estimateStartDate as Date,
-      endDate: application.job.estimateStartDate as Date,
+      endDate: application.job.estimateEndDate as Date,
       tag: application.job.jobTag.title,
       status: application.status,
       employerId: application.job.employerId,
