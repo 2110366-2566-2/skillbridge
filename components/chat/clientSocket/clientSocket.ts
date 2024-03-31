@@ -1,6 +1,6 @@
 "use client"
-import { Message, MessagesGroupByDate } from "@/actions/chat/getMessageByChatRoom";
-import { toClientMessage, toServerImageMessage, toServerTextMessage } from "@/types/chat";
+import { MessagesGroupByDate } from "@/actions/chat/getMessageByChatRoom";
+import { toServerImageMessage, toServerTextMessage } from "@/types/chat";
 import { Dispatch, SetStateAction } from "react";
 import { Socket, io } from "socket.io-client";
 
