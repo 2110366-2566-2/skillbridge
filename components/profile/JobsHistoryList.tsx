@@ -3,7 +3,7 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import JobHistory from "./subProfile/JobHistory"
 
-export default function JobsHistoryList({ allJobsHistory }: { allJobsHistory: any }) {
+export default function JobsHistoryList({ allJobsHistory, studentId }: { allJobsHistory: any; studentId: string }) {
   const router = useRouter()
 
   return (
@@ -15,6 +15,8 @@ export default function JobsHistoryList({ allJobsHistory }: { allJobsHistory: an
             {allJobsHistory.map((job: any, index: number) => (
               <JobHistory
                 key={index}
+                studentId={studentId}
+                jobId={job.job.jobId}
                 jobTitle={job.job.title}
                 jobPeriod={`${job.job.estimateStartDate.toLocaleDateString("en-US")} - ${job.job.estimateEndDate.toLocaleDateString("en-US")}`}
                 jobTag={job.job.jobTag.title}

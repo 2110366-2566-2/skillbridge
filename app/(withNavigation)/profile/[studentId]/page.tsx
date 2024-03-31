@@ -46,7 +46,7 @@ export default async function ProfilePage({ params }: { params: { studentId: str
           session={session}
         />
       </div>
-      <JobsHistoryList allJobsHistory={allJobsHistory} />
+      <JobsHistoryList allJobsHistory={allJobsHistory} studentId={params.studentId} />
     </div>
   )
 }
