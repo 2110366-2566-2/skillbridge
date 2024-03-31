@@ -62,7 +62,7 @@ export default function ProfileInfo({
             นิสิตจุฬาลงกรณ์มหาวิทยาลัย
           </p>
 
-          <RatingScore averageScore={3} />
+          <RatingScore averageScore={averageScore} />
         </div>
       </div>
 
