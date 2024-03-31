@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { convertStateNameToThai } from "@/lib/Jobs/adapter";
-import CallToActionButtons from "../../CallToActionButtons";
+import CallToActionButtons from "../CallToActionButtons";
 import Link from "next/link";
 
 type Props = {

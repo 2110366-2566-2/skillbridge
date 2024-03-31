@@ -12,57 +12,6 @@ type Props = {
     studentId: string;
 };
 
-const testList = [
-    {
-        status: "-PENDING",
-        date: "2022-12-12",
-    },
-    {
-        status: "PENDING-REJECTED",
-        date: "2022-12-12",
-    },
-    {
-        status: "PENDING-ACCEPTED",
-        date: "2022-12-12",
-    },
-    {
-        status: "PENDING-DISCLAIMED",
-        date: "2022-12-12",
-    },
-    {
-        status: "ACCEPTED-DISCLAIMED",
-        date: "2022-12-12",
-    },
-    {
-        status: "ACCEPTED-DEPOSIT_PENDING",
-        date: "2022-12-12",
-    },
-    {
-        status: "DEPOSIT_PENDING-IN_PROGRESS",
-        date: "2022-12-12",
-    },
-    {
-        status: "IN_PROGRESS-CANCELED",
-        date: "2022-12-12",
-    },
-    {
-        status: "IN_PROGRESS-DELIVERED",
-        date: "2022-12-12",
-    },
-    {
-        status: "DELIVERED-IN_PROGRESS",
-        date: "2022-12-12",
-    },
-    {
-        status: "DELIVERED-WAGE_PAYMENT_PENDING",
-        date: "2022-12-12",
-    },
-    {
-        status: "WAGE_PAYMENT_PENDING-DONE",
-        date: "2022-12-12",
-    },
-];
-
 function condenseBeforeAfterStates(data: Array<EmploymentTrack>) {
     return data.map((item) => {
         return {
@@ -75,11 +24,7 @@ function condenseBeforeAfterStates(data: Array<EmploymentTrack>) {
 async function ProgressTracker({ jobId, studentId }: Props) {
     const data: Array<EmploymentTrack> =
         (await getEmploymentTracking(jobId, studentId)).data || [];
-    console.log("data")
-    console.log(data);
     const condensedData = condenseBeforeAfterStates(data);
-    console.log("condensedData")
-    console.log(data);
     if (condensedData.length === 0) {
         return (
             <div className="flex justify-center items-center">

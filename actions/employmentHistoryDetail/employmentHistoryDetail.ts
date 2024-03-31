@@ -101,6 +101,7 @@ const getJobTag = async (jobId: string) => {
 };
 
 const getEmployerFromJobId = async (jobId: string) => {
+  try{
   const employerId = await prisma.job.findFirst({
     where: {
       id: jobId,
@@ -109,7 +110,13 @@ const getEmployerFromJobId = async (jobId: string) => {
       employerId: true,
     },
     });
+
     return employerId ? employerId.employerId : "";
+  }
+  catch (error)
+  {
+    console.error(error);
+  }
 }
 
 export { getRating, getComment, getEmploymentTracking, getJobTag, getEmployerFromJobId };
