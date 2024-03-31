@@ -42,50 +42,48 @@ function StudentJobsPanel({
                         </div>
                     </div>
                 ) : // check if it is empty
-                
-                    isDone === false ? (
-                        sortedData.map((data, index) => {
-                            return (
-                                <StudentJobCard
-                                    key={index}
-                                    jobId={data.jobId}
-                                    studentId={studentId}
-                                    name={data.title}
-                                    startDate={data.startDate}
-                                    endDate={data.endDate}
-                                    category={data.tag}
-                                    status={data.status}
-                                    isDone={isDone}
-                                />
-                            );
-                        })
-                    ) : (
-                        sortedData.map((data, index) => {
-                            return (
-                                <StudentJobCard
-                                    key={index}
-                                    jobId={data.jobId}
-                                    studentId={studentId}
-                                    name={data.title}
-                                    category={data.tag}
-                                    startDate={data.startDate}
-                                    endDate={data.endDate}
-                                    status={data.status}
-                                    isDone={isDone}
-                                />
-                            );
-                        })
-                    )
-                }
+
+                isDone === false ? (
+                    sortedData.map((data, index) => {
+                        return (
+                            <StudentJobCard
+                                key={index}
+                                jobId={data.jobId}
+                                studentId={studentId}
+                                name={data.title}
+                                startDate={data.startDate}
+                                endDate={data.endDate}
+                                category={data.tag}
+                                status={data.status}
+                                isDone={isDone}
+                                employerId={data.employerId}
+                            />
+                        );
+                    })
+                ) : (
+                    sortedData.map((data, index) => {
+                        return (
+                            <StudentJobCard
+                                key={index}
+                                jobId={data.jobId}
+                                studentId={studentId}
+                                name={data.title}
+                                category={data.tag}
+                                startDate={data.startDate}
+                                endDate={data.endDate}
+                                status={data.status}
+                                isDone={isDone}
+                                employerId={data.employerId}
+                            />
+                        );
+                    })
+                )}
             </main>
-            {
-            (sortedData.length === 0 && !isLoading) &&
-            (
+            {sortedData.length === 0 && !isLoading && (
                 <div className="flex justify-center items-center">
                     <SearchNotFound text={"ไม่พบงาน"} />
                 </div>
-            )
-            }
+            )}
         </main>
     );
 }

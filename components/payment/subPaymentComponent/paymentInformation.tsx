@@ -1,10 +1,17 @@
+import { formatPaymentAmountWithCommas } from "@/lib/payment";
+
 export default function PaymentInformation({
   studentName,
-  price,
+  realAmount,
+  comAmount,
+  totalAmount
 }: {
   studentName: string;
-  price: number;
+  realAmount: number;
+  comAmount: number;
+  totalAmount: number;
 }) {
+  
   return (
     <div className="lg:order-2 lg:row-span-2 lg:mt-[13px]">
       <div className="flex">
@@ -26,7 +33,7 @@ export default function PaymentInformation({
           </p>
 
           <p className="text-[#64748b] text-sm lg:text-[18px]">
-            {price * 0.5} บาท
+            {formatPaymentAmountWithCommas(realAmount)} บาท
           </p>
         </div>
 
@@ -36,7 +43,7 @@ export default function PaymentInformation({
           </p>
 
           <p className="text-[#64748b] text-sm lg:text-[18px]">
-            {price * 0.5 * 0.15} บาท
+            {formatPaymentAmountWithCommas(comAmount)} บาท
           </p>
         </div>
 
@@ -46,7 +53,7 @@ export default function PaymentInformation({
           </p>
 
           <p className="text-[#1E293B] text-sm lg:text-[18px]">
-            {price * 0.5 * 0.15 + price * 0.5} บาท
+            {formatPaymentAmountWithCommas(totalAmount)} บาท
           </p>
         </div>
       </div>

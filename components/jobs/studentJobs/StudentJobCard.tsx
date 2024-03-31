@@ -15,6 +15,7 @@ type Props = {
     endDate: Date;
     status: string;
     isDone?: boolean;
+    employerId?: string;
 };
 
 const colorMatcher: Map<string, string> = new Map<string, string>([
@@ -40,6 +41,7 @@ const StudentJobCard = ({
     endDate,
     status,
     isDone = true,
+    employerId = "",
 }: Props) => {
     const [isDropDownOpen, setDropDownOpen] = useState(false);
 
@@ -88,6 +90,7 @@ const StudentJobCard = ({
                     jobId={jobId}
                     status={status}
                     role="student"
+                    employerId={employerId}
                 />
             </div>
         </div>

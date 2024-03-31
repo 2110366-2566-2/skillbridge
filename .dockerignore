@@ -2,6 +2,7 @@
 Dockerfile
 .dockerignore
 docs
+elasticsearch
 logstash
 node_modules
 npm-debug.log
