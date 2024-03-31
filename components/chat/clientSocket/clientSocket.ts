@@ -4,8 +4,6 @@ import { toServerImageMessage, toServerTextMessage } from "@/types/chat";
 import { Dispatch, SetStateAction } from "react";
 import { Socket, io } from "socket.io-client";
 
-type messageByDateSetter = Dispatch<SetStateAction<MessagesGroupByDate[]>>;
-
 const websocketServerURL = "https://websocket-6ajomlbega-uc.a.run.app/";
 
 let curChatroomId: string;
