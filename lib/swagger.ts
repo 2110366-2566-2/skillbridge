@@ -6,7 +6,7 @@ export const getApiDocs = async () => {
         definition: {
             openapi: '3.0.0',
             info: {
-                title: 'API Doc',
+                title: 'API Doc for Skillbridge Application',
                 version: '1.0',
             },
             security: [],
