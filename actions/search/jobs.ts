@@ -143,7 +143,15 @@ async function getSearchJobs(
         jobTags: job.jobTag.title,
         description: job.description ? job.description : "",
         acceptNum: job.applications.filter(
-          (app) => app.status == ApplicationStatus.ACCEPTED,
+          (app: any) => {
+            return (
+              app.status == ApplicationStatus.DEPOSIT_PENDING ||
+              app.status == ApplicationStatus.IN_PROGRESS ||
+              app.status == ApplicationStatus.DELIVERED ||
+              app.status == ApplicationStatus.WAGE_PAYMENT_PENDING ||
+              app.status == ApplicationStatus.DONE
+            );
+          }
         ).length, //TODO : Filter for accepted application
         maxAcceptNum: job.numWorker,
         budget: job.budget,
@@ -214,7 +222,15 @@ async function getSearchJobs(
       jobTags: job.jobTag.title,
       description: job.description ? job.description : "",
       acceptNum: job.applications.filter(
-        (app) => app.status == ApplicationStatus.ACCEPTED,
+        (app: any) => {
+          return (
+            app.status == ApplicationStatus.DEPOSIT_PENDING ||
+            app.status == ApplicationStatus.IN_PROGRESS ||
+            app.status == ApplicationStatus.DELIVERED ||
+            app.status == ApplicationStatus.WAGE_PAYMENT_PENDING ||
+            app.status == ApplicationStatus.DONE
+          );
+        }
       ).length, //TODO : Filter for accepted application
       maxAcceptNum: job.numWorker,
       budget: job.budget,
