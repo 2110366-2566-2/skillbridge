@@ -1,10 +1,15 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function JobHistory({
+    studentId,
+    jobId,
     jobTitle,
     jobPeriod,
     jobTag
 }: {
+    studentId: string,
+    jobId: string
     jobTitle: string,
     jobPeriod: string,
     jobTag: string
@@ -26,10 +31,12 @@ export default function JobHistory({
                     </div>
                 </div>
             </div>
-            <div className="flex items-center ">
-                <div className="rounded-full border border-[#E2E8F0] bg-white p-[8px] hover:opacity-80 active:opacity-60 cursor-pointer w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] flex items-center justify-center mr-[7px] md:mr-[12px] lg:mr-[18px]">
+            <div className="flex items-center " >
+                <Link className="rounded-full border border-[#E2E8F0] bg-white p-[8px] hover:opacity-80 active:opacity-60 cursor-pointer w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] flex items-center justify-center mr-[7px] md:mr-[12px] lg:mr-[18px]"
+                    href={`/progress/${jobId}/${studentId}`}
+                >
                     <Image src={'/icons/right.svg'} width={20} height={20} alt="right" />
-                </div>
+                </Link>
             </div>
 
         </div>
