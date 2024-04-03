@@ -3,10 +3,8 @@ import ChatRoomHeader from "./ChatRoomHeader"
 import ChatMessageList from "./ChatMessageList"
 import ChatInput from "./ChatInput"
 import { ChatRoomInfo, getChatRoomInfo } from "@/actions/chat/getChatRoomInfo"
-import io from 'socket.io-client';
 import { useEffect, useState } from "react"
-import { toServerImageMessage, toServerTextMessage } from "@/types/chat"
-import { Socket } from "socket.io-client"
+import { connect } from "../clientSocket/clientSocket";
 
 type Props = {
     isStudent: boolean,
@@ -14,16 +12,7 @@ type Props = {
     senderId: string
 }
 
-let socket: Socket;
-let curChatRoomId: string;
-
-function isImageFile(file: File | undefined) {
-    return file && file['type'].split('/')[0] === 'image';
-}
-
 export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
-    // curChatRoomId = chatroomId;
-
     const [chatRoomInfo, setChatRoomInfo] = useState<ChatRoomInfo>();
 
     useEffect(() => {
@@ -37,60 +26,19 @@ export default function ChatRoom({ isStudent, chatroomId, senderId }: Props) {
         }
 
         getInitialData();
+
     }, [])
-
-    if (curChatRoomId !== chatroomId) {
-        // if (!process.env.NEXT_PUBLIC_WEBSOCKET_URL) {
-        //     return (<div>
-        //             <h1>{process.env.NEXT_PUBLIC_WEBSOCKET_URL}</h1>
-        //         </div>
-        //     );
-        // }
-
-        socket = io("https://websocket-6ajomlbega-uc.a.run.app/", {
-            extraHeaders: {
-                "chat-room-id": chatroomId,
-                "user-id": senderId!
-            }
-        });
-        // console.log("connecting socket");
-        curChatRoomId = chatroomId;
-    }
-
-
-    function sendMessage(newTextMessage: string) {
-        const messageToServer: toServerTextMessage = {
-            text: newTextMessage
-        };
-        socket.emit('chat text message', messageToServer);
-    };
-
-    async function sendImage(imageFile: File) {
-        if (!isImageFile(imageFile) || !imageFile) {
-            alert("The file supposed to be an image.");
-            return;
-        }
-
-        const arrayBuffer = await imageFile.arrayBuffer();
-        const uiInt8Array = new Uint8Array(arrayBuffer);
-        const buffer = Buffer.from(uiInt8Array);
-
-        const messageToServer: toServerImageMessage = {
-            type: imageFile.type,
-            size: imageFile.size,
-            buffer: buffer
-        }
-
-        socket.emit('chat image message', messageToServer);
-    };
-
-    // console.log("chat room reloading");
+    
+    // connect to websocket with specific chatroomId and senderId
+    // put it here to make sure that setIncommingMessageHandler is called after socket connection is called
+    // put it here because useEffect triggers in child components before parent component
+    connect(chatroomId, senderId);
 
     return (
         <div className="h-[100dvh] w-full flex flex-col bg-neutral-100 border border-[#CBD5E1] lg:h-[80vh]">
             <ChatRoomHeader isStudent={isStudent} chatRoomInfo={chatRoomInfo} />
-            <ChatMessageList isStudent={isStudent} chatroomId={chatroomId} senderId={senderId!} socket={socket} />
-            <ChatInput isStudent={isStudent} chatroomId={chatroomId} sendMessage={sendMessage} sendImage={sendImage} />
+            <ChatMessageList isStudent={isStudent} chatroomId={chatroomId} senderId={senderId} />
+            <ChatInput isStudent={isStudent} chatroomId={chatroomId} />
         </div>
     )
 }

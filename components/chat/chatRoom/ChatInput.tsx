@@ -3,15 +3,14 @@ import { FormEvent, ChangeEvent, useState, useRef } from "react"
 import Image from "next/image";
 import sendButton from "@/public/icons/sendButton.svg";
 import imageButton from "@/public/icons/imageButton.svg";
+import { sendMessage, sendImage } from "../clientSocket/clientSocket";
 
 type Props = {
     isStudent: boolean,
-    chatroomId: string,
-    sendMessage: Function,
-    sendImage: Function
+    chatroomId: string
 }
 
-export default function ChatInput({ isStudent, chatroomId, sendMessage, sendImage }: Props) {
+export default function ChatInput({ isStudent, chatroomId }: Props) {
     const [input, setInput] = useState({
         text: "",
     });

@@ -25,7 +25,7 @@ export default function QualifyCandidateButton({
             <ProgressButton jobId={jobId} studentId={studentId} />
             <div className="w-1/2 flex justify-between">
                 <DangerButton
-                    className="h-[35px] bg-red-500 text-sm text-white rounded-md w-[48%] hover:opacity-80 active:opacity-60"
+                    className="h-[35px] bg-red-500 text-sm text-white rounded-md w-[48%] hover:opacity-80 active:opacity-60 flex justify-center items-center"
                     isLoading={isRejectButtonLoading}
                     isDisabled={isDisabled}
                     onClick={async () => {
@@ -41,7 +41,7 @@ export default function QualifyCandidateButton({
                     ปฏิเสธ
                 </DangerButton>
                 <PrimaryButton
-                    className="h-[35px] bg-[#334155] text-sm text-white rounded-md w-[48%] hover:opacity-80 active:opacity-60"
+                    className="h-[35px] bg-[#334155] text-sm text-white rounded-md w-[48%] hover:opacity-80 active:opacity-60 flex justify-center items-center"
                     isLoading={isAcceptButtonLoading}
                     isDisabled={isDisabled}
                     onClick={async () => {

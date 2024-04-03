@@ -14,7 +14,7 @@ export default function PayButton({
             <div className="w-1/2 flex justify-end">
                 <Link
                     href={`/jobs/${jobId}/payment/${studentId}`}
-                    className="h-[35px] w-[48%] bg-[#334155] text-sm text-white rounded-md hover:opacity-80 active:opacity-60"
+                    className="h-[35px] w-[48%] bg-[#334155] text-sm text-white rounded-md hover:opacity-80 active:opacity-60 flex justify-center items-center"
                 >
                     จ่ายเงิน
                 </Link>
