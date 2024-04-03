@@ -1,10 +1,8 @@
 "use client"
 import Image from "next/image"
-import { useRouter } from "next/navigation"
 import JobHistory from "./subProfile/JobHistory"
 
 export default function JobsHistoryList({ allJobsHistory, studentId }: { allJobsHistory: any; studentId: string }) {
-  const router = useRouter()
 
   return (
     <div className="mt-[20px] w-full md:max-w-[600px] md:mt-0">
@@ -16,7 +14,7 @@ export default function JobsHistoryList({ allJobsHistory, studentId }: { allJobs
               <JobHistory
                 key={index}
                 studentId={studentId}
-                jobId={job.job.jobId}
+                jobId={job.jobId}
                 jobTitle={job.job.title}
                 jobPeriod={`${job.job.estimateStartDate.toLocaleDateString("en-US")} - ${job.job.estimateEndDate.toLocaleDateString("en-US")}`}
                 jobTag={job.job.jobTag.title}

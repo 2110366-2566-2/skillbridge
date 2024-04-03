@@ -3,6 +3,7 @@ import Input from "./Input"
 import PasswordInput from "./PasswordInput"
 import { useState } from "react"
 import { signIn } from "next-auth/react"
+import PrimaryButton from "../public/buttons/primaryButton/PrimaryButton"
 
 type Error = {
   email: string
@@ -24,6 +25,8 @@ export default function LoginViaEmail() {
     email: "",
     password: "",
   })
+  const [isDisabled, setDisabled] = useState(false);
+  const [primaryLoading, setPrimaryLoading] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
@@ -60,10 +63,17 @@ export default function LoginViaEmail() {
   }
 
   const handleValidation = (event: React.FormEvent<HTMLFormElement>) => {
+    setPrimaryLoading((prev) => !prev);
+    setDisabled(true);
+
     event.preventDefault()
     const { errors, success } = validateForm()
     if (!success) {
-      setErrors(errors)
+      setTimeout(() => {
+        setErrors(errors);
+        setPrimaryLoading((prev) => !prev);
+        setDisabled(false);
+      }, 2000);
       return
     } else {
       signIn("credentials", {
@@ -94,11 +104,15 @@ export default function LoginViaEmail() {
         warning={errors.password}
       />
 
-      <button
+      <PrimaryButton
         type="submit"
-        className="w-full bg-[#334155] hover:bg-slate-600 rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md ">
+        isDisabled={isDisabled}
+        className="w-full bg-[#334155] hover:bg-slate-600 rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md"
+        isLoading={primaryLoading}
+        loadingMessage="กรุณารอสักครู่"
+      >
         เข้าสู่ระบบ
-      </button>
+      </PrimaryButton>
 
       <p className="w-full text-center text-sm mt-[10px]">
         ไม่เคยมีบัญชี ?{" "}
