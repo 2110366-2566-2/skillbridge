@@ -18,7 +18,7 @@ export default function AnswerOfferButton({ jobId }: { jobId: string }) {
             <DangerButton
                 isDisabled={isDisabled}
                 isLoading={isDisclaimButtonLoading}
-                className="py-2 px-3 w-full bg-red-500 text-sm text-white rounded-md hover:shadow-md hover:bg-red-600 active:bg-red-700 transition duration-200 ease-in-out"
+                className="flex justify-center items-center py-2 px-3 w-full bg-red-500 text-sm text-white rounded-md hover:shadow-md hover:bg-red-600 active:bg-red-700 transition duration-200 ease-in-out"
                 onClick={async () => {
                     setDisclaimButtonLoading(true);
                     setDisabled(true);
@@ -35,14 +35,14 @@ export default function AnswerOfferButton({ jobId }: { jobId: string }) {
             <PrimaryButton
                 isDisabled={isDisabled}
                 isLoading={isAcceptButtonLoading}
-                className="py-2 px-3 w-full bg-slate-600 text-sm text-white rounded-md hover:shadow-md hover:bg-slate-700 active:bg-slate-800 transition duration-200 ease-in-out"
+                className="flex justify-center items-center py-2 px-3 w-full bg-slate-600 text-sm text-white rounded-md hover:shadow-md hover:bg-slate-700 active:bg-slate-800 transition duration-200 ease-in-out"
                 onClick={async () => {
                     setAcceptButtonLoading(true);
                     setDisabled(true);
                     await acceptedToDepositPending(jobId);
                     setAcceptButtonLoading(false);
                     setDisabled(false);
-                    toast.success("ยอมรับข้อเสนอแล้ว")
+                    toast.success("ยอมรับข้อเสนอแล้ว");
                     location.reload();
                 }}
             >

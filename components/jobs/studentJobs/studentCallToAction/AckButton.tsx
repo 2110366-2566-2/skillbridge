@@ -12,7 +12,7 @@ export default function AckButton({ jobId }: { jobId: string }) {
             <PrimaryButton
                 isDisabled={isDisabled}
                 isLoading={isLoading}
-                className="py-2 px-3 w-full bg-slate-600 text-sm text-white rounded-md hover:shadow-md hover:bg-slate-700 active:bg-slate-800 transition duration-200 ease-in-out"
+                className="py-2 px-3 w-full bg-slate-600 text-sm text-white rounded-md hover:shadow-md hover:bg-slate-700 active:bg-slate-800 transition duration-200 ease-in-out flex justify-center items-center"
                 onClick={async () => {
                     setLoading(true);
                     setDisabled(true);
