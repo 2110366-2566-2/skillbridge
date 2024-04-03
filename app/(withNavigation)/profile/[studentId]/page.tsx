@@ -6,38 +6,14 @@ import { getReviewsByStudentId } from "@/actions/reviews/getReviews"
 import getS3URL from "@/actions/public/S3/getS3URL"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth"
-import { useEffect, useState } from "react"
-import LoadingJobHistoryList from "@/components/profile/LoadingJobHistoryList"
 
 export default async function ProfilePage({ params }: { params: { studentId: string } }) {
-  const [loading, setLoading] = useState(true);
-  const [allJobsHistory, setAllJobsHistory] = useState<any>([]);
-  const [user, setUser] = useState<any>({});
-  const [reviews, setReviews] = useState<any>([]);
-  const [session, setSession] = useState<any>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const [jobs, userInfo, userReviews, serverSession] = await Promise.all([
-        getJobsByStudentId(params.studentId),
-        getStudentInfoById(params.studentId),
-        getReviewsByStudentId(params.studentId),
-        getServerSession(authOptions),
-      ]);
-
-      setAllJobsHistory(jobs);
-      setUser(userInfo);
-      setReviews(userReviews);
-      setSession(serverSession);
-      setLoading(false);
-    };
-
-    fetchData();
-  }, [params.studentId, authOptions]);
-
-  if (loading) {
-    return <LoadingJobHistoryList />;
-  }
+  const [allJobsHistory, user, reviews, session] = await Promise.all([
+    getJobsByStudentId(params.studentId),
+    getStudentInfoById(params.studentId),
+    getReviewsByStudentId(params.studentId),
+    getServerSession(authOptions),
+  ])
 
   const urlRegex =
     /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/
