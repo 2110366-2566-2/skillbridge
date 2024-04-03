@@ -9,6 +9,7 @@ import { signIn } from "next-auth/react"
 import { Session } from "next-auth"
 import getUniqueEmail from "@/actions/authentication/getUnique"
 import { z } from "zod"
+import PrimaryButton from "../public/buttons/primaryButton/PrimaryButton"
 
 export type RegisterProps = {
   handleToggleForm: () => void
@@ -48,6 +49,9 @@ export default function RegisterViaEmail({
   })
 
   const [errors, setErrors] = useState<Form>(structuredClone(defaultForm))
+
+  const [isDisabled, setDisabled] = useState(false);
+  const [primaryLoading, setPrimaryLoading] = useState(false);
 
   const validateFirstPage = async () => {
     const errors: Form = structuredClone(defaultForm)
@@ -104,11 +108,17 @@ export default function RegisterViaEmail({
   }
 
   const handleValidationSecondPage = async () => {
+    setPrimaryLoading((prev) => !prev);
+    setDisabled(true);
     const validationErrors = validateSecondPage()
     const haveErrors = Object.values(validationErrors).some((x) => x !== null && x !== "")
 
     if (haveErrors) {
-      setErrors(validationErrors)
+      setTimeout(() => {
+        setErrors(validationErrors);
+        setPrimaryLoading((prev) => !prev);
+        setDisabled(false);
+      }, 2000);
       return
     }
 
@@ -278,12 +288,15 @@ export default function RegisterViaEmail({
           </div>
 
           {checkBoxError.checkOne && checkBoxError.checkTwo ? (
-            <button
-              id="submit"
+            <PrimaryButton
               type="submit"
-              className="w-full bg-[#334155] hover:bg-slate-600 rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md">
+              isDisabled={isDisabled}
+              className="w-full bg-[#334155] hover:bg-slate-600 rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md"
+              isLoading={primaryLoading}
+              loadingMessage="กรุณารอสักครู่"
+            >
               สร้างบัญชี
-            </button>
+            </PrimaryButton>
           ) : (
             <div className="w-full bg-[#CBD5E1] rounded-lg text-white mt-[30px] px-[16px] py-[8px] text-md text-center cursor-pointer">
               สร้างบัญชี

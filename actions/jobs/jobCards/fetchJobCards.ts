@@ -1,7 +1,15 @@
 "use server";
 import { ApplicationStatus } from "@prisma/client";
 import { prisma } from "../../../lib/prisma";
-import { getEmployerUserId, getStudentUserId, validateJobOwner } from "./utils";
+import { getStudentUserId } from "./utils";
+import { title } from "process";
+import App from "next/app";
+
+const firstTabStatuses: ApplicationStatus[] = [
+  ApplicationStatus.PENDING,
+  ApplicationStatus.ACCEPTED,
+  ApplicationStatus.REJECTED,
+] 
 
 export interface applicationInfo {
   jobId: string;
@@ -10,36 +18,75 @@ export interface applicationInfo {
   endDate: Date;
   tag: string;
   status: string;
+  employerId?: string;
 }
 
-async function studentFetchApplications() {
-  /*
-    need:
-        1. userId and jobId to identify application
-        2. title of the job
-        3. period ex. "18/10/2545 - 21/10/2545"
-        4. tag
-        5. application status
-    psuedo:
-        session = getSession()
-        studentUserId = session.userId
-        applications = application.findMany(
-            where: {userId = studentUserId},
-            include: {job}
-        )
-        extract data from applications into array of applicationInfo
-        return array of applicationInfo
-    */
+function getApplicationTab(isAcknowledged: boolean, status: ApplicationStatus): number {
+  if (isAcknowledged || status === ApplicationStatus.DISCLAIMED) {
+    return 2;
+  }
 
+  if (firstTabStatuses.includes(status)) {
+    return 0;
+  }
+
+  return 1;
+}
+
+async function studentFetchApplications(): Promise<[applicationInfo[], applicationInfo[], applicationInfo[]]> {
+  // get student's userId
   const studentUserId = await getStudentUserId();
 
-  return [
-    await fetchFirstTab(studentUserId),
-    await fetchSecondTab(studentUserId),
-    await fetchThirdTab(studentUserId),
-  ];
-}
+  // load all applications of the student from database
+  const applications = await prisma.application.findMany({
+    where: {
+      userId: studentUserId,
+    },
+    select: {
+      jobId: true,
+      status: true,
+      isAcknowledged: true,
+      job: {
+        select: {
+          title: true,
+          employerId: true,
+          estimateStartDate: true,
+          estimateEndDate: true,
+          jobTag: {
+            select: {
+              title: true
+            }
+          }
+        }
+      },
+    }
+  });
 
+  // construct an ouput array where index is tab number minus one
+  const output: [applicationInfo[], applicationInfo[], applicationInfo[],] = [[], [], []];
+
+  applications.forEach((application) => {
+    // format data for frontend ease of use
+    const applicationInfo: applicationInfo = {
+      jobId: application.jobId,
+      title: application.job.title,
+      startDate: application.job.estimateStartDate as Date,
+      endDate: application.job.estimateEndDate as Date,
+      tag: application.job.jobTag.title,
+      status: application.status,
+      employerId: application.job.employerId,
+    };
+
+    // calculate which tab should this application goes in
+    const tabIndex = getApplicationTab(application.isAcknowledged, application.status);
+
+    // put the application into the appropirate tab
+    output[tabIndex].push(applicationInfo);
+  })
+
+  return output
+}
+/*
 async function fetchFirstTab(studentUserId: string) {
   const applications = await prisma.application.findMany({
     where: {
@@ -107,11 +154,11 @@ async function fetchSecondTab(studentUserId: string) {
       job: {
         include: {
           jobTag: true,
+      
         },
       },
     },
   });
-
   const output: applicationInfo[] = [];
 
   for (let i = 0; i < applications.length; i++) {
@@ -129,6 +176,7 @@ async function fetchSecondTab(studentUserId: string) {
       endDate: app.job.estimateStartDate as Date,
       tag: app.job.jobTag.title,
       status: app.status,
+      employerId: app.job.employerId,
     };
 
     output.push(applicationInfo);
@@ -182,13 +230,6 @@ async function fetchThirdTab(studentUserId: string) {
 
   return output;
 }
-
-async function test() {
-  const app = await prisma.application.findFirst();
-
-  console.log(app);
-}
-
-// test();
+*/
 
 export { studentFetchApplications };

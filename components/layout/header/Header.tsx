@@ -18,12 +18,22 @@ import { getEmployerInfoById } from "@/actions/public/getUserInfo";
 import ProgressHeader from "./progressHeader/ProgressHeader";
 import ProfileHeader from "./profileHeader/ProfileHeader";
 
+// TEMPORARY
+import getS3URL from "@/actions/public/S3/getS3URL";
+
 export default async function Header() {
   // Fetch Job tags
   const jobTags = await getJobTags();
 
   // Sesion with info
   const session = await getServerSession(authOptions);
+  if(session?.user.profileImageUrl) {
+    const res = await getS3URL(session.user.profileImageUrl);
+    if(res.data) {
+      session.user.profileImageUrl = res.data;
+    }
+  }
+
   const isStudent = session?.email.split("@")[1] === "student.chula.ac.th";
   let userInfo = "นิสิตจุฬาลงกรณ์มหาวิทยาลัย";
   if (session && !isStudent) {

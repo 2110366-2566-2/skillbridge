@@ -4,8 +4,11 @@ import {
     pendingToAccepted,
     pendingToRejected,
 } from "@/actions/jobs/jobCards/employerChangeApplicationState";
-import Link from "next/link";
 import ProgressButton from "../ProgressButton";
+import DangerButton from "@/components/public/buttons/dangerButton/DangerButton";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import PrimaryButton from "@/components/public/buttons/primaryButton/PrimaryButton";
 
 export default function QualifyCandidateButton({
     studentId,
@@ -14,28 +17,45 @@ export default function QualifyCandidateButton({
     studentId: string;
     jobId: string;
 }) {
+    const [isDisabled, setDisabled] = useState(false);
+    const [isRejectButtonLoading, setRejectButtonLoading] = useState(false);
+    const [isAcceptButtonLoading, setAcceptButtonLoading] = useState(false);
     return (
         <div className="flex flex-row justify-between">
             <ProgressButton jobId={jobId} studentId={studentId} />
             <div className="w-1/2 flex justify-between">
-                <button
-                    className="h-[35px] bg-red-500 text-sm text-white rounded-md w-[48%] hover:opacity-80 active:opacity-60"
+                <DangerButton
+                    className="h-[35px] bg-red-500 text-sm text-white rounded-md w-[48%] hover:opacity-80 active:opacity-60 flex justify-center items-center"
+                    isLoading={isRejectButtonLoading}
+                    isDisabled={isDisabled}
                     onClick={async () => {
+                        setRejectButtonLoading(true);
+                        setDisabled(true);
                         await pendingToRejected(studentId, jobId);
+                        setRejectButtonLoading(false);
+                        setDisabled(false);
+                        toast.error("ปฏิเสธแล้ว");
                         location.reload();
                     }}
                 >
                     ปฏิเสธ
-                </button>
-                <button
-                    className="h-[35px] bg-[#334155] text-sm text-white rounded-md w-[48%] hover:opacity-80 active:opacity-60"
+                </DangerButton>
+                <PrimaryButton
+                    className="h-[35px] bg-[#334155] text-sm text-white rounded-md w-[48%] hover:opacity-80 active:opacity-60 flex justify-center items-center"
+                    isLoading={isAcceptButtonLoading}
+                    isDisabled={isDisabled}
                     onClick={async () => {
+                        setAcceptButtonLoading(true);
+                        setDisabled(true);
                         await pendingToAccepted(studentId, jobId);
+                        setAcceptButtonLoading(false);
+                        setDisabled(false);
+                        toast.success("ยืนยันแล้ว");
                         location.reload();
                     }}
                 >
                     ยืนยัน
-                </button>
+                </PrimaryButton>
             </div>
         </div>
     );

@@ -13,7 +13,7 @@ type Props = {
 export default async function CommentCard({jobId, studentId}: Props) {
     const commentObject = await getComment(jobId, studentId);
     const comment = commentObject.success ? commentObject.data : "ไม่มีรีวิว";
-    const employerId = await getEmployerFromJobId(jobId);
+    const employerId = await getEmployerFromJobId(jobId) ?? "";
     const employerInfo = await getEmployerInfoById(employerId);
     const employerName = await getStudentName(employerId);
 

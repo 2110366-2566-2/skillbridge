@@ -11,8 +11,8 @@ interface PaymentHistoryInput {
 
 const getUserPaymentHistory = async ({
   userId,
-  year,
   month,
+  year,
 }: PaymentHistoryInput) => {
   try {
     const whereCondition: any = {
@@ -60,30 +60,30 @@ const getUserPaymentHistory = async ({
 
 export { getUserPaymentHistory };
 
-// const main = async () => {
-//   // Example usage without specifying year and month
-//   const userIdWithoutDate = "45f2b0d1-1a44-4028-836e-c1da532a3cab";
-//   const userPaymentHistoryWithoutDate = await getUserPaymentHistory({
-//     userId: userIdWithoutDate,
-//   });
-//   console.log(
-//     "userPaymentHistoryWithoutDate : ",
-//     userPaymentHistoryWithoutDate,
-//   );
+const main = async () => {
+  // Example usage without specifying year and month
+  const userIdWithoutDate = "45f2b0d1-1a44-4028-836e-c1da532a3cab";
+  const userPaymentHistoryWithoutDate = await getUserPaymentHistory({
+    userId: userIdWithoutDate,
+  });
+  console.log(
+    "userPaymentHistoryWithoutDate : ",
+    userPaymentHistoryWithoutDate,
+  );
 
-//   // Example usage with specifying year and month
-//   const userIdWithDate = "4839bedf-5cdd-4d8a-b0b2-93849e585d15";
-//   const userPaymentHistoryWithDate = await getUserPaymentHistory({
-//     userId: userIdWithDate,
-//     year: 2023,
-//     month: 11,
-//   });
-//   console.log("userPaymentHistoryWithDate :", userPaymentHistoryWithDate);
+  // // Example usage with specifying year and month
+  // const userIdWithDate = "4839bedf-5cdd-4d8a-b0b2-93849e585d15";
+  // const userPaymentHistoryWithDate = await getUserPaymentHistory({
+  //   userId: userIdWithDate,
+  //   year: 2023,
+  //   month: 11,
+  // });
+  // console.log("userPaymentHistoryWithDate :", userPaymentHistoryWithDate);
 
-//   const userId = "4839bedf-5cdd-4d8a-b0b2-93849e585d15";
-//   const userTransactionMonthsAndYears =
-//     await getUserTransactionMonthsAndYears(userId);
-//   console.log("serTransactionMonthsAndYears : ", userTransactionMonthsAndYears);
-// };
+  // const userId = "4839bedf-5cdd-4d8a-b0b2-93849e585d15";
+  // const userTransactionMonthsAndYears =
+  //   await getUserTransactionMonthsAndYears(userId);
+  // console.log("serTransactionMonthsAndYears : ", userTransactionMonthsAndYears);
+};
 
-// main();
+main();
