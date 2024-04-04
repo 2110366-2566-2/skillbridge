@@ -14,7 +14,7 @@ export default function ChatCardListStudent({ studentId }: Props) {
     const [employers, setEmployers] = useState<StudentChatListData[]>([])
     const chatListReloadState = useAppSelector((state) => state.auth.chatListReloadState);
     // const employers = await getStudentChatListData(studentId)
-    console.log("Initial state: ", chatListReloadState)
+    // console.log("Initial state: ", chatListReloadState)
     useEffect(() => {
         async function getChatList() {
             try {

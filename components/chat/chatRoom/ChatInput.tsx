@@ -47,7 +47,7 @@ export default function ChatInput({ isStudent, chatroomId }: Props) {
         }
     }
 
-    const handleImageInput = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleImageInput = async (e: ChangeEvent<HTMLInputElement>) => {
         // console.log("CLICKED AT IMAGE INPUT ><")
         if (e.target.files === null) {
             return;
@@ -60,7 +60,10 @@ export default function ChatInput({ isStudent, chatroomId }: Props) {
         if (!imageFile) {
             return;
         }
-        sendImage(imageFile);
+
+        await sendImage(imageFile); // Wait for sendImage to complete
+
+        dispatch(toggleChatListReload()); // Dispatch only after completion
     }
 
 

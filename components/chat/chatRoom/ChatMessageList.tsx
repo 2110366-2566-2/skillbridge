@@ -15,7 +15,7 @@ type Props = {
 export default function ChatMessageList({ chatroomId, senderId }: Props) {
     const [messagesByDate, setMessagesByDate] = useState<MessagesGroupByDate[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    
+
     useEffect(() => {
         const incommingMessageHandler = constructIncommingMessageHandler(setMessagesByDate);
         setIncommingMessageHandler(incommingMessageHandler);
@@ -57,7 +57,7 @@ export default function ChatMessageList({ chatroomId, senderId }: Props) {
     }, [messagesByDate]);
 
     // console.log("chat list reloading")
-    console.log("chat list page function executing");
+    // console.log("chat list page function executing");
 
     return (
         <>

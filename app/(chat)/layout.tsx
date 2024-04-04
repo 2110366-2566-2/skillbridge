@@ -22,7 +22,10 @@ export default async function NavigationLayout({
       {/* Desktop */}
       <div className="hidden lg:flex flex-col justify-between min-h-full bg-slate-800">
         <Header />
-        <DesktopChatPage children={children} isStudent={isStudent} userId={userId} />
+        {/* <DesktopChatPage children={children} isStudent={isStudent} userId={userId} /> */}
+        <DesktopChatPage isStudent={isStudent} userId={userId}>
+          {children}
+        </DesktopChatPage>
         {/* <div className="rounded-3xl bg-slate-50 min-h-[80vh] p-5"> */}
         {/* TODO : Container */}
         {/* <div className="flex gap-4">
