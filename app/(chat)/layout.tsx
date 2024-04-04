@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import ChatCardListStudent from "@/components/chat/chatCardList/student/ChatCardListStudent";
 import ChatGroupListEmployer from "@/components/chat/chatCardList/employer/ChatGroupListEmployer";
+import DesktopChatPage from "@/components/chat/DesktopChatPage";
 
 export default async function NavigationLayout({
   children,
@@ -21,9 +22,10 @@ export default async function NavigationLayout({
       {/* Desktop */}
       <div className="hidden lg:flex flex-col justify-between min-h-full bg-slate-800">
         <Header />
-        <div className="rounded-3xl bg-slate-50 min-h-[80vh] p-5">
-          {/* TODO : Container */}
-          <div className="flex gap-4">
+        <DesktopChatPage children={children} isStudent={isStudent} userId={userId} />
+        {/* <div className="rounded-3xl bg-slate-50 min-h-[80vh] p-5"> */}
+        {/* TODO : Container */}
+        {/* <div className="flex gap-4">
             {isStudent ? (
               // TODO : Desktop Student Chat list
               userId !== null && (
@@ -40,9 +42,9 @@ export default async function NavigationLayout({
               )
             )}
             {/* TODO : Container of Chat room (chat/page.tsx & [userId]/page.tsx) */}
-            <div className="w-full">{children}</div>
-          </div>
-        </div>
+        {/* <div className="w-full">{children}</div> */}
+        {/* </div> */}
+        {/* </div> */}
         <Footer />
       </div>
 

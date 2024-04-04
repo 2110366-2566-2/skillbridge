@@ -2,6 +2,7 @@ import React from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import ChatRoom from "@/components/chat/chatRoom/ChatRoom";
+import ChatRoomSection from "@/components/chat/ChatRoomSection";
 
 export default async function ChatRoomPage({
   params,
@@ -23,7 +24,8 @@ export default async function ChatRoomPage({
     <>
       {/* TODO : Desktop & Mobile Student/Employer Chat room */}
       <div>
-        <ChatRoom isStudent={isStudent} chatroomId={chatroomId} senderId={senderId} />
+        {/* <ChatRoom isStudent={isStudent} chatroomId={chatroomId} senderId={senderId} /> */}
+        <ChatRoomSection isStudent={isStudent} chatroomId={chatroomId} senderId={senderId} />
       </div>
     </>
   );
