@@ -8,7 +8,7 @@ import { Session } from "next-auth"
 import updateProfile from "@/actions/profile/updateProfile"
 import { revalidatePath } from "next/cache"
 
-export default function EditProfile({
+export default function EditStudentProfile({
   showEditProfile,
   toggleEditProfile,
   oldDescription,

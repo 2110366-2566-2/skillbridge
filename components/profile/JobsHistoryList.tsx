@@ -2,7 +2,7 @@
 import Image from "next/image"
 import JobHistory from "./subProfile/JobHistory"
 
-export default function JobsHistoryList({ allJobsHistory, studentId }: { allJobsHistory: any; studentId: string }) {
+export default function JobsHistoryList({ allJobsHistory, userId, isStudent }: { allJobsHistory: any; userId: string; isStudent: boolean; }) {
 
   return (
     <div className="mt-[20px] w-full md:max-w-[600px] md:mt-0">
@@ -13,18 +13,14 @@ export default function JobsHistoryList({ allJobsHistory, studentId }: { allJobs
             {allJobsHistory.map((job: any, index: number) => (
               <JobHistory
                 key={index}
-                studentId={studentId}
+                userId={userId}
                 jobId={job.jobId}
                 jobTitle={job.job.title}
                 jobPeriod={`${job.job.estimateStartDate.toLocaleDateString("en-US")} - ${job.job.estimateEndDate.toLocaleDateString("en-US")}`}
                 jobTag={job.job.jobTag.title}
+                isStudent={isStudent}
               />
             ))}
-            {/* <JobHistory
-              jobTitle="งานที่อยากทำมันมีด้;ยหรอฟร่ะ ยากมากมายเอ้าก่ายกอง"
-              jobPeriod="26/02/67 - 30/02/67"
-              jobTag="การเรียน"
-            /> */}
           </div>
         ) : (
           <div className="mt-[40px] md:mt-[100px]">

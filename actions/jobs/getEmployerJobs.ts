@@ -76,6 +76,8 @@ async function getEmployerJobs() {
     });
 
     return output;
+  } else {
+    return [];
   }
 }
 export { getEmployerJobs };

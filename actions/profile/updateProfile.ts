@@ -45,7 +45,7 @@ const updateProfile = async (formData: FormData) => {
         },
       },
     })
-    revalidatePath("/profile/[studentId]", "page");
+    revalidatePath("/profile/[userId]", "page");
     return student
   } catch (error) {
     console.error("Error in updateProfile:", error)
