@@ -41,12 +41,13 @@ async function studentApplicationExists(jobId: string, studentId: string) {
 
 function validateRequestBody(jobId: string, studentId: string, stars: number, description: string) {
     const requestBodyArray = [jobId, studentId, stars, description];
-    
-    requestBodyArray.forEach((element) => {
+
+    for (let i=0; i<requestBodyArray.length; i++) {
+        const element = requestBodyArray[i];
         if (element === undefined || element === null) {
             return false;
         }
-    })
+    }
 
     if (stars < 0 || stars > 5) {
         return false;
@@ -111,6 +112,7 @@ export async function POST(req: Request) {
             }
         });
     } catch(err) {
+        console.log(err);
         return Response.json({
             success: false,
             message: "Failed to create a new review"
