@@ -11,15 +11,16 @@ const getStudentByJob = async (jobId: string) => {
       },
       include: {
         user: {
-          select: {
-            salutation: true,
-            firstname: true,
-            middlename: true,
-            lastname: true,
-            profileImageUrl: true,
-            lineId: true,
-            facebook: true,
-            email: true,
+          include: {
+            student: {
+              select: {
+                reviews: {
+                  where: {
+                    jobId : jobId
+                  }
+                }
+              },
+            }
           },
         },
         applicationDocumentFiles: {
@@ -38,13 +39,16 @@ const getStudentByJob = async (jobId: string) => {
 export default getStudentByJob;
 
 // const main = async () => {
-//   const jobId = "13d5b60d-332f-4b8a-8024-b12ebc8ea559";
+//   const jobId = "93776d2d-0104-422d-8a70-8904cd749371";
 //   const result = await getStudentByJob(jobId);
 //   console.log("\n")
 //   console.log("This is response from 'getStudentByJob(jobId)' action : \n", result);
+  
 //   console.log("\n")
-//   if(result)
+//   if(result) {
+//   console.log(result[0].user.student)
 //   console.log("Inside the 'applicationDocumentFiles' is look like this : \n", result[0].applicationDocumentFiles);
+//   }
 // };
 // main();
 

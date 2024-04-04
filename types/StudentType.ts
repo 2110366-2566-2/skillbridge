@@ -9,4 +9,5 @@ export type Student = {
   updatedAt: Date;
   status: string;
   bid: number;
+  isReviewed: boolean;
 };
