@@ -90,6 +90,7 @@ function JobManagePanel({ jobId }: Props) {
                                     applicationDate={student.updatedAt}
                                     status={student.status}
                                     price={student.bid}
+                                    isReviewed={student.isReviewed}
                                 />
                             </div>
                         );

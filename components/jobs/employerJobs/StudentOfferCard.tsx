@@ -12,6 +12,7 @@ type Props = {
     applicationDate: Date;
     status: string;
     price: number;
+    isReviewed: boolean;
 };
 
 const colorMatcher: Map<string, string> = new Map<string, string>([
@@ -34,6 +35,7 @@ function StudentOfferCard({
     applicationDate,
     status,
     price,
+    isReviewed,
 }: Props) {
     const [isDropDownOpen, setDropDownOpen] = useState(false);
 
@@ -85,6 +87,7 @@ function StudentOfferCard({
                     studentId={studentId}
                     status={status}
                     role="employer"
+                    isReviewed={isReviewed}
                 />
             </div>
         </div>

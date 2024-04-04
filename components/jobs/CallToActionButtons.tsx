@@ -17,9 +17,10 @@ type Props = {
     status: string;
     role: string;
     employerId?: string;
+    isReviewed: boolean;
 }
 
-function CallToActionButtons({jobId, studentId = "", status, role, employerId= ""}: Props) {
+function CallToActionButtons({jobId, studentId = "", status, role, employerId= "", isReviewed}: Props) {
 
     if(role === "student")
     {
