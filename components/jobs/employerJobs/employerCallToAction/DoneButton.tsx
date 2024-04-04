@@ -21,12 +21,12 @@ export default function DoneButton({
             <ProgressButton jobId={jobId} studentId={studentId} />
             {!isReviewed ? 
                 <PrimaryButton 
-                    className="w-[83px] h-[36px] px-[1px] py-[8px]"
+                    className="w-[83px] h-[36px] px-0 py-[8px]"
                     onClick={reviewButtonOnClick}
                 >รีวิวนิสิต</PrimaryButton>
                 : 
                 <PrimaryButton 
-                    className="w-[83px] h-[36px] px-[1px] py-[8px]"
+                    className="w-[83px] h-[36px] px-0 py-[8px]"
                     isDisabled={true}
                 >
                     รีวิวแล้ว
