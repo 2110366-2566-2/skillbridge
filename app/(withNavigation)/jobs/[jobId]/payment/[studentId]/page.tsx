@@ -1,5 +1,5 @@
 import { getPaymentInfo } from "@/actions/payment/paymentinfo"
-import Payment from "@/components/payment/payment"
+import Payment from "@/components/payment/Payment"
 import { calculateRealAmount, calculateComAmount, calculateTotalAmount } from "@/lib/payment"
 
 export default async function PaymentPage({
