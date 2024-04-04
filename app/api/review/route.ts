@@ -1,6 +1,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import { prisma } from "@/lib/prisma";
+import { reqBody } from "./postBody";
 
 async function validateJobOwner(employerId: string, jobId: string) {
     try {
@@ -55,9 +56,9 @@ function validateRequestBody(jobId: string, studentId: string, stars: number, de
 }
 
 export async function POST(req: Request) {
-    const { jobId, studentId, stars, description } = await req.json();
+    const reqBody: reqBody = await req.json();
 
-    console.log(jobId, studentId, stars, description);
+    const { jobId, studentId, stars, description } = reqBody;
 
     if (!validateRequestBody(jobId, studentId, stars, description)) {
         return Response.json({
@@ -100,18 +101,26 @@ export async function POST(req: Request) {
         });
     }
     
-    const newReview = await prisma.review.create({
-        data: {
-            jobId: jobId,
-            description: description,
-            studentId: studentId,
-            stars: stars
-        }
-    });
+    try {
+        await prisma.review.create({
+            data: {
+                jobId: jobId,
+                description: description,
+                studentId: studentId,
+                stars: stars
+            }
+        });
+    } catch(err) {
+        return Response.json({
+            success: false,
+            message: "Failed to create a new review"
+        }, {
+            status: 500
+        });
+    }
 
     return Response.json({
         success: true,
         message: "Successfully create a review",
-        reviewId: newReview.id
     });
 }
