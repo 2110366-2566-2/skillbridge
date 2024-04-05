@@ -40,16 +40,16 @@ export default function ReviewModal({
                 <RatingStars stars={stars} setStars={setStars} className="mb-[20px]"/>
                 <p className="font-medium text-[14px] leading-[14px] h-[14px] text-[#475569] mb-[8px]">เขียนรีวิว</p>
                 <div className="h-[104px] m-0 p-0">
-                <TextAreaInput 
-                    label={""} 
-                    value={description} 
-                    name={""} 
-                    placeholder={"เขียนรีวิวนิสิตที่นี่"} 
-                    onChange={(e:React.ChangeEvent<HTMLTextAreaElement>) => {
-                        setDescription(e.target.value);
-                    }} 
-                    isDisabled={false} 
-                />
+                    <TextAreaInput 
+                        label={""} 
+                        value={description} 
+                        name={""} 
+                        placeholder={"เขียนรีวิวนิสิตที่นี่"} 
+                        onChange={(e:React.ChangeEvent<HTMLTextAreaElement>) => {
+                            setDescription(e.target.value);
+                        }} 
+                        isDisabled={false} 
+                    />
                 </div>
                 <div className="flex flex-row gap-[20px]">
                     <SecondaryButton 
