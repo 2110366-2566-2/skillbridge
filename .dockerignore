@@ -6,6 +6,7 @@ elasticsearch
 logstash
 node_modules
 npm-debug.log
+app/(api-doc)
 README.md
 .next
 .git
