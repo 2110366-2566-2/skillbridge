@@ -1,6 +1,9 @@
 import { ConsoleSqlOutlined } from "@ant-design/icons";
 import ProgressButton from "../ProgressButton";
 import PrimaryButton from "@/components/public/buttons/primaryButton/PrimaryButton";
+import EditProfile from "@/components/profile/EditProfile";
+import ReviewModal from "../review/ReviewModal";
+import { useState } from "react";
 
 export default function DoneButton({
     studentId,
@@ -11,8 +14,13 @@ export default function DoneButton({
     jobId: string;
     isReviewed: boolean;
 }) {
+
+    isReviewed = false; // for testing purpose DONT FORGET TO REMOVE THIS LINE
+
+    const [showReviewModal, setShowReviewModal] = useState<boolean>(false);
     
     async function reviewButtonOnClick() {
+        setShowReviewModal(true);
         return null;
     }
 
@@ -31,6 +39,9 @@ export default function DoneButton({
                 >
                     รีวิวแล้ว
                 </PrimaryButton>
+            }
+            {
+                showReviewModal ? <ReviewModal setShowReviewModal={setShowReviewModal}/> : null
             }
         </div>
     );
