@@ -56,15 +56,74 @@ function validateRequestBody(jobId: string, studentId: string, stars: number, de
     return true;
 }
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Review:
+ *       type: object
+ *       required: 
+ *       - jobId
+ *       - studentId
+ *       - stars
+ *       - description
+ *       properties:
+ *         jobId:
+ *           type: string
+ *         studentId:
+ *           type: string
+ *         stars:
+ *           type: integer
+ *         description:
+ *           type: string
+ *       example:
+ *         jobId: 2f1e0cc5-925a-4866-bdb4-612f1cb53145
+ *         studentId: 78bcc173-719d-4391-afb7-a5dca6d993a2
+ *         stars: 5
+ *         description: Really Good!
+ */
+
+/**
+ * @swagger
+ * /api/review:
+ *   post:
+ *     summary: create a new review
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Review'
+ *     responses:
+ *       201: 
+ *         description: Successfully create a review
+ *       400: 
+ *         description: Invalid request body.
+ *       401: 
+ *         description: Unauthorized
+ *       500: 
+ *         description: Failed to create a review
+ */
+
 export async function POST(req: Request) {
-    const reqBody: reqBody = await req.json();
+    let reqBody: reqBody;
+    try {
+        reqBody = await req.json();
+    } catch (err) {
+        return Response.json({
+            success: false,
+            message: "Please provide valid jobId, studentId, stars and description"
+        }, {
+            status: 400
+        });
+    }
 
     const { jobId, studentId, stars, description } = reqBody;
 
     if (!validateRequestBody(jobId, studentId, stars, description)) {
         return Response.json({
             success: false,
-            message: "Please provide jobId, studentId, stars and description"
+            message: "Please provide valid jobId, studentId, stars and description"
         }, {
             status: 400
         });
@@ -98,7 +157,7 @@ export async function POST(req: Request) {
             success: false,
             message: "Application does not exists"
         }, {
-            status: 401
+            status: 400
         });
     }
     
@@ -124,5 +183,7 @@ export async function POST(req: Request) {
     return Response.json({
         success: true,
         message: "Successfully create a review",
+    }, {
+        status: 201
     });
 }
