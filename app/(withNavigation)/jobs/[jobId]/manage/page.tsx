@@ -1,10 +1,12 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { redirect } from "next/navigation";
 import CloseJobButton from "@/components/jobManage/CloseJobButton";
 import JobDetail from "@/components/offering/JobDetail";
 import getJobById from "@/actions/jobs/getJobByID";
 import JobManagementPanel from "@/components/jobManage/JobManagementPanel";
 import isJobClosed from "@/actions/createAndUpdateJobs/isJobClosed";
+import { getServerSession } from "next-auth";
+import LoadingJobCard from "@/components/jobs/employerJobs/LoadingJobCard";
 
 type Props = {
     params: {
@@ -13,13 +15,19 @@ type Props = {
 };
 
 async function ManagePage({ params }: Props) {
+    const session = await getServerSession();
+    if (!session) {
+        redirect("/login");
+    }
+
     const jobId = params.jobId;
 
     const jobData = (await getJobById(jobId)) || {};
     if (jobData == null) {
         redirect("/jobs");
     }
-    const isApplicationClosed: boolean = (await isJobClosed(jobId)).isClosed??true;
+    const isApplicationClosed: boolean =
+        (await isJobClosed(jobId)).isClosed ?? true;
 
     return (
         <main className="flex flex-col px-10 gap-10">
@@ -44,8 +52,9 @@ async function ManagePage({ params }: Props) {
                     {/* job detail */}
                     <JobDetail jobId={jobId} isStudentView={false} />
                 </article>
-
-                <JobManagementPanel jobId={jobId} />
+                <Suspense>
+                    <JobManagementPanel jobId={jobId} />
+                </Suspense>
             </section>
         </main>
     );
