@@ -15,9 +15,10 @@ export default function DoneButton({
     isReviewed: boolean;
 }) {
 
-    isReviewed = false; // for testing purpose DONT FORGET TO REMOVE THIS LINE
-
+    // isReviewed = false; // for testing purpose DONT FORGET TO REMOVE THIS LINE
+    
     const [showReviewModal, setShowReviewModal] = useState<boolean>(false);
+    const [reviewAble, setReviewAble] = useState<boolean>(!isReviewed);
     
     async function reviewButtonOnClick() {
         setShowReviewModal(true);
@@ -27,7 +28,7 @@ export default function DoneButton({
     return (
         <div className="w1/2 flex flex-row justify-between">
             <ProgressButton jobId={jobId} studentId={studentId} />
-            {!isReviewed ? 
+            {reviewAble ? 
                 <PrimaryButton 
                     className="w-[83px] h-[36px] !px-[0px] py-[8px]"
                     onClick={reviewButtonOnClick}
@@ -41,7 +42,14 @@ export default function DoneButton({
                 </PrimaryButton>
             }
             {
-                showReviewModal ? <ReviewModal setShowReviewModal={setShowReviewModal}/> : null
+                showReviewModal ? 
+                    <ReviewModal
+                        studentId={studentId}
+                        jobId={jobId} 
+                        setShowReviewModal={setShowReviewModal}
+                        setReviewAble={setReviewAble}
+                    /> : 
+                    null
             }
         </div>
     );
