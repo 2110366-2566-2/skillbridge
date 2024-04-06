@@ -40,9 +40,9 @@ const StudentJobsMenu = (props: Props) => {
             setFirstPageData(fetchedRawData[0] as applicationInfo[]);
             setSecondPageData(fetchedRawData[1] as applicationInfo[]);
             setThirdPageData(fetchedRawData[2] as applicationInfo[]);
-            setIsLoading(false);
             const studentId = await getStudentUserId();
             setStudentId(studentId);
+            setIsLoading(false);
         }
         fetchData();
     }, []);

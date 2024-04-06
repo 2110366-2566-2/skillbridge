@@ -4,6 +4,7 @@ import { applicationInfo } from "@/actions/jobs/jobCards/fetchJobCards";
 import SearchNotFound from "@/components/searchJob/SearchNotFound";
 import StudentJobCard from "./StudentJobCard";
 import { getStudentUserId } from "@/actions/jobs/jobCards/utils";
+import LoadingStudentJobCard from "./LoadingStudentJobCard";
 
 type Props = {
     isLoading: boolean;
@@ -36,11 +37,7 @@ function StudentJobsPanel({
         <main className="flex flex-col">
             <main className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 grid-flow-row gap-10">
                 {isLoading ? (
-                    <div className="flex justify-center items-center">
-                        <div className="font-medium text-lg text-slate-500 mt-4 mx-auto md:text-2xl md:my-6 lg:font-normal">
-                            กำลังโหลดข้อมูล
-                        </div>
-                    </div>
+                    Array.from({ length: 12 }).map((_, index) => (<LoadingStudentJobCard key={index} />))
                 ) : // check if it is empty
 
                 isDone === false ? (

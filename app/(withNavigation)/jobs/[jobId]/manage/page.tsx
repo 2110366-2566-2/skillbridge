@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { redirect } from "next/navigation";
 import CloseJobButton from "@/components/jobManage/CloseJobButton";
 import JobDetail from "@/components/offering/JobDetail";
@@ -6,6 +6,7 @@ import getJobById from "@/actions/jobs/getJobByID";
 import JobManagementPanel from "@/components/jobManage/JobManagementPanel";
 import isJobClosed from "@/actions/createAndUpdateJobs/isJobClosed";
 import { getServerSession } from "next-auth";
+import LoadingJobCard from "@/components/jobs/employerJobs/LoadingJobCard";
 
 type Props = {
     params: {
@@ -51,8 +52,9 @@ async function ManagePage({ params }: Props) {
                     {/* job detail */}
                     <JobDetail jobId={jobId} isStudentView={false} />
                 </article>
-
-                <JobManagementPanel jobId={jobId} />
+                <Suspense>
+                    <JobManagementPanel jobId={jobId} />
+                </Suspense>
             </section>
         </main>
     );

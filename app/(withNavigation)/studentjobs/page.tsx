@@ -10,7 +10,9 @@ export default async function StudentJobsPage() {
     }
     return (
         <div className="px-10">
-            <StudentJobsMenu />
+            <React.Suspense>
+                <StudentJobsMenu />
+            </React.Suspense>
         </div>
     );
 }
