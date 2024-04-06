@@ -1,11 +1,19 @@
 import { Message, MessagesGroupByDate } from "@/actions/chat/getMessageByChatRoom";
+import { ChatListReloadState } from "@/redux/features/chatListSlice";
 import { toClientMessage } from "@/types/chat";
+import { ActionCreatorWithoutPayload, ThunkDispatch, UnknownAction } from "@reduxjs/toolkit";
 import { Dispatch, SetStateAction } from "react";
 
 type messageByDateSetter = Dispatch<SetStateAction<MessagesGroupByDate[]>>;
 
 // this function is dedicated to ChatMessageList component
-export function constructIncommingMessageHandler(setMessagesByDate: messageByDateSetter) {
+export function constructIncommingMessageHandler(
+    setMessagesByDate: messageByDateSetter,
+    dispatch: ThunkDispatch<{
+        auth: ChatListReloadState;
+    }, undefined, UnknownAction> & Dispatch<UnknownAction>,
+    toggleChatListReload: ActionCreatorWithoutPayload<"chatList/toggleChatListReload">
+) {
     // construct an event handler with the given messagesByDate setter
     const inComingMessageHandler = (message: toClientMessage) => {
         setMessagesByDate((messagesByDate) => {
@@ -40,6 +48,8 @@ export function constructIncommingMessageHandler(setMessagesByDate: messageByDat
             messagesByDate[messagesByDate.length - 1].Messages.push(newMessage);
             return [...messagesByDate];
         });
+
+        dispatch(toggleChatListReload());
     }
 
     return inComingMessageHandler;

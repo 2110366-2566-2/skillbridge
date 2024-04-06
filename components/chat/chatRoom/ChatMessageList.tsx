@@ -4,6 +4,8 @@ import { useRef, useEffect, useState } from "react"
 import { MessagesGroupByDate, getMessageByChatRoom } from "@/actions/chat/getMessageByChatRoom"
 import { setIncommingMessageHandler } from "../clientSocket/clientSocket"
 import { constructIncommingMessageHandler } from "../clientSocket/utils"
+import { useAppDispatch } from "@/redux/store"
+import { toggleChatListReload } from "@/redux/features/chatListSlice";
 
 type Props = {
     isStudent: boolean,
@@ -16,8 +18,10 @@ export default function ChatMessageList({ chatroomId, senderId }: Props) {
     const [messagesByDate, setMessagesByDate] = useState<MessagesGroupByDate[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
+    const dispatch = useAppDispatch();
+
     useEffect(() => {
-        const incommingMessageHandler = constructIncommingMessageHandler(setMessagesByDate);
+        const incommingMessageHandler = constructIncommingMessageHandler(setMessagesByDate, dispatch, toggleChatListReload);
         setIncommingMessageHandler(incommingMessageHandler);
     }, []);
 
