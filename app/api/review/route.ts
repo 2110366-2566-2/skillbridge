@@ -16,7 +16,7 @@ async function validateJobOwner(employerId: string, jobId: string) {
 
         return job.employerId === employerId;
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         return false;
     }
 }
@@ -34,7 +34,7 @@ async function studentApplicationExists(jobId: string, studentId: string) {
 
         return true;
     } catch (err) {
-        console.log("application", err);
+        // console.log("application", err);
         return false;
     }
 }
