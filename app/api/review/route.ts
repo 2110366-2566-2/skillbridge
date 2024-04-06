@@ -56,6 +56,18 @@ function validateRequestBody(jobId: string, studentId: string, stars: number, de
     return true;
 }
 
+async function studentReviewExists(jobId: string, studentId: string) {
+    const count = await prisma.review.count({
+        where: {
+            studentId: studentId,
+            jobId: jobId,
+            isDeleted: false
+        }
+    });
+
+    return count > 0;
+}
+
 /**
  * @swagger
  * components:
@@ -159,6 +171,16 @@ export async function POST(req: Request) {
         }, {
             status: 400
         });
+    }
+
+    const reviewExists = await studentReviewExists(studentId, jobId);
+    if (reviewExists) {
+        return Response.json({
+            success: false,
+            message: "Review already exists"
+        }, {
+            status: 400
+        })
     }
     
     try {
