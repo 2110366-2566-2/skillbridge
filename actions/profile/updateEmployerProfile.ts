@@ -35,7 +35,8 @@ const updateEmployerProfile = async (formData: FormData) => {
         },
       },
     })
-    revalidatePath("/profile/[userId]", "page");
+    // revalidatePath("/profile/[userId]", "page");
+    revalidatePath('/')
     return employer
   } catch (error) {
     console.error("Error in updateEmployerProfile:", error)

@@ -3,40 +3,40 @@ import FilesInput from "@/components/public/input/fileInput/FileInput"
 import PrimaryButton from "@/components/public/buttons/primaryButton/PrimaryButton"
 import toast from "react-hot-toast"
 import { ChangeEvent, useState } from "react"
-import { useRouter } from "next/navigation"
 import { Session } from "next-auth"
-import updateProfile from "@/actions/profile/updateProfile"
+import { updateEmployerProfile } from "@/actions/profile/updateStudentProfile"
 import Input from "../public/input/input/Input"
+import SecondaryButton from "../public/buttons/secondaryButton/SecondaryButton"
 
 interface FormData {
   organization: string;
-  postition: string;
+  position: string;
   description: string;
 }
 
-export default function EditStudentProfile({
+export default function EditEmployerProfile({
   showEditProfile,
   toggleEditProfile,
-  oldDescription,
-  session,
+  prevDescription,
+  prevOrganization,
+  prevPosition,
   employerId,
 }: {
   showEditProfile: boolean
   toggleEditProfile: () => void
-  oldDescription: string
+  prevDescription: string
+  prevOrganization: string
+  prevPosition: string
   session: Session | null
   employerId: string
 }) {
   const [formData, setFormData] = useState<FormData>({
-    organization: "",
-    postition: "",
-    description: ""
+    organization: prevOrganization,
+    position: prevPosition,
+    description: prevDescription
   });
   const [profileFiles, setProfileFiles] = useState<FileList | null>(null)
-  const [isDisabled, setDisabled] = useState(false)
   const [primaryLoading, setPrimaryLoading] = useState(false)
-
-  const router = useRouter()
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -50,24 +50,21 @@ export default function EditStudentProfile({
 
   const handleEditProfile = async () => {
     setPrimaryLoading((prev) => !prev)
-    setDisabled(true)
-
+    // construct formDataObject
     const formDataObject = new FormData()
-    formDataObject.append("profile", profileFiles[0]);
+    profileFiles ? formDataObject.append("profile", profileFiles[0]) : null
     formDataObject.append("organization", formData.organization);
-    formDataObject.append("position", formData.postition);
+    formDataObject.append("position", formData.position);
     formDataObject.append("employerId", employerId)
-
-    const result = await updateProfile(formDataObject)
-    // 3 อันคือ profileFiles, resumeFiles, description
-    // profile กับ resume ถ้าอันใดอันหนึ่งไม่เป็น null ก็แก้ไขใน database
-    // description แก้ไขทุกรอบที่ submit
-    toast.success("แก้ไขโปรไฟล์สำเร็จ")
+    // update profile on backend
+    const result = await updateEmployerProfile(formDataObject)
+    if(result) {
+      toast.success("แก้ไขโปรไฟล์สำเร็จ")
+    } else {
+      toast.error("แก้ไขโปรไฟล์ไม่สำเร็จ")
+    }
     setPrimaryLoading((prev) => !prev)
-    setDisabled(false)
     toggleEditProfile()
-
-    // redirect กลับมาหน้าโปรไฟล์แบบ rerender page ใหม่
   }
 
   return (
@@ -75,7 +72,6 @@ export default function EditStudentProfile({
       <div
         className="w-full h-full duration-300 overflow-x-hidden fixed inset-0 z-50 bg-[#262626] bg-opacity-[60%] px-[20px]"
         onClick={() => {
-          // setDescription("")
           toggleEditProfile()
         }}>
         <div className="flex justify-center">
@@ -89,7 +85,7 @@ export default function EditStudentProfile({
               label="อัพโหลดรูปโปรไฟล์"
               files={profileFiles}
               setFiles={setProfileFiles}
-              isDisabled={isDisabled}
+              isDisabled={primaryLoading}
               isPdfAllow={false}
               isImageAllow={true}
               isMultipleFilesAllow={false}
@@ -107,7 +103,7 @@ export default function EditStudentProfile({
             <Input
               type="text"
               label="ตำแหน่ง"
-              value={formData.postition}
+              value={formData.position}
               name="position"
               placeholder="หัวหน้าแผนกการตลาด"
               onChange={handleChange}
@@ -120,7 +116,7 @@ export default function EditStudentProfile({
               <textarea
                 id="text-area"
                 name="description"
-                className="h-[100px] rounded-[6px] border border-[#CBD5E1] px-[10px] py-[5px] "
+                className="h-[100px] rounded-[6px] border border-[#CBD5E1] px-[10px] py-[5px] bg-slate-50 disabled:opacity-60"
                 onChange={handleChange}
                 value={formData.description}
                 disabled={primaryLoading}
@@ -128,19 +124,18 @@ export default function EditStudentProfile({
               />
             </div>
 
-            <div className="mt-[20px] flex justify-between">
-              <button
-                className="w-[47%] rounded-[6px] border border-[#E2E8F0] text-[#0F172A] py-[10px] hover:opacity-[80%] active:opacity-[60%]"
-                onClick={() => {
-                  // setDescription("")
-                  toggleEditProfile()
-                }}>
+            <div className="mt-[20px] flex gap-5">
+              <SecondaryButton
+                isDisabled={primaryLoading}
+                onClick={() => toggleEditProfile()}
+                className="w-full"
+              >
                 ยกเลิก
-              </button>
+              </SecondaryButton>
               <PrimaryButton
                 type="submit"
-                isDisabled={isDisabled}
-                className="w-[47%] rounded-[6px] text-[#FFFFFF] bg-[#334155] py-[10px] hover:opacity-[80%] active:opacity-[60%]"
+                className="w-full"
+                isDisabled={primaryLoading}
                 isLoading={primaryLoading}
                 onClick={handleEditProfile}
                 loadingMessage="กำลังดำเนินการ">

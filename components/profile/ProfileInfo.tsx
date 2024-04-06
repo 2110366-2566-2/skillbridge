@@ -4,31 +4,34 @@ import RatingScore from "./subProfile/RatingScore"
 import { Session } from "next-auth"
 import { useState } from "react"
 import EditStudentProfile from "./EditStudentProfile"
+import EditEmployerProfile from "./EditEmployerProfile"
 
 export default function ProfileInfo({
   userId,
-  profileImageURL,
-  userName,
-  averageScore,
-  portfolioURL,
-  description,
-  workingNumber,
-  workingComplete,
   session,
   isStudent,
-  employerInfo
+  fullName,
+  profileImageURL,
+  description,
+  averageScore,
+  portfolioURL,
+  workingNumber,
+  workingComplete,
+  organization,
+  position,
 }: {
   userId: string
-  profileImageURL: string
-  userName: string
-  averageScore: number
-  portfolioURL: string
-  description: string
-  workingNumber?: number
-  workingComplete?: number
   session: Session | null
   isStudent: boolean
-  employerInfo?: string
+  fullName: string
+  profileImageURL: string
+  description: string
+  averageScore: number
+  portfolioURL: string
+  workingNumber?: number
+  workingComplete?: number
+  organization?: string
+  position?: string
 }) {
   const isEditable = session?.user?.id === userId
 
@@ -59,11 +62,11 @@ export default function ProfileInfo({
 
         <div className="flex flex-col">
           <p className="font-bold text-[21px] text-[#334155] line-clamp-1 lg:text-[28px]">
-            {userName}
+            {fullName}
           </p>
 
           <p className="text-[13px] text-slate-600 mb-[7px] md:text-[14px] lg:text-[17px] lg:mb-[4px]">
-            {isStudent? "นิสิตจุฬาลงกรณ์มหาวิทยาลัย" : (employerInfo)}
+            {isStudent? "นิสิตจุฬาลงกรณ์มหาวิทยาลัย" : `${position} ${organization}`}
           </p>
           {isStudent &&
             <RatingScore averageScore={averageScore} />
@@ -122,14 +125,28 @@ export default function ProfileInfo({
           <p className="text-[14px] font-medium text-slate-600 md:text-[18px]">แก้ไขโปรไฟล์</p>
         </div>
       )}
-
-      <EditStudentProfile
-        showEditProfile={showEditProfile}
-        toggleEditProfile={toggleEditProfile}
-        oldDescription={description ? description : ""}
-        session={session}
-        studentId={userId}
-      />
+      {
+        isStudent ? (
+          <EditStudentProfile
+            showEditProfile={showEditProfile}
+            toggleEditProfile={toggleEditProfile}
+            oldDescription={description ? description : ""}
+            session={session}
+            studentId={userId}
+          />
+        ) : (
+          <EditEmployerProfile
+            showEditProfile={showEditProfile}
+            toggleEditProfile={toggleEditProfile}
+            prevDescription={description || ""}
+            prevOrganization={organization || ""}
+            prevPosition={position || ""}
+            session={session}
+            employerId={userId}
+          />    
+        )
+      }
+      
       {/* <DeleteModal isDisabled={false} deleteAction={null} /> */}
     </div>
   )

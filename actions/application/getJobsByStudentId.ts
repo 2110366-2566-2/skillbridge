@@ -1,6 +1,29 @@
-import { prisma } from "../../lib/prisma"
+import { prisma } from "../../lib/prisma";
 
-const getJobsByStudentId = async (studentId: string) => {
+export interface JobTag {
+  title: string;
+}
+
+export interface Job {
+  title: string;
+  estimateStartDate: Date;
+  estimateEndDate: Date;
+  jobTag: JobTag;
+}
+
+export interface JobsByStudent {
+  userId: string;
+  jobId: string;
+  bid: number;
+  status: string;
+  isDeleted: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  isAcknowledged: boolean;
+  job: Job;
+}
+
+const getJobsByStudentId = async (studentId: string): Promise<JobsByStudent[]> => {
   try {
     const jobs = await prisma.application.findMany({
       where: {
@@ -23,12 +46,12 @@ const getJobsByStudentId = async (studentId: string) => {
           },
         },
       },
-    })
-    return jobs
+    });
+    return jobs;
   } catch (err) {
-    console.log("Error fetching jobs")
-    return []
+    console.log("Error fetching jobs:", err);
+    return [];
   }
-}
+};
 
-export default getJobsByStudentId
+export default getJobsByStudentId;

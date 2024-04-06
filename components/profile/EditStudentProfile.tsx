@@ -5,7 +5,7 @@ import toast from "react-hot-toast"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Session } from "next-auth"
-import updateProfile from "@/actions/profile/updateProfile"
+import { updateStudentProfile } from "@/actions/profile/updateStudentProfile"
 import { revalidatePath } from "next/cache"
 
 export default function EditStudentProfile({
@@ -51,11 +51,15 @@ export default function EditStudentProfile({
     formDataObject.append("description", description)
     formDataObject.append("studentId", studentId)
 
-    const result = await updateProfile(formDataObject)
+    const result = await updateStudentProfile(formDataObject)
     // 3 อันคือ profileFiles, resumeFiles, description
     // profile กับ resume ถ้าอันใดอันหนึ่งไม่เป็น null ก็แก้ไขใน database
     // description แก้ไขทุกรอบที่ submit
-    toast.success("แก้ไขโปรไฟล์สำเร็จ")
+    if(result) {
+      toast.success("แก้ไขโปรไฟล์สำเร็จ")
+    } else {
+      toast.error("แก้ไขโปรไฟล์ไม่สำเร็จ")
+    }
     setPrimaryLoading((prev) => !prev)
     setDisabled(false)
     toggleEditProfile()
@@ -106,7 +110,7 @@ export default function EditStudentProfile({
               <textarea
                 id="text-area"
                 name="description"
-                className="h-[100px] rounded-[6px] border border-[#CBD5E1] px-[10px] py-[5px] "
+                className="h-[100px] rounded-[6px] border border-[#CBD5E1] px-[10px] py-[5px] bg-slate-50"
                 onChange={handleChange}
                 value={description}></textarea>
             </div>

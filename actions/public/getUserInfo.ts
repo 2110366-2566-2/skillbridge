@@ -32,12 +32,9 @@ const getStudentName = async (userId: string) => {
 
 const getStudentInfoById = async (userId: string) => {
   try {
-    const result = await prisma.user.findUnique({
+    const result = await prisma.student.findFirst({
       where: {
-        id: userId,
-      },
-      include: {
-        student: true,
+        userId: userId,
       },
     })
 

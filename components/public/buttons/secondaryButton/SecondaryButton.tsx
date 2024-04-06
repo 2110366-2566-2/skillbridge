@@ -6,7 +6,7 @@ type Props = {
   type?: "submit" | "reset" | "button";
   isDisabled?: boolean;
   onClick?: () => void;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   isLoading?: boolean;
   loadingMessage?: string;
 };
@@ -18,8 +18,6 @@ export default function SecondaryButton(props: Props) {
     isDisabled,
     onClick,
     children,
-    isLoading,
-    loadingMessage,
   } = props;
   return (
     <button
@@ -28,14 +26,7 @@ export default function SecondaryButton(props: Props) {
       disabled={isDisabled}
       onClick={onClick}
     >
-      {isLoading ? (
-        <div className="flex gap-2 justify-center items-center">
-          <Image src={LoadingRing} alt="logo" width={20} height={20} />
-          {loadingMessage}
-        </div>
-      ) : (
-        children
-      )}
+      {children}
     </button>
   );
 }
