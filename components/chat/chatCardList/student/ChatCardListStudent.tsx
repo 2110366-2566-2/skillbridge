@@ -12,7 +12,7 @@ type Props = {
 
 export default function ChatCardListStudent({ studentId }: Props) {
     const [employers, setEmployers] = useState<StudentChatListData[]>([])
-    const chatListReloadState = useAppSelector((state) => state.auth.chatListReloadState);
+    const chatListReloadState = useAppSelector((state) => state.chatList.chatListReloadState);
     // const employers = await getStudentChatListData(studentId)
     // console.log("Initial state: ", chatListReloadState)
     useEffect(() => {

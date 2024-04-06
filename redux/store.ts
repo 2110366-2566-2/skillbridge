@@ -3,7 +3,7 @@ import { useDispatch, TypedUseSelectorHook, useSelector } from "react-redux";
 import { chatListReloadReducer } from "./features/chatListSlice";
 
 export const store = configureStore({
-    reducer: { auth: chatListReloadReducer },
+    reducer: { chatList: chatListReloadReducer },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({ serializableCheck: false }),
 });

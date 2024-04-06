@@ -10,7 +10,7 @@ type messageByDateSetter = Dispatch<SetStateAction<MessagesGroupByDate[]>>;
 export function constructIncommingMessageHandler(
     setMessagesByDate: messageByDateSetter,
     dispatch: ThunkDispatch<{
-        auth: ChatListReloadState;
+        chatList: ChatListReloadState;
     }, undefined, UnknownAction> & Dispatch<UnknownAction>,
     toggleChatListReload: ActionCreatorWithoutPayload<"chatList/toggleChatListReload">
 ) {
