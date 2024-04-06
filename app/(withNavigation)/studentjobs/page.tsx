@@ -1,10 +1,16 @@
 import React from "react";
 import StudentJobsMenu from "@/components/jobs/studentJobs/StudentJobsMenu";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
-export default function StudentJobsPage() {
-  return (
-    <div className="px-10">
-      <StudentJobsMenu />
-    </div>
-  );
+export default async function StudentJobsPage() {
+    const session = await getServerSession();
+    if (!session) {
+        redirect("/login");
+    }
+    return (
+        <div className="px-10">
+            <StudentJobsMenu />
+        </div>
+    );
 }

@@ -5,6 +5,7 @@ import JobDetail from "@/components/offering/JobDetail";
 import getJobById from "@/actions/jobs/getJobByID";
 import JobManagementPanel from "@/components/jobManage/JobManagementPanel";
 import isJobClosed from "@/actions/createAndUpdateJobs/isJobClosed";
+import { getServerSession } from "next-auth";
 
 type Props = {
     params: {
@@ -13,13 +14,19 @@ type Props = {
 };
 
 async function ManagePage({ params }: Props) {
+    const session = await getServerSession();
+    if (!session) {
+        redirect("/login");
+    }
+
     const jobId = params.jobId;
 
     const jobData = (await getJobById(jobId)) || {};
     if (jobData == null) {
         redirect("/jobs");
     }
-    const isApplicationClosed: boolean = (await isJobClosed(jobId)).isClosed??true;
+    const isApplicationClosed: boolean =
+        (await isJobClosed(jobId)).isClosed ?? true;
 
     return (
         <main className="flex flex-col px-10 gap-10">
