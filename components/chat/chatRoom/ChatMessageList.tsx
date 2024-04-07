@@ -4,7 +4,7 @@ import { useRef, useEffect, useState } from "react"
 import { MessagesGroupByDate, getMessageByChatRoom } from "@/actions/chat/getMessageByChatRoom"
 import { setIncommingMessageHandler } from "../clientSocket/clientSocket"
 import { constructIncommingMessageHandler } from "../clientSocket/utils"
-import { useAppDispatch } from "@/redux/store"
+import { useAppDispatch, useAppSelector } from "@/redux/store"
 import { toggleChatListReload } from "@/redux/features/chatListSlice";
 
 type Props = {
@@ -13,17 +13,31 @@ type Props = {
     senderId: string
 }
 
+let toDispatch: boolean = true;
 
 export default function ChatMessageList({ chatroomId, senderId }: Props) {
+    // console.log("Rendering chat message list");
+    // console.log("toDispatch = ", toDispatch);
     const [messagesByDate, setMessagesByDate] = useState<MessagesGroupByDate[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const dispatch = useAppDispatch();
+    if (toDispatch) {
+        // console.log("Dispatching from If");
+        dispatch(toggleChatListReload());
+        toDispatch = false;
+    }
+    const chatListReloadState = useAppSelector((state) => state.chatList.chatListReloadState);
 
     useEffect(() => {
-        const incommingMessageHandler = constructIncommingMessageHandler(setMessagesByDate, dispatch, toggleChatListReload);
+        const incommingMessageHandler = constructIncommingMessageHandler(setMessagesByDate/*, dispatch, toggleChatListReload*/);
         setIncommingMessageHandler(incommingMessageHandler);
     }, []);
+
+    useEffect(() => {
+        dispatch(toggleChatListReload());
+        toDispatch = true;
+    }, [dispatch, messagesByDate]);
 
     const bottomOfPanelRef = useRef<HTMLDivElement>(null)
 
