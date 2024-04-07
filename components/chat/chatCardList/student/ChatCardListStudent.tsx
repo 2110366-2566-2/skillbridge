@@ -36,7 +36,7 @@ export default function ChatCardListStudent({ studentId }: Props) {
             {employers.length ? (
                 employers.map((employer, index) => <ChatCardStudent key={index} employer={employer} />)
             ) : (
-                Array.from({ length: 7 }).map((_, index) => (
+                Array.from({ length: 12 }).map((_, index) => (
                     <ChatCardStudentLoading key={index} />
                 ))
             )}
