@@ -27,7 +27,7 @@ export default function ChatMessageList({ chatroomId, senderId }: Props) {
         dispatch(toggleChatListReload());
         toDispatch = false;
     }
-    const chatListReloadState = useAppSelector((state) => state.chatList.chatListReloadState);
+    // const chatListReloadState = useAppSelector((state) => state.chatList.chatListReloadState);
 
     useEffect(() => {
         const incommingMessageHandler = constructIncommingMessageHandler(setMessagesByDate/*, dispatch, toggleChatListReload*/);
@@ -37,7 +37,7 @@ export default function ChatMessageList({ chatroomId, senderId }: Props) {
     useEffect(() => {
         dispatch(toggleChatListReload());
         toDispatch = true;
-    }, [dispatch, messagesByDate]);
+    }, [messagesByDate]);
 
     const bottomOfPanelRef = useRef<HTMLDivElement>(null)
 
