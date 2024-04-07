@@ -5,6 +5,7 @@ import { getStudentChatListData } from "@/actions/chat/getChatListDataByUser"
 import { useEffect, useState } from "react"
 import { StudentChatListData } from "@/actions/chat/getChatListDataByUser"
 import { useAppSelector } from "@/redux/store"
+import ChatCardStudentLoading from "./ChatCardStudentLoading"
 
 type Props = {
     studentId: string
@@ -12,7 +13,7 @@ type Props = {
 
 export default function ChatCardListStudent({ studentId }: Props) {
     const [employers, setEmployers] = useState<StudentChatListData[]>([])
-    const chatListReloadState = useAppSelector((state) => state.chatList.chatListReloadState);
+    const chatListReloadState = useAppSelector((state: { chatList: { chatListReloadState: boolean } }) => state.chatList.chatListReloadState);
     // const employers = await getStudentChatListData(studentId)
     // console.log("Initial state: ", chatListReloadState)
     useEffect(() => {
@@ -35,7 +36,9 @@ export default function ChatCardListStudent({ studentId }: Props) {
             {employers.length ? (
                 employers.map((employer, index) => <ChatCardStudent key={index} employer={employer} />)
             ) : (
-                <div>กำลังดาวน์โหลด</div>
+                Array.from({ length: 7 }).map((_, index) => (
+                    <ChatCardStudentLoading key={index} />
+                ))
             )}
         </>
     )
