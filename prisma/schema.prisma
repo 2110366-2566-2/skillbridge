@@ -28,6 +28,7 @@ model User {
   hashedPassword  String        @db.VarChar(512)
   isDeleted       Boolean       @default(false)
   isGmail         Boolean       @default(false)
+  description     String?
   applications    Application[]
   employer        Employer?
   mailLogs        MailLog[]
@@ -41,7 +42,6 @@ model Student {
   userId         String        @id @unique
   bankAccountNo  String?
   avgStar        Float?
-  description    String?
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
   resumeName     String?
