@@ -50,7 +50,7 @@ const JobCard = ({
           className={`${isPending ? "" : "hidden"} bg-slate-50 border-2 border-solid rounded-full hover:shadow-md flex align-center w-fit h-fit p-2 mx-2`}
           href={`/jobs/${jobId}/update`}
         >
-          <EditFilled />
+          <EditFilled onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
         </Link>
       </div>
 

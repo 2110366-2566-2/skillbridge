@@ -98,7 +98,8 @@ const StudentJobCard = ({
                     jobId={jobId}
                     status={status}
                     role="student"
-                    employerId={employerId}
+                    employerId={employerId} 
+                    isReviewed={false}                
                 />
             </div>
         </div>
