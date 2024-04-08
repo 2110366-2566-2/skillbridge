@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import noavatar from "@/public/icons/noavatar.svg";
+import Link from "next/link";
 
 type Props = {
   employerData: {
@@ -34,7 +35,9 @@ export default async function EmployerDetail({ employerData }: Props) {
               objectFit: 'cover',
             }}
           />
-          <div className="flex flex-col ml-5 lg:ml-6 cursor-pointer hover:underline">
+          <Link className="flex flex-col ml-5 lg:ml-6 cursor-pointer hover:underline"
+            href={`/profile/`}
+          >
             <div className="font-medium text-[14px] text-slate-800 lg:text-[16px]">
               {employerData.firstName} {employerData.middleName}{" "}
               {employerData.lastName}
@@ -42,7 +45,7 @@ export default async function EmployerDetail({ employerData }: Props) {
             <div className="text-[11px] text-slate-800 line-clamp-1 lg:text-[13px]">
               {employerData.position} {employerData.organization}
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     </>
