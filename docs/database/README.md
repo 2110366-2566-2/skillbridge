@@ -27,6 +27,7 @@
           <li><a href="#v134">v1.34</a></li>
           <li><a href="#v135">v1.35</a></li>
           <li><a href="#v136">v1.36</a></li>
+          <li><a href="#v137">v1.37</a></li>
         </ul>
       </ul>
     </li>
@@ -280,5 +281,15 @@
 
 ### Application
 - The trigger is added to log in `ApplicationStatusLog` when there is an insert on `Application`
+
+<p align="right">(<a href="#database">back to top</a>)</p>
+
+## v1.37
+
+### User
+- `description` is added
+
+### Student
+- `description` is deleted as it has been moved to `User` table
 
 <p align="right">(<a href="#database">back to top</a>)</p>
