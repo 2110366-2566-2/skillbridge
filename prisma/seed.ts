@@ -2637,23 +2637,23 @@ prepare reports, และ provide insights for decision-making. \n \
     },
   });
 
-  const r1 = await prisma.review.create({
-    data: {
-      jobId: j4.id,
-      studentId: s1.userId,
-      stars: 4,
-      description: "งานดีมาก! นิสิตทำได้ดีจริง ๆ",
-    },
-  });
+  // const r1 = await prisma.review.create({
+  //   data: {
+  //     jobId: j4.id,
+  //     studentId: s1.userId,
+  //     stars: 4,
+  //     description: "งานดีมาก! นิสิตทำได้ดีจริง ๆ",
+  //   },
+  // });
 
-  const r2 = await prisma.review.create({
-    data: {
-      jobId: j4.id,
-      studentId: s3.userId,
-      stars: 5,
-      description: "Fantastic Nisit, Exceeded Expectations!",
-    },
-  });
+  // const r2 = await prisma.review.create({
+  //   data: {
+  //     jobId: j4.id,
+  //     studentId: s3.userId,
+  //     stars: 5,
+  //     description: "Fantastic Nisit, Exceeded Expectations!",
+  //   },
+  // });
 
   const r3 = await prisma.review.create({
     data: {
@@ -2723,90 +2723,90 @@ prepare reports, และ provide insights for decision-making. \n \
     },
   });
 
-  const r9 = await prisma.review.create({
-    data: {
-      jobId: j21.id,
-      studentId: s1.userId,
-      stars: 4,
-      description:
-        "I am genuinely impressed with the collaborative spirit and problem-solving abilities of this nisit.\n\
-Their academic prowess shines through in every aspect of the project. The ease with which they communicated \n\
-and took responsibility for their work created an environment that was not only productive but also enjoyable.",
-    },
-  });
+//   const r9 = await prisma.review.create({
+//     data: {
+//       jobId: j21.id,
+//       studentId: s1.userId,
+//       stars: 4,
+//       description:
+//         "I am genuinely impressed with the collaborative spirit and problem-solving abilities of this nisit.\n\
+// Their academic prowess shines through in every aspect of the project. The ease with which they communicated \n\
+// and took responsibility for their work created an environment that was not only productive but also enjoyable.",
+//     },
+//   });
 
-  const r10 = await prisma.review.create({
-    data: {
-      jobId: j21.id,
-      studentId: s2.userId,
-      stars: 5,
-      description:
-        "Working with this nisit has been a truly enlightening experience.\n\
-Their academic proficiency is evident in the exceptional way they approached and executed tasks within the project.\n\
-The standout quality was their impeccable attention to detail and problem-solving capabilities,\n\
-distinguishing them as a standout contributor.",
-    },
-  });
+//   const r10 = await prisma.review.create({
+//     data: {
+//       jobId: j21.id,
+//       studentId: s2.userId,
+//       stars: 5,
+//       description:
+//         "Working with this nisit has been a truly enlightening experience.\n\
+// Their academic proficiency is evident in the exceptional way they approached and executed tasks within the project.\n\
+// The standout quality was their impeccable attention to detail and problem-solving capabilities,\n\
+// distinguishing them as a standout contributor.",
+//     },
+//   });
 
-  const r11 = await prisma.review.create({
-    data: {
-      jobId: j25.id,
-      studentId: s2.userId,
-      stars: 5,
-      description:
-        "Working with this nisit has been a pleasure from start to finish. Their efficient task management skills \n\
-and ability to fulfill assignments were noteworthy. Their work ethic and adaptability to different phases of the project\n\
-ensured a smooth and successful collaboration.",
-    },
-  });
+//   const r11 = await prisma.review.create({
+//     data: {
+//       jobId: j25.id,
+//       studentId: s2.userId,
+//       stars: 5,
+//       description:
+//         "Working with this nisit has been a pleasure from start to finish. Their efficient task management skills \n\
+// and ability to fulfill assignments were noteworthy. Their work ethic and adaptability to different phases of the project\n\
+// ensured a smooth and successful collaboration.",
+//     },
+//   });
 
-  const r12 = await prisma.review.create({
-    data: {
-      jobId: j25.id,
-      studentId: s3.userId,
-      stars: 4,
-      description:
-        "This nisit brought a level of creativity and innovation that greatly enhanced the project. \n\
-Their ability to think outside the box and present solutions was truly commendable. The final deliverables reflected a unique \n\
-and fresh perspective, exceeding our expectations.",
-    },
-  });
+//   const r12 = await prisma.review.create({
+//     data: {
+//       jobId: j25.id,
+//       studentId: s3.userId,
+//       stars: 4,
+//       description:
+//         "This nisit brought a level of creativity and innovation that greatly enhanced the project. \n\
+// Their ability to think outside the box and present solutions was truly commendable. The final deliverables reflected a unique \n\
+// and fresh perspective, exceeding our expectations.",
+//     },
+//   });
 
-  const r13 = await prisma.review.create({
-    data: {
-      jobId: j31.id,
-      studentId: s15.userId,
-      stars: 4,
-      description:
-        "This nisit brought a level of creativity and innovation that greatly enhanced the project. \n\
-Their ability to think outside the box and present solutions was truly commendable. The final deliverables reflected a unique \n\
-and fresh perspective, exceeding our expectations.",
-    },
-  });
+//   const r13 = await prisma.review.create({
+//     data: {
+//       jobId: j31.id,
+//       studentId: s15.userId,
+//       stars: 4,
+//       description:
+//         "This nisit brought a level of creativity and innovation that greatly enhanced the project. \n\
+// Their ability to think outside the box and present solutions was truly commendable. The final deliverables reflected a unique \n\
+// and fresh perspective, exceeding our expectations.",
+//     },
+//   });
 
-  const r14 = await prisma.review.create({
-    data: {
-      jobId: j31.id,
-      studentId: s16.userId,
-      stars: 5,
-      description:
-        "This nisit brought a level of creativity and innovation that greatly enhanced the project. \n\
-Their ability to think outside the box and present solutions was truly commendable. The final deliverables reflected a unique \n\
-and fresh perspective, exceeding our expectations.",
-    },
-  });
+//   const r14 = await prisma.review.create({
+//     data: {
+//       jobId: j31.id,
+//       studentId: s16.userId,
+//       stars: 5,
+//       description:
+//         "This nisit brought a level of creativity and innovation that greatly enhanced the project. \n\
+// Their ability to think outside the box and present solutions was truly commendable. The final deliverables reflected a unique \n\
+// and fresh perspective, exceeding our expectations.",
+//     },
+//   });
 
-  const r15 = await prisma.review.create({
-    data: {
-      jobId: j31.id,
-      studentId: s17.userId,
-      stars: 4.5,
-      description:
-        "This nisit brought a level of creativity and innovation that greatly enhanced the project. \n\
-Their ability to think outside the box and present solutions was truly commendable. The final deliverables reflected a unique \n\
-and fresh perspective, exceeding our expectations.",
-    },
-  });
+//   const r15 = await prisma.review.create({
+//     data: {
+//       jobId: j31.id,
+//       studentId: s17.userId,
+//       stars: 4.5,
+//       description:
+//         "This nisit brought a level of creativity and innovation that greatly enhanced the project. \n\
+// Their ability to think outside the box and present solutions was truly commendable. The final deliverables reflected a unique \n\
+// and fresh perspective, exceeding our expectations.",
+//     },
+//   });
 
   const t1 = await prisma.transaction.create({
     data: {
