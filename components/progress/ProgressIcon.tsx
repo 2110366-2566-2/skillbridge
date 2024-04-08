@@ -15,51 +15,51 @@ export function getStatusIcon(status: string) {
     switch (status) {
         case "-PENDING":
             return (
-                <AuditOutlined className="text-white font-semibold text-xl" />
+                <AuditOutlined className="text-white font-semibold text-xl" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
             );
         case "PENDING-REJECTED":
             return (
-                <CloseSquareOutlined className="text-white font-semibold text-xl" />
+                <CloseSquareOutlined className="text-white font-semibold text-xl" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
             );
         case "PENDING-ACCEPTED":
             return (
-                <CheckSquareOutlined className="text-white font-semibold text-xl" />
+                <CheckSquareOutlined className="text-white font-semibold text-xl" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
             );
         case "PENDING-DISCLAIMED":
             return (
-                <CloseSquareOutlined className="text-white font-semibold text-xl" />
+                <CloseSquareOutlined className="text-white font-semibold text-xl" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
             );
         case "ACCEPTED-DISCLAIMED":
             return (
-                <CloseSquareOutlined className="text-white font-semibold text-xl" />
+                <CloseSquareOutlined className="text-white font-semibold text-xl" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
             );
         case "ACCEPTED-DEPOSIT_PENDING":
             return (
-                <TeamOutlined className="text-white font-semibold text-xl" />
+                <TeamOutlined className="text-white font-semibold text-xl" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
             );
         case "DEPOSIT_PENDING-IN_PROGRESS":
             return (
-                <DollarOutlined className="text-white font-semibold text-xl" />
+                <DollarOutlined className="text-white font-semibold text-xl" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
             );
         case "IN_PROGRESS-CANCELED":
             return (
-                <CloseSquareOutlined className="text-white font-semibold text-xl" />
+                <CloseSquareOutlined className="text-white font-semibold text-xl" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
             );
         case "IN_PROGRESS-DELIVERED":
             return (
-                <FileTextOutlined className="text-white font-semibold text-xl" />
+                <FileTextOutlined className="text-white font-semibold text-xl" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
             );
         case "DELIVERED-IN_PROGRESS":
             return (
-                <CloseSquareOutlined className="text-white font-semibold text-xl" />
+                <CloseSquareOutlined className="text-white font-semibold text-xl" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
             );
         case "DELIVERED-WAGE_PAYMENT_PENDING":
             return (
-                <CheckSquareOutlined className="text-white font-semibold text-xl" />
+                <CheckSquareOutlined className="text-white font-semibold text-xl" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
             );
         case "WAGE_PAYMENT_PENDING-DONE":
             return (
-                <LikeOutlined className="text-white font-semibold text-xl" />
+                <LikeOutlined className="text-white font-semibold text-xl" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
             );
         default:
             return "";

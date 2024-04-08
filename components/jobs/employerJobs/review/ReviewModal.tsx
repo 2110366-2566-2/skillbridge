@@ -16,6 +16,9 @@ gap: 20px;
 border-radius: 15px 0px 0px 0px;
 opacity: 0px;
 */
+
+const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL || "";
+
 export default function ReviewModal({
     studentId,
     jobId,
@@ -43,7 +46,7 @@ export default function ReviewModal({
         }
 
         try {
-            const response = await fetch("http://localhost:3000/api/review", {
+            const response = await fetch(`${backendURL}/api/review`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
