@@ -37,10 +37,10 @@ const updateProfile = async (formData: FormData) => {
       },
       data: {
         profileImageUrl: profileImgName?.data,
+        description,
         student: {
           update: {
             resumeName: resumeImgName?.data,
-            description,
           },
         },
       },
