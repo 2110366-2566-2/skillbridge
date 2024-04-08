@@ -15,6 +15,7 @@ export default async function CommentCards() {
             organization={review.organization}
             jobTag={review.jobTag}
             description={review.description}
+            profileImage={review.profileImage}
           />
         ))}
       </div>
@@ -28,6 +29,7 @@ export default async function CommentCards() {
               organization={review.organization}
               jobTag={review.jobTag}
               description={review.description}
+              profileImage={review.profileImage}
             />
           ))}
         </CardSlider>
