@@ -3,6 +3,7 @@
 import { prisma } from "../../lib/prisma";
 import { ApplicationStatus } from "@prisma/client";
 import getS3URL from "../public/S3/getS3URL";
+import noavatar from "@/public/icons/noavatar.svg";
 import { Response } from "@/types/ResponseType";
 
 const getJobById = async (jobId: string) => {
@@ -30,6 +31,13 @@ const getJobById = async (jobId: string) => {
       },
     },
   });
+
+  const s3Response = await getS3URL(job.employer.user.profileImageUrl);
+  let profileImage = noavatar;
+  if (s3Response.success) {
+    profileImage = s3Response.data;
+  }
+
   // Iterate through each jobDocumentFile and replace fileName with fileLink
   for (const file of job.jobDocumentFiles) {
     const fileResponse: Response<string> = await getS3URL(file.fileName);
@@ -76,7 +84,7 @@ const getJobById = async (jobId: string) => {
     numWorker: job.numWorker,
     jobTagId: job.jobTag.id,
     jobDocumentFiles: job.jobDocumentFiles,
-    profileImageUrl: job.employer.user.profileImageUrl
+    profileImageUrl: profileImage,
   };
   return result;
 };

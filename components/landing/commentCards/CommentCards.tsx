@@ -1,5 +1,6 @@
 import CommentCard from "./commentCard/CommentCard";
 import CardSlider from "../cardSlider/CardSlider";
+import noavatar from "@/public/icons/noavatar.svg";
 import { getReviews } from "@/actions/reviews/getReviews";
 
 export default async function CommentCards() {
@@ -15,6 +16,7 @@ export default async function CommentCards() {
             organization={review.organization}
             jobTag={review.jobTag}
             description={review.description}
+            profileImage={review.profileImageURL || noavatar}
           />
         ))}
       </div>
@@ -28,6 +30,7 @@ export default async function CommentCards() {
               organization={review.organization}
               jobTag={review.jobTag}
               description={review.description}
+              profileImage={review.profileImageURL || noavatar}
             />
           ))}
         </CardSlider>
