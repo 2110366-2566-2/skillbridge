@@ -6,18 +6,20 @@ import Link from "next/link";
 
 type Props = {
   employerData: {
-    id: string,
+    id: string;
     firstName: string;
     middleName: string;
     lastName: string;
     position: string;
     organization: string;
-    profileImageUrl: string
+    profileImageUrl: string;
   };
 };
 
 export default async function EmployerDetail({ employerData }: Props) {
-  const avatar = employerData.profileImageUrl ? employerData.profileImageUrl : noavatar;
+  const avatar = employerData.profileImageUrl
+    ? employerData.profileImageUrl
+    : noavatar;
 
   return (
     <>
@@ -27,16 +29,17 @@ export default async function EmployerDetail({ employerData }: Props) {
         </div>
         <div className="flex flex-row mt-2">
           <Image
-            className="rounded-full translate-x-1"
+            className="h-[40px] w-[40px] rounded-full"
             src={avatar}
             alt="avatar"
-            width={40}
             height={40}
+            width={40}
             style={{
-              objectFit: 'cover',
+              objectFit: "cover",
             }}
           />
-          <Link className="flex flex-col ml-5 lg:ml-6 cursor-pointer hover:underline"
+          <Link
+            className="flex flex-col ml-5 lg:ml-6 cursor-pointer hover:underline"
             href={`/profile/${employerData.id}`}
           >
             <div className="font-medium text-[14px] text-slate-800 lg:text-[16px]">
