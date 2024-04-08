@@ -2,8 +2,10 @@ import Image from "next/image";
 import noavatar from "@/public/icons/noavatar.svg";
 import doubleQuote from "@/public/icons/double-quote.svg";
 import getS3URL from "@/actions/public/S3/getS3URL";
+import Link from "next/link";
 
 type Props = {
+  userId: string;
   name: string;
   position: string;
   organization: string;
@@ -13,8 +15,15 @@ type Props = {
 };
 
 export default async function CommentCard(props: Props) {
-  const { name, position, organization, jobTag, description, profileImage } =
-    props;
+  const {
+    userId,
+    name,
+    position,
+    organization,
+    jobTag,
+    description,
+    profileImage,
+  } = props;
 
   // Get S3 URL
   const s3Response = await getS3URL(profileImage);
@@ -37,9 +46,12 @@ export default async function CommentCard(props: Props) {
             </p>
           </div>
         </div>
-        <div className="flex gap-3 items-center pt-2 md:pt-5">
+        <Link
+          href={`/profile/${userId}`}
+          className="flex gap-3 items-center pt-2 md:pt-5 hover:opacity-80 active:opacity-60"
+        >
           <Image
-            className="md:h-[60px] md:w-[60px]"
+            className="md:h-[60px] md:w-[60px] rounded-full"
             src={profileImageLink}
             alt="avatar"
             height={40}
@@ -54,7 +66,7 @@ export default async function CommentCard(props: Props) {
               {position} {organization}
             </p>
           </div>
-        </div>
+        </Link>
       </div>
     </div>
   );

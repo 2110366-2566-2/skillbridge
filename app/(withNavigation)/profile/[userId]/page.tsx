@@ -43,10 +43,12 @@ export default async function ProfilePage({
       ? await getS3URL(studentInfo?.student?.resumeName)
       : null;
     averageScore = reviews
-      ? Math.round(
-          (reviews.reduce((acc, review) => acc + review.stars, 0) * 10) /
+      ? parseFloat(
+          (
+            reviews.reduce((acc, review) => acc + review.stars, 0) /
             reviews.length
-        ) / 10
+          ).toFixed(1)
+        )
       : 0;
     const success = allJobsHistory.reduce(
       (acc, job) => (job.status === "DONE" ? acc + 1 : acc),

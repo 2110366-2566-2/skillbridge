@@ -1,4 +1,5 @@
 import { prisma } from "../../lib/prisma";
+import getProfileImage from "../profile/getProfileImage";
 
 const getReviews = async () => {
   const results = await prisma.review.findMany({
@@ -20,6 +21,8 @@ const getReviews = async () => {
   results.map((result) => {
     res.push({
       id: result.id,
+      userId: result.job.employer.user.id,
+      profileImage: result.job.employer.user.profileImageUrl,
       name:
         result.job.employer.user.salutation +
         result.job.employer.user.firstname +
