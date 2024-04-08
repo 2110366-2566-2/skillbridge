@@ -9,17 +9,7 @@ function LoadingStudentOfferCard({}: Props) {
             <div className="animate-pulse">
                 <section className="h-[28px] lg:h-[32px] min-h[40px] w-full my-[2px] bg-slate-200 rounded"></section>
 
-                <section className="flex flex-row justify-between">
-                    <div className="flex flex-row">
-                        <section className="h-[24px] lg:h-[32px] min-h[40px] w-[100px] my-[2px] bg-slate-200 rounded"></section>
-                    </div>
-                    <Image
-                        src={"/icons/dropdown.svg"}
-                        width={20}
-                        height={20}
-                        alt={"dropdown"}
-                    />
-                </section>
+                <section className="h-[20px] mt-[4px] lg:h-[28px] min-h[40px] w-[80%] lg:w-[40%] my-[2px] bg-slate-200 rounded"></section>
             </div>
         </div>
     );
