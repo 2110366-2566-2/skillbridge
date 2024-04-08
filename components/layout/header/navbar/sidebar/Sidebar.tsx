@@ -2,7 +2,6 @@ import React, { useState, ReactNode } from "react";
 import Image from "next/image";
 import hamburger from "@/public/icons/hamburger.svg";
 import hamburgerDark from "@/public/icons/hamburgerDark.svg";
-import noavatar from "@/public/icons/noavatar.svg";
 import closeIcon from "@/public/icons/close.svg";
 
 interface SidebarProps {
@@ -11,6 +10,7 @@ interface SidebarProps {
   children?: ReactNode;
   isDark?: boolean;
   session?: any;
+  avatar: string;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -19,10 +19,9 @@ const Sidebar: React.FC<SidebarProps> = ({
   children,
   isDark,
   session,
+  avatar,
 }) => {
   const [isHamburgerOpen, setHamburgerOpen] = useState(false);
-  const avatar = session?.user.profileImageUrl ? (session.user.profileImageUrl) : (noavatar);
-
   return (
     <>
       {/* Hamburger button */}
@@ -55,18 +54,21 @@ const Sidebar: React.FC<SidebarProps> = ({
       ></div>
       {/* Sidebar */}
       <div
-        className={`z-20 font-ibm bg-slate-800 text-slate-50 fixed top-0 right-0 w-2/3 max-w-80 h-screen flex flex-col items-center p-7 ease-in-out pb-28 duration-500 
+        className={`z-20 font-ibm bg-slate-800 text-slate-50 fixed top-0 right-0 w-2/3 max-w-80 h-dvh flex flex-col items-center p-7 ease-in-out duration-500 
                 ${isHamburgerOpen ? "translate-x-0 " : "translate-x-full"}`}
       >
         <div className="flex flex-col gap-8 justify-start w-full mb-[28px]">
           <div className="flex flex-col gap-5">
             <div className="flex justify-between items-start">
               <Image
-                className="rounded-full"
+                className="w-[100px] h-[100px] rounded-full"
                 src={avatar}
                 alt="avatar"
-                width={70}
-                height={70}
+                width={100}
+                height={100}
+                style={{
+                    objectFit: 'cover',
+                }}
               />
               <button
                 className="active:opacity-40"
@@ -83,7 +85,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             </div>
             <div className="flex flex-col gap-1">
               <p>
-                <b className="font-medium text-lg">{name}</b>
+                <b className="font-medium text-base md:text-lg">{name}</b>
               </p>
               <p className="text-xs">{userInfo}</p>
             </div>

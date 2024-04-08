@@ -34,7 +34,7 @@ export default withAuth(
     pages: {
       signIn: "/login",
     },
-  },
+  }
 );
 
 export const config = {
@@ -44,6 +44,7 @@ export const config = {
     "/offer/:path*",
     "/studentjobs/:path*",
     "/payment-history",
-    "/chat/:path*"
+    "/chat/:path*",
+    "/profile/:path*",
   ],
 };

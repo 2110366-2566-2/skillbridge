@@ -189,7 +189,7 @@ export default async function LandingPage() {
         </div>
 
         {/* 2 */}
-        <div className="flex flex-col justify-center items-center gap-6 pb-20 md:px-20 lg:px-32 md:pb-40">
+        {/* <div className="flex flex-col justify-center items-center gap-6 pb-20 md:px-20 lg:px-32 md:pb-40">
           <h1 className="text-[26px] text-slate-800 font-bold [text-shadow:_0_1px_1px_rgb(0_0_0_/_25%)] md:text-5xl md:w-full">
             SkillBridge ใช้ยังไง ?
           </h1>
@@ -206,8 +206,8 @@ export default async function LandingPage() {
                 fill="#D9D9D9"
               />
             </svg>
-          </div>
-        </div>
+          </div> 
+        </div> */}
 
         {/* 3 */}
         <div className="flex flex-col justify-center items-center gap-6 pb-3 md:pb-12">

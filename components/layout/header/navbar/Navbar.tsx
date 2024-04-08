@@ -25,11 +25,12 @@ type Props = {
   session: any;
   isStudent: boolean;
   userInfo: string;
+  profileImage?: string;
 };
 
 export default function Navbar(props: Props) {
   // Authenticated User Info
-  const { session, isStudent, userInfo } = props;
+  const { session, isStudent, userInfo, profileImage } = props;
   let name;
   // If authenticated via google
   if (session?.user.name) {
@@ -110,7 +111,7 @@ export default function Navbar(props: Props) {
   // UI Logic
   const pathName = usePathname();
   const isActive = additionalLink.some((link) => link.path === pathName);
-  const avatar = session?.user.profileImageUrl ? (session.user.profileImageUrl) : (noavatar);
+  const avatar = profileImage ? profileImage : noavatar;
 
   return (
     <>
@@ -126,17 +127,18 @@ export default function Navbar(props: Props) {
               className={`flex justify-center items-center pr-3 ${isActive && "md:bg-slate-50 md:rounded-full"}`}
             >
               {/* Desktop : Avatar */}
-              <div className="hidden md:flex px-2 py-1 items-center gap-3 pl-2 md:hover:opacity-80 md:duration-300">
-                <Image
-                  className="rounded-full"
-                  src={avatar}
-                  alt="avatar"
-                  width={40}
-                  height={40}
-                />
-              </div>
+              <Image
+                className="w-[45px] h-[45px] rounded-full p-1 hidden md:block"
+                src={avatar}
+                alt="avatar"
+                width={45}
+                height={45}
+                style={{
+                    objectFit: 'cover',
+                }}
+              />
               {/* Both : Hamberger Button + Sidebar */}
-              <Sidebar name={name} userInfo={userInfo} isDark={isActive} session={session}>
+              <Sidebar name={name} userInfo={userInfo} isDark={isActive} session={session} avatar={avatar}>
                 <div className="h-full w-full flex flex-col justify-between">
                   <div className="w-full flex flex-col gap-3 md:hidden">
                     {/* Mobile : Main NavButton */}
@@ -147,7 +149,7 @@ export default function Navbar(props: Props) {
                   <div className="w-full flex flex-col gap-3">
                     {/* Both : Additional NavButton */}
                     {additionalLink.map((link) => (
-                      (link.title === "โปรไฟล์" && !isStudent) ? null : <NavButton key={"all : " + link.title} link={link} />
+                      <NavButton key={"all : " + link.title} link={link} />
                     ))}
                     <LogoutLink />
                   </div>

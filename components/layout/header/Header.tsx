@@ -17,9 +17,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import { getEmployerInfoById } from "@/actions/public/getUserInfo";
 import ProgressHeader from "./progressHeader/ProgressHeader";
 import ProfileHeader from "./profileHeader/ProfileHeader";
-
-// TEMPORARY
-import getS3URL from "@/actions/public/S3/getS3URL";
+import getProfileImage from "@/actions/profile/getProfileImage";
 
 export default async function Header() {
   // Fetch Job tags
@@ -27,18 +25,19 @@ export default async function Header() {
 
   // Sesion with info
   const session = await getServerSession(authOptions);
-  if(session?.user.profileImageUrl) {
-    const res = await getS3URL(session.user.profileImageUrl);
-    if(res.data) {
-      session.user.profileImageUrl = res.data;
-    }
+  let profileImage;
+  if (session) {
+    profileImage = await getProfileImage(session?.user.id);
   }
 
   const isStudent = session?.email.split("@")[1] === "student.chula.ac.th";
   let userInfo = "นิสิตจุฬาลงกรณ์มหาวิทยาลัย";
   if (session && !isStudent) {
     const employerInfo = await getEmployerInfoById(session?.user.id);
-    userInfo = employerInfo?.position + " " + employerInfo?.organization;
+    userInfo =
+      employerInfo?.employer?.position +
+      " " +
+      employerInfo?.employer?.organization;
   }
 
   return (
@@ -60,7 +59,12 @@ export default async function Header() {
             {/* Only shows at "/search" */}
             <SearchAndFilter />
           </div>
-          <Navbar session={session} isStudent={isStudent} userInfo={userInfo} />
+          <Navbar
+            session={session}
+            isStudent={isStudent}
+            userInfo={userInfo}
+            profileImage={profileImage}
+          />
         </div>
         <LandingHeader isStudent={isStudent} jobTags={jobTags} />
         <CreateJobHeader />

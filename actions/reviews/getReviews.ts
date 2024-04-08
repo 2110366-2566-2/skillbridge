@@ -1,4 +1,5 @@
-import { prisma } from "../../lib/prisma"
+import { prisma } from "../../lib/prisma";
+import getProfileImage from "../profile/getProfileImage";
 
 const getReviews = async () => {
   const results = await prisma.review.findMany({
@@ -14,12 +15,14 @@ const getReviews = async () => {
         },
       },
     },
-  })
+  });
 
-  const res: any = []
+  const res: any = [];
   results.map((result) => {
     res.push({
       id: result.id,
+      userId: result.job.employer.user.id,
+      profileImage: result.job.employer.user.profileImageUrl,
       name:
         result.job.employer.user.salutation +
         result.job.employer.user.firstname +
@@ -29,10 +32,10 @@ const getReviews = async () => {
       organization: result.job.employer.organization,
       jobTag: result.job.jobTag.title,
       description: result.description.replace(/\n/g, ""),
-    })
-  })
-  return res
-}
+    });
+  });
+  return res;
+};
 
 const getReviewsByStudentId = async (studentId: string) => {
   try {
@@ -40,16 +43,16 @@ const getReviewsByStudentId = async (studentId: string) => {
       where: {
         studentId: studentId,
       },
-    })
+    });
 
-    return reviews
+    return reviews;
   } catch (err) {
-    console.log("Error fetching reviews")
-    return []
+    console.log("Error fetching reviews");
+    return [];
   }
-}
+};
 
-export { getReviews, getReviewsByStudentId }
+export { getReviews, getReviewsByStudentId };
 
 // const main = async () => {
 //   const result = await getReviews();
