@@ -10,6 +10,7 @@ import QualifyCandidateButton from './employerJobs/employerCallToAction/QualifyC
 import CancelButton from './employerJobs/employerCallToAction/CancelButton';
 import ApproveButton from './employerJobs/employerCallToAction/ApproveButton';
 import DefaultButton from './employerJobs/employerCallToAction/DefaultButton';
+import DoneButton from './employerJobs/employerCallToAction/DoneButton';
 
 type Props = {
     jobId: string;
@@ -17,9 +18,10 @@ type Props = {
     status: string;
     role: string;
     employerId?: string;
+    isReviewed: boolean;
 }
 
-function CallToActionButtons({jobId, studentId = "", status, role, employerId= ""}: Props) {
+function CallToActionButtons({jobId, studentId = "", status, role, employerId= "", isReviewed}: Props) {
 
     if(role === "student")
     {
@@ -66,6 +68,8 @@ function CallToActionButtons({jobId, studentId = "", status, role, employerId= "
                 return <ApproveButton studentId={studentId} jobId={jobId} />;
             case "รอจ่ายค่าจ้าง":
                 return <PayButton studentId={studentId} jobId={jobId} />;
+            case "เสร็จสิ้น":
+                return <DoneButton studentId={studentId} jobId={jobId} isReviewed={isReviewed}/>
             default:
                 return <DefaultButton studentId={studentId} jobId={jobId} />;
         }

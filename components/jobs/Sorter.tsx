@@ -40,7 +40,7 @@ const Sorter = ({ sideBarState, sortOptions }: Props) => {
         }}
       >
         <div className="flex align-center">
-          <SortAscendingOutlined className="flex place-items-center" />
+          <SortAscendingOutlined className="flex place-items-center" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
           <p>จัดเรียง</p>
         </div>
       </button>
@@ -59,8 +59,7 @@ const Sorter = ({ sideBarState, sortOptions }: Props) => {
                   onClick={() => {
                     setSortQueue([]);
                     sideBarState.set(false);
-                  }}
-                />
+                  } } onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                />
               </div>
 
               {/* sort options */}

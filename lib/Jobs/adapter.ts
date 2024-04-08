@@ -12,8 +12,8 @@ export function getStudentByJobAdapter(student: any) {
         updatedAt: student.updatedAt,
         status: student.status,
         bid: student.bid,
+        isReviewed: student.user.student.reviews.length === 0 ? (false) : (true)
     };
-
     return result;
 }
 
