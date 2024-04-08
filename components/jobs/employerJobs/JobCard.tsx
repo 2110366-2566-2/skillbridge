@@ -32,7 +32,7 @@ const JobCard = ({
       <div className="flex flex-row justify-between">
         <div className="w-[85%]">
           <div className="h-[60px]">
-            <Link href={`/jobs/${jobId}/manage`}>
+            <Link href={`/jobs/${jobId}/manage`} target="_blank">
               <p className="font-semibold text-2xl line-clamp-2 hover:underline">
                 {name}
               </p>

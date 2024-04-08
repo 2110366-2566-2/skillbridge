@@ -29,6 +29,8 @@ const createTransaction = async (formData: FormData) => {
 
     if (receiptImage && !receiptImage.success) throw new Error("Error in uploading receipt")
 
+    console.log("Receipt Uploaded with name", receiptImage.data)
+
     const newTransaction = await prisma.transaction.create({
       data: {
         jobId,
@@ -40,9 +42,12 @@ const createTransaction = async (formData: FormData) => {
       },
     })
 
+    console.log("Transaction Created with id", newTransaction.id)
+
     // Validate receipt
     const validatedResult = await verifySlip(newTransaction.id, receiptImage.data, amount)
-    console.log("validatedResult", validatedResult)
+
+    console.log("Validation result:", validatedResult?.message)
 
     const results = await Promise.all([
       prisma.transaction.update({
