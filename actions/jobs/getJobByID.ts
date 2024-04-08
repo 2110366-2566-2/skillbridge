@@ -11,7 +11,15 @@ const getJobById = async (jobId: string) => {
       id: jobId,
     },
     include: {
-      employer: true,
+      employer: {
+        include: {
+          user: {
+            select: {
+              profileImageUrl: true,
+            },
+          },
+        },
+      },
       jobTag: true,
       applications: true,
       jobDocumentFiles: {
@@ -44,30 +52,30 @@ const getJobById = async (jobId: string) => {
   });
 
   const result: any = {
-      id: job.id,
-      title: job.title,
-      estimateStartDate: job.estimateStartDate.toLocaleDateString("en-GB"),
-      estimateEndDate: job.estimateEndDate.toLocaleDateString("en-GB"),
-      jobTags: job.jobTag.title,
-      description: job.description ? job.description : "",
-      acceptNum: job.applications.filter(
-          (app: any) => {return (
-              app.status == ApplicationStatus.DEPOSIT_PENDING ||
-              app.status == ApplicationStatus.IN_PROGRESS ||
-              app.status == ApplicationStatus.DELIVERED ||
-              app.status == ApplicationStatus.WAGE_PAYMENT_PENDING ||
-              app.status == ApplicationStatus.DONE
-          );}
-      ).length, //TODO : Filter for accepted application
-      maxAcceptNum: job.numWorker,
-      budget: job.budget,
-      userName: userName,
-      position: job.employer.position,
-      organization: job.employer.organization,
-      status: job.status,
-      numWorker: job.numWorker,
-      jobTagId: job.jobTag.id,
-      jobDocumentFiles: job.jobDocumentFiles,
+    id: job.id,
+    title: job.title,
+    estimateStartDate: job.estimateStartDate.toLocaleDateString("en-GB"),
+    estimateEndDate: job.estimateEndDate.toLocaleDateString("en-GB"),
+    jobTags: job.jobTag.title,
+    description: job.description ? job.description : "",
+    acceptNum: job.applications.filter((app: any) => {
+      return (
+        app.status == ApplicationStatus.DEPOSIT_PENDING ||
+        app.status == ApplicationStatus.IN_PROGRESS ||
+        app.status == ApplicationStatus.DELIVERED ||
+        app.status == ApplicationStatus.WAGE_PAYMENT_PENDING ||
+        app.status == ApplicationStatus.DONE
+      );
+    }).length, //TODO : Filter for accepted application
+    maxAcceptNum: job.numWorker,
+    budget: job.budget,
+    userName: userName,
+    position: job.employer.position,
+    organization: job.employer.organization,
+    status: job.status,
+    numWorker: job.numWorker,
+    jobTagId: job.jobTag.id,
+    jobDocumentFiles: job.jobDocumentFiles,
   };
   return result;
 };
