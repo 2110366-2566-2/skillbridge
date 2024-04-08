@@ -29,6 +29,9 @@ export default async function EmployerDetail({ employerData }: Props) {
             alt="avatar"
             width={40}
             height={40}
+            style={{
+              objectFit: 'cover',
+            }}
           />
           <div className="flex flex-col ml-5 lg:ml-6">
             <div className="font-medium text-[14px] text-slate-800 lg:text-[16px]">

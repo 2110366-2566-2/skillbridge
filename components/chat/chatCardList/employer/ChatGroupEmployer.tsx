@@ -19,11 +19,9 @@ export default function ChatGroupEmployer({ studentsInfo }: Props) {
     // const chatListReloadState = useAppSelector((state: { chatList: { chatListReloadState: boolean } }) => state.chatList.chatListReloadState);
 
     useEffect(() => {
-        if (!isOpen) {
-            setOpen(isInChatGroup);
-        } else {
-            setOpen(false)
-        }
+
+        setOpen(isInChatGroup);
+
     }, [isInChatGroup]);
     // console.log("ping: ", studentsInfo.jobTitle, isOpen, isInChatGroup)
     return (
