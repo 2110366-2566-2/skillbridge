@@ -50,13 +50,19 @@ const StudentJobCard = ({
             <div className="flex flex-row justify-between">
                 <div className="max-w-[85%]">
                     <div className="h-[60px]">
-                        <Link className="font-semibold text-2xl line-clamp-2 hover:underline" href={`progress/${jobId}/${studentId}`}>
+                        <Link
+                            className="font-semibold text-2xl line-clamp-2 hover:underline"
+                            href={`progress/${jobId}/${studentId}`}
+                            target="_blank"
+                        >
                             {name}
                         </Link>
                     </div>
                 </div>
                 <div
-                    className={`${colorMatcher.get(status)} rounded-full flex align-center w-fit h-fit py-2 px-3 mx-2`}
+                    className={`${colorMatcher.get(
+                        status
+                    )} rounded-full flex align-center w-fit h-fit py-2 px-3 mx-2`}
                 >
                     <p className="text-xs font-medium sm:text-nowrap text-wrap">
                         {convertStateNameToThai("student", status)}
@@ -70,13 +76,13 @@ const StudentJobCard = ({
             </div>
 
             <div className="flex flex-row justify-between">
-                <div className="bg-slate-200 rounded p-2 w-fit">
-                    {category}
-                </div>
+                <div className="bg-slate-200 rounded p-2 w-fit">{category}</div>
 
                 {/* DropDownObject is a component that is shown when the card is clicked */}
                 <Image
-                    className={`${isDone ? "hidden" : ""} ${isDropDownOpen ? "rotate-180" : ""} transition duration-300 ease-out hover:cursor-pointer`}
+                    className={`${isDone ? "hidden" : ""} ${
+                        isDropDownOpen ? "rotate-180" : ""
+                    } transition duration-300 ease-out hover:cursor-pointer`}
                     src={"/icons/dropdown.svg"}
                     width={20}
                     height={20}
@@ -85,7 +91,9 @@ const StudentJobCard = ({
                 />
             </div>
 
-            <div className={`${!isDone && isDropDownOpen ? "" : "hidden"} mt-6`}>
+            <div
+                className={`${!isDone && isDropDownOpen ? "" : "hidden"} mt-6`}
+            >
                 <CallToActionButtons
                     jobId={jobId}
                     status={status}

@@ -1,6 +1,6 @@
-import PaymentInformation from "./subPaymentComponent/paymentInformation"
-import PaymentMethod from "./subPaymentComponent/paymentMethod"
-import UploadPayment from "./subPaymentComponent/upLoadPayment"
+import PaymentInformation from "./subPaymentComponent/PaymentInformation"
+import PaymentMethod from "./subPaymentComponent/PaymentMethod"
+import UploadPayment from "./subPaymentComponent/UploadPayment"
 
 export default function Payment({
   studentName,
