@@ -59,6 +59,10 @@ async function verifySlip(transactionId: string, fileName: string, amount: numbe
       const response = await res.json()
       const { data } = response
 
+      console.log(
+        `Verified '${data.sender.displayName}' --${data.amount} THB--> '${data.receiver.displayName}'`
+      )
+
       if (response.success && data.success) {
         if (
           data.receiver.name === process.env.RECIPIENT_EN_NAME &&

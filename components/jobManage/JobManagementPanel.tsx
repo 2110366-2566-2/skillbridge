@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import SearchNotFound from "../searchJob/SearchNotFound";
 import { convertStateNameToThai } from "@/lib/Jobs/adapter";
 import StudentOfferCard from "../jobs/employerJobs/StudentOfferCard";
+import LoadingStudentOfferCard from "../jobs/employerJobs/LoadingStudentOfferCard";
 
 type Props = {
     jobId: string;
@@ -35,11 +36,9 @@ function JobManagePanel({ jobId }: Props) {
                 return jobTypes.indexOf(a.status) - jobTypes.indexOf(b.status);
             });
             setFetchedData(fetchedData);
-            console.log(fetchedData);
+            setLoading(false);
         }
-        setLoading(true);
         fetchData(filter);
-        setLoading(false);
     }, [filter, jobId]);
     return (
         <aside className="flex flex-col gap-4 w-full">
@@ -101,9 +100,11 @@ function JobManagePanel({ jobId }: Props) {
             <div
                 className={`${
                     isLoading ? "" : "hidden"
-                } flex justify-center items-center`}
+                } flex flex-col gap-3 xl:h-[70vh] xl:overflow-y-auto`}
             >
-                <p className="text-xl">กำลังโหลดข้อมูล ...</p>
+                {Array.from({ length: 6 }).map((_, index) => (
+                    <LoadingStudentOfferCard key={index} />
+                ))}
             </div>
         </aside>
     );
