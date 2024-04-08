@@ -70,6 +70,6 @@ export async function sendImage(imageFile: File) {
 // type any because socket.on event handler also any type
 export function setIncommingMessageHandler(inComingMessageHandler: any) {
     // set the handler to events
-    socket.on('chat text message', inComingMessageHandler);
     socket.on('chat image message', inComingMessageHandler);
+    socket.on('chat text message', inComingMessageHandler);
 }

@@ -4,6 +4,8 @@ import Image from "next/image";
 import sendButton from "@/public/icons/sendButton.svg";
 import imageButton from "@/public/icons/imageButton.svg";
 import { sendMessage, sendImage } from "../clientSocket/clientSocket";
+// import { toggleChatListReload } from "@/redux/features/chatListSlice";
+// import { useAppDispatch } from "@/redux/store";
 
 type Props = {
     isStudent: boolean,
@@ -15,6 +17,7 @@ export default function ChatInput({ isStudent, chatroomId }: Props) {
         text: "",
     });
     // console.log(bid, applicationStatus, url, budget, jobStatus)
+    // const dispatch = useAppDispatch();
 
     const handleChange = (evt: ChangeEvent) => {
         const changedInput = evt.target as HTMLInputElement; // Type assertion to HTMLInputElement
@@ -35,6 +38,8 @@ export default function ChatInput({ isStudent, chatroomId }: Props) {
 
             sendMessage(input.text);
 
+            // dispatch(toggleChatListReload())
+
             setInput(currData => ({
                 ...currData,
                 text: ""
@@ -42,7 +47,7 @@ export default function ChatInput({ isStudent, chatroomId }: Props) {
         }
     }
 
-    const handleImageInput = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleImageInput = async (e: ChangeEvent<HTMLInputElement>) => {
         // console.log("CLICKED AT IMAGE INPUT ><")
         if (e.target.files === null) {
             return;
@@ -55,7 +60,10 @@ export default function ChatInput({ isStudent, chatroomId }: Props) {
         if (!imageFile) {
             return;
         }
-        sendImage(imageFile);
+
+        await sendImage(imageFile); // Wait for sendImage to complete
+
+        // dispatch(toggleChatListReload()); // Dispatch only after completion
     }
 
 

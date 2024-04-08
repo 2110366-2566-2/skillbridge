@@ -5,7 +5,13 @@ import { Dispatch, SetStateAction } from "react";
 type messageByDateSetter = Dispatch<SetStateAction<MessagesGroupByDate[]>>;
 
 // this function is dedicated to ChatMessageList component
-export function constructIncommingMessageHandler(setMessagesByDate: messageByDateSetter) {
+export function constructIncommingMessageHandler(
+    setMessagesByDate: messageByDateSetter/*,
+    dispatch: ThunkDispatch<{
+        chatList: ChatListReloadState;
+    }, undefined, UnknownAction> & Dispatch<UnknownAction>,
+    toggleChatListReload: ActionCreatorWithoutPayload<"chatList/toggleChatListReload">*/
+) {
     // construct an event handler with the given messagesByDate setter
     const inComingMessageHandler = (message: toClientMessage) => {
         setMessagesByDate((messagesByDate) => {

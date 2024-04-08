@@ -128,8 +128,21 @@ const getStudentChatListData = async (studentId: string) => {
           }
         }
       }
+      // Order chatrooms by latest message createdAt
+      obj.chatrooms.sort((a, b) => {
+        const dateA = a.latestMessage ? new Date(a.latestMessage.createdAt).getTime() : 0;
+        const dateB = b.latestMessage ? new Date(b.latestMessage.createdAt).getTime() : 0;
+        return dateB - dateA;
+      });
       return obj; // return the modified object
     }));
+
+    // Order modifiedResults by latest message createdAt of latest chatRoom
+    modifiedResults.sort((a, b) => {
+      const latestMessageA = a.chatrooms[0]?.latestMessage?.createdAt ? new Date(a.chatrooms[0].latestMessage.createdAt).getTime() : 0;
+      const latestMessageB = b.chatrooms[0]?.latestMessage?.createdAt ? new Date(b.chatrooms[0].latestMessage.createdAt).getTime() : 0;
+      return latestMessageB - latestMessageA;
+    });
 
     return modifiedResults;
   } catch (error) {
@@ -137,6 +150,7 @@ const getStudentChatListData = async (studentId: string) => {
     return [] as StudentChatListData[]; // Return empty array if error occurs
   }
 };
+
 
 
 const getEmployerChatListData = async (employerId: string) => {
@@ -226,8 +240,21 @@ const getEmployerChatListData = async (employerId: string) => {
           }
         }
       }
+      // Order chatrooms by latest message createdAt
+      obj.chatrooms.sort((a, b) => {
+        const dateA = a.latestMessage ? new Date(a.latestMessage.createdAt).getTime() : 0;
+        const dateB = b.latestMessage ? new Date(b.latestMessage.createdAt).getTime() : 0;
+        return dateB - dateA;
+      });
       return obj; // return the modified object
     }));
+
+    // Order modifiedResults by latest message createdAt of latest chatRoom
+    modifiedResults.sort((a, b) => {
+      const latestMessageA = a.chatrooms[0]?.latestMessage?.createdAt ? new Date(a.chatrooms[0].latestMessage.createdAt).getTime() : 0;
+      const latestMessageB = b.chatrooms[0]?.latestMessage?.createdAt ? new Date(b.chatrooms[0].latestMessage.createdAt).getTime() : 0;
+      return latestMessageB - latestMessageA;
+    });
 
     return modifiedResults;
   } catch (error) {
@@ -236,11 +263,12 @@ const getEmployerChatListData = async (employerId: string) => {
   }
 };
 
+
 export { getStudentChatListData, getEmployerChatListData };
 
 // // Test getStudentChatList
 // const main = async () => {
-//   const studentId = "129f0ce9-b3b3-49bd-a85a-9e4cf76d4fbc";
+//   const studentId = "cc82947d-c078-45b2-b800-734942029979";
 //   const results = await getStudentChatListData(studentId);
 //   console.log(results);
 //   console.log(
@@ -264,7 +292,7 @@ export { getStudentChatListData, getEmployerChatListData };
 
 // // Test getEmployerChatList
 // const main = async () => {
-//   const employerId = "d46d96d9-2f58-4202-804c-baa27288012a";
+//   const employerId = "a8e614f6-9c05-4e34-86e9-e3de4df90c01";
 //   const results = await getEmployerChatListData(employerId);
 //   console.log(results);
 //   console.log(

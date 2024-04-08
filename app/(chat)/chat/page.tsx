@@ -6,6 +6,7 @@ import ChatGroupListEmployer from "@/components/chat/chatCardList/employer/ChatG
 import DefaultChatRoom from "@/components/chat/chatRoom/DefaultChatRoom";
 import Header from "@/components/layout/header/Header";
 import Footer from "@/components/layout/footer/Footer";
+import MobileChatPage from "@/components/chat/MobileChatPage";
 
 export default async function Page() {
   // Session
@@ -24,7 +25,8 @@ export default async function Page() {
       {/* Mobile */}
       <div className="min-h-full bg-slate-800 flex flex-col justify-between lg:hidden">
         <Header />
-        <div className="rounded-3xl bg-slate-50 min-h-[80vh] py-5">
+        <MobileChatPage isStudent={isStudent} userId={userId} />
+        {/* <div className="rounded-3xl bg-slate-50 min-h-[80vh] py-5">
           {isStudent ? (
             // TODO : Mobile Student Chat list
             userId !== null && (
@@ -40,7 +42,7 @@ export default async function Page() {
               </div>
             )
           )}
-        </div>
+        </div> */}
         <Footer />
       </div>
     </>

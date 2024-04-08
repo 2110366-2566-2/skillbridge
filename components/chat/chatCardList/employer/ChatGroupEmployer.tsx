@@ -1,10 +1,11 @@
 "use client"
 import ChatCardListEmployer from "./ChatCardListEmployer"
 import { EmployerChatListData } from "@/actions/chat/getChatListDataByUser"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import downArrowDark from "@/public/icons/downArrowDark.svg";
 import { usePathname } from "next/navigation"
+// import { useAppSelector } from "@/redux/store"
 
 type Props = {
     studentsInfo: EmployerChatListData
@@ -14,8 +15,15 @@ export default function ChatGroupEmployer({ studentsInfo }: Props) {
     const pathName = usePathname();
     const pathId = pathName.split("/").slice(-1)[0]
     const isInChatGroup = studentsInfo.chatrooms.some(chatroom => chatroom.chatroomId === pathId)
-    const [isOpen, setOpen] = useState(isInChatGroup);
+    const [isOpen, setOpen] = useState<boolean>(isInChatGroup);
+    // const chatListReloadState = useAppSelector((state: { chatList: { chatListReloadState: boolean } }) => state.chatList.chatListReloadState);
 
+    useEffect(() => {
+
+        setOpen(isInChatGroup);
+
+    }, [isInChatGroup]);
+    // console.log("ping: ", studentsInfo.jobTitle, isOpen, isInChatGroup)
     return (
         <div>
             <div

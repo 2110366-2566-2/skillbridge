@@ -1,6 +1,7 @@
 import React from "react";
 import CommentCard from "./commentCard/CommentCard";
 import CardSlider from "../cardSlider/CardSlider";
+import noavatar from "@/public/icons/noavatar.svg";
 import { getReviews } from "@/actions/reviews/getReviews";
 
 export default async function CommentCards() {
