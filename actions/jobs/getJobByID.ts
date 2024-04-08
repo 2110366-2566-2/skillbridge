@@ -77,6 +77,7 @@ const getJobById = async (jobId: string) => {
     }).length, //TODO : Filter for accepted application
     maxAcceptNum: job.numWorker,
     budget: job.budget,
+    employerId: job.employerId,
     userName: userName,
     position: job.employer.position,
     organization: job.employer.organization,
