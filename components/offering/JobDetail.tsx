@@ -30,12 +30,15 @@ export default async function JobDetail({ jobId, isStudentView, isHistory }: Pro
   const url = jobData.jobDocumentFiles[0]?.fileLink;
 
   const employerData = {
+    id: job.employerId,
     firstName: job.userName.firstname,
     middleName: job.userName.middlename ? job.userName.middlename : "",
     lastName: job.userName.lastname,
     position: job.position,
     organization: job.organization,
+    profileImageUrl: job.profileImageUrl
   };
+  // console.log("profileImageUrl: ", employerData.profileImageUrl)
 
   const FormattedDate = (inputDateString: string) => {
     const [day, month, year] = inputDateString.split("/");
