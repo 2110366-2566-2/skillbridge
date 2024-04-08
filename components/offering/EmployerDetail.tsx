@@ -6,6 +6,7 @@ import Link from "next/link";
 
 type Props = {
   employerData: {
+    id: string,
     firstName: string;
     middleName: string;
     lastName: string;
@@ -36,7 +37,7 @@ export default async function EmployerDetail({ employerData }: Props) {
             }}
           />
           <Link className="flex flex-col ml-5 lg:ml-6 cursor-pointer hover:underline"
-            href={`/profile/`}
+            href={`/profile/${employerData.id}`}
           >
             <div className="font-medium text-[14px] text-slate-800 lg:text-[16px]">
               {employerData.firstName} {employerData.middleName}{" "}
