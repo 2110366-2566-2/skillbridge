@@ -13,14 +13,6 @@ function LoadingStudentJobCard({}: Props) {
 
                 <div className="flex flex-row justify-between">
                     <section className="h-[40px] w-[20%] bg-slate-200 rounded"></section>
-
-                    {/* DropDownObject is a component that is shown when the card is clicked */}
-                    <Image
-                        src={"/icons/dropdown.svg"}
-                        width={20}
-                        height={20}
-                        alt={"dropdown"}
-                    />
                 </div>
             </div>
         </div>
