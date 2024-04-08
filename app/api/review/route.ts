@@ -173,7 +173,7 @@ export async function POST(req: Request) {
         });
     }
 
-    const reviewExists = await studentReviewExists(studentId, jobId);
+    const reviewExists = await studentReviewExists(jobId, studentId);
     if (reviewExists) {
         return Response.json({
             success: false,
