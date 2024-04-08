@@ -38,7 +38,8 @@ export default async function ProfilePage({ params }: { params: { userId: string
     allJobsHistory = transformStudentJobs(allJobsHistory);
     portfolio = student?.resumeName? await getS3URL(student?.resumeName) : null;
     averageScore = reviews
-      ? reviews.reduce((acc, review) => acc + review.stars, 0) / reviews.length
+      ? Math.round(reviews.reduce((acc, review) => acc + review.stars, 0) * 10 / reviews.length) /
+      10
       : 0;
     const success = allJobsHistory.reduce((acc, job) => (job.status === "DONE" ? acc + 1 : acc), 0);
     successRate = Math.round((success * 100) / allJobsHistory.length) || 0;
