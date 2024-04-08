@@ -10,11 +10,12 @@ type Props = {
     lastName: string;
     position: string;
     organization: string;
+    profileImageUrl: string
   };
 };
 
 export default async function EmployerDetail({ employerData }: Props) {
-  const avatar = noavatar;
+  const avatar = employerData.profileImageUrl ? employerData.profileImageUrl : noavatar;
 
   return (
     <>

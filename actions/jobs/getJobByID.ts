@@ -76,6 +76,7 @@ const getJobById = async (jobId: string) => {
     numWorker: job.numWorker,
     jobTagId: job.jobTag.id,
     jobDocumentFiles: job.jobDocumentFiles,
+    profileImageUrl: job.employer.user.profileImageUrl
   };
   return result;
 };
