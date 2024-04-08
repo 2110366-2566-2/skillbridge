@@ -40,7 +40,7 @@ export default async function ProfilePage({ params }: { params: { studentId: str
           studentName={`${user?.salutation} ${user?.firstname} ${user?.lastname}` || ""}
           averageScore={averageScore || 0}
           portfolioURL={portfolio?.data || ""}
-          studentDetail={user?.student?.description || ""}
+          studentDetail={user?.description || ""}
           workingNumber={allJobsHistory.length}
           workingComplete={isNaN(successRate) ? 0 : successRate}
           session={session}
