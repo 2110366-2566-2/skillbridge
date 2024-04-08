@@ -1,12 +1,11 @@
-"use client"
-import FilesInput from "@/components/public/input/fileInput/FileInput"
-import PrimaryButton from "@/components/public/buttons/primaryButton/PrimaryButton"
-import toast from "react-hot-toast"
-import { ChangeEvent, useState } from "react"
-import { Session } from "next-auth"
-import { updateEmployerProfile } from "@/actions/profile/updateStudentProfile"
-import Input from "../public/input/input/Input"
-import SecondaryButton from "../public/buttons/secondaryButton/SecondaryButton"
+"use client";
+import FilesInput from "@/components/public/input/fileInput/FileInput";
+import PrimaryButton from "@/components/public/buttons/primaryButton/PrimaryButton";
+import toast from "react-hot-toast";
+import { ChangeEvent, useState } from "react";
+import updateEmployerProfile from "@/actions/profile/updateEmployerProfile";
+import Input from "../public/input/input/Input";
+import SecondaryButton from "../public/buttons/secondaryButton/SecondaryButton";
 
 interface FormData {
   organization: string;
@@ -22,24 +21,24 @@ export default function EditEmployerProfile({
   prevPosition,
   employerId,
 }: {
-  showEditProfile: boolean
-  toggleEditProfile: () => void
-  prevDescription: string
-  prevOrganization: string
-  prevPosition: string
-  session: Session | null
-  employerId: string
+  showEditProfile: boolean;
+  toggleEditProfile: () => void;
+  prevDescription: string;
+  prevOrganization: string;
+  prevPosition: string;
+  session: any | null;
+  employerId: string;
 }) {
   const [formData, setFormData] = useState<FormData>({
     organization: prevOrganization,
     position: prevPosition,
-    description: prevDescription
+    description: prevDescription,
   });
-  const [profileFiles, setProfileFiles] = useState<FileList | null>(null)
-  const [primaryLoading, setPrimaryLoading] = useState(false)
+  const [profileFiles, setProfileFiles] = useState<FileList | null>(null);
+  const [primaryLoading, setPrimaryLoading] = useState(false);
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -49,38 +48,43 @@ export default function EditEmployerProfile({
   };
 
   const handleEditProfile = async () => {
-    setPrimaryLoading((prev) => !prev)
+    setPrimaryLoading((prev) => !prev);
     // construct formDataObject
-    const formDataObject = new FormData()
-    profileFiles ? formDataObject.append("profile", profileFiles[0]) : null
+    const formDataObject = new FormData();
+    profileFiles ? formDataObject.append("profile", profileFiles[0]) : null;
     formDataObject.append("organization", formData.organization);
     formDataObject.append("position", formData.position);
-    formDataObject.append("employerId", employerId)
+    formDataObject.append("description", formData.description);
+    formDataObject.append("employerId", employerId);
     // update profile on backend
-    const result = await updateEmployerProfile(formDataObject)
-    if(result) {
-      toast.success("แก้ไขโปรไฟล์สำเร็จ")
+    const result = await updateEmployerProfile(formDataObject);
+    if (result) {
+      toast.success("แก้ไขโปรไฟล์สำเร็จ");
     } else {
-      toast.error("แก้ไขโปรไฟล์ไม่สำเร็จ")
+      toast.error("แก้ไขโปรไฟล์ไม่สำเร็จ");
     }
-    setPrimaryLoading((prev) => !prev)
-    toggleEditProfile()
-  }
+    setPrimaryLoading((prev) => !prev);
+    toggleEditProfile();
+  };
 
   return (
     showEditProfile && (
       <div
         className="w-full h-full duration-300 overflow-x-hidden fixed inset-0 z-50 bg-[#262626] bg-opacity-[60%] px-[20px]"
         onClick={() => {
-          toggleEditProfile()
-        }}>
+          toggleEditProfile();
+        }}
+      >
         <div className="flex justify-center">
           <div
             className=" bg-[#f8fafc] p-[20px] lg:px-[30px] lg:pb-[30px] rounded-[15px] w-full mt-[163px] lg:mt-[185px] max-w-[500px]"
             onClick={(e) => {
-              e.stopPropagation()
-            }}>
-            <p className="font-bold text-[24px] text-slate-600 mb-[7px]">แก้ไขโปรไฟล์</p>
+              e.stopPropagation();
+            }}
+          >
+            <p className="font-bold text-[24px] text-slate-600 mb-[7px]">
+              แก้ไขโปรไฟล์
+            </p>
             <FilesInput
               label="อัพโหลดรูปโปรไฟล์"
               files={profileFiles}
@@ -110,7 +114,10 @@ export default function EditEmployerProfile({
               isDisabled={primaryLoading}
             />
             <div className="flex flex-col gap-1 flex-grow mt-[10px]">
-              <label htmlFor="text-area" className="text-[14px] font-medium text-slate-900">
+              <label
+                htmlFor="text-area"
+                className="text-[14px] font-medium text-slate-900"
+              >
                 คำอธิบายตัวเอง
               </label>
               <textarea
@@ -138,7 +145,8 @@ export default function EditEmployerProfile({
                 isDisabled={primaryLoading}
                 isLoading={primaryLoading}
                 onClick={handleEditProfile}
-                loadingMessage="กำลังดำเนินการ">
+                loadingMessage="กำลังดำเนินการ"
+              >
                 ยืนยันการแก้ไข
               </PrimaryButton>
             </div>
@@ -146,5 +154,5 @@ export default function EditEmployerProfile({
         </div>
       </div>
     )
-  )
+  );
 }

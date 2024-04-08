@@ -26,7 +26,7 @@ export default async function Header() {
   // Sesion with info
   const session = await getServerSession(authOptions);
   let profileImage;
-  if(session) {
+  if (session) {
     profileImage = await getProfileImage(session?.user.id);
   }
 
@@ -34,7 +34,10 @@ export default async function Header() {
   let userInfo = "นิสิตจุฬาลงกรณ์มหาวิทยาลัย";
   if (session && !isStudent) {
     const employerInfo = await getEmployerInfoById(session?.user.id);
-    userInfo = employerInfo?.position + " " + employerInfo?.organization;
+    userInfo =
+      employerInfo?.employer?.position +
+      " " +
+      employerInfo?.employer?.organization;
   }
 
   return (
@@ -56,7 +59,12 @@ export default async function Header() {
             {/* Only shows at "/search" */}
             <SearchAndFilter />
           </div>
-          <Navbar session={session} isStudent={isStudent} userInfo={userInfo} profileImage={profileImage} />
+          <Navbar
+            session={session}
+            isStudent={isStudent}
+            userInfo={userInfo}
+            profileImage={profileImage}
+          />
         </div>
         <LandingHeader isStudent={isStudent} jobTags={jobTags} />
         <CreateJobHeader />
