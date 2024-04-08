@@ -31,7 +31,7 @@ export default function ChatCardListStudent({ studentId }: Props) {
         }
 
         getChatList();
-        console.log("New state: ", chatListReloadState)
+        // console.log("New state: ", chatListReloadState)
 
     }, [chatListReloadState])
 

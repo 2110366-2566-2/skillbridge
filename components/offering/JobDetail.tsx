@@ -38,7 +38,7 @@ export default async function JobDetail({ jobId, isStudentView, isHistory }: Pro
     organization: job.organization,
     profileImageUrl: job.profileImageUrl
   };
-  console.log("profileImageUrl: ", employerData.profileImageUrl)
+  // console.log("profileImageUrl: ", employerData.profileImageUrl)
 
   const FormattedDate = (inputDateString: string) => {
     const [day, month, year] = inputDateString.split("/");
