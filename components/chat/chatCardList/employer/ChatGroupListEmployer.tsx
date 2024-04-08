@@ -4,6 +4,7 @@ import { useAppSelector } from "@/redux/store";
 import ChatGroupEmployer from "./ChatGroupEmployer"
 import { useEffect, useState } from "react"
 import { EmployerChatListData, getEmployerChatListData } from "@/actions/chat/getChatListDataByUser"
+import ChatGroupEmployerLoading from "./ChatGroupEmployerLoading";
 
 type Props = {
     employerId: string
@@ -33,7 +34,9 @@ export default function ChatGroupListEmployer({ employerId }: Props) {
             {groups.length ? (
                 groups.map((group, index) => <ChatGroupEmployer key={index} studentsInfo={group} />)
             ) : (
-                <div>กำลังดาวน์โหลด</div>
+                Array.from({ length: 12 }).map((_, index) => (
+                    <ChatGroupEmployerLoading key={index} />
+                ))
             )}
         </>
     )
