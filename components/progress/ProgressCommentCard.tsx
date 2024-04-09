@@ -1,5 +1,6 @@
 import Image from "next/image";
 import doubleQuote from "@/public/icons/double-quote.svg";
+import noavatar from "@/public/icons/noavatar.svg";
 import {
     getComment,
     getEmployerFromJobId,
@@ -44,12 +45,8 @@ export default async function CommentCard({
                 </div>
                 <div className="flex gap-3 items-center pt-2 md:pt-5">
                     <Image
-                        className="md:h-[60px] md:w-[60px]"
-                        src={
-                            profileImageURL
-                                ? profileImageURL
-                                : "/images/defaultProfile.svg"
-                        }
+                        className="md:h-[60px] md:w-[60px] rounded-full"
+                        src={profileImageURL ? profileImageURL : noavatar}
                         alt="profile"
                         height={40}
                         width={40}

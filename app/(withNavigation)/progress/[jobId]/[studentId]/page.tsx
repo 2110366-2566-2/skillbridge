@@ -2,10 +2,12 @@
 
 import { getRating } from "@/actions/employmentHistoryDetail/employmentHistoryDetail";
 import getProfileImage from "@/actions/profile/getProfileImage";
+import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import JobDetail from "@/components/offering/JobDetail";
 import RatingScore from "@/components/profile/subProfile/RatingScore";
 import ProgressCommentCard from "@/components/progress/ProgressCommentCard";
 import ProgressTracker from "@/components/progress/ProgressTracker";
+import { getServerSession } from "next-auth";
 import React from "react";
 
 type Props = {};
@@ -17,7 +19,8 @@ async function ProgressPage({
 }) {
     const [jobId, studentId] = [params.jobId, params.studentId];
     const rating = await getRating(jobId, studentId);
-    const profileImageURL = await getProfileImage(params.studentId);
+    const employerId = (await getServerSession(authOptions))?.user.id as string;
+    const profileImageURL = await getProfileImage(employerId);
 
     return (
         <div className="flex flex-row justify-center mx-auto">
