@@ -1,0 +1,120 @@
+{
+    "settings": {
+        "index": {
+            "routing": {
+                "allocation": {
+                    "include": {
+                        "_tier_preference": "data_content"
+                    }
+                }
+            },
+            "number_of_shards": "3",
+            "provided_name": "job_1",
+            "creation_date": "1707989806266",
+            "analysis": {
+                "analyzer": {
+                    "thai": {
+                        "filter": ["lowercase"],
+                        "tokenizer": "thai"
+                    }
+                }
+            },
+            "number_of_replicas": "1",
+            "uuid": "r0HzrQucReK_e9odHT4XxA",
+            "version": {
+                "created": "8500008"
+            }
+        }
+    },
+    "mappings": {
+        "properties": {
+            "@timestamp": {
+                "type": "date"
+            },
+            "@version": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    }
+                }
+            },
+            "budget": {
+                "type": "long"
+            },
+            "createdat": {
+                "type": "date"
+            },
+            "description": {
+                "type": "text",
+                "analyzer": "thai"
+            },
+            "employerid": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    }
+                }
+            },
+            "enddate": {
+                "type": "date"
+            },
+            "estimateenddate": {
+                "type": "date"
+            },
+            "estimatestartdate": {
+                "type": "date"
+            },
+            "id": {
+                "type": "text"
+            },
+            "is_deleted": {
+                "type": "boolean"
+            },
+            "isdeleted": {
+                "type": "boolean"
+            },
+            "jobtag": {
+                "type": "text",
+                "analyzer": "thai"
+            },
+            "jobtagid": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    }
+                }
+            },
+            "numworker": {
+                "type": "long"
+            },
+            "startdate": {
+                "type": "date"
+            },
+            "status": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    }
+                }
+            },
+            "title": {
+                "type": "text",
+                "analyzer": "thai"
+            },
+            "updated_at": {
+                "type": "date"
+            },
+            "updatedat": {
+                "type": "date"
+            }
+        }
+    }
+}
