@@ -49,7 +49,7 @@ function validateRequestBody(jobId: string, studentId: string, stars: number, de
         }
     }
 
-    if (stars < 0 || stars > 5) {
+    if (stars < 1 || stars > 5) {
         return false;
     }
 
