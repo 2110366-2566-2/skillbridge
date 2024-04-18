@@ -23,6 +23,13 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/profile/EditStudentProfile.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "components/profile/EditStudentProfile.tsx",
+    "app/api/review/postHandler.test.js'"
+  ],
   "exclude": ["node_modules"]
 }
