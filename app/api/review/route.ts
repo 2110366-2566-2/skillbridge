@@ -116,6 +116,74 @@ async function studentReviewExists(jobId: string, studentId: string) {
  *       500: 
  *         description: Failed to create a review
  */
+type postHandlerReturnVal = [{ success: boolean, message: string }, { status: number }];
+
+async function postReviewHandler(jobId: string, studentId: string, stars: number, description: string, employerId: string): Promise<postHandlerReturnVal> {
+    if (!validateRequestBody(jobId, studentId, stars, description)) {
+        return [{
+            success: false,
+            message: "Please provide valid jobId, studentId, stars and description"
+        }, {
+            status: 400
+        }]
+    }
+
+    const validJobOwner = await validateJobOwner(employerId, jobId);
+    if (!validJobOwner) {
+        return [{
+            success: false,
+            message: "Invalid job owner"
+        }, {
+            status: 401
+        }]
+    }
+
+    const applicationExists = studentApplicationExists(jobId, studentId);
+    if (!applicationExists) {
+        return [{
+            success: false,
+            message: "Application does not exists"
+        }, {
+            status: 400
+        }]
+    }
+
+    const reviewExists = await studentReviewExists(jobId, studentId);
+    if (reviewExists) {
+        return [{
+            success: false,
+            message: "Review already exists"
+        }, {
+            status: 400
+        }]
+    }
+    
+    try {
+        await prisma.review.create({
+            data: {
+                jobId: jobId,
+                description: description,
+                studentId: studentId,
+                stars: stars
+            }
+        });
+    } catch(err) {
+        console.log(err);
+        return [{
+            success: false,
+            message: "Failed to create a new review"
+        }, {
+            status: 500
+        }]
+    }
+
+    return [{
+        success: true,
+        message: "Successfully create a review",
+    }, {
+        status: 201
+    }]
+}
 
 export async function POST(req: Request) {
     let reqBody: reqBody;
@@ -132,15 +200,6 @@ export async function POST(req: Request) {
 
     const { jobId, studentId, stars, description } = reqBody;
 
-    if (!validateRequestBody(jobId, studentId, stars, description)) {
-        return Response.json({
-            success: false,
-            message: "Please provide valid jobId, studentId, stars and description"
-        }, {
-            status: 400
-        });
-    }
-
     const session = await getServerSession(authOptions);
     if (!session) {
         return Response.json({
@@ -153,59 +212,7 @@ export async function POST(req: Request) {
 
     const employerId = session.user.id;
 
-    const validJobOwner = await validateJobOwner(employerId, jobId);
-    if (!validJobOwner) {
-        return Response.json({
-            success: false,
-            message: "Invalid job owner"
-        }, {
-            status: 401
-        });
-    }
+    const results = await postReviewHandler(jobId, studentId, stars, description, employerId);
 
-    const applicationExists = studentApplicationExists(jobId, studentId);
-    if (!applicationExists) {
-        return Response.json({
-            success: false,
-            message: "Application does not exists"
-        }, {
-            status: 400
-        });
-    }
-
-    const reviewExists = await studentReviewExists(jobId, studentId);
-    if (reviewExists) {
-        return Response.json({
-            success: false,
-            message: "Review already exists"
-        }, {
-            status: 400
-        })
-    }
-    
-    try {
-        await prisma.review.create({
-            data: {
-                jobId: jobId,
-                description: description,
-                studentId: studentId,
-                stars: stars
-            }
-        });
-    } catch(err) {
-        console.log(err);
-        return Response.json({
-            success: false,
-            message: "Failed to create a new review"
-        }, {
-            status: 500
-        });
-    }
-
-    return Response.json({
-        success: true,
-        message: "Successfully create a review",
-    }, {
-        status: 201
-    });
+    return Response.json(results[0], results[1]);
 }
