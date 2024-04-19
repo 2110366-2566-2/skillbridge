@@ -13,12 +13,14 @@ test("1: Application does not exist in the system", async () => {
   );
 
   //Clean up the database after testing
-  await prisma.review.deleteMany({
-    where: {
-      studentId: "33333-7f36-4694-ac36-090d69c3dd9a",
-      jobId: "02f2c362-0548-41f8-b3b9-c9b24c0e43c6"
-    }
-  });
+  if (result[1].status === 201) {
+    await prisma.review.deleteMany({
+      where: {
+        studentId: "33333-7f36-4694-ac36-090d69c3dd9a",
+        jobId: "02f2c362-0548-41f8-b3b9-c9b24c0e43c6"
+      }
+    });
+  }
 
   expect(result).toEqual([
     {
@@ -41,12 +43,14 @@ test("2: ApplicationId does exist in the system and its status is not Done", asy
   );
 
   //Clean up the database after testing
-  await prisma.review.deleteMany({
-    where: {
-      studentId: "f088ce9f-7f36-4694-ac36-090d69c3dd9a",
-      jobId: "02f2c362-0548-41f8-b3b9-c9b24c0e43c6",
-    }
-  });
+  if (result[1].status === 201) {
+    await prisma.review.deleteMany({
+      where: {
+        studentId: "f088ce9f-7f36-4694-ac36-090d69c3dd9a",
+        jobId: "02f2c362-0548-41f8-b3b9-c9b24c0e43c6",
+      }
+    });
+  }
 
   expect(result).toEqual([
     {
@@ -69,12 +73,14 @@ test("3: EmployerId does not match the employerId of job.employerId where job is
   );
 
   //Clean up the database after testing
-  await prisma.review.deleteMany({
-    where: {
-      studentId: "4d342cdf-9c05-4326-808d-d6d107429c4b",
-      jobId: "1ef9a7f7-c8ad-448a-8197-3ba270151a97",
-    }
-  });
+  if (result[1].status === 201) {
+    await prisma.review.deleteMany({
+      where: {
+        studentId: "4d342cdf-9c05-4326-808d-d6d107429c4b",
+        jobId: "1ef9a7f7-c8ad-448a-8197-3ba270151a97",
+      }
+    });
+  }
 
   expect(result).toEqual([
     {
@@ -98,12 +104,14 @@ test("4: ApplicationId does exist in the system and its status is â€œCOMPLETEDâ€
   );
 
   //Clean up the database after testing
-  await prisma.review.deleteMany({
-    where: {
-      studentId: "4d342cdf-9c05-4326-808d-d6d107429c4b",
-      jobId: "1ef9a7f7-c8ad-448a-8197-3ba270151a97",
-    }
-  });
+  if (result[1].status === 201) {
+    await prisma.review.deleteMany({
+      where: {
+        studentId: "4d342cdf-9c05-4326-808d-d6d107429c4b",
+        jobId: "1ef9a7f7-c8ad-448a-8197-3ba270151a97",
+      }
+    });
+  }
 
   expect(result).toEqual([
     {
@@ -126,12 +134,14 @@ test("5: Stars is not an integer", async () => {
   );
 
   //Clean up the database after testing
-  await prisma.review.deleteMany({
-    where: {
-      studentId: "c3712e5b-e24c-4e8e-ac1a-9000aec609e5",
-      jobId: "1ef9a7f7-c8ad-448a-8197-3ba270151a97",
-    }
-  });
+  if (result[1].status === 201) {
+    await prisma.review.deleteMany({
+      where: {
+        studentId: "c3712e5b-e24c-4e8e-ac1a-9000aec609e5",
+        jobId: "1ef9a7f7-c8ad-448a-8197-3ba270151a97",
+      }
+    });
+  }
 
   expect(result).toEqual([
     {
@@ -154,12 +164,14 @@ test("6: Stars is an integer and in range of 1 to 5", async () => {
   );
 
   //Clean up the database after testing
-  await prisma.review.deleteMany({
-    where: {
-      studentId: "c3712e5b-e24c-4e8e-ac1a-9000aec609e5",
-      jobId: "1ef9a7f7-c8ad-448a-8197-3ba270151a97",
-    }
-  });
+  if (result[1].status === 201) {
+    await prisma.review.deleteMany({
+      where: {
+        studentId: "c3712e5b-e24c-4e8e-ac1a-9000aec609e5",
+        jobId: "1ef9a7f7-c8ad-448a-8197-3ba270151a97",
+      }
+    });
+  }
 
   expect(result).toEqual([
     {
@@ -182,12 +194,14 @@ test("7: Stars is an integer and less than 1", async () => {
   );
 
   //Clean up the database after testing
-  await prisma.review.deleteMany({
-    where: {
-      studentId: "7639942c-c753-4943-94de-d28f25bb8520",
-      jobId: "1ef9a7f7-c8ad-448a-8197-3ba270151a97",
-    }
-  });
+  if (result[1].status === 201) {
+    await prisma.review.deleteMany({
+      where: {
+        studentId: "7639942c-c753-4943-94de-d28f25bb8520",
+        jobId: "1ef9a7f7-c8ad-448a-8197-3ba270151a97",
+      }
+    });
+  }
 
   expect(result).toEqual([
     {
@@ -210,12 +224,14 @@ test("8: Stars is an integer and more than 5", async () => {
   );
 
   //Clean up the database after testing
-  await prisma.review.deleteMany({
-    where: {
-      studentId: "7639942c-c753-4943-94de-d28f25bb8520",
-      jobId: "1ef9a7f7-c8ad-448a-8197-3ba270151a97",
-    }
-  });
+  if (result[1].status === 201) {
+    await prisma.review.deleteMany({
+      where: {
+        studentId: "7639942c-c753-4943-94de-d28f25bb8520",
+        jobId: "1ef9a7f7-c8ad-448a-8197-3ba270151a97",
+      }
+    });
+  }
 
   expect(result).toEqual([
     {
@@ -238,12 +254,14 @@ test("9: Description is an empty string", async () => {
   );
 
   //Clean up the database after testing
-  await prisma.review.deleteMany({
-    where: {
-      studentId: "7639942c-c753-4943-94de-d28f25bb8520",
-      jobId: "1ef9a7f7-c8ad-448a-8197-3ba270151a97",
-    }
-  });
+  if (result[1].status === 201) {
+    await prisma.review.deleteMany({
+      where: {
+        studentId: "7639942c-c753-4943-94de-d28f25bb8520",
+        jobId: "1ef9a7f7-c8ad-448a-8197-3ba270151a97",
+      }
+    });
+  }
 
   expect(result).toEqual([
     {
@@ -267,12 +285,14 @@ test("10: Description is not an empty string", async () => {
   );
 
   //Clean up the database after testing
-  await prisma.review.deleteMany({
-    where: {
-      studentId: "d1e141cf-b0dd-4234-9912-e58f8012d476",
-      jobId: "f77bb475-7f6f-45c6-aa96-63cd6b8355bd",
-    }
-  });
+  if (result[1].status === 201) {
+    await prisma.review.deleteMany({
+      where: {
+        studentId: "d1e141cf-b0dd-4234-9912-e58f8012d476",
+        jobId: "f77bb475-7f6f-45c6-aa96-63cd6b8355bd",
+      }
+    });
+  }
 
   expect(result).toEqual([
     {
