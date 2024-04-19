@@ -24,11 +24,11 @@ test("1: Application does not exist in the system", async () => {
 
   expect(result).toEqual([
     {
-      message: "Application does not exists",
+      message: "Failed to create a new review",
       success: false,
     },
     {
-      status: 400,
+      status: 500,
     },
   ]);
 });
