@@ -12,14 +12,13 @@ Feature: Job Offering functionality
         And click submit an offer
         Then the uploaded TOR file and offered price should show on the page
 
-    Scenario: verify single fault for exceed file size
+    Scenario: exceed file size on TOR file input
         Given open job offering page
         When input offer price as number
         And input a TOR file in pdf format exceed 5 MB size
-        Then the TOR file input should not allow to use the file
+        Then the TOR file input should not allow to use the file and warn user
 
-    Scenario: verify single fault for exceed file size
+    Scenario: type string on offer price input
         Given open job offering page
-        When input offer price as number
-        And input a TOR file in pdf format exceed 5 MB size
-        Then the TOR file input should not allow to use the file
+        When input offer price as string
+        Then nothing should happen to the input
