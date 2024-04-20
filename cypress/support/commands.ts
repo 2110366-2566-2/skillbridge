@@ -35,3 +35,15 @@
 //     }
 //   }
 // }
+
+
+Cypress.Commands.add('loginAsStudent', (email: string, password: string) => {
+    cy.session([email, password], () => {
+        cy.visit('/login');
+        cy.get("#email").clear().type(email);
+        cy.get("#password").clear().type(password);
+        cy.get('[type="submit"]').click();
+        cy.get('#hamburgerButton').click();
+        cy.get('#logoutButton').should('exist');
+    })
+})

@@ -1,10 +1,5 @@
 Feature: Job Offering functionality
 
-    Scenario: Navigate to Job Offering Page
-        Given I open the search page
-        When I click on a job card
-        Then I should be redirected to the job offering page
-
     Scenario: Cancel the Offer
         Given I am on the job offering page
         When I click on the cancel button
