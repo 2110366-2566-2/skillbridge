@@ -27,6 +27,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Hamburger button */}
       <button
         className="active:opacity-40"
+        id="hamburgerButton"
         onClick={() => setHamburgerOpen((prevOpen) => !prevOpen)}
       >
         {/* Desktop (include white bg) */}
@@ -67,7 +68,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 width={100}
                 height={100}
                 style={{
-                    objectFit: 'cover',
+                  objectFit: 'cover',
                 }}
               />
               <button

@@ -12,6 +12,7 @@ type Props = {
   isShowModal: boolean;
   setShowModal: (arg0: boolean) => void;
   onDangerClick: () => void;
+  id?: string;
 };
 
 export default function DeleteModal(props: Props) {
@@ -22,11 +23,13 @@ export default function DeleteModal(props: Props) {
     isShowModal,
     setShowModal,
     onDangerClick,
+    id
   } = props;
 
   return (
     <>
       <div
+        id={id ? id : "dangerModal"}
         className={`${isShowModal ? "opacity-100" : "opacity-0 invisible"} flex duration-300 justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50`}
       >
         <div className="relative w-auto my-6 mx-auto max-w-sm">
