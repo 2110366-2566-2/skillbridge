@@ -5,6 +5,18 @@ Feature: Job Offering functionality
         When click on a job card
         Then rediredcted to the job offering page
 
+    Scenario: Cancle the offer
+        Given open job offering page
+        When click on cancle button
+        And click on confirm button on confirmation modal
+        Then the page should be closed
+    
+    Scenario: Close thec onfirmation modal
+        Given open job offering page
+        When click on cancle button
+        And click on cancle button on confirmation modal
+        Then the modal should be closed and should be no changes to the job offering page
+
     Scenario: verify offering form can be submit
         Given open job offering page
         When input offer price as number
