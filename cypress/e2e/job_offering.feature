@@ -25,7 +25,7 @@ Scenario: Verify Offering Form Submission
 Scenario: Offer Price is Missing
     Given I am on the job offering page
     When I attempt to submit an offer without specifying the offer price
-    Then the offering form should not allow submission
+    Then the offering form should not allow submission and warn the user
 
 Scenario: Exceed File Size Limit on TOR File Input
     Given I am on the job offering page
