@@ -7,6 +7,7 @@ export default function LogoutButton() {
   return (
     <button
       className="w-full flex gap-8 p-2 active:opacity-40"
+      id="logoutButton"
       onClick={() => signOut({ callbackUrl: process.env.NEXTAUTH_URL })}
       key="mobile : ออกจากระบบ"
     >

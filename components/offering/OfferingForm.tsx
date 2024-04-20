@@ -240,6 +240,7 @@ export default function OfferingForm({ jobId, application }: Props) {
               className="w-full"
               isDisabled={disabled}
               onClick={() => setShowModal(true)}
+              id="cancelButton"
             >
               ยกเลิก
             </SecondaryButton>
@@ -256,6 +257,7 @@ export default function OfferingForm({ jobId, application }: Props) {
         )}
       </form>
       <DangerModal
+        id="closeModal"
         message="กดตกลงเพื่อปิดแท็บนี้"
         dangerButtonMessage="ตกลง"
         secondaryButtonMessage="ยกเลิก"
