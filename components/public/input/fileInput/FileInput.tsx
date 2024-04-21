@@ -181,6 +181,7 @@ export default function FilesInput(props: Props) {
           />
         </label>
         <p
+          id="exceedMaxSize"
           className={`text-[14px] text-red-600 ${!isInvalid ? "opacity-0" : ""}`}
         >
           ไฟล์เกินขนาด

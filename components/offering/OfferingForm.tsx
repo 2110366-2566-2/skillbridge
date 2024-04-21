@@ -139,7 +139,7 @@ export default function OfferingForm({ jobId, application }: Props) {
           </div>
         </div>
         {bid && !url && (
-          <div className="flex flex-row gap-1">
+          <div className="flex flex-row gap-1" id="noIncludedFile">
             <Image
               src={noFile}
               alt="noFile"
@@ -153,7 +153,7 @@ export default function OfferingForm({ jobId, application }: Props) {
           </div>
         )}
         {bid && url && (
-          <div className="mt-[7px]">
+          <div className="mt-[7px]" id="includedFile">
             <FileBox url={url} src={paperClip} text="ไฟล์สัญญาที่แนบไว้" />
           </div>
         )}
