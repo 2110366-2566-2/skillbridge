@@ -12,20 +12,26 @@ Feature: Job Offering functionality
         And I click on the cancel button within the confirmation modal
         Then the modal should be closed without making any changes to the job offering page
 
-    Scenario: Verify Offering Form Submission
+    Scenario: Verify Offering Form Submission (without file uploaded)
         Given I am on the job offering page
         When I input the offer price as a number
+        And I submit the offer
+        Then the offered price should be displayed on the page
+
+    Scenario: Verify Offering Form Submission (with file uploaded)
+        Given I am on the job offering page2
+        When I input the offer price as a number2
         And I upload a TOR file in PDF format, up to 5 MB in size
         And I submit the offer
         Then the uploaded TOR file and offered price should be displayed on the page
 
     Scenario: Offer Price is Missing
-        Given I am on the job offering page
+        Given I am on the job offering page3
         When I attempt to submit an offer without specifying the offer price
         Then the offering form should not allow submission and warn the user
 
     Scenario: Exceed File Size Limit on TOR File Input
-        Given I am on the job offering page
+        Given I am on the job offering page3
         When I input the offer price as a number
         And I attempt to upload a TOR file in PDF format exceeding 5 MB in size
         Then the TOR file input should not accept the file and warn the user

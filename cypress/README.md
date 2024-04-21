@@ -9,7 +9,8 @@ At skillbridge directory
 At cypress directory ("cd cypress" from skillbridge directory)
 
 1. npm install
-2. npx cypress open
+2. npm i cypress-file-upload --save-dev
+3. npx cypress open
 
 # <!-- Cypress Coding Standard
 
