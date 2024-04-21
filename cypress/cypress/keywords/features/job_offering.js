@@ -50,24 +50,32 @@ And("I submit the offer", () => {
 
 Then("the offered price should be displayed on the page", () => {
   cy.wait(5000)
-
-  // cy.get('.flex.flex-row.gap-1') // Target the parent element
-  // .find('.text-[16px].text-[#838383].mt-[10px]') // Find the child element within
-  // .should('contain.text', 'ไม่ได้แนบไฟล์สัญญา');
-
+  cy.get('#noIncludedFile').should('contain.text', 'ไม่ได้แนบไฟล์สัญญา');
   cy.get('[name="bid"]').should('have.value', 1500)
 })
 
 
-// Scenario: Verify Offering Form Submission (with file uploaded)
+// Scenario: Exceed File Size Limit on TOR File Input
 Given("I am on the job offering page2", () => {
   cy.visit("http://localhost:3000/offer/" + jobId2)
 })
 
 When("I input the offer price as a number2", () => {
-  cy.get('[name="bid"]').type(2000)
+  cy.get('[name="bid"]').type(1500)
 })
 
+And("I attempt to upload a TOR file in PDF format exceeding 5 MB in size", () => {
+  cy.get('#exceedMaxSize').should('be.visible').not()
+  cy.get('#dropzone-file-0').attachFile('Pittinan.pdf')
+})
+
+Then("the TOR file input should not accept the file and warn the user", () => {
+  cy.wait(1000)
+  cy.get('#exceedMaxSize').should('be.visible')
+})
+
+
+// Scenario: Verify Offering Form Submission (with file uploaded)
 And("I upload a TOR file in PDF format, up to 5 MB in size", () => {
   cy.get('#dropzone-file-0').attachFile('BG3.pdf')
 })
@@ -78,13 +86,8 @@ And("I submit the offer", () => {
 
 Then("the uploaded TOR file and offered price should be displayed on the page", () => {
   cy.wait(5000)
-
-  // cy.get('.mt-[7px] .w-full.flex.p-3.bg-slate-200.text-slate-500.rounded-md.hover:bg-slate-400.hover:cursor-pointer.hover:shadow-md.hover:text-slate-100') // Target the parent element
-  // .find('.text-[14px].font-semibold') // Find the child element with desired class
-  // .should('contain.text', 'ไฟล์สัญญาที่แนบไว้');
-
-  cy.get('[name="bid"]').should('have.value', 2000)
-  cy.get('div.mt-[7px]').click()
+  cy.get('#includedFile').should('contain.text', 'ไฟล์สัญญาที่แนบไว้');
+  cy.get('[name="bid"]').should('have.value', 1500)
 })
 
 
@@ -98,23 +101,43 @@ When("I attempt to submit an offer without specifying the offer price", () => {
 })
 
 Then("the offering form should not allow submission and warn the user", () => {
+  cy.get("#primaryButton").should('be.visible')
+})
+
+
+// Scenario: Input String on Offer Price Input
+When("I input a string in the offer price field", () => {
+  cy.get('[name="bid"]').type('พันห้าจ้า')
+})
+
+Then("there should be no change to the input", () => {
+  cy.wait(1000)
   cy.get('[name="bid"]').should('be.empty')
-  cy.on('[name="bid"]', (message) => {
-    expect(message).to.equal('โปรดกรอกฟิลด์นี้');
-  });
+  cy.get("#primaryButton").should('be.visible')
+})
+
+
+// Scenario: Input Negative Number on Offer Price Input
+When("I input a negative number in the offer price field", () => {
+  cy.get('[name="bid"]').type(-1500)
+})
+
+And("I submit the offer", () => {
   cy.get("#primaryButton").click()
 })
 
-
-// Exceed File Size Limit on TOR File Input
-And("I attempt to upload a TOR file in PDF format exceeding 5 MB in size", () => {
-  cy.get('#dropzone-file-0').attachFile('Pittinan.pdf')
+Then("the offering form should not allow submission and warn the user", () => {
+  cy.get("#primaryButton").should('be.visible')
 })
 
-Then("the TOR file input should not accept the file and warn the user", () => {
-  cy.wait(1000)
-  cy.get('.text-[14px].text-red-600').should('be.visible')
+
+// Scenario: Attempt to Offer a Job Already Offered
+Given("I am on the job offering page for a job I have already offered", () => {
+  cy.visit("http://localhost:3000/offer/" + jobId)
 })
 
+Then("the offering form should not be displayed", () => {
+  cy.get("#primaryButton").should('not.exist')
+})
 
 

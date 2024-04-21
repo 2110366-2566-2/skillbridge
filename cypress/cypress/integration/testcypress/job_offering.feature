@@ -18,6 +18,12 @@ Feature: Job Offering functionality
         And I submit the offer
         Then the offered price should be displayed on the page
 
+    Scenario: Exceed File Size Limit on TOR File Input
+        Given I am on the job offering page2
+        When I input the offer price as a number2
+        And I attempt to upload a TOR file in PDF format exceeding 5 MB in size
+        Then the TOR file input should not accept the file and warn the user
+
     Scenario: Verify Offering Form Submission (with file uploaded)
         Given I am on the job offering page2
         When I input the offer price as a number2
@@ -30,16 +36,17 @@ Feature: Job Offering functionality
         When I attempt to submit an offer without specifying the offer price
         Then the offering form should not allow submission and warn the user
 
-    Scenario: Exceed File Size Limit on TOR File Input
-        Given I am on the job offering page3
-        When I input the offer price as a number
-        And I attempt to upload a TOR file in PDF format exceeding 5 MB in size
-        Then the TOR file input should not accept the file and warn the user
-
     Scenario: Input String on Offer Price Input
-        Given I am on the job offering page
+        Given I am on the job offering page3
         When I input a string in the offer price field
+        And I submit the offer
         Then there should be no change to the input
+
+    Scenario: Input Negative Number on Offer Price Input
+        Given I am on the job offering page3
+        When I input a negative number in the offer price field
+        And I submit the offer
+        Then the offering form should not allow submission and warn the user
 
     Scenario: Attempt to Offer a Job Already Offered
         Given I am on the job offering page for a job I have already offered

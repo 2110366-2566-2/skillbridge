@@ -30,6 +30,7 @@ Cypress.Commands.add('loginAsStudent', (email, password) => {
     cy.get("#email").clear().type(email);
     cy.get("#password").clear().type(password);
     cy.get('[type="submit"]').click();
+    cy.wait(3000)
     cy.get('#hamburgerButton').click();
     cy.get('#logoutButton').should('exist');
     // })
