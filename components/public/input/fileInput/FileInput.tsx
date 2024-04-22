@@ -16,7 +16,7 @@ type Props = {
   id?: number
 }
 
-export default function aFilesInput(props: Props) {
+export default function FilesInput(props: Props) {
   const {
     label,
     files,
