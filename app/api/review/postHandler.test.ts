@@ -245,6 +245,13 @@ test("8: Stars is an integer and more than 5", async () => {
 });
 
 test("9: Description is an empty string", async () => {
+  await prisma.review.deleteMany({
+    where: {
+      studentId: "7639942c-c753-4943-94de-d28f25bb8520",
+      jobId: "1ef9a7f7-c8ad-448a-8197-3ba270151a97",
+    }
+  });
+
   const result = await postReviewHandler(
     "1ef9a7f7-c8ad-448a-8197-3ba270151a97",
     "7639942c-c753-4943-94de-d28f25bb8520",

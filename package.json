@@ -43,6 +43,7 @@
     "socket.io-client": "^4.7.5",
     "swagger-ui-react": "^5.13.0",
     "tailwind-merge": "^2.2.1",
+    "tsify": "^5.0.4",
     "utf-8-validate": "^5.0.10",
     "uuid": "^9.0.1",
     "ws": "^8.16.0",

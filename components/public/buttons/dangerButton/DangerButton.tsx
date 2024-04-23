@@ -9,6 +9,7 @@ type Props = {
   children: React.ReactNode;
   isLoading?: boolean;
   loadingMessage?: string;
+  id?: string;
 };
 
 export default function DangerButton(props: Props) {
@@ -20,6 +21,7 @@ export default function DangerButton(props: Props) {
     children,
     isLoading,
     loadingMessage,
+    id
   } = props;
   return (
     <button
@@ -27,6 +29,7 @@ export default function DangerButton(props: Props) {
       className={`px-[20px] py-[12px] rounded-[6px] text-sm text-slate-50 bg-red-600 hover:opacity-80 active:opacity-60 disabled:opacity-60 ${className}`}
       disabled={isDisabled}
       onClick={onClick}
+      id={id ? id : "dangerButton"}
     >
       {isLoading ? (
         <div className="flex gap-2 justify-center items-center">

@@ -22,6 +22,7 @@ export default function NumberInput(props: Props) {
         value={value === 0 ? "" : value}
         onChange={onChange}
         disabled={isDisabled}
+        required
       />
       <div className="absolute text-slate-400 inset-y-0 end-3 flex items-center pointer-events-none">
         บาท

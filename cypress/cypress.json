@@ -1,0 +1,19 @@
+{
+  "reporter": "mochawesome",
+  "ignoreTestFiles": [
+    "*.md"
+  ],
+  "watchForFileChanges": true,
+  "reporterOptions": {
+    "reportFilename": "test_result",
+    "reportDir": "results/",
+    "overwrite": false,
+    "html": true,
+    "json": true
+  },
+  "video": false,
+  "chromeWebSecurity": false,
+  "env": {
+    "RETRIES": 3
+  }
+}
